@@ -32,10 +32,8 @@ export default class Welcome extends Component {
                         <Divider/>
                     </View>
                     <View>
-
-
                         <TouchableOpacity
-                            onPress={() => null}
+                            onPress={() => { this.props.navigation.navigate('StartWorkout')}}
                             style={{
                                 marginTop: 100,
                                 paddingTop: 20,

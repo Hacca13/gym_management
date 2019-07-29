@@ -9,18 +9,19 @@ export default class WelcomeNav extends Component {
     render() {
         return (
             <Header
+                backgroundColor='black'
                 leftComponent={
                     <TouchableOpacity/>
                 }
                 centerComponent={
-                    <Text style={{alignSelf: 'center'}}>Fit&Fight</Text>
+                    <Text style={{alignSelf: 'center', color: '#FFFFFF', fontSize: 20}}>Fit&Fight</Text>
                 }
                 rightComponent={
                     <TouchableOpacity
                         onPress={() => {
                             this.props.navigation.navigate('Profile')
                         }}>
-                        <EvilIcons name="user" type="EvilIcons" size={40} color="blue"/>
+                        <EvilIcons name="user" type="EvilIcons" size={40} color='#FFFFFF'/>
                     </TouchableOpacity>
                 }
             />

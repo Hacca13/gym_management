@@ -17,8 +17,6 @@ export default class Profile extends Component {
         }
     }
 
-
-
     changeTab(val) {
         this.setState({
             active: val
@@ -42,7 +40,6 @@ export default class Profile extends Component {
                         marginRight: 24,
                         backgroundColor: 'white'
                     }}>
-
 
                     <View>
                         <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
@@ -70,8 +67,6 @@ export default class Profile extends Component {
                         </View>
 
                         <View style={{paddingLeft: 15, paddingRight: 15, marginTop: 10}}><Divider/></View>
-
-
 
                         { this.state.active === 0 && <ProfileTabOne/> }
 

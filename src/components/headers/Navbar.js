@@ -12,19 +12,12 @@ export default class Navbar extends Component {
             <Header
                 leftComponent={
                     <TouchableOpacity
-                        onPress={() => { this.props.navigation.navigate('Home')}}>
-                        <Text style={{color: 'blue', fontSize: 20, marginLeft: 5}}>
-                            <AntDesign name="left" type="AntDesign" size={20} color="blue" />Back</Text>
-                    </TouchableOpacity>
-                }
-                rightComponent={
-                    <TouchableOpacity
-                        onPress={() => { this.props.navigation.navigate('Profile')}}>
-                        <EvilIcons name="user" type="EvilIcons" size={40} color="blue" style={{marginRight: 5}}/>
+                        onPress={() => { this.props.navigation.navigate('Welcome')}}>
+                        <Text style={{color: '#007AFF', fontSize: 20, marginLeft: 5}}>
+                            <AntDesign name="left" type="AntDesign" size={20} color='#007AFF' />Indietro</Text>
                     </TouchableOpacity>
                 }
             />
         );
     }
-
 }
