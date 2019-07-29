@@ -16,14 +16,14 @@ export default class Login extends Component {
     }
 
     login() {
-       if (this.state.text === 'pelo' && this.state.password === 'pelo') {
-           this.props.navigation.navigate('Home');
-       } else {
-           this.setState({
-               text: 'error',
-               password: 'error'
-           })
-       }
+        if (this.state.text === 'pelo' && this.state.password === 'pelo') {
+            this.props.navigation.navigate('Home');
+        } else {
+            this.setState({
+                text: 'error',
+                password: 'error'
+            })
+        }
     }
 
     render() {
@@ -79,15 +79,15 @@ export default class Login extends Component {
                         <View style={{width: '50%', alignSelf: 'flex-end', marginTop: 10}}>
                             <TouchableOpacity
                                 onPress={() => this.login()}
-                            style={{
-                                marginTop: 10,
-                                paddingTop: 10,
-                                paddingBottom: 10,
-                                backgroundColor:'#D8D8D8',
-                                borderRadius: 30,
-                                borderWidth: 1,
-                                borderColor: '#979797'
-                            }}>
+                                style={{
+                                    marginTop: 10,
+                                    paddingTop: 10,
+                                    paddingBottom: 10,
+                                    backgroundColor:'#D8D8D8',
+                                    borderRadius: 30,
+                                    borderWidth: 1,
+                                    borderColor: '#979797'
+                                }}>
                                 <Text style={{
                                     color:'#000000',
                                     textAlign:'center',
