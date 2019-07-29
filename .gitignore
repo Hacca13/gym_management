@@ -61,3 +61,4 @@ yarn.lock
 /android/app/google-services.json
 /ios/GoogleService-Info.plist
 package-lock.json
+/ios/fitandfight.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist
