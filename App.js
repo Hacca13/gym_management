@@ -45,8 +45,7 @@ const AppNavigator = createStackNavigator(
         }
     },
     {
-        initialRouteName: 'Welcome'
+        initialRouteName: 'Profile'
     }
 );
-
 export default createAppContainer(AppNavigator);
