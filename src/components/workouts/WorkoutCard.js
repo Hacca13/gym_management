@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 
-import {View, Text, Platform, Image, Dimensions, TouchableOpacity} from 'react-native';
+import {View, Text, Platform, Image, Dimensions, TouchableOpacity, ListView} from 'react-native';
 import CardView from 'react-native-cardview';
 import plank from './../../assets/plank.png';
 import gifff from './../../assets/testgif.gif';
 const { height, width } = Dimensions.get("window");
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import Tooltip from 'rn-tooltip';
+import {Divider} from 'react-native-paper';
 
 // import styles from './styles';
 
@@ -30,31 +33,51 @@ export default class WorkoutCard extends Component {
                     <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
 
                         <View style={{ width: width/4}}>
-                            <Image source={{uri: 'https://upload.wikimedia.org/wikipedia/commons/2/2c/Rotating_earth_%28large%29.gif'}} style={{width: '100%', height: 80, marginTop: 20, marginLeft: 20, marginBottom: 20, borderRadius: 10}}/>
+                            <Image source={gifff} style={{width: '100%', height: 80, marginTop: 20, marginLeft: 20, marginBottom: 20, borderRadius: 10}}/>
                         </View>
 
-
-
-                        <View style={{justifyContent: 'center'}}>
+                        <View style={{justifyContent: 'center', marginLeft: 20}}>
                             <Text style={{fontSize: 25}}>Leg press</Text>
-                            <Text style={{fontSize: 20, marginTop: 5}}>Leg press</Text>
+                            <Text style={{fontSize: 20, marginTop: 5, color: 'grey'}}>60kg - x3</Text>
                         </View>
 
                         <View style={{flexDirection: 'row', marginRight: 20, marginTop: 45}}>
-                            <TouchableOpacity onPress={() => {null}}>
+                            {/*<TouchableOpacity onPress={() => {null}}>
                                 <Ionicons name={Platform.OS === 'ios' ? 'ios-create' : 'md-create'} color='#007AFF' size={30}/>
-                            </TouchableOpacity>
+                            </TouchableOpacity>*/}
 
                             <TouchableOpacity onPress={() => {null}}>
-                                <Ionicons style={{marginLeft: 20}} name={Platform.OS === 'ios' ? 'ios-information-circle' : 'md-information-circle'} color='#007AFF' size={30}/>
+                                <Tooltip
+                                    withPointer={false}
+                                    withOverlay={true}
+                                    backgroundColor={'white'}
+                                    height={100}
+                                    popover={
+                                        <View>
+                                            <TouchableOpacity>
+                                                <Text style={{fontSize: 20}}>
+                                                    <Ionicons name={Platform.OS === 'ios' ? 'ios-create' : 'md-create'} color='#007AFF' size={25}/>
+                                                    {' '}Modifica
+                                                </Text>
+                                            </TouchableOpacity>
+
+                                            <TouchableOpacity>
+                                                <Text style={{fontSize: 20, marginTop: 15}}>
+                                                    <Ionicons name={Platform.OS === 'ios' ? 'ios-information-circle-outline' : 'md-information-circle-outline'} color='#007AFF' size={25}/>
+                                                    {' '}Info
+                                                </Text>
+                                            </TouchableOpacity>
+                                        </View>
+                                    }>
+                                    <FontAwesome style={{marginLeft: 15}} name={'ellipsis-v'} color='#007AFF' size={30}/>
+                                </Tooltip>
+
                             </TouchableOpacity>
                         </View>
                     </View>
-
                 </CardView>
             </View>
         );
-
 
 
     }
