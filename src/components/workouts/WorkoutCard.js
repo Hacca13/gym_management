@@ -8,14 +8,11 @@ const { height, width } = Dimensions.get("window");
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Tooltip from 'rn-tooltip';
-import {Divider} from 'react-native-paper';
 
-// import styles from './styles';
 
 export default class WorkoutCard extends Component {
     render() {
         return (
-            <View>
                 <CardView
                     cardElevation={7}
                     cardMaxElevation={2}
@@ -24,10 +21,8 @@ export default class WorkoutCard extends Component {
                         marginTop: 20,
                         marginLeft: 24,
                         marginRight: 24,
-                        backgroundColor: 'white'
+                        backgroundColor: this.props.bgColor
                     }}>
-
-
 
 
                     <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
@@ -46,37 +41,50 @@ export default class WorkoutCard extends Component {
                                 <Ionicons name={Platform.OS === 'ios' ? 'ios-create' : 'md-create'} color='#007AFF' size={30}/>
                             </TouchableOpacity>*/}
 
-                            <TouchableOpacity onPress={() => {null}}>
-                                <Tooltip
-                                    withPointer={false}
-                                    withOverlay={true}
-                                    backgroundColor={'white'}
-                                    height={100}
-                                    popover={
-                                        <View>
-                                            <TouchableOpacity>
-                                                <Text style={{fontSize: 20}}>
-                                                    <Ionicons name={Platform.OS === 'ios' ? 'ios-create' : 'md-create'} color='#007AFF' size={25}/>
-                                                    {' '}Modifica
-                                                </Text>
-                                            </TouchableOpacity>
 
-                                            <TouchableOpacity>
-                                                <Text style={{fontSize: 20, marginTop: 15}}>
-                                                    <Ionicons name={Platform.OS === 'ios' ? 'ios-information-circle-outline' : 'md-information-circle-outline'} color='#007AFF' size={25}/>
-                                                    {' '}Info
-                                                </Text>
-                                            </TouchableOpacity>
-                                        </View>
-                                    }>
-                                    <FontAwesome style={{marginLeft: 15}} name={'ellipsis-v'} color='#007AFF' size={30}/>
-                                </Tooltip>
 
-                            </TouchableOpacity>
+                            {this.props.doneWorkout ?
+                                (<FontAwesome style={{marginLeft: 15}} name={'check'} color='#007AFF' size={30}/>)
+                                :
+                                (
+                                    <TouchableOpacity onPress={() => {null}}>
+                                        <Tooltip
+                                            withPointer={false}
+                                            withOverlay={true}
+                                            backgroundColor={'white'}
+                                            height={100}
+                                            popover={
+                                                <View>
+                                                    <TouchableOpacity>
+                                                        <Text style={{fontSize: 20}}>
+                                                            <Ionicons name={Platform.OS === 'ios' ? 'ios-create' : 'md-create'} color='#007AFF' size={25}/>
+                                                            {' '}Modifica
+                                                        </Text>
+                                                    </TouchableOpacity>
+
+                                                    <TouchableOpacity>
+                                                        <Text style={{fontSize: 20, marginTop: 15}}>
+                                                            <Ionicons name={Platform.OS === 'ios' ? 'ios-information-circle-outline' : 'md-information-circle-outline'} color='#007AFF' size={25}/>
+                                                            {' '}Info
+                                                        </Text>
+                                                    </TouchableOpacity>
+                                                </View>
+                                            }>
+
+                                            <FontAwesome style={{marginLeft: 15}} name={'ellipsis-v'} color='#007AFF' size={30}/>
+
+                                        </Tooltip>
+                                    </TouchableOpacity>
+                                )
+                            }
+
+
+
+
+
                         </View>
                     </View>
                 </CardView>
-            </View>
         );
 
 

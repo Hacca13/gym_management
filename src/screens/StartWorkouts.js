@@ -22,16 +22,18 @@ export default class StartWorkouts extends Component {
                 </TouchableOpacity>
 
                 <ScrollView>
-                    <WorkoutCard/>
-                    <WorkoutCard/>
-                    <WorkoutCard/>
-                    <WorkoutCard/>
-                    <WorkoutCard/>
-                    <WorkoutCard/>
-                    <WorkoutCard/>
-                    <WorkoutCard/>
-                    <WorkoutCard/>
-                    <WorkoutCard/>
+
+                    <TouchableOpacity onPress={() => {this.props.navigation.push('SingleWorkout')}}>
+                        <WorkoutCard bgColor={'white'}/>
+                    </TouchableOpacity>
+
+                    <WorkoutCard bgColor={'#4CD964'} doneWorkout={true}/>
+
+                    <WorkoutCard bgColor={'white'}/>
+                    <WorkoutCard bgColor={'white'}/>
+                    <WorkoutCard bgColor={'white'}/>
+                    <WorkoutCard bgColor={'white'}/>
+                    <WorkoutCard bgColor={'white'}/>
                 </ScrollView>
 
             </SafeAreaView>

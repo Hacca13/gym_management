@@ -9,6 +9,8 @@ import Welcome from './src/screens/Welcome';
 import WelcomeNav from './src/components/headers/WelcomeNav';
 import ProfileNav from './src/components/headers/ProfileNav';
 import StartWorkouts from './src/screens/StartWorkouts';
+import singleWorkout from './src/screens/singleWorkout';
+import WorkoutNav from './src/components/headers/WorkoutNav';
 
 class App extends Component {
     render() {
@@ -48,6 +50,12 @@ const AppNavigator = createStackNavigator(
             screen: StartWorkouts,
             navigationOptions: {
                 header: navigationProps => <Navbar {...navigationProps} />
+            }
+        },
+        SingleWorkout: {
+            screen: singleWorkout,
+            navigationOptions: {
+                header: navigationProps => <WorkoutNav {...navigationProps} />
             }
         }
     },
