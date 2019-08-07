@@ -11,6 +11,38 @@ import ProfileNav from './src/components/headers/ProfileNav';
 import StartWorkouts from './src/screens/StartWorkouts';
 import singleWorkout from './src/screens/singleWorkout';
 import WorkoutNav from './src/components/headers/WorkoutNav';
+import TestWorkout from './src/screens/testWorkout';
+import CircleWorkout from './src/screens/circleWorkout';
+
+var ls = require('react-native-local-storage');
+
+const workouts =  [
+    {
+        name: 'Leg Press',
+        gif: 'gif',
+        weight: '20kg',
+        reps: '8',
+        series: '3',
+        rest: '00:30',
+        status: false
+    },
+    {
+        name: 'Plank',
+        gif: 'gif',
+        weight: '0',
+        reps: 3,
+        series: 1,
+        rest: 2,
+        time: 2,
+        restSeries: 1,
+        status: false
+    },
+]
+
+ls.save('workouts', workouts).then(() => {
+    console.log('setted')
+    // output should be "get: Kobe Bryant"
+});
 
 class App extends Component {
     render() {
@@ -52,8 +84,11 @@ const AppNavigator = createStackNavigator(
                 header: navigationProps => <Navbar {...navigationProps} />
             }
         },
-        SingleWorkout: {
-            screen: singleWorkout,
+        TestWorkout: {
+            screen: TestWorkout,
+        },
+        CircleWorkout: {
+            screen: CircleWorkout,
             navigationOptions: {
                 header: navigationProps => <WorkoutNav {...navigationProps} />
             }

@@ -1,13 +1,54 @@
 import React, { Component } from 'react';
 
-import { View, Text, SafeAreaView, Dimensions, Platform, TouchableOpacity, ScrollView } from 'react-native';
+import { View, Text, SafeAreaView, Dimensions, Platform, TouchableOpacity, ScrollView, AsyncStorage } from 'react-native';
 const { height, width } = Dimensions.get("window");
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import WorkoutCard from '../components/workouts/WorkoutCard';
+var ls = require('react-native-local-storage');
 
-// import styles from './styles';
+
 
 export default class StartWorkouts extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            workouts: [
+                {
+                    name: 'Leg Press',
+                    gif: 'gif',
+                    weight: '20kg',
+                    reps: '8',
+                    series: '3',
+                    rest: '00:30',
+                },
+                {
+                    name: 'Plank',
+                    gif: 'gif',
+                    weight: '0',
+                    series: 1,
+                    rest: {
+                      minutes: 0,
+                      seconds: 5
+                    },
+                    time: {
+                        minutes: 0,
+                        seconds: 5
+                    },
+                    restSeries: 1
+                },
+            ],
+            store: null
+        }
+    }
+
+
+
+    componentDidMount(): void {
+        ls.get('workouts').then(value => {
+            this.setState({store: value})
+        })
+    }
+
     render() {
         return (
             <SafeAreaView>
@@ -16,14 +57,16 @@ export default class StartWorkouts extends Component {
                     <View style={{backgroundColor: '#D8D8D8', height: height/3, alignItems: 'center', justifyContent: 'center'}}>
                         <Text style={{fontSize: 40}}>
                             <Ionicons name={Platform.OS === 'ios' ? 'ios-play' : 'md-play'} size={40}/>
-                            {' '} Inizia allenamento
+                            {' '} Inizia allenamento { this.state.key}
                         </Text>
                     </View>
                 </TouchableOpacity>
 
                 <ScrollView>
 
-                    <TouchableOpacity onPress={() => {this.props.navigation.push('SingleWorkout')}}>
+                    <TouchableOpacity onPress={() => {
+                        this.props.navigation.push('CircleWorkout', {workout: this.state.workouts[1]})
+                    }}>
                         <WorkoutCard bgColor={'white'}/>
                     </TouchableOpacity>
 

@@ -7,6 +7,8 @@ import com.facebook.react.PackageList;
 import com.facebook.hermes.reactexecutor.HermesExecutorFactory;
 import com.facebook.react.bridge.JavaScriptExecutorFactory;
 import com.facebook.react.ReactApplication;
+import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
+import com.horcrux.svg.SvgPackage;
 import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
 import io.invertase.firebase.RNFirebasePackage;
 import com.facebook.react.ReactNativeHost;

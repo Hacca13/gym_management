@@ -9,8 +9,8 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Tooltip from 'rn-tooltip';
 
-
 export default class WorkoutCard extends Component {
+
     render() {
         return (
                 <CardView
@@ -40,7 +40,6 @@ export default class WorkoutCard extends Component {
                             {/*<TouchableOpacity onPress={() => {null}}>
                                 <Ionicons name={Platform.OS === 'ios' ? 'ios-create' : 'md-create'} color='#007AFF' size={30}/>
                             </TouchableOpacity>*/}
-
 
 
                             {this.props.doneWorkout ?
