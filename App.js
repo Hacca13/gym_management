@@ -90,7 +90,7 @@ const AppNavigator = createStackNavigator(
         CircleWorkout: {
             screen: CircleWorkout,
             navigationOptions: {
-                header: navigationProps => <WorkoutNav {...navigationProps} />
+                header: null
             }
         }
     },

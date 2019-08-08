@@ -4,13 +4,14 @@ import {Button, SafeAreaView, Image, Text, TouchableOpacity, View, Dimensions, E
 import Fontisto from 'react-native-vector-icons/Fontisto';
 import {AnimatedCircularProgress} from 'react-native-circular-progress';
 import WorkoutNav from '../components/headers/WorkoutNav';
+import AntDesign from 'react-native-vector-icons/AntDesign';
+import Header from '@freakycoder/react-native-header-view';
 var ls = require('react-native-local-storage');
 
 const timer = require('react-native-timer');
 
 
 export default class CircleWorkout extends Component {
-
 
     constructor(props) {
         console.ignoredYellowBox = ['Setting a timer'];
@@ -39,6 +40,8 @@ export default class CircleWorkout extends Component {
         this.resetTimer = this.resetTimer.bind(this);
         this.navigateBack = this.navigateBack.bind(this);
     }
+
+
 
     componentDidUpdate(prevProps: Readonly<P>, prevState: Readonly<S>, snapshot: SS): void {
 
@@ -75,13 +78,12 @@ export default class CircleWorkout extends Component {
 
 
     startWorkouTimer() {
-
         timer.clearTimeout(this);
         this.setState({
             timeOrAction: true,
             progressColor: '#00e0ff',
-            series: this.state.series - 1,
-            paused: false});
+            paused: false
+        });
         timer.setInterval(this, 'workCounter', () => {
             this.setState({
                 time: {
@@ -93,6 +95,7 @@ export default class CircleWorkout extends Component {
 
         this.circularProgress.animate(100, (this.state.time.minutes * 60 * 1000) +
             (this.state.time.seconds * 1000), Easing.quad);
+
 
     }
 
@@ -122,6 +125,7 @@ export default class CircleWorkout extends Component {
             });
             this.startRestTimer();
         }, 2000);
+        this.setState({series: this.state.series - 1})
         this.circularProgress.animate(0, 2000, Easing.quad);
 
     }
@@ -129,7 +133,7 @@ export default class CircleWorkout extends Component {
 
     startRestTimer() {
         timer.clearTimeout(this);
-        this.setState({timeOrAction: true, progressColor: '#FCD533', restSeries: this.state.restSeries - 1});
+        this.setState({timeOrAction: true, progressColor: '#FCD533'});
         timer.setInterval(this, 'restCounter', () => {
             this.setState({
                 rest: {
@@ -141,29 +145,32 @@ export default class CircleWorkout extends Component {
 
         this.circularProgress.animate(100, (this.state.rest.minutes * 60 * 1000) +
             (this.state.rest.seconds * 1000), Easing.quad);
+
     }
 
     stopRestTimer() {
-        if (this.state.series === 0 && this.state.restSeries === 0) {
-            this.setWorkoutDone();
-        } else {
+
+        this.setState({
+            timeOrAction: false,
+            progressColor: '#4CD964',
+            circularProgressAction: this.state.series === 0 ? 'Fine' : 'Allenati',
+            restSeries: this.state.restSeries - 1
+        });
+        timer.clearInterval(this);
+        timer.setTimeout(this, 'restCounter', () => {
             this.setState({
-                timeOrAction: false,
-                progressColor: '#4CD964',
-                circularProgressAction: 'Allenati',
+                workOrRest: true,
+                time: {
+                    minutes: this.state.snapshot.time.minutes,
+                    seconds: this.state.snapshot.time.seconds
+                }
             });
-            timer.clearInterval(this);
-            timer.setTimeout(this, 'restCounter', () => {
-                this.setState({
-                    workOrRest: true,
-                    time: {
-                        minutes: this.state.snapshot.time.minutes,
-                        seconds: this.state.snapshot.time.seconds
-                    }
-                });
-            }, 2000);
-            this.circularProgress.animate(0, 2000, Easing.quad);
-        }
+            if (this.state.restSeries === 0 && this.state.series === 0) {
+                this.setWorkoutDone();
+            }}, 2000);
+
+        this.circularProgress.animate(0, 2000, Easing.quad);
+
 
     }
 
@@ -178,9 +185,7 @@ export default class CircleWorkout extends Component {
             circularProgressAction: 'Avanti'
         });
         this.circularProgress.animate(100, 0, Easing.quad)
-        ls.save('workout/' + this.props.navigation.getParam('workID'), true)
-            .then(() => {
-            })
+
     }
 
 
@@ -208,14 +213,34 @@ export default class CircleWorkout extends Component {
 
     }
 
+
     render() {
         return (
 
             <SafeAreaView>
+                <Header
+                    leftComponent={
+                        <TouchableOpacity
+                            onPress={() => {
+                                this.state.doneWorkout ? (this.navigateBack())
+                                    :
+                                    this.props.navigation.pop();
+                            }
+                            }>
+                            <Text style={{color: '#007AFF', fontSize: 20, marginLeft: 5}}>
+                                <AntDesign name="left" type="AntDesign" size={20} color='#007AFF' />Indietro</Text>
+                        </TouchableOpacity>
+                    }
+
+                />
 
                 <ScrollView>
 
                     <Text>{this.state.doneWorkout ? 'true' : 'false'}</Text>
+
+                    <Text>{this.state.series}</Text>
+                    <Text>{this.state.restSeries}</Text>
+
                     <AnimatedCircularProgress
                         ref={(ref) => this.circularProgress = ref}
                         size={260}
@@ -348,8 +373,6 @@ export default class CircleWorkout extends Component {
                                                 </View>
 
                                             )
-
-
 
                                     )
 

@@ -11,6 +11,7 @@ export default class WorkoutNav extends Component {
     constructor(props) {
         super(props);
         this.state = {
+
         }
     }
 
@@ -22,12 +23,14 @@ export default class WorkoutNav extends Component {
             leftComponent={
                 <TouchableOpacity
                     onPress={() => {
-                        this.props.navigation.pop()}
+                        if (this.props.name)
+                        this.props.navigation.goWorkoutList();
+                        //this.props.navigation.pop()
+                        }
                     }>
                     <Text style={{color: '#007AFF', fontSize: 20, marginLeft: 5}}>
                         <AntDesign name="left" type="AntDesign" size={20} color='#007AFF' />Indietro</Text>
-
-
+                        <Text>{this.props.navigation.getParam('workID')}</Text>
                 </TouchableOpacity>
             }
 

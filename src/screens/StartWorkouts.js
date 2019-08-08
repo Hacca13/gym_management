@@ -36,7 +36,8 @@ export default class StartWorkouts extends Component {
                     name: 'Plank',
                     gif: gifff,
                     weight: 60,
-                    series: 1,
+                    series: 2,
+                    restSeries: 2,
                     rest: {
                         minutes: 0,
                         seconds: 5
@@ -45,7 +46,6 @@ export default class StartWorkouts extends Component {
                         minutes: 0,
                         seconds: 5
                     },
-                    restSeries: 1,
                     status: false
                 },
                 {
@@ -125,6 +125,7 @@ export default class StartWorkouts extends Component {
         })
     }
 
+
     render() {
         return (
             <SafeAreaView style={{flex: 1}}>
@@ -137,7 +138,7 @@ export default class StartWorkouts extends Component {
                     </View>
                 </TouchableOpacity>
 
-                <ScrollView>
+                <ScrollView contentContainerStyle={{paddingBottom: 20}}>
 
                     {this.state.workouts.map((value, index) => (
 
@@ -155,7 +156,7 @@ export default class StartWorkouts extends Component {
 
                             (
                                 <TouchableOpacity key={index} onPress={() => {
-                                    this.props.navigation.push('CircleWorkout', {workout: value, workID: index, returnData: this.returnData.bind(this) })
+                                    this.props.navigation.push('CircleWorkout', {workout: value, workID: index, statusID: false, returnData: this.returnData.bind(this) })
                                 }}>
                                     <WorkoutCard workout={value} bgColor={'white'}/>
                                 </TouchableOpacity>
@@ -163,20 +164,6 @@ export default class StartWorkouts extends Component {
 
                     ))}
 
-                    {/*
-                    <TouchableOpacity onPress={() => {
-                        this.props.navigation.push('CircleWorkout', {workout: this.state.workouts[1], workID: 1, returnData: this.returnData.bind(this) })
-                    }}>
-                        <WorkoutCard bgColor={'white'}/>
-                    </TouchableOpacity>
-
-                    <WorkoutCard bgColor={'#4CD964'} doneWorkout={true}/>
-
-                    <WorkoutCard bgColor={'white'}/>
-                    <WorkoutCard bgColor={'white'}/>
-                    <WorkoutCard bgColor={'white'}/>
-                    <WorkoutCard bgColor={'white'}/>
-                    <WorkoutCard bgColor={'white'}/>*/}
 
                 </ScrollView>
 
