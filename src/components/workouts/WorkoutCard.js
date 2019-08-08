@@ -10,6 +10,10 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Tooltip from 'rn-tooltip';
 
 export default class WorkoutCard extends Component {
+    constructor(props) {
+        super(props);
+
+    }
 
     render() {
         return (
@@ -27,14 +31,17 @@ export default class WorkoutCard extends Component {
 
                     <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
 
+                        {/* WORKOUT IMAGE */}
                         <View style={{ width: width/4}}>
-                            <Image source={gifff} style={{width: '100%', height: 80, marginTop: 20, marginLeft: 20, marginBottom: 20, borderRadius: 10}}/>
+                            <Image source={this.props.workout.gif} style={{width: '100%', height: 80, marginTop: 20, marginLeft: 20, marginBottom: 20, borderRadius: 10}}/>
                         </View>
 
-                        <View style={{justifyContent: 'center', marginLeft: 20}}>
-                            <Text style={{fontSize: 25}}>Leg press</Text>
-                            <Text style={{fontSize: 20, marginTop: 5, color: 'grey'}}>60kg - x3</Text>
+                        {/* NAME, WEIGHT, REPS, SERIES */}
+                        <View style={{flexDirection: 'column', justifyContent: 'center'}}>
+                            <Text style={{fontSize: 25}}>{this.props.workout.name}</Text>
+                            <Text style={{fontSize: 20, marginTop: 5, color: 'grey'}}>{this.props.workout.weight + 'kg ' + 'x' +this.props.workout.series}</Text>
                         </View>
+
 
                         <View style={{flexDirection: 'row', marginRight: 20, marginTop: 45}}>
                             {/*<TouchableOpacity onPress={() => {null}}>

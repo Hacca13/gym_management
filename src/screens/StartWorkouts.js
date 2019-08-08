@@ -5,6 +5,7 @@ const { height, width } = Dimensions.get("window");
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import WorkoutCard from '../components/workouts/WorkoutCard';
 var ls = require('react-native-local-storage');
+import gifff from './../assets/testgif.gif';
 
 
 
@@ -12,60 +13,159 @@ export default class StartWorkouts extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            id: 9,
+            status: null,
             workouts: [
                 {
-                    name: 'Leg Press',
-                    gif: 'gif',
-                    weight: '20kg',
-                    reps: '8',
-                    series: '3',
-                    rest: '00:30',
-                },
-                {
                     name: 'Plank',
-                    gif: 'gif',
-                    weight: '0',
+                    gif: gifff,
+                    weight: 60,
                     series: 1,
                     rest: {
-                      minutes: 0,
-                      seconds: 5
+                        minutes: 0,
+                        seconds: 5
                     },
                     time: {
                         minutes: 0,
                         seconds: 5
                     },
-                    restSeries: 1
+                    restSeries: 1,
+                    status: true
                 },
+                {
+                    name: 'Plank',
+                    gif: gifff,
+                    weight: 60,
+                    series: 1,
+                    rest: {
+                        minutes: 0,
+                        seconds: 5
+                    },
+                    time: {
+                        minutes: 0,
+                        seconds: 5
+                    },
+                    restSeries: 1,
+                    status: false
+                },
+                {
+                    name: 'Plank',
+                    gif: gifff,
+                    weight: 60,
+                    series: 1,
+                    rest: {
+                        minutes: 0,
+                        seconds: 5
+                    },
+                    time: {
+                        minutes: 0,
+                        seconds: 5
+                    },
+                    restSeries: 1,
+                    status: false
+                },
+                {
+                    name: 'Plank',
+                    gif: gifff,
+                    weight: 60,
+                    series: 1,
+                    rest: {
+                        minutes: 0,
+                        seconds: 5
+                    },
+                    time: {
+                        minutes: 0,
+                        seconds: 5
+                    },
+                    restSeries: 1,
+                    status: false
+                },
+                {
+                    name: 'Plank',
+                    gif: gifff,
+                    weight: 60,
+                    series: 1,
+                    rest: {
+                        minutes: 0,
+                        seconds: 5
+                    },
+                    time: {
+                        minutes: 0,
+                        seconds: 5
+                    },
+                    restSeries: 1,
+                    status: false
+                },
+                {
+                    name: 'Plank',
+                    gif: gifff,
+                    weight: 60,
+                    series: 1,
+                    rest: {
+                        minutes: 0,
+                        seconds: 5
+                    },
+                    time: {
+                        minutes: 0,
+                        seconds: 5
+                    },
+                    restSeries: 1,
+                    status: false
+                }
             ],
-            store: null
         }
+        this.returnData = this.returnData.bind(this);
     }
 
-
-
-    componentDidMount(): void {
-        ls.get('workouts').then(value => {
-            this.setState({store: value})
+    returnData(id, status) {
+        const tmp = [...this.state.workouts];
+        tmp[id].status = status;
+        this.setState({
+            workouts: tmp
         })
     }
 
     render() {
         return (
-            <SafeAreaView>
-
+            <SafeAreaView style={{flex: 1}}>
                 <TouchableOpacity onPress={() => {null}}>
                     <View style={{backgroundColor: '#D8D8D8', height: height/3, alignItems: 'center', justifyContent: 'center'}}>
                         <Text style={{fontSize: 40}}>
                             <Ionicons name={Platform.OS === 'ios' ? 'ios-play' : 'md-play'} size={40}/>
-                            {' '} Inizia allenamento { this.state.key}
+                            {' '} Inizia allenamento
                         </Text>
                     </View>
                 </TouchableOpacity>
 
                 <ScrollView>
 
+                    {this.state.workouts.map((value, index) => (
+
+                        value.status ?
+
+                            (
+                                <WorkoutCard key={index}
+                                             bgColor={'#4CD964'}
+                                             doneWorkout={value.status}
+                                             workout={value}
+                                />
+                            )
+
+                            :
+
+                            (
+                                <TouchableOpacity key={index} onPress={() => {
+                                    this.props.navigation.push('CircleWorkout', {workout: value, workID: index, returnData: this.returnData.bind(this) })
+                                }}>
+                                    <WorkoutCard workout={value} bgColor={'white'}/>
+                                </TouchableOpacity>
+                            )
+
+                    ))}
+
+                    {/*
                     <TouchableOpacity onPress={() => {
-                        this.props.navigation.push('CircleWorkout', {workout: this.state.workouts[1]})
+                        this.props.navigation.push('CircleWorkout', {workout: this.state.workouts[1], workID: 1, returnData: this.returnData.bind(this) })
                     }}>
                         <WorkoutCard bgColor={'white'}/>
                     </TouchableOpacity>
@@ -76,7 +176,8 @@ export default class StartWorkouts extends Component {
                     <WorkoutCard bgColor={'white'}/>
                     <WorkoutCard bgColor={'white'}/>
                     <WorkoutCard bgColor={'white'}/>
-                    <WorkoutCard bgColor={'white'}/>
+                    <WorkoutCard bgColor={'white'}/>*/}
+
                 </ScrollView>
 
             </SafeAreaView>
