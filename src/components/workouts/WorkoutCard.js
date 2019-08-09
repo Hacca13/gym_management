@@ -28,7 +28,6 @@ export default class WorkoutCard extends Component {
                         backgroundColor: this.props.bgColor
                     }}>
 
-
                     <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
 
                         {/* WORKOUT IMAGE */}
@@ -44,14 +43,13 @@ export default class WorkoutCard extends Component {
 
 
                         <View style={{flexDirection: 'row', marginRight: 20, marginTop: 45}}>
-                            {/*<TouchableOpacity onPress={() => {null}}>
-                                <Ionicons name={Platform.OS === 'ios' ? 'ios-create' : 'md-create'} color='#007AFF' size={30}/>
-                            </TouchableOpacity>*/}
 
 
                             {this.props.doneWorkout ?
                                 (<FontAwesome style={{marginLeft: 15}} name={'check'} color='#007AFF' size={30}/>)
                                 :
+
+
                                 (
                                     <TouchableOpacity onPress={() => {null}}>
                                         <Tooltip
@@ -61,14 +59,14 @@ export default class WorkoutCard extends Component {
                                             height={100}
                                             popover={
                                                 <View>
-                                                    <TouchableOpacity>
+                                                    <TouchableOpacity onPress={() => this.props.setEditModalVisible(true)}>
                                                         <Text style={{fontSize: 20}}>
                                                             <Ionicons name={Platform.OS === 'ios' ? 'ios-create' : 'md-create'} color='#007AFF' size={25}/>
                                                             {' '}Modifica
                                                         </Text>
                                                     </TouchableOpacity>
 
-                                                    <TouchableOpacity>
+                                                    <TouchableOpacity onPress={() => this.props.setInfoModalVisible(true)}>
                                                         <Text style={{fontSize: 20, marginTop: 15}}>
                                                             <Ionicons name={Platform.OS === 'ios' ? 'ios-information-circle-outline' : 'md-information-circle-outline'} color='#007AFF' size={25}/>
                                                             {' '}Info

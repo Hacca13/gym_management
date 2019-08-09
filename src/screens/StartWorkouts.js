@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 
-import { View, Text, SafeAreaView, Dimensions, Platform, TouchableOpacity, ScrollView, AsyncStorage } from 'react-native';
+import { View, Text, SafeAreaView, Dimensions, Platform, TouchableOpacity, ScrollView, Modal } from 'react-native';
 const { height, width } = Dimensions.get("window");
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import WorkoutCard from '../components/workouts/WorkoutCard';
 var ls = require('react-native-local-storage');
 import gifff from './../assets/testgif.gif';
-
+import CardView from 'react-native-cardview';
+import EditModal from '../components/modals/editModal';
+import InfoModal from '../components/modals/infoModal';
 
 
 export default class StartWorkouts extends Component {
@@ -15,6 +17,8 @@ export default class StartWorkouts extends Component {
         this.state = {
             id: 9,
             status: null,
+            editModalVisible: false,
+            infoModalVisible: false,
             workouts: [
                 {
                     name: 'Plank',
@@ -113,8 +117,10 @@ export default class StartWorkouts extends Component {
                     status: false
                 }
             ],
-        }
+        };
         this.returnData = this.returnData.bind(this);
+        this.setInfoModalVisible = this.setInfoModalVisible.bind(this);
+        this.setEditModalVisible = this.setEditModalVisible.bind(this);
     }
 
     returnData(id, status) {
@@ -125,11 +131,36 @@ export default class StartWorkouts extends Component {
         })
     }
 
+    setEditModalVisible(visible) {
+        this.setState({ editModalVisible: visible})
+         console.log(this.state.editModalVisible);
+    }
+
+    setInfoModalVisible(visible) {
+        this.setState({ infoModalVisible: visible})
+        console.log(this.state.infoModalVisible);
+
+    }
+
+
+
+    componentWillUnmount(): void {
+        this.setEditModalVisible(false);
+        this.setInfoModalVisible(false);
+    }
+
 
     render() {
         return (
+
+
             <SafeAreaView style={{flex: 1}}>
-                <TouchableOpacity onPress={() => {null}}>
+
+                <EditModal visible={this.state.editModalVisible} setEditModalVisible={this.setEditModalVisible.bind(this)}/>
+
+                <InfoModal visible={this.state.infoModalVisible} setInfoModalVisible={this.setInfoModalVisible.bind(this)}/>
+
+                <TouchableOpacity onPress={() => this.setInfoModalVisible(true) }>
                     <View style={{backgroundColor: '#D8D8D8', height: height/3, alignItems: 'center', justifyContent: 'center'}}>
                         <Text style={{fontSize: 40}}>
                             <Ionicons name={Platform.OS === 'ios' ? 'ios-play' : 'md-play'} size={40}/>
@@ -149,6 +180,7 @@ export default class StartWorkouts extends Component {
                                              bgColor={'#4CD964'}
                                              doneWorkout={value.status}
                                              workout={value}
+
                                 />
                             )
 
@@ -158,7 +190,10 @@ export default class StartWorkouts extends Component {
                                 <TouchableOpacity key={index} onPress={() => {
                                     this.props.navigation.push('CircleWorkout', {workout: value, workID: index, statusID: false, returnData: this.returnData.bind(this) })
                                 }}>
-                                    <WorkoutCard workout={value} bgColor={'white'}/>
+                                    <WorkoutCard workout={value}
+                                                 setEditModalVisible={this.setEditModalVisible.bind(this)}
+                                                 setInfoModalVisible={this.setInfoModalVisible.bind(this)}
+                                                 bgColor={'white'}/>
                                 </TouchableOpacity>
                             )
 
