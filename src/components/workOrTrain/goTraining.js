@@ -21,6 +21,8 @@ export default class GoTraining extends Component {
                         marginLeft: 24,
                         marginRight: 24,
                         marginBottom: 24,
+                        backgroundColor: 'white'
+
                     }}>
 
                     <View style={{height: height/3, alignItems: 'center', justifyContent: 'center'}}>

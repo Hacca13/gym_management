@@ -24,8 +24,10 @@ export default class Profile extends Component {
     }
 
     render() {
+
+        
         return (
-            <SafeAreaView>
+            <SafeAreaView style={{backgroundColor: 'black', flex: 1}}>
                 <ScrollView>
                     <View style={{alignSelf: 'center', marginTop: 20}}>
                         <Avatar.Image size={148} source={avatar} />

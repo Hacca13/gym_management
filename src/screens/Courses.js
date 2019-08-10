@@ -18,7 +18,9 @@ export default class  extends Component {
         this.state = {
             modalVisible: false,
             modalID: [],
+
             courses: [
+
                 {
                     name: 'BodyPamp',
                     cadenza: {
@@ -46,8 +48,10 @@ export default class  extends Component {
                     },
                     collapsed: false
                 }
+
             ],
         };
+        this.collapseManagement = this.collapseManagement.bind(this);
     }
 
     collapseManagement(index) {
@@ -82,6 +86,7 @@ export default class  extends Component {
                                             marginLeft: 24,
                                             marginRight: 24,
                                             marginBottom: 24,
+                                            backgroundColor: 'white'
                                         }}>
 
                                         <Card>
@@ -143,7 +148,25 @@ export default class  extends Component {
                                 ))
                             ) :
 
-                            (<Text style={{color: 'white'}}>NoCourses</Text>)
+                            ( <CardView
+                                    cardElevation={7}
+                                    cardMaxElevation={2}
+                                    cornerRadius={8}
+                                    style={{
+                                        marginTop: 24,
+                                        marginLeft: 24,
+                                        marginRight: 24,
+                                        marginBottom: 24,
+                                        backgroundColor: 'white'
+
+                                    }}>
+                                    <View style={{justifyContent: 'center', flexDirection: 'column', marginTop: 5}}>
+                                        <Ionicons style={{color: 'red', alignSelf: 'center'}} size={100} name={'md-close-circle'}/>
+
+                                    </View>
+                                </CardView>
+
+                            )
 
                     }
 
