@@ -33,7 +33,7 @@ export default class Welcome extends Component {
                     </View>
                     <View>
                         <TouchableOpacity
-                            onPress={() => { this.props.navigation.navigate('StartWorkout')}}
+                            onPress={() => { this.props.navigation.push('TrainOrCourse')}}
                             style={{
                                 marginTop: 100,
                                 paddingTop: 20,

@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 
-import { View, Text, SafeAreaView, Dimensions, Platform, TouchableOpacity, ScrollView, Modal } from 'react-native';
+import { View, Text, SafeAreaView, Dimensions, Platform, TouchableOpacity, ScrollView } from 'react-native';
 const { height, width } = Dimensions.get("window");
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import WorkoutCard from '../components/workouts/WorkoutCard';
-var ls = require('react-native-local-storage');
 import gifff from './../assets/testgif.gif';
-import CardView from 'react-native-cardview';
 import EditModal from '../components/modals/editModal';
 import InfoModal from '../components/modals/infoModal';
 
@@ -121,6 +119,7 @@ export default class StartWorkouts extends Component {
         this.returnData = this.returnData.bind(this);
         this.setInfoModalVisible = this.setInfoModalVisible.bind(this);
         this.setEditModalVisible = this.setEditModalVisible.bind(this);
+        this.startTraining = this.startTraining.bind(this);
     }
 
     returnData(id, status) {
@@ -132,12 +131,12 @@ export default class StartWorkouts extends Component {
     }
 
     setEditModalVisible(visible) {
-        this.setState({ editModalVisible: visible})
+        this.setState({ editModalVisible: visible});
          console.log(this.state.editModalVisible);
     }
 
     setInfoModalVisible(visible) {
-        this.setState({ infoModalVisible: visible})
+        this.setState({ infoModalVisible: visible});
         console.log(this.state.infoModalVisible);
 
     }
@@ -147,6 +146,10 @@ export default class StartWorkouts extends Component {
     componentWillUnmount(): void {
         this.setEditModalVisible(false);
         this.setInfoModalVisible(false);
+    }
+
+    startTraining(workout) {
+        this.props.navigation.push('CircleWorkout', {workout: workout, workID: workout, statusID: false, returnData: this.returnData.bind(this)})
     }
 
 
@@ -160,7 +163,7 @@ export default class StartWorkouts extends Component {
 
                 <InfoModal visible={this.state.infoModalVisible} setInfoModalVisible={this.setInfoModalVisible.bind(this)}/>
 
-                <TouchableOpacity onPress={() => this.setInfoModalVisible(true) }>
+                <TouchableOpacity onPress={() => this.startTraining(this.state.workouts[0]) }>
                     <View style={{backgroundColor: '#D8D8D8', height: height/3, alignItems: 'center', justifyContent: 'center'}}>
                         <Text style={{fontSize: 40}}>
                             <Ionicons name={Platform.OS === 'ios' ? 'ios-play' : 'md-play'} size={40}/>
@@ -171,15 +174,17 @@ export default class StartWorkouts extends Component {
 
                 <ScrollView contentContainerStyle={{paddingBottom: 20}}>
 
-                    {this.state.workouts.map((value, index) => (
+                    {this.state.workouts.map((workout, index) => (
 
-                        value.status ?
+
+
+                        workout.status ?
 
                             (
                                 <WorkoutCard key={index}
                                              bgColor={'#4CD964'}
-                                             doneWorkout={value.status}
-                                             workout={value}
+                                             doneWorkout={workout.status}
+                                             workout={workout}
 
                                 />
                             )
@@ -188,9 +193,9 @@ export default class StartWorkouts extends Component {
 
                             (
                                 <TouchableOpacity key={index} onPress={() => {
-                                    this.props.navigation.push('CircleWorkout', {workout: value, workID: index, statusID: false, returnData: this.returnData.bind(this) })
+                                    this.startTraining(workout);
                                 }}>
-                                    <WorkoutCard workout={value}
+                                    <WorkoutCard workout={workout}
                                                  setEditModalVisible={this.setEditModalVisible.bind(this)}
                                                  setInfoModalVisible={this.setInfoModalVisible.bind(this)}
                                                  bgColor={'white'}/>

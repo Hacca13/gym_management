@@ -12,7 +12,7 @@ export default class Navbar extends Component {
             <Header
                 leftComponent={
                     <TouchableOpacity
-                        onPress={() => { this.props.navigation.navigate('Welcome')}}>
+                        onPress={() => { this.props.navigation.pop()}}>
                         <Text style={{color: '#007AFF', fontSize: 20, marginLeft: 5}}>
                             <AntDesign name="left" type="AntDesign" size={20} color='#007AFF' />Indietro</Text>
                     </TouchableOpacity>

@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 
-import {View, Text, Platform, Image, Dimensions, TouchableOpacity, ListView} from 'react-native';
+import {View, Text, Platform, Image, Dimensions, TouchableOpacity } from 'react-native';
 import CardView from 'react-native-cardview';
-import plank from './../../assets/plank.png';
-import gifff from './../../assets/testgif.gif';
-const { height, width } = Dimensions.get("window");
+const {  width } = Dimensions.get("window");
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Tooltip from 'rn-tooltip';

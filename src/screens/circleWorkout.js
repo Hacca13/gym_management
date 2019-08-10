@@ -6,7 +6,6 @@ import {AnimatedCircularProgress} from 'react-native-circular-progress';
 import WorkoutNav from '../components/headers/WorkoutNav';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Header from '@freakycoder/react-native-header-view';
-var ls = require('react-native-local-storage');
 
 const timer = require('react-native-timer');
 
