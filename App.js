@@ -57,7 +57,7 @@ const AppNavigator = createStackNavigator(
         StartWorkout: {
             screen: StartWorkouts,
             navigationOptions: {
-                header: navigationProps => <Navbar {...navigationProps} />
+                header: navigationProps => <StockNav {...navigationProps} />
             }
         },
 

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { View, Text, SafeAreaView, Dimensions, Platform, TouchableOpacity, ScrollView } from 'react-native';
+import { View, Text, SafeAreaView, Dimensions, Platform, TouchableOpacity, ScrollView, TouchableWithoutFeedback } from 'react-native';
 const { height, width } = Dimensions.get("window");
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import WorkoutCard from '../components/workouts/WorkoutCard';
@@ -158,13 +158,13 @@ export default class StartWorkouts extends Component {
         return (
 
 
-            <SafeAreaView style={{flex: 1}}>
+            <SafeAreaView style={{flex: 1, backgroundColor: 'black'}}>
 
                 <EditModal visible={this.state.editModalVisible} setEditModalVisible={this.setEditModalVisible.bind(this)}/>
 
                 <InfoModal visible={this.state.infoModalVisible} setInfoModalVisible={this.setInfoModalVisible.bind(this)}/>
 
-                <TouchableOpacity onPress={() => this.startTraining(this.state.workouts[0], 0) }>
+                <TouchableOpacity activeOpacity={0.5} delayPressIn={50} onPress={() => this.startTraining(this.state.workouts[0], 0) }>
                     <View style={{backgroundColor: '#D8D8D8', height: height/3, alignItems: 'center', justifyContent: 'center'}}>
                         <Text style={{fontSize: 40}}>
                             <Ionicons name={Platform.OS === 'ios' ? 'ios-play' : 'md-play'} size={40}/>
@@ -173,11 +173,10 @@ export default class StartWorkouts extends Component {
                     </View>
                 </TouchableOpacity>
 
+
                 <ScrollView contentContainerStyle={{paddingBottom: 20}}>
 
                     {this.state.workouts.map((workout, index) => (
-
-
 
                         workout.status ?
 
@@ -193,9 +192,10 @@ export default class StartWorkouts extends Component {
                             :
 
                             (
-                                <TouchableOpacity key={index} onPress={() => {
+                                <TouchableOpacity activeOpacity={0.5} delayPressIn={50} key={index} onPress={() => {
                                     this.startTraining(workout, index);
                                 }}>
+
                                     <WorkoutCard workout={workout}
                                                  setEditModalVisible={this.setEditModalVisible.bind(this)}
                                                  setInfoModalVisible={this.setInfoModalVisible.bind(this)}

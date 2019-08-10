@@ -94,11 +94,11 @@ export default class  extends Component {
 
                                             <Card.Content style={{flexDirection: 'row', justifyContent: 'space-between', paddingBottom: 15}}>
                                                 <Text style={{marginTop: 10, fontSize: 30, alignSelf: 'center'}}>{course.name}</Text>
-                                                <TouchableOpacity onPress={() => {
+                                                <TouchableOpacity activeOpacity={0.5} delayPressIn={50} onPress={() => {
                                                     this.collapseManagement(index);
                                                 }}>
 
-                                                    <Ionicons style={{alignSelf: 'center', marginTop: 15}}
+                                                    <Ionicons style={{alignSelf: 'center', marginTop: 15, color: '#007AFF'}}
                                                               name={ (this.state.courses[index].collapsed) ?
                                                                   (Platform.OS === 'ios' ? 'md-arrow-dropup' : 'ios-arrow-dropup')
                                                                   :
@@ -161,7 +161,7 @@ export default class  extends Component {
 
                                     }}>
                                     <View style={{justifyContent: 'center', flexDirection: 'column', marginTop: 5}}>
-                                        <Ionicons style={{color: 'red', alignSelf: 'center'}} size={100} name={'md-close-circle'}/>
+                                        <Ionicons style={{color: '#007AFF', alignSelf: 'center'}} size={100} name={Platform.OS === 'ios' ? 'md-close-circle' : 'md-close-circle'}/>
 
                                     </View>
                                 </CardView>

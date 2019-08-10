@@ -10,7 +10,7 @@ import CardView from 'react-native-cardview';
 export default class GoCourses extends Component {
     render() {
         return (
-            <TouchableOpacity onPress={() => this.props.navigation.push('Courses')}>
+            <TouchableOpacity activeOpacity={0.5} onPress={() => this.props.navigation.push('Courses')}>
 
                 <CardView
                     cardElevation={7}

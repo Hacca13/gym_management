@@ -19,6 +19,7 @@ export default class WorkoutNav extends Component {
     render() {
     return (
         <Header
+            backgroundColor='black'
             leftComponent={
                 <TouchableOpacity
                     onPress={() => {
@@ -26,8 +27,8 @@ export default class WorkoutNav extends Component {
                         this.props.navigation.goWorkoutList();
                         }
                     }>
-                    <Text style={{color: '#007AFF', fontSize: 20, marginLeft: 5}}>
-                        <AntDesign name="left" type="AntDesign" size={20} color='#007AFF' />Indietro</Text>
+                    <Text style={{color: 'white', fontSize: 20, marginLeft: 5}}>
+                        <AntDesign name="left" type="AntDesign" size={20} color='white' />Indietro</Text>
                 </TouchableOpacity>
             }
 

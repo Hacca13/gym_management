@@ -1,11 +1,16 @@
 import React, { Component } from 'react';
 
-import {Button, SafeAreaView, Image, Text, TouchableOpacity, View, Dimensions, Easing, ScrollView, Platform} from 'react-native';
+import {Button, SafeAreaView, Image, Text, TouchableOpacity, View, Dimensions, Easing, ScrollView, Platform, ImageBackground} from 'react-native';
 import Fontisto from 'react-native-vector-icons/Fontisto';
 import {AnimatedCircularProgress} from 'react-native-circular-progress';
 import WorkoutNav from '../components/headers/WorkoutNav';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Header from '@freakycoder/react-native-header-view';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import {Card, Divider} from 'react-native-paper';
+import plank from '../assets/plank.png';
+import CardView from 'react-native-cardview';
+const { height, width } = Dimensions.get("window");
 
 const timer = require('react-native-timer');
 
@@ -216,29 +221,69 @@ export default class CircleWorkout extends Component {
     render() {
         return (
 
-            <SafeAreaView>
+            <SafeAreaView style={{backgroundColor: 'black', flex: 1}}>
                 <Header
+                    backgroundColor={'black'}
                     leftComponent={
                         <TouchableOpacity
                             onPress={() => {
                                 this.state.doneWorkout ? (this.navigateBack())
                                     :
                                     this.props.navigation.pop();
-                            }
-                            }>
-                            <Text style={{color: '#007AFF', fontSize: 20, marginLeft: 5}}>
-                                <AntDesign name="left" type="AntDesign" size={20} color='#007AFF' />Indietro</Text>
+                            }}>
+                            <Text style={{color: 'white', fontSize: 20, marginLeft: 5}}>
+                                <AntDesign name="left" type="AntDesign" size={20} color='white' />Indietro</Text>
                         </TouchableOpacity>
                     }
-
                 />
 
                 <ScrollView>
 
-                    <Text>{this.state.doneWorkout ? 'true' : 'false'}</Text>
+                    <View style={{backgroundColor: '#D8D8D8'}}>
+                        <ImageBackground resizeMode={'contain'} source={this.state.gif} style={{width: '100%', height: height/4}}/>
+                    </View>
 
-                    <Text>{this.state.series}</Text>
-                    <Text>{this.state.restSeries}</Text>
+                    <View style={{backgroundColor: '#D8D8D8', height: height/3.5, justifyContent: 'center'}}>
+
+                        <CardView
+                            cardElevation={7}
+                            cardMaxElevation={2}
+                            cornerRadius={8}
+                            style={{
+                                marginLeft: 24,
+                                marginRight: 24,
+                                paddingBottom: 20,
+                                flexDirection: 'column',
+                                justifyContent: 'space-between'
+                            }}>
+                            <View style={{justifyContent: 'space-between', flexDirection: 'row', marginTop: 10, marginLeft: 20, marginRight: 20}}>
+                                <Text style={{fontSize: 25, color: '#007AFF'}}>Peso:</Text>
+                                <Fontisto style={{marginTop:5, color: '#EB3333'}} size={25} name={'minus-a'}/>
+                                <Text style={{fontSize: 25}}>60Kg</Text>
+                                <Fontisto style={{marginTop:5, color: '#4CD964'}} size={25} name={'plus-a'}/>
+                            </View>
+
+                            <View style={{justifyContent: 'space-between', flexDirection: 'row', marginTop: 10, marginLeft: 20, marginRight: 20}}>
+                                <Text style={{fontSize: 25, color: '#007AFF'}}>Ripetizioni:</Text>
+                                <Text style={{fontSize: 25}}>3</Text>
+                            </View>
+
+                            <View style={{justifyContent: 'space-between', flexDirection: 'row', marginTop: 10, marginLeft: 20, marginRight: 20}}>
+                                <Text style={{fontSize: 25, color: '#007AFF'}}>Riposo:</Text>
+                                <Text style={{fontSize: 25}}>00:30</Text>
+                            </View>
+
+                            <View style={{justifyContent: 'space-between', flexDirection: 'row', marginTop: 10, marginLeft: 20, marginRight: 20}}>
+                                <Text style={{fontSize: 25, color: '#007AFF'}}>Lavoro:</Text>
+                                <Text style={{fontSize: 25}}>00:30</Text>
+                            </View>
+
+
+
+
+
+                        </CardView>
+                    </View>
 
                     <AnimatedCircularProgress
                         ref={(ref) => this.circularProgress = ref}
@@ -247,7 +292,7 @@ export default class CircleWorkout extends Component {
                         fill={this.state.doneWorkout ? 100 : this.state.animationFill}
                         backgroundColor="#3d5875"
                         tintColor={this.state.doneWorkout ? '#4CD964' : this.state.progressColor }
-                        style={{alignSelf:'center'}}>
+                        style={{alignSelf:'center', marginTop: 20}}>
 
                         {
                             (fill) => (
@@ -291,7 +336,7 @@ export default class CircleWorkout extends Component {
                                                             <View>
 
                                                                 <View style={{flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}>
-                                                                    <Text style={{fontSize: 35}}>
+                                                                    <Text style={{fontSize: 35, color: 'white'}}>
                                                                         {this.state.time.minutes + ':' + this.state.time.seconds}
                                                                     </Text>
                                                                 </View>
@@ -302,16 +347,12 @@ export default class CircleWorkout extends Component {
                                                                     <TouchableOpacity onPress={() => {
                                                                         this.state.paused ? this.startWorkouTimer() : this.pauseTimer()
                                                                     }}>
-
-
-
-
-                                                                        <Fontisto style={{alignSelf: 'center', justifyContent: 'center'}} size={30} name={this.state.paused ? 'play' : 'pause'}/>
+                                                                        <Fontisto style={{alignSelf: 'center', justifyContent: 'center', color: 'white'}} size={30} name={this.state.paused ? 'play' : 'pause'}/>
                                                                     </TouchableOpacity>
 
                                                                     {/* Pause/Resume Icon*/}
                                                                     <TouchableOpacity onPress={() => this.resetTimer()}>
-                                                                        <Fontisto style={{alignSelf: 'center', justifyContent: 'center', marginLeft: 20}} size={30} name={'redo'}/>
+                                                                        <Fontisto style={{alignSelf: 'center', justifyContent: 'center', marginLeft: 20, color: 'white'}} size={30} name={'redo'}/>
                                                                     </TouchableOpacity>
 
                                                                 </View>
@@ -327,14 +368,21 @@ export default class CircleWorkout extends Component {
                                                             <TouchableOpacity onPress={() => {
                                                                 this.startWorkouTimer()
                                                             }}>
-                                                                <Text style={{fontSize: 35}}>
+                                                                <Text style={{fontSize: 35, color: 'white'}}>
                                                                     {this.state.circularProgressAction}
                                                                 </Text>
+
+                                                                {
+                                                                    this.state.circularProgressAction === 'Allenati' ?
+                                                                        (<Fontisto style={{alignSelf: 'center', justifyContent: 'center', color: 'white', marginTop: 10}} size={30} name={'play'}/>)
+                                                                        :
+                                                                        (<View/>)
+                                                                }
+
                                                             </TouchableOpacity>
                                                         )
+
                                                     }
-
-
                                                 </View>
                                             )
 
@@ -351,7 +399,7 @@ export default class CircleWorkout extends Component {
                                                         //IF TRUE RENDER TIMER
                                                         (
 
-                                                            <Text style={{fontSize: 35}}>
+                                                            <Text style={{fontSize: 35, color: 'white'}}>
                                                                 {this.state.rest.minutes + ':' + this.state.rest.seconds}
                                                             </Text>
 
@@ -362,7 +410,7 @@ export default class CircleWorkout extends Component {
                                                         //IF FALSE RENDER ACTION
                                                         (
 
-                                                            <Text style={{fontSize: 35}}>
+                                                            <Text style={{fontSize: 35, color: 'white'}}>
                                                                 {this.state.circularProgressAction}
                                                             </Text>
                                                         )
