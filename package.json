@@ -10,6 +10,7 @@
   "dependencies": {
     "@freakycoder/react-native-header-view": "^0.2.61",
     "@react-native-community/async-storage": "^1.6.1",
+    "accordion-collapse-react-native": "^0.1.11",
     "moment": "^2.24.0",
     "react": "16.8.6",
     "react-moment": "^0.9.2",

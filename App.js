@@ -13,6 +13,7 @@ import CircleWorkout from './src/screens/circleWorkout';
 import TrainOrCourse from './src/screens/TrainOrCourse';
 import TrainOrCourseNav from './src/components/headers/TrainOrCourseNav';
 import Courses from './src/screens/Courses';
+import StockNav from './src/components/headers/StockNav';
 
 class App extends Component {
     render() {
@@ -77,7 +78,7 @@ const AppNavigator = createStackNavigator(
         Courses: {
             screen: Courses,
             navigationOptions: {
-                header: navigationProps => <Navbar {...navigationProps} />
+                header: navigationProps => <StockNav {...navigationProps} />
             }
         }
 
