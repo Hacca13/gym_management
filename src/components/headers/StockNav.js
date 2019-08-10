@@ -20,16 +20,6 @@ export default class StockNav extends Component {
                     </TouchableOpacity>
                 }
 
-
-                rightComponent={
-                    <TouchableOpacity
-                        onPress={() => {
-                            this.props.navigation.navigate('Profile')
-                        }}>
-                        <EvilIcons name="user" type="EvilIcons" size={40} color='#FFFFFF'/>
-                    </TouchableOpacity>
-                }
-
             />
         );
     }
