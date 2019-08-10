@@ -239,11 +239,12 @@ export default class CircleWorkout extends Component {
 
                 <ScrollView>
 
-                    <View style={{backgroundColor: '#D8D8D8'}}>
-                        <ImageBackground resizeMode={'contain'} source={this.state.gif} style={{width: '100%', height: height/4}}/>
+                    <View style={{backgroundColor: '#EFF0F0'}}>
+                        <ImageBackground resizeMode={'contain'} source={this.state.gif} style={{width: '100%', height: height/3.8}}/>
                     </View>
 
-                    <View style={{backgroundColor: '#D8D8D8', height: height/3.5, justifyContent: 'center'}}>
+
+                    <View style={{backgroundColor: 'black', height: height/3.5, justifyContent: 'center'}}>
 
                         <CardView
                             cardElevation={7}
@@ -292,8 +293,7 @@ export default class CircleWorkout extends Component {
                         fill={this.state.doneWorkout ? 100 : this.state.animationFill}
                         backgroundColor="#3d5875"
                         tintColor={this.state.doneWorkout ? '#4CD964' : this.state.progressColor }
-                        style={{alignSelf:'center', marginTop: 20}}>
-
+                        style={{alignSelf:'center', marginTop: 15, paddingBottom: 20}}>
                         {
                             (fill) => (
 

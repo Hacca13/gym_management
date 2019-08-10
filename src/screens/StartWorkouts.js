@@ -4,10 +4,9 @@ import { View, Text, SafeAreaView, Dimensions, Platform, TouchableOpacity, Scrol
 const { height, width } = Dimensions.get("window");
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import WorkoutCard from '../components/workouts/WorkoutCard';
-import gifff from './../assets/testgif.gif';
+import gifff from './../assets/test.gif';
 import EditModal from '../components/modals/editModal';
 import InfoModal from '../components/modals/infoModal';
-
 
 export default class StartWorkouts extends Component {
     constructor(props) {
@@ -32,7 +31,7 @@ export default class StartWorkouts extends Component {
                         seconds: 5
                     },
                     restSeries: 1,
-                    status: true
+                    status: false
                 },
                 {
                     name: 'Plank',

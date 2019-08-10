@@ -73,7 +73,7 @@ export default class WorkoutCard extends Component {
                                                 </View>
                                             }>
 
-                                            <FontAwesome style={{marginLeft: 15}} name={'ellipsis-v'} color='#007AFF' size={30}/>
+                                            <FontAwesome style={{marginLeft: 15}} name={'bars'} color='#007AFF' size={30}/>
 
                                         </Tooltip>
                                     </TouchableOpacity>
