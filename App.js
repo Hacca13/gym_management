@@ -74,7 +74,7 @@ const AppNavigator = createStackNavigator(
           }
         },
 
-        Couses: {
+        Courses: {
             screen: Courses,
             navigationOptions: {
                 header: navigationProps => <Navbar {...navigationProps} />
@@ -82,9 +82,8 @@ const AppNavigator = createStackNavigator(
         }
 
     },
-
     {
-        initialRouteName: 'Welcome'
+        initialRouteName: 'TrainOrCourse'
     }
 );
 export default createAppContainer(AppNavigator);

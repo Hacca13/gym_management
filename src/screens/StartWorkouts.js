@@ -123,7 +123,8 @@ export default class StartWorkouts extends Component {
     }
 
     returnData(id, status) {
-        const tmp = [...this.state.workouts];
+        let tmp = [...this.state.workouts];
+        console.log(id, status);
         tmp[id].status = status;
         this.setState({
             workouts: tmp
@@ -148,8 +149,8 @@ export default class StartWorkouts extends Component {
         this.setInfoModalVisible(false);
     }
 
-    startTraining(workout) {
-        this.props.navigation.push('CircleWorkout', {workout: workout, workID: workout, statusID: false, returnData: this.returnData.bind(this)})
+    startTraining(workout, id) {
+        this.props.navigation.push('CircleWorkout', {workout: workout, workID: id, statusID: false, returnData: this.returnData.bind(this)})
     }
 
 
@@ -163,7 +164,7 @@ export default class StartWorkouts extends Component {
 
                 <InfoModal visible={this.state.infoModalVisible} setInfoModalVisible={this.setInfoModalVisible.bind(this)}/>
 
-                <TouchableOpacity onPress={() => this.startTraining(this.state.workouts[0]) }>
+                <TouchableOpacity onPress={() => this.startTraining(this.state.workouts[0], 0) }>
                     <View style={{backgroundColor: '#D8D8D8', height: height/3, alignItems: 'center', justifyContent: 'center'}}>
                         <Text style={{fontSize: 40}}>
                             <Ionicons name={Platform.OS === 'ios' ? 'ios-play' : 'md-play'} size={40}/>
@@ -193,7 +194,7 @@ export default class StartWorkouts extends Component {
 
                             (
                                 <TouchableOpacity key={index} onPress={() => {
-                                    this.startTraining(workout);
+                                    this.startTraining(workout, index);
                                 }}>
                                     <WorkoutCard workout={workout}
                                                  setEditModalVisible={this.setEditModalVisible.bind(this)}
