@@ -5,12 +5,17 @@ import {Text, View} from 'react-native';
 // import styles from './styles';
 
 export default class ProfileTabTwo extends Component {
+    constructor(props) {
+        super(props);
+
+    }
+
     render() {
         return (
             <View style={{flexDirection: 'column', marginLeft: 20, marginTop: 10, paddingBottom: 10}}>
 
                 <Text style={{color: '#007AFF'}}>Altezza</Text>
-                <Text style={{fontSize: 25}}>1.80cm</Text>
+                <Text style={{fontSize: 25}}>{this.props.userAnemic ? this.props.userAnemic['Altezza'] + 'cm' : ' '}</Text>
 
                 <Text style={{color: '#007AFF'}}>Peso</Text>
                 <Text style={{fontSize: 25}}>74kg</Text>

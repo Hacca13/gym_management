@@ -4,27 +4,62 @@ import {Text, TouchableOpacity, SafeAreaView, View, StyleSheet, Dimensions} from
 import CardView from 'react-native-cardview'
 import { TextInput } from 'react-native-paper';
 import Video from "react-native-video";
+import firebase from 'react-native-firebase';
+var ls = require('react-native-local-storage');
+
 const { height } = Dimensions.get("window");
 
 export default class Login extends Component {
     constructor(props) {
         super(props);
+        this.unsubscriber = null;
         this.state = {
-            text: '',
-            password: ''
+            email: '',
+            password: '',
+            isAuth: false,
         };
     }
 
-    login() {
-        if (this.state.text === 'pelo' && this.state.password === 'pelo') {
-            this.props.navigation.navigate('Home');
-        } else {
-            this.setState({
-                text: 'error',
-                password: 'error'
-            })
-        }
+    componentDidMount(): void {
+        firebase.auth().onAuthStateChanged(user => {
+            if (user) {
+                this.props.navigation.replace('Welcome')
+            } else {
+                this.setState({
+                    isAuth: true
+                })
+            }
+        })
     }
+
+
+
+    componentWillUnmount(): void {
+        this.setState({
+            email: '',
+            password: ''
+        });
+
+        this.player.dismissFullscreenPlayer()
+    }
+
+
+    login() {
+        firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password).then((user) => {
+            this.setState({isAuth: true});
+            this.player.dismissFullscreenPlayer();
+            ls.save('user', user)
+                .then(() => {
+                    this.props.navigation.replace('Welcome', {user})
+                })
+        }).catch(err => {
+            this.setState({
+                email: err,
+                password: err
+            })
+        })
+    }
+
 
     render() {
         return (
@@ -33,6 +68,9 @@ export default class Login extends Component {
                     source={require("./../assets/videoplayback.mp4")}
                     style={styles.backgroundVideo}
                     muted={true}
+                    ref={(ref) => {
+                        this.player = ref
+                    }}
                     repeat={true}
                     resizeMode={"cover"}
                     rate={1.0}
@@ -54,8 +92,8 @@ export default class Login extends Component {
                         <TextInput
                             mode='outlined'
                             label='Email'
-                            value={this.state.text}
-                            onChangeText={text => this.setState({ text })}
+                            value={this.state.email}
+                            onChangeText={email => this.setState({ email })}
                             theme={{
                                 colors: {
                                     primary: 'gray',

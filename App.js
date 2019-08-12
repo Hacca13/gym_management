@@ -84,7 +84,7 @@ const AppNavigator = createStackNavigator(
 
     },
     {
-        initialRouteName: 'TrainOrCourse'
+        initialRouteName: 'Login'
     }
 );
 export default createAppContainer(AppNavigator);
