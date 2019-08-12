@@ -15,10 +15,10 @@ export default class ProfileTabTwo extends Component {
             <View style={{flexDirection: 'column', marginLeft: 20, marginTop: 10, paddingBottom: 10}}>
 
                 <Text style={{color: '#007AFF'}}>Altezza</Text>
-                <Text style={{fontSize: 25}}>{this.props.userAnemic ? this.props.userAnemic['Altezza'] + 'cm' : ' '}</Text>
+                <Text style={{fontSize: 25}}>{this.props.userAnemic ? this.props.userAnemic['Altezza'] + ' cm' : ' '}</Text>
 
                 <Text style={{color: '#007AFF'}}>Peso</Text>
-                <Text style={{fontSize: 25}}>74kg</Text>
+                <Text style={{fontSize: 25}}>{this.props.userAnemic ? this.props.userAnemic['Peso'] + ' kg' : ' '}</Text>
 
                 <Text style={{color: '#007AFF'}}>BCM</Text>
                 <Text style={{fontSize: 25}}>Appezzi</Text>

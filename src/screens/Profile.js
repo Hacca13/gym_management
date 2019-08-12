@@ -26,11 +26,13 @@ export default class Profile extends Component {
             active: 0,
             user: null,
             spinner: true,
-            anemic: null
+            anemic: null,
+            subscript: null,
         };
 
         this.retrieveInfo = this.retrieveInfo.bind(this);
         this.retrieveAnemic = this.retrieveAnemic.bind(this);
+        this.retrieveSubscription = this.retrieveSubscription.bind(this);
     }
 
     componentDidMount(): void {
@@ -61,6 +63,8 @@ export default class Profile extends Component {
             })
         }).then(() => {
             this.retrieveAnemic()
+        }).then(() => {
+            this.retrieveSubscription()
         });
     }
 
@@ -68,6 +72,18 @@ export default class Profile extends Component {
         firebase.firestore().collection('Anemia').doc(this.state.userInfo['Anemia']).get().then(value => {
             this.setState({
                 anemic: value.data(),
+                spinner: false,
+
+            }).catch(err => {
+                console.log(err)
+            });
+        })
+    }
+
+    retrieveSubscription() {
+        firebase.firestore().collection('Abbonamenti').doc(this.state.userInfo['Abbonamento']).get().then(value => {
+            this.setState({
+                subscript: value.data(),
                 spinner: false,
 
             }).catch(err => {
@@ -126,6 +142,7 @@ export default class Profile extends Component {
                                     <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
                                         <View style={{marginLeft: 40, marginTop: 10}}>
 
+
                                             <TouchableOpacity onPress={() => {this.changeTab(0)}}>
                                                 <Ionicons name={Platform.OS === 'ios' ? 'ios-person' : 'md-person'} type="FontAwesome" size={40} color={this.state.active === 0 ? '#007AFF' : 'grey'} />
                                             </TouchableOpacity>
@@ -152,7 +169,7 @@ export default class Profile extends Component {
 
                                     { this.state.active === 1 && <ProfileTabTwo userAnemic={this.state.anemic}/> }
 
-                                    { this.state.active === 2 && <ProfileTabThree/> }
+                                    { this.state.active === 2 && <ProfileTabThree startSubscription={this.state.userInfo['Iscrizione']} userSubscription={this.state.subscript}/> }
 
 
                                 </View>
