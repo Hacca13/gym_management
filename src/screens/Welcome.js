@@ -7,28 +7,27 @@ const { height, width } = Dimensions.get("window");
 import gymWallpaper from './../assets/gym-workout-wallpaper.jpg';
 import firebase from "react-native-firebase";
 
-
 export default class Welcome extends Component {
     constructor(props) {
         super(props);
         this.state = {
             user: null,
-            mail: ''
         }
     }
 
 
     componentDidMount(): void {
+
         firebase.auth().onAuthStateChanged(user => {
             if (user) {
-                //console.log(user)
-            } else {
                 this.setState({
-                    isAuth: true
+                    isAuth: true,
                 })
+            } else {
             }
         })
     }
+
 
     render() {
         return (
@@ -51,9 +50,11 @@ export default class Welcome extends Component {
 
                     <View style={{paddingLeft: 20, paddingRight: 20}}>
                         <Divider/>
-                        <Text>{this.state.mail}</Text>
                     </View>
                     <View>
+
+
+
                         <TouchableOpacity
                             onPress={() => { this.props.navigation.push('TrainOrCourse')}}
                             style={{

@@ -5,7 +5,6 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 const { height, width } = Dimensions.get("window");
 import Emoji from 'react-native-emoji';
 import CardView from 'react-native-cardview';
-// import styles from './styles';
 
 export default class GoCourses extends Component {
     render() {

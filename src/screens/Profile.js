@@ -169,8 +169,7 @@ export default class Profile extends Component {
 
                                     { this.state.active === 1 && <ProfileTabTwo userAnemic={this.state.anemic}/> }
 
-                                    { this.state.active === 2 && <ProfileTabThree startSubscription={this.state.userInfo['Iscrizione']} userSubscription={this.state.subscript}/> }
-
+                                    { this.state.active === 2 && <ProfileTabThree navigation={this.props.navigation} startSubscription={this.state.userInfo['Iscrizione']} userSubscription={this.state.subscript}/> }
 
                                 </View>
 
@@ -199,20 +198,10 @@ export default class Profile extends Component {
 
                         (<Spinner
                                 visible={this.state.spinner}
-                                textContent={'Loading...'}
                             />
                         )
 
                     }
-
-
-
-
-
-
-
-
-
                 </SafeAreaView>
             );
         }

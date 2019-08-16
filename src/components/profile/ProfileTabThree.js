@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import {Text, View} from 'react-native';
 import Entrance from '../subscription/entrance';
 import Periodical from '../subscription/periodical';
+import ActiveCourses from '../subscription/activeCourses';
 
 // import styles from './styles';
 
@@ -34,10 +35,11 @@ export default class ProfileTabThree extends Component {
                 {this.props.userSubscription['Tipo'].Entrate && <Entrance entrance={this.props.userSubscription['Entrate']}
                                                                           remain={this.props.userSubscription['EntrateAttuali']} />}
 
-
-
                 <Text style={{color: '#007AFF'}}>Iscrizione</Text>
                 <Text style={{fontSize: 25}}>{this.props.startSubscription}</Text>
+
+                {this.props.userSubscription['IDCorso'].length > 0 ? <ActiveCourses navigation={this.props.navigation} active={true}/> : <ActiveCourses active={false}/>}
+
 
             </View>
         );

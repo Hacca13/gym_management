@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-
-import {View, SafeAreaView, ScrollView, Text, Dimensions, Platform, TouchableOpacity} from 'react-native';
+import {View, SafeAreaView, ScrollView, Text, Dimensions, Platform, TouchableOpacity, NativeModules} from 'react-native';
 import Emoji from 'react-native-emoji';
 import CardView from 'react-native-cardview';
 import {Card, Divider} from 'react-native-paper';
@@ -9,8 +8,10 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 const { height, width } = Dimensions.get("window");
 import {Collapse, CollapseHeader, CollapseBody} from "accordion-collapse-react-native";
 const timer = require('react-native-timer');
+import firebase from 'react-native-firebase';
+import Reactotron from 'reactotron-react-native';
 
-// import styles from './styles';
+
 
 export default class  extends Component {
     constructor(props) {
@@ -18,7 +19,12 @@ export default class  extends Component {
         this.state = {
             modalVisible: false,
             modalID: [],
-
+            id: '',
+            user: null,
+            userInfo: null,
+            spinner: true,
+            anemic: null,
+            subscript: null,
             courses: [
 
                 {
@@ -50,15 +56,83 @@ export default class  extends Component {
                 }
 
             ],
+            fireCourse: [],
+            courseVal: null
         };
+
         this.collapseManagement = this.collapseManagement.bind(this);
+        this.retrieveInfo = this.retrieveInfo.bind(this);
+        this.retrieveSubscription = this.retrieveSubscription.bind(this);
+        this.retrieveCourses = this.retrieveCourses.bind(this);
     }
 
     collapseManagement(index) {
-        let tmp = [...this.state.courses];
+        let tmp = [...this.state.fireCourse];
         tmp[index].collapsed = !tmp[index].collapsed;
         this.setState({
-            courses: tmp
+            fireCourse: tmp
+        })
+    }
+
+
+    retrieveInfo(user) {
+        firebase.firestore().collection('User').where('Username', '==', user._user.uid).get().then(value => {
+            value.docs.map((value1) => {
+                this.setState({
+                    id: value1.id,
+                    userInfo: value1.data(),
+                    spinner: false
+                })
+            })
+        }).catch(err => {
+            console.log(err);
+        }).then(() => {
+            this.retrieveSubscription();
+        })
+    }
+
+    retrieveSubscription() {
+        firebase.firestore().collection('Abbonamenti').doc(this.state.userInfo['Abbonamento']).get().then(value => {
+            this.setState({
+                subscript: value.data(),
+                spinner: false,
+            }).catch(err => {
+                console.log(err)
+            })
+        }).catch(err => {
+            console.log(err)
+        }).then(() => {
+            this.retrieveCourses()
+        })
+    }
+
+    retrieveCourses() {
+        if(this.state.subscript['IDCorso'].length > 0) {
+            let fireCourses = [];
+            this.state.subscript['IDCorso'].map((value) => {
+                firebase.firestore().collection('Corsi').doc(value).get().then(value1 => {
+                    fireCourses.push({...value1.data(), collapsed: false})
+                }).then(() => {
+                    this.setState({
+                        fireCourse: fireCourses
+                    })
+                })
+            })
+        } else {
+            Reactotron.log('no')
+        }
+
+    }
+
+
+    componentDidMount(): void {
+        firebase.auth().onAuthStateChanged(user => {
+            if (user) {
+                this.retrieveInfo(user);
+            } else {
+                console.log('nouser')
+            }
+
         })
     }
 
@@ -70,10 +144,11 @@ export default class  extends Component {
                 <ScrollView>
 
                     {
-                        this.state.courses.length > 0 ? (
+
+                        this.state.fireCourse.length > 0 ? (
 
 
-                                this.state.courses.map((course, index) => (
+                                this.state.fireCourse.map((course, index) => (
 
 
                                     <CardView
@@ -93,13 +168,13 @@ export default class  extends Component {
                                             <Card.Cover source={plank}/>
 
                                             <Card.Content style={{flexDirection: 'row', justifyContent: 'space-between', paddingBottom: 15}}>
-                                                <Text style={{marginTop: 10, fontSize: 30, alignSelf: 'center'}}>{course.name}</Text>
+                                                <Text style={{marginTop: 10, fontSize: 30, alignSelf: 'center'}}>{course['Nome']}</Text>
                                                 <TouchableOpacity activeOpacity={0.5} delayPressIn={50} onPress={() => {
                                                     this.collapseManagement(index);
                                                 }}>
 
                                                     <Ionicons style={{alignSelf: 'center', marginTop: 15, color: '#007AFF'}}
-                                                              name={ (this.state.courses[index].collapsed) ?
+                                                              name={ (this.state.fireCourse[index].collapsed) ?
                                                                   (Platform.OS === 'ios' ? 'md-arrow-dropup' : 'ios-arrow-dropup')
                                                                   :
                                                                   (Platform.OS === 'ios' ? 'md-information-circle-outline' : 'ios-information-circle-outline')
@@ -108,7 +183,7 @@ export default class  extends Component {
                                                 </TouchableOpacity>
                                             </Card.Content>
 
-                                            { (this.state.courses[index].collapsed) ?
+                                            { (this.state.fireCourse[index].collapsed) ?
                                                 (
                                                     <Card.Content>
 
@@ -116,24 +191,35 @@ export default class  extends Component {
 
                                                         <View style={{justifyContent: 'flex-start', flexDirection: 'row', marginTop: 5}}>
                                                             <Text style={{fontSize: 15, color: '#007AFF', marginTop: 5}}>Allenatore:</Text>
-                                                            <Text style={{fontSize: 20}}>{' ' + course.istruttore}</Text>
+                                                            <Text style={{fontSize: 20}}>{' ' + course['Istruttore']}</Text>
                                                         </View>
 
                                                         <View style={{justifyContent: 'flex-start', flexDirection: 'row', marginTop: 5}}>
                                                             <Text style={{fontSize: 15, color: '#007AFF', marginTop: 5}}>Cadenza:</Text>
-                                                            {course.cadenza.giorni.map((days, index) => (
-                                                                <Text key={index} style={{fontSize: 20}}>{' ' + days}</Text>
-                                                            ))}
+
+                                                            {
+                                                                course['Cadenza']['Giorni'].map((days, index) => (
+                                                                        <Text style={{fontSize: 20}}>{' ' + days['Giorno']['Giorno']}</Text>
+                                                                    )
+                                                                )
+                                                            }
+
+
+
                                                         </View>
 
                                                         <View style={{justifyContent: 'flex-start', flexDirection: 'row', marginTop: 5}}>
                                                             <Text style={{fontSize: 15, color: '#007AFF', marginTop: 5}}>Inizio:</Text>
-                                                            <Text style={{fontSize: 20}}>{' ' + course.svolgimento.inizio}</Text>
+                                                            <Text style={{fontSize: 20}}>{' ' + course['Svolgimento']['Inizio']}</Text>
                                                         </View>
+
+
+
+
 
                                                         <View style={{justifyContent: 'flex-start', flexDirection: 'row', marginTop: 5}}>
                                                             <Text style={{fontSize: 15, color: '#007AFF', marginTop: 5}}>Fine:</Text>
-                                                            <Text style={{fontSize: 20}}>{' ' + course.svolgimento.fine}</Text>
+                                                            <Text style={{fontSize: 20}}>{' ' + course['Svolgimento']['Fine']}</Text>
                                                         </View>
 
                                                     </Card.Content>
@@ -170,7 +256,7 @@ export default class  extends Component {
 
                     }
 
-
+                    <Text style={{color: 'white'}}>{this.state.courseVal}</Text>
                 </ScrollView>
 
 
