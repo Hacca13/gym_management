@@ -6,8 +6,11 @@ import TextCarousel from 'react-native-text-carousel'
 const { height, width } = Dimensions.get("window");
 import gymWallpaper from './../assets/gym-workout-wallpaper.jpg';
 import firebase from "react-native-firebase";
+import OfflineManager from '../logic/offlineManager';
+import Reactotron from 'reactotron-react-native';
 
 export default class Welcome extends Component {
+    offlineManager = new OfflineManager();
     constructor(props) {
         super(props);
         this.state = {
@@ -20,6 +23,11 @@ export default class Welcome extends Component {
 
         firebase.auth().onAuthStateChanged(user => {
             if (user) {
+
+                this.offlineManager.getCourses(user).then(value => {
+                   Reactotron.log('Setted')
+                });
+
                 this.setState({
                     isAuth: true,
                 })

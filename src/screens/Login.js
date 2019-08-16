@@ -10,6 +10,7 @@ var ls = require('react-native-local-storage');
 const { height } = Dimensions.get("window");
 
 export default class Login extends Component {
+
     constructor(props) {
         super(props);
         this.unsubscriber = null;
@@ -46,12 +47,9 @@ export default class Login extends Component {
 
     login() {
         firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password).then((user) => {
+
             this.setState({isAuth: true});
             this.player.dismissFullscreenPlayer();
-            ls.save('user', user)
-                .then(() => {
-                    this.props.navigation.replace('Welcome', {user})
-                })
         }).catch(err => {
             this.setState({
                 email: err,
