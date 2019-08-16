@@ -196,9 +196,8 @@ export default class Profile extends Component {
                             </TouchableOpacity>
                         </ScrollView>) :
 
-                        (<Spinner
-                                visible={this.state.spinner}
-                            />
+                        (
+                            <Spinner visible={this.state.spinner}/>
                         )
 
                     }
