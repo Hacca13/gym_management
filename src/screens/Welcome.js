@@ -6,11 +6,12 @@ import TextCarousel from 'react-native-text-carousel'
 const { height, width } = Dimensions.get("window");
 import gymWallpaper from './../assets/gym-workout-wallpaper.jpg';
 import firebase from "react-native-firebase";
-import OfflineManager from '../logic/offlineManager';
 import Reactotron from 'reactotron-react-native';
+import {observer} from 'mobx-react';
+import CounterStore from '../UserManagerOffline';
 
+@observer
 export default class Welcome extends Component {
-    offlineManager = new OfflineManager();
     constructor(props) {
         super(props);
         this.state = {
@@ -24,8 +25,8 @@ export default class Welcome extends Component {
         firebase.auth().onAuthStateChanged(user => {
             if (user) {
 
-                this.offlineManager.getCourses(user).then(value => {
-                   Reactotron.log('Setted')
+                CounterStore.getMultiple().then(value => {
+                    Reactotron.log(value)
                 });
 
                 this.setState({
@@ -39,7 +40,11 @@ export default class Welcome extends Component {
 
     render() {
         return (
+
             <SafeAreaView>
+
+
+
                 <ImageBackground source={gymWallpaper} style={{width: '100%', height: '100%'}}>
 
                     <View style={{alignSelf: 'center', paddingLeft: 50, paddingRight: 50}}>
@@ -64,7 +69,10 @@ export default class Welcome extends Component {
 
 
                         <TouchableOpacity
-                            onPress={() => { this.props.navigation.push('TrainOrCourse')}}
+                            onPress={() => {
+                            //    this.props.navigation.push('TrainOrCourse')
+                                CounterStore.increment()
+                            }}
                             style={{
                                 marginTop: 100,
                                 paddingTop: 20,
@@ -76,6 +84,9 @@ export default class Welcome extends Component {
                                 width: width/2,
                                 alignSelf: 'center'
                             }}>
+
+
+
                             <Text style={{
                                 color:'#000000',
                                 textAlign:'center',

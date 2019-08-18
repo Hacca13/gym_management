@@ -11,11 +11,10 @@ const timer = require('react-native-timer');
 import Spinner from 'react-native-loading-spinner-overlay';
 import firebase from 'react-native-firebase';
 import Reactotron from 'reactotron-react-native';
-import OfflineManager from '../logic/offlineManager';
+
 
 
 export default class  extends Component {
-    offlineManager = new OfflineManager();
 
     constructor(props) {
         super(props);
@@ -39,12 +38,7 @@ export default class  extends Component {
     componentDidMount(): void {
         firebase.auth().onAuthStateChanged(user => {
             if (user) {
-                this.offlineManager.getCourses(user).then(value => {
-                    this.setState({
-                        fireCourse: value,
-                        spinner: false
-                    })
-                })
+
             } else {
                 console.log('nouser')
             }

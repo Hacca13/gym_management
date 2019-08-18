@@ -17,7 +17,10 @@ import StockNav from './src/components/headers/StockNav';
 
 class App extends Component {
     render() {
-        return <AppNavigator />;
+        return (
+
+            <AppNavigator />
+        )
     }
 }
 
@@ -69,10 +72,10 @@ const AppNavigator = createStackNavigator(
         },
 
         TrainOrCourse: {
-          screen: TrainOrCourse,
-          navigationOptions: {
-              header: navigationProps => <TrainOrCourseNav {...navigationProps} />
-          }
+            screen: TrainOrCourse,
+            navigationOptions: {
+                header: navigationProps => <TrainOrCourseNav {...navigationProps} />
+            }
         },
 
         Courses: {

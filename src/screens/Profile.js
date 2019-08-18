@@ -11,6 +11,7 @@ import ProfileTabThree from '../components/profile/ProfileTabThree';
 import firebase from 'react-native-firebase';
 import { StackActions, NavigationActions } from 'react-navigation';
 import Spinner from 'react-native-loading-spinner-overlay';
+import CounterStore from '../UserManagerOffline';
 
 const resetAction = StackActions.reset({
     index: 0,
@@ -94,117 +95,119 @@ export default class Profile extends Component {
 
 
 
-        componentWillUnmount(): void {
-            this.setState({
-                spinner: false
-            })
-        }
+    componentWillUnmount(): void {
+        this.setState({
+            spinner: false
+        })
+    }
 
-        changeTab(val) {
-            this.setState({
-                active: val
-            })
-        }
+    changeTab(val) {
+        this.setState({
+            active: val
+        })
+    }
 
 
-        logout() {
-            firebase.auth().signOut().then(value => {
+    logout() {
+        firebase.auth().signOut().then(value => {
+            CounterStore.clearAll().then(() => {
                 this.props.navigation.dispatch(resetAction);
-            }).catch(err => {
-                console.log(err)
             })
+        }).catch(err => {
+            console.log(err)
+        })
 
-        }
-        render() {
-
-
-            return (
-                <SafeAreaView style={{backgroundColor: 'black', flex: 1}}>
-
-                    {this.state.userInfo ?
-
-                        (<ScrollView>
-                            <View style={{alignSelf: 'center', marginTop: 20}}>
-                                <Avatar.Image size={148} source={avatar} />
-                            </View>
-                            <CardView
-                                cardElevation={7}
-                                cardMaxElevation={2}
-                                cornerRadius={8}
-                                style={{
-                                    marginTop: 20,
-                                    marginLeft: 24,
-                                    marginRight: 24,
-                                    backgroundColor: 'white'
-                                }}>
-
-                                <View>
-                                    <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-                                        <View style={{marginLeft: 40, marginTop: 10}}>
+    }
+    render() {
 
 
-                                            <TouchableOpacity onPress={() => {this.changeTab(0)}}>
-                                                <Ionicons name={Platform.OS === 'ios' ? 'ios-person' : 'md-person'} type="FontAwesome" size={40} color={this.state.active === 0 ? '#007AFF' : 'grey'} />
-                                            </TouchableOpacity>
-                                        </View>
+        return (
+            <SafeAreaView style={{backgroundColor: 'black', flex: 1}}>
 
-                                        <View style={{marginTop: 10}}>
-                                            <TouchableOpacity onPress={() => {this.changeTab(1)}}>
-                                                <Ionicons name={Platform.OS === 'ios' ? 'ios-clipboard' : 'md-clipboard'} type="Ionicons" size={40} color={this.state.active === 1 ? '#007AFF' : 'grey'} />
-                                            </TouchableOpacity>
-                                        </View>
+                {this.state.userInfo ?
 
-                                        <View style={{marginRight: 40, marginTop: 10}}>
-                                            <TouchableOpacity onPress={() => {this.changeTab(2)}}>
-                                                <Ionicons name={Platform.OS === 'ios' ? 'ios-apps' : 'md-apps'} type="Ionicons" size={40} color={this.state.active === 2 ? '#007AFF' : 'grey'} />
-                                            </TouchableOpacity>
-                                        </View>
+                    (<ScrollView>
+                        <View style={{alignSelf: 'center', marginTop: 20}}>
+                            <Avatar.Image size={148} source={avatar} />
+                        </View>
+                        <CardView
+                            cardElevation={7}
+                            cardMaxElevation={2}
+                            cornerRadius={8}
+                            style={{
+                                marginTop: 20,
+                                marginLeft: 24,
+                                marginRight: 24,
+                                backgroundColor: 'white'
+                            }}>
 
+                            <View>
+                                <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+                                    <View style={{marginLeft: 40, marginTop: 10}}>
+
+
+                                        <TouchableOpacity onPress={() => {this.changeTab(0)}}>
+                                            <Ionicons name={Platform.OS === 'ios' ? 'ios-person' : 'md-person'} type="FontAwesome" size={40} color={this.state.active === 0 ? '#007AFF' : 'grey'} />
+                                        </TouchableOpacity>
                                     </View>
 
-                                    <View style={{paddingLeft: 15, paddingRight: 15, marginTop: 10}}><Divider/></View>
+                                    <View style={{marginTop: 10}}>
+                                        <TouchableOpacity onPress={() => {this.changeTab(1)}}>
+                                            <Ionicons name={Platform.OS === 'ios' ? 'ios-clipboard' : 'md-clipboard'} type="Ionicons" size={40} color={this.state.active === 1 ? '#007AFF' : 'grey'} />
+                                        </TouchableOpacity>
+                                    </View>
 
-                                    { this.state.active === 0 && <ProfileTabOne userInfo={this.state.userInfo}/>
-                                    }
-
-                                    { this.state.active === 1 && <ProfileTabTwo userAnemic={this.state.anemic}/> }
-
-                                    { this.state.active === 2 && <ProfileTabThree navigation={this.props.navigation} startSubscription={this.state.userInfo['Iscrizione']} userSubscription={this.state.subscript}/> }
+                                    <View style={{marginRight: 40, marginTop: 10}}>
+                                        <TouchableOpacity onPress={() => {this.changeTab(2)}}>
+                                            <Ionicons name={Platform.OS === 'ios' ? 'ios-apps' : 'md-apps'} type="Ionicons" size={40} color={this.state.active === 2 ? '#007AFF' : 'grey'} />
+                                        </TouchableOpacity>
+                                    </View>
 
                                 </View>
 
-                            </CardView>
-                            <TouchableOpacity
-                                onPress={() => this.logout()}
-                                style={{
-                                    marginTop: 20,
-                                    marginRight: 24,
-                                    paddingTop: 20,
-                                    paddingBottom: 20,
-                                    backgroundColor:'#EB3333',
-                                    borderRadius: 30,
-                                    borderWidth: 1,
-                                    borderColor: '#EB3333',
-                                    alignSelf: 'flex-end',
-                                    width: '40%'
-                                }}>
-                                <Text style={{
-                                    color:'#FFFFFF',
-                                    textAlign:'center',
-                                    fontSize: 25
-                                }}>Logout <Ionicons name={Platform.OS === 'ios' ? 'ios-log-out' : 'md-log-out'} size={25} /></Text>
-                            </TouchableOpacity>
-                        </ScrollView>) :
+                                <View style={{paddingLeft: 15, paddingRight: 15, marginTop: 10}}><Divider/></View>
 
-                        (
-                            <Spinner visible={this.state.spinner}/>
-                        )
+                                { this.state.active === 0 && <ProfileTabOne userInfo={this.state.userInfo}/>
+                                }
 
-                    }
-                </SafeAreaView>
-            );
-        }
+                                { this.state.active === 1 && <ProfileTabTwo userAnemic={this.state.anemic}/> }
+
+                                { this.state.active === 2 && <ProfileTabThree navigation={this.props.navigation} startSubscription={this.state.userInfo['Iscrizione']} userSubscription={this.state.subscript}/> }
+
+                            </View>
+
+                        </CardView>
+                        <TouchableOpacity
+                            onPress={() => this.logout()}
+                            style={{
+                                marginTop: 20,
+                                marginRight: 24,
+                                paddingTop: 20,
+                                paddingBottom: 20,
+                                backgroundColor:'#EB3333',
+                                borderRadius: 30,
+                                borderWidth: 1,
+                                borderColor: '#EB3333',
+                                alignSelf: 'flex-end',
+                                width: '40%'
+                            }}>
+                            <Text style={{
+                                color:'#FFFFFF',
+                                textAlign:'center',
+                                fontSize: 25
+                            }}>Logout <Ionicons name={Platform.OS === 'ios' ? 'ios-log-out' : 'md-log-out'} size={25} /></Text>
+                        </TouchableOpacity>
+                    </ScrollView>) :
+
+                    (
+                        <Spinner visible={this.state.spinner}/>
+                    )
+
+                }
+            </SafeAreaView>
+        );
     }
+}
 
 
 

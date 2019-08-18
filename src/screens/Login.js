@@ -6,6 +6,7 @@ import { TextInput } from 'react-native-paper';
 import Video from "react-native-video";
 import firebase from 'react-native-firebase';
 var ls = require('react-native-local-storage');
+import CounterStore from '../UserManagerOffline';
 
 const { height } = Dimensions.get("window");
 
@@ -47,7 +48,7 @@ export default class Login extends Component {
 
     login() {
         firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password).then((user) => {
-
+            CounterStore.retrieveUser(user);
             this.setState({isAuth: true});
             this.player.dismissFullscreenPlayer();
         }).catch(err => {
