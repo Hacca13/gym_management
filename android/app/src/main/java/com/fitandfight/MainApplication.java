@@ -16,6 +16,7 @@ import com.facebook.react.ReactPackage;
 import com.facebook.soloader.SoLoader;
 import io.invertase.firebase.firestore.RNFirebaseFirestorePackage;
 import io.invertase.firebase.auth.RNFirebaseAuthPackage;
+import io.invertase.firebase.database.RNFirebaseDatabasePackage;
 
 import java.util.List;
 
@@ -35,6 +36,7 @@ public class MainApplication extends Application implements ReactApplication {
       // packages.add(new MyReactNativePackage());
       packages.add(new RNFirebaseAuthPackage());
       packages.add(new RNFirebaseFirestorePackage());
+      packages.add(new RNFirebaseDatabasePackage());
       return packages;
     }
 
@@ -51,6 +53,7 @@ public class MainApplication extends Application implements ReactApplication {
 
   @Override
   public void onCreate() {
+    //RNFirebaseDatabasePackage.getInstance().setPersistenceEnabled(true);
     super.onCreate();
     SoLoader.init(this, /* native exopackage */ false);
   }

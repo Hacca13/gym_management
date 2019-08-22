@@ -31,7 +31,7 @@ target 'fitandfight' do
   pod 'RNFirebase', :path => '../node_modules/react-native-firebase/ios'
   pod 'Firebase/Firestore', '~> 6.3.0'
   pod 'Firebase/Auth', '~> 6.3.0'
-
+  pod 'Firebase/Database', '~> 6.3.0'
 
   pod 'RNGestureHandler', :path => '../node_modules/react-native-gesture-handler'
 

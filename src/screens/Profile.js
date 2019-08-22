@@ -110,9 +110,7 @@ export default class Profile extends Component {
 
     logout() {
         firebase.auth().signOut().then(value => {
-            CounterStore.clearAll().then(() => {
-                this.props.navigation.dispatch(resetAction);
-            })
+            this.props.navigation.dispatch(resetAction);
         }).catch(err => {
             console.log(err)
         })

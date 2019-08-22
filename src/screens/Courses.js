@@ -6,14 +6,12 @@ import {Card, Divider} from 'react-native-paper';
 import plank from '../assets/plank.png';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 const { height, width } = Dimensions.get("window");
-import {Collapse, CollapseHeader, CollapseBody} from "accordion-collapse-react-native";
 const timer = require('react-native-timer');
-import Spinner from 'react-native-loading-spinner-overlay';
 import firebase from 'react-native-firebase';
-import Reactotron from 'reactotron-react-native';
+import UserManagerOffline from '../UserManagerOffline';
+import {observer} from 'mobx-react';
 
-
-
+@observer
 export default class  extends Component {
 
     constructor(props) {
@@ -38,7 +36,9 @@ export default class  extends Component {
     componentDidMount(): void {
         firebase.auth().onAuthStateChanged(user => {
             if (user) {
-
+                this.setState({
+                    fireCourse: UserManagerOffline.userCourses
+                })
             } else {
                 console.log('nouser')
             }
@@ -53,8 +53,6 @@ export default class  extends Component {
                 <ScrollView>
 
                     {
-
-
 
                         this.state.fireCourse.length > 0  ? (
 

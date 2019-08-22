@@ -1,17 +1,22 @@
 import React, { Component } from 'react';
 
 import {SafeAreaView, View, Text, Dimensions, TouchableOpacity, ImageBackground} from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
 import {Divider} from 'react-native-paper';
 import TextCarousel from 'react-native-text-carousel'
 const { height, width } = Dimensions.get("window");
 import gymWallpaper from './../assets/gym-workout-wallpaper.jpg';
 import firebase from "react-native-firebase";
 import Reactotron from 'reactotron-react-native';
+import UserManagerOffline from '../UserManagerOffline';
 import {observer} from 'mobx-react';
-import CounterStore from '../UserManagerOffline';
+import Spinner from 'react-native-loading-spinner-overlay';
+
 
 @observer
 export default class Welcome extends Component {
+
+
     constructor(props) {
         super(props);
         this.state = {
@@ -21,13 +26,11 @@ export default class Welcome extends Component {
 
 
     componentDidMount(): void {
-
         firebase.auth().onAuthStateChanged(user => {
             if (user) {
 
-                CounterStore.getMultiple().then(value => {
-                    Reactotron.log(value)
-                });
+
+                UserManagerOffline.retrieveUser(user);
 
                 this.setState({
                     isAuth: true,
@@ -43,9 +46,8 @@ export default class Welcome extends Component {
 
             <SafeAreaView>
 
-
-
-                <ImageBackground source={gymWallpaper} style={{width: '100%', height: '100%'}}>
+                {UserManagerOffline.isSet ? (
+                    <ImageBackground source={gymWallpaper} style={{width: '100%', height: '100%'}}>
 
                     <View style={{alignSelf: 'center', paddingLeft: 50, paddingRight: 50}}>
                         <TextCarousel height={height/3} direction='up'>
@@ -70,8 +72,8 @@ export default class Welcome extends Component {
 
                         <TouchableOpacity
                             onPress={() => {
-                            //    this.props.navigation.push('TrainOrCourse')
-                                CounterStore.increment()
+                                this.props.navigation.push('TrainOrCourse')
+
                             }}
                             style={{
                                 marginTop: 100,
@@ -86,15 +88,20 @@ export default class Welcome extends Component {
                             }}>
 
 
+                            {Reactotron.log(UserManagerOffline.userSubscription)}
 
                             <Text style={{
                                 color:'#000000',
                                 textAlign:'center',
                                 fontSize: 20
                             }}>Allenati</Text>
+
+
                         </TouchableOpacity>
                     </View>
-                </ImageBackground>
+                </ImageBackground>) : (<Spinner visible={!UserManagerOffline.isSet}/>)}
+
+
 
             </SafeAreaView>
         );

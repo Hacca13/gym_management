@@ -6,9 +6,15 @@ import { TextInput } from 'react-native-paper';
 import Video from "react-native-video";
 import firebase from 'react-native-firebase';
 var ls = require('react-native-local-storage');
-import CounterStore from '../UserManagerOffline';
-
+import AsyncStorage from '@react-native-community/async-storage';
+import Reactotron from 'reactotron-react-native';
 const { height } = Dimensions.get("window");
+import {observer} from 'mobx-react';
+import {CountStore} from '../store';
+const hydrate = create({ storage: AsyncStorage });
+const countStore = new CountStore;
+hydrate('userInfo', countStore);
+import { create } from 'mobx-persist';
 
 export default class Login extends Component {
 
@@ -48,7 +54,6 @@ export default class Login extends Component {
 
     login() {
         firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password).then((user) => {
-            CounterStore.retrieveUser(user);
             this.setState({isAuth: true});
             this.player.dismissFullscreenPlayer();
         }).catch(err => {
