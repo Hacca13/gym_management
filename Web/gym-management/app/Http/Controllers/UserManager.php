@@ -9,10 +9,10 @@ use Firevel\Firestore\Facades\Firestore;
 class UserManager extends Controller
 {
     //
-    public function GetAllUser () {
+    public function getAllUser () {
 
       $collection = Firestore::collection('User');
       $allUser = $collection->documents();
-      return view('index', compact('allUser'));
+      return view('welcome', compact('allUser'));
     }
 }
