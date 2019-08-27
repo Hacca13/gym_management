@@ -12,7 +12,12 @@
 */
 
 Route::get('/', function () {
-    return view('structure');
+    return view('index');
 });
+
+Route::get('/courses', function () {
+    return view('courses');
+});
+
 
 Route::get('/firetest', 'Firetest@test');

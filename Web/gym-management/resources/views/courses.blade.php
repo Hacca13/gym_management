@@ -16,7 +16,7 @@
                     <div class="container-fluid">
                         <div class="row">
 
-                            @include('dashboard')
+                            @include('coursesList')
 
                         </div>
                     </div>
