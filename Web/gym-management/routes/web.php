@@ -19,5 +19,6 @@ Route::get('/courses', function () {
     return view('courses');
 });
 
+Route::get('/getAllUser', 'UserManager@getAllUser');
 
 Route::get('/firetest', 'Firetest@test');
