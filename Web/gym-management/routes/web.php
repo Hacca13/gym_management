@@ -15,6 +15,10 @@ Route::get('/', function () {
     return view('index');
 });
 
+Route::get('/courses', function () {
+    return view('courses');
+});
 
-Route::get('/courses', 'CoursesManager@getAllCourses');
+Route::get('/getAllUser', 'UserManager@getAllUser');
+
 Route::get('/firetest', 'Firetest@test');
