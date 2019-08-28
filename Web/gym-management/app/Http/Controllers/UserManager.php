@@ -18,7 +18,7 @@ class UserManager extends Controller
           echo $user['Nome'];
           echo $user['Cognome'];
           echo $user['Residenza']['Via'];
-        
+          
       }
     }
 

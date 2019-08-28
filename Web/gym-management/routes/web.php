@@ -22,3 +22,4 @@ Route::get('/courses', function () {
 Route::get('/getAllUser', 'UserManager@getAllUser');
 
 Route::get('/firetest', 'Firetest@test');
+Route::get('/firetest2', 'Firetest@test2');
