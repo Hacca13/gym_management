@@ -10,12 +10,11 @@ class Firetest extends Controller
     public function test() {
 
         $collection = Firestore::collection('User');
+        $user = $collection->document('fSVIao7b2BKQYuP01sqN')->snapshot()->data();
 
-        $todos = $collection->documents();
+        var_dump($user);
 
-        foreach ($todos as $todo) {
-            echo $todo['Nome'];
-        }
+
     }
 
 

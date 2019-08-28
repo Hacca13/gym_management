@@ -1,30 +1,44 @@
 @extends('layouts.master')
 
-@section('template')
-
-    <div class="wrapper">
-        <div class="sidebar" data-color="purple" data-image="assets/img/sidebar-5.jpg">
-
-            @include('components.sidebar')
-
-            <div class="main-panel">
+@section('content')
 
 
-                @include('components.nav')
+        <div class="row">
+            <div class="col-md-12" style="text-align: center">
+                <h1>Corsi</h1>
+            </div>
 
-                <div class="content">
-                    <div class="container-fluid">
-                        <div class="row">
+            <div class="col-md-12">
 
-                            @include('coursesList')
+                <div class="row">
 
-                        </div>
+                    <div class="col-md-6">
+                        <form>
+                            <div class="form-row align-items-center">
+                                <form class="navbar-form" role="search">
+                                    <div class="input-group add-on" >
+                                        <div class="input-group-btn">
+                                            <button class="btn btn-default" type="submit"><i class="pe-7s-search" style="font-size: 150%"></i></button>
+                                        </div>
+                                        <input class="form-control" placeholder="" name="srch-term" id="srch-term" type="text">
+
+                                    </div>
+                                </form>
+                            </div>
+
                     </div>
+
+                    <div class="col-md-6">
+
+                    </div>
+
                 </div>
 
-
-                @include('components.footer')
             </div>
+
+
         </div>
-    </div>
+
+
+
 @endsection

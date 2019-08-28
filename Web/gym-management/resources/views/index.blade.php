@@ -1,30 +1,48 @@
 @extends('layouts.master')
 
-@section('template')
+@section('content')
 
-    <div class="wrapper">
-        <div class="sidebar" data-color="purple" data-image="assets/img/sidebar-5.jpg">
+    <div class="row">
 
-            @include('components.sidebar')
-
-            <div class="main-panel">
-
-
-                @include('components.nav')
-
-                <div class="content">
-                    <div class="container-fluid">
-                        <div class="row">
-
-                            @include('dashboard')
-
-                        </div>
-                    </div>
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header" style="text-align: center; padding-top: 0.2em; padding-bottom: 0.2em">
+                    <h1>Gestione Schede</h1>
                 </div>
+            </div>
+        </div>
 
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header" style="text-align: center; padding-top: 0.2em; padding-bottom: 0.2em">
+                    <h1>Gestione Esercizi</h1>
+                </div>
+            </div>
+        </div>
 
-                @include('components.footer')
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header" style="text-align: center; padding-top: 0.2em; padding-bottom: 0.2em">
+                    <h1>Gestione Abbonamenti</h1>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header" style="text-align: center; padding-top: 0.2em; padding-bottom: 0.2em">
+                    <h1>Gestione Iscritti</h1>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header" style="text-align: center; padding-top: 0.2em; padding-bottom: 0.2em">
+                    <h1>Gestione Corsi</h1>
+                </div>
             </div>
         </div>
     </div>
+
 @endsection

@@ -7,8 +7,10 @@
 
     <ul class="nav">
 
-        <li class="active">
-            <a href="#">
+        <li @if (\Request::is('/'))
+            class="active"
+                @endif>
+            <a href="/">
                 <i class="pe-7s-home"></i>
                 <p>Home</p>
             </a>
@@ -42,8 +44,10 @@
             </a>
         </li>
 
-        <li>
-            <a href="#">
+        <li @if (\Request::is('courses'))
+            class="active"
+                @endif>
+            <a href="/courses">
                 <i class="pe-7s-notebook"></i>
                 <p>Gestione corsi</p>
             </a>
