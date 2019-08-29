@@ -8,6 +8,7 @@ namespace App\Http\Models;
  */
 class UserModel extends AnotherClass
 {
+  $idDatabase;
   $name;
   $surname;
   $status;
@@ -35,8 +36,9 @@ class UserModel extends AnotherClass
   $telephoneNumber;
 
 
-  function __construct($name,$surname,$status,$dateOfBirth,$birthNation,$birthPlace,$residence,$document,$email,$telephoneNumber)
+  function __construct($idDatabase,$name,$surname,$status,$dateOfBirth,$birthNation,$birthPlace,$residence,$document,$email,$telephoneNumber)
   {
+    $this->$idDatabase = $idDatabase;
     $this->$name = $name;
     $this->$surname = $surname;
     $this->$status = $status;
@@ -67,4 +69,5 @@ class UserModel extends AnotherClass
     $this->$email = $email;
     $this->$telephoneNumber = $telephoneNumber;
   }
+
 }
