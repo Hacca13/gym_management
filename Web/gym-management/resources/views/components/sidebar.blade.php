@@ -1,58 +1,19 @@
-<div class="sidebar-wrapper">
-    <div class="logo">
-        <a href="#" class="simple-text">
-            Fit&Fight
-        </a>
+<aside class="left-sidebar" data-sidebarbg="skin5">
+    <!-- Sidebar scroll-->
+    <div class="scroll-sidebar">
+        <!-- Sidebar navigation-->
+        <nav class="sidebar-nav">
+            <ul id="sidebarnav" class="p-t-30">
+                <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/" aria-expanded="false"><i class="mdi mdi-home"></i><span class="hide-menu">Home</span></a></li>
+                <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="charts.html" aria-expanded="false"><i class="mdi mdi-clipboard-outline"></i><span class="hide-menu">Gestione Schede</span></a></li>
+                <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="charts.html" aria-expanded="false"><i class="mdi mdi-football-helmet"></i><span class="hide-menu">Gestione Esercizi</span></a></li>
+                <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="charts.html" aria-expanded="false"><i class="mdi mdi-format-list-bulleted-type"></i><span class="hide-menu">Gestione Abbonamenti</span></a></li>
+                <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="charts.html" aria-expanded="false"><i class="mdi mdi-account-multiple"></i><span class="hide-menu">Gestione Iscritti</span></a></li>
+                <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/corsi" aria-expanded="false"><i class="mdi mdi-av-timer"></i><span class="hide-menu">Gestione Corsi</span></a></li>
+
+            </ul>
+        </nav>
+        <!-- End Sidebar navigation -->
     </div>
-
-    <ul class="nav">
-
-        <li @if (\Request::is('/'))
-            class="active"
-                @endif>
-            <a href="/">
-                <i class="pe-7s-home"></i>
-                <p>Home</p>
-            </a>
-        </li>
-
-        <li>
-            <a href="#">
-                <i class="pe-7s-note2"></i>
-                <p>Gestione schede</p>
-            </a>
-        </li>
-
-        <li>
-            <a href="#">
-                <i class="pe-7s-gym"></i>
-                <p>Gestione esercizi</p>
-            </a>
-        </li>
-
-        <li>
-            <a href="#">
-                <i class="pe-7s-id"></i>
-                <p>Gestione abbonamenti</p>
-            </a>
-        </li>
-
-        <li>
-            <a href="#">
-                <i class="pe-7s-users"></i>
-                <p>Gestione iscritti</p>
-            </a>
-        </li>
-
-        <li @if (\Request::is('courses'))
-            class="active"
-                @endif>
-            <a href="/courses">
-                <i class="pe-7s-notebook"></i>
-                <p>Gestione corsi</p>
-            </a>
-        </li>
-
-    </ul>
-</div>
-</div>
+    <!-- End Sidebar scroll-->
+</aside>
