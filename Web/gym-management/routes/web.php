@@ -20,3 +20,4 @@ Route::get('/corsi', 'CoursesManager@getAllCourses');
 Route::get('/getAllUser', 'UserManager@getAllUser');
 
 Route::get('/firetest', 'Firetest@test');
+Route::get('/firetest2', 'Firetest@test2');
