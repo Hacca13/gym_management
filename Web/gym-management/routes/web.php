@@ -26,3 +26,7 @@ Route::get('/firetest2', 'Firetest@test2');
 Route::get('/schede', function () {
     return view('recordCardPage');
 });
+
+Route::get('/esercizi', function () {
+    return view('excercisePage');
+});
