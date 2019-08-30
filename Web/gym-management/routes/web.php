@@ -34,3 +34,7 @@ Route::get('/esercizi', function () {
 Route::get('/abbonamenti', function () {
     return view('subscriptionPage');
 });
+
+Route::get('/iscritti', function () {
+    return view('usersPage');
+});
