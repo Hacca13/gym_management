@@ -30,3 +30,7 @@ Route::get('/schede', function () {
 Route::get('/esercizi', function () {
     return view('excercisePage');
 });
+
+Route::get('/abbonamenti', function () {
+    return view('subscriptionPage');
+});
