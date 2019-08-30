@@ -3,6 +3,7 @@
 
 namespace App\Http\Models;
 
+use Illuminate\Support\Arr;
 /**
  *
  */

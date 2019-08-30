@@ -10,16 +10,16 @@ class ExerciseModel extends AnotherClass
   $idDatabase:
   $name;
   $description;
-  $isometric;
+  $exerciseIsATime;
   $gif;
   $link;
 
-  function __construct($idDatabase,$name,$description,$isometric,$gif,$link)
+  function __construct($idDatabase,$name,$description,$exerciseIsATime,$gif,$link)
   {
     $this->$idDatabase = $idDatabase;
     $this->$name = $name;
     $this->$description = $description;
-    $this->$isometric = $isometric;
+    $this->$exerciseIsATime = $exerciseIsATime;
     $this->$gif = $gif;
     $this->$link = $link;
   }
