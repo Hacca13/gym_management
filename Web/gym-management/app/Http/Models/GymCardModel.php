@@ -37,7 +37,7 @@ class GymCardModel extends AnotherClass
         $exercise2:
             $idExerciseDatabase;
             $serialNumber;
-            $numberOfNepetitions
+            $numberOfRepetitions
             $restTime:
                 $minutes;
                 $seconds;
@@ -57,8 +57,17 @@ class GymCardModel extends AnotherClass
         ]
     );
 
+    $localCounter = 0;
     $this->$exercises = Arr::add(
       [
+        foreach ($exercises as $exercise) {
+          'exercise'.$localCounter = Arr::add([
+              /*
+                  Here I insert the variables of the exercise, but first I have to check if the variable $exerciseIsATime (in to exercise) is set to TRUE
+              */
+          ]);
+          $localCounter++;
+        }
 
       ]
     );

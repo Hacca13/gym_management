@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Google\Cloud\Firestore\FirestoreClient;
 use Firevel\Firestore\Facades\Firestore;
 
-class UserManager extends Controller
+class UsersManager extends Controller
 {
     //this function retorn all User
     public function getAllUser () {
