@@ -6,7 +6,7 @@ use Illuminate\Support\Arr;
 /**
  *
  */
-class GymCardModel extends AnotherClass
+class TrainingCardsModel extends AnotherClass
 {
   $idDatabase;
   $idUserDatabase;
