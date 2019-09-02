@@ -49,21 +49,21 @@ class UserModel extends AnotherClass
 
     $this->$residence = Arr::add(
         [
-          'nation' => data_get($residence, 'nation');,
-          'cityOfResidence' => data_get($residence, 'cityOfResidence');,
-          'cap' => data_get($residence, 'cap');,
-          'street' => data_get($residence, 'street');,
-          'number' => data_get($residence, 'number');
+          'nation' => get($residence, 'nation');,
+          'cityOfResidence' => get($residence, 'cityOfResidence');,
+          'cap' => get($residence, 'cap');,
+          'street' => get($residence, 'street');,
+          'number' => get($residence, 'number');
         ]
     );
 
 
     $this->$document = Arr::add(
         [
-          'type' => data_get($document, 'type');,
-          'number' => data_get($document, 'number');,
-          'released' => data_get($document, 'released');,
-          'releaseDate' => data_get($document, 'releaseDate');
+          'type' => get($document, 'type');,
+          'number' => get($document, 'number');,
+          'released' => get($document, 'released');,
+          'releaseDate' => get($document, 'releaseDate');
         ]
     );
 

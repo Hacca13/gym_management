@@ -3,6 +3,7 @@
 namespace App\Http\Models;
 
 use Illuminate\Support\Arr;
+
 /**
  *
  */
@@ -20,6 +21,7 @@ class TrainingCardsModel extends AnotherClass
 
   $exercises;
   /*
+    array
     $exercises:
         //If the variable $exerciseIsATime is set to TRUE
         $exercise1:
@@ -52,8 +54,8 @@ class TrainingCardsModel extends AnotherClass
     $this->$idUserDatabase = $idUserDatabase;
     $this->$period = Arr::add(
         [
-          'startDate' => data_get($period, 'startDate');,
-          'endDate' => data_get($period, 'endDate');
+          'startDate' => get($period, 'startDate');,
+          'endDate' => get($period, 'endDate');
         ]
     );
 
@@ -63,8 +65,13 @@ class TrainingCardsModel extends AnotherClass
         foreach ($exercises as $exercise) {
           'exercise'.$localCounter = Arr::add([
               /*
-                  Here I insert the variables of the exercise, but first I have to check if the variable $exerciseIsATime (in to exercise) is set to TRUE
+                  Here I insert the variables of the exercise, but first I have to check if the variable
+                  $exerciseIsATime (in to exercise) is set to TRUE
               */
+            $exercise1 = ExercisesManager::getExercise($exercise);
+
+
+
           ]);
           $localCounter++;
         }

@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Http\Models;
+
 /**
  *
  */
@@ -12,7 +14,7 @@ class SubscriptionModel extends AnotherClass
   $type;
   //da finire
 
-  function __construct(argument)
+  function __construct($idDatabase,$idUserDatabase,$status,$type)
   {
     // code...
   }

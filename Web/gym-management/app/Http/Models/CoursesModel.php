@@ -1,5 +1,9 @@
 <?php
 
+namespace App\Http\Models;
+
+use Illuminate\Support\Arr;
+
 /**
  *
  */
@@ -37,9 +41,47 @@ class CourseModel extends AnotherClass
                   $minutes;
   */
 
-  function __construct(argument)
+  function __construct($idDatabase,$name,$image,$instructor,$numberOfSubscribers,$period,$weeklyFrequency)
   {
-    // code...
+    $this->$idDatabase = $idDatabase;
+    $this->$name = $name;
+    $this->$image = $image;
+    $this->$instructor = $instructor;
+    $this->$numberOfSubscribers = $numberOfSubscribers;
+    $this->$period = Arr::add(
+        [
+          'startDate' => get($period, 'startDate');,
+          'endDate' => get($period, 'endDate');
+        ]
+    );
+    $localCounter=0;
+    $this->$weeklyFrequency = Arr::add(
+        [
+          foreach ($weeklyFrequency as $day) {
+            'day'.$localCounter = Arr::add(
+                [
+                  'startTime' = Arr::add(
+                        [
+                          'hour' = get($day,'startTime.hour');,
+                          'minutes' = get($day,'startTime.minutes');
+                        ]
+                   );,
+                  '$endTime' = Arr::add(
+                        [
+                          'hour' = get($day,'endTime.hour');,
+                          'minutes' = get($day,'endTime.minutes');
+                        ]
+                   );
+                ]
+             );
+
+            $localCounter++;
+          }
+
+
+        ]
+    );
+
   }
 }
 
