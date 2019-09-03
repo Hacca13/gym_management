@@ -9,9 +9,9 @@ use Illuminate\Support\Arr;
  */
 class TrainingCardsModel extends AnotherClass
 {
-  $idDatabase;
-  $idUserDatabase;
-  $period;
+  private $idDatabase;
+  private $idUserDatabase;
+  private $period;
   /*
     $period:
       $startDate;
@@ -19,7 +19,7 @@ class TrainingCardsModel extends AnotherClass
   */
 
 
-  $exercises;
+  private $exercises;
   /*
     array
     $exercises:

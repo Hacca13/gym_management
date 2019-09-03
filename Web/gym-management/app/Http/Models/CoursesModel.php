@@ -9,18 +9,18 @@ use Illuminate\Support\Arr;
  */
 class CourseModel extends AnotherClass
 {
-  $idDatabase;
-  $name;
-  $image;
-  $instructor;
-  $numberOfSubscribers;
-  $period;
+  private $idDatabase;
+  private $name;
+  private $image;
+  private private $instructor;
+  private $numberOfSubscribers;
+  private $period;
   /*
       $period:
           $startDate;
           $endDate;
   */
-  $weeklyFrequency;
+  private $weeklyFrequency;
   /*  array
       $weeklyFrequency:
           0:

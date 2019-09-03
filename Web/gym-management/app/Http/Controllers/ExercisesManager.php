@@ -14,5 +14,6 @@ class ExercisesManager extends Controller
 
           $collection = Firestore::collection('Exercises');
           $exercise = $collection->document($idDatabase)->snapshot()->data();
+
       }
 }

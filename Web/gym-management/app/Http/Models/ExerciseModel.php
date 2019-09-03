@@ -7,12 +7,12 @@ namespace App\Http\Models;
  */
 class ExerciseModel extends AnotherClass
 {
-  $idDatabase:
-  $name;
-  $description;
-  $exerciseIsATime;
-  $gif;
-  $link;
+  private $idDatabase:
+  private $name;
+  private $description;
+  private $exerciseIsATime;
+  private $gif;
+  private $link;
 
   function __construct($idDatabase,$name,$description,$exerciseIsATime,$gif,$link)
   {

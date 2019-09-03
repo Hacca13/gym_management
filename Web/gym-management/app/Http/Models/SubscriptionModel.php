@@ -8,10 +8,10 @@ namespace App\Http\Models;
 class SubscriptionModel extends AnotherClass
 {
 
-  $idDatabase;
-  $idUserDatabase;
-  $status;
-  $type;
+  private $idDatabase;
+  private $idUserDatabase;
+  private $status;
+  private $type;
   //da finire
 
   function __construct($idDatabase,$idUserDatabase,$status,$type)

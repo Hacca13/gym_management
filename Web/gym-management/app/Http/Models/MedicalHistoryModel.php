@@ -7,22 +7,22 @@ namespace App\Http\Models;
  */
 class MedicalHistoryModel extends AnotherClass
 {
-  $idDatabase;
-  $idUserDatabase;
-  $importantInformation;
-  $weight;
-  $height;
-  $previousSport;
-  $previousSportTime;
-  $inactiveTime;
-  $plicometricData;
-  $hypertrophy;
-  $slimming;
-  $toning;
-  $athleticTraining;
-  $rehabilitation;
-  $combatSports;
-  $otherGoals;
+  private $idDatabase;
+  private $idUserDatabase;
+  private $importantInformation;
+  private $weight;
+  private $height;
+  private $previousSport;
+  private $previousSportTime;
+  private $inactiveTime;
+  private $plicometricData;
+  private $hypertrophy;
+  private $slimming;
+  private $toning;
+  private $athleticTraining;
+  private $rehabilitation;
+  private $combatSports;
+  private $otherGoals;
 
 
   function __construct($idDatabase,$idUserDatabase,$importantInformation,$weight,$height,$previousSport,$previousSportTime,$inactiveTime,$plicometricData,$hypertrophy,$slimming,$toning,$athleticTraining,$rehabilitation,$combatSports,$otherGoals)
