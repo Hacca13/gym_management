@@ -64,11 +64,40 @@ class TrainingCardsModel extends AnotherClass
       [
         foreach ($exercises as $exercise) {
           'exercise'.$localCounter = Arr::add([
+
+              'idExerciseDatabase' => ,
+              'serialNumber' => ,
+
               /*
                   Here I insert the variables of the exercise, but first I have to check if the variable
                   $exerciseIsATime (in to exercise) is set to TRUE
               */
-            $exercise1 = ExercisesManager::getExercise($exercise);
+            $exercise1 = ExercisesManager::getExerciseById(get($exercise,'idDatabase'););
+
+            if($exercise1->$exerciseIsATime == TRUE){
+              'workoutTime' = Arr::add(
+                    [
+                      'minutes' = get($exercise,'workoutTime.minutes');,
+                      'seconds' = get($exercise,'workoutTime.seconds');
+                    ]
+               );,
+
+               'restTime' = Arr::add(
+                     [
+                       'minutes' = get($exercise,'restTime.minutes');,
+                       'seconds' = get($exercise,'restTime.seconds');
+                     ]
+                );
+            }
+            else{
+              'numberOfRepetitions' => get($exercise,'numberOfRepetitions'); ,
+              'restTime' = Arr::add(
+                    [
+                      'minutes' = get($exercise,'restTime.minutes');,
+                      'seconds' = get($exercise,'restTime.seconds');
+                    ]
+               );
+            }
 
 
 

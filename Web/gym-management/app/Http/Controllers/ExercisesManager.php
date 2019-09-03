@@ -10,7 +10,7 @@ class ExercisesManager extends Controller
 {
       public function getAllExercises(){}
 
-      public function getExercise($idDatabase){
+      public function getExerciseById($idDatabase){
 
           $collection = Firestore::collection('Exercises');
           $exercise = $collection->document($idDatabase)->snapshot()->data();
