@@ -43,21 +43,31 @@ class CourseModel extends AnotherClass
 
   function __construct($idDatabase,$name,$image,$instructor,$numberOfSubscribers,$period,$weeklyFrequency)
   {
-    $this->$idDatabase = $idDatabase;
-    $this->$name = $name;
-    $this->$image = $image;
-    $this->$instructor = $instructor;
-    $this->$numberOfSubscribers = $numberOfSubscribers;
-    $this->$period = Arr::add(
-        [
-          'startDate' => get($period, 'startDate');,
-          'endDate' => get($period, 'endDate');
-        ]
+    $this->idDatabase = $idDatabase;
+    $this->name = $name;
+    $this->image = $image;
+    $this->instructor = $instructor;
+    $this->numberOfSubscribers = $numberOfSubscribers;
+    $this->period = array(
+
+      'startDate' => data_get($period, 'startDate');,
+      'endDate' => data_get($period, 'endDate')
+
     );
+
+
     $localCounter=0;
-    $this->$weeklyFrequency = Arr::add(
+    $this->$weeklyFrequency =  array(
+      foreach ($weeklyFrequency as $day) {
+
+      }
+      '' => ,
+    );
+
+/*
+     Arr::add(
         [
-          foreach ($weeklyFrequency as $day) {
+
             'day'.$localCounter = Arr::add(
                 [
                   'startTime' = Arr::add(
@@ -80,7 +90,7 @@ class CourseModel extends AnotherClass
 
 
         ]
-    );
+    );*/
 
   }
 }

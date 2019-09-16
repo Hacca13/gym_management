@@ -6,6 +6,7 @@ use Firevel\Firestore\Facades\Firestore;
 use Illuminate\Http\Request;
 use App\Http\Models\UserModel;
 use Illuminate\Support\Arr;
+use App\Services\PayUService\Exception;
 
 class Firetest extends Controller
 {
@@ -21,11 +22,13 @@ class Firetest extends Controller
   }
 
   public function test2(){
+
     $idDatabase= NULL;
     $name= 'mirko';
     $surname='aliberti';
     $username = 'mirko3';
     $status = True;
+    $isAdult = True;
     $dateOfBirth= '12/02/1993';
     $birthNation= 'Ungheria';
     $birthPlace = 'Roma';
@@ -60,11 +63,14 @@ class Firetest extends Controller
     $email = 'M.Aliberti3@salvatorearuba.com';
     $telephoneNumber = '436726537265';
 
-    $newUser = new UserModel($idDatabase,$name,$surname,$username,$status,$dateOfBirth,$birthNation,$birthPlace,$residence,$document,$email,$telephoneNumber);
+
+
+    $newUser = new UserModel($idDatabase,$name,$surname,$username,$status,$isAdult,$dateOfBirth,$birthNation,$birthPlace,$residence,$document,$email,$telephoneNumber);
     var_dump($newUser);
 
 
   /*  $residence = array('nation' => 'Ungheria', 'pippo' =>'pluto');
+  $idDatabase,$name,$surname,$username,$status,$isAdult,$dateOfBirth,$birthNation,$birthPlace,$residence,$document,$email,$telephoneNumber
   //  $residence= Arr::add($residence,'nation','Ungheria');
     var_dump($residence);*/
   }
