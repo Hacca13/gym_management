@@ -57,40 +57,23 @@ class CourseModel extends AnotherClass
 
 
     $localCounter=0;
-    $this->$weeklyFrequency =  array(
+    $this->weeklyFrequency =  array(
       foreach ($weeklyFrequency as $day) {
+          'day'.$localCounter => array(
+              'startTime' => array(
+                  'hour' => data_get($day,'startTime.hour') ,
+                  'minutes' => data_get($day,'startTime.minutes')
+              ), 
+              '$endTime' => array(
+                  'hour' => data_get($day,'endTime.hour') ,
+                  'minutes' => data_get($day,'endTime.minutes')
+              )
+          );
 
+          $localCounter++;
       }
-      '' => ,
+
     );
-
-/*
-     Arr::add(
-        [
-
-            'day'.$localCounter = Arr::add(
-                [
-                  'startTime' = Arr::add(
-                        [
-                          'hour' = get($day,'startTime.hour');,
-                          'minutes' = get($day,'startTime.minutes');
-                        ]
-                   );,
-                  '$endTime' = Arr::add(
-                        [
-                          'hour' = get($day,'endTime.hour');,
-                          'minutes' = get($day,'endTime.minutes');
-                        ]
-                   );
-                ]
-             );
-
-            $localCounter++;
-          }
-
-
-        ]
-    );*/
 
   }
 }

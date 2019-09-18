@@ -50,9 +50,9 @@ class TrainingCardsModel extends AnotherClass
 
   function __construct($idDatabase,$idUserDatabase,$period,$exercises)
   {
-    $this->$idDatabase = $idDatabase;
-    $this->$idUserDatabase = $idUserDatabase;
-    $this->$period = Arr::add(
+    $this->idDatabase = $idDatabase;
+    $this->idUserDatabase = $idUserDatabase;
+    $this->period = Arr::add(
         [
           'startDate' => get($period, 'startDate');,
           'endDate' => get($period, 'endDate');
@@ -60,7 +60,7 @@ class TrainingCardsModel extends AnotherClass
     );
 
     $localCounter = 0;
-    $this->$exercises = Arr::add(
+    $this->exercises = Arr::add(
       [
         foreach ($exercises as $exercise) {
           'exercise'.$localCounter = Arr::add([
@@ -74,7 +74,7 @@ class TrainingCardsModel extends AnotherClass
               */
             $exercise1 = ExercisesManager::getExerciseById(get($exercise,'idDatabase'););
 
-            if($exercise1->$exerciseIsATime == TRUE){
+            if($exercise1->exerciseIsATime == TRUE){
               'workoutTime' = Arr::add(
                     [
                       'minutes' = get($exercise,'workoutTime.minutes');,

@@ -16,11 +16,11 @@ class ExerciseModel extends AnotherClass
 
   function __construct($idDatabase,$name,$description,$exerciseIsATime,$gif,$link)
   {
-    $this->$idDatabase = $idDatabase;
-    $this->$name = $name;
-    $this->$description = $description;
-    $this->$exerciseIsATime = $exerciseIsATime;
-    $this->$gif = $gif;
-    $this->$link = $link;
+    $this->idDatabase = $idDatabase;
+    $this->name = $name;
+    $this->description = $description;
+    $this->exerciseIsATime = $exerciseIsATime;
+    $this->gif = $gif;
+    $this->link = $link;
   }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Models;
+namespace App\Http\Models\UserModels;
 
 use Illuminate\Support\Arr;
 /**
@@ -8,16 +8,18 @@ use Illuminate\Support\Arr;
  */
 class UserModel
 {
-  private $idDatabase;
-  private $name;
-  private $surname;
-  private $username;
-  private $status;
-  private $isAdult;
-  private $dateOfBirth;
-  private $birthNation;
-  private $birthPlace;
-  private $residence;
+  protected $idDatabase;
+  protected $name;
+  protected $surname;
+  protected $gender ;
+  protected $username;
+  protected $profilePicture;
+  protected $status;
+  protected $isAdult;
+  protected $dateOfBirth;
+  protected $birthNation;
+  protected $birthPlace;
+  protected $residence;
     /*
       residence:
           nation;
@@ -26,23 +28,26 @@ class UserModel
           street;
           number;
     */
-  private $document;
+  protected $document;
     /*
       document:
+          documentImage;
           type;
           number;
           ReleaseDate;
           Released;
     */
-  private $email;
-  private $telephoneNumber;
+  protected $email;
+  protected $telephoneNumber;
 
-  public function __construct($idDatabase,$name,$surname,$username,$status,$isAdult,$dateOfBirth,$birthNation,$birthPlace,$residence,$document,$email,$telephoneNumber){
+  public function __construct($idDatabase,$name,$surname,$gender,$username,$profilePicture,$status,$isAdult,$dateOfBirth,$birthNation,$birthPlace,$residence,$document,$email,$telephoneNumber){
 
     $this->idDatabase = $idDatabase;
     $this->name = $name;
     $this->surname = $surname;
+    $this->gender = $gender;
     $this->username = $username;
+    $this->profilePicture = $profilePicture ;
     $this->status = $status;
     $this->isAdult = $isAdult;
     $this->dateOfBirth = $dateOfBirth;
@@ -59,6 +64,7 @@ class UserModel
     );
 
     $this->document = array(
+        'documentImage' => data_get($document, 'documentImage'),
         'type' => data_get($document, 'type'),
         'number' => data_get($document, 'number'),
         'released' => data_get($document, 'released'),
