@@ -4,9 +4,12 @@ namespace App\Http\Controllers;
 use Google\Cloud\Firestore\FirestoreClient;
 use Firevel\Firestore\Facades\Firestore;
 use Illuminate\Http\Request;
-use App\Http\Models\UserModel;
+use App\Http\Models\UserModels\UserModel;
+use App\Http\Models\ExerciseModel;
+use App\Http\Models\TrainingCardsModel;
 use Illuminate\Support\Arr;
 use App\Services\PayUService\Exception;
+use App\Http\Controllers\ExercisesManager;
 
 class Firetest extends Controller
 {
@@ -20,6 +23,7 @@ class Firetest extends Controller
     var_dump($exercise);
 
   }
+
 
   public function test2(){
 
@@ -66,6 +70,8 @@ class Firetest extends Controller
 
 
     $newUser = new UserModel($idDatabase,$name,$surname,$username,$status,$isAdult,$dateOfBirth,$birthNation,$birthPlace,$residence,$document,$email,$telephoneNumber);
+
+
     var_dump($newUser);
 
 
@@ -73,6 +79,12 @@ class Firetest extends Controller
   $idDatabase,$name,$surname,$username,$status,$isAdult,$dateOfBirth,$birthNation,$birthPlace,$residence,$document,$email,$telephoneNumber
   //  $residence= Arr::add($residence,'nation','Ungheria');
     var_dump($residence);*/
+  }
+
+  public function test3()
+  {
+    $exercise0 = ExercisesManager::getExerciseById('U68MHeUUjjbAzgBpXTTt');
+    var_dump($exercise);
   }
 
 
