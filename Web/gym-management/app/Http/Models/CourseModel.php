@@ -7,8 +7,8 @@ use Illuminate\Support\Arr;
 /**
  *
  */
-class CourseModel extends AnotherClass
-{
+class CourseModel{
+
   private $idDatabase;
   private $name;
   private $image;
@@ -41,8 +41,8 @@ class CourseModel extends AnotherClass
                   $minutes;
   */
 
-  function __construct($idDatabase,$name,$image,$instructor,$numberOfSubscribers,$period,$weeklyFrequency)
-  {
+  function __construct($idDatabase,$name,$image,$instructor,$numberOfSubscribers,$period,$weeklyFrequency){
+
     $this->idDatabase = $idDatabase;
     $this->name = $name;
     $this->image = $image;
@@ -50,34 +50,18 @@ class CourseModel extends AnotherClass
     $this->numberOfSubscribers = $numberOfSubscribers;
     $this->period = array(
 
-      'startDate' => data_get($period, 'startDate');,
+      'startDate' => data_get($period, 'startDate'),
       'endDate' => data_get($period, 'endDate')
 
     );
 
+    $this->weeklyFrequency =  array();
 
-    $localCounter=0;
-    $this->weeklyFrequency =  array(
-      foreach ($weeklyFrequency as $day) {
-          'day'.$localCounter => array(
-              'startTime' => array(
-                  'hour' => data_get($day,'startTime.hour') ,
-                  'minutes' => data_get($day,'startTime.minutes')
-              ),
-              '$endTime' => array(
-                  'hour' => data_get($day,'endTime.hour') ,
-                  'minutes' => data_get($day,'endTime.minutes')
-              )
-          );
-
-          $localCounter++;
-      }
-
-    );
+    foreach ($weeklyFrequency as $day) {
+      array_push($this->weeklyFrequency,$day);
+    }
 
   }
-
-
 
     /**
      * Get the value of Id Database
@@ -218,12 +202,8 @@ class CourseModel extends AnotherClass
      */
     public function setPeriod($period)
     {
-      $this->period = array(
+        $this->period = $period;
 
-        'startDate' => data_get($period, 'startDate');,
-        'endDate' => data_get($period, 'endDate')
-
-      );
         return $this;
     }
 
@@ -246,25 +226,7 @@ class CourseModel extends AnotherClass
      */
     public function setWeeklyFrequency($weeklyFrequency)
     {
-
-      $localCounter=0;
-      $this->weeklyFrequency =  array(
-        foreach ($weeklyFrequency as $day) {
-            'day'.$localCounter => array(
-                'startTime' => array(
-                    'hour' => data_get($day,'startTime.hour') ,
-                    'minutes' => data_get($day,'startTime.minutes')
-                ),
-                '$endTime' => array(
-                    'hour' => data_get($day,'endTime.hour') ,
-                    'minutes' => data_get($day,'endTime.minutes')
-                )
-            );
-
-            $localCounter++;
-        }
-
-      );
+        $this->weeklyFrequency = $weeklyFrequency;
 
         return $this;
     }

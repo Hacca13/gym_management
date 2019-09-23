@@ -5,9 +5,9 @@ namespace App\Http\Models;
 /**
  *
  */
-class ExerciseModel extends AnotherClass
+class ExerciseModel
 {
-  private $idDatabase:
+  private $idDatabase;
   private $name;
   private $description;
   private $exerciseIsATime;

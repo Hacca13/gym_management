@@ -1,28 +1,41 @@
 <?php
 
+namespace App\Http\Models;
 /**
  *
  */
-class progressCollection
+class ProgressCollection
 {
   private $idDatabase;
   private $idUserDatabase;
-  private $height;
-  private $weight;
-  private $date;
-  private $IMC;
+  private $progress;
+  /*
+    array:
+      $progress:
+        $progress1:
+            $IMC;
+            $date;
+            $height;
+            $weight;
+        $progress2:
+            $IMC;
+            $date;
+            $height;
+            $weight;
+  */
 
-  function __construct($idDatabase,$idUserDatabase,$height,$weight,$date,$IMC)
-  {
+
+  function __construct($idDatabase,$idUserDatabase,$progress){
+
     $this->idDatabase = $idDatabase;
     $this->idUserDatabase = $idUserDatabase;
-    $this->height = $height;
-    $this->weight = $weight;
-    $this->date = $date;
-    $this->IMC = $IMC;
-    
 
+    $this->progress = array();
+    foreach ($progress as $progres) {
+      array_push($this->progress, $progres);
+    }
   }
+
 
     /**
      * Get the value of Id Database
@@ -73,97 +86,25 @@ class progressCollection
     }
 
     /**
-     * Get the value of Height
+     * Get the value of Progress
      *
      * @return mixed
      */
-    public function getHeight()
+    public function getProgress()
     {
-        return $this->height;
+        return $this->progress;
     }
 
     /**
-     * Set the value of Height
+     * Set the value of Progress
      *
-     * @param mixed height
+     * @param mixed progress
      *
      * @return self
      */
-    public function setHeight($height)
+    public function setProgress($progress)
     {
-        $this->height = $height;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of Weight
-     *
-     * @return mixed
-     */
-    public function getWeight()
-    {
-        return $this->weight;
-    }
-
-    /**
-     * Set the value of Weight
-     *
-     * @param mixed weight
-     *
-     * @return self
-     */
-    public function setWeight($weight)
-    {
-        $this->weight = $weight;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of Date
-     *
-     * @return mixed
-     */
-    public function getDate()
-    {
-        return $this->date;
-    }
-
-    /**
-     * Set the value of Date
-     *
-     * @param mixed date
-     *
-     * @return self
-     */
-    public function setDate($date)
-    {
-        $this->date = $date;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of IMC
-     *
-     * @return mixed
-     */
-    public function getIMC()
-    {
-        return $this->IMC;
-    }
-
-    /**
-     * Set the value of IMC
-     *
-     * @param mixed IMC
-     *
-     * @return self
-     */
-    public function setIMC($IMC)
-    {
-        $this->IMC = $IMC;
+        $this->progress = $progress;
 
         return $this;
     }

@@ -1,5 +1,8 @@
 <?php
 
+namespace App\Http\Models\UserModels;
+
+use App\Http\Models\UserModels\UserModel;
 /**
  *
  */
@@ -17,8 +20,8 @@ class UserUnderageModel extends UserModel
   protected $parentEmail;
   protected $parentTelephoneNumber;
 
-  function __construct($idDatabase,$name,$surname,$gender,$username,$profilePicture,$status,$isAdult,$dateOfBirth,$birthNation,$birthPlace,$residence,$document,$email,$telephoneNumber,$parentName,$parentSurname,$parentGender,$parentDateOfBirth,$parentBirthNation,$parentBirthPlace,$parentResidence,$parentDocument,$parentEmail,$parentTelephoneNumber)
-  {
+  function __construct($idDatabase,$name,$surname,$gender,$username,$profilePicture,$status,$isAdult,$dateOfBirth,$birthNation,$birthPlace,$residence,$document,$email,$telephoneNumber,$parentName,$parentSurname,$parentGender,$parentDateOfBirth,$parentBirthNation,$parentBirthPlace,$parentResidence,$parentDocument,$parentEmail,$parentTelephoneNumber){
+
     parent::__construct($idDatabase,$name,$surname,$gender,$username,$profilePicture,$status,$isAdult,$dateOfBirth,$birthNation,$birthPlace,$residence,$document,$email,$telephoneNumber);
 
     $this->parentName = $parentName;
@@ -222,7 +225,7 @@ class UserUnderageModel extends UserModel
         'street' => data_get($parentResidence, 'street'),
         'number' => data_get($parentResidence, 'number')
 
-      ); 
+      );
         return $this;
     }
 

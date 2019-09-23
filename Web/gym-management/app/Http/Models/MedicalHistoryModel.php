@@ -5,8 +5,8 @@ namespace App\Http\Models;
 /**
  *
  */
-class MedicalHistoryModel extends AnotherClass
-{
+class MedicalHistoryModel{
+
   private $idDatabase;
   private $idUserDatabase;
   private $importantInformation;
@@ -26,8 +26,8 @@ class MedicalHistoryModel extends AnotherClass
   private $otherGoals;
 
 
-  function __construct($idDatabase,$idUserDatabase,$importantInformation,$weight,$height,$previousSport,$previousSportTime,$inactiveTime,$plicometricData,$hypertrophy,$slimming,$toning,$athleticTraining,$rehabilitation,$combatSports,$otherGoals)
-  {
+  function __construct($idDatabase,$idUserDatabase,$importantInformation,$weight,$height,$previousSport,$previousSportTime,$inactiveTime,$plicometricData,$hypertrophy,$slimming,$toning,$athleticTraining,$rehabilitation,$combatSports,$otherGoals){
+    
     $this->idDatabase = $idDatabase;
     $this->idUserDatabase = $idUserDatabase;
     $this->importantInformation = $importantInformation;
