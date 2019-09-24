@@ -19,9 +19,18 @@ class UsersManager extends Controller
         return $allUser;
       }
 
-      public function getUser(){}
+      public function getUserById($idDatabase){
+        
+        $collection = Firestore::collection('User');
+        $arrayUser = $collection->documents($idDatabase)->snapshot()->data();
+
+        $user = $this->transformArrayUserIntoUser($arrayUser);
+
+        return $user;
+      }
 
       public function createUser($newUser){
+        $collection = Firestore::collection('User');
 
         if($newUser->getIsAdult() == TRUE){
           $arrayUser = UsersManager::transformUserIntoArrayUser($newUser);
@@ -30,19 +39,117 @@ class UsersManager extends Controller
           $arrayUser = UsersManager::transformUserUnderageIntoArrayUserUnderage($newUser);
         }
 
-      }
-
-      private static function transformArrayUserIntoUser($arrayUser){
-        
-      }
-
-
-      private static function transformUserUnderageIntoArrayUserUnderage($arrayUser){
+        $collection->add($arrayUser);
 
       }
 
+      public function transformArrayUserIntoUser($arrayUser){
+        $idDatabase = data_get($arrayUser,'idDatabase');
+        $name = data_get($arrayUser,'name');
+        $surname = data_get($arrayUser,'surname');
+        $gender = data_get($arrayUser,'gender');
+        $username = data_get($arrayUser,'username');
+        $profilePicture = data_get($arrayUser,'profilePicture');
+        $status = data_get($arrayUser,'status');
+        $isAdult = data_get($arrayUser,'isAdult');
+        $dateOfBirth = data_get($arrayUser,'dateOfBirth');
+        $birthNation = data_get($arrayUser,'birthNation');
+        $birthPlace = data_get($arrayUser,'birthPlace');
 
-      private static function transformUserIntoArrayUser($user){
+        $residence = array(
+          'nation' => data_get($arrayUser, 'residence.nation'),
+          'cityOfResidence' => data_get($arrayUser, 'residence.cityOfResidence'),
+          'cap' => data_get($arrayUser, 'residence.cap'),
+          'street' => data_get($arrayUser, 'residence.street'),
+          'number' => data_get($arrayUser, 'residence.number')
+
+        );
+
+        $document = array(
+            'documentImage' => data_get($arrayUser, 'document.documentImage'),
+            'type' => data_get($arrayUser, 'document.type'),
+            'number' => data_get($arrayUser, 'document.number'),
+            'released' => data_get($arrayUser, 'document.released'),
+            'releaseDate' => data_get($arrayUser, 'document.releaseDate')
+        );
+
+        $email = data_get($arrayUser,'email');
+        $telephoneNumber = data_get($arrayUser,'telephoneNumber');
+
+        $user = new UserModel($idDatabase,$name,$surname,$gender,$username,$profilePicture,$status,$isAdult,$dateOfBirth,$birthNation,$birthPlace,$residence,$document,$email,$telephoneNumber);
+
+        return $user;
+      }
+
+
+      public function transformArrayUserUnderageIntoUserUnderage($arrayUser){
+        $idDatabase = data_get($arrayUser,'idDatabase');
+        $name = data_get($arrayUser,'name');
+        $surname = data_get($arrayUser,'surname');
+        $gender = data_get($arrayUser,'gender');
+        $username = data_get($arrayUser,'username');
+        $profilePicture = data_get($arrayUser,'profilePicture');
+        $status = data_get($arrayUser,'status');
+        $isAdult = data_get($arrayUser,'isAdult');
+        $dateOfBirth = data_get($arrayUser,'dateOfBirth');
+        $birthNation = data_get($arrayUser,'birthNation');
+        $birthPlace = data_get($arrayUser,'birthPlace');
+
+        $residence = array(
+          'nation' => data_get($arrayUser, 'residence.nation'),
+          'cityOfResidence' => data_get($arrayUser, 'residence.cityOfResidence'),
+          'cap' => data_get($arrayUser, 'residence.cap'),
+          'street' => data_get($arrayUser, 'residence.street'),
+          'number' => data_get($arrayUser, 'residence.number')
+
+        );
+
+        $document = array(
+            'documentImage' => data_get($arrayUser, 'document.documentImage'),
+            'type' => data_get($arrayUser, 'document.type'),
+            'number' => data_get($arrayUser, 'document.number'),
+            'released' => data_get($arrayUser, 'document.released'),
+            'releaseDate' => data_get($arrayUser, 'document.releaseDate')
+        );
+
+        $email = data_get($arrayUser,'email');
+        $telephoneNumber = data_get($arrayUser,'telephoneNumber');
+
+        $parentName = data_get($arrayUser,'parentName');
+        $parentSurname = data_get($arrayUser,'parentSurname');
+        $parentGender = data_get($arrayUser,'parentGender');
+        $parentDateOfBirth = data_get($arrayUser,'parentDateOfBirth');
+        $parentBirthNation = data_get($arrayUser,'parentBirthNation');
+        $parentBirthPlace = data_get($arrayUser,'parentBirthPlace');
+
+        $parentResidence = array(
+          'nation' => data_get($arrayUser, 'parentResidence.nation'),
+          'cityOfResidence' => data_get($arrayUser, 'parentResidence.cityOfResidence'),
+          'cap' => data_get($arrayUser, 'parentResidence.cap'),
+          'street' => data_get($arrayUser, 'parentResidence.street'),
+          'number' => data_get($arrayUser, 'parentResidence.number')
+
+        );
+
+        $parentDocument = array(
+            'documentImage' => data_get($arrayUser, 'parentDocument.documentImage'),
+            'type' => data_get($arrayUser, 'parentDocument.type'),
+            'number' => data_get($arrayUser, 'parentDocument.number'),
+            'released' => data_get($arrayUser, 'parentDocument.released'),
+            'releaseDate' => data_get($arrayUser, 'parentDocument.releaseDate')
+        );
+
+
+        $parentEmail = data_get($arrayUser,'parentEmail');
+        $parentTelephoneNumber = data_get($arrayUser,'parentTelephoneNumber');
+
+        $user = new UserUnderageModel($idDatabase,$name,$surname,$gender,$username,$profilePicture,$status,$isAdult,$dateOfBirth,$birthNation,$birthPlace,$residence,$document,$email,$telephoneNumber,$parentName,$parentSurname,$parentGender,$parentDateOfBirth,$parentBirthNation,$parentBirthPlace,$parentResidence,$parentDocument,$parentEmail,$parentTelephoneNumber);
+
+        return $user;
+      }
+
+
+      public function transformUserIntoArrayUser($user){
         $residence= array(
           'nation' => data_get($user->getResidence(),'nation'),
           'cityOfResidence' => data_get($user->getResidence(),'cityOfResidence'),
@@ -51,13 +158,15 @@ class UsersManager extends Controller
           'number' => data_get($user->getResidence(),'number')
         );
         $document = array(
+            'documentImage' => data_get($user->getDocument(), 'documentImage'),
             'type' => data_get($user->getDocument(),'type'),
             'number' => data_get($user->getDocument(),'number'),
-            'ReleaseDate' => data_get($user->getDocument(),'ReleaseDate'),
-            'Released' => data_get($user->getDocument(),'Released')
+            'released' => data_get($user->getDocument(),'released'),
+            'releaseDate' => data_get($user->getDocument(),'releaseDate')
         );
 
         $arrayUser = array(
+          'idDatabase' => $user->getIdDatabase(),
           'name' => $user->getName(),
           'surname' => $user->getSurname(),
           'username' => $user->getUsername(),
@@ -74,10 +183,10 @@ class UsersManager extends Controller
           'telephoneNumber' => $user->getTelephoneNumber()
         );
 
-        return $arrayUser
+        return $arrayUser;
       }
 
-      private static function transformUserUnderageIntoArrayUserUnderage($user){
+      public function transformUserUnderageIntoArrayUserUnderage($user){
 
         $residence= array(
           'nation' => data_get($user->getResidence(),'nation'),
@@ -87,10 +196,11 @@ class UsersManager extends Controller
           'number' => data_get($user->getResidence(),'number')
         );
         $document = array(
+            'documentImage' => data_get($user->getDocument(), 'documentImage'),
             'type' => data_get($user->getDocument(),'type'),
             'number' => data_get($user->getDocument(),'number'),
-            'ReleaseDate' => data_get($user->getDocument(),'ReleaseDate'),
-            'Released' => data_get($user->getDocument(),'Released')
+            'released' => data_get($user->getDocument(),'released'),
+            'releaseDate' => data_get($user->getDocument(),'releaseDate')
         );
 
         $parentResidence= array(
@@ -101,14 +211,16 @@ class UsersManager extends Controller
           'number' => data_get($user->getParentResidence(),'number')
         );
         $parentDocument = array(
+            'documentImage' => data_get($user->getParentDocument(), 'documentImage'),
             'type' => data_get($user->getParentDocument(),'type'),
             'number' => data_get($user->getParentDocument(),'number'),
-            'ReleaseDate' => data_get($user->getParentDocument(),'ReleaseDate'),
-            'Released' => data_get($user->getParentDocument(),'Released')
+            'released' => data_get($user->getParentDocument(),'released'),
+            'releaseDate' => data_get($user->getParentDocument(),'releaseDate')
         );
 
 
         $arrayUser = array(
+          'idDatabase' => $user->getIdDatabase(),
           'name' => $user->getName(),
           'surname' => $user->getSurname(),
           'username' => $user->getUsername(),
@@ -124,18 +236,18 @@ class UsersManager extends Controller
           'email' => $user->getEmail(),
           'telephoneNumber' => $user->getTelephoneNumber(),
 
-          'parentName' => $user->getParentName()
-          'parentSurname' => $user->getParentSurnam(),
-          'parentGender' => $user->getParentGender()
-          'parentDateOfBirth' => $user->getParentDateOfBirth()
-          'parentBirthNation' => $user->getParentBirthNation()
-          'parentBirthPlace' => $user->getParentBirthPlace()
+          'parentName' => $user->getParentName(),
+          'parentSurname' => $user->getParentSurname(),
+          'parentGender' => $user->getParentGender(),
+          'parentDateOfBirth' => $user->getParentDateOfBirth(),
+          'parentBirthNation' => $user->getParentBirthNation(),
+          'parentBirthPlace' => $user->getParentBirthPlace(),
 
 
           'parentResidence' => $parentResidence,
           'parentDocument' => $parentDocument,
 
-          'parentEmail' => $user->getParentEmail()
+          'parentEmail' => $user->getParentEmail(),
           'parentTelephoneNumber' => $user->getParentTelephoneNumber()
         );
 

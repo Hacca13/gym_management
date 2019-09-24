@@ -16,7 +16,23 @@ class UserUnderageModel extends UserModel
   protected $parentBirthNation;
   protected $parentBirthPlace;
   protected $parentResidence;
+  /*
+    parentResidence:
+        nation;
+        cityOfResidence;
+        cap;
+        street;
+        number;
+  */
   protected $parentDocument;
+  /*
+    parentDocument:
+        documentImage;
+        type;
+        number;
+        ReleaseDate;
+        Released;
+  */
   protected $parentEmail;
   protected $parentTelephoneNumber;
 

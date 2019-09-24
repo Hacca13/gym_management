@@ -6,6 +6,7 @@ use Firevel\Firestore\Facades\Firestore;
 use Illuminate\Http\Request;
 use App\Http\Models\UserModels\UserModel;
 use App\Http\Models\UserModels\UserUnderageModel;
+use App\Http\Controllers\UsersManager;
 use App\Http\Models\ExerciseModel;
 use App\Http\Models\TrainingCardsModel;
 use Illuminate\Support\Arr;
@@ -41,7 +42,10 @@ class Firetest extends Controller
   public function test3(){
     $user = Firetest::createUser();
   //  $userArray = Firetest::userToArrayUser($user);
-  echo data_get($user->getResidence(), 'nation');
+
+    $userTest = UsersManager::transformUserUnderageIntoArrayUserUnderage($user);
+    $userTest2 =  UsersManager::transformArrayUserUnderageIntoUserUnderage($userTest);
+    var_dump($userTest2);
   //  $collection = Firestore::collection('Users');
   //  $user2 = $collection->add($userArray);
 //    var_dump($user2);
@@ -56,10 +60,11 @@ class Firetest extends Controller
       'number' => 'SNC'
     );
     $document = array(
+        'documentImage' => 'documentImage',
         'type' => 'Patente',
         'number' => 'SA47838',
-        'ReleaseDate' => '13/05/2012',
-        'Released' => 'Motorizzazione civile'
+        'released' => 'Motorizzazione civile',
+        'releaseDate' => '13/05/2012'
     );
     $parentResidence= array(
       'nation' => 'Ungheria',
@@ -69,14 +74,16 @@ class Firetest extends Controller
       'number' => 'SNC'
     );
     $parentDocument = array(
+        'documentImage' => 'documentImage',
         'type' => 'Patente',
         'number' => 'SA47838',
-        'ReleaseDate' => '13/05/2012',
-        'Released' => 'Motorizzazione civile'
+        'releaseDate' => '13/05/2012',
+        'released' => 'Motorizzazione civile'
     );
 
 
     $userArray = array(
+      'idDatabase' => 'NULL',
       'name' => 'mirko',
       'surname' => 'aliberti',
       'username' => 'mirko3',
@@ -112,7 +119,7 @@ class Firetest extends Controller
   }
 
   static function createUser(){
-    $idDatabase= NULL;
+    $idDatabase= 'PELO';
     $name= 'mirko';
     $surname='aliberti';
     $username = 'mirko3';
@@ -139,13 +146,15 @@ class Firetest extends Controller
             number;
       */
     $document = array(
+        'documentImage' => 'documentImage',
         'type' => 'Patente',
         'number' => 'SA47838',
-        'ReleaseDate' => '13/05/2012',
-        'Released' => 'Motorizzazione civile'
+        'released' => 'Motorizzazione civile',
+        'releaseDate' => '13/05/2012'
     );
       /*
         document:
+            documentImage;
             type;
             number;
             ReleaseDate;
@@ -169,15 +178,17 @@ class Firetest extends Controller
       'number' => 'SNC'
     );
     $parentDocument = array(
+        'documentImage' => 'documentImage',
         'type' => 'Patente',
         'number' => 'SA47838',
-        'ReleaseDate' => '13/05/2012',
-        'Released' => 'Motorizzazione civile'
+        'releaseDate' => '13/05/2012',
+        'released' => 'Motorizzazione civile'
     );
 
 
     $parentEmail = 'parentEmail';
     $parentTelephoneNumber = 'parentTelephoneNumber';
+
 
     $user = new UserUnderageModel($idDatabase,$name,$surname,$gender,$username,$profilePicture,$status,$isAdult,$dateOfBirth,$birthNation,$birthPlace,$residence,$document,$email,$telephoneNumber,$parentName,$parentSurname,$parentGender,$parentDateOfBirth,$parentBirthNation,$parentBirthPlace,$parentResidence,$parentDocument,$parentEmail,$parentTelephoneNumber);
 
