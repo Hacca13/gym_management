@@ -5,8 +5,7 @@ namespace App\Http\Models\SubscriptionModels;
 /**
  *
  */
-abstract class SubscriptionModel
-{
+abstract class SubscriptionModel {
 
   protected $idDatabase;
   protected $idUserDatabase;

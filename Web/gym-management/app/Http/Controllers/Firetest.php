@@ -14,6 +14,11 @@ use App\Http\Controllers\ExercisesManager;
 use App\Http\Models\MedicalHistoryModel;
 use App\Http\Models\ProgressCollection;
 use App\Http\Models\CourseModel;
+use App\Http\Models\SubscriptionModels\SubscriptionModel;
+use App\Http\Models\SubscriptionModels\SubscriptionRevenueModel;
+use App\Http\Models\SubscriptionModels\SubscriptionCourseModel;
+use App\Http\Models\SubscriptionModels\SubscriptionPeriodModel;
+
 
 class Firetest extends Controller
 {
@@ -30,16 +35,19 @@ class Firetest extends Controller
 
 
   public function test2(){
+    echo 'Pelo';
+  }
 
-    $idDatabase= NULL;
-    $name= 'mirko';
-    $surname='aliberti';
-    $username = 'mirko3';
-    $status = True;
-    $isAdult = True;
-    $dateOfBirth= '12/02/1993';
-    $birthNation= 'Ungheria';
-    $birthPlace = 'Roma';
+  public function test3(){
+    $user = Firetest::createUser();
+  //  $userArray = Firetest::userToArrayUser($user);
+  echo data_get($user->getResidence(), 'nation');
+  //  $collection = Firestore::collection('Users');
+  //  $user2 = $collection->add($userArray);
+//    var_dump($user2);
+  }
+
+  static function userToArrayUser($user){
     $residence= array(
       'nation' => 'Ungheria',
       'cityOfResidence' => 'Sala C',
@@ -47,46 +55,63 @@ class Firetest extends Controller
       'street' => 'via roma' ,
       'number' => 'SNC'
     );
-      /*
-        residence:
-            nation;
-            cityOfResidence;
-            cap;
-            street;
-            number;
-      */
     $document = array(
         'type' => 'Patente',
         'number' => 'SA47838',
         'ReleaseDate' => '13/05/2012',
         'Released' => 'Motorizzazione civile'
     );
-      /*
-        document:
-            type;
-            number;
-            ReleaseDate;
-            Released;
-      */
-    $email = 'M.Aliberti3@salvatorearuba.com';
-    $telephoneNumber = '436726537265';
+    $parentResidence= array(
+      'nation' => 'Ungheria',
+      'cityOfResidence' => 'Sala C',
+      'cap' => '84036',
+      'street' => 'via roma' ,
+      'number' => 'SNC'
+    );
+    $parentDocument = array(
+        'type' => 'Patente',
+        'number' => 'SA47838',
+        'ReleaseDate' => '13/05/2012',
+        'Released' => 'Motorizzazione civile'
+    );
 
 
+    $userArray = array(
+      'name' => 'mirko',
+      'surname' => 'aliberti',
+      'username' => 'mirko3',
+      'gender' => 'Uomo',
+      'profilePicture' => 'stica.png' ,
+      'status' => True,
+      'isAdult' => True,
+      'dateOfBirth' => '12/02/1993',
+      'birthNation' => 'Ungheria',
+      'birthPlace' => 'Roma',
+      'residence' => $residence,
+      'document' => $document,
+      'email' => 'M.Aliberti3@salvatorearuba.com',
+      'telephoneNumber' => '436726537265',
 
-    $newUser = new UserModel($idDatabase,$name,$surname,$username,$status,$isAdult,$dateOfBirth,$birthNation,$birthPlace,$residence,$document,$email,$telephoneNumber);
+      'parentName' => 'parentName',
+      'parentSurname' => 'parentSurname',
+      'parentGender' => 'parentGender',
+      'parentDateOfBirth' => 'parentDateOfBirth',
+      'parentBirthNation' => 'parentBirthNation',
+      'parentBirthPlace' => 'parentBirthPlace',
 
 
-    var_dump($newUser);
+      'parentResidence' => $parentResidence,
+      'parentDocument' => $parentDocument,
 
+      'parentEmail' => 'parentEmail',
+      'parentTelephoneNumber' => 'parentTelephoneNumber'
 
-  /*  $residence = array('nation' => 'Ungheria', 'pippo' =>'pluto');
-  $idDatabase,$name,$surname,$username,$status,$isAdult,$dateOfBirth,$birthNation,$birthPlace,$residence,$document,$email,$telephoneNumber
-  //  $residence= Arr::add($residence,'nation','Ungheria');
-    var_dump($residence);*/
+    );
+
+    return $userArray;
   }
 
-  public function test3(){
-
+  static function createUser(){
     $idDatabase= NULL;
     $name= 'mirko';
     $surname='aliberti';
@@ -136,7 +161,7 @@ class Firetest extends Controller
     $parentBirthNation = 'parentBirthNation';
     $parentBirthPlace = 'parentBirthPlace';
 
-    $parentResidence= array(
+    $parentResidence = array(
       'nation' => 'Ungheria',
       'cityOfResidence' => 'Sala C',
       'cap' => '84036',
@@ -156,9 +181,8 @@ class Firetest extends Controller
 
     $user = new UserUnderageModel($idDatabase,$name,$surname,$gender,$username,$profilePicture,$status,$isAdult,$dateOfBirth,$birthNation,$birthPlace,$residence,$document,$email,$telephoneNumber,$parentName,$parentSurname,$parentGender,$parentDateOfBirth,$parentBirthNation,$parentBirthPlace,$parentResidence,$parentDocument,$parentEmail,$parentTelephoneNumber);
 
-    var_dump($user);
+    return $user;
   }
-
 
 
 }

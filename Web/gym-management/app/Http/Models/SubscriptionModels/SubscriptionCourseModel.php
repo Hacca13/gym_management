@@ -1,4 +1,4 @@
-private <?php
+<?php
 
 namespace App\Http\Models\SubscriptionModels;
 
@@ -8,11 +8,11 @@ namespace App\Http\Models\SubscriptionModels;
 class SubscriptionCourseModel extends SubscriptionModel
 {
 
-  private $ididCourseDatabase;
+  private $idCourseDatabase;
   private $startDate;
   private $endDate;
 
-  function __construct($idDatabase,$idUserDatabase,$status,$type,$ididCourseDatabase,$startDate,$endDate)
+  function __construct($idDatabase,$idUserDatabase,$status,$type,$idCourseDatabase,$startDate,$endDate)
   {
     parent::__construct($idDatabase,$idUserDatabase,$status,$type);
     // code...
