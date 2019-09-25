@@ -8,20 +8,25 @@ use Firevel\Firestore\Facades\Firestore;
 use App\Http\Models\UserModels\UserModel;
 use App\Http\Models\UserModels\UserUnderageModel;
 
-class UsersManager extends Controller
-{
+class UsersManager extends Controller{
+
+
       //this function retorn all User
-      public function getAllUser () {
+      public static function getAllUser () {
 
-        $collection = Firestore::collection('User');
-        $allUser = $collection->documents()->snapshot()->data();
+        $collection = Firestore::collection('Users');
+        $allUser = $collection->documents()->snapshot()-data();
 
-        return $allUser;
+        var_dump($allUser);
+      //  return $allUser;
       }
 
-      public function getUserById($idDatabase){
-        
-        $collection = Firestore::collection('User');
+      public static function getUserByName($name){
+
+      }
+
+      public static function getUserById($idDatabase){
+
         $arrayUser = $collection->documents($idDatabase)->snapshot()->data();
 
         $user = $this->transformArrayUserIntoUser($arrayUser);
@@ -29,8 +34,7 @@ class UsersManager extends Controller
         return $user;
       }
 
-      public function createUser($newUser){
-        $collection = Firestore::collection('User');
+      public static function createUser($newUser){
 
         if($newUser->getIsAdult() == TRUE){
           $arrayUser = UsersManager::transformUserIntoArrayUser($newUser);
@@ -43,7 +47,7 @@ class UsersManager extends Controller
 
       }
 
-      public function transformArrayUserIntoUser($arrayUser){
+      public static function transformArrayUserIntoUser($arrayUser){
         $idDatabase = data_get($arrayUser,'idDatabase');
         $name = data_get($arrayUser,'name');
         $surname = data_get($arrayUser,'surname');
@@ -82,7 +86,7 @@ class UsersManager extends Controller
       }
 
 
-      public function transformArrayUserUnderageIntoUserUnderage($arrayUser){
+      public static function transformArrayUserUnderageIntoUserUnderage($arrayUser){
         $idDatabase = data_get($arrayUser,'idDatabase');
         $name = data_get($arrayUser,'name');
         $surname = data_get($arrayUser,'surname');
@@ -149,7 +153,7 @@ class UsersManager extends Controller
       }
 
 
-      public function transformUserIntoArrayUser($user){
+      public static function transformUserIntoArrayUser($user){
         $residence= array(
           'nation' => data_get($user->getResidence(),'nation'),
           'cityOfResidence' => data_get($user->getResidence(),'cityOfResidence'),
@@ -186,7 +190,7 @@ class UsersManager extends Controller
         return $arrayUser;
       }
 
-      public function transformUserUnderageIntoArrayUserUnderage($user){
+      public static function transformUserUnderageIntoArrayUserUnderage($user){
 
         $residence= array(
           'nation' => data_get($user->getResidence(),'nation'),

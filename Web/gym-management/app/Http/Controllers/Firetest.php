@@ -40,12 +40,10 @@ class Firetest extends Controller
   }
 
   public function test3(){
-    $user = Firetest::createUser();
+    $users = UsersManager::getAllUser();
   //  $userArray = Firetest::userToArrayUser($user);
 
-    $userTest = UsersManager::transformUserUnderageIntoArrayUserUnderage($user);
-    $userTest2 =  UsersManager::transformArrayUserUnderageIntoUserUnderage($userTest);
-    var_dump($userTest2);
+    var_dump($users);
   //  $collection = Firestore::collection('Users');
   //  $user2 = $collection->add($userArray);
 //    var_dump($user2);

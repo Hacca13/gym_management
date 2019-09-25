@@ -40,8 +40,9 @@ class CourseModel{
                   $hour;
                   $minutes;
   */
+  private $usersList;
 
-  function __construct($idDatabase,$name,$image,$instructor,$numberOfSubscribers,$period,$weeklyFrequency){
+  function __construct($idDatabase,$name,$image,$instructor,$numberOfSubscribers,$period,$weeklyFrequency,$usersList){
 
     $this->idDatabase = $idDatabase;
     $this->name = $name;
@@ -61,7 +62,13 @@ class CourseModel{
       array_push($this->weeklyFrequency,$day);
     }
 
+    $this->usersList =  array();
+    foreach ($usersList as $user) {
+      array_push($this->usersList,$user);
+    }
+
   }
+
 
     /**
      * Get the value of Id Database
@@ -227,6 +234,30 @@ class CourseModel{
     public function setWeeklyFrequency($weeklyFrequency)
     {
         $this->weeklyFrequency = $weeklyFrequency;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of Users List
+     *
+     * @return mixed
+     */
+    public function getUsersList()
+    {
+        return $this->usersList;
+    }
+
+    /**
+     * Set the value of Users List
+     *
+     * @param mixed usersList
+     *
+     * @return self
+     */
+    public function setUsersList($usersList)
+    {
+        $this->usersList = $usersList;
 
         return $this;
     }
