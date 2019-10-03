@@ -12,5 +12,29 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
+});
+
+Route::get('/corsi', 'CoursesManager@getAllCourses');
+
+Route::get('/getAllUser', 'UserManager@getAllUser');
+
+Route::get('/firetest', 'Firetest@test');
+Route::get('/firetest2', 'Firetest@test2');
+Route::get('/firetest3', 'Firetest@test3');
+
+Route::get('/schede', function () {
+    return view('recordCardPage');
+});
+
+Route::get('/esercizi', function () {
+    return view('excercisePage');
+});
+
+Route::get('/abbonamenti', function () {
+    return view('subscriptionPage');
+});
+
+Route::get('/iscritti', function () {
+    return view('usersPage');
 });
