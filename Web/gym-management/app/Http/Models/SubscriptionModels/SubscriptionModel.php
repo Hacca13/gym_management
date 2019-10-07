@@ -9,14 +9,14 @@ abstract class SubscriptionModel {
 
   protected $idDatabase;
   protected $idUserDatabase;
-  protected $status;
+  protected $isActive;
   protected $type;
 
-  function __construct($idDatabase,$idUserDatabase,$status,$type)
+  function __construct($idDatabase,$idUserDatabase,$isActive,$type)
   {
     $this->idDatabase = $idDatabase;
     $this->idUserDatabase = $idUserDatabase;
-    $this->status = $status;
+    $this->isActive = $isActive;
     $this->type = $type;
   }
 
@@ -70,25 +70,25 @@ abstract class SubscriptionModel {
     }
 
     /**
-     * Get the value of Status
+     * Get the value of isActive
      *
      * @return mixed
      */
-    public function getStatus()
+    public function getIsActive()
     {
-        return $this->status;
+        return $this->isActive;
     }
 
     /**
-     * Set the value of Status
+     * Set the value of isActive
      *
-     * @param mixed status
+     * @param mixed isActive
      *
      * @return self
      */
-    public function setStatus($status)
+    public function setIsActive($isActive)
     {
-        $this->status = $status;
+        $this->isActive = $isActive;
 
         return $this;
     }

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Models\UserModels\UserModel;
 use App\Http\Models\UserModels\UserUnderageModel;
 use App\Http\Controllers\UsersManager;
+use App\Http\Controllers\SubscriptionManager;
 use App\Http\Models\ExerciseModel;
 use App\Http\Models\TrainingCardsModel;
 use Illuminate\Support\Arr;
@@ -36,18 +37,18 @@ class Firetest extends Controller
 
 
   public function test2(){
-    $collection = Firestore::collection('Users');
-    $user = $collection->document('UEMkxzS6DodLuYRlMnSH')->snapshot()->data();
-    $user = UsersManager::transformArrayUserIntoUser($user);
-    var_dump(UsersManager::isAdult($user));
+    $collection = Firestore::collection('Subscriptions');
+    $subscription = $collection->document('feF7lZOdEf6F9eqTjSeI')->snapshot()->data();
+    $subscription = SubscriptionManager::trasformArraySubscriptionToSubscription($subscription);
+    var_dump($subscription);
 
     }
 
   public function test3(){
     $collection = Firestore::collection('Users');
     $user = $collection->document('UEMkxzS6DodLuYRlMnSH')->snapshot()->data();
-    $usera = UsersManager::getUsersByUsername(data_get($user,'username'));
-    var_dump($usera);
+    var_dump($user);
+
   }
 
   static function userToArrayUser(){
