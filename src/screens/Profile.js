@@ -12,6 +12,7 @@ import firebase from 'react-native-firebase';
 import { StackActions, NavigationActions } from 'react-navigation';
 import Spinner from 'react-native-loading-spinner-overlay';
 import CounterStore from '../UserManagerOffline';
+import Reactotron from 'reactotron-react-native'
 
 const resetAction = StackActions.reset({
     index: 0,
@@ -28,20 +29,18 @@ export default class Profile extends Component {
             user: null,
             spinner: true,
             anemic: null,
-            subscript: null,
+            subscription: null,
         };
 
-        this.retrieveInfo = this.retrieveInfo.bind(this);
+        this.retrieveInfo2 = this.retrieveInfo2.bind(this);
         this.retrieveAnemic = this.retrieveAnemic.bind(this);
         this.retrieveSubscription = this.retrieveSubscription.bind(this);
     }
 
-    componentDidMount(): void {
+    componentDidMount() {
         firebase.auth().onAuthStateChanged(user => {
             if (user) {
-                this.retrieveInfo(user);
-                //  this.retrieveAnemic(user);
-
+                this.retrieveInfo2();
             } else {
                 this.setState({
                     isAuth: true
@@ -50,52 +49,55 @@ export default class Profile extends Component {
         })
     }
 
-
-
-
-    retrieveInfo(user) {
-        firebase.firestore().collection('User').where('Username', '==', user._user.uid).get().then(value => {
-            value.docs.map((value1) => {
-                this.setState({
-                    id: value1.id,
-                    userInfo: value1.data(),
-                    spinner: false
-                })
+    retrieveInfo2() {
+        firebase.firestore().collection('Users').doc('UEMkxzS6DodLuYRlMnSH').get().then(value => {
+            this.setState({
+                id: value.id,
+                userInfo: value.data(),
+                spinner: false
             })
         }).then(() => {
-            this.retrieveAnemic()
+            this.retrieveAnemic();
         }).then(() => {
-            this.retrieveSubscription()
-        });
+            this.retrieveSubscription();
+        })
     }
 
+
+
     retrieveAnemic() {
-        firebase.firestore().collection('Anemia').doc(this.state.userInfo['Anemia']).get().then(value => {
+        firebase.firestore().collection('MedicalHistory').where('idUserDatabase', '==', this.state.id).get().then(value => {
+
+
             this.setState({
-                anemic: value.data(),
+                anemic: value.docs[0].data(),
                 spinner: false,
 
             }).catch(err => {
                 console.log(err)
             });
+
+
+
+        }).catch(e => {
+            console.log(e);
         })
     }
 
     retrieveSubscription() {
-        firebase.firestore().collection('Abbonamenti').doc(this.state.userInfo['Abbonamento']).get().then(value => {
+        firebase.firestore().collection('Subscriptions').where('idUserDatabase', '==', this.state.id).get().then(value => {
             this.setState({
-                subscript: value.data(),
-                spinner: false,
-
-            }).catch(err => {
-                console.log(err)
-            });
+                subscription: value.docs[0].data(),
+                spinner: false
+            })
+        }).catch(e => {
+            Reactotron.log(e);
         })
     }
 
 
 
-    componentWillUnmount(): void {
+    componentWillUnmount() {
         this.setState({
             spinner: false
         })
@@ -170,7 +172,7 @@ export default class Profile extends Component {
 
                                 { this.state.active === 1 && <ProfileTabTwo userAnemic={this.state.anemic}/> }
 
-                                { this.state.active === 2 && <ProfileTabThree navigation={this.props.navigation} startSubscription={this.state.userInfo['Iscrizione']} userSubscription={this.state.subscript}/> }
+                                { this.state.active === 2 && <ProfileTabThree navigation={this.props.navigation} userSubscription={this.state.subscription}/> }
 
                             </View>
 

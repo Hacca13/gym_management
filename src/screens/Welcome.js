@@ -25,12 +25,12 @@ export default class Welcome extends Component {
     }
 
 
-    componentDidMount(): void {
+    componentDidMount() {
         firebase.auth().onAuthStateChanged(user => {
             if (user) {
 
 
-                UserManagerOffline.retrieveUser(user);
+                //UserManagerOffline.retrieveUser(user);
 
                 this.setState({
                     isAuth: true,
@@ -46,8 +46,8 @@ export default class Welcome extends Component {
 
             <SafeAreaView>
 
-                {UserManagerOffline.isSet ? (
-                    <ImageBackground source={gymWallpaper} style={{width: '100%', height: '100%'}}>
+
+                <ImageBackground source={gymWallpaper} style={{width: '100%', height: '100%'}}>
 
                     <View style={{alignSelf: 'center', paddingLeft: 50, paddingRight: 50}}>
                         <TextCarousel height={height/3} direction='up'>
@@ -99,7 +99,7 @@ export default class Welcome extends Component {
 
                         </TouchableOpacity>
                     </View>
-                </ImageBackground>) : (<Spinner visible={!UserManagerOffline.isSet}/>)}
+                </ImageBackground>
 
 
 

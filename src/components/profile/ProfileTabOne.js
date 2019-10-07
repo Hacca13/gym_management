@@ -17,19 +17,19 @@ export default class ProfileTabOne extends Component {
             <View style={{flexDirection: 'column', marginLeft: 20, marginTop: 10, paddingBottom: 10}}>
 
                 <Text style={{color: '#007AFF'}}>Nome</Text>
-                <Text style={{fontSize: 25}}>{this.props.userInfo ? this.props.userInfo['Nome'] : ' '}</Text>
+                <Text style={{fontSize: 25}}>{this.props.userInfo ? this.props.userInfo['name'] : ' '}</Text>
 
                 <Text style={{color: '#007AFF'}}>Cognome</Text>
-                <Text style={{fontSize: 25}}>{this.props.userInfo ? this.props.userInfo['Cognome'] : ' '}</Text>
+                <Text style={{fontSize: 25}}>{this.props.userInfo ? this.props.userInfo['surname'] : ' '}</Text>
 
                 <Text style={{color: '#007AFF'}}>Età</Text>
-                <Text style={{fontSize: 25}}>{this.props.userInfo ? this.props.userInfo['DataNascita'] : ' '}</Text>
+                <Text style={{fontSize: 25}}>{this.props.userInfo ? this.props.userInfo['dateOfBirth'] : ' '}</Text>
 
                 <Text style={{color: '#007AFF'}}>Email</Text>
-                <Text style={{fontSize: 25}}>{this.props.userInfo ? this.props.userInfo['Email'] : ' '}</Text>
+                <Text style={{fontSize: 25}}>{this.props.userInfo ? this.props.userInfo['email'] : ' '}</Text>
 
                 <Text style={{color: '#007AFF'}}>Telefono</Text>
-                <Text style={{fontSize: 25}}>{this.props.userInfo ? this.props.userInfo['Telefono'] : ' '}</Text>
+                <Text style={{fontSize: 25}}>{this.props.userInfo ? this.props.userInfo['telephoneNumber'] : ' '}</Text>
 
             </View>
         );

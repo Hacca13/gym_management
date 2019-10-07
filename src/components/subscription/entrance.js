@@ -15,7 +15,7 @@ export default class Entrance extends Component {
         }
     }
 
-    componentDidMount(): void {
+    componentDidMount() {
         let entrance = [];
         let remain = [];
         let total = [];
@@ -45,7 +45,7 @@ export default class Entrance extends Component {
 
                 <Text style={{color: '#007AFF'}}>Entrate rimanenti</Text>
 
-                <View style={{flexDirection: 'row', marginTop: 5, marginBottom: 5}}>
+                <View style={{flexDirection: 'row', marginTop: 5, marginBottom: 5, flexWrap: "wrap"}}>
                     {
                         this.state.remain.map((index) => (
                             <Fontisto key={index} name={'ticket'} style={{color: 'green', marginLeft: (index > 0) ? 10 : 0}} size={30}/>
