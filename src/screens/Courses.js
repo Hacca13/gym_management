@@ -10,6 +10,8 @@ const timer = require('react-native-timer');
 import firebase from 'react-native-firebase';
 import UserManagerOffline from '../UserManagerOffline';
 import {observer} from 'mobx-react';
+import Reactotron from "reactotron-react-native";
+import Spinner from "react-native-loading-spinner-overlay";
 
 @observer
 export default class  extends Component {
@@ -22,6 +24,7 @@ export default class  extends Component {
         };
 
         this.collapseManagement = this.collapseManagement.bind(this);
+        this.retrieveCourses = this.retrieveCourses.bind(this);
     }
 
     collapseManagement(index) {
@@ -33,12 +36,45 @@ export default class  extends Component {
     }
 
 
-    componentDidMount(): void {
+    retrieveCourses(user) {
+        let courses = [];
+        firebase.firestore().collection('Courses').get().then(allCourses => {
+            allCourses.docs.map((course) => {
+                course.data()['usersList'].forEach(usr => {
+                    if (usr === user.uid) {
+                        courses.push(course.data());
+                    }
+                })
+            });
+        }).then(() => {
+            this.setState({
+                fireCourse: courses,
+                spinner: false
+            })
+        })
+
+
+
+
+        /*
+                userSubs['IDCorso'].map(val => {
+                    firebase.firestore().collection('Corsi').doc(val).get().then(course => {
+                        courses.push(course.data())
+                    }).then(() => {
+                        this.userCourses = courses;
+                        Reactotron.log('COURSES SETTED')
+                    }).then(() => {
+                        this.isSet = true;
+                    })
+                })
+         */
+
+    }
+    componentDidMount() {
         firebase.auth().onAuthStateChanged(user => {
             if (user) {
-                this.setState({
-                    fireCourse: UserManagerOffline.userCourses
-                })
+
+                this.retrieveCourses(user);
             } else {
                 console.log('nouser')
             }
@@ -49,8 +85,7 @@ export default class  extends Component {
         return (
             <SafeAreaView style={{flex: 1, backgroundColor: 'black'}}>
 
-
-                <ScrollView>
+                {this.state.spinner ? (<Spinner visible={this.state.spinner}/>) : (<ScrollView>
 
                     {
 
@@ -83,7 +118,7 @@ export default class  extends Component {
                                                 marginTop: 10,
                                                 fontSize: 30,
                                                 alignSelf: 'center'
-                                            }}>{course['Nome']}</Text>
+                                            }}>{course['name']}</Text>
                                             <TouchableOpacity activeOpacity={0.5} delayPressIn={50} onPress={() => {
                                                 this.collapseManagement(index);
                                             }}>
@@ -114,7 +149,7 @@ export default class  extends Component {
                                                             color: '#007AFF',
                                                             marginTop: 5
                                                         }}>Istruttore:</Text>
-                                                        <Text style={{fontSize: 20}}>{' ' + course['Istruttore']}</Text>
+                                                        <Text style={{fontSize: 20}}>{' ' + course['instructor']}</Text>
                                                     </View>
 
                                                     <View style={{
@@ -132,7 +167,13 @@ export default class  extends Component {
 
                                                             {
 
-                                                                course['Cadenza']['Giorni'].map((days, index) => (
+
+                                                                course['weeklyFrequency'].map((workDay, index) =>(
+                                                                    <Text key={index} style={{fontSize: 18, marginTop: 2}}>{' ' + workDay.day + ' - ' + workDay.startTime.hour + ':' + workDay.endTime.minutes}</Text>
+                                                                ))
+
+                                                                /*
+                                                                course['weeklyFrequency']['Giorni'].map((days, index) => (
                                                                         <Text key={index} style={{fontSize: 18, marginTop: 2}}>
                                                                             {
                                                                                 ' ' + days['Giorno']['Giorno'] + ' - ' + days['Giorno']['Ora inizio']['Ora'] + ':'
@@ -143,6 +184,10 @@ export default class  extends Component {
                                                                         </Text>
                                                                     )
                                                                 )
+
+                                                                 */
+
+
                                                             }
                                                         </View>
 
@@ -160,7 +205,7 @@ export default class  extends Component {
                                                             marginTop: 5
                                                         }}>Inizio:</Text>
                                                         <Text
-                                                            style={{fontSize: 20}}>{' ' + course['Svolgimento']['Inizio']}</Text>
+                                                            style={{fontSize: 20}}>{' ' + course['period'].startDate }</Text>
                                                     </View>
 
 
@@ -175,7 +220,7 @@ export default class  extends Component {
                                                             marginTop: 5
                                                         }}>Fine:</Text>
                                                         <Text
-                                                            style={{fontSize: 20}}>{' ' + course['Svolgimento']['Fine']}</Text>
+                                                            style={{fontSize: 20}}>{' ' + course['period'].endDate}</Text>
                                                     </View>
 
                                                 </Card.Content>
@@ -209,7 +254,9 @@ export default class  extends Component {
 
                     }
 
-                </ScrollView>
+                </ScrollView>)}
+
+
 
 
             </SafeAreaView>

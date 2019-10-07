@@ -29,7 +29,7 @@ export default class ProfileTabOne extends Component {
                 <Text style={{fontSize: 25}}>{this.props.userInfo ? this.props.userInfo['email'] : ' '}</Text>
 
                 <Text style={{color: '#007AFF'}}>Telefono</Text>
-                <Text style={{fontSize: 25}}>{this.props.userInfo ? this.props.userInfo['telephoneNumber'] : ' '}</Text>
+                <Text style={{fontSize: 25}}>{this.props.userInfo ? this.props.userInfo['telephone'] : ' '}</Text>
 
             </View>
         );

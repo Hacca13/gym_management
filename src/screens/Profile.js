@@ -40,7 +40,7 @@ export default class Profile extends Component {
     componentDidMount() {
         firebase.auth().onAuthStateChanged(user => {
             if (user) {
-                this.retrieveInfo2();
+                this.retrieveInfo2(user);
             } else {
                 this.setState({
                     isAuth: true
@@ -49,8 +49,8 @@ export default class Profile extends Component {
         })
     }
 
-    retrieveInfo2() {
-        firebase.firestore().collection('Users').doc('UEMkxzS6DodLuYRlMnSH').get().then(value => {
+    retrieveInfo2(user) {
+        firebase.firestore().collection('Users').doc(user.uid).get().then(value => {
             this.setState({
                 id: value.id,
                 userInfo: value.data(),

@@ -30,6 +30,8 @@ export default class ProfileTabThree extends Component {
 
                     {this.props.userSubscription['type'] === 'revenue' &&  'Entrate'}
 
+                    {this.props.userSubscription['type'] === 'course' &&  'Corso'}
+
                 </Text>
 
 
@@ -41,12 +43,7 @@ export default class ProfileTabThree extends Component {
                                                                           remain={this.props.userSubscription['numberOfEntries'] -
                                                                           this.props.userSubscription['numberOfEntriesMade']} />}
 
-                {/*<Text style={{color: '#007AFF'}}>Iscrizione</Text>
-                <Text style={{fontSize: 25}}>{this.props.userSubscription['startDate']}</Text> */
-                }
-
-                {//this.props.userSubscription['IDCorso'].length > 0 ? <ActiveCourses navigation={this.props.navigation} active={true}/> : <ActiveCourses active={false}/>
-                     }
+                {this.props.userSubscription['type'] === 'course' ? <ActiveCourses navigation={this.props.navigation} active={true}/> : <ActiveCourses active={false}/>}
 
 
             </View>
