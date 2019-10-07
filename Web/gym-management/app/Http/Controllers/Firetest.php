@@ -37,24 +37,20 @@ class Firetest extends Controller
 
   public function test2(){
     $collection = Firestore::collection('Users');
-    $users = $collection->documents();
-    foreach ($users as $user) {
-      var_dump($user->data());
+    $user = $collection->document('UEMkxzS6DodLuYRlMnSH')->snapshot()->data();
+    $user = UsersManager::transformArrayUserIntoUser($user);
+    var_dump(UsersManager::isAdult($user));
+
     }
 
-  }
-
   public function test3(){
-
-  //  $userArray = Firetest::userToArrayUser($user);
-
-    echo 'so cazzi tua';
-  //  $collection = Firestore::collection('Users');
-  //  $user2 = $collection->add($userArray);
-//    var_dump($user2);
+    $collection = Firestore::collection('Users');
+    $user = $collection->document('UEMkxzS6DodLuYRlMnSH')->snapshot()->data();
+    $usera = UsersManager::getUsersByUsername(data_get($user,'username'));
+    var_dump($usera);
   }
 
-  static function userToArrayUser($user){
+  static function userToArrayUser(){
     $residence= array(
       'nation' => 'Ungheria',
       'cityOfResidence' => 'Sala C',

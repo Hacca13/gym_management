@@ -7,9 +7,9 @@ use App\Http\Models\TrainingCardsModel;
 
 class TrainingCardsManager extends Controller
 {
+  
 
     public static function transformTrainingCardsIntoArrayTrainingCards($trainingCards){
-
       $idDatabase = $trainingCards->getIdDatabase();
       $idUserDatabase = $trainingCards->getIdUserDatabase();
       $period = $trainingCards->getPeriod();
@@ -24,6 +24,7 @@ class TrainingCardsManager extends Controller
 
       return $arrayTrainingCards;
     }
+
     public static function transformArrayTrainingCardsIntoTrainingCards($arrayTrainingCards){
       $idDatabase = data_get($arrayTrainingCards,'idDatabase');
       $idUserDatabase = data_get($arrayTrainingCards,'idUserDatabase');
