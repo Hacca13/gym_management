@@ -14,17 +14,19 @@ class UsersManager extends Controller{
 
       //this function retorn all User
       public static function getAllUser(){
-        $collection = Firestore::collection('Users');
-        $userCollection = $collection->documents();
         $allUser = array();
-        foreach ($userCollection as $arrayUser) {
-          $user = UsersManager::transformArrayUserIntoUser($arrayUser->data());
+        $collection = Firestore::collection('Users');
+        $documents = $collection->documents();
+        foreach ($documents as $document) {
+          $user = UsersManager::transformArrayUserIntoUser($document->data());
+          $user->setIdDatabase($document->id());
           array_push($allUser,$user);
         }
         return $allUser;
       }
 
-      public static function getUsersByUsername($username){s
+
+      public static function getUsersByUsername($username){
         $users = array();
         $collection = Firestore::collection('Users');
         $query = $collection->where('username', '=' ,$username);

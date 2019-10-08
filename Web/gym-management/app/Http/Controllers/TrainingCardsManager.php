@@ -3,11 +3,23 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Google\Cloud\Firestore\FirestoreClient;
+use Firevel\Firestore\Facades\Firestore;
 use App\Http\Models\TrainingCardsModel;
 
 class TrainingCardsManager extends Controller
 {
-  
+    public static function getAllTrainingCards(){
+      $allTrainingCards = array();
+      $collection = Firestore::collection('TrainingCards');
+      $documents = $collection->documents();
+      foreach ($documents as $document) {
+        $trainingCards = TrainingCardsManager::transformArrayTrainingCardsIntoTrainingCards($document->data());
+        $trainingCards->setIdDatabase($document-id());
+        array_push($allTrainingCards,$trainingCards);
+      }
+      return $allTrainingCards;
+    }
 
     public static function transformTrainingCardsIntoArrayTrainingCards($trainingCards){
       $idDatabase = $trainingCards->getIdDatabase();

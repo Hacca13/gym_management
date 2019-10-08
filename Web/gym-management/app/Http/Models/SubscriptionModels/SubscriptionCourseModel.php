@@ -24,25 +24,25 @@ class SubscriptionCourseModel extends SubscriptionModel
   }
 
     /**
-     * Get the value of Idid Course Database
+     * Get the value of id Course Database
      *
      * @return mixed
      */
-    public function getIdidCourseDatabase()
+    public function getIdCourseDatabase()
     {
-        return $this->ididCourseDatabase;
+        return $this->idCourseDatabase;
     }
 
     /**
-     * Set the value of Idid Course Database
+     * Set the value of id Course Database
      *
-     * @param mixed ididCourseDatabase
+     * @param mixed idCourseDatabase
      *
      * @return self
      */
-    public function setIdidCourseDatabase($ididCourseDatabase)
+    public function setIdCourseDatabase($idCourseDatabase)
     {
-        $this->ididCourseDatabase = $ididCourseDatabase;
+        $this->idCourseDatabase = $idCourseDatabase;
 
         return $this;
     }

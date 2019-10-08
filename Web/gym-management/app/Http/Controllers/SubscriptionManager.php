@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Google\Cloud\Firestore\FirestoreClient;
+use Firevel\Firestore\Facades\Firestore;
 use App\Http\Models\SubscriptionModels\SubscriptionModel;
 use App\Http\Models\SubscriptionModels\SubscriptionCourseModel;
 use App\Http\Models\SubscriptionModels\SubscriptionPeriodModel;
@@ -11,8 +13,31 @@ use App\Http\Models\SubscriptionModels\SubscriptionRevenueModel;
 class SubscriptionManager extends Controller
 {
 
+    public static function getAllSubscription(){
+      $allSubscriptions = array();
+      $collection = Firestore::collection('Subscriptions');
+      $documents = $collection->documents();
 
+      foreach ($documents as $document) {
+        $subscription = SubscriptionManager::trasformArraySubscriptionToSubscription($document->data());
+        $subscription->setIdDatabase($document->id());
+        array_push($allSubscriptions,$subscription);
+      }
+      return $allSubscriptions;
+    }
 
+    public static function getSubscriptionByUser($idUserDatabase){
+      $allSubscriptions = array();
+      $collection = Firestore::collection('Subscriptions');
+      $query = $collection->where('idUserDatabase','=',$idUserDatabase);
+      $documents = $query->documents();
+      foreach ($documents as $document) {
+        $subscription = SubscriptionManager::trasformArraySubscriptionToSubscription($document->data());
+        $subscription->setIdDatabase($document->id());
+        array_push($allSubscriptions,$subscription);
+      }
+      return $allSubscriptions;
+    }
 
 
     public static function trasformArraySubscriptionToSubscription($arraySubscription){
@@ -44,8 +69,41 @@ class SubscriptionManager extends Controller
       return $subscription;
     }
 
-    public static function trasformSubscriptionToArraySubscription($Subscription){
+    public static function trasformSubscriptionToArraySubscription($subscription){
 
+      if($subscription->getType() == 'course'){
+        $arraySubscription = array(
+          'idDatabase' => $subscription->getIdDatabase(),
+          'idUserDatabase' => $subscription->getIdUserDatabase(),
+          'isActive' => $subscription->getIsActive(),
+          'type' => $subscription->getType(),
+          'idCourseDatabase' => $subscription->getIdCourseDatabase(),
+          'startDate' => $subscription->getStartDate(),
+          'endDate' => $subscription->getEndDate()
+        );
+      }
+      elseif($subscription->getType() == 'period'){
+        $arraySubscription = array(
+          'idDatabase' => $subscription->getIdDatabase(),
+          'idUserDatabase' => $subscription->getIdUserDatabase(),
+          'isActive' => $subscription->getIsActive(),
+          'type' => $subscription->getType(),
+          'startDate' => $subscription->getStartDate(),
+          'endDate' => $subscription->getEndDate()
+        );
+      }
+      else{
+        $arraySubscription = array(
+          'idDatabase' => $subscription->getIdDatabase(),
+          'idUserDatabase' => $subscription->getIdUserDatabase(),
+          'isActive' => $subscription->getIsActive(),
+          'type' => $subscription->getType(),
+          'numberOfEntries' => $subscription->getNumberOfEntries(),
+          'numberOfEntriesMade' => $subscription->getNumberOfEntriesMade()
+        );
+      }
+
+      return $arraySubscription;
     }
 
 

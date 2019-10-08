@@ -37,17 +37,53 @@ class Firetest extends Controller
 
 
   public function test2(){
-    $collection = Firestore::collection('Subscriptions');
-    $subscription = $collection->document('feF7lZOdEf6F9eqTjSeI')->snapshot()->data();
-    $subscription = SubscriptionManager::trasformArraySubscriptionToSubscription($subscription);
-    var_dump($subscription);
+    $collection = Firestore::collection('MedicalHistory');
+    $documents = $collection->document('hQq65ajzer49nzWk4lRD')->snapshot()->data();
+  /*  foreach ($documents as $document){
+  exercises
+  0
+  idExerciseDatabase
+  "qcUJpzle2LoHowJO3yQ7"
+  restTime
+  minutes
+  1
+  seconds
+  30
+  serialNumber
+  4
+  workoutTime
+  minutes
+  2
+  seconds
+  0
+  1
+  idExerciseDatabase
+  "U68MHeUUjjbAzgBpXTTt"
+  numberOfRepetitions
+  "8"
+  restTime
+  minutes
+  1
+  seconds
+  "30"
+  serialNumber
+  3
+  idUserDatabase
+  "UEMkxzS6DodLuYRlMnSH"
+  period
+  endDate
+  "31/07/2019"
+  startDate
+  "31/08/2019"
+  */  }
+    var_dump($documents);
 
     }
 
   public function test3(){
-    $collection = Firestore::collection('Users');
-    $user = $collection->document('UEMkxzS6DodLuYRlMnSH')->snapshot()->data();
-    var_dump($user);
+
+    $subscription = TrainingCardsManager::getAllTrainingCards();
+    var_dump($subscription);
 
   }
 
