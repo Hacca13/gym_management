@@ -38,3 +38,15 @@ Route::get('/abbonamenti', function () {
 Route::get('/iscritti', function () {
     return view('usersPage');
 });
+
+Route::get('/card', function (){
+   return view('userCard');
+});
+
+Route::get('/insertcourse', function (){
+    return view('insertNewCourse');
+});
+
+
+Route::post('/userCard', 'UsersManager@Pelo');
+

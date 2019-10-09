@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use Google\Cloud\Firestore\FirestoreClient;
 use Firevel\Firestore\Facades\Firestore;
 use App\Http\Models\UserModels\UserModel;
-use App\Http\Controllers\UsersManager;
 use App\Http\Models\UserModels\UserUnderageModel;
 
 class UsersManager extends Controller{
@@ -25,7 +24,10 @@ class UsersManager extends Controller{
         return $allUser;
       }
 
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
       public static function getUsersByUsername($username){
         $users = array();
         $collection = Firestore::collection('Users');
@@ -68,7 +70,7 @@ class UsersManager extends Controller{
         $arrayUser = UsersManager::transformUserIntoArrayUser($newUser);
 
         if(UsersManager::existsUsername($newUser->getUsername()) == FALSE){
-          $collection->add($arrayUser);
+          //$collection->add($arrayUser);
         }
         else {
           return FALSE;
@@ -253,6 +255,13 @@ class UsersManager extends Controller{
 
         return $arrayUser;
       }
+
+        public function Pelo(Request $request){
+          $name = $request->input('cityOfResidence');
+          var_dump($name);
+
+        }
+
 
 
 }
