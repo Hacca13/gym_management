@@ -26,6 +26,8 @@ class TrainingCardsModel{
           //If the variable $exerciseIsATime is set to TRUE
           $exercise1:
               $idExerciseDatabase;
+              $day;
+              $exerciseExecutionDate
               $serialNumber;
               $workoutTime:
                   $minutes;
@@ -39,7 +41,9 @@ class TrainingCardsModel{
           $exercise2:
               $idExerciseDatabase;
               $serialNumber;
-              $numberOfRepetitions
+              $numberOfRepetitions;
+              $day;
+              $exerciseExecutionDate
               $restTime:
                   $minutes;
                   $seconds;

@@ -38,3 +38,7 @@ Route::get('/abbonamenti', function () {
 Route::get('/iscritti', function () {
     return view('usersPage');
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
