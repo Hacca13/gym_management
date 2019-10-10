@@ -7,8 +7,33 @@ use Google\Cloud\Firestore\FirestoreClient;
 use Firevel\Firestore\Facades\Firestore;
 use App\Http\Models\MedicalHistoryModel;
 
-class MedicalHistoryManager extends Controller
-{
+class MedicalHistoryManager extends Controller{
+
+    public static function getMedicalHistoryByUserId($idUserDatabase){
+      $collection = Firestore::collection('MedicalHistory');
+      $query = $collection->where('idUserDatabase','=', $idUserDatabase);
+      $documents = $query->documents();
+
+      foreach ($documents as $document) {
+        $medicalHistory = MedicalHistoryManager::trasformArrayMedicalHistoryToMedicalHistory($document->data());
+        $medicalHistory->setIdDatabase($document->id());
+      }
+
+      return $medicalHistory;
+    }
+
+    public static function getAllMedicalHistory(){
+      $arrayMedicalHistory = array();
+      $collection = Firestore::collection('MedicalHistory');
+      $documents = $collection->documents();
+      foreach ($documents as $document) {
+        $medicalHistory = MedicalHistoryManager::trasformArrayMedicalHistoryToMedicalHistory($document->data());
+        $medicalHistory->setIdDatabase($document->id());
+        array_push($arrayMedicalHistory,$medicalHistory);
+      }
+      return $arrayMedicalHistory;
+    }
+
     public static function trasformArrayMedicalHistoryToMedicalHistory($arrayMedicalHistory){
         $idDatabase = data_get($arrayMedicalHistory, 'idDatabase');
         $idUserDatabase = data_get($arrayMedicalHistory, 'idUserDatabase');
@@ -28,22 +53,10 @@ class MedicalHistoryManager extends Controller
         $combatSports = data_get($arrayMedicalHistory, 'combatSports');
         $otherGoals = data_get($arrayMedicalHistory, 'otherGoals');
 
-        $arrayMedicalHistory = array(
-
-
-          'importantInformation' => $importantInformation,
-          'hypertrophy' => $hypertrophy,
-
-          'toning' => $toning,
-          'athleticTraining' => $athleticTraining,
-          'rehabilitation' => $rehabilitation,
-          'combatSports' => $combatSports,
-          'otherGoals' => $otherGoals
-        );
-
-      //  $medicalHistory = new MedicalHistoryModel($idDatabase,$idUserDatabase,$importantInformation,$weight,$height,$imc,$previousSport,$previousSportTime,$inactiveTime,$plicometricData,$hypertrophy,$slimming,$toning,$athleticTraining,$rehabilitation,$combatSports,$otherGoals);
-        return $arrayMedicalHistory;
+        $medicalHistory = new MedicalHistoryModel($idDatabase,$idUserDatabase,$importantInformation,$weight,$height,$imc,$previousSport,$previousSportTime,$inactiveTime,$plicometricData,$hypertrophy,$slimming,$toning,$athleticTraining,$rehabilitation,$combatSports,$otherGoals);
+        return $medicalHistory;
     }
+
     public static function trasformMedicalHistoryToArrayMedicalHistory($medicalHistory){
         $idDatabase = $medicalHistory->getIdDatabase();
         $idUserDatabase = $medicalHistory->getIdUserDatabase();

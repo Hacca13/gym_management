@@ -9,12 +9,12 @@ use App\Http\Models\UserModels\UserUnderageModel;
 use App\Http\Controllers\UsersManager;
 use App\Http\Controllers\SubscriptionManager;
 use App\Http\Controllers\MedicalHistoryManager;
+use App\Http\Controllers\ExercisesManager;
 use App\Http\Controllers\ProgressCollectionManager;
 use App\Http\Models\ExerciseModel;
 use App\Http\Models\TrainingCardsModel;
 use Illuminate\Support\Arr;
 use App\Services\PayUService\Exception;
-use App\Http\Controllers\ExercisesManager;
 use App\Http\Models\MedicalHistoryModel;
 use App\Http\Models\ProgressCollection;
 use App\Http\Models\CourseModel;
@@ -39,10 +39,10 @@ class Firetest extends Controller
 
 
   public function test2(){
-    $collection = Firestore::collection('MedicalHistory');
-    $documents = $collection->document('hQq65ajzer49nzWk4lRD')->snapshot()->data();
-    $document = MedicalHistoryManager::trasformArrayMedicalHistoryToMedicalHistory($documents);
-
+    $collection = Firestore::collection('Exercises');
+    $document = $collection->document('U68MHeUUjjbAzgBpXTTt')->snapshot()->data();
+    $document = ExercisesManager::trasformArrayExerciseToExercise($document);
+    $document = ExercisesManager::trasformExerciseToArrayExercise($document);
     var_dump($document);
 
     }
