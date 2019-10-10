@@ -47,6 +47,13 @@ Route::get('/insertcourse', function (){
     return view('insertNewCourse');
 });
 
+Route::get('/nuovoAbbonamento', function (){
+    return view('subStrap');
+});
+
+Route::get('/prova', function (){
+    return view('viewStrap');
+});
+
 
 Route::post('/userCard', 'UsersManager@Pelo');
-
