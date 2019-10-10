@@ -47,11 +47,9 @@ Route::get('/corsi', function (){
     return view('newCourse');
 });
 
-Route::get('/scheda', function (){
-    return view('manageCard');
+Route::get('/exc', function (){
+    return view('newExcercise');
 });
-
-
 
 Route::post('/userAdd', 'UsersManager@Pelo');
 
