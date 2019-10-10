@@ -39,14 +39,19 @@ Route::get('/iscritti', function () {
     return view('usersPage');
 });
 
-Route::get('/card', function (){
-   return view('userCard');
+Route::get('/addUser', function (){
+   return view('userAdd');
 });
 
-Route::get('/insertcourse', function (){
-    return view('insertNewCourse');
+Route::get('/corsi', function (){
+    return view('newCourse');
+});
+
+Route::get('/scheda', function (){
+    return view('manageCard');
 });
 
 
-Route::post('/userCard', 'UsersManager@Pelo');
+
+Route::post('/userAdd', 'UsersManager@Pelo');
 

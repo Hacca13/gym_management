@@ -24,10 +24,7 @@ class UsersManager extends Controller{
         return $allUser;
       }
 
-<<<<<<< Updated upstream
 
-=======
->>>>>>> Stashed changes
       public static function getUsersByUsername($username){
         $users = array();
         $collection = Firestore::collection('Users');
