@@ -39,14 +39,15 @@ Route::get('/iscritti', function () {
     return view('usersPage');
 });
 
-Route::get('/card', function (){
-   return view('userCard');
+Route::get('/addUser', function (){
+   return view('userAdd');
 });
 
-Route::get('/insertcourse', function (){
-    return view('insertNewCourse');
+Route::get('/corsi', function (){
+    return view('newCourse');
 });
 
+<<<<<<< HEAD
 Route::get('/nuovoAbbonamento', function (){
     return view('subStrap');
 });
@@ -54,6 +55,13 @@ Route::get('/nuovoAbbonamento', function (){
 Route::get('/prova', function (){
     return view('viewStrap');
 });
+=======
+Route::get('/exc', function (){
+    return view('newExcercise');
+});
+
+Route::post('/userAdd', 'UsersManager@Pelo');
+>>>>>>> Web
 
 
 Route::post('/userCard', 'UsersManager@Pelo');

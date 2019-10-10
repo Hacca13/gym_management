@@ -48,14 +48,6 @@
 
 
                 @include('components.excercise.excerciseCard')
-                @include('components.excercise.excerciseCard')
-                @include('components.excercise.excerciseCard')
-                @include('components.excercise.excerciseCard')
-                @include('components.excercise.excerciseCard')
-                @include('components.excercise.excerciseCard')
-                @include('components.excercise.excerciseCard')
-                @include('components.excercise.excerciseCard')
-                @include('components.excercise.excerciseCard')
 
             </div>
         </div>

@@ -100,5 +100,24 @@
 <script src="../matrix-admin-bt4/assets/libs/flot/jquery.flot.crosshair.js"></script>
 <script src="../matrix-admin-bt4/assets/libs/flot.tooltip/js/jquery.flot.tooltip.min.js"></script>
 <script src="../matrix-admin-bt4/dist/js/pages/chart/chart-page-init.js"></script>
+<script>
+    function myFunction() {
+        myFunction1();
+        var x = document.getElementById("myDIV");
+        if (x.style.display === "block") {
+            x.style.display = "none";
+        } else {
+            x.style.display = "block";
+        }
+    }</script>
+<script>
+function myFunction1() {
+var x = document.getElementById("myDiv");
+if (x.style.display === "block") {
+x.style.display = "none";
+} else {
+x.style.display = "block";
+}
+}</script>
 </body>
 </html>
