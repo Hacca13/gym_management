@@ -48,6 +48,7 @@ Route::get('/corsi', function (){
 });
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 Route::get('/nuovoAbbonamento', function (){
     return view('subStrap');
 });
@@ -59,6 +60,13 @@ Route::get('/prova', function (){
 Route::get('/exc', function (){
     return view('newExcercise');
 });
+=======
+Route::get('/exc', function (){
+    return view('newExcercise');
+});
+
+Route::post('/userAdd', 'UsersManager@Pelo');
+>>>>>>> Web
 
 Route::post('/userAdd', 'UsersManager@Pelo');
 >>>>>>> Web
