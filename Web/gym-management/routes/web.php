@@ -43,23 +43,18 @@ Route::get('/addUser', function (){
    return view('userAdd');
 });
 
-Route::post('/addUserPost', 'UsersManager@createUser');
-
-
 Route::get('/corsi', function (){
     return view('newCourse');
 });
-
 
 Route::get('/nuovoAbbonamento', function (){
     return view('subStrap');
 });
 
-Route::get('/prova', function () {
+Route::get('/prova', function (){
     return view('viewStrap');
 });
-
-Route::get('/exc', function ( ){
+Route::get('/exc', function (){
     return view('newExcercise');
 });
 

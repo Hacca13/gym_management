@@ -19,4 +19,16 @@
         </div>
 
     </div>
+
+    <div class="row justify-content-center">
+
+        <div class="col-md-12">
+
+            @include('components.recordCard.recordCard')
+
+        </div>
+
+    </div>
+
+
 @endsection
