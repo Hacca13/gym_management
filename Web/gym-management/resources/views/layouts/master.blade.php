@@ -17,10 +17,12 @@
 
     <link href="../css/bttn.min.css" rel="stylesheet">
 
+    <script src="https://www.gstatic.com/firebasejs/7.2.0/firebase-auth.js"></script>
 
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 
+    @toastr_css
 
 </head>
 
@@ -111,13 +113,19 @@
         }
     }</script>
 <script>
-function myFunction1() {
-var x = document.getElementById("myDiv");
-if (x.style.display === "block") {
-x.style.display = "none";
-} else {
-x.style.display = "block";
-}
-}</script>
+    function myFunction1() {
+        var x = document.getElementById("myDiv");
+        if (x.style.display === "block") {
+            x.style.display = "none";
+        } else {
+            x.style.display = "block";
+        }
+    }</script>
+
+
 </body>
+
+@jquery
+@toastr_js
+@toastr_render
 </html>

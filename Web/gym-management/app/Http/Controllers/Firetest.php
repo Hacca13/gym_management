@@ -24,6 +24,14 @@ use App\Http\Models\SubscriptionModels\SubscriptionPeriodModel;
 
 class Firetest extends Controller
 {
+
+
+
+    public function tester() {
+
+    }
+
+
   public function test() {
 
     $collection = Firestore::collection('Users');

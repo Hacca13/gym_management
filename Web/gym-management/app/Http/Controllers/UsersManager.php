@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Google\Cloud\Firestore\FirestoreClient;
+use Kreait\Firebase\Exception\AuthException;
+use Kreait\Firebase\Exception\FirebaseException;
+use Kreait\Firebase\Factory;
 use Firevel\Firestore\Facades\Firestore;
 use App\Http\Models\UserModels\UserModel;
 use App\Http\Models\UserModels\UserUnderageModel;
@@ -63,16 +66,46 @@ class UsersManager extends Controller{
 
 
 
-      public static function createUser($newUser){
-        $arrayUser = UsersManager::transformUserIntoArrayUser($newUser);
+      public static function createUser(Request $request){
+          $input = $request->all();
 
-        if(UsersManager::existsUsername($newUser->getUsername()) == FALSE){
-          //$collection->add($arrayUser);
-        }
-        else {
-          return FALSE;
-        }
-        return TRUE;
+          $email = $input['email'];
+          $password = $input['password'];
+
+          $firebase = (new Factory)
+              ->withServiceAccount('../FitAndFight-d18fd34bc5db.json')
+              ->withDatabaseUri('https://fitandfight.firebaseio.com')
+              ->create();
+
+          try {
+              $firebase->getAuth()->createUserWithEmailAndPassword($email, $password);
+              $user = $firebase->getAuth()->getUserByEmail($email);
+
+
+              toastr()->success('Correctly user inserted');
+              return redirect('/addUser');
+
+          } catch (AuthException $e) {
+            toastr()->error($e->getMessage());
+              return redirect('/addUser');
+          } catch (FirebaseException $e) {
+              toastr()->error($e->getMessage());
+              return redirect('/addUser');
+          }
+
+
+          /*
+            //$arrayUser = UsersManager::transformUserIntoArrayUser($newUser);
+
+          if(UsersManager::existsUsername($newUser->getUsername()) == FALSE){
+            //$collection->add($arrayUser);
+          }
+          else {
+            return FALSE;
+          }
+          return TRUE;
+
+          */
       }
 
       public static function isAdult($user){
