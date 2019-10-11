@@ -9,9 +9,25 @@ use App\Http\Models\ExerciseModel;
 
 class ExercisesManager extends Controller{
 
-      public static function getAllExercises(){}
+      public static function getAllExercises(){
+        $arrayExercises = array();
+        $collection = Firestore::collection('Exercises');
+        $documents = $collection->documents();
+        foreach ($documents as $document) {
+          $exercise = ExercisesManager::trasformArrayExerciseToExercise($document->data());
+          $exercise->setIdDatabase($document->id());
+          array_push($arrayExercises,$exercise);
+        }
+        return $arrayExercises;
+
+      }
 
       public static function getExerciseById($idDatabase){
+        $collection = Firestore::collection('Exercises');
+        $document = $collection->document($idDatabase)->snapshot()->data();
+        $document = ExercisesManager::trasformArrayExerciseToExercise($document);
+        $document->setIdDatabase($idDatabase);
+        return $document;
       }
 
       public static function trasformArrayExerciseToExercise($arrayExercise){

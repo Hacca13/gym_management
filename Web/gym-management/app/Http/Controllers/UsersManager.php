@@ -76,6 +76,7 @@ class UsersManager extends Controller{
         return TRUE;
       }
 
+
       public static function isAdult($user){
         if($user instanceof UserModel){
             if($user->getIsAdult() == TRUE){

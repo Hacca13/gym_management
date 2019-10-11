@@ -13,7 +13,6 @@ class CourseModel{
   private $name;
   private $image;
   private $instructor;
-  private $numberOfSubscribers;
   private $period;
   /*
       $period:
@@ -42,15 +41,13 @@ class CourseModel{
   */
   private $usersList;
 
-  function __construct($idDatabase,$name,$image,$instructor,$numberOfSubscribers,$period,$weeklyFrequency,$usersList){
+  function __construct($idDatabase,$name,$image,$instructor,$period,$weeklyFrequency,$usersList){
 
     $this->idDatabase = $idDatabase;
     $this->name = $name;
     $this->image = $image;
     $this->instructor = $instructor;
-    $this->numberOfSubscribers = $numberOfSubscribers;
     $this->period = array(
-
       'startDate' => data_get($period, 'startDate'),
       'endDate' => data_get($period, 'endDate')
 
@@ -68,6 +65,9 @@ class CourseModel{
     }
 
   }
+
+
+
 
 
     /**

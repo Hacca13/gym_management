@@ -11,6 +11,7 @@ use App\Http\Controllers\SubscriptionManager;
 use App\Http\Controllers\MedicalHistoryManager;
 use App\Http\Controllers\ExercisesManager;
 use App\Http\Controllers\ProgressCollectionManager;
+use App\Http\Controllers\CoursesManager;
 use App\Http\Models\ExerciseModel;
 use App\Http\Models\TrainingCardsModel;
 use Illuminate\Support\Arr;
@@ -48,9 +49,11 @@ class Firetest extends Controller
     }
 
   public function test3(){
-
-    $subscription = TrainingCardsManager::getAllTrainingCards();
-    var_dump($subscription);
+    $collection = Firestore::collection('Courses');
+    $document = $collection->document('2n9xLsfSh5dRlwfT393H')->snapshot()->data();
+    $document = CoursesManager::trasformArrayCourseToCourse($document);
+    $document = CoursesManager::trasformCourseToArrayCourse($document);
+    var_dump($document);
 
   }
 
