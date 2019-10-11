@@ -4,7 +4,7 @@
 
 
 
-    <form action="/addUserPost" method="post">
+    <form action="/addUserPost" method="post" enctype="multipart/form-data">
         @csrf
 
 
@@ -54,7 +54,7 @@
                     <div class="form-group row">
                         <label for="fname" class="col-sm-3 text-right control-label col-form-label">Nazionalità di Nascita</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="fname" name="">
+                            <input type="text" class="form-control" id="fname" name="birthNation">
                         </div>
                     </div>
                     <div class="form-group row">
@@ -75,6 +75,15 @@
             <div class="card col-md-6">
 
                 <div class="card-body">
+
+                    <div class="form-group row">
+                        <label for="lname" class="col-sm-3 text-right control-label col-form-label">Cellulare</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="lname" name="telephone">
+                        </div>
+                    </div>
+
+
                     <div class="form-group row">
                         <label for="lname" class="col-sm-3 text-right control-label col-form-label">Nazione di Residenza</label>
                         <div class="col-sm-9">
@@ -84,7 +93,7 @@
                     <div class="form-group row">
                         <label for="lname" class="col-sm-3 text-right control-label col-form-label">Cap</label>
                         <div class="col-sm-9">
-                            <input type="password" class="form-control" id="lname" name="cap">
+                            <input type="text" class="form-control" id="lname" name="cap">
                         </div>
                     </div>
                     <div class="form-group row">
@@ -102,12 +111,12 @@
                     <div class="form-group row">
                         <label for="cono1" class="col-sm-3 text-right control-label col-form-label">Documento d'Identità</label>
                         <div class="col-sm-9">
-                            <input type="file" class="form-control" id="cono1" name="profilePicture">
+                            <input type="file" class="form-control" id="cono1" name="documentPicture">
                         </div>
                     </div>
                     <div class="border-top">
                         <div class="card-body">
-                            <input type="checkbox" onclick="myFunction()">E' minorenne?</input>
+                            <input type="checkbox" onclick="myFunction()"> E' minorenne?</input>
                         </div>
                     </div>
                 </div>
