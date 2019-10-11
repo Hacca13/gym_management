@@ -51,5 +51,10 @@ Route::get('/exc', function (){
     return view('newExcercise');
 });
 
+Route::get('/corso', function (){
+    return view('courses');
+});
+
+
 Route::post('/userAdd', 'UsersManager@Pelo');
 

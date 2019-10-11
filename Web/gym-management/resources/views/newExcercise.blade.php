@@ -18,7 +18,7 @@
 
                     </div>
                     <div class="col-md-4" style="text-align: start">
-                        <h4>Inserisci Esercizio</h4>
+                        <h4>Inserisci Eserizio</h4>
 
                 </div>
 
