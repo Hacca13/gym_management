@@ -49,10 +49,10 @@ class Firetest extends Controller
     }
 
   public function test3(){
-    $collection = Firestore::collection('Courses');
-    $document = $collection->document('2n9xLsfSh5dRlwfT393H')->snapshot()->data();
-    $document = CoursesManager::trasformArrayCourseToCourse($document);
-    $document = CoursesManager::trasformCourseToArrayCourse($document);
+  //  $collection = Firestore::collection('Courses');
+  //  $document = $collection->document('2n9xLsfSh5dRlwfT393H')->snapshot()->data();
+    $document = CoursesManager::theUserForWhichCourseIsRegistered('L8SN43WhnCMG8gQ2Jjh5tiVrCWV2');
+    //$document = CoursesManager::getAllCourses();
     var_dump($document);
 
   }

@@ -6,11 +6,44 @@ use Firevel\Firestore\Facades\Firestore;
 use Illuminate\Http\Request;
 use App\Http\Models\CourseModel;
 
-class CoursesManager extends Controller
-{
+class CoursesManager extends Controller{
+
+    public static function theUserForWhichCourseIsRegistered($idUserDatabase){
+      $courses = array();
+      $allCourses = CoursesManager::getAllCourses();
+      foreach ($allCourses as $course){
+          foreach ($course->getUsersList() as $user) {
+              if($user == $idUserDatabase){
+                array_push($courses,$course);
+              }
+          }
+      }
+      return $courses;
+    }
+
+    public static function getCoursesByInstructor($instructor){
+      $courses = array();
+      $collection = Firestore::collection('Courses');
+      $query = $collection->where('instructor', '=' ,$instructor);
+      $documents = $query->documents();
+      foreach ($documents as $document){
+        $course = CoursesManager::trasformArrayCourseToCourse($document->data());
+        $course->setIdDatabase($document->id());
+        array_push($courses,$course);
+      }
+      return $courses;
+    }
+
     public static function getAllCourses() {
-
-
+      $allCourses = array();
+      $collection = Firestore::collection('Courses');
+      $documents = $collection->documents();
+      foreach ($documents as $document) {
+        $course = CoursesManager::trasformArrayCourseToCourse($document->data());
+        $course->setIdDatabase($document->id());
+        array_push($allCourses,$course);
+      }
+      return $allCourses;
     }
 
     public static function trasformArrayCourseToCourse($arrayCourse){
