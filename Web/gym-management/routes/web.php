@@ -63,8 +63,12 @@ Route::get('/nuovaScheda', function (){
 
 Route::post('/addUserPost', 'UsersManager@createUser');
 
-
-
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/insertCourse', function () {
+    return view('insertNewCourse');
+});
+
+Route::post('/insertFormCourse', 'CoursesManager@addCourse');
