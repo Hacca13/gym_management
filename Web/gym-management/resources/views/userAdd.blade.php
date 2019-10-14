@@ -21,7 +21,7 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="fname" class="col-sm-3 text-right control-label col-form-label">Cognome</label>
+                        <label for="fsurname" class="col-sm-3 text-right control-label col-form-label">Cognome</label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control" id="fname" name="surname" required>
                         </div>
@@ -43,7 +43,7 @@
                     <div class="form-group row">
                         <label for="fname" class="col-sm-3 text-right control-label col-form-label">Data di Nascita</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="fname" name="dateOfBirth" required>
+                            <input type="" class="form-control" id="fname" name="dateOfBirth" required>
                         </div>
                     </div>
                     <div class="form-group row">
