@@ -47,8 +47,9 @@
 
 
 
-                @include('components.excercise.excerciseCard')
-
+                @foreach($exercises as $ex)
+                    @include('components.excercise.excerciseCard')
+                @endforeach
             </div>
         </div>
 

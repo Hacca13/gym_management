@@ -27,9 +27,7 @@ Route::get('/schede', function () {
     return view('recordCardPage');
 });
 
-Route::get('/esercizi', function () {
-    return view('excercisePage');
-});
+Route::get('/esercizi', 'ExercisesManager@exercisePage');
 
 Route::get('/abbonamenti', function () {
     return view('subscriptionPage');
@@ -71,4 +69,10 @@ Route::get('/insertCourse', function () {
     return view('insertNewCourse');
 });
 
+Route::get('/insertExercise', function () {
+    return view('insertNewExcercise');
+});
+
 Route::post('/insertFormCourse', 'CoursesManager@addCourse');
+
+Route::post('/insertFormExercise', 'ExercisesManager@addExercise');
