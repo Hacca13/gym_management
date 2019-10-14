@@ -39,7 +39,7 @@ Route::get('/iscritti', function () {
     return view('usersPage');
 });
 
-Route::get('/addUser', function (){
+Route::get('/nuovoUtente', function (){
    return view('userAdd');
 });
 

@@ -1599,16 +1599,16 @@
         },
         {
             "name": "kreait/firebase-php",
-            "version": "4.32.0",
+            "version": "4.34.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kreait/firebase-php.git",
-                "reference": "aad7f361f09661bb2e7b6267b99fd1efb73d0d07"
+                "reference": "83a84c4364eb9e5d5410e57acc451b4534b8c88e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kreait/firebase-php/zipball/aad7f361f09661bb2e7b6267b99fd1efb73d0d07",
-                "reference": "aad7f361f09661bb2e7b6267b99fd1efb73d0d07",
+                "url": "https://api.github.com/repos/kreait/firebase-php/zipball/83a84c4364eb9e5d5410e57acc451b4534b8c88e",
+                "reference": "83a84c4364eb9e5d5410e57acc451b4534b8c88e",
                 "shasum": ""
             },
             "require": {
@@ -1618,6 +1618,7 @@
                 "ext-openssl": "*",
                 "giggsey/libphonenumber-for-php": "^8.9",
                 "google/auth": "^0.11.0|^1.0",
+                "google/cloud-storage": "^1.14",
                 "guzzlehttp/guzzle": "^6.2.1",
                 "kreait/clock": "^1.0.1",
                 "kreait/firebase-tokens": "^1.8.1",
@@ -1635,6 +1636,9 @@
                 "phpstan/phpstan-phpunit": "^0.9.2",
                 "phpunit/phpunit": "^6.0",
                 "symfony/var-dumper": "^3.3"
+            },
+            "suggest": {
+                "google/cloud-firestore": "^1.0 to use the Firestore component"
             },
             "type": "library",
             "extra": {
@@ -1669,7 +1673,7 @@
                 "google",
                 "sdk"
             ],
-            "time": "2019-09-13T10:27:17+00:00"
+            "time": "2019-10-13T16:36:14+00:00"
         },
         {
             "name": "kreait/firebase-tokens",
@@ -2056,16 +2060,16 @@
         },
         {
             "name": "league/flysystem",
-            "version": "1.0.55",
+            "version": "1.0.56",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/flysystem.git",
-                "reference": "33c91155537c6dc899eacdc54a13ac6303f156e6"
+                "reference": "90e3f83cb10ef6b058d70f95267030e7a6236518"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/33c91155537c6dc899eacdc54a13ac6303f156e6",
-                "reference": "33c91155537c6dc899eacdc54a13ac6303f156e6",
+                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/90e3f83cb10ef6b058d70f95267030e7a6236518",
+                "reference": "90e3f83cb10ef6b058d70f95267030e7a6236518",
                 "shasum": ""
             },
             "require": {
@@ -2136,7 +2140,7 @@
                 "sftp",
                 "storage"
             ],
-            "time": "2019-08-24T11:17:19+00:00"
+            "time": "2019-10-12T13:05:59+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -4837,16 +4841,16 @@
         },
         {
             "name": "facade/ignition",
-            "version": "1.11.1",
+            "version": "1.11.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/facade/ignition.git",
-                "reference": "dc56111b19e160236084dc6ab460e9c08912ecac"
+                "reference": "862cbc2dfffa1fa28b47822a116e5b2e03b421db"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/facade/ignition/zipball/dc56111b19e160236084dc6ab460e9c08912ecac",
-                "reference": "dc56111b19e160236084dc6ab460e9c08912ecac",
+                "url": "https://api.github.com/repos/facade/ignition/zipball/862cbc2dfffa1fa28b47822a116e5b2e03b421db",
+                "reference": "862cbc2dfffa1fa28b47822a116e5b2e03b421db",
                 "shasum": ""
             },
             "require": {
@@ -4904,7 +4908,7 @@
                 "laravel",
                 "page"
             ],
-            "time": "2019-10-08T07:36:31+00:00"
+            "time": "2019-10-13T10:42:06+00:00"
         },
         {
             "name": "facade/ignition-contracts",
@@ -5108,40 +5112,6 @@
                 "test"
             ],
             "time": "2016-01-20T08:20:44+00:00"
-        },
-        {
-            "name": "kkcodes/laravel-firebase-auth",
-            "version": "1.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/kkcodes/laravel-firebase-auth.git",
-                "reference": "77280fecf6262f362ea627687ba1b605be5f9949"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/kkcodes/laravel-firebase-auth/zipball/77280fecf6262f362ea627687ba1b605be5f9949",
-                "reference": "77280fecf6262f362ea627687ba1b605be5f9949",
-                "shasum": ""
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Kkcodes\\FirebaseAuth\\FirebaseAuthServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Kkcodes\\FirebaseAuth\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "Firebase Authenticator baked for Laravel.",
-            "time": "2018-02-24T09:18:53+00:00"
         },
         {
             "name": "mockery/mockery",
@@ -5969,93 +5939,6 @@
                 "xunit"
             ],
             "time": "2019-10-07T12:57:41+00:00"
-        },
-        {
-            "name": "plokko/firebase-php",
-            "version": "0.1.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/plokko/firebase-php.git",
-                "reference": "bcfa1e9e73257e8c38f39ee485d317f5a15174a7"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/plokko/firebase-php/zipball/bcfa1e9e73257e8c38f39ee485d317f5a15174a7",
-                "reference": "bcfa1e9e73257e8c38f39ee485d317f5a15174a7",
-                "shasum": ""
-            },
-            "require": {
-                "firebase/php-jwt": "^5.0",
-                "google/auth": "^1.2.1",
-                "guzzlehttp/guzzle": "^6.3",
-                "php": ">=5.6"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Plokko\\Firebase\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "Firebase API php implementation",
-            "time": "2018-09-05T12:22:34+00:00"
-        },
-        {
-            "name": "plokko/laravel-firebase",
-            "version": "0.1.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/plokko/laravel-firebase.git",
-                "reference": "d1619f0aa6365d1cfbe78880eaa20dc79deed8f6"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/plokko/laravel-firebase/zipball/d1619f0aa6365d1cfbe78880eaa20dc79deed8f6",
-                "reference": "d1619f0aa6365d1cfbe78880eaa20dc79deed8f6",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/support": "^5.4.0",
-                "php": ">=5.6",
-                "plokko/firebase-php": "^0.1.1"
-            },
-            "require-dev": {
-                "orchestra/testbench": "~3.6.0",
-                "phpunit/phpunit": "~7.0"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Plokko\\LaravelFirebase\\ServiceProvider"
-                    ],
-                    "aliases": {
-                        "FirebaseDb": "Plokko\\LaravelFirebase\\Facades\\FirebaseDb",
-                        "FirebaseJWT": "Plokko\\LaravelFirebase\\Facades\\FirebaseJWT",
-                        "FCM": "Plokko\\LaravelFirebase\\Facades\\FCM"
-                    }
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Plokko\\LaravelFirebase\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "Laravel Firebase integration",
-            "keywords": [
-                "FCM",
-                "firebase",
-                "laravel",
-                "realtime database"
-            ],
-            "time": "2019-10-01T15:53:58+00:00"
         },
         {
             "name": "scrivo/highlight.php",
