@@ -15,7 +15,7 @@ Route::get('/', function () {
     return view('index');
 });
 
-//Route::get('/corsi', 'CoursesManager@getAllCourses');
+Route::get('/corsi', 'CoursesManager@getAllCourses');
 
 Route::get('/getAllUser', 'UserManager@getAllUser');
 
@@ -43,10 +43,9 @@ Route::get('/addUser', function (){
    return view('userAdd');
 });
 
-Route::get('/inserisciCorso', function (){
-    return view('insertNewCourse');
+Route::get('/corsi', function (){
+    return view('newCourse');
 });
-
 
 Route::get('/nuovoAbbonamento', function (){
     return view('subStrap');
@@ -55,22 +54,10 @@ Route::get('/nuovoAbbonamento', function (){
 Route::get('/prova', function (){
     return view('viewStrap');
 });
-
 Route::get('/exc', function (){
-    return view('insertNewExcercise');
+    return view('newExcercise');
 });
 
-
-Route::post('/userAdd', 'UsersManager@Pelo');
-
-
-Route::get('/corso', function (){
-    return view('courses');
-});
+Route::post('/addUserPost', 'UsersManager@createUser');
 
 
-Route::post('/userAdd', 'UsersManager@Pelo');
-
-
-
-Route::post('/userCard', 'UsersManager@Pelo');
