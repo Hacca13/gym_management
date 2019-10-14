@@ -66,3 +66,7 @@ Route::get('/nuovaScheda', function (){
 Route::post('/addUserPost', 'UsersManager@createUser');
 
 
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

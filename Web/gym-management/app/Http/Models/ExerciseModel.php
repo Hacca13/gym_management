@@ -5,8 +5,7 @@ namespace App\Http\Models;
 /**
  *
  */
-class ExerciseModel
-{
+class ExerciseModel{
   private $idDatabase;
   private $name;
   private $description;
@@ -14,8 +13,7 @@ class ExerciseModel
   private $gif;
   private $link;
 
-  function __construct($idDatabase,$name,$description,$exerciseIsATime,$gif,$link)
-  {
+  function __construct($idDatabase,$name,$description,$exerciseIsATime,$gif,$link){
     $this->idDatabase = $idDatabase;
     $this->name = $name;
     $this->description = $description;
@@ -23,6 +21,32 @@ class ExerciseModel
     $this->gif = $gif;
     $this->link = $link;
   }
+
+
+
+    /**
+     * Get the value of Id Database
+     *
+     * @return mixed
+     */
+    public function getIdDatabase()
+    {
+        return $this->idDatabase;
+    }
+
+    /**
+     * Set the value of Id Database
+     *
+     * @param mixed idDatabase
+     *
+     * @return self
+     */
+    public function setIdDatabase($idDatabase)
+    {
+        $this->idDatabase = $idDatabase;
+
+        return $this;
+    }
 
     /**
      * Get the value of Name

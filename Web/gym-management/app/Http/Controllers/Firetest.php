@@ -8,11 +8,14 @@ use App\Http\Models\UserModels\UserModel;
 use App\Http\Models\UserModels\UserUnderageModel;
 use App\Http\Controllers\UsersManager;
 use App\Http\Controllers\SubscriptionManager;
+use App\Http\Controllers\MedicalHistoryManager;
+use App\Http\Controllers\ExercisesManager;
+use App\Http\Controllers\ProgressCollectionManager;
+use App\Http\Controllers\CoursesManager;
 use App\Http\Models\ExerciseModel;
 use App\Http\Models\TrainingCardsModel;
 use Illuminate\Support\Arr;
 use App\Services\PayUService\Exception;
-use App\Http\Controllers\ExercisesManager;
 use App\Http\Models\MedicalHistoryModel;
 use App\Http\Models\ProgressCollection;
 use App\Http\Models\CourseModel;
@@ -52,9 +55,11 @@ class Firetest extends Controller
     }
 
   public function test3(){
-
-    $subscription = TrainingCardsManager::getAllTrainingCards();
-    var_dump($subscription);
+  //  $collection = Firestore::collection('Courses');
+  //  $document = $collection->document('2n9xLsfSh5dRlwfT393H')->snapshot()->data();
+    $document = CoursesManager::theUserForWhichCourseIsRegistered('L8SN43WhnCMG8gQ2Jjh5tiVrCWV2');
+    //$document = CoursesManager::getAllCourses();
+    var_dump($document);
 
   }
 

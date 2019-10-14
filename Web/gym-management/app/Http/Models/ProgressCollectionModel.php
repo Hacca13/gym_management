@@ -4,7 +4,7 @@ namespace App\Http\Models;
 /**
  *
  */
-class ProgressCollection
+class ProgressCollectionModel
 {
   private $idDatabase;
   private $idUserDatabase;
