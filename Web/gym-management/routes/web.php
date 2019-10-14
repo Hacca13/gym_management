@@ -54,8 +54,13 @@ Route::get('/nuovoAbbonamento', function (){
 Route::get('/prova', function (){
     return view('viewStrap');
 });
+
 Route::get('/exc', function (){
     return view('newExcercise');
+});
+
+Route::get('/nuovaScheda', function (){
+    return view('newCard');
 });
 
 Route::post('/addUserPost', 'UsersManager@createUser');

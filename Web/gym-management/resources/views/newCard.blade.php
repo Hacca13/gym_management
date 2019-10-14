@@ -1,90 +1,45 @@
-    @extends('layouts.master')
+@extends('layouts.master')
 
-    @section('content')
-        <div class="col-md-12">
-        <div class="card" style="border-radius: 10px">
-            <div class="card-body">
-            <div class="row">
-              <div class="col-md-8">
-                <div class="card">
-                  <div class="card-body wizard-content">
-                    <form id="example-form" action="#" class="m-t-40">
-                      <div>
-                        <section>
-                          <label for="userName">Abbonamento di:</label>
-                          <input id="userName" name="userName" type="text" class="required form-control">
-                        </section>
-                      </div>
-                      <div>
-                        <br>
-                        <label for="userName">Tipo di abbonamento:</label>
-                        <section>
-                          <input id="acceptTerms" name="acceptTerms" type="checkbox" class="required">
-                          <label for="acceptTerms">Annuale</label>
-                          <input id="acceptTerms" name="acceptTerms" type="checkbox" class="required">
-                          <label for="acceptTerms">Entrate</label>
-                          <input id="acceptTerms" name="acceptTerms" type="checkbox" class="required">
-                          <label for="acceptTerms">Corso</label>
-                        </section>
-                      </div>
-                      <br>
-                      <div class="row">
-                        <div class="col-md-6">
-                          <label>Inzio</label>
-                          <div class="input-group">
-                            <input type="text" class="form-control mydatepicker" placeholder="mm/dd/yyyy">
-                            <div class="input-group-append">
-                              <span class="input-group-text"><i class="fa fa-calendar"></i></span>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-md-6">
-                          <label>Fine</label>
-                          <div class="input-group">
-                            <input type="text" class="form-control mydatepicker" placeholder="mm/dd/yyyy">
-                            <div class="input-group-append">
-                              <span class="input-group-text"><i class="fa fa-calendar"></i></span>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="row">
-                        <div class="col-md-6">
-                          <div>
-                            <section>
-                              <label for="userName">Nome Corso</label>
-                              <input id="userName" name="userName" type="text" class="required form-control">
-                            </section>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="row">
-                        <div class="col-md-6">
-                          <div class="form-group">
-                            <label for="exampleFormControlSelect1">Numero Entrate</label>
-                            <select class="form-control" id="exampleFormControlSelect1">
-                              <option>1</option>
-                              <option>2</option>
-                              <option>3</option>
-                              <option>4</option>
-                              <option>5</option>
-                            </select>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="card">
+@section('content')
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <form class="form-horizontal">
                     <div class="card-body">
-                      <h5 class="card-title">Foto</h5>
+                        <h4 class="card-title ">Inserisci Informazione Corso</h4>
+                        <div class="form-group row">
+                            <label for="fname" class="col-sm-3 text-right control-label col-form-label">Scheda di: </label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="fname" name="name">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="fname" class="col-sm-3 text-right control-label col-form-label">Ripetizione Settimanale: </label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="fname" name="instructor">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="fname" class="col-sm-3 text-right control-label col-form-label">Durata del Corso</label>
+                            <div class="col-sm-9">
+                                <input type="number" class="form-control" id="fname" name="period">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="fname" class="col-sm-3 text-right control-label col-form-label">Immagine del Corso</label>
+                            <div class="col-sm-9">
+                                <input type="file" class="form-control" id="fname" name="image">
+                            </div>
+                        </div>
+                        <div class="border-top">
+                            <div class="card-body">
+                                <button type="button" class="btn btn-success">Inserisci Corso</button>
+                            </div>
+                        </div>
+
                     </div>
-                  </div>
-                </div>
-              </div>
+                </form>
             </div>
         </div>
     </div>
-
-    @endsection
+@endsection
