@@ -13,7 +13,7 @@
             <form class="form">
                 <div class="row">
 
-                    <div class="col-md-6">
+                    <div class="col-md-10">
 
                         <div class="input-group no-border">
                             <input type="text" value="" class="form-control" placeholder="Search...">
@@ -26,30 +26,13 @@
 
                     </div>
 
-                    <div class="col-md-6">
+                    <div class="col-md-2" style="text-align: center; margin-top: auto; margin-bottom: auto">
 
-                        <div class="row">
-
-                            <div class="col-md-6" >
-                                <div class="input-group no-border">
-                                    <div class="form-check" >
-                                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                        <label class="form-check-label" for="exampleCheck1">Corsi Attivi</label>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-md-6">
-                                <div class="input-group no-border">
-                                    <div class="form-check">
-                                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                        <label class="form-check-label" for="exampleCheck1">Corsi Vecchi</label>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-
+                        <a href="#">
+                            <button class="bttn-material-circle bttn-md bttn-success">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </a>
 
                     </div>
 

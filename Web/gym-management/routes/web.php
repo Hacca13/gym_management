@@ -15,7 +15,7 @@ Route::get('/', function () {
     return view('index');
 });
 
-Route::get('/corsi', 'CoursesManager@getAllCourses');
+//Route::get('/corsi', 'CoursesManager@getAllCourses');
 
 Route::get('/getAllUser', 'UserManager@getAllUser');
 
@@ -43,12 +43,11 @@ Route::get('/addUser', function (){
    return view('userAdd');
 });
 
-Route::get('/corsi', function (){
-    return view('newCourse');
+Route::get('/inserisciCorso', function (){
+    return view('insertNewCourse');
 });
 
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 Route::get('/nuovoAbbonamento', function (){
     return view('subStrap');
 });
@@ -56,17 +55,14 @@ Route::get('/nuovoAbbonamento', function (){
 Route::get('/prova', function (){
     return view('viewStrap');
 });
-=======
+
 Route::get('/exc', function (){
-    return view('newExcercise');
-});
-=======
-Route::get('/exc', function (){
-    return view('newExcercise');
+    return view('insertNewExcercise');
 });
 
+
 Route::post('/userAdd', 'UsersManager@Pelo');
->>>>>>> Web
+
 
 Route::get('/corso', function (){
     return view('courses');
@@ -74,7 +70,7 @@ Route::get('/corso', function (){
 
 
 Route::post('/userAdd', 'UsersManager@Pelo');
->>>>>>> Web
+
 
 
 Route::post('/userCard', 'UsersManager@Pelo');
