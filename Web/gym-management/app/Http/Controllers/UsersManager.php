@@ -6,7 +6,7 @@ use App\User;
 use Illuminate\Http\Request;
 use Kreait\Firebase\Exception\AuthException;
 use Kreait\Firebase\Exception\FirebaseException;
-use Kreait\Firebase\Factory;
+use Kreait\Firebase;
 use Firevel\Firestore\Facades\Firestore;
 use App\Http\Models\UserModels\UserModel;
 use App\Http\Models\UserModels\UserUnderageModel;
@@ -80,10 +80,7 @@ class UsersManager extends Controller{
 
         $tr = new GoogleTranslate('it');
 
-        $firebase = (new Factory)
-            ->withServiceAccount('../FitAndFight-d18fd34bc5db.json')
-            ->withDatabaseUri('https://fitandfight.firebaseio.com')
-            ->create();
+        $firebase = (new Firebase\Factory());
 
       
                 $str = $firebase->getStorage()->getBucket()->upload(file_get_contents($documentImage),
@@ -104,7 +101,7 @@ class UsersManager extends Controller{
                 $collection = Firestore::collection('Users');
 
         try {
-            $uid = $firebase->getAuth()->createUserWithEmailAndPassword($input['email'], $input['password'])->uid;
+            $uid = $firebase->createAuth()->createUserWithEmailAndPassword($input['email'], $input['password'])->uid;
 
             $fireUser = UsersManager::trasformRequestIntoUser($uid, $input, $documentImage, $parentDocumentImage);
 

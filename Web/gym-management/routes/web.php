@@ -43,9 +43,7 @@ Route::get('/nuovoUtente', function (){
    return view('userAdd');
 });
 
-Route::get('/corsi', function (){
-    return view('newCourse');
-});
+Route::get('/corsi', 'CoursesManager@coursesPage');
 
 Route::get('/nuovoAbbonamento', function (){
     return view('newSubscription');
@@ -65,8 +63,12 @@ Route::get('/nuovaScheda', function (){
 
 Route::post('/addUserPost', 'UsersManager@createUser');
 
-
-
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/insertCourse', function () {
+    return view('insertNewCourse');
+});
+
+Route::post('/insertFormCourse', 'CoursesManager@addCourse');
