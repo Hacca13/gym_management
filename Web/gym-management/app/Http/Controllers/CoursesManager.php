@@ -81,4 +81,9 @@ class CoursesManager extends Controller{
       return $arrayCourse;
     }
 
+    public function coursesPage() {
+        $courses = CoursesManager::getAllCourses();
+        return view('courses', compact('courses'));
+    }
+
 }

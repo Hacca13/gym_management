@@ -43,9 +43,7 @@ Route::get('/addUser', function (){
    return view('userAdd');
 });
 
-Route::get('/corsi', function (){
-    return view('newCourse');
-});
+Route::get('/corsi', 'CoursesManager@coursesPage');
 
 Route::get('/nuovoAbbonamento', function (){
     return view('newSubscription');
