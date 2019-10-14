@@ -48,7 +48,7 @@ Route::get('/corsi', function (){
 });
 
 Route::get('/nuovoAbbonamento', function (){
-    return view('subStrap');
+    return view('newSubscription');
 });
 
 Route::get('/prova', function (){

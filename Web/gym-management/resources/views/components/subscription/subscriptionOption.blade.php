@@ -27,20 +27,11 @@
                 </div>
             </div>
         </div>
-        <a data-toggle="collapse" href="#aggiungiAbbonamento" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">
-          <h2>
-            <i class="fas fa-plus" style="color: black"></i>
-          </h2>
+        <a href="nuovoAbbonamento" role="button">
+            <button class="bttn-material-circle bttn-md bttn-success">
+                <i class="fas fa-plus"></i>
+            </button>
         </a>
-        <div class="col-md-12">
-          <div class="collapse multi-collapse" id="aggiungiAbbonamento">
-            <div class="card card-body">
-              <div class="row justify-content-center">
-                @include('components.subscription.newSubscription')
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   </div>
