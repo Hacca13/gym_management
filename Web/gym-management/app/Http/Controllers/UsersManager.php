@@ -82,7 +82,7 @@ class UsersManager extends Controller{
 
         $firebase = (new Firebase\Factory());
 
-      
+
                 $str = $firebase->getStorage()->getBucket()->upload(file_get_contents($documentImage),
                     [
                         'name' => $documentImage->getClientOriginalName()
@@ -109,17 +109,17 @@ class UsersManager extends Controller{
             $collection->document($uid)->set($uploadUser);
 
             toastr()->success('Utente registrato');
-            return redirect('/addUser');
+            return redirect('/nuovoUtente');
 
         } catch (AuthException $e) {
 
             toastr()->error($tr->translate($e->getMessage()));
-            return redirect('/addUser');
+            return redirect('/nuovoUtente');
 
         } catch (FirebaseException $e) {
 
             toastr()->error($tr->translate($e->getMessage()));
-            return redirect('/addUser');
+            return redirect('/nuovoUtente');
         }
 
     }
@@ -302,7 +302,7 @@ class UsersManager extends Controller{
         return $arrayUser;
     }
 
-    public static function trasformRequestIntoUser($uid, $input, $documentImage, $parentDocumentImage){
+    private static function trasformRequestIntoUser($uid, $input, $documentImage, $parentDocumentImage){
 
 
       $idDatabase = $uid;
