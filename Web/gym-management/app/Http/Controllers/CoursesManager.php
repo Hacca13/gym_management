@@ -141,6 +141,8 @@ class CoursesManager extends Controller{
         );
         $coll->document($idDatabase)->set(CoursesManager::trasformCourseToArrayCourse($corso));
 
+        toastr()->success('Corso inserito');
+        return redirect('/corsi');
 
     }
 
