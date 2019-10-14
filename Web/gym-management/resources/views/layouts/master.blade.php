@@ -106,10 +106,35 @@
     function myFunction() {
         myFunction1();
         var x = document.getElementById("myDIV");
+        let inputs = [
+            document.getElementById('parentName'),
+            document.getElementById('parentSurname'),
+            document.getElementById('parentGender'),
+            document.getElementById('parentDateOfBirth'),
+            document.getElementById('parentbirthPlace'),
+            document.getElementById('parentResidence'),
+            document.getElementById('parentNation'),
+            document.getElementById('parentCap'),
+            document.getElementById('parentStreet'),
+            document.getElementById('parentTelephone'),
+            document.getElementById('parentEmail'),
+            document.getElementById('parentDocumentImage'),
+            document.getElementById('parentDocumentNumber'),
+            document.getElementById('parentDocumentType'),
+            document.getElementById('parentDocumentReleaseDate'),
+            document.getElementById('parentDocumentReleaser'),
+        ];
         if (x.style.display === "block") {
             x.style.display = "none";
+            inputs.forEach(value => {
+                value.removeAttribute("required")
+            })
         } else {
             x.style.display = "block";
+            inputs.forEach(value => {
+                value.setAttribute("required", "");
+            })
+
         }
     }</script>
 <script>
@@ -121,6 +146,11 @@
             x.style.display = "block";
         }
     }</script>
+
+<script>
+
+
+</script>
 
 
 </body>

@@ -58,6 +58,6 @@ Route::get('/exc', function (){
     return view('newExcercise');
 });
 
-Route::post('/userAdd', 'UsersManager@Pelo');
+Route::post('/addUserPost', 'UsersManager@createUser');
 
-Route::post('/userCard', 'UsersManager@Pelo');
+

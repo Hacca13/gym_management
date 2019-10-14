@@ -69,8 +69,7 @@ class UsersManager extends Controller{
 
     public static function createUser(Request $request){
         $input = $request->all();
-
-        $uploadedFile = $request->file('documentPicture');
+        $documentImage = $request->file('documentPicture');
 
         $tr = new GoogleTranslate('it');
 
@@ -79,44 +78,51 @@ class UsersManager extends Controller{
             ->withDatabaseUri('https://fitandfight.firebaseio.com')
             ->create();
 
-        $str = $firebase->getStorage()->getBucket()->upload(file_get_contents($uploadedFile),
-            [
-                'name' => $uploadedFile->getClientOriginalName()
-            ])->name();
+                $str = $firebase->getStorage()->getBucket()->upload(file_get_contents($documentImage),
+                    [
+                        'name' => $documentImage->getClientOriginalName()
+                    ])->name();
 
-        $documentPicture =  "https://firebasestorage.googleapis.com/v0/b/fitandfight.appspot.com/o/". $str ."?alt=media";
+                $documentPicture =  "https://firebasestorage.googleapis.com/v0/b/fitandfight.appspot.com/o/". $str ."?alt=media";
 
-        $collection = Firestore::collection('Users');
+                $collection = Firestore::collection('Users');
 
         try {
-            $firebase->getAuth()->createUserWithEmailAndPassword($input['email'], $input['password']);
-            $user = $firebase->getAuth()->getUserByEmail($input['email']);
+            $uid = $firebase->getAuth()->createUserWithEmailAndPassword($input['email'], $input['password'])->uid;
 
-            $collection->document($user->uid)->set([
-                'name' => $input['name'],
-                'surname' => $input['surname'],
-                'email' => $input['email'],
-                'dateOfBirth' => $input['dateOfBirth'],
-                'birthPlace' => $input['birthPlace'],
-                'birthNation' => $input['birthNation'],
-                'gender' => $input['gender'],
-                'cityOfResidence' => $input['cityOfResidence'],
-                'nation' => $input['nation'],
-                'cap' => $input['cap'],
-                'street' => $input['street'],
-                'number' => $input['number'],
-                'profilePicture' => $input['profilePicture'],
-                'password' => $input['password'],
-                'telephone' => $input['telephone'],
-                'residence' => [
+            $fireUser = new UserModel(
+                $uid,
+                $input['name'],
+                $input['surname'],
+                $input['gender'],
+                $input['email'],
+                null, //profilePic
+                true, //status
+                true, //isAdult
+
+                $input['dateOfBirth'],
+                $input['birthNation'],
+                $input['birthPlace'],
+                [
                     'nation' => $input['nation'],
                     'cityOfResidence' => $input['cityOfResidence'],
                     'cap' => $input['cap'],
                     'street' => $input['street'],
                     'number' => $input['number']
                 ],
-                'documentPicture' => $documentPicture
-            ]);
+                [
+                    'documentImage' => $documentPicture,
+                    'type' => $input['documentType'],
+                    'number' => $input['documentNumber'],
+                    'released' => $input['releaserDocument'],
+                    'releaseDate' => $input['releaseDateDocument'],
+                ],
+                $input['email'],
+                $input['telephone']
+            );
+
+            $uploadUser = UsersManager::transformUserIntoArrayUser($fireUser);
+            $collection->document($uid)->set($uploadUser);
 
             toastr()->success('Utente registrato');
             return redirect('/addUser');
@@ -240,7 +246,7 @@ class UsersManager extends Controller{
 
 
 
-    public static function transformUserIntoArrayUser($user){
+    public static function transformUserIntoArrayUser(UserModel $user){
         $residence= array(
             'nation' => data_get($user->getResidence(),'nation'),
             'cityOfResidence' => data_get($user->getResidence(),'cityOfResidence'),
@@ -311,13 +317,5 @@ class UsersManager extends Controller{
 
         return $arrayUser;
     }
-
-    public function Pelo(Request $request){
-        $name = $request->input('cityOfResidence');
-        var_dump($name);
-
-    }
-
-
 
 }
