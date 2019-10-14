@@ -27,6 +27,14 @@ use App\Http\Models\SubscriptionModels\SubscriptionPeriodModel;
 
 class Firetest extends Controller
 {
+
+
+
+    public function tester() {
+
+    }
+
+
   public function test() {
 
     $collection = Firestore::collection('Users');
@@ -40,11 +48,9 @@ class Firetest extends Controller
 
 
   public function test2(){
-    $collection = Firestore::collection('Exercises');
-    $document = $collection->document('U68MHeUUjjbAzgBpXTTt')->snapshot()->data();
-    $document = ExercisesManager::trasformArrayExerciseToExercise($document);
-    $document = ExercisesManager::trasformExerciseToArrayExercise($document);
-    var_dump($document);
+    $collection = Firestore::collection('Users');
+    $documents = $collection->document('L8SN43WhnCMG8gQ2Jjh5tiVrCWV2')->snapshot()->data();
+     var_dump($documents);
 
     }
 

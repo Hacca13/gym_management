@@ -22,12 +22,20 @@
 
                 </div>
 
-                <div class="col-md-1" style="text-align: right; margin-top: auto; margin-bottom: auto;">
+                <a data-toggle="collapse" href="#multiCollapseExample4" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">
+                  <h2>
+                    <i class="mdi mdi-arrow-down-drop-circle" style="color: black"></i>
+                  </h2>
+                </a>
 
-                    <a href="#">
-                        <h2><i class="mdi mdi-arrow-down-drop-circle" style="color: black"></i></h2>
-                    </a>
-
+                <div class="col-md-12">
+                  <div class="collapse multi-collapse" id="multiCollapseExample4">
+                    <div class="card card-body">
+                      <div class="row justify-content-center">
+                        @include('components.subscription.recordSubPeriod')
+                      </div>
+                    </div>
+                  </div>
                 </div>
 
             </div>

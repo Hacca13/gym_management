@@ -39,6 +39,34 @@ Route::get('/iscritti', function () {
     return view('usersPage');
 });
 
+Route::get('/addUser', function (){
+   return view('userAdd');
+});
+
+Route::get('/corsi', function (){
+    return view('newCourse');
+});
+
+Route::get('/nuovoAbbonamento', function (){
+    return view('newSubscription');
+});
+
+Route::get('/prova', function (){
+    return view('viewStrap');
+});
+
+Route::get('/exc', function (){
+    return view('newExcercise');
+});
+
+Route::get('/nuovaScheda', function (){
+    return view('newCard');
+});
+
+Route::post('/addUserPost', 'UsersManager@createUser');
+
+
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

@@ -17,10 +17,12 @@
 
     <link href="../css/bttn.min.css" rel="stylesheet">
 
+    <script src="https://www.gstatic.com/firebasejs/7.2.0/firebase-auth.js"></script>
 
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 
+    @toastr_css
 
 </head>
 
@@ -100,5 +102,60 @@
 <script src="../matrix-admin-bt4/assets/libs/flot/jquery.flot.crosshair.js"></script>
 <script src="../matrix-admin-bt4/assets/libs/flot.tooltip/js/jquery.flot.tooltip.min.js"></script>
 <script src="../matrix-admin-bt4/dist/js/pages/chart/chart-page-init.js"></script>
+<script>
+    function myFunction() {
+        myFunction1();
+        var x = document.getElementById("myDIV");
+        let inputs = [
+            document.getElementById('parentName'),
+            document.getElementById('parentSurname'),
+            document.getElementById('parentGender'),
+            document.getElementById('parentDateOfBirth'),
+            document.getElementById('parentbirthPlace'),
+            document.getElementById('parentResidence'),
+            document.getElementById('parentNation'),
+            document.getElementById('parentCap'),
+            document.getElementById('parentStreet'),
+            document.getElementById('parentTelephone'),
+            document.getElementById('parentEmail'),
+            document.getElementById('parentDocumentImage'),
+            document.getElementById('parentDocumentNumber'),
+            document.getElementById('parentDocumentType'),
+            document.getElementById('parentDocumentReleaseDate'),
+            document.getElementById('parentDocumentReleaser'),
+        ];
+        if (x.style.display === "block") {
+            x.style.display = "none";
+            inputs.forEach(value => {
+                value.removeAttribute("required")
+            })
+        } else {
+            x.style.display = "block";
+            inputs.forEach(value => {
+                value.setAttribute("required", "");
+            })
+
+        }
+    }</script>
+<script>
+    function myFunction1() {
+        var x = document.getElementById("myDiv");
+        if (x.style.display === "block") {
+            x.style.display = "none";
+        } else {
+            x.style.display = "block";
+        }
+    }</script>
+
+<script>
+
+
+</script>
+
+
 </body>
+
+@jquery
+@toastr_js
+@toastr_render
 </html>
