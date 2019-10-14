@@ -27,9 +27,7 @@ Route::get('/schede', function () {
     return view('recordCardPage');
 });
 
-Route::get('/esercizi', function () {
-    return view('excercisePage');
-});
+Route::get('/esercizi', 'ExercisesManager@exercisePage');
 
 Route::get('/abbonamenti', function () {
     return view('subscriptionPage');
@@ -43,9 +41,7 @@ Route::get('/addUser', function (){
    return view('userAdd');
 });
 
-Route::get('/corsi', function (){
-    return view('newCourse');
-});
+Route::get('/corsi', 'CoursesManager@coursesPage');
 
 Route::get('/nuovoAbbonamento', function (){
     return view('newSubscription');
@@ -65,8 +61,18 @@ Route::get('/nuovaScheda', function (){
 
 Route::post('/addUserPost', 'UsersManager@createUser');
 
-
-
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/insertCourse', function () {
+    return view('insertNewCourse');
+});
+
+Route::get('/insertExercise', function () {
+    return view('insertNewExcercise');
+});
+
+Route::post('/insertFormCourse', 'CoursesManager@addCourse');
+
+Route::post('/insertFormExercise', 'ExercisesManager@addExercise');
