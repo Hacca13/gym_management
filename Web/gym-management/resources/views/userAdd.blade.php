@@ -82,7 +82,7 @@
                     <div class="form-group row">
                         <label for="lname" class="col-sm-3 text-right control-label col-form-label">Cap</label>
                         <div class="col-sm-9">
-                            <input type="number" class="form-control" id="lname" name="cap" required>
+                            <input type="text" class="form-control" id="lname" name="cap" required>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -94,7 +94,7 @@
                     <div class="form-group row">
                         <label for="cono1" class="col-sm-3 text-right control-label col-form-label">Numero</label>
                         <div class="col-sm-9">
-                            <input type="number" class="form-control" id="cono1" name="number" required>
+                            <input type="text" class="form-control" id="cono1" name="number" required>
                         </div>
                     </div>
                     <div class="form-group row">

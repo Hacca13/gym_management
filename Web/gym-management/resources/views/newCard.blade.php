@@ -22,7 +22,7 @@
                         <div class="form-group row">
                             <label for="fname" class="col-sm-3 text-right control-label col-form-label">Durata del Corso</label>
                             <div class="col-sm-4">
-                                <input type="number" class="form-control" id="fname" name="period">
+                                <input type="text" class="form-control" id="fname" name="period">
                             </div>
                         </div>
                         <div class="form-group row">
