@@ -9,7 +9,7 @@
         </div>
 
         <div class="col-md-12" style="margin-top: 2.5%">
-            <form class="form">
+
                 <div class="row">
 
                     <div class="col-md-10">
@@ -27,7 +27,7 @@
 
                     <div class="col-md-2" style="text-align: center; margin-top: auto; margin-bottom: auto">
 
-                        <a href="/exc">
+                        <a href="insertExercise" role="button">
                             <button class="bttn-material-circle bttn-md bttn-success">
                                 <i class="fas fa-plus"></i>
                             </button>
@@ -36,7 +36,7 @@
                     </div>
 
                 </div>
-            </form>
+
 
 
         </div>
