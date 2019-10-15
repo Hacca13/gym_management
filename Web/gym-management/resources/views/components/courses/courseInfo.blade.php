@@ -1,7 +1,7 @@
 
 <div class="col-md-8">
 
-    <div class="card" style="border-radius: 10px">
+    <div class="card" style="border-radius: 10px;background-color:rgb(255, 255, 255,0.5);">
 
         <div class="card-header">
 
@@ -26,7 +26,7 @@
 
         </div>
         <form class="form-horizontal" method="get">
-        <div class="card-body">
+        <div class="card-body" style="background-color: transparent;">
             <div class="form-group row">
                 <label for="fname" class="col-sm-3 text-right control-label col-form-label">Nome Corso</label>
                 <div class="col-sm-9">

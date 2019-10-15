@@ -68,6 +68,10 @@ Route::get('/insertExercise', function () {
     return view('insertNewExcercise');
 });
 
+Route::get('/corso', function () {
+    return view('courses');
+});
+
 Route::post('/insertFormCourse', 'CoursesManager@addCourse');
 
 Route::post('/insertFormExercise', 'ExercisesManager@addExercise');

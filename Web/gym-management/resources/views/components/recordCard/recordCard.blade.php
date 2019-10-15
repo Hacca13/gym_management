@@ -2,7 +2,7 @@
 
     <div class="col-md-10">
 
-        <div class="card" style="border-radius: 10px;">
+        <div class="card" style="border-radius: 10px;background-color: rgb(255, 255, 255,0.7);">
 
             @for($i=0;$i<5;$i++)
             <div class="card-body">
