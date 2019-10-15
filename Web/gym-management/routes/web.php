@@ -22,13 +22,10 @@ Route::get('/getAllUser', 'UserManager@getAllUser');
 Route::get('/firetest', 'Firetest@test');
 Route::get('/firetest2', 'Firetest@test2');
 Route::get('/firetest3', 'Firetest@test3');
+Route::get('/esercizi', 'ExercisesManager@exercisePage');
 
 Route::get('/schede', function () {
     return view('recordCardPage');
-});
-
-Route::get('/esercizi', function () {
-    return view('excercisePage');
 });
 
 Route::get('/abbonamenti', function () {
@@ -53,10 +50,6 @@ Route::get('/prova', function (){
     return view('viewStrap');
 });
 
-Route::get('/exc', function (){
-    return view('newExcercise');
-});
-
 Route::get('/nuovaScheda', function (){
     return view('newCard');
 });
@@ -71,4 +64,10 @@ Route::get('/insertCourse', function () {
     return view('insertNewCourse');
 });
 
+Route::get('/insertExercise', function () {
+    return view('insertNewExcercise');
+});
+
 Route::post('/insertFormCourse', 'CoursesManager@addCourse');
+
+Route::post('/insertFormExercise', 'ExercisesManager@addExercise');

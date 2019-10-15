@@ -34,9 +34,13 @@
 
                 <img src="../images/lombari.png" class="img-fluid" alt="">
 
-                <h3 style="text-align: center; margin-top: 2.5%">Good morning</h3>
+                <h3 style="text-align: center; margin-top: 2.5%">{{$ex->getName()}}</h3>
 
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto deserunt doloribus expedita explicabo maiores maxime nihil, quaerat quasi quia quidem quo repellendus sapiente sit soluta tempora. Enim maxime modi repellendus?</p>
+                <p>{{$ex->getDescription()}}</p>
+
+                <hr>
+
+                <h4><a href="{{$ex->getLink()}}">{{$ex->getLink()}}</a></h4>
 
             </div>
 

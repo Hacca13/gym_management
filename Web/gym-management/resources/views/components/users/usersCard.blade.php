@@ -1,49 +1,36 @@
-<div class="col-md-4">
-
-
-    <div class="card" style="border-radius: 10px">
-
-        <div class="card-header" style="text-align: end">
-
-            <a href="#"><i style="font-size: 150%; color: black;" class="fas fa-edit"></i></a>
-
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Utenti Abbonati</h5>
+                <form class="-flip-horizontal">
+                    <div class="table-responsive">
+                        <table id="zero_config" class="table table-striped table-bordered">
+                            <thead>
+                            <tr>
+                                <th>Nome Iscritto</th>
+                                <th>Abbonamento</th>
+                                <th>Scheda</th>
+                                <th>Corso</th>
+                                <th>Data Inizio</th>
+                                <th>Data Fine</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>Herrod Chandler</td>
+                                <td>Sales Assistant</td>
+                                <td>San Francisco</td>
+                                <td>59</td>
+                                <td>2012/08/06</td>
+                                <td>$137,500</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </form>
+            </div>
         </div>
-
-        <div class="card-body" style="text-align: center">
-            <img src="../images/user.png" alt="" class="img-fluid">
-            <hr>
-            <h3>Mirko Aliberti</h3>
-            <br>
-            <h5>Status: attivo</h5>
-            <br>
-            <button class="bttn-jelly bttn-md bttn-danger">Disattiva</button>
-        </div>
-
     </div>
-
 </div>
 
-<div class="col-md-4">
-
-
-    <div class="card" style="border-radius: 10px; background-color: slategray">
-
-        <div class="card-header" style="text-align: end">
-
-            <a href="#"><i style="font-size: 150%; color: black;" class="fas fa-edit"></i></a>
-
-        </div>
-
-        <div class="card-body" style="text-align: center">
-            <img src="../images/user.png" alt="" class="img-fluid">
-            <hr>
-            <h3>Mirko Aliberti</h3>
-            <br>
-            <h5>Status: attivo</h5>
-            <br>
-            <button class="bttn-jelly bttn-md bttn-success">Attiva</button>
-        </div>
-
-    </div>
-
-</div>

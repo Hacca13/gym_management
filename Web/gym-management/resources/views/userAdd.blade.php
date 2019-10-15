@@ -2,11 +2,8 @@
 
 @section('content')
 
-
-
     <form action="/addUserPost" method="post" enctype="multipart/form-data">
     @csrf
-
     <!-- USER FORM -->
 
         <div class="row">
@@ -43,7 +40,7 @@
                     <div class="form-group row">
                         <label for="fname" class="col-sm-3 text-right control-label col-form-label">Data di Nascita</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="fname" name="dateOfBirth" required>
+                            <input type="date" class="form-control" id="fname" name="dateOfBirth" required>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -73,10 +70,9 @@
                     <div class="form-group row">
                         <label for="lname" class="col-sm-3 text-right control-label col-form-label">Cellulare</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="lname" name="telephone" required>
+                            <input type="tel" class="form-control" id="lname" name="telephone" required>
                         </div>
                     </div>
-
                     <div class="form-group row">
                         <label for="lname" class="col-sm-3 text-right control-label col-form-label">Nazione di Residenza</label>
                         <div class="col-sm-9">
@@ -104,67 +100,52 @@
 
                 </div>
             </div>
-
             <div class="card col-md-6">
-
                 <div class="card-body">
-
-
-
-
-
                     <div class="form-group row">
                         <label for="email1" class="col-sm-3 text-right control-label col-form-label">Tipo di Documento</label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control" id="email1" name="documentType" required>
                         </div>
                     </div>
-
                     <div class="form-group row">
                         <label for="cono1" class="col-sm-3 text-right control-label col-form-label">Numero documento d'Identità</label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control" id="lname" name="documentNumber" required>
                         </div>
                     </div>
-
                     <div class="form-group row">
                         <label for="cono1" class="col-sm-3 text-right control-label col-form-label">Data di Rilascio</label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control" id="cono1" name="releaseDateDocument" required>
                         </div>
                     </div>
-
                     <div class="form-group row">
                         <label for="cono1" class="col-sm-3 text-right control-label col-form-label">Rilasciato Da</label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control" id="cono1" name="releaserDocument" required>
                         </div>
                     </div>
-
                     <div class="form-group row">
                         <label for="lname" class="col-sm-3 text-right control-label col-form-label">Imagine Documento d'Identità</label>
                         <div class="col-sm-9">
                             <input type="file" class="form-control" id="lname" name="documentImage" required>
                         </div>
                     </div>
-
                     <div class="border-top">
                         <div class="card-body">
                             <input type="checkbox" onclick="myFunction()" name="isUnderage" value="TRUE"> E' minorenne?</input>
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
-
 
         <!-- PARENT FORM -->
 
         <div class="row">
             <div class="col-md-6" id="myDIV" style="display: none">
                 <div class="card">
-
                     <div class="card-body">
                         <h4 class="card-title ">Inserisci Dati Genitore</h4>
                         <div class="form-group row">
@@ -212,7 +193,7 @@
                         <div class="form-group row">
                             <label for="lname" class="col-sm-3 text-right control-label col-form-label">Cap</label>
                             <div class="col-sm-9">
-                                <input type="password" class="form-control" id="parentCap" name="parentCap">
+                                <input type="number" class="form-control" id="parentCap" name="parentCap">
                             </div>
                         </div>
                     </div>
@@ -238,7 +219,7 @@
                         <div class="form-group row">
                             <label for="cono1" class="col-sm-3 text-right control-label col-form-label">E-mail del Tutore</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" id="parentEmail" name="parentEmail">
+                                <input type="email" class="form-control" id="parentEmail" name="parentEmail">
                             </div>
                         </div>
                         <div class="form-group row">
@@ -262,7 +243,7 @@
                         <div class="form-group row">
                             <label for="cono1" class="col-sm-3 text-right control-label col-form-label">Data di Rilascio</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" id="parentDocumentReleaseDate" name="parentDocumentReleaseDate">
+                                <input type="date" class="form-control" id="parentDocumentReleaseDate" name="parentDocumentReleaseDate">
                             </div>
                         </div>
                         <div class="form-group row">
@@ -277,16 +258,14 @@
             </div>
         </div>
 
-
         <!-- SUBMIT/RESET -->
+
         <div class="row">
             <div class="border-top">
                 <div class="card-body">
                     <input type="submit">
                 </div>
             </div>
-
         </div>
-
     </form>
 @endsection
