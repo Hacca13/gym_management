@@ -33,7 +33,7 @@
 
                         <div class="col-md-2">
                             <a href="addUser" role="button">
-                                <button class="bttn-material-circle bttn-md bttn-success">
+                                <button class="bttn-material-circle bttn-md bttn-primary">
                                     <i class="fas fa-plus"></i>
                                 </button>
                             </a>

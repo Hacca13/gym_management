@@ -29,10 +29,11 @@
                     </div>
                 </div>
                 <a href="nuovaScheda" role="button">
-                    <button class="bttn-material-circle bttn-md bttn-success">
+                    <button class="bttn-material-circle bttn-md bttn-primary">
                         <i class="fas fa-plus"></i>
                     </button>
                 </a>
             </div>
         </div>
     </div>
+</div>
