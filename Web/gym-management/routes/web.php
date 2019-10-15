@@ -22,12 +22,11 @@ Route::get('/getAllUser', 'UserManager@getAllUser');
 Route::get('/firetest', 'Firetest@test');
 Route::get('/firetest2', 'Firetest@test2');
 Route::get('/firetest3', 'Firetest@test3');
+Route::get('/esercizi', 'ExercisesManager@exercisePage');
 
 Route::get('/schede', function () {
     return view('recordCardPage');
 });
-
-Route::get('/esercizi', 'ExercisesManager@exercisePage');
 
 Route::get('/abbonamenti', function () {
     return view('subscriptionPage');
