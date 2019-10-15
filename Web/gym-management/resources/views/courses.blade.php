@@ -10,7 +10,7 @@
         </div>
 
         <div class="col-md-12" style="margin-top: 2.5%">
-            <div class="card" style="border-radius: 4%;background-color: rgb(255,255,255,0.9);">
+            <div class="card" style="border-radius: 10px;background-color: rgb(255,255,255,0.9);">
 
                 <div class="card-body">
                     <div class="row">
@@ -43,7 +43,7 @@
                         </div>
                         <div class="col-md-1" style="text-align: center; margin-top: auto; margin-bottom: auto">
                             <a href="insertCourse" role="button">
-                                <button class="bttn-material-circle bttn-md bttn-success">
+                                <button class="bttn-material-circle bttn-md bttn-primary">
                                     <i class="fas fa-plus"></i>
                                 </button>
                             </a>

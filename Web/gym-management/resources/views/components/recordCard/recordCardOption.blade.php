@@ -28,6 +28,11 @@
                         <label class="form-check-label" for="exampleCheck1">Schede Vecchie</label>
                     </div>
                 </div>
+                <a href="nuovaScheda" role="button">
+                    <button class="bttn-material-circle bttn-md bttn-primary">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                </a>
             </div>
             <a href="nuovaScheda" role="button">
                 <button class="bttn-material-circle bttn-md bttn-success">

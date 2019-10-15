@@ -29,6 +29,13 @@
                                 <label class="form-check-label" for="exampleCheck1">Abbonamenti Scaduti</label>
                             </div>
                         </div>
+                        <div class="col-md-2">
+                            <a href="nuovoAbbonamento" role="button">
+                                <button class="bttn-material-circle bttn-md bttn-primary">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </a>
+                        </div>
                     </div>
                     <div class="col-md-2">
                         <a href="nuovoAbbonamento" role="button">
