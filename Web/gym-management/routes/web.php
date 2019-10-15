@@ -64,7 +64,7 @@ Route::get('/insertCourse', function () {
     return view('insertNewCourse');
 });
 
-Route::get('/insertExercise', function () {
+Route::get('/nuovoEsercizio', function () {
     return view('insertNewExcercise');
 });
 

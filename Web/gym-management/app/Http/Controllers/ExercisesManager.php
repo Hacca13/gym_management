@@ -99,6 +99,7 @@ class ExercisesManager extends Controller{
 
     }
 
+
     public function exercisePage() {
         $exercises = ExercisesManager::getAllExercises();
         return view('excercisePage', compact('exercises'));

@@ -83,12 +83,12 @@ class UsersManager extends Controller{
         $firebase = (new Firebase\Factory());
 
 
-                $str = $firebase->getStorage()->getBucket()->upload(file_get_contents($documentImage),
+                $str = $firebase->createStorage()->getBucket()->upload(file_get_contents($documentImage),
                     [
                         'name' => $documentImage->getClientOriginalName()
                     ])->name();
                 if($isUnderage == 'TRUE'){
-                    $str2 = $firebase->getStorage()->getBucket()->upload(file_get_contents($parentDocumentImage),
+                    $str2 = $firebase->createStorage()->getBucket()->upload(file_get_contents($parentDocumentImage),
                         [
                             'name' => $parentDocumentImage->getClientOriginalName()
                         ])->name();
