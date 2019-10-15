@@ -4,10 +4,7 @@
 
     <form action="/addUserPost" method="post" enctype="multipart/form-data">
     @csrf
-    <!-- USER FORM -->
-
         <div class="row">
-
             <div class="card col-md-6">
                 <div class="card-body">
                     <h4 class="card-title ">Inserisci Dati Utente</h4>
@@ -122,7 +119,7 @@
                     <div class="form-group row">
                         <label for="cono1" class="col-sm-3 text-right control-label col-form-label">Data di Rilascio</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="cono1" name="releaseDateDocument" required>
+                            <input type="date" class="form-control" id="cono1" name="releaseDateDocument" required>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -174,7 +171,7 @@
                         <div class="form-group row">
                             <label for="fname" class="col-sm-3 text-right control-label col-form-label">Data di Nascita Tutore</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" id="parentDateOfBirth" name="parentDateOfBirth">
+                                <input type="date" class="form-control" id="parentDateOfBirth" name="parentDateOfBirth">
                             </div>
                         </div>
                         <div class="form-group row">
@@ -217,7 +214,7 @@
                         <div class="form-group row">
                             <label for="email1" class="col-sm-3 text-right control-label col-form-label">Cap</label>
                             <div class="col-sm-9">
-                                <input type="number" class="form-control" id="parentCap" name="parentCap">
+                                <input type="text" class="form-control" id="parentCap" name="parentCap">
                             </div>
                         </div>
 

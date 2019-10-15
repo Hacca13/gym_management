@@ -64,6 +64,10 @@ Route::get('/insertCourse', function () {
     return view('insertNewCourse');
 });
 
+Route::get('/prova', function () {
+    return view('viewStrap');
+});
+
 Route::get('/insertExercise', function () {
     return view('insertNewExcercise');
 });
