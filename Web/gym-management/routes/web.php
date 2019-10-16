@@ -32,6 +32,10 @@ Route::get('/gestioneAbbonamenti', function () {
     return view('subscriptionPage');
 });
 
+Route::get('/gestioneEsercizi', function () {
+    return view('exercisePage');
+});
+
 Route::get('/gestioneIscritti', function () {
     return view('usersPage');
 });

@@ -72,9 +72,11 @@ class UsersManager extends Controller{
         $documentImage = $request->file('documentImage');
         $parentDocumentImage = NULL;
 
-        $isUnderage = isset($input['isUnderage']) ? $input['isUnderage'] : 'FALSE';
+        if(!(isset($input['isUnderage']))){
+          $input['isUnderage'] = 'FALSE';
+        }
 
-        if($isUnderage == 'TRUE'){
+        if($input['isUnderage'] == 'TRUE'){
             $parentDocumentImage = $request->file('parentDocumentImage');
         }
 
@@ -87,7 +89,7 @@ class UsersManager extends Controller{
                     [
                         'name' => $documentImage->getClientOriginalName()
                     ])->name();
-                if($isUnderage == 'TRUE'){
+                if($input['isUnderage'] == 'TRUE'){
                     $str2 = $firebase->createStorage()->getBucket()->upload(file_get_contents($parentDocumentImage),
                         [
                             'name' => $parentDocumentImage->getClientOriginalName()
@@ -159,7 +161,6 @@ class UsersManager extends Controller{
         $name = data_get($arrayUser,'name');
         $surname = data_get($arrayUser,'surname');
         $gender = data_get($arrayUser,'gender');
-        $username = data_get($arrayUser,'username');
         $profileImage = data_get($arrayUser,'profileImage');
         $status = data_get($arrayUser,'status');
         $isAdult = data_get($arrayUser,'isAdult');
@@ -216,11 +217,11 @@ class UsersManager extends Controller{
             $parentEmail = data_get($arrayUser,'parentEmail');
             $parentTelephoneNumber = data_get($arrayUser,'parentTelephoneNumber');
 
-            $user = new UserUnderageModel($idDatabase,$name,$surname,$gender,$username,$profileImage,$status,$isAdult,$dateOfBirth,$birthNation,$birthPlace,$residence,$document,$email,$telephoneNumber,$parentName,$parentSurname,$parentGender,$parentDateOfBirth,$parentBirthNation,$parentBirthPlace,$parentResidence,$parentDocument,$parentEmail,$parentTelephoneNumber);
+            $user = new UserUnderageModel($idDatabase,$name,$surname,$gender,$profileImage,$status,$isAdult,$dateOfBirth,$birthNation,$birthPlace,$residence,$document,$email,$telephoneNumber,$parentName,$parentSurname,$parentGender,$parentDateOfBirth,$parentBirthNation,$parentBirthPlace,$parentResidence,$parentDocument,$parentEmail,$parentTelephoneNumber);
 
         }
         else{
-            $user = new UserModel($idDatabase,$name,$surname,$gender,$username,$profileImage,$status,$isAdult,$dateOfBirth,$birthNation,$birthPlace,$residence,$document,$email,$telephoneNumber);
+            $user = new UserModel($idDatabase,$name,$surname,$gender,$profileImage,$status,$isAdult,$dateOfBirth,$birthNation,$birthPlace,$residence,$document,$email,$telephoneNumber);
         }
 
 
@@ -250,7 +251,6 @@ class UsersManager extends Controller{
             'idDatabase' => $user->getIdDatabase(),
             'name' => $user->getName(),
             'surname' => $user->getSurname(),
-            'username' => $user->getUsername(),
             'gender' => $user->getGender(),
             'profileImage' => $user->getProfileImage(),
             'status' => $user->getStatus(),
@@ -312,7 +312,14 @@ class UsersManager extends Controller{
       $profileImage = null;
 
       $status = TRUE;
-      $isUnderage = $input['isUnderage'];
+
+      if($input['isUnderage'] == 'FALSE'){
+        $isAdult = TRUE;
+      }
+      else{
+        $isAdult = FALSE;
+      }
+
 
       $dateOfBirth = $input['dateOfBirth'];
       $birthNation = $input['birthNation'];

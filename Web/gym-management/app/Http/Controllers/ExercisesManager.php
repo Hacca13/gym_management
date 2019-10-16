@@ -79,7 +79,7 @@ class ExercisesManager extends Controller{
 
         $imageDatabase =  "https://firebasestorage.googleapis.com/v0/b/fitandfight.appspot.com/o/". $imageRef ."?alt=media";
 
-        $collection = Firestore::collection('Exercise');
+        $collection = Firestore::collection('Exercises');
 
 
         $id = $collection->add([])->id();
