@@ -2,7 +2,9 @@
 
     <div class="col-md-10">
 
-        <div class="card" style="border-radius: 10px;background-color: rgb(255, 255, 255,0.7);">
+        <div class="card" style="border-radius: 10px;">
+
+            @for($i=0;$i<5;$i++)
             <div class="card-body">
 
                 <div class="row">
@@ -28,16 +30,16 @@
                     </div>
 
 
-                        <a data-toggle="collapse" href="" role="button" aria-expanded="false" aria-controls="">
+                        <a data-toggle="collapse" href="{{'#multiCollapseExample' . $i}}" role="button" aria-expanded="false" aria-controls="{{'multiCollapseExample' . $i}}">
                             <h2>
                                 <i class="mdi mdi-arrow-down-drop-circle" style="color: black"></i>
                             </h2>
                         </a>
                         <div class="col-md-12">
-                            <div class="collapse multi-collapse" id="">
+                            <div class="collapse multi-collapse" id="{{'multiCollapseExample' . $i}}">
                                 <div class="card card-body">
                                     <div class="row justify-content-center">
-                                        @include('components.exercise.exerciseCard')
+                                        @include('components.excercise.excerciseCard')
                                     </div>
                                 </div>
                             </div>
@@ -51,7 +53,7 @@
 
 
             </div>
-
+            @endfor
         </div>
 
     </div>

@@ -94,7 +94,12 @@
                             <input type="text" class="form-control" id="cono1" name="number" required>
                         </div>
                     </div>
-
+                    <div class="form-group row">
+                        <label for="cono1" class="col-sm-3 text-right control-label col-form-label">Immagine</label>
+                        <div class="col-sm-9">
+                            <input type="file" class="form-control" id="cono1" name="profilePicture" required>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="card col-md-6">
@@ -126,12 +131,12 @@
                     <div class="form-group row">
                         <label for="lname" class="col-sm-3 text-right control-label col-form-label">Imagine Documento d'Identità</label>
                         <div class="col-sm-9">
-                            <input type="file" class="form-control" id="lname" name="documentImage" required>
+                            <input type="file" class="form-control" id="lname" name="documentPicture" required>
                         </div>
                     </div>
                     <div class="border-top">
                         <div class="card-body">
-                            <input type="checkbox" onclick="myFunction()" name="isUnderage" value="TRUE"> E' minorenne?</input>
+                            <input type="checkbox" onclick="myFunction()"> E' minorenne?</input>
                         </div>
                     </div>
                 </div>
@@ -176,9 +181,9 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="fname" class="col-sm-3 text-right control-label col-form-label">Città Residenza del Tutore</label>
+                            <label for="fname" class="col-sm-3 text-right control-label col-form-label">Residenza del Tutore</label>
                             <div class="col-sm-9">
-                                <input class="form-control" id="parentResidence" name="parentCityOfResidence">
+                                <input class="form-control" id="parentResidence" name="parentResidence">
                             </div>
                         </div>
                         <div class="form-group row">
@@ -202,7 +207,7 @@
                         <div class="form-group row">
                             <label for="email1" class="col-sm-3 text-right control-label col-form-label">Via</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" id="parentResidenceStreet" name="parentResidenceStreet">
+                                <input type="text" class="form-control" id="parentStreet" name="parentStreet">
                             </div>
                         </div>
 
@@ -216,7 +221,7 @@
                         <div class="form-group row">
                             <label for="cono1" class="col-sm-3 text-right control-label col-form-label">Numero Tutore</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" id="parentTelephoneNumber" name="parentTelephoneNumber">
+                                <input type="tel" class="form-control" id="parentTelephone" name="parentTelephone">
                             </div>
                         </div>
                         <div class="form-group row">

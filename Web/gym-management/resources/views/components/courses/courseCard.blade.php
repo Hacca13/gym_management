@@ -2,7 +2,7 @@
 
     <div class="col-md-10">
 
-        <div class="card" style="border-radius: 10px;background-color: rgb(255, 255, 255,0.7);">
+        <div class="card" style="border-radius: 10px;">
 
 
             <div class="card-body">
@@ -36,7 +36,7 @@
                     </a>
                     <div class="col-md-12">
                         <div class="collapse multi-collapse" id="{{'multiCollapseExample' . $loop->index}}">
-                            <div class="card card-body" style="background-color: transparent;">
+                            <div class="card card-body">
                                 <div class="row justify-content-center">
                                     @include('components.courses.courseInfo')
                                 </div>
