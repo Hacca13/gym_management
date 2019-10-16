@@ -46,7 +46,7 @@ Route::get('/nuovoAbbonamento', function (){
     return view('newSubscription');
 });
 
-Route::get('/prova', function (){
+Route::get('/provaa', function (){
     return view('viewStrap');
 });
 
