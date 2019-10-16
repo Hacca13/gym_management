@@ -15,7 +15,7 @@ Route::get('/', function () {
     return view('index');
 });
 
-Route::get('/corsi', 'CoursesManager@getAllCourses');
+Route::get('/corsi', 'CoursesManager@coursesPage');
 
 Route::get('/getAllUser', 'UserManager@getAllUser');
 

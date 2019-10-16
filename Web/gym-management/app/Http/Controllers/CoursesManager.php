@@ -91,47 +91,39 @@ class CoursesManager extends Controller{
     public function addCourse(Request $request) {
         $input = $request->all();
 
-        $name = 'Zack efron';
+        $days = [];
+
+        for ($i = 0; $i<7; $i++) {
+            if (isset($input['singleDay' . strval($i)])) {
+                array_push($days, [
+                    'day' => $input['singleDay' . strval($i)],
+                    'startTime' => [
+                        'hour' => $input['hourFrom' . strval($i)],
+                        'minutes' => $input['minutesFrom' . strval($i)],
+                    ],
+                    'endTime' => [
+                        'hour' => $input['hourTo' . strval($i)],
+                        'minutes' => $input['minutesTo' . strval($i)],
+                    ]
+                ]);
+            }
+        }
+
+        $name = $input['name'];
         $image = '';
-        $istructor = 'marone';
+        $istructor = $input['instructor'];
         $period = [
-            'startDate' => 'oggi',
-            'endDate' => 'domani'
+            'startDate' => $input['startDate'],
+            'endDate' => $input['endDate']
         ];
-        $weekly = [
-            [
-                'day' => 'lun',
-                'startTime' => [
-                    'hour' => '17',
-                    'minutes' => '17'
-                ],
-                'endTime' => [
-                    'hour' => '17',
-                    'minutes' => '17'
-                ]
-            ],
-            [
-                'day' => 'mar',
-                'startTime' => [
-                    'hour' => '18',
-                    'minutes' => '00'
-                ],
-                'endTime' => [
-                    'hour' => '15',
-                    'minutes' => '17'
-                ]
-            ],
-        ];
-        $userList = [
-            'vjhcbkd',
-            'sjkhankml'
-        ];
+        $weekly = $days;
+        $userList = [];
 
 
         $coll = Firestore::collection('Courses');
         $idDatabase = $coll->add([])->id();
         $corso = new CourseModel(
-            $idDatabase,
+            null,
             $name,
             $image,
             $istructor,
