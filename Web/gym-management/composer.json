@@ -9,9 +9,18 @@
     "license": "MIT",
     "require": {
         "php": "^7.2",
+        "caouecs/laravel-lang": "~4.0",
         "fideloper/proxy": "^4.0",
-        "laravel/framework": "^6.0",
-        "laravel/tinker": "^1.0"
+        "firevel/firestore": "^1.0",
+        "google/cloud": "^0.115.0",
+        "google/cloud-firestore": "^1.9",
+        "grpc/grpc": "^v1.1.0",
+        "joggapp/laravel-google-translate": "^3.0",
+        "kreait/firebase-php": "^4.32",
+        "laravel/framework": "^5.8",
+        "laravel/tinker": "^1.0",
+        "stichoza/google-translate-php": "^4.0",
+        "yoeunes/toastr": "^1.2"
     },
     "require-dev": {
         "facade/ignition": "^1.4",
