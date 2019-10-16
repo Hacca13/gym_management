@@ -119,7 +119,6 @@
                                 <button type="submit" class="btn btn-success">Inserisci Corso</button>
                             </div>
                         </div>
-
                     </div>
                 </form>
             </div>
