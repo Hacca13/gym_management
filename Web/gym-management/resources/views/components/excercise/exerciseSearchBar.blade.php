@@ -11,7 +11,7 @@
                 </div>
             </div>
             <div class="col-md-2" style="text-align: center; margin-top: auto; margin-bottom: auto">
-                <a href="insertExercise" role="button">
+                <a href="nuovoEsercizio" role="button">
                     <button class="bttn-material-circle bttn-md bttn-success">
                         <i class="fas fa-plus"></i>
                     </button>

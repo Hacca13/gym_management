@@ -24,15 +24,15 @@ Route::get('/firetest2', 'Firetest@test2');
 Route::get('/firetest3', 'Firetest@test3');
 Route::get('/esercizi', 'ExercisesManager@exercisePage');
 
-Route::get('/schede', function () {
-    return view('recordCardPage');
+Route::get('/gestioneSchede', function () {
+    return view('TrainingCards');
 });
 
-Route::get('/abbonamenti', function () {
+Route::get('/gestioneAbbonamenti', function () {
     return view('subscriptionPage');
 });
 
-Route::get('/iscritti', function () {
+Route::get('/gestioneIscritti', function () {
     return view('usersPage');
 });
 
@@ -40,7 +40,7 @@ Route::get('/nuovoUtente', function (){
    return view('userAdd');
 });
 
-Route::get('/corsi', 'CoursesManager@coursesPage');
+Route::get('/gestioneCorsi', 'CoursesManager@coursesPage');
 
 Route::get('/nuovoAbbonamento', function (){
     return view('newSubscription');
@@ -60,7 +60,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/insertCourse', function () {
+Route::get('/nuovoCorso', function () {
     return view('insertNewCourse');
 });
 
@@ -68,9 +68,6 @@ Route::get('/nuovoEsercizio', function () {
     return view('insertNewExcercise');
 });
 
-Route::get('/corso', function () {
-    return view('courses');
-});
 
 Route::post('/insertFormCourse', 'CoursesManager@addCourse');
 

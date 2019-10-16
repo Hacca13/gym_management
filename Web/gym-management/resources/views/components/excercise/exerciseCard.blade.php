@@ -34,13 +34,13 @@
 
                 <img src="../images/lombari.png" class="img-fluid" alt="">
 
-                <h3 style="text-align: center; margin-top: 2.5%">{{$ex->getName()}}</h3>
+                <h3 style="text-align: center; margin-top: 2.5%"></h3>
 
-                <p>{{$ex->getDescription()}}</p>
+                <p></p>
 
                 <hr>
 
-                <h4><a href="{{$ex->getLink()}}">{{$ex->getLink()}}</a></h4>
+                <h4><a href=""></a></h4>
 
             </div>
 

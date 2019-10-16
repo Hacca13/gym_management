@@ -9,21 +9,11 @@
                     <h1>Schede</h1>
                 </div>
 
-                @include('components.recordCard.recordCardOption')
+                @include('components.trainingCards.trainingCardsSearchBar')
 
                 <div class="col-md-12">
 
-                    @include('components.recordCard.recordCard')
-
-                </div>
-
-            </div>
-
-            <div class="row justify-content-center">
-
-                <div class="col-md-12">
-
-                    @include('components.recordCard.recordCard')
+                    @include('components.trainingCards.TrainingCardsList')
 
                 </div>
 
