@@ -9,7 +9,7 @@
     <div class="row justify-content-center">
         <div class="col-md-10">
             <div class="card">
-                <form class="form-horizontal" method="post" action="/insertFormCourse">
+                <form class="form-horizontal" method="post" enctype="multipart/form-data" action="/insertFormCourse">
                     @csrf
                     <div class="card-body">
                         <h4 class="card-title">Inserisci Informazione Corso</h4>
@@ -111,7 +111,7 @@
                         <div class="form-group row">
                             <label for="fname" class="col-sm-3 text-right control-label col-form-label">Immagine del Corso</label>
                             <div class="col-sm-9">
-                                <input type="file" class="form-control" id="fname" name="image">
+                                <input type="file" class="form-control" id="courseImage" name="courseImage">
                             </div>
                         </div>
                         <div class="border-top">

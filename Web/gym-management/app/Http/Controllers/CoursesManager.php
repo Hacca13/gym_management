@@ -5,8 +5,10 @@ use Google\Cloud\Firestore\FirestoreClient;
 use Firevel\Firestore\Facades\Firestore;
 use Illuminate\Http\Request;
 use App\Http\Models\CourseModel;
+use Illuminate\Support\Facades\Storage;
+use Spatie\LaravelImageOptimizer\Facades\ImageOptimizer;
 use Stichoza\GoogleTranslate\GoogleTranslate;
-use Kreait\Firebase\Factory;
+use Kreait\Firebase;
 
 class CoursesManager extends Controller{
 
@@ -91,6 +93,21 @@ class CoursesManager extends Controller{
     public function addCourse(Request $request) {
         $input = $request->all();
 
+        $uploadedImage = $request->file('courseImage');
+
+        $firebase = (new Firebase\Factory());
+
+        $bucket = $firebase->createStorage()->getBucket();
+
+        $name = $input['name'] . '.' . $uploadedImage->getClientOriginalExtension();
+
+        $str = $bucket->upload(file_get_contents($uploadedImage),
+            [
+                'name' => $name
+            ])->name();
+
+        $documentImage =  "https://firebasestorage.googleapis.com/v0/b/fitandfight.appspot.com/o/". $str ."?alt=media";
+
         $days = [];
 
         for ($i = 0; $i<7; $i++) {
@@ -110,7 +127,6 @@ class CoursesManager extends Controller{
         }
 
         $name = $input['name'];
-        $image = '';
         $istructor = $input['instructor'];
         $period = [
             'startDate' => $input['startDate'],
@@ -121,17 +137,17 @@ class CoursesManager extends Controller{
 
 
         $coll = Firestore::collection('Courses');
-        $idDatabase = $coll->add([])->id();
+
         $corso = new CourseModel(
             null,
             $name,
-            $image,
+            $documentImage,
             $istructor,
             $period,
             $weekly,
             $userList
         );
-        $coll->document($idDatabase)->set(CoursesManager::trasformCourseToArrayCourse($corso));
+        $coll->add(CoursesManager::trasformCourseToArrayCourse($corso));
 
         toastr()->success('Corso inserito');
         return redirect('/corsi');
