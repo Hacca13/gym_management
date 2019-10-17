@@ -12,7 +12,7 @@ class UserModel
   protected $name;
   protected $surname;
   protected $gender ;
-  protected $profileImage;
+  protected $profileP;
   protected $status;
   protected $isAdult;
   protected $dateOfBirth;
@@ -45,7 +45,7 @@ class UserModel
     $this->name = $name;
     $this->surname = $surname;
     $this->gender = $gender;
-    $this->profilePicture = $profileImage ;
+    $this->profileImage = $profileImage ;
     $this->status = $status;
     $this->isAdult = $isAdult;
     $this->dateOfBirth = $dateOfBirth;
@@ -172,25 +172,25 @@ class UserModel
 
 
     /**
-     * Get the value of Profile Picture
+     * Get the value of Profile Image
      *
      * @return mixed
      */
-    public function getProfilePicture()
+    public function getProfileImage()
     {
-        return $this->profilePicture;
+        return $this->profileImage;
     }
 
     /**
-     * Set the value of Profile Picture
+     * Set the value of Profile Image
      *
-     * @param mixed profilePicture
+     * @param mixed profileImage
      *
      * @return self
      */
-    public function setProfilePicture($profileImage)
+    public function setProfileImage($profileImage)
     {
-        $this->profilePicture = $profileImage;
+        $this->profileImage = $profileImage;
 
         return $this;
     }

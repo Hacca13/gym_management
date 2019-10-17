@@ -578,16 +578,16 @@
         },
         {
             "name": "giggsey/libphonenumber-for-php",
-            "version": "8.10.20",
+            "version": "8.10.21",
             "source": {
                 "type": "git",
                 "url": "https://github.com/giggsey/libphonenumber-for-php.git",
-                "reference": "aed1229bef97cd4abc6f67cbc064cf832d259327"
+                "reference": "04d0228908237931bc1d9c841e3380991055a7e6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/giggsey/libphonenumber-for-php/zipball/aed1229bef97cd4abc6f67cbc064cf832d259327",
-                "reference": "aed1229bef97cd4abc6f67cbc064cf832d259327",
+                "url": "https://api.github.com/repos/giggsey/libphonenumber-for-php/zipball/04d0228908237931bc1d9c841e3380991055a7e6",
+                "reference": "04d0228908237931bc1d9c841e3380991055a7e6",
                 "shasum": ""
             },
             "require": {
@@ -642,7 +642,7 @@
                 "phonenumber",
                 "validation"
             ],
-            "time": "2019-10-02T20:06:44+00:00"
+            "time": "2019-10-16T11:25:36+00:00"
         },
         {
             "name": "giggsey/locale",
@@ -2277,16 +2277,16 @@
         },
         {
             "name": "nesbot/carbon",
-            "version": "2.25.1",
+            "version": "2.25.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/briannesbitt/Carbon.git",
-                "reference": "d59c6cea9c4a3547bb6c0dfec451319abdaa4fb1"
+                "reference": "443fe5f1498147e0fbc792142b5dc43e2e8a533f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/d59c6cea9c4a3547bb6c0dfec451319abdaa4fb1",
-                "reference": "d59c6cea9c4a3547bb6c0dfec451319abdaa4fb1",
+                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/443fe5f1498147e0fbc792142b5dc43e2e8a533f",
+                "reference": "443fe5f1498147e0fbc792142b5dc43e2e8a533f",
                 "shasum": ""
             },
             "require": {
@@ -2340,7 +2340,7 @@
                 "datetime",
                 "time"
             ],
-            "time": "2019-10-05T15:52:23+00:00"
+            "time": "2019-10-14T14:18:59+00:00"
         },
         {
             "name": "nikic/php-parser",
