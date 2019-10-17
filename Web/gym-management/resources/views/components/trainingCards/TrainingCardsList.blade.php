@@ -37,7 +37,7 @@
                             <div class="collapse multi-collapse" id="">
                                 <div class="card card-body">
                                     <div class="row justify-content-center">
-                                        @include('components.exercise.exerciseCard')
+                                        @include('components.excercise.exerciseCard')
                                     </div>
                                 </div>
                             </div>

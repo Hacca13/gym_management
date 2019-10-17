@@ -97,7 +97,14 @@
 <script src="../matrix-admin-bt4/dist/js/pages/chart/chart-page-init.js"></script>
 <script>
     function myFunction() {
-        myFunction1();
+
+        var x = document.getElementById("myDiv");
+        if (x.style.display === "block") {
+            x.style.display = "none";
+        } else {
+            x.style.display = "block";
+        }
+
         var x = document.getElementById("myDIV");
         let inputs = [
             document.getElementById('parentName'),
@@ -130,15 +137,7 @@
 
         }
     }</script>
-<script>
-    function myFunction1() {
-        var x = document.getElementById("myDiv");
-        if (x.style.display === "block") {
-            x.style.display = "none";
-        } else {
-            x.style.display = "block";
-        }
-    }</script>
+
 
 <script>
     Filevalidation = () => {
