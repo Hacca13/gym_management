@@ -26,5 +26,5 @@
     </div>
 </div><!--E ANCHE QUESTO ID-->
 <div class="collapse multi-collapse" id="multiCollapseExample3">
-    @include('components.excercise.descriptionEx')
+    @include('components.exercise.descriptionEx')
 </div>

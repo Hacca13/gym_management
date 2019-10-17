@@ -26,6 +26,7 @@ Route::get('/firetest3', 'Firetest@test3');
 //Route::get('/esercizi', 'ExercisesManager@exercisePage');
 Route::post('/insertFormExercise', 'ExercisesManager@addExercise');
 
+
 Route::get('/gestioneEsercizi', function () {
     return view('exercisePage');
 });
@@ -38,7 +39,7 @@ Route::get('/modificaEsercizio', function (){
     return view('changeEx');
 });
 
-
+Route::get('/nuovaSched', 'TrainingCardsManager@exercisePage');
 
 
 //UTENTI
