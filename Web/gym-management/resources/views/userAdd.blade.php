@@ -23,7 +23,7 @@
                     <div class="form-group row">
                         <label for="fname" class="col-sm-3 text-right control-label col-form-label">E-mail</label>
                         <div class="col-sm-9">
-                            <input type="email" class="form-control" id="fname" name="email" required>
+                            <input type="email" class="form-control" id="email" name="email" required>
                         </div>
                     </div>
 
@@ -37,7 +37,7 @@
                     <div class="form-group row">
                         <label for="fname" class="col-sm-3 text-right control-label col-form-label">Data di Nascita</label>
                         <div class="col-sm-9">
-                            <input type="date" class="form-control" id="fname" name="dateOfBirth" required>
+                            <input type="date" class="form-control" id="dateOfBirth" name="dateOfBirth" required>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -54,8 +54,12 @@
                     </div>
                     <div class="form-group row">
                         <label for="fname" class="col-sm-3 text-right control-label col-form-label">Sesso</label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" id="fname" name="gender" required>
+                        <div class="col-sm-2">
+                            <input type="radio" class="form-control" id="fname" name="gender" required>
+                            <label>Uomo</label>
+                            <input type="radio" class="form-control" id="fname" name="gender" required>
+                            <label>Donna</label>
+
                         </div>
                     </div>
                     <div class="form-group row">
@@ -126,18 +130,12 @@
                     <div class="form-group row">
                         <label for="lname" class="col-sm-3 text-right control-label col-form-label">Imagine Documento d'Identità</label>
                         <div class="col-sm-9">
-                            <input type="file" class="form-control" id="lname" name="documentImage" required>
-                        </div>
-                    </div>
-                    <div class="border-top">
-                        <div class="card-body">
-                            <input type="checkbox" onclick="myFunction()" name="isUnderage" value="TRUE"> E' minorenne?</input>
+                            <input type="file" class="form-control" id="documentImage" name="documentImage" onchange="Filevalidation()" required>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
         <!-- PARENT FORM -->
 
         <div class="row">
@@ -247,12 +245,6 @@
                             <label for="cono1" class="col-sm-3 text-right control-label col-form-label">Data di Rilascio</label>
                             <div class="col-sm-9">
                                 <input type="date" class="form-control" id="parentDocumentReleaseDate" name="parentDocumentReleaseDate">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="cono1" class="col-sm-3 text-right control-label col-form-label">Rilasciato Da</label>
-                            <div class="col-sm-9">
-                                <input type="text" class="form-control" id="parentDocumentReleaser" name="parentDocumentReleaser">
                             </div>
                         </div>
                     </div>
