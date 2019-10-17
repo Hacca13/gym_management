@@ -47,6 +47,12 @@
                             </div>
                         </div>
                         <div class="form-group row">
+                            <div class="col-sm-6">
+                                <label for="fname" class="col-sm-12 text-left control-label col-form-label">L'esercizio è a tempo?</label>
+                                <input type="checkbox" class="form-control" id="exerciseIsATime" name="exerciseIsATime" style="border-radius: 10px; background-color: rgb(255, 255, 255,0.7);" value="TRUE" >
+                            </div>
+                        </div>
+                        <div class="form-group row">
                             <div class="col-sm-9">
                                 <input type='submit' class="btn btn-success" id="fname" name="" style="border-radius: 10px;">
                             </div>
