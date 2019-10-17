@@ -69,8 +69,7 @@ class UsersManager extends Controller{
 
     public static function createUser(Request $request){
         $input = $request->all();
-        $documentImage = $request->file('documentImage');
-        $parentDocumentImage = NULL;
+        $documentImage = $request->file('documentPicture');
 
         if(!(isset($input['isUnderage']))){
           $input['isUnderage'] = 'FALSE';
@@ -84,7 +83,6 @@ class UsersManager extends Controller{
 
         $firebase = (new Firebase\Factory());
 
-
                 $str = $firebase->createStorage()->getBucket()->upload(file_get_contents($documentImage),
                     [
                         'name' => $documentImage->getClientOriginalName()
@@ -95,33 +93,59 @@ class UsersManager extends Controller{
                             'name' => $parentDocumentImage->getClientOriginalName()
                         ])->name();
 
-                    $parentDocumentImage =  "https://firebasestorage.googleapis.com/v0/b/fitandfight.appspot.com/o/". $str2 ."?alt=media";
-                }
-
-                $documentImage =  "https://firebasestorage.googleapis.com/v0/b/fitandfight.appspot.com/o/". $str ."?alt=media";
+                $documentPicture =  "https://firebasestorage.googleapis.com/v0/b/fitandfight.appspot.com/o/". $str ."?alt=media";
 
                 $collection = Firestore::collection('Users');
 
         try {
             $uid = $firebase->createAuth()->createUserWithEmailAndPassword($input['email'], $input['password'])->uid;
 
-            $fireUser = UsersManager::trasformRequestIntoUser($uid, $input, $documentImage, $parentDocumentImage);
+            $fireUser = new UserModel(
+                $uid,
+                $input['name'],
+                $input['surname'],
+                $input['gender'],
+                $input['email'],
+                null, //profilePic
+                true, //status
+                true, //isAdult
+
+                $input['dateOfBirth'],
+                $input['birthNation'],
+                $input['birthPlace'],
+                [
+                    'nation' => $input['nation'],
+                    'cityOfResidence' => $input['cityOfResidence'],
+                    'cap' => $input['cap'],
+                    'street' => $input['street'],
+                    'number' => $input['number']
+                ],
+                [
+                    'documentImage' => $documentPicture,
+                    'type' => $input['documentType'],
+                    'number' => $input['documentNumber'],
+                    'released' => $input['releaserDocument'],
+                    'releaseDate' => $input['releaseDateDocument'],
+                ],
+                $input['email'],
+                $input['telephone']
+            );
 
             $uploadUser = UsersManager::transformUserIntoArrayUser($fireUser);
             $collection->document($uid)->set($uploadUser);
 
             toastr()->success('Utente registrato');
-            return redirect('/nuovoUtente');
+            return redirect('/addUser');
 
         } catch (AuthException $e) {
 
             toastr()->error($tr->translate($e->getMessage()));
-            return redirect('/nuovoUtente');
+            return redirect('/addUser');
 
         } catch (FirebaseException $e) {
 
             toastr()->error($tr->translate($e->getMessage()));
-            return redirect('/nuovoUtente');
+            return redirect('/addUser');
         }
 
     }
@@ -252,7 +276,7 @@ class UsersManager extends Controller{
             'name' => $user->getName(),
             'surname' => $user->getSurname(),
             'gender' => $user->getGender(),
-            'profileImage' => $user->getProfileImage(),
+            'profilePicture' => $user->getProfilePicture(),
             'status' => $user->getStatus(),
             'isAdult' => $user->getIsAdult(),
             'dateOfBirth' => $user->getDateOfBirth(),
