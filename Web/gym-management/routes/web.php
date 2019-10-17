@@ -93,4 +93,3 @@ Auth::routes();
 Route::get('/provaa', function (){
     return view('viewStrap');
 });
-
