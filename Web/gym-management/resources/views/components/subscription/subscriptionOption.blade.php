@@ -37,13 +37,6 @@
                             </a>
                         </div>
                     </div>
-                    <div class="col-md-2">
-                        <a href="nuovoAbbonamento" role="button">
-                            <button class="bttn-material-circle bttn-md bttn-success">
-                                <i class="fas fa-plus"></i>
-                            </button>
-                        </a>
-                    </div>
                 </div>
             </div>
         </div>

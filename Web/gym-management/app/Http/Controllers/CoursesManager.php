@@ -5,8 +5,10 @@ use Google\Cloud\Firestore\FirestoreClient;
 use Firevel\Firestore\Facades\Firestore;
 use Illuminate\Http\Request;
 use App\Http\Models\CourseModel;
+use Illuminate\Support\Facades\Storage;
+use Spatie\LaravelImageOptimizer\Facades\ImageOptimizer;
 use Stichoza\GoogleTranslate\GoogleTranslate;
-use Kreait\Firebase\Factory;
+use Kreait\Firebase;
 
 class CoursesManager extends Controller{
 
@@ -91,55 +93,61 @@ class CoursesManager extends Controller{
     public function addCourse(Request $request) {
         $input = $request->all();
 
-        $name = 'Zack efron';
-        $image = '';
-        $istructor = 'marone';
+        $uploadedImage = $request->file('courseImage');
+
+        $firebase = (new Firebase\Factory());
+
+        $bucket = $firebase->createStorage()->getBucket();
+
+        $name = $input['name'] . '.' . $uploadedImage->getClientOriginalExtension();
+
+        $str = $bucket->upload(file_get_contents($uploadedImage),
+            [
+                'name' => $name
+            ])->name();
+
+        $documentImage =  "https://firebasestorage.googleapis.com/v0/b/fitandfight.appspot.com/o/". $str ."?alt=media";
+
+        $days = [];
+
+        for ($i = 0; $i<7; $i++) {
+            if (isset($input['singleDay' . strval($i)])) {
+                array_push($days, [
+                    'day' => $input['singleDay' . strval($i)],
+                    'startTime' => [
+                        'hour' => $input['hourFrom' . strval($i)],
+                        'minutes' => $input['minutesFrom' . strval($i)],
+                    ],
+                    'endTime' => [
+                        'hour' => $input['hourTo' . strval($i)],
+                        'minutes' => $input['minutesTo' . strval($i)],
+                    ]
+                ]);
+            }
+        }
+
+        $name = $input['name'];
+        $istructor = $input['instructor'];
         $period = [
-            'startDate' => 'oggi',
-            'endDate' => 'domani'
+            'startDate' => $input['startDate'],
+            'endDate' => $input['endDate']
         ];
-        $weekly = [
-            [
-                'day' => 'lun',
-                'startTime' => [
-                    'hour' => '17',
-                    'minutes' => '17'
-                ],
-                'endTime' => [
-                    'hour' => '17',
-                    'minutes' => '17'
-                ]
-            ],
-            [
-                'day' => 'mar',
-                'startTime' => [
-                    'hour' => '18',
-                    'minutes' => '00'
-                ],
-                'endTime' => [
-                    'hour' => '15',
-                    'minutes' => '17'
-                ]
-            ],
-        ];
-        $userList = [
-            'vjhcbkd',
-            'sjkhankml'
-        ];
+        $weekly = $days;
+        $userList = [];
 
 
         $coll = Firestore::collection('Courses');
-        $idDatabase = $coll->add([])->id();
+
         $corso = new CourseModel(
-            $idDatabase,
+            null,
             $name,
-            $image,
+            $documentImage,
             $istructor,
             $period,
             $weekly,
             $userList
         );
-        $coll->document($idDatabase)->set(CoursesManager::trasformCourseToArrayCourse($corso));
+        $coll->add(CoursesManager::trasformCourseToArrayCourse($corso));
 
         toastr()->success('Corso inserito');
         return redirect('/corsi');

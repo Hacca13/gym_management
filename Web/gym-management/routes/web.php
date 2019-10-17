@@ -15,60 +15,81 @@ Route::get('/', function () {
     return view('index');
 });
 
-Route::get('/corsi', 'CoursesManager@getAllCourses');
-
-Route::get('/getAllUser', 'UserManager@getAllUser');
+Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/firetest', 'Firetest@test');
 Route::get('/firetest2', 'Firetest@test2');
 Route::get('/firetest3', 'Firetest@test3');
-Route::get('/esercizi', 'ExercisesManager@exercisePage');
 
-Route::get('/gestioneSchede', function () {
-    return view('TrainingCards');
-});
 
-Route::get('/gestioneAbbonamenti', function () {
-    return view('subscriptionPage');
-});
+//ESERCIZI
+//Route::get('/esercizi', 'ExercisesManager@exercisePage');
+Route::post('/insertFormExercise', 'ExercisesManager@addExercise');
 
-Route::get('/gestioneIscritti', function () {
-    return view('usersPage');
-});
-
-Route::get('/nuovoUtente', function (){
-   return view('userAdd');
-});
-
-Route::get('/gestioneCorsi', 'CoursesManager@coursesPage');
-
-Route::get('/nuovoAbbonamento', function (){
-    return view('newSubscription');
-});
-
-Route::get('/prova', function (){
-    return view('viewStrap');
-});
-
-Route::get('/nuovaScheda', function (){
-    return view('newCard');
-});
-
-Route::post('/addUserPost', 'UsersManager@createUser');
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-
-Route::get('/nuovoCorso', function () {
-    return view('insertNewCourse');
+Route::get('/gestioneEsercizi', function () {
+    return view('exercisePage');
 });
 
 Route::get('/nuovoEsercizio', function () {
     return view('insertNewExcercise');
 });
 
+Route::get('/modificaEsercizio', function (){
+    return view('changeEx');
+});
 
+
+
+
+//UTENTI
+Route::get('/getAllUser', 'UserManager@getAllUser');
+Route::post('/addUserPost', 'UsersManager@createUser');
+
+Route::get('/nuovoUtente', function (){
+    return view('userAdd');
+});
+
+Route::get('/gestioneIscritti', function () {
+    return view('usersPage');
+});
+
+
+
+
+//ABBONAMENTI
+Route::get('/gestioneAbbonamenti', function () {
+    return view('subscriptionPage');
+});
+
+Route::get('/nuovoAbbonamento', function (){
+    return view('newSubscription');
+});
+
+
+
+//SCHEDA
+Route::get('/nuovaScheda', function (){
+    return view('newCard');
+});
+
+Route::get('/gestioneSchede', function () {
+    return view('trainingCards');
+});
+
+
+
+//CORSI
+Route::get('/corsi', 'CoursesManager@getAllCourses');
 Route::post('/insertFormCourse', 'CoursesManager@addCourse');
+Route::get('/gestioneCorsi', 'CoursesManager@coursesPage');
 
-Route::post('/insertFormExercise', 'ExercisesManager@addExercise');
+Route::get('/nuovoCorso', function () {
+    return view('insertNewCourse');
+});
+
+Auth::routes();
+
+Route::get('/provaa', function (){
+    return view('viewStrap');
+});
+
