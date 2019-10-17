@@ -31,7 +31,7 @@ Route::get('/gestioneEsercizi', function () {
 });
 
 Route::get('/nuovoEsercizio', function () {
-    return view('insertNewExcercise');
+    return view('insertNewExercise');
 });
 
 Route::get('/modificaEsercizio', function (){
@@ -92,4 +92,3 @@ Auth::routes();
 Route::get('/provaa', function (){
     return view('viewStrap');
 });
-
