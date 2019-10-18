@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Kreait\Firebase\Exception\AuthException;
 use Kreait\Firebase\Exception\FirebaseException;
 use Kreait\Firebase;
+use App\Http\Controllers\CoursesManager;
 use Firevel\Firestore\Facades\Firestore;
 use App\Http\Models\UserModels\UserModel;
 use App\Http\Models\UserModels\UserUnderageModel;
@@ -31,7 +32,17 @@ class UsersManager extends Controller{
 
     public function getAllUserForView(){
       $users = UsersManager::getAllUser();
-      return view('usersPage', compact('users'));
+      $coursesForUsers = array();
+
+      $coursesForUser  = array();
+      foreach ($users as $user) {
+        $coursesForUser = CoursesManager::theUserForWhichCourseIsRegistered($user->getIdDatabase());
+        $userIdAndCourse = array(
+          'idUser' => $user->getIdDatabase(),
+          'courses'  => $coursesForUser );
+        $coursesForUsers = $coursesForUsers + $userIdAndCourse;
+      }
+      return view('usersPage', compact('users','coursesForUsers'));
     }
 
     public static function getUsersByUsername($username){
