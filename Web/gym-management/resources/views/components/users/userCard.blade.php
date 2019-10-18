@@ -27,10 +27,17 @@
                       <?php
 
                         foreach ($coursesForUsers as $coursesForUser) {
-                            if($user->getIdDatabase() == data_get($coursesForUser,'idUser')){
+
+                            if(data_get($coursesForUser,'idUser') == $user->getIdDatabase()){
+                                if(count(data_get($coursesForUser,'courses')) != 0){
+                                  $courses = data_get($coursesForUser,'courses');
                               ?>
-pippo
+                                I corsi a cui partecipa sono:
+                                  <?php foreach ($courses as $course): ?>
+                                      {{$course->getName()}}
+                                  <?php endforeach; ?>
                               <?php
+                              }
                             }
                         }
                        ?>

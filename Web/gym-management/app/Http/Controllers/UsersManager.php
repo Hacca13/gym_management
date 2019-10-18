@@ -40,7 +40,7 @@ class UsersManager extends Controller{
         $userIdAndCourse = array(
           'idUser' => $user->getIdDatabase(),
           'courses'  => $coursesForUser );
-        $coursesForUsers = $coursesForUsers + $userIdAndCourse;
+        array_push($coursesForUsers,$userIdAndCourse);
       }
       return view('usersPage', compact('users','coursesForUsers'));
     }
