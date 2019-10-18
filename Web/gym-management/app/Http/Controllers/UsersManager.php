@@ -29,6 +29,11 @@ class UsersManager extends Controller{
     }
 
 
+    public function getAllUserForView(){
+      $users = UsersManager::getAllUser();
+      return view('usersPage', compact('users'));
+    }
+
     public static function getUsersByUsername($username){
         $users = array();
         $collection = Firestore::collection('Users');
@@ -92,7 +97,7 @@ class UsersManager extends Controller{
                         [
                             'name' => $parentDocumentImage->getClientOriginalName()
                         ])->name();
-
+                }
                 $documentPicture =  "https://firebasestorage.googleapis.com/v0/b/fitandfight.appspot.com/o/". $str ."?alt=media";
 
                 $collection = Firestore::collection('Users');
