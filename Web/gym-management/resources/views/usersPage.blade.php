@@ -8,10 +8,7 @@
         </div>
         <div class="col-md-12" style="margin-top: 2.5%">
             @include('components.users.usersOption')
-            <?php
-
-          var_dump($coursesForUsers);
-                    ?>
+            
             @foreach($users as $user)
                 @include('components.users.userCard')
             @endforeach
