@@ -24,25 +24,26 @@ Route::get('/firetest3', 'Firetest@test3');
 
 //ESERCIZI
 //Route::get('/esercizi', 'ExercisesManager@exercisePage');
-Route::post('/insertExercisePost', 'ExercisesManager@addExercise');
+Route::post('/insertFormExercise', 'ExercisesManager@addExercise');
 
-Route::get('/gestioneEsercizi', 'ExercisesManager@exercisePage');
 
+Route::get('/gestioneEsercizi', function () {
+    return view('exercisePage');
+});
 
 Route::get('/nuovoEsercizio', function () {
     return view('insertNewExercise');
 });
 
-
 Route::get('/modificaEsercizio', function (){
     return view('changeEx');
 });
 
-
+Route::get('/nuovaSched', 'TrainingCardsManager@exercisePage');
 
 
 //UTENTI
-
+Route::get('/getAllUser', 'UserManager@getAllUser');
 Route::post('/addUserPost', 'UsersManager@createUser');
 
 Route::get('/nuovoUtente', function (){
