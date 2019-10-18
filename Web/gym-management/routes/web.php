@@ -42,16 +42,15 @@ Route::get('/modificaEsercizio', function (){
 
 
 //UTENTI
-Route::get('/getAllUser', 'UserManager@getAllUser');
+
 Route::post('/addUserPost', 'UsersManager@createUser');
 
 Route::get('/nuovoUtente', function (){
     return view('userAdd');
 });
 
-Route::get('/gestioneIscritti', function () {
-    return view('usersPage');
-});
+Route::get('/gestioneIscritti', 'UsersManager@getAllUserForView');
+
 
 
 
