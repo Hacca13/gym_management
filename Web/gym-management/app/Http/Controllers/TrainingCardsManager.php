@@ -21,29 +21,6 @@ class TrainingCardsManager extends Controller
       return $allTrainingCards;
     }
 
-    public static function createTrainingCards(Request $request){
-      $input = $request->all();
-      $collection = Firestore::collection('TrainingCards');
-
-      try {
-        $trainingCard = TrainingCardsManager::trasformRequestIntoTrainingCards($input);
-        $arrayTrainingCard = TrainingCardsManager::transformTrainingCardsIntoArrayTrainingCards($trainingCard);
-        $collection->add($arrayTrainingCard);
-        toastr()->success('Scheda inserita con successo.');
-        return redirect('/nuovaScheda');
-
-      } catch (FirebaseException $e) {
-
-          toastr()->error($tr->translate($e->getMessage()));
-          return redirect('/nuovaScheda');
-      }
-    }
-
-    private static function trasformRequestIntoTrainingCards($input){
-      //fgsfgsdfg
-
-    }
-
     public static function transformTrainingCardsIntoArrayTrainingCards($trainingCards){
       $idDatabase = $trainingCards->getIdDatabase();
       $idUserDatabase = $trainingCards->getIdUserDatabase();
@@ -70,6 +47,4 @@ class TrainingCardsManager extends Controller
 
       return $trainingCards;
     }
-
-
 }

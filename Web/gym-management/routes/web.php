@@ -24,14 +24,13 @@ Route::get('/firetest3', 'Firetest@test3');
 
 //ESERCIZI
 //Route::get('/esercizi', 'ExercisesManager@exercisePage');
-Route::post('/insertFormExercise', 'ExercisesManager@addExercise');
+Route::post('/insertExercisePost', 'ExercisesManager@addExercise');
 
-Route::get('/gestioneEsercizi', function () {
-    return view('exercisePage');
-});
+Route::get('/gestioneEsercizi', 'ExercisesManager@exercisePage');
+
 
 Route::get('/nuovoEsercizio', function () {
-    return view('insertNewExcercise');
+    return view('insertNewExercise');
 });
 
 Route::get('/modificaEsercizio', function (){
@@ -92,4 +91,3 @@ Auth::routes();
 Route::get('/provaa', function (){
     return view('viewStrap');
 });
-

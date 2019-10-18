@@ -11,20 +11,15 @@
     </div>
 </div>
 <div class="card-body">
-    <img src="../images/lombari.png" class="img-fluid" alt="">
+    <img src="{{$exercise->getGif()}}" class="img-fluid" alt="">
     <h3 style="text-align: center; margin-top: 2.5%"></h3>
     <hr>
 </div>
 <div class="row">
     <div class="col-md-12 text-center">
-        <h3>CRISTONE</h3>
+        <h3>{{$exercise->getName()}}</h3>
     </div>
     <div class="col-md-12 text-center"><!--CAMBIARE QUESTO HREF-->
-        <a data-toggle="collapse" href="#multiCollapseExample3" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">
-                <h5 style="text-align: center">Info <i class="fa fa-angle-downphp"></i></h5>
-        </a>
+        @include('components.exercise.descriptionExercise')
     </div>
-</div><!--E ANCHE QUESTO ID-->
-<div class="collapse multi-collapse" id="multiCollapseExample3">
-    @include('components.excercise.descriptionEx')
 </div>

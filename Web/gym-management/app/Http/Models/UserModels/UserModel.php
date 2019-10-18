@@ -39,7 +39,7 @@ class UserModel
   protected $email;
   protected $telephoneNumber;
 
-  public function __construct($idDatabase,$name,$surname,$gender,$profileImage,$status,$isAdult,$dateOfBirth,$birthNation,$birthPlace,$residence,$document,$email,$telephoneNumber){
+  public function __construct($idDatabase,$name,$surname,$gender,$username,$profilePicture,$status,$isAdult,$dateOfBirth,$birthNation,$birthPlace,$residence,$document,$email,$telephoneNumber){
 
     $this->idDatabase = $idDatabase;
     $this->name = $name;
@@ -170,6 +170,15 @@ class UserModel
         return $this;
     }
 
+    /**
+     * Get the value of Username
+     *
+     * @return mixed
+     */
+    public function getUsername()
+    {
+        return $this->username;
+    }
 
     /**
      * Get the value of Profile Image

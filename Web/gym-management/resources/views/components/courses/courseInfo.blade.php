@@ -16,7 +16,7 @@
             </div>
         </div>
         <form class="form-horizontal" method="get">
-        <div class="card-body" style="background-color: transparent;">
+        <div class="card-body">
             <div class="form-group row">
                 <label for="fname" class="col-sm-3 text-right control-label col-form-label">Nome Corso</label>
                 <div class="col-sm-9">

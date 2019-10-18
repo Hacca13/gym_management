@@ -21,7 +21,7 @@
                     </a>
                     <div class="col-md-12">
                         <div class="collapse multi-collapse" id="{{'multiCollapseExample' . $loop->index}}">
-                            <div class="card card-body" style="background-color: transparent;">
+                            <div class="card card-body">
                                 <div class="row justify-content-center">
                                     @include('components.courses.courseInfo')
                                 </div>

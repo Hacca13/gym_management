@@ -67,8 +67,14 @@ class ExercisesManager extends Controller{
 
     public function addExercise(Request $request) {
         $input = $request->all();
-        $exerciseImage = $request->file('image');
+        $exerciseImage = $request->file('imageExercise');
 
+        if(isset($input['exerciseIsATime']) == FALSE){
+          $input['exerciseIsATime'] = FALSE;
+        }
+        else{
+          $input['exerciseIsATime'] = TRUE;
+        }
 
         $firebase = (new Firebase\Factory());
 
@@ -85,20 +91,19 @@ class ExercisesManager extends Controller{
         $id = $collection->add([])->id();
         $exercise = new ExerciseModel(
             $id,
-            $input['name'],
-            $input['description'],
+            $input['nameExercise'],
+            $input['descriptionExercise'],
             $input['exerciseIsATime'],
             $imageDatabase,
-            $input['link']
+            $input['linkExercise']
         );
 
         $collection->document($id)->set(ExercisesManager::trasformExerciseToArrayExercise($exercise));
 
         toastr()->success('Esercizio inserito');
-        return redirect('esercizi');
+        return redirect('gestioneEsercizi');
 
     }
-
 
     public function exercisePage() {
         $exercises = ExercisesManager::getAllExercises();
