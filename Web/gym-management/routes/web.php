@@ -33,6 +33,7 @@ Route::get('/nuovoEsercizio', function () {
     return view('insertNewExercise');
 });
 
+
 Route::get('/modificaEsercizio', function (){
     return view('changeEx');
 });
