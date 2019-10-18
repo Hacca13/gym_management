@@ -1,4 +1,5 @@
 @extends('layouts.master')
+
 @section('content')
     <div class="row justify-content-center">
         <div class="col-md-10">
@@ -6,7 +7,7 @@
                 <div class="card-header">
                     <div class="row">
                         <div class="col-md-8" style="text-align: left">
-                            <h4>Modifica esercizio</h4>
+                            <h4>Inserisci Eserizio</h4>
                         </div>
                         <div class="col-md-4" style="text-align: end">
                             <!--Pagina precedente-->
@@ -18,11 +19,11 @@
                 </div>
                 <div class="card-body">
                     <form action="/insertFormExercise" method="post" enctype="multipart/form-data">
-                        @csrf
+                    @csrf
                         <div class="form-group row">
                             <div class="col-sm-6">
                                 <label for="fname" class="col-sm-12 text-left control-label col-form-label">Nome Esercizio</label>
-                                <input type="text" class="form-control" placeholder="#" id="fname" name="name" style="border-radius: 10px;background-color: rgb(255, 255, 255,0.7);">
+                                <input type="text" class="form-control" id="fname" name="name" style="border-radius: 10px;background-color: rgb(255, 255, 255,0.7);">
                             </div>
                             <div class="col-md-6">
 
@@ -31,17 +32,18 @@
                         <div class="form-group row">
                             <div class="col-sm-6">
                                 <label for="fname" class="col-sm-12 text-left control-label col-form-label">Descrizione</label>
-                                <textarea  class="form-control" placeholder="#" id="fname" name="description" rows="5" style="border-radius: 10px;background-color: rgb(255, 255, 255,0.7);"></textarea>
+                                <textarea  class="form-control" id="fname" name="description" rows="5" style="border-radius: 10px;background-color: rgb(255, 255, 255,0.7);"></textarea>
                             </div>
                             <div class="col-md-6">
                                 <label for="fname" class="col-sm-12 text-left control-label col-form-label">Carica Gif</label>
                                 <input type="file" class="form-control" id="fname" name="image" style="border-radius: 10px;background-color: rgb(255, 255, 255,0.7);">
                             </div>
+
                         </div>
                         <div class="form-group row">
                             <div class="col-sm-6">
                                 <label for="fname" class="col-sm-12 text-left control-label col-form-label">Link esercizio</label>
-                                <input class="form-control" placeholder="#" id="fname" name="link" style="border-radius: 10px; background-color: rgb(255, 255, 255,0.7);">
+                                <input class="form-control" id="fname" name="link" style="border-radius: 10px; background-color: rgb(255, 255, 255,0.7);">
                             </div>
                         </div>
                         <div class="form-group row">
