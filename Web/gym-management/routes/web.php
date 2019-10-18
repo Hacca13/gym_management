@@ -26,10 +26,7 @@ Route::get('/firetest3', 'Firetest@test3');
 //Route::get('/esercizi', 'ExercisesManager@exercisePage');
 Route::post('/insertFormExercise', 'ExercisesManager@addExercise');
 
-
-Route::get('/gestioneEsercizi', function () {
-    return view('exercisePage');
-});
+Route::get('/gestioneEsercizi', 'ExercisesManager@getAllExercisesForView');
 
 Route::get('/nuovoEsercizio', function () {
     return view('insertNewExercise');

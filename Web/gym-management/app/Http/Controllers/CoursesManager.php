@@ -147,6 +147,7 @@ class CoursesManager extends Controller{
             $weekly,
             $userList
         );
+
         $coll->add(CoursesManager::trasformCourseToArrayCourse($corso));
 
         toastr()->success('Corso inserito');
