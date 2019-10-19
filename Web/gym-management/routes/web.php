@@ -80,7 +80,7 @@ Route::get('/gestioneSchede', function () {
 
 
 //CORSI
-Route::get('/corsi', 'CoursesManager@getAllCourses');
+Route::get('/gestioneCorsi', 'CoursesManager@getAllCourses');
 Route::post('/insertFormCourse', 'CoursesManager@addCourse');
 Route::get('/gestioneCorsi', 'CoursesManager@coursesPage');
 
