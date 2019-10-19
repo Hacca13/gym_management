@@ -39,6 +39,8 @@ Route::get('/modificaEsercizio', function (){
 Route::get('/nuovaSched', 'TrainingCardsManager@exercisePage');
 
 
+
+
 //UTENTI
 Route::get('/getAllUser', 'UserManager@getAllUser');
 Route::post('/addUserPost', 'UsersManager@createUser');
@@ -61,6 +63,8 @@ Route::get('/gestioneAbbonamenti', function () {
 Route::get('/nuovoAbbonamento', function (){
     return view('newSubscription');
 });
+
+
 
 
 
