@@ -12,6 +12,7 @@ use Firevel\Firestore\Facades\Firestore;
 use App\Http\Models\UserModels\UserModel;
 use App\Http\Models\UserModels\UserUnderageModel;
 use Stichoza\GoogleTranslate\GoogleTranslate;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class UsersManager extends Controller{
 
@@ -30,8 +31,9 @@ class UsersManager extends Controller{
     }
 
 
-    public function getAllUserForView(){
-      $users = UsersManager::getAllUser();
+    public function getAllUserForView(Request $request){
+      $currentPage = LengthAwarePaginator::resolveCurrentPage();
+      $users = UsersManager::getUserDBOrUserSession($request,$currentPage);
       $coursesForUsers = array();
 
       $coursesForUser  = array();
@@ -42,8 +44,28 @@ class UsersManager extends Controller{
           'courses'  => $coursesForUser );
         array_push($coursesForUsers,$userIdAndCourse);
       }
+      $itemCollection = collect($users);
+      $perPage = 1;
+      $currentPageItems = $itemCollection->slice(($currentPage * $perPage) - $perPage, $perPage)->all();
+      $users= new LengthAwarePaginator($currentPageItems , count($itemCollection), $perPage);
+      $users->setPath($request->url());
+
       return view('usersPage', compact('users','coursesForUsers'));
     }
+
+    public function getUserDBOrUserSession(Request $request,$currentPage){
+      if($currentPage == 1){
+        $documents = UsersManager::getAllUser();
+        $request->session()->put('allUsers', $documents);
+
+      }
+      else{
+        $documents = $request->session()->pull('allUsers');
+        $request->session()->put('allUsers', $documents);
+      }
+      return $documents;
+    }
+
 
     public static function getUsersByUsername($username){
         $users = array();
