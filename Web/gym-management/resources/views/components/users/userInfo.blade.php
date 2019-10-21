@@ -1,7 +1,8 @@
+<div class="col-md-12">
 <form action="/" method="get" enctype="multipart/form-data">
     @csrf
     <div class="row">
-        <div class="card col-md-6">
+        <div class="col-md-6" style="border: 1px red solid">
             <div class="card-body">
                 <h4 class="card-title ">Informazioni Utente</h4>
                 <div class="form-group row">
@@ -93,7 +94,7 @@
 
             </div>
         </div>
-        <div class="card col-md-6">
+        <div class="col-md-6">
             <div class="card-body">
                 <div class="form-group row">
                     <div class="col-sm-9">
@@ -250,7 +251,7 @@
         </div>
     </div>
 </form>
-
+</div>
 
 <script>
     function testAge() {
