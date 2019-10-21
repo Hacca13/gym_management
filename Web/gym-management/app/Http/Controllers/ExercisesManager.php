@@ -83,29 +83,33 @@ class ExercisesManager extends Controller{
                 'name' => $exerciseImage->getClientOriginalName()
             ])->name();
 
-        $imageDatabase =  "https://firebasestorage.googleapis.com/v0/b/fitandfight.appspot.com/o/". $imageRef ."?alt=media";
+        $gif =  "https://firebasestorage.googleapis.com/v0/b/fitandfight.appspot.com/o/". $imageRef ."?alt=media";
 
         $collection = Firestore::collection('Exercises');
 
+        $arrayExercise = ExercisesManager::trasformRequestIntoArrayExercise($input,$gif);
 
-        $id = $collection->add([])->id();
-        $exercise = new ExerciseModel(
-            $id,
-            $input['nameExercise'],
-            $input['descriptionExercise'],
-            $input['exerciseIsATime'],
-            $imageDatabase,
-            $input['linkExercise']
-        );
-
-        $collection->document($id)->set(ExercisesManager::trasformExerciseToArrayExercise($exercise));
+        $collection->add($arrayExercise);
 
         toastr()->success('Esercizio inserito');
         return redirect('gestioneEsercizi');
 
     }
 
-    public function exercisePage() {
+    public function trasformRequestIntoArrayExercise($input,$gif){
+
+      $arrayExercise = array(
+          'nameExercise' => $input['nameExercise'],
+          'descriptionExercise' => $input['descriptionExercise'],
+          'exerciseIsATim' => $input['exerciseIsATim'],
+          'gif' => $gif,
+          'linkExercise' => $input['linkExercise']
+      );
+
+      return $arrayExercise;
+    }
+
+    public function getAllExercisesForView() {
         $exercises = ExercisesManager::getAllExercises();
         return view('exercisePage', compact('exercises'));
     }
