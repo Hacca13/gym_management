@@ -110,4 +110,5 @@ class ExercisesManager extends Controller{
         return view('exercisePage', compact('exercises'));
     }
 
+
 }

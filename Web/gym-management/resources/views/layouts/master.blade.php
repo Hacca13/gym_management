@@ -41,7 +41,7 @@
     <!-- ============================================================== -->
     <!-- Page wrapper  -->
     <!-- ============================================================== -->
-    <div class="page-wrapper" style="background-image: url('images/wall.jpg'); background-size: cover; padding-bottom: 6%;background-attachment: fixed;">
+    <div class="page-wrapper" style="background-image: url('images/wall.jpg'); background-size: cover; padding-bottom: 14%;background-attachment: fixed;">
         <!-- ============================================================== -->
         <!-- Bread crumb and right sidebar toggle -->
         <!-- ============================================================== -->

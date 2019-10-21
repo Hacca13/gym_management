@@ -5,7 +5,7 @@
 
     <div class="row justify-content-center">
         <div class="col-md-10">
-            <div class="card" style="border-radius: 10px;background-color: rgb(255, 255, 255,0.7);margin-bottom: 10%;">
+            <div class="card" style="border-radius: 10px;margin-bottom: 10%;">
                 <div class="card-header">
                     <div class="row">
                         <div class="col-md-8" style="text-align: left">

@@ -6,7 +6,7 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-md-12" style="text-align: center;">
-                    <h1>Corsi</h1>
+                    <h1>Gestione Schede</h1>
                 </div>
                 <div class="col-md-12" style="margin-top: 2.5%">
                     <div class="card" style="border-radius: 10px;background-color:rgb(255, 255, 255,0.7)">
@@ -25,7 +25,7 @@
                                     <div class="input-group no-border">
                                         <div class="form-check" >
                                             <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                            <label class="form-check-label" for="exampleCheck1">Corsi Attivi</label>
+                                            <label class="form-check-label" for="exampleCheck1">Schede Attive</label>
                                         </div>
                                     </div>
                                 </div>
@@ -33,7 +33,7 @@
                                     <div class="input-group no-border">
                                         <div class="form-check">
                                             <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                            <label class="form-check-label" for="exampleCheck1">Corsi Non Attivi</label>
+                                            <label class="form-check-label" for="exampleCheck1">Schede Non Attive</label>
                                         </div>
                                     </div>
                                 </div>
@@ -49,11 +49,13 @@
                     </div>
                 </div>
             </div>
-            @foreach($courses as $course)
-            <div class="col-md-12">
-                    @include('components.courses.courseCard')
+                <div class="col-md-12">
+                    @foreach($exercises as $exercise)
+                    @include('components.trainingCards.TrainingCardsList')
+                    @endforeach
+
                 </div>
-            @endforeach
+
         </div>
     </div>
 @endsection
