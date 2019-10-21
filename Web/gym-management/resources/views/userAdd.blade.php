@@ -59,7 +59,8 @@
                             <label>Uomo</label>
                             <input type="radio" class="form-control" id="fname" name="gender" required>
                             <label>Donna</label>
-
+                            <input type="radio" class="form-control" id="fname" name="gender" required>
+                            <label>Altro</label>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -263,7 +264,7 @@
         <div class="row">
             <div class="border-top">
                 <div class="card-body">
-                    <input type="submit">
+                    <input type="submit" class="btn btn-success">
                 </div>
             </div>
         </div>
