@@ -26,13 +26,15 @@
 
 </head>
 
-<body style="background-color: #EEEEEE">
+<body style="background: transparent">
 
 
 
-<div id="main-wrapper">
+<div id="main-wrapper"  style="background-image: url('images/wall.jpg'); background-size: cover; padding-bottom: 14%;background-attachment: fixed;">
 
+@include('components.navbar')
 @include('components.sidebar')
+
 <!-- Left Sidebar - style you can find in sidebar.scss  -->
 <!-- ============================================================== -->
 <!-- ============================================================== -->
@@ -41,7 +43,7 @@
     <!-- ============================================================== -->
     <!-- Page wrapper  -->
     <!-- ============================================================== -->
-    <div class="page-wrapper" style="background-image: url('images/wall.jpg'); background-size: cover; padding-bottom: 14%;background-attachment: fixed;">
+    <div class="page-wrapper" style="background: transparent">
         <!-- ============================================================== -->
         <!-- Bread crumb and right sidebar toggle -->
         <!-- ============================================================== -->
