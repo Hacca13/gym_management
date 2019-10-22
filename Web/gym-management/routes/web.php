@@ -94,3 +94,6 @@ Route::get('/provaa', function (){
     return view('viewStrap');
 });
 
+Route::get('/insertTCard', function (){
+    return view('insertNewTrainingCard');
+});

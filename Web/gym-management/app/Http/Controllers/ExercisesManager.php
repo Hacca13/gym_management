@@ -9,6 +9,7 @@ use Kreait\Firebase;
 use Firevel\Firestore\Facades\Firestore;
 use App\Http\Models\ExerciseModel;
 
+
 class ExercisesManager extends Controller{
 
     public static function getAllExercises(){
@@ -103,6 +104,15 @@ class ExercisesManager extends Controller{
     public function exercisePage() {
         $exercises = ExercisesManager::getAllExercises();
         return view('exercisePage', compact('exercises'));
+    }
+
+    public function jsonEx() {
+        $exercises = ExercisesManager::getAllExercises();
+        $arr = [];
+        foreach ($exercises as $ex) {
+            array_push($arr, ExercisesManager::trasformExerciseToArrayExercise($ex));
+        }
+        return response()->json($arr);
     }
 
 }
