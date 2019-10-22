@@ -2,55 +2,73 @@
 
 @section('content')
     <div class="row">
-        <div class="col-md-6 col-lg-4 col-xlg-3">
-            <a href="gestioneSchede">
-                <div class="card card-hover">
-                    <div class="box bg-cyan text-center">
-                        <h1 class="font-light text-white"><i class="fas fa-clipboard-list"></i></h1>
-                        <h6 class="text-white">Gestione Schede</h6>
+        <div class="col-md-5">
+            <div class="card" style="border-radius: 30px; background-color: #d6d8d8">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card-body border-bottom">
+                            <h1 class="card-title m-t-10 text-center">Azioni Rapide</h1>
+                        </div>
+                        <div class="card-body">
+                            <div class="row justify-content-center">
+                                <div class="col-md-12">
+                                    <div id="calendar-events" class="text-center" >
+                                        <button class="bttn-fill bttn-md bttn-primary" >Inserisci Nuova Scheda</button>
+                                        <br>
+                                        <br>
+                                        <button class="bttn-fill bttn-md bttn-success" >Inserisci Nuovo Abbonamento</button>
+                                        <br>
+                                        <br>
+                                        <button class="bttn-fill bttn-md bttn-warning" >Inserisci Nuovo Esercizio</button>
+                                        <br>
+                                        <br>
+                                        <button class="bttn-fill bttn-md bttn-danger" >Inserisci Nuovo Iscritto</button>
+                                        <br>
+                                        <br>
+                                        <button class="bttn-fill bttn-md bttn-primary" >Inserisci Nuovo Corso</button>
+                                        <br>
+                                        <br>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </a>
+            </div>
         </div>
-        <div class="col-md-6 col-lg-4 col-xlg-3">
-            <a href="gestioneAbbonamenti">
-                <div class="card card-hover">
-                    <div class="box bg-success text-center">
-                        <h1 class="font-light text-white"><i class="fas fa-euro-sign"></i></h1>
-                        <h6 class="text-white">Gestione Abbonamenti</h6>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card" style="border-radius: 30px; background-color: #d6d8d8">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="card-body border-bottom">
+                                <h1 class="card-title m-t-10 text-center">Gestisci</h1>
+                            </div>
+                            <div class="card-body">
+                                <div class="row justify-content-center">
+                                    <div class="col-md-12">
+                                        <div id="calendar-events" class="text-center">
+                                            <button class="bttn-fill bttn-md bttn-primary" >Gestione Schede</button>
+                                            <br>
+                                            <br>
+                                            <button class="bttn-fill bttn-md bttn-success" >Gestione Abbonamenti</button>
+                                            <br>
+                                            <br>
+                                            <button class="bttn-fill bttn-md bttn-warning" >Gestione Esercizi</button>
+                                            <br>
+                                            <br>
+                                            <button class="bttn-fill bttn-md bttn-danger" >Gestione Iscritti</button>
+                                            <br>
+                                            <br>
+                                            <button class="bttn-fill bttn-md bttn-primary" >Gestione Corsi</button>
+                                            <br>
+                                            <br>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </a>
-        </div>
-        <div class="col-md-6 col-lg-4 col-xlg-3">
-            <a href="gestioneEsercizi">
-                <div class="card card-hover">
-                    <div class="box bg-warning text-center">
-                        <h1 class="font-light text-white"><i class="fab fa-algolia"></i></h1>
-                        <h6 class="text-white">Gestione Esercizi</h6>
-                    </div>
-                </div>
-            </a>
-        </div>
-        <div class="col-md-6 col-lg-4 col-xlg-3">
-            <a href="gestioneIscritti">
-                <div class="card card-hover">
-                    <div class="box bg-danger text-center">
-                        <h1 class="font-light text-white"><i class="fas fa-users"></i></h1>
-                        <h6 class="text-white">Gestione Iscritti</h6>
-                    </div>
-                </div>
-            </a>
-        </div>
-        <div class="col-md-6 col-lg-4 col-xlg-3">
-            <a href="gestioneCorsi">
-                <div class="card card-hover">
-                    <div class="box bg-info text-center">
-                        <h1 class="font-light text-white"><i class="fas fa-calendar-alt"></i></h1>
-                        <h6 class="text-white">Gestione Corsi</h6>
-                    </div>
-                </div>
-            </a>
-        </div>
-    </div>
+            </div>
 @endsection

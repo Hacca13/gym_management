@@ -8,8 +8,8 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="../../assets/images/favicon.png">
-    <title>Matrix Template - The Ultimate Multipurpose admin template</title>
+    <link rel="icon"  href="/Fit_Fight.ico">
+    <title>Fit & Fight</title>
     <!-- Custom CSS -->
     <link href="../matrix-admin-bt4/assets/libs/flot/css/float-chart.css" rel="stylesheet">
     <!-- Custom CSS -->
@@ -41,7 +41,7 @@
     <!-- ============================================================== -->
     <!-- Page wrapper  -->
     <!-- ============================================================== -->
-    <div class="page-wrapper" style="background-image: url('images/wall.jpg'); background-size: cover; background-attachment: fixed; padding-top: 3%">
+    <div class="page-wrapper" style="background-image: url('images/wall.jpg'); background-size: cover; padding-bottom: 14%;background-attachment: fixed;">
         <!-- ============================================================== -->
         <!-- Bread crumb and right sidebar toggle -->
         <!-- ============================================================== -->
@@ -97,7 +97,14 @@
 <script src="../matrix-admin-bt4/dist/js/pages/chart/chart-page-init.js"></script>
 <script>
     function myFunction() {
-        myFunction1();
+
+        var x = document.getElementById("myDiv");
+        if (x.style.display === "block") {
+            x.style.display = "none";
+        } else {
+            x.style.display = "block";
+        }
+
         var x = document.getElementById("myDIV");
         let inputs = [
             document.getElementById('parentName'),
@@ -130,21 +137,32 @@
 
         }
     }</script>
+
+
 <script>
-    function myFunction1() {
-        var x = document.getElementById("myDiv");
-        if (x.style.display === "block") {
-            x.style.display = "none";
-        } else {
-            x.style.display = "block";
+    Filevalidation = () => {
+        const fi = document.getElementById('documentImage');
+        // Check if any file is selected.
+        if (fi.files.length > 0) {
+            for (const i = 0; i <= fi.files.length - 1; i++) {
+
+                const fsize = fi.files.item(i).size;
+                const file = Math.round((fsize / 1024));
+                // The size of the file.
+                if (file >= 1024) {
+                    alert(
+                        "File too Big, please select a file less than 4mb");
+                } else if (file < 1024) {
+                    alert(
+                        "File too small, please select a file greater than 2mb");
+                } else {
+                    document.getElementById('size').innerHTML = '<b>'
+                        + file + '</b> KB';
+                }
+            }
         }
-    }</script>
-
-<script>
-
-
+    }
 </script>
-
 
 </body>
 

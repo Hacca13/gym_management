@@ -1,7 +1,6 @@
 
-<div class="card" style="border-radius: 10px">
+<div class="card" style="border-radius: 10px;background-color: rgb(255, 255, 255,0.7);">
     <div class="card-body">
-
         <div class="row">
             <div class="col-md-6">
                 <div class="input-group no-border">
@@ -31,14 +30,12 @@
                         </div>
                     </div>
 
-                        <div class="col-md-2">
-                            <a href="nuovoUtente" role="button">
-                                <button class="bttn-material-circle bttn-md bttn-primary">
-                                    <i class="fas fa-plus"></i>
-                                </button>
-                            </a>
-                        </div>
-                        
+                    <div class="col-md-2">
+                        <a href="addUser" role="button">
+                            <button class="bttn-material-circle bttn-md bttn-success">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </a>
                     </div>
                 </div>
             </div>

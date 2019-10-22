@@ -7,10 +7,12 @@ use Illuminate\Http\Request;
 use Kreait\Firebase\Exception\AuthException;
 use Kreait\Firebase\Exception\FirebaseException;
 use Kreait\Firebase;
+use App\Http\Controllers\CoursesManager;
 use Firevel\Firestore\Facades\Firestore;
 use App\Http\Models\UserModels\UserModel;
 use App\Http\Models\UserModels\UserUnderageModel;
 use Stichoza\GoogleTranslate\GoogleTranslate;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class UsersManager extends Controller{
 
@@ -26,6 +28,42 @@ class UsersManager extends Controller{
             array_push($allUser,$user);
         }
         return $allUser;
+    }
+
+
+    public function getAllUserForView(Request $request){
+      $currentPage = LengthAwarePaginator::resolveCurrentPage();
+      $users = UsersManager::getUserDBOrUserSession($request,$currentPage);
+      $coursesForUsers = array();
+
+      $coursesForUser  = array();
+      foreach ($users as $user) {
+        $coursesForUser = CoursesManager::theUserForWhichCourseIsRegistered($user->getIdDatabase());
+        $userIdAndCourse = array(
+          'idUser' => $user->getIdDatabase(),
+          'courses'  => $coursesForUser );
+        array_push($coursesForUsers,$userIdAndCourse);
+      }
+      $itemCollection = collect($users);
+      $perPage = 1;
+      $currentPageItems = $itemCollection->slice(($currentPage * $perPage) - $perPage, $perPage)->all();
+      $users= new LengthAwarePaginator($currentPageItems , count($itemCollection), $perPage);
+      $users->setPath($request->url());
+
+      return view('usersPage', compact('users','coursesForUsers'));
+    }
+
+    public function getUserDBOrUserSession(Request $request,$currentPage){
+      if($currentPage == 1){
+        $documents = UsersManager::getAllUser();
+        $request->session()->put('allUsers', $documents);
+
+      }
+      else{
+        $documents = $request->session()->pull('allUsers');
+        $request->session()->put('allUsers', $documents);
+      }
+      return $documents;
     }
 
 
@@ -69,12 +107,14 @@ class UsersManager extends Controller{
 
     public static function createUser(Request $request){
         $input = $request->all();
-        $documentImage = $request->file('documentImage');
-        $parentDocumentImage = NULL;
+        $documentImage = $request->file('documentPicture');
+        $parentDocumentImage = null;
 
-        $isUnderage = isset($input['isUnderage']) ? $input['isUnderage'] : 'FALSE';
+        if(!(isset($input['isUnderage']))){
+          $input['isUnderage'] = 'FALSE';
+        }
 
-        if($isUnderage == 'TRUE'){
+        if($input['isUnderage'] == 'TRUE'){
             $parentDocumentImage = $request->file('parentDocumentImage');
         }
 
@@ -82,44 +122,39 @@ class UsersManager extends Controller{
 
         $firebase = (new Firebase\Factory());
 
-
                 $str = $firebase->createStorage()->getBucket()->upload(file_get_contents($documentImage),
                     [
                         'name' => $documentImage->getClientOriginalName()
                     ])->name();
-                if($isUnderage == 'TRUE'){
+                if($input['isUnderage'] == 'TRUE'){
                     $str2 = $firebase->createStorage()->getBucket()->upload(file_get_contents($parentDocumentImage),
                         [
                             'name' => $parentDocumentImage->getClientOriginalName()
                         ])->name();
-
-                    $parentDocumentImage =  "https://firebasestorage.googleapis.com/v0/b/fitandfight.appspot.com/o/". $str2 ."?alt=media";
                 }
-
-                $documentImage =  "https://firebasestorage.googleapis.com/v0/b/fitandfight.appspot.com/o/". $str ."?alt=media";
+                $documentPicture =  "https://firebasestorage.googleapis.com/v0/b/fitandfight.appspot.com/o/". $str ."?alt=media";
 
                 $collection = Firestore::collection('Users');
 
         try {
             $uid = $firebase->createAuth()->createUserWithEmailAndPassword($input['email'], $input['password'])->uid;
 
-            $fireUser = UsersManager::trasformRequestIntoUser($uid, $input, $documentImage, $parentDocumentImage);
+            $arrayUser = UsersManager::trasformRequestIntoArrayUser($input, $documentImage, $parentDocumentImage);
 
-            $uploadUser = UsersManager::transformUserIntoArrayUser($fireUser);
-            $collection->document($uid)->set($uploadUser);
+            $collection->document($uid)->set($arrayUser);
 
             toastr()->success('Utente registrato');
-            return redirect('/nuovoUtente');
+            return redirect('/addUser');
 
         } catch (AuthException $e) {
 
             toastr()->error($tr->translate($e->getMessage()));
-            return redirect('/nuovoUtente');
+            return redirect('/addUser');
 
         } catch (FirebaseException $e) {
 
             toastr()->error($tr->translate($e->getMessage()));
-            return redirect('/nuovoUtente');
+            return redirect('/addUser');
         }
 
     }
@@ -159,7 +194,6 @@ class UsersManager extends Controller{
         $name = data_get($arrayUser,'name');
         $surname = data_get($arrayUser,'surname');
         $gender = data_get($arrayUser,'gender');
-        $username = data_get($arrayUser,'username');
         $profileImage = data_get($arrayUser,'profileImage');
         $status = data_get($arrayUser,'status');
         $isAdult = data_get($arrayUser,'isAdult');
@@ -216,11 +250,11 @@ class UsersManager extends Controller{
             $parentEmail = data_get($arrayUser,'parentEmail');
             $parentTelephoneNumber = data_get($arrayUser,'parentTelephoneNumber');
 
-            $user = new UserUnderageModel($idDatabase,$name,$surname,$gender,$username,$profileImage,$status,$isAdult,$dateOfBirth,$birthNation,$birthPlace,$residence,$document,$email,$telephoneNumber,$parentName,$parentSurname,$parentGender,$parentDateOfBirth,$parentBirthNation,$parentBirthPlace,$parentResidence,$parentDocument,$parentEmail,$parentTelephoneNumber);
+            $user = new UserUnderageModel($idDatabase,$name,$surname,$gender,$profileImage,$status,$isAdult,$dateOfBirth,$birthNation,$birthPlace,$residence,$document,$email,$telephoneNumber,$parentName,$parentSurname,$parentGender,$parentDateOfBirth,$parentBirthNation,$parentBirthPlace,$parentResidence,$parentDocument,$parentEmail,$parentTelephoneNumber);
 
         }
         else{
-            $user = new UserModel($idDatabase,$name,$surname,$gender,$username,$profileImage,$status,$isAdult,$dateOfBirth,$birthNation,$birthPlace,$residence,$document,$email,$telephoneNumber);
+            $user = new UserModel($idDatabase,$name,$surname,$gender,$profileImage,$status,$isAdult,$dateOfBirth,$birthNation,$birthPlace,$residence,$document,$email,$telephoneNumber);
         }
 
 
@@ -250,9 +284,8 @@ class UsersManager extends Controller{
             'idDatabase' => $user->getIdDatabase(),
             'name' => $user->getName(),
             'surname' => $user->getSurname(),
-            'username' => $user->getUsername(),
             'gender' => $user->getGender(),
-            'profileImage' => $user->getProfileImage(),
+            'profilePicture' => $user->getProfilePicture(),
             'status' => $user->getStatus(),
             'isAdult' => $user->getIsAdult(),
             'dateOfBirth' => $user->getDateOfBirth(),
@@ -302,21 +335,7 @@ class UsersManager extends Controller{
         return $arrayUser;
     }
 
-    private static function trasformRequestIntoUser($uid, $input, $documentImage, $parentDocumentImage){
-
-
-      $idDatabase = $uid;
-      $name = $input['name'];
-      $surname = $input['surname'];
-      $gender = $input['gender'];
-      $profileImage = null;
-
-      $status = TRUE;
-      $isUnderage = $input['isUnderage'];
-
-      $dateOfBirth = $input['dateOfBirth'];
-      $birthNation = $input['birthNation'];
-      $birthPlace = $input['birthPlace'];
+    private static function trasformRequestIntoArrayUser( $input, $documentImage, $parentDocumentImage){
 
       $residence = array(
           'nation' => $input['nation'],
@@ -326,7 +345,6 @@ class UsersManager extends Controller{
           'number' => $input['number']
 
       );
-
       $document = array(
           'documentImage' => $documentImage,
           'type' => $input['documentType'],
@@ -335,47 +353,70 @@ class UsersManager extends Controller{
           'releaseDate' => $input['releaseDateDocument']
       );
 
-      $email = $input['email'];
-      $telephoneNumber =   $input['telephone'];
-
-      if($input['isUnderage'] == 'TRUE'){
-          $parentName = $input['parentName'];
-          $parentSurname = $input['parentSurname'];
-          $parentGender = $input['parentGender'];
-          $parentDateOfBirth = $input['parentDateOfBirth'];
-          $parentBirthNation = $input['parentBirthNation'];
-          $parentBirthPlace = $input['parentBirthPlace'];
-
-          $parentResidence = array(
-              'nation' => $input['parentNation'],
-              'cityOfResidence' => $input['parentCityOfResidence'],
-              'cap' => $input['parentCap'],
-              'street' => $input['parentResidenceStreet'],
-              'number' => $input['parentResidence.number']
-
-          );
-
-          $parentDocument = array(
-              'documentImage' => $parentDocumentImage,
-              'type' => $input['parentDocumentType'],
-              'number' => $input['parentDocumentNumber'],
-              'released' => $input['parentDocumentReleaser'],
-              'releaseDate' => $input['parentDocumentReleaseDate']
-          );
-
-
-          $parentEmail = $input['parentEmail'];
-          $parentTelephoneNumber = $input['parentTelephoneNumber'];
-
-          $user = new UserUnderageModel($idDatabase,$name,$surname,$gender,$profileImage,$status,$isAdult,$dateOfBirth,$birthNation,$birthPlace,$residence,$document,$email,$telephoneNumber,$parentName,$parentSurname,$parentGender,$parentDateOfBirth,$parentBirthNation,$parentBirthPlace,$parentResidence,$parentDocument,$parentEmail,$parentTelephoneNumber);
-
+      if($input['isUnderage'] == 'FALSE'){
+        $isAdult = TRUE;
       }
       else{
-          $user = new UserModel($idDatabase,$name,$surname,$gender,$profileImage,$status,$isAdult,$dateOfBirth,$birthNation,$birthPlace,$residence,$document,$email,$telephoneNumber);
+        $isAdult = FALSE;
       }
 
 
-      return $user;
+      if($input['isUnderage'] == 'TRUE'){
+        $parentResidence = array(
+            'nation' => $input['parentNation'],
+            'cityOfResidence' => $input['parentCityOfResidence'],
+            'cap' => $input['parentCap'],
+            'street' => $input['parentResidenceStreet'],
+            'number' => $input['parentResidence.number']
+
+        );
+
+        $parentDocument = array(
+            'documentImage' => $parentDocumentImage,
+            'type' => $input['parentDocumentType'],
+            'number' => $input['parentDocumentNumber'],
+            'released' => $input['parentDocumentReleaser'],
+            'releaseDate' => $input['parentDocumentReleaseDate']
+        );
+      }
+      if($input['isUnderage'] == 'TRUE'){
+          $arrayUser1 = array(
+            'parentName' => $input['parentName'],
+            'parentSurname' => $input['parentSurname'],
+            'parentGender' => $input['parentGender'],
+            'parentDateOfBirth' => $input['parentDateOfBirth'],
+            'parentBirthNation' => $input['parentBirthNation'],
+            'parentBirthPlace' => $input['parentBirthPlace'],
+            'parentResidence' => $parentResidence,
+            'parentDocument' => $parentDocument,
+            'parentEmail' => $input['parentEmail'],
+            'parentTelephoneNumber' => $input['parentTelephoneNumber']
+          );
+      }
+
+      $arrayUser0 = array(
+        'name' => $input['name'],
+        'surname' => $input['surname'],
+        'gender' => $input['gender'],
+        'profileImage' => null,
+        'status' => TRUE,
+        'isAdult' =>$isAdult,
+        'dateOfBirth' => $input['dateOfBirth'],
+        'birthNation' => $input['birthNation'],
+        'birthPlace' => $input['birthPlace'],
+        'residence' => $residence,
+        'document' => $document,
+        'email' => $input['email'],
+        'telephoneNumber' =>   $input['telephone']
+      );
+
+
+      if($isAdult == TRUE){
+        return $arrayUser0;
+      }else{
+        $arrayUser2 = $arrayUser0 + $arrayUser1;
+        return $arrayUser2;
+      }
 
     }
 

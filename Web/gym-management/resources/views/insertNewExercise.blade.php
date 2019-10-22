@@ -4,7 +4,7 @@
 @section('content')
     <div class="row justify-content-center">
         <div class="col-md-10">
-            <div class="card" style="border-radius: 10px;background-color: rgb(255, 255, 255,0.7);">
+            <div class="card" style="border-radius: 10px;">
                 <div class="card-header">
                     <div class="row">
                         <div class="col-md-8" style="text-align: left">
@@ -28,9 +28,7 @@
                                 <label for="fname" class="col-sm-12 text-left control-label col-form-label">Nome Esercizio</label>
                                 <input type="text" class="form-control" id="nameExercise" name="nameExercise" style="border-radius: 10px;background-color: rgb(255, 255, 255,0.7);" required>
                             </div>
-                            <div class="col-md-6">
-
-                            </div>
+                            <div class="col-md-6"></div>
                         </div>
                         <div class="form-group row">
                             <div class="col-sm-6">

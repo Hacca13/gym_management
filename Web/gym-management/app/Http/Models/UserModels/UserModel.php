@@ -45,7 +45,7 @@ class UserModel
     $this->name = $name;
     $this->surname = $surname;
     $this->gender = $gender;
-    $this->profilePicture = $profileImage ;
+    $this->profileImage = $profileImage ;
     $this->status = $status;
     $this->isAdult = $isAdult;
     $this->dateOfBirth = $dateOfBirth;
@@ -72,6 +72,8 @@ class UserModel
     $this->email = $email;
     $this->telephoneNumber = $telephoneNumber;
   }
+
+
 
 
     /**
@@ -170,27 +172,26 @@ class UserModel
         return $this;
     }
 
-
     /**
-     * Get the value of Profile Picture
+     * Get the value of Profile Image
      *
      * @return mixed
      */
-    public function getProfilePicture()
+    public function getProfileImage()
     {
-        return $this->profilePicture;
+        return $this->profileImage;
     }
 
     /**
-     * Set the value of Profile Picture
+     * Set the value of Profile Image
      *
-     * @param mixed profilePicture
+     * @param mixed profileImage
      *
      * @return self
      */
-    public function setProfilePicture($profileImage)
+    public function setProfileImage($profileImage)
     {
-        $this->profilePicture = $profileImage;
+        $this->profileImage = $profileImage;
 
         return $this;
     }
@@ -334,15 +335,7 @@ class UserModel
      */
     public function setResidence($residence)
     {
-
-      $this->residence = array(
-        'nation' => data_get($residence, 'nation'),
-        'cityOfResidence' => data_get($residence, 'cityOfResidence'),
-        'cap' => data_get($residence, 'cap'),
-        'street' => data_get($residence, 'street'),
-        'number' => data_get($residence, 'number')
-
-      );
+        $this->residence = $residence;
 
         return $this;
     }
@@ -366,13 +359,8 @@ class UserModel
      */
     public function setDocument($document)
     {
-      $this->document = array(
-          'documentImage' => data_get($document, 'documentImage'),
-          'type' => data_get($document, 'type'),
-          'number' => data_get($document, 'number'),
-          'released' => data_get($document, 'released'),
-          'releaseDate' => data_get($document, 'releaseDate')
-      );
+        $this->document = $document;
+
         return $this;
     }
 

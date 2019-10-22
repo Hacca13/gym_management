@@ -3,7 +3,7 @@
 @section('content')
 
     <form action="/addUserPost" method="post" enctype="multipart/form-data">
-    @csrf
+        @csrf
         <div class="row">
             <div class="card col-md-6">
                 <div class="card-body">
@@ -23,7 +23,7 @@
                     <div class="form-group row">
                         <label for="fname" class="col-sm-3 text-right control-label col-form-label">E-mail</label>
                         <div class="col-sm-9">
-                            <input type="email" class="form-control" id="fname" name="email" required>
+                            <input type="email" class="form-control" id="email" name="email" required>
                         </div>
                     </div>
 
@@ -37,7 +37,7 @@
                     <div class="form-group row">
                         <label for="fname" class="col-sm-3 text-right control-label col-form-label">Data di Nascita</label>
                         <div class="col-sm-9">
-                            <input type="date" class="form-control" id="fname" name="dateOfBirth" required>
+                            <input type="date" class="form-control" oninput="testAge()" id="dateOfBirth" name="dateOfBirth" required>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -54,8 +54,13 @@
                     </div>
                     <div class="form-group row">
                         <label for="fname" class="col-sm-3 text-right control-label col-form-label">Sesso</label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" id="fname" name="gender" required>
+                        <div class="col-sm-2">
+                            <input type="radio" class="form-control" id="fname" name="gender" required>
+                            <label>Uomo</label>
+                            <input type="radio" class="form-control" id="fname" name="gender" required>
+                            <label>Donna</label>
+                            <input type="radio" class="form-control" id="fname" name="gender" required>
+                            <label>Altro</label>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -126,21 +131,20 @@
                     <div class="form-group row">
                         <label for="lname" class="col-sm-3 text-right control-label col-form-label">Imagine Documento d'Identità</label>
                         <div class="col-sm-9">
-                            <input type="file" class="form-control" id="lname" name="documentImage" required>
+                            <input type="file" class="form-control" id="documentImage" name="documentImage" onchange="Filevalidation()" required>
                         </div>
                     </div>
                     <div class="border-top">
                         <div class="card-body">
-                            <input type="checkbox" onclick="myFunction()" name="isUnderage" value="TRUE"> E' minorenne?</input>
+                            <input type="checkbox" hidden name="isUnderage" value="TRUE"></input>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
         <!-- PARENT FORM -->
 
-        <div class="row">
+        <div class="row" id="parentDiv">
             <div class="col-md-6" id="myDIV" style="display: none">
                 <div class="card">
                     <div class="card-body">
@@ -249,12 +253,6 @@
                                 <input type="date" class="form-control" id="parentDocumentReleaseDate" name="parentDocumentReleaseDate">
                             </div>
                         </div>
-                        <div class="form-group row">
-                            <label for="cono1" class="col-sm-3 text-right control-label col-form-label">Rilasciato Da</label>
-                            <div class="col-sm-9">
-                                <input type="text" class="form-control" id="parentDocumentReleaser" name="parentDocumentReleaser">
-                            </div>
-                        </div>
                     </div>
 
                 </div>
@@ -266,9 +264,30 @@
         <div class="row">
             <div class="border-top">
                 <div class="card-body">
-                    <input type="submit">
+                    <input type="submit" class="btn btn-success">
                 </div>
             </div>
         </div>
     </form>
+
+
+    <script>
+        function testAge() {
+            let birthDateString = document.getElementById('dateOfBirth').value;
+            var today = new Date();
+            var birthDate = new Date(birthDateString);
+            var age = today.getFullYear() - birthDate.getFullYear();
+            var m = today.getMonth() - birthDate.getMonth();
+            if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+                age--;
+            }
+            if (age < 18) {
+               myFunction();
+            } else {
+                document.getElementById('myDIV').style.display = "none";
+                document.getElementById('myDiv').style.display = "none";
+            }
+        }
+    </script>
+
 @endsection
