@@ -5,94 +5,20 @@ import Autocomplete from 'react-autocomplete';
 import ExerciseToAdd from "./exerciseToAdd";
 import Autosuggest from 'react-autosuggest';
 
-const languages = [
-    {
-        name: 'C',
-        year: 1972
-    },
-    {
-        name: 'Elm',
-        year: 2012
-    },
-
-];
-
-// Teach Autosuggest how to calculate suggestions for any given input value.
-
-
 class NewTcard2 extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            value: '',
-            exerr: [
-                {
-                    id: 'fsefes',
-                    name: 'Panca reclinata',
-                    atTime: true,
-                    reps: 5,
-                    work: {
-                        min: 0,
-                        sec: 30
-                    },
-                    rest: {
-                        min: 0,
-                        sec: 30
-                    }
-                },
-                {
-                    id: 'lsngagm',
-                    name: 'albicocca',
-                    atTime: true,
-                    reps: 5,
-                    work: {
-                        min: 0,
-                        sec: 30
-                    },
-                    rest: {
-                        min: 0,
-                        sec: 30
-                    }
-                },
-
-            ],
-            exercisesList: [
-                /*
-                {
-                    id: 'fsefes',
-                    name: 'Panca reclinata',
-                    atTime: true,
-                    reps: 5,
-                    work: {
-                        min: 0,
-                        sec: 30
-                    },
-                    rest: {
-                        min: 0,
-                        sec: 30
-                    }
-                },
-                {
-                    id: 'lsngagm',
-                    name: 'Panca reclinata',
-                    atTime: true,
-                    reps: 5,
-                    work: {
-                        min: 0,
-                        sec: 30
-                    },
-                    rest: {
-                        min: 0,
-                        sec: 30
-                    }
-                },
-
-                 */
-            ],
-            suggestions: []
-        }
+            value: '1',
+            exerr: [],
+            exercisesList: [],
+            suggestions: [],
+            no: 1
+        };
         this.removeExercise = this.removeExercise.bind(this);
+        this.returnInfo = this.returnInfo.bind(this);
+        this.myRef = React.createRef();
     }
 
     componentDidMount() {
@@ -114,21 +40,20 @@ class NewTcard2 extends Component {
             id: tmp_ex[ind].idDatabase,
             name: tmp_ex[ind].name,
             atTime: tmp_ex[ind].exerciseIsATime,
-            reps: 5,
+            reps: '',
             work: {
-                min: 0,
-                sec: 30
+                min: '',
+                sec: ''
             },
             rest: {
-                min: 0,
-                sec: 30
+                min: '',
+                sec: ''
             }
         }
         let temp_arr = this.state.exercisesList;
         temp_arr.push(toAdd);
-        this.setState({ exercisesList: temp_arr})
+        this.setState({ exercisesList: temp_arr});
         document.getElementById('modalBtn').click();
-
     }
 
     onChange = (event, { newValue }) => {
@@ -140,7 +65,6 @@ class NewTcard2 extends Component {
 
     removeExercise(index) {
         let tmp_exercises = this.state.exercisesList;
-        //tmp_exercises.splice(index);
         delete tmp_exercises[index];
         this.setState({ exercisesList: tmp_exercises});
     }
@@ -188,6 +112,12 @@ class NewTcard2 extends Component {
         });
     };
 
+
+    returnInfo(item, index) {
+
+
+    }
+
     render() {
         const { value, suggestions } = this.state;
         const inputProps = {
@@ -196,6 +126,8 @@ class NewTcard2 extends Component {
             onChange: this.onChange
         };
         return (
+
+
 
             <div className="row justify-content-center">
                 <div className="col-md-10">
@@ -254,6 +186,7 @@ class NewTcard2 extends Component {
                                                 name={value.name}
                                                 indexed={index}
                                                 key={index}
+                                                retrieveState={this.returnInfo}
                                             />
                                         }))
                                     }
