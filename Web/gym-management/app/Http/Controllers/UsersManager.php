@@ -35,8 +35,7 @@ class UsersManager extends Controller{
       $currentPage = LengthAwarePaginator::resolveCurrentPage();
       $users = UsersManager::getUserDBOrUserSession($request,$currentPage);
       $coursesForUsers = array();
-
-      $coursesForUser  = array();
+      
       foreach ($users as $user) {
         $coursesForUser = CoursesManager::theUserForWhichCourseIsRegistered($user->getIdDatabase());
         $userIdAndCourse = array(

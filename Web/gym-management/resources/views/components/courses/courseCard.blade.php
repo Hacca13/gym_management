@@ -6,7 +6,7 @@
                     <div class="col-md-4" style="margin-top: auto; margin-bottom: auto;">
                         <h3>{{$course->getName()}}</h3>
                     </div>
-                    <div class="col-md-1"><h4><?php if($course->getIsActive()){?>
+                    <div class="col-md-1"><h4><?php if($course->getIsActive() == 1){?>
                       Attivato
                       <?php}else {
                       ?>

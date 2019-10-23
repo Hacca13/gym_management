@@ -9,9 +9,35 @@ use App\Http\Models\SubscriptionModels\SubscriptionModel;
 use App\Http\Models\SubscriptionModels\SubscriptionCourseModel;
 use App\Http\Models\SubscriptionModels\SubscriptionPeriodModel;
 use App\Http\Models\SubscriptionModels\SubscriptionRevenueModel;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class SubscriptionManager extends Controller
 {
+
+    public static function getAllSubscriptionForView(Request $request){
+      $currentPage = LengthAwarePaginator::resolveCurrentPage();
+      $subscription = SubscriptionManager::getSubscriptionDBOrSubscriptionSession($request,$currentPage);
+      $itemCollection = collect($subscription);
+      $perPage = 1;
+      $currentPageItems = $itemCollection->slice(($currentPage * $perPage) - $perPage, $perPage)->all();
+      $subscription= new LengthAwarePaginator($currentPageItems , count($itemCollection), $perPage);
+      $subscription->setPath($request->url());
+
+      return view('subscriptionPage', compact('subscription'));
+    }
+
+    public static function getSubscriptionDBOrSubscriptionSession(Request $request,$currentPage){
+      if($currentPage == 1){
+        $documents = SubscriptionManager::getAllSubscription();
+        $request->session()->put('allSubscription', $documents);
+
+      }
+      else{
+        $documents = $request->session()->pull('allSubscription');
+        $request->session()->put('allSubscription', $documents);
+      }
+      return $documents;
+    }
 
     public static function getAllSubscription(){
       $allSubscriptions = array();
