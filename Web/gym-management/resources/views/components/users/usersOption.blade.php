@@ -31,7 +31,7 @@
                     </div>
 
                     <div class="col-md-2">
-                        <a href="addUser" role="button">
+                        <a href="nuovoIscritto" role="button">
                             <button class="bttn-material-circle bttn-md bttn-success" style="background-color: #21252E">
                                 <i class="fas fa-plus"></i>
                             </button>

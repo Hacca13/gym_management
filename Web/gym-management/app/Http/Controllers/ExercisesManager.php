@@ -8,6 +8,7 @@ use Kreait\Firebase\Exception\FirebaseException;
 use Kreait\Firebase;
 use Firevel\Firestore\Facades\Firestore;
 use App\Http\Models\ExerciseModel;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class ExercisesManager extends Controller{
 
@@ -22,6 +23,21 @@ class ExercisesManager extends Controller{
         }
         return $arrayExercises;
 
+    }
+
+    public static function getExerciseByName($name){
+        $exercises = array();
+        $collection = Firestore::collection('Exercises');
+        $query = $collection->where('name', '=' ,$name);
+        $documents = $query->documents();
+
+        foreach ($documents as $document) {
+          $exercise = ExercisesManager::trasformArrayExerciseToExercise($document->data());
+          $exercise->setIdDatabase($document->id());
+          array_push($exercises,$exercise);
+        }
+
+        return $exercises;
     }
 
     public static function getExerciseById($idDatabase){
@@ -65,8 +81,25 @@ class ExercisesManager extends Controller{
         return $arrayExercise;
     }
 
-    public function addExercise(Request $request) {
+    public static function existsAExerciseWithThisName($name){
+      $exercisesList = ExercisesManager::getExerciseByName($name);
+      if(count($exercisesList) == 0){
+        return FALSE;
+      }else{
+        return TRUE;
+      }
+
+    }
+
+    public static function addExercise(Request $request) {
         $input = $request->all();
+        $name = $input['nameExercise'];
+
+        if(ExercisesManager::existsAExerciseWithThisName($name)){
+          toastr()->error('Esiste già un esercizio con questo nome');
+          return redirect('nuovoEsercizio');
+        }
+
         $exerciseImage = $request->file('imageExercise');
 
         if(isset($input['exerciseIsATime']) == FALSE){
@@ -99,23 +132,40 @@ class ExercisesManager extends Controller{
     public function trasformRequestIntoArrayExercise($input,$gif){
 
       $arrayExercise = array(
-          'nameExercise' => $input['nameExercise'],
-          'descriptionExercise' => $input['descriptionExercise'],
-          'exerciseIsATim' => $input['exerciseIsATim'],
+          'name' => $input['nameExercise'],
+          'description' => $input['descriptionExercise'],
+          'exerciseIsATime' => $input['exerciseIsATime'],
           'gif' => $gif,
-          'linkExercise' => $input['linkExercise']
+          'link' => $input['linkExercise']
       );
 
       return $arrayExercise;
     }
 
-    public static function getAllExercisesForView() {
-        $exercises = ExercisesManager::getAllExercises();
-        return view('exercisePage', compact('exercises'));
-    }
-    
-    public static function getExercisesDBOrExercises(Request $request,$currentPage){
+    public static function getAllExercisesForView(Request $request) {
+      $currentPage = LengthAwarePaginator::resolveCurrentPage();
+      $exercises = ExercisesManager::getExercisesDBOrExercises($request,$currentPage);
 
+      $itemCollection = collect($exercises);
+      $perPage = 9;
+      $currentPageItems = $itemCollection->slice(($currentPage * $perPage) - $perPage, $perPage)->all();
+      $exercises = new LengthAwarePaginator($currentPageItems , count($itemCollection), $perPage);
+      $exercises->setPath($request->url());
+
+      return view('exercisePage', compact('exercises'));
+    }
+
+    public static function getExercisesDBOrExercises(Request $request,$currentPage){
+      if($currentPage == 1){
+        $documents = ExercisesManager::getAllExercises();
+        $request->session()->put('exercises', $documents);
+
+      }
+      else{
+        $documents = $request->session()->pull('exercises');
+        $request->session()->put('exercises', $documents);
+      }
+      return $documents;
     }
 
 }

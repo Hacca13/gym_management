@@ -45,9 +45,8 @@ class TrainingCardsManager extends Controller
         }
       }
 
-  
 
-      return view('trainingCardPage', compact('trainingCardsList','$usersList'));
+      return view('trainingCardPage', compact('trainingCardsList','usersList'));
     }
 
     public static function getTrainingCardsDBOrTrainingCardsSession(Request $request,$currentPage){
