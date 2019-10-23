@@ -38,3 +38,4 @@ Route::get('/abbonamenti', function () {
 Route::get('/iscritti', function () {
     return view('usersPage');
 });
+
