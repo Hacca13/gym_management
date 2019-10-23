@@ -54,9 +54,7 @@ Route::get('/gestioneIscritti', 'UsersManager@getAllUserForView');
 
 
 //ABBONAMENTI
-Route::get('/gestioneAbbonamenti', function () {
-    return view('subscriptionPage');
-});
+Route::get('/gestioneAbbonamenti', 'SubscriptionManager@getAllUser');
 
 Route::get('/nuovoAbbonamento', function (){
     return view('insertNewSubscription');
