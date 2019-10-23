@@ -98,8 +98,7 @@
                         <div class="col-sm-9">
                             <input type="text" class="form-control" id="cono1" name="number" required>
                         </div>
-                    </div>
-
+                    </div
                 </div>
             </div>
             <div class="card col-md-6">
