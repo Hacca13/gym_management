@@ -9,6 +9,7 @@ use Kreait\Firebase;
 use Firevel\Firestore\Facades\Firestore;
 use App\Http\Models\ExerciseModel;
 
+
 class ExercisesManager extends Controller{
 
     public static function getAllExercises(){
@@ -67,14 +68,8 @@ class ExercisesManager extends Controller{
 
     public function addExercise(Request $request) {
         $input = $request->all();
-        $exerciseImage = $request->file('imageExercise');
+        $exerciseImage = $request->file('image');
 
-        if(isset($input['exerciseIsATime']) == FALSE){
-          $input['exerciseIsATime'] = FALSE;
-        }
-        else{
-          $input['exerciseIsATime'] = TRUE;
-        }
 
         $firebase = (new Firebase\Factory());
 
@@ -91,24 +86,33 @@ class ExercisesManager extends Controller{
         $id = $collection->add([])->id();
         $exercise = new ExerciseModel(
             $id,
-            $input['nameExercise'],
-            $input['descriptionExercise'],
+            $input['name'],
+            $input['description'],
             $input['exerciseIsATime'],
             $imageDatabase,
-            $input['linkExercise']
+            $input['link']
         );
 
         $collection->document($id)->set(ExercisesManager::trasformExerciseToArrayExercise($exercise));
 
         toastr()->success('Esercizio inserito');
-        return redirect('gestioneEsercizi');
+        return redirect('esercizi');
 
     }
+
 
     public function exercisePage() {
         $exercises = ExercisesManager::getAllExercises();
         return view('exercisePage', compact('exercises'));
     }
 
+    public function jsonEx() {
+        $exercises = ExercisesManager::getAllExercises();
+        $arr = [];
+        foreach ($exercises as $ex) {
+            array_push($arr, ExercisesManager::trasformExerciseToArrayExercise($ex));
+        }
+        return response()->json($arr);
+    }
 
 }
