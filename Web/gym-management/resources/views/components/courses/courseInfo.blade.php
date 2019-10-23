@@ -28,7 +28,7 @@
                             <div class="form-group row">
                                 <div class="col-sm-9">
                                     <label for="fname" class="col-sm-6 text-right control-label col-form-label" style="font-family: bold">Immagine del Corso:</label>
-                                    <img src="{{$course->getImage()}}" class="img embed-responsive">
+                                    <img src="{{$course->getImage()}}" height="180dpi" width="200dpi" class="img embed-responsive">
                                 </div>
                             </div>
                         </div>

@@ -77,13 +77,12 @@ class Firetest extends Controller
       }
       return $documents;
   }
-  
+
 
   public function test3(){
-  $array0 = array('aaaaa' => 'aaaaa', 'bbbbb'=> 'bbbbb');
-  $array1 = array('cccc' => 'cccc', 'ddddd' => 'ddddd' );
-  $array2 = $array0 + $array1;
-    var_dump($array2);
+  $array = CoursesManager::getAllCourses();
+
+
 
   }
 

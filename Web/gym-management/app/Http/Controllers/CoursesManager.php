@@ -35,6 +35,8 @@ class CoursesManager extends Controller{
             $course->setIdDatabase($document->id());
             array_push($courses,$course);
         }
+
+
         return $courses;
     }
 
@@ -45,13 +47,16 @@ class CoursesManager extends Controller{
         foreach ($documents as $document) {
             $course = CoursesManager::trasformArrayCourseToCourse($document->data());
             $course->setIdDatabase($document->id());
+
             array_push($allCourses,$course);
         }
+
         return $allCourses;
     }
+
     public static function getAllCoursesView(){
       $courses = CoursesManager::getAllCourses();
-      
+
       return view('courses', compact('courses'));
     }
 
@@ -59,12 +64,13 @@ class CoursesManager extends Controller{
         $idDatabase = data_get($arrayCourse,'idDatabase');
         $name = data_get($arrayCourse,'name');
         $image = data_get($arrayCourse,'image');
+        $isActive = data_get($arrayCourse,'isActive');
         $instructor = data_get($arrayCourse,'instructor');
         $period = data_get($arrayCourse,'period');
         $weeklyFrequency = data_get($arrayCourse,'weeklyFrequency') ;
         $usersList = data_get($arrayCourse,'usersList') ;
 
-        $course = new CourseModel($idDatabase,$name,$image,$instructor,$period,$weeklyFrequency,$usersList);
+        $course = new CourseModel($idDatabase,$name,$image,$isActive,$instructor,$period,$weeklyFrequency,$usersList);
 
         return $course;
     }
@@ -72,6 +78,7 @@ class CoursesManager extends Controller{
         $idDatabase = $course->getIdDatabase();
         $name = $course->getName();
         $image = $course->getImage();
+        $isActive = $course->getIsActive();
         $instructor = $course->getInstructor();
         $period = $course->getPeriod();
         $weeklyFrequency = $course->getWeeklyFrequency();
@@ -81,6 +88,7 @@ class CoursesManager extends Controller{
             'idDatabase' => $idDatabase,
             'name' => $name,
             'image' => $image,
+            'isActive' => $isActive,
             'instructor' => $instructor,
             'period' => $period,
             'weeklyFrequency' => $weeklyFrequency,
@@ -146,6 +154,7 @@ class CoursesManager extends Controller{
         $corso = array(
             'name' => $name,
             'image' => $image,
+            'isActive' => TRUE,
             'instructor' => $instructor,
             'period' => $period,
             'weeklyFrequency' => $weeklyFrequency,
