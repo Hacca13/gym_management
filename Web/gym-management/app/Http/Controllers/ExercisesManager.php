@@ -9,7 +9,6 @@ use Kreait\Firebase;
 use Firevel\Firestore\Facades\Firestore;
 use App\Http\Models\ExerciseModel;
 
-
 class ExercisesManager extends Controller{
 
     public static function getAllExercises(){
@@ -68,8 +67,14 @@ class ExercisesManager extends Controller{
 
     public function addExercise(Request $request) {
         $input = $request->all();
-        $exerciseImage = $request->file('image');
+        $exerciseImage = $request->file('imageExercise');
 
+        if(isset($input['exerciseIsATime']) == FALSE){
+          $input['exerciseIsATime'] = FALSE;
+        }
+        else{
+          $input['exerciseIsATime'] = TRUE;
+        }
 
         $firebase = (new Firebase\Factory());
 
@@ -78,41 +83,36 @@ class ExercisesManager extends Controller{
                 'name' => $exerciseImage->getClientOriginalName()
             ])->name();
 
-        $imageDatabase =  "https://firebasestorage.googleapis.com/v0/b/fitandfight.appspot.com/o/". $imageRef ."?alt=media";
+        $gif =  "https://firebasestorage.googleapis.com/v0/b/fitandfight.appspot.com/o/". $imageRef ."?alt=media";
 
         $collection = Firestore::collection('Exercises');
 
+        $arrayExercise = ExercisesManager::trasformRequestIntoArrayExercise($input,$gif);
 
-        $id = $collection->add([])->id();
-        $exercise = new ExerciseModel(
-            $id,
-            $input['name'],
-            $input['description'],
-            $input['exerciseIsATime'],
-            $imageDatabase,
-            $input['link']
-        );
-
-        $collection->document($id)->set(ExercisesManager::trasformExerciseToArrayExercise($exercise));
+        $collection->add($arrayExercise);
 
         toastr()->success('Esercizio inserito');
-        return redirect('esercizi');
+        return redirect('gestioneEsercizi');
 
     }
 
+    public function trasformRequestIntoArrayExercise($input,$gif){
 
-    public function exercisePage() {
+      $arrayExercise = array(
+          'nameExercise' => $input['nameExercise'],
+          'descriptionExercise' => $input['descriptionExercise'],
+          'exerciseIsATim' => $input['exerciseIsATim'],
+          'gif' => $gif,
+          'linkExercise' => $input['linkExercise']
+      );
+
+      return $arrayExercise;
+    }
+
+    public function getAllExercisesForView() {
         $exercises = ExercisesManager::getAllExercises();
         return view('exercisePage', compact('exercises'));
     }
 
-    public function jsonEx() {
-        $exercises = ExercisesManager::getAllExercises();
-        $arr = [];
-        foreach ($exercises as $ex) {
-            array_push($arr, ExercisesManager::trasformExerciseToArrayExercise($ex));
-        }
-        return response()->json($arr);
-    }
 
 }

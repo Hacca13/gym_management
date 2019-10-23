@@ -49,6 +49,10 @@ class CoursesManager extends Controller{
         }
         return $allCourses;
     }
+    public static function getAllCoursesView(){
+      $courses = CoursesManager::getAllCourses();
+      return view('courses', compact('courses'));
+    }
 
     public static function trasformArrayCourseToCourse($arrayCourse){
         $idDatabase = data_get($arrayCourse,'idDatabase');
@@ -106,9 +110,9 @@ class CoursesManager extends Controller{
                 'name' => $name
             ])->name();
 
-        $documentImage =  "https://firebasestorage.googleapis.com/v0/b/fitandfight.appspot.com/o/". $str ."?alt=media";
+        $image =  "https://firebasestorage.googleapis.com/v0/b/fitandfight.appspot.com/o/". $str ."?alt=media";
 
-        $days = [];
+        $days = array();
 
         for ($i = 0; $i<7; $i++) {
             if (isset($input['singleDay' . strval($i)])) {
@@ -127,30 +131,30 @@ class CoursesManager extends Controller{
         }
 
         $name = $input['name'];
-        $istructor = $input['instructor'];
+        $instructor = $input['instructor'];
         $period = [
             'startDate' => $input['startDate'],
             'endDate' => $input['endDate']
         ];
-        $weekly = $days;
-        $userList = [];
+        $weeklyFrequency = $days;
+        $usersList = array();
 
 
         $coll = Firestore::collection('Courses');
 
-        $corso = new CourseModel(
-            null,
-            $name,
-            $documentImage,
-            $istructor,
-            $period,
-            $weekly,
-            $userList
+        $corso = array(
+            'name' => $name,
+            'image' => $image,
+            'instructor' => $instructor,
+            'period' => $period,
+            'weeklyFrequency' => $weeklyFrequency,
+            'usersList' => $usersList
         );
-        $coll->add(CoursesManager::trasformCourseToArrayCourse($corso));
+
+        $coll->add($corso);
 
         toastr()->success('Corso inserito');
-        return redirect('/corsi');
+        return redirect('/gestioneCorsi');
 
     }
 
