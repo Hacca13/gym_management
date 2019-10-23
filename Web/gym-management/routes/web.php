@@ -70,9 +70,8 @@ Route::get('/nuovaScheda', function (){
     return view('newCard');
 });
 
-Route::get('/gestioneSchede', function () {
-    return view('trainingCards');
-});
+Route::get('/gestioneSchede', 'TrainingCardsManager@getAllTrainingCardsForView');
+
 
 
 

@@ -35,7 +35,7 @@ class UsersManager extends Controller{
       $currentPage = LengthAwarePaginator::resolveCurrentPage();
       $users = UsersManager::getUserDBOrUserSession($request,$currentPage);
       $coursesForUsers = array();
-      
+
       foreach ($users as $user) {
         $coursesForUser = CoursesManager::theUserForWhichCourseIsRegistered($user->getIdDatabase());
         $userIdAndCourse = array(
@@ -52,7 +52,7 @@ class UsersManager extends Controller{
       return view('usersPage', compact('users','coursesForUsers'));
     }
 
-    public function getUserDBOrUserSession(Request $request,$currentPage){
+    public static function getUserDBOrUserSession(Request $request,$currentPage){
       if($currentPage == 1){
         $documents = UsersManager::getAllUser();
         $request->session()->put('allUsers', $documents);
@@ -66,18 +66,7 @@ class UsersManager extends Controller{
     }
 
 
-    public static function getUsersByUsername($username){
-        $users = array();
-        $collection = Firestore::collection('Users');
-        $query = $collection->where('username', '=' ,$username);
-        $documents = $query->documents();
-        foreach ($documents as $document) {
-            $user = UsersManager::transformArrayUserIntoUser($document->data());
-            $user->setIdDatabase($document->id());
-            array_push($users,$user);
-        }
-        return $users;
-    }
+
 
     public static function getUsersByName($name){
         $users = array();

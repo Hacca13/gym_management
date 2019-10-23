@@ -50,7 +50,7 @@ class Firetest extends Controller
 
   public function test2(Request $request){
 
-    $currentPage = LengthAwarePaginator::resolveCurrentPage();
+    /*$currentPage = LengthAwarePaginator::resolveCurrentPage();
     $documents = Firetest::testPage($request,$currentPage);
     $itemCollection = collect($documents);
     $perPage = 1;
@@ -58,8 +58,17 @@ class Firetest extends Controller
     $paginatedItems= new LengthAwarePaginator($currentPageItems , count($itemCollection), $perPage);
     $paginatedItems->setPath($request->url());
 
+    <?php  
+          $exercisesList = array();
+    ?>
+  <!--  @foreach($trainingCard->getExercises() as $exercise)
+      @include('components.exercise.cardExercise')
+    @endforeach -->
 
-    return view('items_view', compact('paginatedItems'));
+
+    return view('items_view', compact('paginatedItems'));*/
+
+    TrainingCardsManager::getAllTrainingCardsForView($request);
 
   }
 

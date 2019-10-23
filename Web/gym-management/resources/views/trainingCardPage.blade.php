@@ -38,7 +38,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-1" style="text-align: center; margin-top: auto; margin-bottom: auto">
-                                    <a href="nuovoCorso" role="button">
+                                    <a href="nuovaScheda" role="button">
                                         <button class="bttn-material-circle bttn-md bttn-primary">
                                             <i class="fas fa-plus"></i>
                                         </button>
@@ -50,12 +50,14 @@
                 </div>
             </div>
                 <div class="col-md-12">
-                    @foreach($exercises as $exercise)
-                    @include('components.trainingCards.TrainingCardsList')
+                    @foreach($trainingCardsList as $trainingCard)
+                      @include('components.trainingCards.TrainingCardsList')
                     @endforeach
 
                 </div>
-
+              <div>
+                    {{ $trainingCardsList->links()}}
+              </div>
         </div>
     </div>
 @endsection

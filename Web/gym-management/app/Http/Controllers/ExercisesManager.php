@@ -109,10 +109,13 @@ class ExercisesManager extends Controller{
       return $arrayExercise;
     }
 
-    public function getAllExercisesForView() {
+    public static function getAllExercisesForView() {
         $exercises = ExercisesManager::getAllExercises();
         return view('exercisePage', compact('exercises'));
     }
+    
+    public static function getExercisesDBOrExercises(Request $request,$currentPage){
 
+    }
 
 }
