@@ -2,9 +2,24 @@
 <form action="/" method="get" enctype="multipart/form-data">
     @csrf
     <div class="row">
+        <div class="col-md-4" style="text-align: start;">
+            <a href="modificaScheda">
+                <i class="fas fa-edit" style="font-size: 150%; color: black;"></i>
+            </a>
+        </div>
+        <div class="col-md-4" style="text-align: center">
+            <h4>Informazioni Iscritto</h4>
+        </div>
+        <div class="col-md-4" style="text-align: end">
+            <!--Pagina precedente-->
+            <a href="/gestionIscritti">
+                <h3>
+                    <i class="fas fa-times" style="color: red"></i>
+                </h3>
+            </a>
+        </div>
         <div class="col-md-6" style="border: 1px red solid">
             <div class="card-body">
-                <h4 class="card-title ">Informazioni Utente</h4>
                 <div class="form-group row">
                     <div class="col-sm-9">
                         <label for="fname" class="col-sm-6 text-left control-label col-form-label" style="font-family: bold">Nome:</label>
@@ -131,6 +146,19 @@
                         <input type="checkbox" hidden name="isUnderage" value="TRUE"></input>
                     </div>
                 </div>
+            </div>
+        </div>
+        <div class="card-body">
+
+            <div class="form-group row">
+                <div class="col-md-10"></div>
+                <div class="col-md-2">
+                    <a href="/gestioneEsercizi">
+                        <button class="btn btn-danger" id="fname" name="" style="border-radius: 10px;">Disattiva</button>
+                    </a>
+                </div>
+
+
             </div>
         </div>
     </div>

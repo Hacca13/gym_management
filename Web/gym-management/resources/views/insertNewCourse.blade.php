@@ -12,7 +12,7 @@
                 <form class="form-horizontal" method="post" enctype="multipart/form-data" action="/insertFormCourse">
                     @csrf
                     <div class="card-body">
-                        <h4 class="card-title">Inserisci Informazione Corso</h4>
+                        <h4 class="card-title m-t-10 text-center">Inserisci Informazione Corso</h4>
                         <br>
                         <div class="form-group row">
                             <label for="fname" class="col-sm-3 text-right control-label col-form-label">Nome Corso</label>

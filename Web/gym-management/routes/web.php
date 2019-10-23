@@ -41,10 +41,9 @@ Route::get('/gestioneScheda', 'TrainingCardsManager@trainingCardPage');
 
 
 //UTENTI
-Route::get('/getAllUser', 'UserManager@getAllUser');
 Route::post('/addUserPost', 'UsersManager@createUser');
 
-Route::get('/nuovoUtente', function (){
+Route::get('/nuovoIscritto', function (){
     return view('userAdd');
 });
 
@@ -79,20 +78,11 @@ Route::get('/gestioneSchede', function () {
 
 
 //CORSI
-Route::get('/gestioneCorsi', 'CoursesManager@getAllCourses');
+Route::get('/gestioneCorsi', 'CoursesManager@getAllCoursesPage');
 Route::post('/insertFormCourse', 'CoursesManager@addCourse');
-Route::get('/gestioneCorsi', 'CoursesManager@coursesPage');
-
 Route::get('/nuovoCorso', function () {
     return view('insertNewCourse');
 });
 
+
 Auth::routes();
-
-Route::get('/provaa', function (){
-    return view('viewStrap');
-});
-
-Route::get('/insertTCard', function (){
-    return view('insertNewTrainingCard');
-});

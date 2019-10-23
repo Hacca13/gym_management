@@ -51,6 +51,7 @@ class CoursesManager extends Controller{
     }
     public static function getAllCoursesView(){
       $courses = CoursesManager::getAllCourses();
+      
       return view('courses', compact('courses'));
     }
 
@@ -89,7 +90,7 @@ class CoursesManager extends Controller{
         return $arrayCourse;
     }
 
-    public function coursesPage() {
+    public function getAllCoursesPage() {
         $courses = CoursesManager::getAllCourses();
         return view('courses', compact('courses'));
     }
