@@ -54,10 +54,31 @@ class CoursesManager extends Controller{
         return $allCourses;
     }
 
-    public static function getAllCoursesView(){
-      $courses = CoursesManager::getAllCourses();
+    public static function getAllCoursesView(Request $request){
+      $currentPage = LengthAwarePaginator::resolveCurrentPage();
+      $courses = CoursesManager::getCoursesDBOrCoursesSession();
+
+      $itemCollection = collect($courses);
+      $perPage = 1;
+      $currentPageItems = $itemCollection->slice(($currentPage * $perPage) - $perPage, $perPage)->all();
+      $courses = new LengthAwarePaginator($currentPageItems , count($itemCollection), $perPage);
+      $courses->setPath($request->url());
 
       return view('courses', compact('courses'));
+    }
+
+    public static function getCoursesDBOrCoursesSession(Request $request,$currentPage){
+      if($currentPage == 1){
+        $documents = CoursesManager::getAllCourses();
+        $request->session()->put('Courses', $documents);
+
+      }
+      else{
+        $documents = $request->session()->pull('Courses');
+        $request->session()->put('Courses', $documents);
+      }
+      return $documents;
+
     }
 
     public static function trasformArrayCourseToCourse($arrayCourse){

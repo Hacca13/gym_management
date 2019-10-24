@@ -45,6 +45,7 @@ class TrainingCardsManager extends Controller
         }
       }
 
+//DA FINIRE DeVO PRENDERE GLI ESERCIZI
 
       return view('trainingCardPage', compact('trainingCardsList','usersList'));
     }

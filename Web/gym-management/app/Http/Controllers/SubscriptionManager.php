@@ -16,21 +16,20 @@ class SubscriptionManager extends Controller
 
     public static function getAllSubscriptionForView(Request $request){
       $currentPage = LengthAwarePaginator::resolveCurrentPage();
-      $subscription = SubscriptionManager::getSubscriptionDBOrSubscriptionSession($request,$currentPage);
-      $itemCollection = collect($subscription);
+      $subscriptionList = SubscriptionManager::getSubscriptionDBOrSubscriptionSession($request,$currentPage);
+      $itemCollection = collect($subscriptionList);
       $perPage = 1;
       $currentPageItems = $itemCollection->slice(($currentPage * $perPage) - $perPage, $perPage)->all();
-      $subscription= new LengthAwarePaginator($currentPageItems , count($itemCollection), $perPage);
-      $subscription->setPath($request->url());
+      $subscriptionList= new LengthAwarePaginator($currentPageItems , count($itemCollection), $perPage);
+      $subscriptionList->setPath($request->url());
 
-      return view('subscriptionPage', compact('subscription'));
+      return view('subscriptionPage', compact('subscriptionList'));
     }
 
     public static function getSubscriptionDBOrSubscriptionSession(Request $request,$currentPage){
       if($currentPage == 1){
         $documents = SubscriptionManager::getAllSubscription();
         $request->session()->put('allSubscription', $documents);
-
       }
       else{
         $documents = $request->session()->pull('allSubscription');

@@ -17,6 +17,7 @@
                     @include('components.courses.courseCard')
                 </div>
             @endforeach
+            
         </div>
     </div>
 @endsection
