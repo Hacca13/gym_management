@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Models\TrainingCardsModel;
 use Illuminate\Http\Request;
 use Google\Cloud\Firestore\FirestoreClient;
 use Kreait\Firebase\Exception\FirebaseException;
@@ -166,6 +167,13 @@ class ExercisesManager extends Controller{
         $request->session()->put('exercises', $documents);
       }
       return $documents;
+    }
+
+    public function insertTrainingCard(Request $request) {
+
+        $collection = Firestore::collection('TrainingCards');
+        $collection->add($request->all());
+        return '/nuovaScheda';
     }
 
 }

@@ -73147,8 +73147,7 @@ function (_Component) {
         min: '',
         sec: ''
       },
-      day: '',
-      no: 1
+      day: 'Lunedì'
     };
     return _this;
   }
@@ -73206,7 +73205,8 @@ function (_Component) {
         onChange: function onChange(event) {
           _this2.setState({
             work: {
-              min: event.target.value
+              min: event.target.value,
+              sec: _this2.state.work.sec
             }
           });
         },
@@ -73220,7 +73220,8 @@ function (_Component) {
         onChange: function onChange(event) {
           _this2.setState({
             work: {
-              sec: event.target.value
+              sec: event.target.value,
+              min: _this2.state.work.min
             }
           });
         },
@@ -73238,7 +73239,8 @@ function (_Component) {
         onChange: function onChange(event) {
           _this2.setState({
             rest: {
-              min: event.target.value
+              min: event.target.value,
+              sec: _this2.state.rest.sec
             }
           });
         },
@@ -73252,6 +73254,7 @@ function (_Component) {
         onChange: function onChange(event) {
           _this2.setState({
             rest: {
+              min: _this2.state.rest.min,
               sec: event.target.value
             }
           });
@@ -73266,7 +73269,6 @@ function (_Component) {
         htmlFor: "select"
       }, "Giorno"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
         className: "select2 form-control custom-select",
-        id: "select",
         name: "EerciseDay" + this.props.indexed,
         value: this.state.day,
         onChange: function onChange(event) {
@@ -73365,6 +73367,22 @@ function (_Component) {
       });
     });
 
+    _defineProperty(_assertThisInitialized(_this), "handleSubmit", function (event) {
+      event.preventDefault();
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('/api/insertTrainCard', {
+        idUserDatabase: _this.state.userID,
+        exercises: _this.state.exercisesList,
+        period: {
+          startDate: _this.state.from,
+          endDate: _this.state.to
+        }
+      }).then(function (response) {
+        window.location.href = response.data;
+      })["catch"](function (e) {
+        console.log(e);
+      });
+    });
+
     _defineProperty(_assertThisInitialized(_this), "getSuggestions", function (value, exer) {
       var inputValue = value.trim().toLowerCase();
       var inputLength = inputValue.length;
@@ -73410,17 +73428,19 @@ function (_Component) {
     });
 
     _this.state = {
-      value: '1',
+      value: '',
       exerr: [],
+      userID: '',
+      from: '',
+      to: '',
       exercisesList: [],
-      suggestions: [],
-      no: 1
+      suggestions: []
     };
     _this.removeExercise = _this.removeExercise.bind(_assertThisInitialized(_this));
     _this.returnInfo = _this.returnInfo.bind(_assertThisInitialized(_this));
-    _this.myRef = react__WEBPACK_IMPORTED_MODULE_0___default.a.createRef();
     return _this;
-  }
+  } //COMPONENTS FUNCTIONS
+
 
   _createClass(NewTcard2, [{
     key: "componentDidMount",
@@ -73434,27 +73454,30 @@ function (_Component) {
       })["catch"](function (e) {
         console.log(e);
       }).then(function () {});
-    }
+    } //FORM FUNCTIONS
+
   }, {
     key: "addExercise",
+    //EXERCISES FUNCTIONS
     value: function addExercise(suggest) {
       var tmp_ex = this.state.exerr;
       var ind = tmp_ex.findIndex(function (ex) {
         return ex.name === suggest;
       });
       var toAdd = {
-        id: tmp_ex[ind].idDatabase,
+        idExerciseDatabase: tmp_ex[ind].idDatabase,
         name: tmp_ex[ind].name,
-        atTime: tmp_ex[ind].exerciseIsATime,
-        reps: '',
-        work: {
-          min: '',
-          sec: ''
+        //atTime: tmp_ex[ind].exerciseIsATime,
+        numberOfRepetitions: '',
+        workoutTime: {
+          minutes: '',
+          seconds: ''
         },
-        rest: {
-          min: '',
-          sec: ''
-        }
+        restTime: {
+          minutes: '',
+          seconds: ''
+        },
+        day: ''
       };
       var temp_arr = this.state.exercisesList;
       temp_arr.push(toAdd);
@@ -73473,11 +73496,25 @@ function (_Component) {
       });
     }
   }, {
-    key: "handleSubmit",
-    value: function handleSubmit() {}
-  }, {
     key: "returnInfo",
-    value: function returnInfo(item, index) {}
+    value: function returnInfo(item, index) {
+      var tmp_exercises = this.state.exercisesList;
+      var tmp_exercise = this.state.exercisesList[index];
+      tmp_exercise.numberOfRepetitions = item.series;
+      tmp_exercise.workoutTime = {
+        minutes: item.work.min,
+        seconds: item.work.sec
+      };
+      tmp_exercise.restTime = {
+        minutes: item.rest.min,
+        seconds: item.rest.sec
+      };
+      tmp_exercise.day = item.day;
+      this.setState({
+        exercisesList: tmp_exercises
+      });
+    } //SUGGESTION FUNCTIONS
+
   }, {
     key: "render",
     value: function render() {
@@ -73525,7 +73562,13 @@ function (_Component) {
       }, "Scheda Di:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
         className: "form-control",
-        name: "name",
+        name: "userID",
+        value: this.state.userID,
+        onChange: function onChange(event) {
+          return _this3.setState({
+            userID: event.target.value
+          });
+        },
         style: {
           borderRadius: '10px',
           backgroundColor: 'rgb(255, 255, 255,0.7)'
@@ -73546,8 +73589,15 @@ function (_Component) {
         className: "col-sm-12 text-left control-label col-form-label"
       }, "Dal:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "date",
+        pattern: "\\d{1,2}/\\d{1,2}/\\d{4}",
         className: "form-control",
         name: "from",
+        value: this.state.from,
+        onChange: function onChange(event) {
+          return _this3.setState({
+            from: event.target.value
+          });
+        },
         style: {
           borderRadius: '10px',
           backgroundColor: 'rgb(255, 255, 255,0.7)'
@@ -73561,11 +73611,20 @@ function (_Component) {
         type: "date",
         className: "form-control",
         name: "to",
+        pattern: "\\d{1,2}/\\d{1,2}/\\d{4}",
+        value: this.state.to,
+        onChange: function onChange(event) {
+          return _this3.setState({
+            to: event.target.value
+          });
+        },
         style: {
           borderRadius: '10px',
           backgroundColor: 'rgb(255, 255, 255,0.7)'
         }
-      })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        type: "submit"
+      }, "INSERT"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "row"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-md-12",
@@ -73621,7 +73680,7 @@ function (_Component) {
         renderSuggestion: this.renderSuggestion,
         inputProps: inputProps,
         onSuggestionSelected: this.onSuggestionSelected
-      }))))))))))));
+      })))))))))))));
     }
   }]);
 
