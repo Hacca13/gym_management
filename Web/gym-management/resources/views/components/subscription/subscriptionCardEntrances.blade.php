@@ -1,5 +1,5 @@
 <div class="col-md-12">
-  <div class="card" style="border-radius: 10px; border: 1px red solid">
+  <div class="card" style="border-radius: 10px;">
     <div class="card-body">
       <div class="row">
         <div class="col-md-5" style="margin-top: auto; margin-bottom: auto;">

@@ -1,4 +1,3 @@
-
 <div class="card" style="border-radius: 10px;background-color: rgb(255, 255, 255,0.7);">
     <div class="card-body">
         <div class="row">

@@ -29,7 +29,7 @@
                     </div>
                     <div class="col-md-1" style="text-align: center; margin-top: auto; margin-bottom: auto">
                         <a href="nuovoAbbonamento" role="button">
-                            <button class="bttn-material-circle bttn-md bttn-primary">
+                            <button class="bttn-material-circle bttn-md bttn-primary" style="background-color: #21252E">
                                 <i class="fas fa-plus"></i>
                             </button>
                         </a>

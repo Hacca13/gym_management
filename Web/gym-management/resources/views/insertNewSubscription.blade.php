@@ -9,20 +9,20 @@
                     <div class="col-md-12">
                         <form class="card">
                             <div class="card-body wizard-content">
-                                <div class="col-md-6">
+                                <div class="col-md-12">
                                     <h2>Inserisci Dati Abbonamento</h2>
                                 </div>
                                 <br>
                                 <form id="example-form" action="#" class="m-t-40">
                                     <div>
                                         <section>
-                                            <label for="userName">Abbonamento di: </label>
+                                            <label for="userName" class="row justify-content-center">Abbonamento di: </label>
                                             <input type="text" class="form-control text">
                                         </section>
                                     </div>
                                     <div>
                                         <br>
-                                        <label for="userName">Tipo di abbonamento:</label>
+                                        <label for="userName" class="row justify-content-center">Tipo di abbonamento:</label>
                                         <section>
                                             <input id="myCheck" onclick="Annuale()" name="acceptTerms" type="radio" class="required">
                                             <label for="acceptTerms">Annuale</label>
@@ -78,8 +78,11 @@
                                         </div>
                                     </div>
                                 </form>
-                                <section>
+                                <br>
+                                <section class="right-side-dd">
+                                    <p align="right">
                                     <button id="corso" name="acceptTerms" class="btn btn-primary">Inserisci</button>
+                                    </p>
                                 </section>
                             </div>
                     </div>
@@ -99,6 +102,8 @@
             if (checkBox.checked == true){
                 inizio.style.display = "block";
                 fine.style.display = "block";
+                entrate.style.display = 'none';
+                corsi.style.display = "none";
             } else {
                 inizio.style.display = "none";
                 fine.style.display = "none";
@@ -115,6 +120,9 @@
 
             if (entrata.checked == true){
                 entrate.style.display = "block";
+                corsi.style.display = "none";
+                inizio.style.display = "none";
+                fine.style.display = "none";
             } else {
                 entrate.style.display = "none";
             }
@@ -130,16 +138,14 @@
 
             if (corso.checked == true){
                 corsi.style.display = "block";
+                entrate.style.display = 'none';
+                inizio.style.display = "none";
+                fine.style.display = "none";
             } else {
                 corsi.style.display = "none";
             }
         }
-        /*  if(checkbox.checked === true){
-              entrate.style.display = "none";
-          } else if(entrata.checked === true) {
-              inizio.style.display = "none";
-              fine.style.display = "none";
-          }*/
+
     </script>
 
 
