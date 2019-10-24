@@ -14,8 +14,7 @@ class ExerciseToAdd extends Component {
                 min: '',
                 sec: ''
             },
-            day: '',
-            no: 1
+            day: 'Lunedì',
         }
     }
 
@@ -67,7 +66,8 @@ class ExerciseToAdd extends Component {
                                            onChange={event => {
                                                this.setState({
                                                    work: {
-                                                       min: event.target.value
+                                                       min: event.target.value,
+                                                       sec: this.state.work.sec
                                                    }
                                                })
                                            }}
@@ -80,7 +80,8 @@ class ExerciseToAdd extends Component {
                                            onChange={event => {
                                                this.setState({
                                                    work: {
-                                                       sec: event.target.value
+                                                       sec: event.target.value,
+                                                       min: this.state.work.min
                                                    }
                                                })
                                            }}
@@ -95,7 +96,8 @@ class ExerciseToAdd extends Component {
                                            onChange={event => {
                                                this.setState({
                                                    rest: {
-                                                       min: event.target.value
+                                                       min: event.target.value,
+                                                       sec: this.state.rest.sec
                                                    }
                                                });
                                            }}
@@ -108,6 +110,7 @@ class ExerciseToAdd extends Component {
                                            onChange={event => {
                                                this.setState({
                                                    rest: {
+                                                       min: this.state.rest.min,
                                                        sec: event.target.value
                                                    }
                                                })
@@ -117,7 +120,7 @@ class ExerciseToAdd extends Component {
 
                                 <div className="form-group">
                                     <label htmlFor="select">Giorno</label>
-                                    <select className="select2 form-control custom-select" id="select"
+                                    <select className="select2 form-control custom-select"
                                             name={"EerciseDay" + this.props.indexed}
                                             value={this.state.day}
                                             onChange={event => {
