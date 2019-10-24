@@ -10,17 +10,19 @@ class NewTcard2 extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            value: '1',
+            value: '',
             exerr: [],
+            userID: '',
+            from: '',
+            to: '',
             exercisesList: [],
-            suggestions: [],
-            no: 1
+            suggestions: []
         };
         this.removeExercise = this.removeExercise.bind(this);
         this.returnInfo = this.returnInfo.bind(this);
-        this.myRef = React.createRef();
     }
 
+    //COMPONENTS FUNCTIONS
     componentDidMount() {
         axios.get('/api/jsonExercises').then(value => {
             this.setState({
@@ -33,29 +35,7 @@ class NewTcard2 extends Component {
 
     }
 
-    addExercise(suggest) {
-        let tmp_ex = this.state.exerr;
-        let ind = tmp_ex.findIndex(ex => ex.name === suggest);
-        let toAdd = {
-            id: tmp_ex[ind].idDatabase,
-            name: tmp_ex[ind].name,
-            atTime: tmp_ex[ind].exerciseIsATime,
-            reps: '',
-            work: {
-                min: '',
-                sec: ''
-            },
-            rest: {
-                min: '',
-                sec: ''
-            }
-        }
-        let temp_arr = this.state.exercisesList;
-        temp_arr.push(toAdd);
-        this.setState({ exercisesList: temp_arr});
-        document.getElementById('modalBtn').click();
-    }
-
+    //FORM FUNCTIONS
     onChange = (event, { newValue }) => {
         this.setState({
             value: newValue
@@ -63,11 +43,77 @@ class NewTcard2 extends Component {
 
     };
 
+    handleSubmit = event => {
+        event.preventDefault();
+        axios.post('/api/insertTrainCard', {
+            idUserDatabase: this.state.userID,
+            exercises: this.state.exercisesList,
+            period: {
+                startDate: this.state.from,
+                endDate: this.state.to
+            }
+
+        }).then(response => {
+            window.location.href = response.data;
+        })
+            .catch(e => {
+                console.log(e);
+            });
+
+
+    }
+
+    //EXERCISES FUNCTIONS
+
+    addExercise(suggest) {
+        let tmp_ex = this.state.exerr;
+        let ind = tmp_ex.findIndex(ex => ex.name === suggest);
+        let toAdd = {
+            idExerciseDatabase: tmp_ex[ind].idDatabase,
+            name: tmp_ex[ind].name,
+            //atTime: tmp_ex[ind].exerciseIsATime,
+            numberOfRepetitions: '',
+            workoutTime: {
+                minutes: '',
+                seconds: ''
+            },
+            restTime: {
+                minutes: '',
+                seconds: ''
+            },
+            day: ''
+        }
+        let temp_arr = this.state.exercisesList;
+        temp_arr.push(toAdd);
+        this.setState({ exercisesList: temp_arr});
+        document.getElementById('modalBtn').click();
+    }
+
     removeExercise(index) {
         let tmp_exercises = this.state.exercisesList;
         delete tmp_exercises[index];
         this.setState({ exercisesList: tmp_exercises});
     }
+
+    returnInfo(item, index) {
+        let tmp_exercises = this.state.exercisesList;
+        let tmp_exercise = this.state.exercisesList[index];
+        tmp_exercise.numberOfRepetitions = item.series;
+        tmp_exercise.workoutTime = {
+            minutes: item.work.min,
+            seconds: item.work.sec
+        };
+        tmp_exercise.restTime = {
+            minutes: item.rest.min,
+            seconds: item.rest.sec
+        };
+        tmp_exercise.day = item.day;
+        this.setState({
+            exercisesList: tmp_exercises
+        });
+    }
+
+    //SUGGESTION FUNCTIONS
 
     getSuggestions = (value, exer) => {
         const inputValue = value.trim().toLowerCase();
@@ -77,21 +123,13 @@ class NewTcard2 extends Component {
         );
     };
 
-// When suggestion is clicked, Autosuggest needs to populate the input
-// based on the clicked suggestion. Teach Autosuggest how to calculate the
-// input value for every given suggestion.
     getSuggestionValue = suggestion => suggestion.name;
 
-// Use your imagination to render suggestions.
     renderSuggestion = suggestion => (
         <div>
             {suggestion.name}
         </div>
     );
-
-    handleSubmit() {
-
-    }
 
     onSuggestionSelected = (event, { suggestion, suggestionValue, suggestionIndex, sectionIndex, method }) => {
         this.addExercise(suggestionValue);
@@ -113,10 +151,7 @@ class NewTcard2 extends Component {
     };
 
 
-    returnInfo(item, index) {
 
-
-    }
 
     render() {
         const { value, suggestions } = this.state;
@@ -148,7 +183,13 @@ class NewTcard2 extends Component {
                                         <label htmlFor="fname"
                                                className="col-sm-12 text-left control-label col-form-label">Scheda
                                             Di:</label>
-                                        <input type="text" className="form-control" name="name"
+                                        <input type="text" className="form-control" name="userID"
+                                               value={this.state.userID}
+                                               onChange={event => (
+                                                   this.setState({
+                                                        userID: event.target.value
+                                                   })
+                                               )}
                                                style={{borderRadius: '10px', backgroundColor: 'rgb(255, 255, 255,0.7)'}}/>
                                     </div>
                                     <div className="col-md-6">
@@ -162,80 +203,92 @@ class NewTcard2 extends Component {
                                     <div className="col-sm-6">
                                         <label htmlFor="fname"
                                                className="col-sm-12 text-left control-label col-form-label">Dal:</label>
-                                        <input type="date" className="form-control" name="from"
+                                        <input type="date" pattern="\d{1,2}/\d{1,2}/\d{4}" className="form-control" name="from"
+                                               value={this.state.from}
+                                               onChange={event => (
+                                                   this.setState({
+                                                       from: event.target.value
+                                                   })
+                                               )}
                                                style={{borderRadius: '10px', backgroundColor: 'rgb(255, 255, 255,0.7)'}}/>
                                     </div>
 
                                     <div className="col-md-6">
                                         <label htmlFor="fname"
                                                className="col-sm-12 text-left control-label col-form-label">Al:</label>
-                                        <input type="date" className="form-control" name="to"
+                                        <input type="date" className="form-control" name="to" pattern="\d{1,2}/\d{1,2}/\d{4}"
+                                               value={this.state.to}
+                                               onChange={event => (
+                                                   this.setState({
+                                                       to: event.target.value
+                                                   })
+                                               )}
                                                style={{borderRadius: '10px', backgroundColor: 'rgb(255, 255, 255,0.7)'}}/>
                                     </div>
                                 </div>
 
-                            </form>
+                                <button type="submit">INSERT</button>
 
-                            <div className="row">
 
-                                <div className="col-md-12" style={{border: '1px red dotted'}}>
-                                    {
-                                        this.state.exercisesList.map(((value, index) => {
-                                            return <ExerciseToAdd
-                                                removeEx={this.removeExercise}
-                                                name={value.name}
-                                                indexed={index}
-                                                key={index}
-                                                retrieveState={this.returnInfo}
-                                            />
-                                        }))
-                                    }
+                                <div className="row">
+
+                                    <div className="col-md-12" style={{border: '1px red dotted'}}>
+                                        {
+                                            this.state.exercisesList.map(((value, index) => {
+                                                return <ExerciseToAdd
+                                                    removeEx={this.removeExercise}
+                                                    name={value.name}
+                                                    indexed={index}
+                                                    key={index}
+                                                    retrieveState={this.returnInfo}
+                                                />
+                                            }))
+                                        }
+
+                                    </div>
 
                                 </div>
 
-                            </div>
+                                <div className="col-md-5">
 
-                            <div className="col-md-5">
+                                    <div className="modal fade" id="Modal1" tabIndex="-1" role="dialog"
+                                         aria-labelledby="exampleModalLabel" aria-hidden="true ">
+                                        <div className="modal-dialog" role="document ">
+                                            <div className="modal-content">
+                                                <div className="modal-header">
+                                                    <h5 className="modal-title" id="exampleModalLabel">Popup
+                                                        Headfewfwer</h5>
+                                                    <button type="button" id="modalBtn" className="close"
+                                                            data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true ">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div className="modal-body">
+                                                    <div className="container">
 
-                                <div className="modal fade" id="Modal1" tabIndex="-1" role="dialog"
-                                     aria-labelledby="exampleModalLabel" aria-hidden="true ">
-                                    <div className="modal-dialog" role="document ">
-                                        <div className="modal-content">
-                                            <div className="modal-header">
-                                                <h5 className="modal-title" id="exampleModalLabel">Popup
-                                                    Headfewfwer</h5>
-                                                <button type="button" id="modalBtn" className="close"
-                                                        data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true ">&times;</span>
-                                                </button>
-                                            </div>
-                                            <div className="modal-body">
-                                                <div className="container">
+                                                        <div className='row justify-content-center'>
 
-                                                    <div className='row justify-content-center'>
+                                                            <Autosuggest
+                                                                suggestions={suggestions}
+                                                                onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
+                                                                onSuggestionsClearRequested={this.onSuggestionsClearRequested}
+                                                                getSuggestionValue={this.getSuggestionValue}
+                                                                renderSuggestion={this.renderSuggestion}
+                                                                inputProps={inputProps}
+                                                                onSuggestionSelected={this.onSuggestionSelected}
+                                                            />
 
-                                                        <Autosuggest
-                                                            suggestions={suggestions}
-                                                            onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
-                                                            onSuggestionsClearRequested={this.onSuggestionsClearRequested}
-                                                            getSuggestionValue={this.getSuggestionValue}
-                                                            renderSuggestion={this.renderSuggestion}
-                                                            inputProps={inputProps}
-                                                            onSuggestionSelected={this.onSuggestionSelected}
-                                                        />
-
-
-
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+
                                 </div>
-
-                            </div>
-
+                            </form>
                         </div>
+
                     </div>
                 </div>
             </div>
