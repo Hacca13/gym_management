@@ -1,4 +1,3 @@
-
 <div class="card" style="border-radius: 10px;background-color: rgb(255, 255, 255,0.7);">
     <div class="card-body">
         <div class="row">
@@ -31,7 +30,7 @@
                     </div>
 
                     <div class="col-md-2">
-                        <a href="addUser" role="button">
+                        <a href="/nuovoIscritto" role="button">
                             <button class="bttn-material-circle bttn-md bttn-success" style="background-color: #21252E">
                                 <i class="fas fa-plus"></i>
                             </button>
