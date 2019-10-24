@@ -36,9 +36,6 @@ Route::get('/modificaEsercizio', function (){
     return view('changeEx');
 });
 
-Route::get('/nuovaSched', 'TrainingCardsManager@exercisePage');
-Route::get('/gestioneScheda', 'TrainingCardsManager@trainingCardPage');
-
 
 //UTENTI
 Route::post('/addUserPost', 'UsersManager@createUser');
@@ -71,6 +68,9 @@ Route::get('/nuovaScheda', function (){
 });
 
 Route::get('/gestioneSchede', 'TrainingCardsManager@getAllTrainingCardsForView');
+
+Route::get('/nuovaSched', 'TrainingCardsManager@exercisePage');
+
 
 
 

@@ -9,7 +9,7 @@
                                 <div>
                                     <section>
                                         <label for="userName">Abbonamento di: </label>
-                                        <h1>{{$user->getName()}} {{$user->getSurname()}}</h1>
+                                        <h1>name</h1>
                                     </section>
                                 </div>
                                 <div>
@@ -73,4 +73,3 @@
     </div>
 </div>
 </div>
-

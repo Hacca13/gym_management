@@ -10,9 +10,8 @@
                     @include('components.subscription.subscriptionOption')
                     <div class="col-md-12" style="margin-top: 2.5%">
                         <div class="row justify-content-center">
-                            @foreach($allUser as $user)
+                          
                                 @include('components.subscription.subscriptionCardEntrances')
-                            @endforeach
 
                         </div>
                     </div>

@@ -14,7 +14,7 @@
                             <div class="row">
                                 <div class="col-md-5">
                                     <div class="input-group no-border">
-                                        <input type="text" value="" class="form-control" placeholder="Search...">
+                                        <input type="text" value="" class="form-control" placeholder="Cerca scheda di...">
                                         <button type="submit" class="btn btn-default btn-round btn-just-icon">
                                             <i class="fas fa-search"></i>
                                             <div class="ripple-container"></div>
@@ -24,7 +24,7 @@
                                 <div class="col-md-3" >
                                     <div class="input-group no-border">
                                         <div class="form-check" >
-                                            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                            <input type="checkbox" checked class="form-check-input" id="exampleCheck1">
                                             <label class="form-check-label" for="exampleCheck1">Schede Attive</label>
                                         </div>
                                     </div>
