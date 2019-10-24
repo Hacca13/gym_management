@@ -73137,12 +73137,30 @@ function (_Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(ExerciseToAdd).call(this, props));
     _this.state = {
-      atTime: true
+      atTime: true,
+      series: '',
+      work: {
+        min: '',
+        sec: ''
+      },
+      rest: {
+        min: '',
+        sec: ''
+      },
+      day: '',
+      no: 1
     };
     return _this;
   }
 
   _createClass(ExerciseToAdd, [{
+    key: "componentDidUpdate",
+    value: function componentDidUpdate(prevProps, prevState, snapshot) {
+      if (prevState !== this.state) {
+        this.props.retrieveState(this.state, this.props.indexed);
+      }
+    }
+  }, {
     key: "render",
     value: function render() {
       var _this2 = this;
@@ -73167,8 +73185,14 @@ function (_Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         htmlFor: "series"
       }, "Numero serie"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        name: "series",
+        name: "series" + this.props.indexed,
         type: "number",
+        value: this.state.series,
+        onChange: function onChange(event) {
+          _this2.setState({
+            series: event.target.value
+          });
+        },
         style: {
           width: '50%'
         }
@@ -73177,13 +73201,29 @@ function (_Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         htmlFor: "series"
       }, "Tempo lavoro"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        name: "series",
+        name: "workMin" + this.props.indexed,
+        value: this.state.work.min,
+        onChange: function onChange(event) {
+          _this2.setState({
+            work: {
+              min: event.target.value
+            }
+          });
+        },
         type: "number",
         style: {
           width: '40%'
         }
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, ":"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        name: "series",
+        name: "workSec" + this.props.indexed,
+        value: this.state.work.sec,
+        onChange: function onChange(event) {
+          _this2.setState({
+            work: {
+              sec: event.target.value
+            }
+          });
+        },
         type: "number",
         style: {
           width: '40%'
@@ -73193,13 +73233,29 @@ function (_Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         htmlFor: "series"
       }, "Tempo riposo"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        name: "series",
+        name: "restMin" + this.props.indexed,
+        value: this.state.rest.min,
+        onChange: function onChange(event) {
+          _this2.setState({
+            rest: {
+              min: event.target.value
+            }
+          });
+        },
         type: "number",
         style: {
           width: '40%'
         }
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, ":"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        name: "series",
+        name: "restSec" + this.props.indexed,
+        value: this.state.rest.sec,
+        onChange: function onChange(event) {
+          _this2.setState({
+            rest: {
+              sec: event.target.value
+            }
+          });
+        },
         type: "number",
         style: {
           width: '40%'
@@ -73211,7 +73267,13 @@ function (_Component) {
       }, "Giorno"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
         className: "select2 form-control custom-select",
         id: "select",
-        name: "singleDay1",
+        name: "EerciseDay" + this.props.indexed,
+        value: this.state.day,
+        onChange: function onChange(event) {
+          _this2.setState({
+            day: event.target.value
+          });
+        },
         style: {
           width: '100%',
           height: '36px'
@@ -73282,13 +73344,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-var languages = [{
-  name: 'C',
-  year: 1972
-}, {
-  name: 'Elm',
-  year: 2012
-}]; // Teach Autosuggest how to calculate suggestions for any given input value.
 
 var NewTcard2 =
 /*#__PURE__*/
@@ -73355,69 +73410,15 @@ function (_Component) {
     });
 
     _this.state = {
-      value: '',
-      exerr: [{
-        id: 'fsefes',
-        name: 'Panca reclinata',
-        atTime: true,
-        reps: 5,
-        work: {
-          min: 0,
-          sec: 30
-        },
-        rest: {
-          min: 0,
-          sec: 30
-        }
-      }, {
-        id: 'lsngagm',
-        name: 'albicocca',
-        atTime: true,
-        reps: 5,
-        work: {
-          min: 0,
-          sec: 30
-        },
-        rest: {
-          min: 0,
-          sec: 30
-        }
-      }],
-      exercisesList: [
-        /*
-        {
-            id: 'fsefes',
-            name: 'Panca reclinata',
-            atTime: true,
-            reps: 5,
-            work: {
-                min: 0,
-                sec: 30
-            },
-            rest: {
-                min: 0,
-                sec: 30
-            }
-        },
-        {
-            id: 'lsngagm',
-            name: 'Panca reclinata',
-            atTime: true,
-            reps: 5,
-            work: {
-                min: 0,
-                sec: 30
-            },
-            rest: {
-                min: 0,
-                sec: 30
-            }
-        },
-          */
-      ],
-      suggestions: []
+      value: '1',
+      exerr: [],
+      exercisesList: [],
+      suggestions: [],
+      no: 1
     };
     _this.removeExercise = _this.removeExercise.bind(_assertThisInitialized(_this));
+    _this.returnInfo = _this.returnInfo.bind(_assertThisInitialized(_this));
+    _this.myRef = react__WEBPACK_IMPORTED_MODULE_0___default.a.createRef();
     return _this;
   }
 
@@ -73445,14 +73446,14 @@ function (_Component) {
         id: tmp_ex[ind].idDatabase,
         name: tmp_ex[ind].name,
         atTime: tmp_ex[ind].exerciseIsATime,
-        reps: 5,
+        reps: '',
         work: {
-          min: 0,
-          sec: 30
+          min: '',
+          sec: ''
         },
         rest: {
-          min: 0,
-          sec: 30
+          min: '',
+          sec: ''
         }
       };
       var temp_arr = this.state.exercisesList;
@@ -73465,8 +73466,7 @@ function (_Component) {
   }, {
     key: "removeExercise",
     value: function removeExercise(index) {
-      var tmp_exercises = this.state.exercisesList; //tmp_exercises.splice(index);
-
+      var tmp_exercises = this.state.exercisesList;
       delete tmp_exercises[index];
       this.setState({
         exercisesList: tmp_exercises
@@ -73475,6 +73475,9 @@ function (_Component) {
   }, {
     key: "handleSubmit",
     value: function handleSubmit() {}
+  }, {
+    key: "returnInfo",
+    value: function returnInfo(item, index) {}
   }, {
     key: "render",
     value: function render() {
@@ -73574,7 +73577,8 @@ function (_Component) {
           removeEx: _this3.removeExercise,
           name: value.name,
           indexed: index,
-          key: index
+          key: index,
+          retrieveState: _this3.returnInfo
         });
       }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-md-5"

@@ -4,9 +4,26 @@ class ExerciseToAdd extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            atTime: true
+            atTime: true,
+            series: '',
+            work: {
+                min: '',
+                sec: ''
+            },
+            rest: {
+                min: '',
+                sec: ''
+            },
+            day: '',
+            no: 1
         }
+    }
 
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (prevState !== this.state) {
+            this.props.retrieveState(this.state, this.props.indexed);
+        }
     }
 
     render() {
@@ -28,40 +45,95 @@ class ExerciseToAdd extends Component {
                         {
                             this.state.atTime &&
                             <div>
+
                                 <div className="form-group">
                                     <label htmlFor="series">Numero serie</label>
                                     <br/>
-                                    <input name="series" type="number" style={{width: '50%'}}/>
+                                    <input name={"series" + this.props.indexed} type="number" value={this.state.series}
+                                           onChange={event => {
+                                               this.setState({
+                                                   series: event.target.value
+                                               })
+
+                                           }}
+                                           style={{width: '50%'}}/>
                                 </div>
 
                                 <div className="form-group">
                                     <label htmlFor="series">Tempo lavoro</label>
                                     <br/>
-                                    <input name="series" type="number" style={{width: '40%'}}/>
+                                    <input name={"workMin" + this.props.indexed}
+                                           value={this.state.work.min}
+                                           onChange={event => {
+                                               this.setState({
+                                                   work: {
+                                                       min: event.target.value
+                                                   }
+                                               })
+                                           }}
+                                           type="number" style={{width: '40%'}}/>
+
                                     <h6>:</h6>
-                                    <input name="series" type="number" style={{width: '40%'}}/>
+
+                                    <input name={"workSec" + this.props.indexed}
+                                           value={this.state.work.sec}
+                                           onChange={event => {
+                                               this.setState({
+                                                   work: {
+                                                       sec: event.target.value
+                                                   }
+                                               })
+                                           }}
+                                           type="number" style={{width: '40%'}}/>
                                 </div>
 
                                 <div className="form-group">
                                     <label htmlFor="series">Tempo riposo</label>
                                     <br/>
-                                    <input name="series" type="number" style={{width: '40%'}}/>
+                                    <input name={"restMin" + this.props.indexed}
+                                           value={this.state.rest.min}
+                                           onChange={event => {
+                                               this.setState({
+                                                   rest: {
+                                                       min: event.target.value
+                                                   }
+                                               });
+                                           }}
+                                           type="number" style={{width: '40%'}}/>
+
                                     <h6>:</h6>
-                                    <input name="series" type="number" style={{width: '40%'}}/>
+
+                                    <input name={"restSec" + this.props.indexed}
+                                           value={this.state.rest.sec}
+                                           onChange={event => {
+                                               this.setState({
+                                                   rest: {
+                                                       sec: event.target.value
+                                                   }
+                                               })
+                                           }}
+                                           type="number" style={{width: '40%'}}/>
                                 </div>
 
                                 <div className="form-group">
                                     <label htmlFor="select">Giorno</label>
-                                        <select className="select2 form-control custom-select" id="select"
-                                                name="singleDay1" style={{width: '100%' , height:'36px'}}>
-                                            <option>Lunedì</option>
-                                            <option>Martedì</option>
-                                            <option>Mercoledì</option>
-                                            <option>Giovedì</option>
-                                            <option>Venerdì</option>
-                                            <option>Sabato</option>
-                                        </select>
-                                    </div>
+                                    <select className="select2 form-control custom-select" id="select"
+                                            name={"EerciseDay" + this.props.indexed}
+                                            value={this.state.day}
+                                            onChange={event => {
+                                                this.setState({
+                                                    day: event.target.value
+                                                })
+                                            }}
+                                            style={{width: '100%' , height:'36px'}}>
+                                        <option>Lunedì</option>
+                                        <option>Martedì</option>
+                                        <option>Mercoledì</option>
+                                        <option>Giovedì</option>
+                                        <option>Venerdì</option>
+                                        <option>Sabato</option>
+                                    </select>
+                                </div>
                             </div>
                         }
                     </div>
