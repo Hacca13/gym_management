@@ -176,11 +176,6 @@ class ExercisesManager extends Controller{
       return $documents;
     }
 
-    public function insertTrainingCard(Request $request) {
 
-        $collection = Firestore::collection('TrainingCards');
-        $collection->add($request->all());
-        return '/nuovaScheda';
-    }
 
 }

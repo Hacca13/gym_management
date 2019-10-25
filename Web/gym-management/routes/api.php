@@ -19,4 +19,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::get('/jsonExercises', 'ExercisesManager@jsonEx');
 
-Route::post('/insertTrainCard', 'ExercisesManager@insertTrainingCard');
+Route::post('/insertTrainCard', 'TrainingCardsManager@insertTrainingCard');

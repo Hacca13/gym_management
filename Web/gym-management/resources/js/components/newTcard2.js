@@ -71,7 +71,7 @@ class NewTcard2 extends Component {
         let toAdd = {
             idExerciseDatabase: tmp_ex[ind].idDatabase,
             name: tmp_ex[ind].name,
-            //atTime: tmp_ex[ind].exerciseIsATime,
+            atTime: tmp_ex[ind].exerciseIsATime,
             numberOfRepetitions: '',
             workoutTime: {
                 minutes: '',
@@ -81,8 +81,11 @@ class NewTcard2 extends Component {
                 minutes: '',
                 seconds: ''
             },
-            day: ''
-        }
+            day: '',
+            gif: tmp_ex[ind].gif,
+            description: tmp_ex[ind].description,
+            link: tmp_ex[ind].link
+        };
         let temp_arr = this.state.exercisesList;
         temp_arr.push(toAdd);
         this.setState({ exercisesList: temp_arr});
