@@ -168,6 +168,7 @@ class NewTcard2 extends Component {
                 <div className="col-md-10">
                     <div className="card"
                          style={{borderRadius: '10px', backgroundColor: 'rgb(255, 255, 255,0.7)', marginBottom: '10%'}}>
+
                         <div className="card-header">
                             <div className="row">
                                 <div className="col-md-8" style={{textAlign: 'left'}}>
@@ -175,9 +176,9 @@ class NewTcard2 extends Component {
                                 </div>
                             </div>
                         </div>
+
                         <div className="card-body">
                             <form onSubmit={this.handleSubmit}>
-
                                 <div className="form-group row">
                                     <div className="col-sm-6">
                                         <label htmlFor="fname"
