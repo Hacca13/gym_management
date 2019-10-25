@@ -150,6 +150,8 @@ class ExercisesManager extends Controller{
             array_push($arr, ExercisesManager::trasformExerciseToArrayExercise($ex));
         }
         return response()->json($arr);
+    }
+    
     public static function getAllExercisesForView(Request $request) {
       $currentPage = LengthAwarePaginator::resolveCurrentPage();
       $exercises = ExercisesManager::getExercisesDBOrExercises($request,$currentPage);
