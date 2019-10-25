@@ -26,12 +26,10 @@ Route::get('/firetest3', 'Firetest@test3');
 //Route::get('/esercizi', 'ExercisesManager@exercisePage');
 Route::post('/insertFormExercise', 'ExercisesManager@addExercise');
 
-Route::get('/gestioneEsercizi', function () {
-    return view('exercisePage');
-});
+Route::get('/gestioneEsercizi', 'ExercisesManager@getAllExercisesForView');
 
 Route::get('/nuovoEsercizio', function () {
-    return view('insertNewExcercise');
+    return view('insertNewExercise');
 });
 
 Route::get('/modificaEsercizio', function (){
@@ -39,31 +37,33 @@ Route::get('/modificaEsercizio', function (){
 });
 
 
-
-
 //UTENTI
-Route::get('/getAllUser', 'UserManager@getAllUser');
 Route::post('/addUserPost', 'UsersManager@createUser');
 
-Route::get('/nuovoUtente', function (){
+Route::get('/nuovoIscritto', function (){
     return view('userAdd');
 });
 
-Route::get('/gestioneIscritti', function () {
-    return view('usersPage');
+Route::get('/gestioneIscritti', 'UsersManager@getAllUserForView');
+
+Route::get('/prova', function (){
+    return view('prova');
 });
 
-
+Route::get('/prova1', function (){
+    return view('prova1');
+});
 
 
 //ABBONAMENTI
-Route::get('/gestioneAbbonamenti', function () {
-    return view('subscriptionPage');
-});
+Route::get('/gestioneAbbonamenti', 'SubscriptionManager@getAllSubscriptionForView');
+
 
 Route::get('/nuovoAbbonamento', function (){
-    return view('newSubscription');
+    return view('insertNewSubscription');
 });
+
+
 
 
 
@@ -72,24 +72,20 @@ Route::get('/nuovaScheda', function (){
     return view('newCard');
 });
 
-Route::get('/gestioneSchede', function () {
-    return view('trainingCards');
-});
+Route::get('/gestioneSchede', 'TrainingCardsManager@getAllTrainingCardsForView');
+
+Route::get('/nuovaSched', 'TrainingCardsManager@exercisePage');
+
+
 
 
 
 //CORSI
-Route::get('/corsi', 'CoursesManager@getAllCourses');
+Route::get('/gestioneCorsi', 'CoursesManager@getAllCoursesPage');
 Route::post('/insertFormCourse', 'CoursesManager@addCourse');
-Route::get('/gestioneCorsi', 'CoursesManager@coursesPage');
-
 Route::get('/nuovoCorso', function () {
     return view('insertNewCourse');
 });
 
+
 Auth::routes();
-
-Route::get('/provaa', function (){
-    return view('viewStrap');
-});
-

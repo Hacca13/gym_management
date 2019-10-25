@@ -12,7 +12,7 @@ class UserModel
   protected $name;
   protected $surname;
   protected $gender ;
-  protected $profileP;
+  protected $profileImage;
   protected $status;
   protected $isAdult;
   protected $dateOfBirth;
@@ -72,6 +72,8 @@ class UserModel
     $this->email = $email;
     $this->telephoneNumber = $telephoneNumber;
   }
+
+
 
 
     /**
@@ -169,7 +171,6 @@ class UserModel
 
         return $this;
     }
-
 
     /**
      * Get the value of Profile Image
@@ -334,15 +335,7 @@ class UserModel
      */
     public function setResidence($residence)
     {
-
-      $this->residence = array(
-        'nation' => data_get($residence, 'nation'),
-        'cityOfResidence' => data_get($residence, 'cityOfResidence'),
-        'cap' => data_get($residence, 'cap'),
-        'street' => data_get($residence, 'street'),
-        'number' => data_get($residence, 'number')
-
-      );
+        $this->residence = $residence;
 
         return $this;
     }
@@ -366,13 +359,8 @@ class UserModel
      */
     public function setDocument($document)
     {
-      $this->document = array(
-          'documentImage' => data_get($document, 'documentImage'),
-          'type' => data_get($document, 'type'),
-          'number' => data_get($document, 'number'),
-          'released' => data_get($document, 'released'),
-          'releaseDate' => data_get($document, 'releaseDate')
-      );
+        $this->document = $document;
+
         return $this;
     }
 

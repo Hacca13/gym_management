@@ -5,9 +5,10 @@
     <form action="/addUserPost" method="post" enctype="multipart/form-data">
         @csrf
         <div class="row">
-            <div class="card col-md-6">
+            <div class="card col-md-12" style="border-radius: 10px">
                 <div class="card-body">
-                    <h4 class="card-title ">Inserisci Dati Utente</h4>
+                    <h3 class="card-title ">Inserisci Dati Utente</h3>
+                    <br>
                     <div class="form-group row">
                         <label for="fname" class="col-sm-3 text-right control-label col-form-label">Nome</label>
                         <div class="col-sm-9">
@@ -59,7 +60,8 @@
                             <label>Uomo</label>
                             <input type="radio" class="form-control" id="fname" name="gender" required>
                             <label>Donna</label>
-
+                            <input type="radio" class="form-control" id="fname" name="gender" required>
+                            <label>Altro</label>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -98,11 +100,8 @@
                             <input type="text" class="form-control" id="cono1" name="number" required>
                         </div>
                     </div>
-
                 </div>
-            </div>
-            <div class="card col-md-6">
-                <div class="card-body">
+
                     <div class="form-group row">
                         <label for="email1" class="col-sm-3 text-right control-label col-form-label">Tipo di Documento</label>
                         <div class="col-sm-9">
@@ -133,19 +132,126 @@
                             <input type="file" class="form-control" id="documentImage" name="documentImage" onchange="Filevalidation()" required>
                         </div>
                     </div>
-                    <div class="border-top">
+                <hr>
                         <div class="card-body">
                             <input type="checkbox" hidden name="isUnderage" value="TRUE"></input>
                         </div>
+                <hr>
+                    <h4 class="card-title ">Inserisci Dati Plicometrici</h4>
+                    <div class="form-group row">
+                        <label for="fname" class="col-sm-3 text-right control-label col-form-label">Peso:</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="fname" name="weight" required>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="fname" class="col-sm-3 text-right control-label col-form-label">Altezza:</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="fname" name="height" required>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="fname" class="col-sm-3 text-right control-label col-form-label">IMC:</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="email" name="imc" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="fname" class="col-sm-3 text-right control-label col-form-label">Sport Praticati Precedentemente:</label>
+                        <div class="col-sm-9">
+                            <input type="password" class="form-control" id="fname" name="previousSport" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="fname" class="col-sm-3 text-right control-label col-form-label">Tempo Sport Praticati Precedentemente:</label>
+                        <div class="col-sm-9">
+                            <input type="date" class="form-control" oninput="testAge()" id="$previousSportTime" name="dateOfBirth" required>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="fname" class="col-sm-3 text-right control-label col-form-label">Tempo Inattivo:</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="fname" name="inactiveTime" required>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="fname" class="col-sm-3 text-right control-label col-form-label">Dati Plicometrici:</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="fname" name="pligometricData" required>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="lname" class="col-sm-3 text-right control-label col-form-label">Ipertrofia:</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="lname" name="hypertrophy" required>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="lname" class="col-sm-3 text-right control-label col-form-label">Dimagrimento:</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="lname" name="slimming" required>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="email1" class="col-sm-3 text-right control-label col-form-label">Tonificazione:</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="email1" name="toning" required>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="cono1" class="col-sm-3 text-right control-label col-form-label">Allenamento Atletico:</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="cono1" name="athleticTraining" required>
+                        </div>
+                    </div>
+                <div class="form-group row">
+                    <label for="email1" class="col-sm-3 text-right control-label col-form-label">Riabilitazione:</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" id="email1" name="rehabilitation" required>
                     </div>
                 </div>
+                <div class="form-group row">
+                    <label for="cono1" class="col-sm-3 text-right control-label col-form-label">Sport Di Combattimento:</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" id="lname" name="combatSports" required>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="cono1" class="col-sm-3 text-right control-label col-form-label">Altri Obiettivi:</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" id="cono1" name="otherGoals" required>
+                    </div>
+                </div>
+                <div class="border-top">
+                    <div class="card-body">
+                        <input type="checkbox" hidden name="isUnderage" value="TRUE"></input>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <section class="right-side-dd">
+                        <p align="right">
+                            <button id="corso" name="acceptTerms" class="btn btn-primary">Inserisci</button>
+                        </p>
+                    </section>
+                </div>
+            </div>
             </div>
         </div>
-        <!-- PARENT FORM -->
 
+
+
+
+    </form>
+
+
+
+
+    <!-- PARENT FORM -->
         <div class="row" id="parentDiv">
             <div class="col-md-6" id="myDIV" style="display: none">
-                <div class="card">
+                <div class="card" style="border-radius: 10px" >
                     <div class="card-body">
                         <h4 class="card-title ">Inserisci Dati Genitore</h4>
                         <div class="form-group row">
@@ -200,7 +306,7 @@
                 </div>
             </div>
             <div class="col-md-6" id="myDiv" style="display: none">
-                <div class="card">
+                <div class="card" style="border-radius: 10px;">
                     <div class="card-body">
                         <div class="form-group row">
                             <label for="email1" class="col-sm-3 text-right control-label col-form-label">Via</label>
@@ -259,14 +365,6 @@
         </div>
 
         <!-- SUBMIT/RESET -->
-
-        <div class="row">
-            <div class="border-top">
-                <div class="card-body">
-                    <input type="submit">
-                </div>
-            </div>
-        </div>
     </form>
 
 

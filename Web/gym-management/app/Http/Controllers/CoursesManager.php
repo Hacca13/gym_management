@@ -35,6 +35,8 @@ class CoursesManager extends Controller{
             $course->setIdDatabase($document->id());
             array_push($courses,$course);
         }
+
+
         return $courses;
     }
 
@@ -45,21 +47,51 @@ class CoursesManager extends Controller{
         foreach ($documents as $document) {
             $course = CoursesManager::trasformArrayCourseToCourse($document->data());
             $course->setIdDatabase($document->id());
+
             array_push($allCourses,$course);
         }
+
         return $allCourses;
+    }
+
+    public static function getAllCoursesView(Request $request){
+      $currentPage = LengthAwarePaginator::resolveCurrentPage();
+      $courses = CoursesManager::getCoursesDBOrCoursesSession();
+
+      $itemCollection = collect($courses);
+      $perPage = 1;
+      $currentPageItems = $itemCollection->slice(($currentPage * $perPage) - $perPage, $perPage)->all();
+      $courses = new LengthAwarePaginator($currentPageItems , count($itemCollection), $perPage);
+      $courses->setPath($request->url());
+
+      return view('courses', compact('courses'));
+    }
+
+    public static function getCoursesDBOrCoursesSession(Request $request,$currentPage){
+      if($currentPage == 1){
+        $documents = CoursesManager::getAllCourses();
+        $request->session()->put('Courses', $documents);
+
+      }
+      else{
+        $documents = $request->session()->pull('Courses');
+        $request->session()->put('Courses', $documents);
+      }
+      return $documents;
+
     }
 
     public static function trasformArrayCourseToCourse($arrayCourse){
         $idDatabase = data_get($arrayCourse,'idDatabase');
         $name = data_get($arrayCourse,'name');
         $image = data_get($arrayCourse,'image');
+        $isActive = data_get($arrayCourse,'isActive');
         $instructor = data_get($arrayCourse,'instructor');
         $period = data_get($arrayCourse,'period');
         $weeklyFrequency = data_get($arrayCourse,'weeklyFrequency') ;
         $usersList = data_get($arrayCourse,'usersList') ;
 
-        $course = new CourseModel($idDatabase,$name,$image,$instructor,$period,$weeklyFrequency,$usersList);
+        $course = new CourseModel($idDatabase,$name,$image,$isActive,$instructor,$period,$weeklyFrequency,$usersList);
 
         return $course;
     }
@@ -67,6 +99,7 @@ class CoursesManager extends Controller{
         $idDatabase = $course->getIdDatabase();
         $name = $course->getName();
         $image = $course->getImage();
+        $isActive = $course->getIsActive();
         $instructor = $course->getInstructor();
         $period = $course->getPeriod();
         $weeklyFrequency = $course->getWeeklyFrequency();
@@ -76,6 +109,7 @@ class CoursesManager extends Controller{
             'idDatabase' => $idDatabase,
             'name' => $name,
             'image' => $image,
+            'isActive' => $isActive,
             'instructor' => $instructor,
             'period' => $period,
             'weeklyFrequency' => $weeklyFrequency,
@@ -85,7 +119,7 @@ class CoursesManager extends Controller{
         return $arrayCourse;
     }
 
-    public function coursesPage() {
+    public function getAllCoursesPage() {
         $courses = CoursesManager::getAllCourses();
         return view('courses', compact('courses'));
     }
@@ -106,9 +140,9 @@ class CoursesManager extends Controller{
                 'name' => $name
             ])->name();
 
-        $documentImage =  "https://firebasestorage.googleapis.com/v0/b/fitandfight.appspot.com/o/". $str ."?alt=media";
+        $image =  "https://firebasestorage.googleapis.com/v0/b/fitandfight.appspot.com/o/". $str ."?alt=media";
 
-        $days = [];
+        $days = array();
 
         for ($i = 0; $i<7; $i++) {
             if (isset($input['singleDay' . strval($i)])) {
@@ -127,30 +161,31 @@ class CoursesManager extends Controller{
         }
 
         $name = $input['name'];
-        $istructor = $input['instructor'];
+        $instructor = $input['instructor'];
         $period = [
             'startDate' => $input['startDate'],
             'endDate' => $input['endDate']
         ];
-        $weekly = $days;
-        $userList = [];
+        $weeklyFrequency = $days;
+        $usersList = array();
 
 
         $coll = Firestore::collection('Courses');
 
-        $corso = new CourseModel(
-            null,
-            $name,
-            $documentImage,
-            $istructor,
-            $period,
-            $weekly,
-            $userList
+        $corso = array(
+            'name' => $name,
+            'image' => $image,
+            'isActive' => TRUE,
+            'instructor' => $instructor,
+            'period' => $period,
+            'weeklyFrequency' => $weeklyFrequency,
+            'usersList' => $usersList
         );
-        $coll->add(CoursesManager::trasformCourseToArrayCourse($corso));
+
+        $coll->add($corso);
 
         toastr()->success('Corso inserito');
-        return redirect('/corsi');
+        return redirect('/gestioneCorsi');
 
     }
 

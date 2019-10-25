@@ -24,6 +24,7 @@ use App\Http\Models\SubscriptionModels\SubscriptionRevenueModel;
 use App\Http\Models\SubscriptionModels\SubscriptionCourseModel;
 use App\Http\Models\SubscriptionModels\SubscriptionPeriodModel;
 
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class Firetest extends Controller
 {
@@ -47,19 +48,50 @@ class Firetest extends Controller
   }
 
 
-  public function test2(){
-    $collection = Firestore::collection('Users');
-    $documents = $collection->document('L8SN43WhnCMG8gQ2Jjh5tiVrCWV2')->snapshot()->data();
-     var_dump($documents);
+  public function test2(Request $request){
 
-    }
+    /*$currentPage = LengthAwarePaginator::resolveCurrentPage();
+    $documents = Firetest::testPage($request,$currentPage);
+    $itemCollection = collect($documents);
+    $perPage = 1;
+    $currentPageItems = $itemCollection->slice(($currentPage * $perPage) - $perPage, $perPage)->all();
+    $paginatedItems= new LengthAwarePaginator($currentPageItems , count($itemCollection), $perPage);
+    $paginatedItems->setPath($request->url());
+
+    <?php
+          $exercisesList = array();
+    ?>
+  <!--  @foreach($trainingCard->getExercises() as $exercise)
+      @include('components.exercise.cardExercise')
+    @endforeach -->
+
+
+    return view('items_view', compact('paginatedItems'));*/
+
+    $ciao = ExercisesManager::getExerciseByName('eserci');
+    var_dump(count($ciao));
+  }
+
+  public static function testPage(Request $request,$currentPage){
+      if($currentPage == 1){
+        $documents = UsersManager::getAllUser();
+        $request->session()->put('allUsers', $documents);
+        var_dump('query al db');
+      }
+      else{
+        //LA FUNZIONE PULL ELIMINA L'OGGETTO DALLA SESSIONE QUINDI EVITO IL PROBLEMA RINSERENDOLO
+        $documents = $request->session()->pull('allUsers');
+        $request->session()->put('allUsers', $documents);
+          var_dump('nessuna query al db');
+      }
+      return $documents;
+  }
+
 
   public function test3(){
-  //  $collection = Firestore::collection('Courses');
-  //  $document = $collection->document('2n9xLsfSh5dRlwfT393H')->snapshot()->data();
-    $document = CoursesManager::theUserForWhichCourseIsRegistered('L8SN43WhnCMG8gQ2Jjh5tiVrCWV2');
-    //$document = CoursesManager::getAllCourses();
-    var_dump($document);
+  $array = CoursesManager::getAllCourses();
+
+
 
   }
 

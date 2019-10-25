@@ -3,13 +3,15 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="../../assets/images/favicon.png">
-    <title>Matrix Template - The Ultimate Multipurpose admin template</title>
+    <link rel="icon"  href="/images/rsz_fit&fight_ok.png">
+    <title>Fit & Fight</title>
     <!-- Custom CSS -->
     <link href="../matrix-admin-bt4/assets/libs/flot/css/float-chart.css" rel="stylesheet">
     <!-- Custom CSS -->
@@ -18,7 +20,7 @@
     <link href="../css/bttn.min.css" rel="stylesheet">
 
     <script src="https://www.gstatic.com/firebasejs/7.2.0/firebase-auth.js"></script>
-
+    
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 
@@ -26,13 +28,15 @@
 
 </head>
 
-<body style="background-color: #EEEEEE">
+<body style="background: transparent">
 
 
 
-<div id="main-wrapper">
+<div id="main-wrapper"  style="background-image: url('images/wall.jpg'); background-size: cover; padding-bottom: 14%;background-attachment: fixed;">
 
+@include('components.navbar')
 @include('components.sidebar')
+
 <!-- Left Sidebar - style you can find in sidebar.scss  -->
 <!-- ============================================================== -->
 <!-- ============================================================== -->
@@ -41,7 +45,7 @@
     <!-- ============================================================== -->
     <!-- Page wrapper  -->
     <!-- ============================================================== -->
-    <div class="page-wrapper" style="background-image: url('images/wall.jpg'); background-size: cover; padding-bottom: 6%">
+    <div class="page-wrapper" style="background: transparent">
         <!-- ============================================================== -->
         <!-- Bread crumb and right sidebar toggle -->
         <!-- ============================================================== -->

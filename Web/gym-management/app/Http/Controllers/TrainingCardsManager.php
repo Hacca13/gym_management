@@ -71,5 +71,18 @@ class TrainingCardsManager extends Controller
       return $trainingCards;
     }
 
+    public function exercisePage() {
+        $exercises = ExercisesManager::getAllExercises();
+        return view('insertNewTCARD', compact('exercises'));
+    }
+
+    public function insertTrainingCard(Request $request) {
+
+        $collection = Firestore::collection('TrainingCards');
+        $collection->add($request->all());
+        return '/nuovaScheda';
+    }
+
+
 
 }
