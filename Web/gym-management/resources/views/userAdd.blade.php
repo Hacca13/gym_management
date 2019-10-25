@@ -5,9 +5,9 @@
     <form action="/addUserPost" method="post" enctype="multipart/form-data">
         @csrf
         <div class="row">
-            <div class="card col-md-12" style="border-radius: 10px">
+            <div class="card col-md-12" style="border-radius: 10px;background-color: #d6d8d8">
                 <div class="card-body">
-                    <h3 class="card-title ">Inserisci Dati Utente</h3>
+                    <h3 class="card-title text-center">Inserisci Dati Utente</h3>
                     <br>
                     <div class="form-group row">
                         <label for="fname" class="col-sm-3 text-right control-label col-form-label">Nome</label>
@@ -251,7 +251,7 @@
     <!-- PARENT FORM -->
         <div class="row" id="parentDiv">
             <div class="col-md-6" id="myDIV" style="display: none">
-                <div class="card" style="border-radius: 10px" >
+                <div class="card" style="border-radius: 10px;background-color: #d6d8d8">
                     <div class="card-body">
                         <h4 class="card-title ">Inserisci Dati Genitore</h4>
                         <div class="form-group row">
