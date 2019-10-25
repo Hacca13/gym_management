@@ -47,31 +47,31 @@ export default class CircleWorkout extends Component {
 
 
 
-    componentDidUpdate(prevProps: Readonly<P>, prevState: Readonly<S>, snapshot: SS): void {
+    componentDidUpdate(prevProps: Readonly<P>, prevState: Readonly<S>, snapshot: SS) {
 
         //CHECK IN THE PREVIOUS STATE IF WORKOUT IS DONE
 
-        if (prevState.time.seconds === 1) {
+        if (prevState.workoutTime.seconds === 1) {
 
-            if (prevState.time.minutes === 0 ) {
+            if (prevState.workoutTime.minutes === 0 ) {
                 this.stopWorkouTimer();
             }
 
             this.setState({
-                time: {
-                    minutes: this.state.time.minutes - 1,
+                workoutTime: {
+                    minutes: this.state.workoutTime.minutes - 1,
                     seconds: 60
                 }
             })
         }
 
-        if (prevState.rest.seconds === 1) {
-            if (prevState.rest.minutes === 0 ) {
+        if (prevState.restTime.seconds === 1) {
+            if (prevState.restTime.minutes === 0 ) {
                 this.stopRestTimer();
             }
             this.setState({
-                rest: {
-                    minutes: this.state.rest.minutes - 1,
+                restTime: {
+                    minutes: this.state.restTime.minutes - 1,
                     seconds: 60
                 }
             })
@@ -90,15 +90,15 @@ export default class CircleWorkout extends Component {
         });
         timer.setInterval(this, 'workCounter', () => {
             this.setState({
-                time: {
-                    minutes: this.state.time.minutes,
-                    seconds: this.state.time.seconds - 1
+                workoutTime: {
+                    minutes: this.state.workoutTime.minutes,
+                    seconds: this.state.workoutTime.seconds - 1
                 }
             })
         }, 1000);
 
-        this.circularProgress.animate(100, (this.state.time.minutes * 60 * 1000) +
-            (this.state.time.seconds * 1000), Easing.quad);
+        this.circularProgress.animate(100, (this.state.workoutTime.minutes * 60 * 1000) +
+            (this.state.workoutTime.seconds * 1000), Easing.quad);
 
 
     }
@@ -122,14 +122,14 @@ export default class CircleWorkout extends Component {
         timer.setTimeout(this, 'workCounter', () => {
             this.setState({
                 workOrRest: false,
-                rest: {
-                    minutes: this.state.snapshot.rest.minutes,
-                    seconds: this.state.snapshot.rest.seconds
+                restTime: {
+                    minutes: this.state.snapshot.restTime.minutes,
+                    seconds: this.state.snapshot.restTime.seconds
                 }
             });
             this.startRestTimer();
         }, 2000);
-        this.setState({series: this.state.series - 1})
+        this.setState({numberOfRepetitions: this.state.numberOfRepetitions - 1})
         this.circularProgress.animate(0, 2000, Easing.quad);
 
     }
@@ -140,15 +140,15 @@ export default class CircleWorkout extends Component {
         this.setState({timeOrAction: true, progressColor: '#FCD533'});
         timer.setInterval(this, 'restCounter', () => {
             this.setState({
-                rest: {
-                    minutes: this.state.rest.minutes,
-                    seconds: this.state.rest.seconds - 1
+                restTime: {
+                    minutes: this.state.restTime.minutes,
+                    seconds: this.state.restTime.seconds - 1
                 }
             })
         }, 1000);
 
-        this.circularProgress.animate(100, (this.state.rest.minutes * 60 * 1000) +
-            (this.state.rest.seconds * 1000), Easing.quad);
+        this.circularProgress.animate(100, (this.state.restTime.minutes * 60 * 1000) +
+            (this.state.restTime.seconds * 1000), Easing.quad);
 
     }
 
@@ -157,19 +157,19 @@ export default class CircleWorkout extends Component {
         this.setState({
             timeOrAction: false,
             progressColor: '#4CD964',
-            circularProgressAction: this.state.series === 0 ? 'Fine' : 'Allenati',
+            circularProgressAction: this.state.numberOfRepetitions === 0 ? 'Fine' : 'Allenati',
             restSeries: this.state.restSeries - 1
         });
         timer.clearInterval(this);
         timer.setTimeout(this, 'restCounter', () => {
             this.setState({
                 workOrRest: true,
-                time: {
-                    minutes: this.state.snapshot.time.minutes,
-                    seconds: this.state.snapshot.time.seconds
+                workoutTime: {
+                    minutes: this.state.snapshot.workoutTime.minutes,
+                    seconds: this.state.snapshot.workoutTime.seconds
                 }
             });
-            if (this.state.restSeries === 0 && this.state.series === 0) {
+            if (this.state.restSeries === 0 && this.state.numberOfRepetitions === 0) {
                 this.setWorkoutDone();
             }}, 2000);
 
@@ -198,8 +198,8 @@ export default class CircleWorkout extends Component {
         this.pauseTimer();
         this.circularProgress.animate(0,0,Easing.quad);
         this.setState({
-            time: this.state.snapshot.time,
-            rest: this.state.snapshot.rest,
+            workoutTime: this.state.snapshot.workoutTime,
+            rest: this.state.snapshot.restTime,
             timeOrAction: false
         })
     }
@@ -210,7 +210,7 @@ export default class CircleWorkout extends Component {
         this.props.navigation.pop();
     }
 
-    componentWillUnmount(): void {
+    componentWillUnmount() {
         clearInterval(this);
         clearTimeout(this);
         this.circularProgress.animate().stop();
@@ -240,7 +240,7 @@ export default class CircleWorkout extends Component {
                 <ScrollView>
 
                     <View style={{backgroundColor: '#EFF0F0'}}>
-                        <ImageBackground resizeMode={'contain'} source={this.state.gif} style={{width: '100%', height: height/3.8}}/>
+                        <ImageBackground resizeMode={'contain'} source={{uri: this.state.gif}} style={{width: '100%', height: height/3.8}}/>
                     </View>
 
 
@@ -257,26 +257,32 @@ export default class CircleWorkout extends Component {
                                 flexDirection: 'column',
                                 justifyContent: 'space-between'
                             }}>
-                            <View style={{justifyContent: 'space-between', flexDirection: 'row', marginTop: 10, marginLeft: 20, marginRight: 20}}>
-                                <Text style={{fontSize: 25, color: '#007AFF'}}>Peso:</Text>
-                                <Fontisto style={{marginTop:5, color: '#EB3333'}} size={25} name={'minus-a'}/>
-                                <Text style={{fontSize: 25}}>60Kg</Text>
-                                <Fontisto style={{marginTop:5, color: '#4CD964'}} size={25} name={'plus-a'}/>
-                            </View>
+
+                            {
+                                this.state.atTime === false &&
+                                <View style={{justifyContent: 'space-between', flexDirection: 'row', marginTop: 10, marginLeft: 20, marginRight: 20}}>
+                                    <Text style={{fontSize: 25, color: '#007AFF'}}>Peso:</Text>
+                                    <Fontisto style={{marginTop:5, color: '#EB3333'}} size={25} name={'minus-a'}/>
+                                    <Text style={{fontSize: 25}}>60Kg</Text>
+                                    <Fontisto style={{marginTop:5, color: '#4CD964'}} size={25} name={'plus-a'}/>
+                                </View>
+                            }
+
+
 
                             <View style={{justifyContent: 'space-between', flexDirection: 'row', marginTop: 10, marginLeft: 20, marginRight: 20}}>
                                 <Text style={{fontSize: 25, color: '#007AFF'}}>Ripetizioni:</Text>
-                                <Text style={{fontSize: 25}}>3</Text>
+                                <Text style={{fontSize: 25}}>{this.state.snapshot.numberOfRepetitions}</Text>
                             </View>
 
                             <View style={{justifyContent: 'space-between', flexDirection: 'row', marginTop: 10, marginLeft: 20, marginRight: 20}}>
                                 <Text style={{fontSize: 25, color: '#007AFF'}}>Riposo:</Text>
-                                <Text style={{fontSize: 25}}>00:30</Text>
+                                <Text style={{fontSize: 25}}>{this.state.snapshot.workoutTime.minutes + ':' + this.state.snapshot.workoutTime.seconds}</Text>
                             </View>
 
                             <View style={{justifyContent: 'space-between', flexDirection: 'row', marginTop: 10, marginLeft: 20, marginRight: 20}}>
                                 <Text style={{fontSize: 25, color: '#007AFF'}}>Lavoro:</Text>
-                                <Text style={{fontSize: 25}}>00:30</Text>
+                                <Text style={{fontSize: 25}}>{this.state.snapshot.restTime.minutes + ':' + this.state.snapshot.restTime.seconds}</Text>
                             </View>
 
 
@@ -337,7 +343,7 @@ export default class CircleWorkout extends Component {
 
                                                                 <View style={{flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}>
                                                                     <Text style={{fontSize: 35, color: 'white'}}>
-                                                                        {this.state.time.minutes + ':' + this.state.time.seconds}
+                                                                        {this.state.workoutTime.minutes + ':' + this.state.workoutTime.seconds}
                                                                     </Text>
                                                                 </View>
 
@@ -400,7 +406,7 @@ export default class CircleWorkout extends Component {
                                                         (
 
                                                             <Text style={{fontSize: 35, color: 'white'}}>
-                                                                {this.state.rest.minutes + ':' + this.state.rest.seconds}
+                                                                {this.state.restTime.minutes + ':' + this.state.restTime.seconds}
                                                             </Text>
 
                                                         )

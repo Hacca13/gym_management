@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Reactotron from 'reactotron-react-native'
 
 import { View, Text, SafeAreaView, Dimensions, Platform, TouchableOpacity, ScrollView, TouchableWithoutFeedback } from 'react-native';
 const { height, width } = Dimensions.get("window");
@@ -7,6 +8,7 @@ import WorkoutCard from '../components/workouts/WorkoutCard';
 import gifff from './../assets/test.gif';
 import EditModal from '../components/modals/editModal';
 import InfoModal from '../components/modals/infoModal';
+import firebase from "react-native-firebase";
 
 export default class StartWorkouts extends Component {
     constructor(props) {
@@ -16,110 +18,38 @@ export default class StartWorkouts extends Component {
             status: null,
             editModalVisible: false,
             infoModalVisible: false,
-            workouts: [
-                {
-                    name: 'Plank',
-                    gif: gifff,
-                    weight: 60,
-                    series: 1,
-                    rest: {
-                        minutes: 0,
-                        seconds: 5
-                    },
-                    time: {
-                        minutes: 0,
-                        seconds: 5
-                    },
-                    restSeries: 1,
-                    status: false
-                },
-                {
-                    name: 'Plank',
-                    gif: gifff,
-                    weight: 60,
-                    series: 2,
-                    restSeries: 2,
-                    rest: {
-                        minutes: 0,
-                        seconds: 5
-                    },
-                    time: {
-                        minutes: 0,
-                        seconds: 5
-                    },
-                    status: false
-                },
-                {
-                    name: 'Plank',
-                    gif: gifff,
-                    weight: 60,
-                    series: 1,
-                    rest: {
-                        minutes: 0,
-                        seconds: 5
-                    },
-                    time: {
-                        minutes: 0,
-                        seconds: 5
-                    },
-                    restSeries: 1,
-                    status: false
-                },
-                {
-                    name: 'Plank',
-                    gif: gifff,
-                    weight: 60,
-                    series: 1,
-                    rest: {
-                        minutes: 0,
-                        seconds: 5
-                    },
-                    time: {
-                        minutes: 0,
-                        seconds: 5
-                    },
-                    restSeries: 1,
-                    status: false
-                },
-                {
-                    name: 'Plank',
-                    gif: gifff,
-                    weight: 60,
-                    series: 1,
-                    rest: {
-                        minutes: 0,
-                        seconds: 5
-                    },
-                    time: {
-                        minutes: 0,
-                        seconds: 5
-                    },
-                    restSeries: 1,
-                    status: false
-                },
-                {
-                    name: 'Plank',
-                    gif: gifff,
-                    weight: 60,
-                    series: 1,
-                    rest: {
-                        minutes: 0,
-                        seconds: 5
-                    },
-                    time: {
-                        minutes: 0,
-                        seconds: 5
-                    },
-                    restSeries: 1,
-                    status: false
-                }
-            ],
+            workouts: []
         };
         this.returnData = this.returnData.bind(this);
         this.setInfoModalVisible = this.setInfoModalVisible.bind(this);
         this.setEditModalVisible = this.setEditModalVisible.bind(this);
         this.startTraining = this.startTraining.bind(this);
+        this.getTrainingCard = this.getTrainingCard.bind(this);
     }
+
+    componentDidMount() {
+        firebase.auth().onAuthStateChanged(user => {
+            if (user) {
+                this.getTrainingCard(user.uid);
+            } else {
+                Reactotron.log('NO USER');
+            }
+        })
+    }
+
+    getTrainingCard(id) {
+        firebase.firestore().collection('TrainingCards').where('idUserDatabase', '==', id).get().then(value => {
+            this.setState({
+                workouts: value.docs[0].data().exercises
+            })
+            Reactotron.log(this.state.fireWorkouts);
+            Reactotron.log(this.state.workouts);
+        }).catch(error => {
+            Reactotron.log(error);
+        })
+    }
+
+
 
     returnData(id, status) {
         let tmp = [...this.state.workouts];
@@ -132,7 +62,7 @@ export default class StartWorkouts extends Component {
 
     setEditModalVisible(visible) {
         this.setState({ editModalVisible: visible});
-         console.log(this.state.editModalVisible);
+        console.log(this.state.editModalVisible);
     }
 
     setInfoModalVisible(visible) {
@@ -143,7 +73,7 @@ export default class StartWorkouts extends Component {
 
 
 
-    componentWillUnmount(): void {
+    componentWillUnmount() {
         this.setEditModalVisible(false);
         this.setInfoModalVisible(false);
     }
