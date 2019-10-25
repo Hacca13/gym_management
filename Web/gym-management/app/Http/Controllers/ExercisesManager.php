@@ -11,6 +11,7 @@ use Firevel\Firestore\Facades\Firestore;
 use App\Http\Models\ExerciseModel;
 use Illuminate\Pagination\LengthAwarePaginator;
 
+
 class ExercisesManager extends Controller{
 
     public static function getAllExercises(){
@@ -103,12 +104,6 @@ class ExercisesManager extends Controller{
 
         $exerciseImage = $request->file('imageExercise');
 
-        if(isset($input['exerciseIsATime']) == FALSE){
-          $input['exerciseIsATime'] = FALSE;
-        }
-        else{
-          $input['exerciseIsATime'] = TRUE;
-        }
 
         $firebase = (new Firebase\Factory());
 
@@ -121,28 +116,40 @@ class ExercisesManager extends Controller{
 
         $collection = Firestore::collection('Exercises');
 
-        $arrayExercise = ExercisesManager::trasformRequestIntoArrayExercise($input,$gif);
-
-        $collection->add($arrayExercise);
+        $exercise = trasformRequestToArrayExercise($input,$gif);
+        $collection->add($exercise);
 
         toastr()->success('Esercizio inserito');
-        return redirect('gestioneEsercizi');
+        return redirect('esercizi');
 
     }
 
-    public function trasformRequestIntoArrayExercise($input,$gif){
+    public static function trasformRequestToArrayExercise($input,$gif){
+        $arrayExercise = array(
+            'name' => $input['nameExercise'],
+            'description' => $input['descriptionExercise'],
+            'exerciseIsATime' => $input['exerciseIsATime'],
+            'gif' => $gif,
+            'link' => $input['linkExercise']
+        );
 
-      $arrayExercise = array(
-          'name' => $input['nameExercise'],
-          'description' => $input['descriptionExercise'],
-          'exerciseIsATime' => $input['exerciseIsATime'],
-          'gif' => $gif,
-          'link' => $input['linkExercise']
-      );
-
-      return $arrayExercise;
+        return $arrayExercise;
     }
 
+
+    public function exercisePage() {
+        $exercises = ExercisesManager::getAllExercises();
+        return view('exercisePage', compact('exercises'));
+
+    }
+
+    public function jsonEx() {
+        $exercises = ExercisesManager::getAllExercises();
+        $arr = [];
+        foreach ($exercises as $ex) {
+            array_push($arr, ExercisesManager::trasformExerciseToArrayExercise($ex));
+        }
+        return response()->json($arr);
     public static function getAllExercisesForView(Request $request) {
       $currentPage = LengthAwarePaginator::resolveCurrentPage();
       $exercises = ExercisesManager::getExercisesDBOrExercises($request,$currentPage);

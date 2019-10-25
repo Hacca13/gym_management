@@ -120,7 +120,7 @@ class UsersManager extends Controller{
                             'name' => $parentDocumentImage->getClientOriginalName()
                         ])->name();
                 }
-                $documentPicture =  "https://firebasestorage.googleapis.com/v0/b/fitandfight.appspot.com/o/". $str ."?alt=media";
+                $documentImage =  "https://firebasestorage.googleapis.com/v0/b/fitandfight.appspot.com/o/". $str ."?alt=media";
 
                 $collection = Firestore::collection('Users');
 
