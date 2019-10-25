@@ -73685,7 +73685,7 @@ function (_Component) {
       var toAdd = {
         idExerciseDatabase: tmp_ex[ind].idDatabase,
         name: tmp_ex[ind].name,
-        //atTime: tmp_ex[ind].exerciseIsATime,
+        atTime: tmp_ex[ind].exerciseIsATime,
         numberOfRepetitions: '',
         workoutTime: {
           minutes: '',
@@ -73695,7 +73695,10 @@ function (_Component) {
           minutes: '',
           seconds: ''
         },
-        day: ''
+        day: '',
+        gif: tmp_ex[ind].gif,
+        description: tmp_ex[ind].description,
+        link: tmp_ex[ind].link
       };
       var temp_arr = this.state.exercisesList;
       temp_arr.push(toAdd);
