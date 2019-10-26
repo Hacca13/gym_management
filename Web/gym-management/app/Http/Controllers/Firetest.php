@@ -38,12 +38,17 @@ class Firetest extends Controller
 
   public function test() {
 
-    $collection = Firestore::collection('Users');
-    $user = $collection->document('UEMkxzS6DodLuYRlMnSH')->snapshot()->data();
-    $collection2 = Firestore::collection('Exercises');
-    $exercise = $collection2->document('U68MHeUUjjbAzgBpXTTt')->snapshot()->data();
-    var_dump($user);
-    var_dump($exercise);
+    $collection = Firestore::collection('Exercises');
+    $user = $collection->orderBy('name')->startAt(['esercizio'])->endAt(['esercizio\uf8ff'])->documents();
+
+    foreach ($user as $key) {
+      $key = ExercisesManager::trasformArrayExerciseToExercise($key->data());
+      var_dump($key);
+    }
+
+
+
+
 
   }
 

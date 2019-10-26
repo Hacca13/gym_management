@@ -2,17 +2,22 @@
 
 @section('content')
 <div class="container">
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-6">
             <div class="card" style="border-radius: 10px;background-color: #d6d8d8">
-                <div class="card-header"><h3>{{ __('Login') }}</h3></div>
+                <div class="card-header text-center"><h1>{{ __('Login') }}</h1></div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
 
                         <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right"><h3>{{ __('Username') }}</h3></label>
+                            <label for="name" class="col-md-4 col-form-label text-md-right"><h4>{{ __('Username') }}</h4></label>
 
                             <div class="col-md-6">
                                 <input id="email" type="text" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
@@ -26,7 +31,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right"><h3>{{ __('Password') }}</h3></label>
+                            <label for="password" class="col-md-4 col-form-label text-md-right"><h4>{{ __('Password') }}</h4></label>
 
                             <div class="col-md-6">
                                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">

@@ -39,6 +39,8 @@ Route::get('/modificaEsercizio', function (){
 
 //UTENTI
 Route::post('/addUserPost', 'UsersManager@createUser');
+Route::post('/userSearchResultsPage', 'UsersManager@searchUsers');
+Route::get('/usersPageSearchResult', 'UsersManager@searchUsers');
 
 Route::get('/nuovoIscritto', function (){
     return view('userAdd');
@@ -81,7 +83,7 @@ Route::get('/nuovaSched', 'TrainingCardsManager@exercisePage');
 
 
 //CORSI
-Route::get('/gestioneCorsi', 'CoursesManager@getAllCoursesPage');
+Route::get('/gestioneCorsi', 'CoursesManager@getAllCoursesView');//->middleware('auth')
 Route::post('/insertFormCourse', 'CoursesManager@addCourse');
 Route::get('/nuovoCorso', function () {
     return view('insertNewCourse');
