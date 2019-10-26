@@ -27,7 +27,7 @@
                                 <hr><hr><hr><hr>
                             </div>
                             <div class="col-md-4">
-                                <label for="userName">Peso :</label>
+                                <label for="userName">Peso0 :</label>
                                 <div class="col-sm-9">
                                     <input id="userName" name="userName" type="text" class="required form-control">
                                 </div>

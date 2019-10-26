@@ -8,7 +8,7 @@
 
     <div class="row justify-content-center">
         <div class="col-md-10">
-            <div class="card">
+            <div class="card" style="border-radius: 10px;background-color: #d6d8d8">
                 <form class="form-horizontal" method="post" enctype="multipart/form-data" action="/insertFormCourse">
                     @csrf
                     <div class="card-body">
