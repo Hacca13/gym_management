@@ -2,13 +2,17 @@
     <div class="card-body">
         <div class="row">
             <div class="col-md-5">
+              <form action="/coursesSearchResultsPage" method="post">
+                @csrf
                 <div class="input-group no-border">
-                    <input type="text" value="" class="form-control" placeholder="Search...">
+                    <input type="text" value="" name='searchInput' class="form-control" placeholder="Cerca...">
                     <button type="submit" class="btn btn-default btn-round btn-just-icon">
                         <i class="fas fa-search"></i>
-                        <div class="ripple-container"></div>
+                        <div class="ripple-container">
+                        </div>
                     </button>
                 </div>
+              </form>
             </div>
             <div class="col-md-3" >
                 <div class="input-group no-border">

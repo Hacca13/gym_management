@@ -13,6 +13,60 @@ use Illuminate\Pagination\LengthAwarePaginator;
 
 class CoursesManager extends Controller{
 
+    public static function searchCourses(Request $request){
+      $currentPage = LengthAwarePaginator::resolveCurrentPage();
+      $input = $request->all();
+
+      if(isset($input['searchInput'])){
+        $input = $input['searchInput'];
+        $request->session()->put('searchInput', $input);
+      }else{
+        $input = $request->session()->pull('searchInput');
+        $request->session()->put('searchInput', $input);
+      }
+      $url = substr($request->url(), 0, strlen($request->url())-24);
+      $url = $url.'coursesPageSearchResults';
+
+      $coursesResultList = CoursesManager::getCoursesDBOrCoursesSessionForSearchPage($request,$currentPage,$input);
+
+      $itemCollection = collect($coursesResultList);
+      $perPage = 1;
+      $currentPageItems = $itemCollection->slice(($currentPage * $perPage) - $perPage, $perPage)->all();
+      $coursesResultList = new LengthAwarePaginator($currentPageItems , count($itemCollection), $perPage);
+      $coursesResultList->setPath($url);
+
+
+      return view('coursesPageSearchResult', compact('coursesResultList'));
+    }
+
+    public static function getCoursesDBOrCoursesSessionForSearchPage($request,$currentPage,$input){
+      if($currentPage == 1){
+        $coursesResultList = CoursesManager::searchCoursesPartially($input);
+        $request->session()->put('coursesResultList', $coursesResultList);
+      }
+      else{
+        $coursesResultList = $request->session()->pull('coursesResultList');
+        $request->session()->put('coursesResultList', $coursesResultList);
+      }
+      return $coursesResultList;
+    }
+
+    public static function searchCoursesPartially($input){
+      $coursesResultList = array();
+      $collection = Firestore::collection('Courses');
+      $documents = $collection->orderBy('name')->startAt([$input])->endAt([$input.'z'])->documents();
+
+      foreach ($documents as $document) {
+          $course = CoursesManager::trasformArrayCourseToCourse($document->data());
+          $course->setIdDatabase($document->id());
+          array_push($coursesResultList,$course);
+      }
+
+      return $coursesResultList;
+
+    }
+
+
     public static function theUserForWhichCourseIsRegistered($idUserDatabase){
         $courses = array();
         $allCourses = CoursesManager::getAllCourses();

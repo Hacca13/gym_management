@@ -60,10 +60,7 @@ class UsersManager extends Controller{
       return $usersResultListBySurname;
     }
 
-    public static function searchUsersOtherPages(Request $request){
-      $currentPage = LengthAwarePaginator::resolveCurrentPage();
-      var_dump($currentPage);
-    }
+
 
     public static function searchUsers(Request $request){
       $currentPage = LengthAwarePaginator::resolveCurrentPage();
