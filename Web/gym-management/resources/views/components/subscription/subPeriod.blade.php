@@ -19,4 +19,13 @@
       </div>
     </div>
   </div>
+    <br>
+    <br>
+    <br>
+    <div class="col-md-12 row">
+        <hr>
+        <p align="right">
+            <button name="acceptTerms" class="btn btn-success">Rinnova Abbonamento</button>
+        </p>
+    </div>
 </div>

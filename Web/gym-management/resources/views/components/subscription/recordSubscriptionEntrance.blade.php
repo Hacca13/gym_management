@@ -25,11 +25,11 @@
                                     </section>
                                 </div>
                                 <br>
-                                  @include('components.subscription.recordSubPeriod')
+                                  @include('components.subscription.subPeriod')
                                 <div class="row">
-                                    @include('components.subscription.recordSubCourse')
+                                    @include('components.subscription.subCourse')
                                 </div>
-                               @include('components.subscription.recordSubEntrance')
+                               @include('components.subscription.subEntrance')
                     </form>
                 </div>
             </div>
