@@ -2,8 +2,10 @@ import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 import Autocomplete from 'react-autocomplete';
-import ExerciseToAdd from "./exerciseToAdd";
 import Autosuggest from 'react-autosuggest';
+import ExerciseToAdd from "./exerciseToAdd";
+import ExerciseToAddByTime from "./exerciseToAddByTime";
+import UserSearch from "./userSearch";
 
 class NewTcard2 extends Component {
 
@@ -20,6 +22,7 @@ class NewTcard2 extends Component {
         };
         this.removeExercise = this.removeExercise.bind(this);
         this.returnInfo = this.returnInfo.bind(this);
+        this.addUser = this.addUser.bind(this);
     }
 
     //COMPONENTS FUNCTIONS
@@ -59,8 +62,10 @@ class NewTcard2 extends Component {
             .catch(e => {
                 console.log(e);
             });
+    }
 
-
+    addUser(user) {
+        console.log(user)
     }
 
     //EXERCISES FUNCTIONS
@@ -88,8 +93,8 @@ class NewTcard2 extends Component {
         };
         let temp_arr = this.state.exercisesList;
         temp_arr.push(toAdd);
-        this.setState({ exercisesList: temp_arr});
-        document.getElementById('modalBtn').click();
+        this.setState({ exercisesList: temp_arr, suggest: [], value: ''});
+
     }
 
     removeExercise(index) {
@@ -130,14 +135,15 @@ class NewTcard2 extends Component {
 
     renderSuggestion = suggestion => (
         <div>
-            {suggestion.name}
+            {suggestion.name + ' ' + suggestion.surname}
         </div>
     );
 
     onSuggestionSelected = (event, { suggestion, suggestionValue, suggestionIndex, sectionIndex, method }) => {
         this.addExercise(suggestionValue);
         this.setState({
-            value: ''
+            value: '',
+            suggestion: []
         });
     };
 
@@ -159,7 +165,7 @@ class NewTcard2 extends Component {
     render() {
         const { value, suggestions } = this.state;
         const inputProps = {
-            placeholder: 'Type a programming language',
+            placeholder: 'es. Plank, Panca Reclinata',
             value,
             onChange: this.onChange
         };
@@ -180,6 +186,10 @@ class NewTcard2 extends Component {
                             </div>
                         </div>
 
+                        <UserSearch
+                            mirko={this.addUser}
+                        />
+
                         <div className="card-body">
                             <form onSubmit={this.handleSubmit}>
                                 <div className="form-group row">
@@ -191,16 +201,12 @@ class NewTcard2 extends Component {
                                                value={this.state.userID}
                                                onChange={event => (
                                                    this.setState({
-                                                        userID: event.target.value
+                                                       userID: event.target.value
                                                    })
                                                )}
                                                style={{borderRadius: '10px', backgroundColor: 'rgb(255, 255, 255,0.7)'}}/>
                                     </div>
-                                    <div className="col-md-6">
-                                        <button type="button" className="btn btn-primary margin-5"
-                                                data-toggle="modal" data-target="#Modal1">Inserisci Esercizio
-                                        </button>
-                                    </div>
+
                                 </div>
 
                                 <div className="form-group row">
@@ -231,21 +237,52 @@ class NewTcard2 extends Component {
                                     </div>
                                 </div>
 
-                                <button type="submit">INSERT</button>
+                                <br/>
+                                <div className="row justify-content-center">
+                                    <div className="col-md-6 text-center">
+                                        <h4>Inserisci esercizio</h4>
+                                        <div className="row justify-content-center">
+                                            <div className="col-md-8 text-center">
+                                                <div className='row justify-content-center'>
+                                                    <Autosuggest
+                                                        suggestions={suggestions}
+                                                        onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
+                                                        onSuggestionsClearRequested={this.onSuggestionsClearRequested}
+                                                        getSuggestionValue={this.getSuggestionValue}
+                                                        renderSuggestion={this.renderSuggestion}
+                                                        inputProps={inputProps}
+                                                        onSuggestionSelected={this.onSuggestionSelected}
+                                                    />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div className="col-md-6 text-center">
+                                        <button type="submit" className="bttn-pill bttn-success bttn-md">Inserisci scheda</button>
+                                    </div>
 
 
-                                <div className="row">
 
-                                    <div className="col-md-12" style={{border: '1px red dotted'}}>
+                                    <div className="col-md-12">
                                         {
-                                            this.state.exercisesList.map(((value, index) => {
-                                                return <ExerciseToAdd
+                                            this.state.exercisesList.reverse().map(((value, index) => {
+                                                return <ExerciseToAddByTime removeEx={this.removeExercise}
+                                                                            name={value.name}
+                                                                            indexed={index}
+                                                                            key={index}
+                                                                            retrieveState={this.returnInfo}/>
+                                                /*
+                                                <ExerciseToAdd
                                                     removeEx={this.removeExercise}
                                                     name={value.name}
                                                     indexed={index}
                                                     key={index}
                                                     retrieveState={this.returnInfo}
                                                 />
+
+                                                 */
                                             }))
                                         }
 
@@ -253,43 +290,7 @@ class NewTcard2 extends Component {
 
                                 </div>
 
-                                <div className="col-md-5">
 
-                                    <div className="modal fade" id="Modal1" tabIndex="-1" role="dialog"
-                                         aria-labelledby="exampleModalLabel" aria-hidden="true ">
-                                        <div className="modal-dialog" role="document ">
-                                            <div className="modal-content">
-                                                <div className="modal-header">
-                                                    <h5 className="modal-title" id="exampleModalLabel">Popup
-                                                        Headfewfwer</h5>
-                                                    <button type="button" id="modalBtn" className="close"
-                                                            data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true ">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <div className="modal-body">
-                                                    <div className="container">
-
-                                                        <div className='row justify-content-center'>
-
-                                                            <Autosuggest
-                                                                suggestions={suggestions}
-                                                                onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
-                                                                onSuggestionsClearRequested={this.onSuggestionsClearRequested}
-                                                                getSuggestionValue={this.getSuggestionValue}
-                                                                renderSuggestion={this.renderSuggestion}
-                                                                inputProps={inputProps}
-                                                                onSuggestionSelected={this.onSuggestionSelected}
-                                                            />
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
                             </form>
                         </div>
 

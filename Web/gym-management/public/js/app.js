@@ -73300,6 +73300,247 @@ function (_Component) {
 
 /***/ }),
 
+/***/ "./resources/js/components/exerciseToAddByTime.js":
+/*!********************************************************!*\
+  !*** ./resources/js/components/exerciseToAddByTime.js ***!
+  \********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+var ExerciseToAddByTime =
+/*#__PURE__*/
+function (_Component) {
+  _inherits(ExerciseToAddByTime, _Component);
+
+  function ExerciseToAddByTime(props) {
+    var _this;
+
+    _classCallCheck(this, ExerciseToAddByTime);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(ExerciseToAddByTime).call(this, props));
+    _this.state = {
+      atTime: true,
+      series: '1',
+      work: {
+        min: '00',
+        sec: '00'
+      },
+      rest: {
+        min: '00',
+        sec: '00'
+      },
+      day: 'Lunedì'
+    };
+    return _this;
+  }
+
+  _createClass(ExerciseToAddByTime, [{
+    key: "componentDidUpdate",
+    value: function componentDidUpdate(prevProps, prevState, snapshot) {
+      if (prevState !== this.state) {
+        this.props.retrieveState(this.state, this.props.indexed);
+      }
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this2 = this;
+
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "card",
+        style: {
+          borderRadius: '10px',
+          backgroundColor: '#d6d8d8',
+          marginTop: '2%'
+        }
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "card-header row justify-content-between"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-md-8"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, this.props.name)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-md-2",
+        style: {
+          textAlign: 'right'
+        }
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: function onClick() {
+          _this2.props.removeEx(_this2.props.indexed);
+        },
+        className: "bttn-material-circle bttn-sm bttn-danger"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "fas fa-times"
+      })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "card-body"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "row"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-md-6",
+        style: {
+          borderRight: '1px solid gray'
+        }
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group row justify-content-center"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        htmlFor: "userName"
+      }, "Numero Serie :"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-md-12 col-sm-12 text-center"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        name: "series" + this.props.indexed,
+        type: "number",
+        value: this.state.series,
+        onChange: function onChange(event) {
+          _this2.setState({
+            series: event.target.value
+          });
+        },
+        style: {
+          width: '30%'
+        }
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group row justify-content-center"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        htmlFor: "userName"
+      }, "Tempo Allenamento:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-md-12 col-sm-12 row justify-content-center"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-md-5",
+        style: {
+          textAlign: 'right'
+        }
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        name: "workMin" + this.props.indexed,
+        value: this.state.work.min,
+        onChange: function onChange(event) {
+          _this2.setState({
+            work: {
+              min: event.target.value,
+              sec: _this2.state.work.sec
+            }
+          });
+        },
+        type: "number",
+        style: {
+          width: '50%'
+        }
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, ":"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-md-5"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        name: "workSec" + this.props.indexed,
+        value: this.state.work.sec,
+        onChange: function onChange(event) {
+          _this2.setState({
+            work: {
+              sec: event.target.value,
+              min: _this2.state.work.min
+            }
+          });
+        },
+        type: "number",
+        style: {
+          width: '50%'
+        }
+      }))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-md-6 text-center",
+        style: {
+          borderLeft: '1px solid gray'
+        }
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        htmlFor: "userName"
+      }, "Giorno :"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group row justify-content-center"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-md-6 col-sm-6"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+        className: "select2 form-control custom-select",
+        name: "EerciseDay" + this.props.indexed,
+        value: this.state.day,
+        onChange: function onChange(event) {
+          _this2.setState({
+            day: event.target.value
+          });
+        },
+        style: {
+          width: '100%',
+          height: '36px'
+        }
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, "Lunedi"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, "Martedi"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, "Mercoledi"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, "Giovedi"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, "Venerdi"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, "Sabato"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, "Domenica")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group row justify-content-center"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        htmlFor: "userName"
+      }, "Tempo Allenamento:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-md-12 col-sm-12 row justify-content-center"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-md-5",
+        style: {
+          textAlign: 'right'
+        }
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        name: "restMin" + this.props.indexed,
+        value: this.state.rest.min,
+        onChange: function onChange(event) {
+          _this2.setState({
+            rest: {
+              min: event.target.value,
+              sec: _this2.state.rest.sec
+            }
+          });
+        },
+        type: "number",
+        style: {
+          width: '50%'
+        }
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, ":"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-md-5"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        name: "restSec" + this.props.indexed,
+        value: this.state.rest.sec,
+        onChange: function onChange(event) {
+          _this2.setState({
+            rest: {
+              min: _this2.state.rest.min,
+              sec: event.target.value
+            }
+          });
+        },
+        type: "number",
+        style: {
+          width: '50%'
+        }
+      }))))))));
+    }
+  }]);
+
+  return ExerciseToAddByTime;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+
+/* harmony default export */ __webpack_exports__["default"] = (ExerciseToAddByTime);
+
+/***/ }),
+
 /***/ "./resources/js/components/newTcard2.js":
 /*!**********************************************!*\
   !*** ./resources/js/components/newTcard2.js ***!
@@ -73317,9 +73558,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var react_autocomplete__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-autocomplete */ "./node_modules/react-autocomplete/build/lib/Autocomplete.js");
 /* harmony import */ var react_autocomplete__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_autocomplete__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _exerciseToAdd__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./exerciseToAdd */ "./resources/js/components/exerciseToAdd.js");
-/* harmony import */ var react_autosuggest__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-autosuggest */ "./node_modules/react-autosuggest/dist/index.js");
-/* harmony import */ var react_autosuggest__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react_autosuggest__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var react_autosuggest__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-autosuggest */ "./node_modules/react-autosuggest/dist/index.js");
+/* harmony import */ var react_autosuggest__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react_autosuggest__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _exerciseToAdd__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./exerciseToAdd */ "./resources/js/components/exerciseToAdd.js");
+/* harmony import */ var _exerciseToAddByTime__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./exerciseToAddByTime */ "./resources/js/components/exerciseToAddByTime.js");
+/* harmony import */ var _userSearch__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./userSearch */ "./resources/js/components/userSearch.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -73339,6 +73582,8 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
 
 
 
@@ -73396,7 +73641,7 @@ function (_Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "renderSuggestion", function (suggestion) {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, suggestion.name);
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, suggestion.name + ' ' + suggestion.surname);
     });
 
     _defineProperty(_assertThisInitialized(_this), "onSuggestionSelected", function (event, _ref2) {
@@ -73409,7 +73654,8 @@ function (_Component) {
       _this.addExercise(suggestionValue);
 
       _this.setState({
-        value: ''
+        value: '',
+        suggestion: []
       });
     });
 
@@ -73438,6 +73684,7 @@ function (_Component) {
     };
     _this.removeExercise = _this.removeExercise.bind(_assertThisInitialized(_this));
     _this.returnInfo = _this.returnInfo.bind(_assertThisInitialized(_this));
+    _this.addUser = _this.addUser.bind(_assertThisInitialized(_this));
     return _this;
   } //COMPONENTS FUNCTIONS
 
@@ -73457,8 +73704,13 @@ function (_Component) {
     } //FORM FUNCTIONS
 
   }, {
+    key: "addUser",
+    value: function addUser(user) {
+      console.log(user);
+    } //EXERCISES FUNCTIONS
+
+  }, {
     key: "addExercise",
-    //EXERCISES FUNCTIONS
     value: function addExercise(suggest) {
       var tmp_ex = this.state.exerr;
       var ind = tmp_ex.findIndex(function (ex) {
@@ -73485,9 +73737,10 @@ function (_Component) {
       var temp_arr = this.state.exercisesList;
       temp_arr.push(toAdd);
       this.setState({
-        exercisesList: temp_arr
+        exercisesList: temp_arr,
+        suggest: [],
+        value: ''
       });
-      document.getElementById('modalBtn').click();
     }
   }, {
     key: "removeExercise",
@@ -73527,7 +73780,7 @@ function (_Component) {
           value = _this$state.value,
           suggestions = _this$state.suggestions;
       var inputProps = {
-        placeholder: 'Type a programming language',
+        placeholder: 'es. Plank, Panca Reclinata',
         value: value,
         onChange: this.onChange
       };
@@ -73551,7 +73804,9 @@ function (_Component) {
         style: {
           textAlign: 'left'
         }
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Inserisci Scheda")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Inserisci Scheda")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_userSearch__WEBPACK_IMPORTED_MODULE_7__["default"], {
+        mirko: this.addUser
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "card-body"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         onSubmit: this.handleSubmit
@@ -73576,14 +73831,7 @@ function (_Component) {
           borderRadius: '10px',
           backgroundColor: 'rgb(255, 255, 255,0.7)'
         }
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-md-6"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        type: "button",
-        className: "btn btn-primary margin-5",
-        "data-toggle": "modal",
-        "data-target": "#Modal1"
-      }, "Inserisci Esercizio"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "form-group row"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-sm-6"
@@ -73625,57 +73873,17 @@ function (_Component) {
           borderRadius: '10px',
           backgroundColor: 'rgb(255, 255, 255,0.7)'
         }
-      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        type: "submit"
-      }, "INSERT"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "row"
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "row justify-content-center"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-md-12",
-        style: {
-          border: '1px red dotted'
-        }
-      }, this.state.exercisesList.map(function (value, index) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_exerciseToAdd__WEBPACK_IMPORTED_MODULE_4__["default"], {
-          removeEx: _this3.removeExercise,
-          name: value.name,
-          indexed: index,
-          key: index,
-          retrieveState: _this3.returnInfo
-        });
-      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-md-5"
+        className: "col-md-6 text-center"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Inserisci esercizio"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "row justify-content-center"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "modal fade",
-        id: "Modal1",
-        tabIndex: "-1",
-        role: "dialog",
-        "aria-labelledby": "exampleModalLabel",
-        "aria-hidden": "true "
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "modal-dialog",
-        role: "document "
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "modal-content"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "modal-header"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
-        className: "modal-title",
-        id: "exampleModalLabel"
-      }, "Popup Headfewfwer"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        type: "button",
-        id: "modalBtn",
-        className: "close",
-        "data-dismiss": "modal",
-        "aria-label": "Close"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-        "aria-hidden": "true "
-      }, "\xD7"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "modal-body"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "container"
+        className: "col-md-8 text-center"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "row justify-content-center"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_autosuggest__WEBPACK_IMPORTED_MODULE_5___default.a, {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_autosuggest__WEBPACK_IMPORTED_MODULE_4___default.a, {
         suggestions: suggestions,
         onSuggestionsFetchRequested: this.onSuggestionsFetchRequested,
         onSuggestionsClearRequested: this.onSuggestionsClearRequested,
@@ -73683,7 +73891,31 @@ function (_Component) {
         renderSuggestion: this.renderSuggestion,
         inputProps: inputProps,
         onSuggestionSelected: this.onSuggestionSelected
-      })))))))))))));
+      }))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-md-6 text-center"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        type: "submit",
+        className: "bttn-pill bttn-success bttn-md"
+      }, "Inserisci scheda")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-md-12"
+      }, this.state.exercisesList.reverse().map(function (value, index) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_exerciseToAddByTime__WEBPACK_IMPORTED_MODULE_6__["default"], {
+          removeEx: _this3.removeExercise,
+          name: value.name,
+          indexed: index,
+          key: index,
+          retrieveState: _this3.returnInfo
+        });
+        /*
+        <ExerciseToAdd
+            removeEx={this.removeExercise}
+            name={value.name}
+            indexed={index}
+            key={index}
+            retrieveState={this.returnInfo}
+        />
+          */
+      }))))))));
     }
   }]);
 
@@ -73695,6 +73927,167 @@ function (_Component) {
 if (document.getElementById('index')) {
   react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(NewTcard2, null), document.getElementById('index'));
 }
+
+/***/ }),
+
+/***/ "./resources/js/components/userSearch.js":
+/*!***********************************************!*\
+  !*** ./resources/js/components/userSearch.js ***!
+  \***********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_autosuggest__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-autosuggest */ "./node_modules/react-autosuggest/dist/index.js");
+/* harmony import */ var react_autosuggest__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_autosuggest__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+
+
+var UserSearch =
+/*#__PURE__*/
+function (_Component) {
+  _inherits(UserSearch, _Component);
+
+  function UserSearch(props) {
+    var _this;
+
+    _classCallCheck(this, UserSearch);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(UserSearch).call(this, props));
+
+    _defineProperty(_assertThisInitialized(_this), "onChange", function (event, _ref) {
+      var newValue = _ref.newValue;
+
+      _this.setState({
+        value: newValue
+      });
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "getSuggestions", function (value, exer) {
+      var inputValue = value.trim().toLowerCase();
+      var inputLength = inputValue.length;
+      return inputLength === 0 ? [] : exer.filter(function (lang) {
+        return lang.surname.toLowerCase().slice(0, inputLength) === inputValue;
+      });
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "getSuggestionValue", function (suggestion) {
+      return suggestion.surname;
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "renderSuggestion", function (suggestion) {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, suggestion.name + ' ' + suggestion.surname + ' ' + suggestion.dateOfBirth);
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "onSuggestionSelected", function (event, _ref2) {
+      var suggestion = _ref2.suggestion,
+          suggestionValue = _ref2.suggestionValue,
+          suggestionIndex = _ref2.suggestionIndex,
+          sectionIndex = _ref2.sectionIndex,
+          method = _ref2.method;
+
+      _this.props.mirko('pelo');
+
+      _this.setState({
+        value: '',
+        suggestion: []
+      });
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "onSuggestionsFetchRequested", function (_ref3) {
+      var value = _ref3.value;
+
+      _this.setState({
+        suggestions: _this.getSuggestions(value, _this.state.exerr)
+      });
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "onSuggestionsClearRequested", function () {
+      _this.setState({
+        suggestions: []
+      });
+    });
+
+    _this.state = {
+      value: '',
+      exerr: [],
+      userID: '',
+      from: '',
+      to: '',
+      exercisesList: [],
+      suggestions: []
+    };
+    return _this;
+  } //COMPONENTS FUNCTIONS
+
+
+  _createClass(UserSearch, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/jsonUsers').then(function (value) {
+        _this2.setState({
+          exerr: value.data
+        });
+      })["catch"](function (e) {
+        console.log(e);
+      }).then(function () {});
+    } //FORM FUNCTIONS
+
+  }, {
+    key: "render",
+    value: function render() {
+      var _this$state = this.state,
+          value = _this$state.value,
+          suggestions = _this$state.suggestions;
+      var inputProps = {
+        placeholder: 'es. Plank, Panca Reclinata',
+        value: value,
+        onChange: this.onChange
+      };
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_autosuggest__WEBPACK_IMPORTED_MODULE_1___default.a, {
+        suggestions: suggestions,
+        onSuggestionsFetchRequested: this.onSuggestionsFetchRequested,
+        onSuggestionsClearRequested: this.onSuggestionsClearRequested,
+        getSuggestionValue: this.getSuggestionValue,
+        renderSuggestion: this.renderSuggestion,
+        inputProps: inputProps,
+        onSuggestionSelected: this.onSuggestionSelected
+      });
+    }
+  }]);
+
+  return UserSearch;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+
+/* harmony default export */ __webpack_exports__["default"] = (UserSearch);
 
 /***/ }),
 
