@@ -39,10 +39,7 @@ class TrainingCardsManager extends Controller
       }
     }
 
-    private static function trasformRequestIntoTrainingCards($input){
-      //fgsfgsdfg
-
-    }
+    
 
     public static function transformTrainingCardsIntoArrayTrainingCards($trainingCards){
       $idDatabase = $trainingCards->getIdDatabase();
