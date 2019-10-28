@@ -25,47 +25,11 @@
                                     </section>
                                 </div>
                                 <br>
+                                  @include('components.subscription.recordSubPeriod')
                                 <div class="row">
-                                    <div class="col-md-6"  id="inizio">
-                                        <label>Inzio</label>
-                                        <div class="input-group">
-                                            <input type="text" class="form-control mydatepicker" placeholder="mm/dd/yyyy">
-                                            <div class="input-group-append">
-                                                <span class="input-group-text"><i class="fa fa-calendar"></i></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6"  id="fine">
-                                        <label>Fine</label>
-                                        <div class="input-group">
-                                            <input type="text" class="form-control mydatepicker" placeholder="mm/dd/yyyy">
-                                            <div class="input-group-append">
-                                                <span class="input-group-text"><i class="fa fa-calendar"></i></span>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    @include('components.subscription.recordSubCourse')
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-6" id="corsi">
-                                        <div>
-                                            <section>
-                                                <label for="userName">Nome Corso</label>
-                                                <input id="userName" name="userName" type="text" class="required form-control">
-                                            </section>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6" id="entrate">
-                                        <div class="form-group">
-                                            <label for="exampleFormControlSelect1">Numero Entrate</label>
-                                            <select class="form-control" id="exampleFormControlSelect1">
-                                                <option>1</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                        </div>
+                               @include('components.subscription.recordSubEntrance')
                     </form>
                 </div>
             </div>
