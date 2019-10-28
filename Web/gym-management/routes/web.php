@@ -71,13 +71,13 @@ Route::get('/nuovoAbbonamento', function (){
 
 
 //SCHEDA
-Route::get('/nuovaScheda', function (){
-    return view('newCard');
-});
+
 
 Route::get('/gestioneSchede', 'TrainingCardsManager@getAllTrainingCardsForView');
 
-Route::get('/nuovaSched', 'TrainingCardsManager@exercisePage');
+Route::get('/nuovaScheda', 'TrainingCardsManager@exercisePage');
+Route::post('/trainingCardsSearchResultsPage', 'TrainingCardsManager@searchTrainingCards');
+Route::get('/trainingCardsPageSearchResults', 'TrainingCardsManager@searchTrainingCards');
 
 
 

@@ -54,14 +54,12 @@
                 </div>
             </div>
                 <div class="col-md-12">
-                    @foreach($trainingCardsList as $trainingCard)
+                    @foreach($trainingCardsResultList as $trainingCard)
                       @include('components.trainingCards.TrainingCardsList')
                     @endforeach
 
                 </div>
-                <div>
-                      {{ $trainingCardsList->links()}}
-                </div>
+              
         </div>
     </div>
 @endsection

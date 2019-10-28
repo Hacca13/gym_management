@@ -60,7 +60,13 @@ class UsersManager extends Controller{
       return $usersResultListBySurname;
     }
 
+    public static function searchUsersPartially($input){
+      $usersResultListByName = UsersManager::searchUsersPartiallyByName($input);
+      $usersResultListBySurname = UsersManager::searchUsersPartiallyBySurname($input);
+      $usersResultList = $usersResultListByName + $usersResultListBySurname;
 
+      return $usersResultList;
+    }
 
     public static function searchUsers(Request $request){
       $currentPage = LengthAwarePaginator::resolveCurrentPage();
