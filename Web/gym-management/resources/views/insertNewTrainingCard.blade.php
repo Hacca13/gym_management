@@ -9,7 +9,7 @@
                 <div class="card-header">
                     <div class="row">
                         <div class="col-md-8" style="text-align: left">
-                            <h2>Inserisci Scheda</h2>
+                            <h2 class >Inserisci Scheda</h2>
                         </div>
                     </div>
                 </div>

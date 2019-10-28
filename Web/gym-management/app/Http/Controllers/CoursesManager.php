@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Storage;
 use Spatie\LaravelImageOptimizer\Facades\ImageOptimizer;
 use Stichoza\GoogleTranslate\GoogleTranslate;
 use Kreait\Firebase;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class CoursesManager extends Controller{
 
@@ -56,7 +57,7 @@ class CoursesManager extends Controller{
 
     public static function getAllCoursesView(Request $request){
       $currentPage = LengthAwarePaginator::resolveCurrentPage();
-      $courses = CoursesManager::getCoursesDBOrCoursesSession();
+      $courses = CoursesManager::getCoursesDBOrCoursesSession($request,$currentPage);
 
       $itemCollection = collect($courses);
       $perPage = 1;
@@ -117,11 +118,6 @@ class CoursesManager extends Controller{
         );
 
         return $arrayCourse;
-    }
-
-    public function getAllCoursesPage() {
-        $courses = CoursesManager::getAllCourses();
-        return view('courses', compact('courses'));
     }
 
     public function addCourse(Request $request) {
