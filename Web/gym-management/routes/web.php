@@ -40,7 +40,8 @@ Route::get('/modificaEsercizio', function (){
 //UTENTI
 Route::post('/addUserPost', 'UsersManager@createUser');
 Route::post('/userSearchResultsPage', 'UsersManager@searchUsers');
-Route::get('/usersPageSearchResult', 'UsersManager@searchUsers');
+Route::get('/userPageSearchResults', 'UsersManager@searchUsers');
+
 
 Route::get('/nuovoIscritto', function (){
     return view('userAdd');
