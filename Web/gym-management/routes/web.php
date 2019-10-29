@@ -75,6 +75,7 @@ Route::get('/nuovaScheda', function (){
 Route::get('/gestioneSchede', 'TrainingCardsManager@getAllTrainingCardsForView');
 
 Route::get('/nuovaSched', 'TrainingCardsManager@exercisePage');
+Route::get('/salvatore', 'TrainingCardsManager@exercisePage2');
 
 
 

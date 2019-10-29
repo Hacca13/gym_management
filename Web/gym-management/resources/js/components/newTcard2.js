@@ -6,6 +6,10 @@ import Autosuggest from 'react-autosuggest';
 import ExerciseToAdd from "./exerciseToAdd";
 import ExerciseToAddByTime from "./exerciseToAddByTime";
 import UserSearch from "./userSearch";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+
+
 
 class NewTcard2 extends Component {
 
@@ -14,11 +18,13 @@ class NewTcard2 extends Component {
         this.state = {
             value: '',
             exerr: [],
+            userName: '',
             userID: '',
-            from: '',
-            to: '',
             exercisesList: [],
-            suggestions: []
+            suggestions: [],
+            from: new Date(),
+            to: new Date(),
+            visible: false
         };
         this.removeExercise = this.removeExercise.bind(this);
         this.returnInfo = this.returnInfo.bind(this);
@@ -46,6 +52,12 @@ class NewTcard2 extends Component {
 
     };
 
+    handleChange = date => {
+        this.setState({
+            startDate: date
+        });
+    };
+
     handleSubmit = event => {
         event.preventDefault();
         axios.post('/api/insertTrainCard', {
@@ -65,7 +77,10 @@ class NewTcard2 extends Component {
     }
 
     addUser(user) {
-        console.log(user)
+        this.setState({
+            userID: user.idDatabase,
+            userName: user.name + ' ' + user.surname
+        })
     }
 
     //EXERCISES FUNCTIONS
@@ -133,34 +148,69 @@ class NewTcard2 extends Component {
 
     getSuggestionValue = suggestion => suggestion.name;
 
-    renderSuggestion = suggestion => (
-        <div>
-            {suggestion.name + ' ' + suggestion.surname}
-        </div>
-    );
+    renderSuggestion = suggestion => {
+
+        return (
+            <div>
+                <h4 style={{paddingTop: '2.4%'}}>{suggestion.name}</h4>
+                <hr/>
+            </div>
+        )
+    }
 
     onSuggestionSelected = (event, { suggestion, suggestionValue, suggestionIndex, sectionIndex, method }) => {
         this.addExercise(suggestionValue);
         this.setState({
             value: '',
-            suggestion: []
+            suggestion: [],
+            visible: false
         });
     };
 
     onSuggestionsFetchRequested = ({value}) => {
         this.setState({
-            suggestions: this.getSuggestions(value, this.state.exerr)
+            suggestions: this.getSuggestions(value, this.state.exerr),
+            visible: true
         });
     };
 
     onSuggestionsClearRequested = () => {
         this.setState({
-            suggestions: []
+            suggestions: [],
+            visible: false
         });
     };
 
+    renderInputComponent = inputProps => (
 
+        <div className="input-group">
+            <div className="input-group-prepend">
+                <span className="input-group-text" id="basic-addon1"><i className="fas fa-user"/></span>
+            </div>
+            <input type="text" className="form-control" placeholder="Prepend"aria-label="Username"
+                   aria-describedby="basic-addon1" {...inputProps} style={{width: '80%'}}/>
+        </div>
 
+    );
+
+    renderSuggestionsContainer = ({ containerProps, children, query }) => (
+        <div {...containerProps}
+             style={{
+                 display: this.state.visible ? 'block' : 'none',
+                 backgroundColor: 'white',
+                 paddingBottom: '2%',
+                 paddingTop: '2%'
+             }}>
+            {children}
+
+        </div>
+    );
+
+    setFrom(date) {
+        this.setState({
+            from: date
+        })
+    }
 
     render() {
         const { value, suggestions } = this.state;
@@ -169,10 +219,18 @@ class NewTcard2 extends Component {
             value,
             onChange: this.onChange
         };
+
+        const ExampleCustomInput = ({ value, onClick }) => (
+            <div className="input-group">
+                <div className="input-group-prepend">
+                    <span className="input-group-text" id="basic-addon1"><i className='fas fa-calendar'/></span>
+                </div>
+                <input type="text" value={value} className="form-control" onClick={onClick} />
+            </div>
+
+        );
+
         return (
-
-
-
             <div className="row justify-content-center">
                 <div className="col-md-10">
                     <div className="card"
@@ -186,78 +244,77 @@ class NewTcard2 extends Component {
                             </div>
                         </div>
 
-                        <UserSearch
-                            mirko={this.addUser}
-                        />
 
                         <div className="card-body">
                             <form onSubmit={this.handleSubmit}>
-                                <div className="form-group row">
+
+
+
+                                <div className="form-group row justify-content-center">
                                     <div className="col-sm-6">
                                         <label htmlFor="fname"
-                                               className="col-sm-12 text-left control-label col-form-label">Scheda
-                                            Di:</label>
-                                        <input type="text" className="form-control" name="userID"
-                                               value={this.state.userID}
-                                               onChange={event => (
-                                                   this.setState({
-                                                       userID: event.target.value
-                                                   })
-                                               )}
-                                               style={{borderRadius: '10px', backgroundColor: 'rgb(255, 255, 255,0.7)'}}/>
+                                               className="col-sm-12 text-center control-label col-form-label">Utente</label>
+                                        <UserSearch
+                                            retrieveUser={this.addUser}
+                                        />
                                     </div>
 
                                 </div>
 
-                                <div className="form-group row">
+                                <div className="form-group row text-center justify-content-center">
+
                                     <div className="col-sm-6">
                                         <label htmlFor="fname"
-                                               className="col-sm-12 text-left control-label col-form-label">Dal:</label>
-                                        <input type="date" pattern="\d{1,2}/\d{1,2}/\d{4}" className="form-control" name="from"
-                                               value={this.state.from}
-                                               onChange={event => (
-                                                   this.setState({
-                                                       from: event.target.value
-                                                   })
-                                               )}
-                                               style={{borderRadius: '10px', backgroundColor: 'rgb(255, 255, 255,0.7)'}}/>
+                                               className="col-sm-12 text-center control-label col-form-label">Data inizio</label>
+                                        <DatePicker
+                                            selected={this.state.from}
+                                            onChange={date =>
+                                                this.setState({
+                                                    from: date
+                                                })}
+                                            dateFormat="dd/MM/yyyy"
+                                            customInput={<ExampleCustomInput
+                                                fromOrTo={true}
+                                            />}
+                                        />
                                     </div>
 
+                                    <div className="col-sm-6">
+                                        <label htmlFor="fname"
+                                               className="col-sm-12 text-center control-label col-form-label">Data fine</label>
+                                        <DatePicker
+                                            selected={this.state.to}
+                                            onChange={date =>
+                                                this.setState({
+                                                    to: date
+                                                })}
+                                            dateFormat="dd/MM/yyyy"
+                                            customInput={<ExampleCustomInput
+                                                fromOrTo={false}/>
+                                            }
+                                        />
+                                    </div>
+
+                                </div>
+
+                                <div className="form-group row justify-content-center">
                                     <div className="col-md-6">
                                         <label htmlFor="fname"
-                                               className="col-sm-12 text-left control-label col-form-label">Al:</label>
-                                        <input type="date" className="form-control" name="to" pattern="\d{1,2}/\d{1,2}/\d{4}"
-                                               value={this.state.to}
-                                               onChange={event => (
-                                                   this.setState({
-                                                       to: event.target.value
-                                                   })
-                                               )}
-                                               style={{borderRadius: '10px', backgroundColor: 'rgb(255, 255, 255,0.7)'}}/>
+                                               className="col-sm-12 text-center control-label col-form-label">Utente</label>
+                                        <Autosuggest
+                                            suggestions={suggestions}
+                                            onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
+                                            onSuggestionsClearRequested={this.onSuggestionsClearRequested}
+                                            getSuggestionValue={this.getSuggestionValue}
+                                            renderSuggestion={this.renderSuggestion}
+                                            inputProps={inputProps}
+                                            onSuggestionSelected={this.onSuggestionSelected}
+                                            renderSuggestionsContainer={this.renderSuggestionsContainer}
+                                            renderInputComponent={this.renderInputComponent}
+                                        />
                                     </div>
-                                </div>
 
-                                <br/>
-                                <div className="row justify-content-center">
-                                    <div className="col-md-6 text-center">
-                                        <h4>Inserisci esercizio</h4>
-                                        <div className="row justify-content-center">
-                                            <div className="col-md-8 text-center">
-                                                <div className='row justify-content-center'>
-                                                    <Autosuggest
-                                                        suggestions={suggestions}
-                                                        onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
-                                                        onSuggestionsClearRequested={this.onSuggestionsClearRequested}
-                                                        getSuggestionValue={this.getSuggestionValue}
-                                                        renderSuggestion={this.renderSuggestion}
-                                                        inputProps={inputProps}
-                                                        onSuggestionSelected={this.onSuggestionSelected}
-                                                    />
-                                                </div>
-                                            </div>
-                                        </div>
 
-                                    </div>
 
                                     <div className="col-md-6 text-center">
                                         <button type="submit" className="bttn-pill bttn-success bttn-md">Inserisci scheda</button>
@@ -268,11 +325,16 @@ class NewTcard2 extends Component {
                                     <div className="col-md-12">
                                         {
                                             this.state.exercisesList.reverse().map(((value, index) => {
-                                                return <ExerciseToAddByTime removeEx={this.removeExercise}
-                                                                            name={value.name}
-                                                                            indexed={index}
-                                                                            key={index}
-                                                                            retrieveState={this.returnInfo}/>
+                                                if (value.atTime) {
+                                                    return <ExerciseToAddByTime removeEx={this.removeExercise}
+                                                                                name={value.name}
+                                                                                indexed={index}
+                                                                                key={index}
+                                                                                retrieveState={this.returnInfo}/>
+                                                } else {
+                                                    return <h1>not a time</h1>
+                                                }
+
                                                 /*
                                                 <ExerciseToAdd
                                                     removeEx={this.removeExercise}
@@ -306,8 +368,5 @@ class NewTcard2 extends Component {
 
 export default NewTcard2;
 
-if (document.getElementById('index')) {
-    ReactDOM.render(<NewTcard2 />, document.getElementById('index'));
-}
 
 

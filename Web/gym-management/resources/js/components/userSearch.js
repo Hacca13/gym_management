@@ -13,7 +13,8 @@ class UserSearch extends Component {
             from: '',
             to: '',
             exercisesList: [],
-            suggestions: []
+            suggestions: [],
+            visible: false,
         };
 
     }
@@ -39,6 +40,18 @@ class UserSearch extends Component {
 
     };
 
+    renderInputComponent = inputProps => (
+
+        <div className="input-group">
+            <div className="input-group-prepend">
+                <span className="input-group-text" id="basic-addon1"><i className="fas fa-user"/></span>
+            </div>
+            <input type="text" className="form-control" placeholder="Prepend"aria-label="Username"
+                   aria-describedby="basic-addon1" {...inputProps} style={{width: '80%'}}/>
+        </div>
+
+    );
+
     //SUGGESTION FUNCTIONS
 
     getSuggestions = (value, exer) => {
@@ -51,39 +64,67 @@ class UserSearch extends Component {
 
     getSuggestionValue = suggestion => suggestion.surname;
 
-    renderSuggestion = suggestion => (
-        <div>
-            {suggestion.name + ' ' + suggestion.surname + ' ' + suggestion.dateOfBirth}
-        </div>
-    );
+    renderSuggestion = suggestion => {
+
+        return (
+            <div>
+                <h4 style={{paddingTop: '2.4%'}}>{suggestion.name + ' ' + suggestion.surname + ' ' + suggestion.dateOfBirth}</h4>
+                <hr/>
+            </div>
+        )
+    }
+
 
     onSuggestionSelected = (event, { suggestion, suggestionValue, suggestionIndex, sectionIndex, method }) => {
-        this.props.mirko('pelo');
+        this.props.retrieveUser(suggestion);
         this.setState({
-            value: '',
-            suggestion: []
+            value: suggestion.name + ' ' + suggestion.surname,
+            suggestion: [],
+            visible: false
         });
     };
 
     onSuggestionsFetchRequested = ({value}) => {
         this.setState({
-            suggestions: this.getSuggestions(value, this.state.exerr)
+            suggestions: this.getSuggestions(value, this.state.exerr),
+            visible: true
         });
     };
 
     onSuggestionsClearRequested = () => {
         this.setState({
-            suggestions: []
+            suggestions: [],
+            visible: false
         });
     };
+
+
+    renderSuggestionsContainer = ({ containerProps, children, query }) => (
+        <div {...containerProps}
+             style={{
+                 display: this.state.visible ? 'block' : 'none',
+                 backgroundColor: 'white',
+                 paddingBottom: '2%',
+                 paddingTop: '2%'
+             }}>
+            {children}
+
+        </div>
+    );
 
 
     render() {
         const { value, suggestions } = this.state;
         const inputProps = {
-            placeholder: 'es. Plank, Panca Reclinata',
+            type: "text",
+            className: "form-control",
+            placeholder: "Prepend",
             value,
             onChange: this.onChange
+        };
+
+        const containerProps = {
+            className: "card",
         };
 
         return (
@@ -95,7 +136,8 @@ class UserSearch extends Component {
                 renderSuggestion={this.renderSuggestion}
                 inputProps={inputProps}
                 onSuggestionSelected={this.onSuggestionSelected}
-
+                renderInputComponent={this.renderInputComponent}
+                renderSuggestionsContainer={this.renderSuggestionsContainer}
             />
         );
     }
