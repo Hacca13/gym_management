@@ -8,9 +8,7 @@
                     </a>
                 </div>
                 <div class="col-md-6" style="text-align: end">
-                    <a href="nuovoEsercizio">
-                        <i class="fas fa-times" style="font-size: 170%; color: red; margin-left: 2.5%"></i>
-                    </a>
+
                 </div>
             </div>
         </div>
@@ -29,7 +27,10 @@
                         <div class="col-md-12 text-center"><!--CAMBIARE QUESTO HREF-->
                           <div class="col-md-12" style="border-radius: 10px;">
                               <h5>
+                                Descrizione:
+                                
                                 {{$exercise->getDescription()}}
+
                               </h5>
                           </div>
                         </div>

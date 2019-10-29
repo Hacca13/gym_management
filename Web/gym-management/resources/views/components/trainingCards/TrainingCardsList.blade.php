@@ -30,7 +30,7 @@
                                   @foreach ($exerciseListBig as $exerciseList)
                                     @if(data_get($exerciseList,'idDatabase') == $trainingCard->getIdDatabase())
                                       @foreach ( data_get($exerciseList,'exercises') as $exercise)
-                                        @include('components.exercise.cardExercise')
+                                        @include('components.exercise.cardExerciseForTrainingCard')
                                       @endforeach
                                     @endif
                                   @endforeach
