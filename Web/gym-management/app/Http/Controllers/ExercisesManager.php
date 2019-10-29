@@ -143,7 +143,8 @@ class ExercisesManager extends Controller{
 
     }
 
-    public function jsonEx() {
+    public function jsonEx()
+    {
         $exercises = ExercisesManager::getAllExercises();
         $arr = [];
         foreach ($exercises as $ex) {
@@ -151,7 +152,17 @@ class ExercisesManager extends Controller{
         }
         return response()->json($arr);
     }
-    
+
+    public function jsonUsr()
+    {
+        $users = UsersManager::getAllUser();
+        $arr = [];
+        foreach ($users as $usr) {
+            array_push($arr, UsersManager::transformUserIntoArrayUser($usr));
+        }
+        return response()->json($arr);
+    }
+
     public static function getAllExercisesForView(Request $request) {
       $currentPage = LengthAwarePaginator::resolveCurrentPage();
       $exercises = ExercisesManager::getExercisesDBOrExercises($request,$currentPage);

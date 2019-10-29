@@ -27,7 +27,13 @@
                         <div class="collapse multi-collapse" id="{{'multiCollapseExample' . $loop->index}}">
                             <div class="card card-body">
                                 <div class="row justify-content-center">
-                                asdasdasdasdsa
+                                  @foreach ($exerciseListBig as $exerciseList)
+                                    @if(data_get($exerciseList,'idDatabase') == $trainingCard->getIdDatabase())
+                                      @foreach ( data_get($exerciseList,'exercises') as $exercise)
+                                        @include('components.exercise.cardExercise')
+                                      @endforeach
+                                    @endif
+                                  @endforeach
                                 </div>
                             </div>
                         </div>

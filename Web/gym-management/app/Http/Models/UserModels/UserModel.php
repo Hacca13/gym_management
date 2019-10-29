@@ -412,4 +412,8 @@ class UserModel
         return $this;
     }
 
+    public function getProfilePicture() {
+        return $this->profileImage;
+    }
+
 }

@@ -60,10 +60,28 @@ class UsersManager extends Controller{
       return $usersResultListBySurname;
     }
 
+    public static function searchUsersPartially($input){
+      $usersResultListByName = UsersManager::searchUsersPartiallyByName($input);
+      $usersResultListBySurname = UsersManager::searchUsersPartiallyBySurname($input);
+      $usersResultList = $usersResultListByName + $usersResultListBySurname;
+
+      return $usersResultList;
+    }
+
     public static function searchUsers(Request $request){
       $currentPage = LengthAwarePaginator::resolveCurrentPage();
       $input = $request->all();
-      $input = $input['searchInput'];
+
+      if(isset($input['searchInput'])){
+        $input = $input['searchInput'];
+        $request->session()->put('searchInput', $input);
+      }else{
+        $input = $request->session()->pull('searchInput');
+        $request->session()->put('searchInput', $input);
+      }
+
+      $url = substr($request->url(), 0, strlen($request->url())-21);
+      $url = $url.'userPageSearchResults';
 
       $usersResultList = UsersManager::getUserDBOrUserSessionForSearchPage($request,$currentPage,$input);
 
@@ -71,7 +89,9 @@ class UsersManager extends Controller{
       $perPage = 1;
       $currentPageItems = $itemCollection->slice(($currentPage * $perPage) - $perPage, $perPage)->all();
       $usersResultList= new LengthAwarePaginator($currentPageItems , count($itemCollection), $perPage);
-      $usersResultList->setPath($request->url());
+      $usersResultList->setPath($url);
+
+
 
       return view('usersPageSearchResult', compact('usersResultList'));
     }
