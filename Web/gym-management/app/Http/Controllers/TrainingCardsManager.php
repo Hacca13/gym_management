@@ -11,32 +11,62 @@ use Illuminate\Pagination\LengthAwarePaginator;
 class TrainingCardsManager extends Controller
 {
     public static function searchTrainingCards(Request $request){
+      $currentPage = LengthAwarePaginator::resolveCurrentPage();
       $input = $request->all();
 
-      if(isset($input['searchInput'])){
-        $input = $input['searchInput'];
-        $request->session()->put('searchInput', $input);
+      if(isset($input['searchInputTrainingCards'])){
+        $input = $input['searchInputTrainingCards'];
+        $request->session()->put('searchInputTrainingCards', $input);
       }else{
-        $input = $request->session()->pull('searchInput');
-        $request->session()->put('searchInput', $input);
+        $input = $request->session()->pull('searchInputTrainingCards');
+        $request->session()->put('searchInputTrainingCards', $input);
       }
-      $usersList = UsersManager::searchUsersPartially($input);
+
+      $usersList = TrainingCardsManager::getUsersPartiallyDBOrUsersPartiallySessionForSearchPage($request,$currentPage,$input);
       $trainingCardsResultList = array();
 
-      foreach ($usersList  as $user) {
-          $trainingCards = TrainingCardsManager::getTrainingCardsByUser($user->getIdDatabase());
-          foreach ($trainingCards  as $trainingCard) {
-              array_push($trainingCardsResultList,$trainingCard );
+      if($currentPage == 1){
+          foreach ($usersList  as $user) {
+              $trainingCards = TrainingCardsManager::getTrainingCardsByUser($user->getIdDatabase());
+              foreach ($trainingCards  as $trainingCard) {
+                  array_push($trainingCardsResultList,$trainingCard );
+              }
           }
+            $request->session()->put('trainingCardsResultList', $trainingCardsResultList);
+      }else{
+        $trainingCardsResultList = $request->session()->pull('trainingCardsResultList');
+        $request->session()->put('trainingCardsResultList', $trainingCardsResultList);
       }
+
+
+
+      $url = substr($request->url(), 0, strlen($request->url())-30);
+      $url = $url.'/trainingCardsPageSearchResult';
+
+      $itemCollection = collect($trainingCardsResultList);
+      $perPage = 1;
+      $currentPageItems = $itemCollection->slice(($currentPage * $perPage) - $perPage, $perPage)->all();
+      $trainingCardsResultList= new LengthAwarePaginator($currentPageItems , count($itemCollection), $perPage);
+      $trainingCardsResultList->setPath($url);
+
+
 
       return view('trainingCardsPageSearchResult', compact('trainingCardsResultList', 'usersList'));
     }
 
+    public static function getUsersPartiallyDBOrUsersPartiallySessionForSearchPage($request,$currentPage,$input){
+      if($currentPage == 1){
+        $usersList = UsersManager::searchUsersPartially($input);
+        $request->session()->put('usersList', $usersList);
+      }
+      else{
+        $usersList = $request->session()->pull('usersList');
+        $request->session()->put('usersList', $usersList);
+      }
+      return $usersList;
+    }
 
-  /*<div>
-        {{ $trainingCardsResultList->links()}}
-  </div>*/
+
   public static function getTrainingCardsByUser($idUserDatabase){
     $trainingCardsList = array();
     $collection = Firestore::collection('TrainingCards');
@@ -75,12 +105,27 @@ class TrainingCardsManager extends Controller
       $trainingCardsList= new LengthAwarePaginator($currentPageItems , count($itemCollection), $perPage);
       $trainingCardsList->setPath($request->url());
 
+      $exerciseListBig = array();
+      $exerciseListTemp = array();
       foreach ($trainingCardsList as $trainingCard) {
         $user = UsersManager::getUserById($trainingCard->getIdUserDatabase());
         array_push($usersList,$user);
+
+        foreach ($trainingCard->getExercises() as $exercise) {
+          $exercise1 = ExercisesManager::trasformArrayExerciseToExercise($exercise);
+          $exercise1->setIdDatabase(data_get($exercise, 'idExerciseDatabase'));
+          $exercise1->setExerciseIsATime(data_get($exercise, 'atTime'));
+          array_push($exerciseListTemp,$exercise1);
+        }
+
+        $arrayTemp['idDatabase'] = $trainingCard->getIdDatabase();
+        $arrayTemp['exercises'] = $exerciseListTemp ;
+
+        array_push($exerciseListBig,$arrayTemp);
+
       }
 
-      return view('trainingCardPage', compact('trainingCardsList', 'usersList'));
+      return view('trainingCardPage', compact('trainingCardsList', 'usersList', 'exerciseListBig' ));
     }
 
     public static function getTrainingCardsDBOrTrainingCardsSession(Request $request,$currentPage){

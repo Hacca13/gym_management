@@ -16,7 +16,7 @@
                                   <form action="/trainingCardsSearchResultsPage" method="post">
                                     @csrf
                                     <div class="input-group no-border">
-                                        <input type="text" value="" name='searchInput' class="form-control" placeholder="Cerca scheda di...">
+                                        <input type="text" value="" name='searchInputTrainingCards' class="form-control" placeholder="Cerca scheda di...">
                                         <button type="submit" class="btn btn-default btn-round btn-just-icon">
                                             <i class="fas fa-search"></i>
                                             <div class="ripple-container"></div>

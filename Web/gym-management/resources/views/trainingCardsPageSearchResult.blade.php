@@ -16,7 +16,7 @@
                                   <form action="/trainingCardsSearchResultsPage" method="post">
                                     @csrf
                                     <div class="input-group no-border">
-                                        <input type="text" value="" name='searchInput' class="form-control" placeholder="Cerca scheda di...">
+                                        <input type="text" value="" name='searchInputTrainingCards' class="form-control" placeholder="Cerca scheda di...">
                                         <button type="submit" class="btn btn-default btn-round btn-just-icon">
                                             <i class="fas fa-search"></i>
                                             <div class="ripple-container"></div>
@@ -54,12 +54,25 @@
                 </div>
             </div>
                 <div class="col-md-12">
+                  @if(count($trainingCardsResultList) == 0)
+                    <div class="row text-center">
+                      <br>
+                      <br>
+                      <br>
+                        <h1 class="col-md-12 text-center">Non ci sono risultati</h1>
+                      <br>
+                      <br>
+                      <br>
+                    </div>
+                  @endif
                     @foreach($trainingCardsResultList as $trainingCard)
                       @include('components.trainingCards.TrainingCardsList')
                     @endforeach
 
                 </div>
-              
+                <div>
+                      {{ $trainingCardsResultList->links()}}
+                </div>
         </div>
     </div>
 @endsection

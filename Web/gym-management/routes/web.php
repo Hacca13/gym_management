@@ -77,7 +77,7 @@ Route::get('/gestioneSchede', 'TrainingCardsManager@getAllTrainingCardsForView')
 
 Route::get('/nuovaScheda', 'TrainingCardsManager@exercisePage');
 Route::post('/trainingCardsSearchResultsPage', 'TrainingCardsManager@searchTrainingCards');
-Route::get('/trainingCardsPageSearchResults', 'TrainingCardsManager@searchTrainingCards');
+Route::get('/trainingCardsPageSearchResult', 'TrainingCardsManager@searchTrainingCards');
 
 
 
