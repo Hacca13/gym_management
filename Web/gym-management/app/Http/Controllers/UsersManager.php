@@ -31,7 +31,86 @@ class UsersManager extends Controller{
     }
 
 
-    public function getAllUserForView(Request $request){
+
+    public static function searchUsersPartiallyByName($input){
+      $usersResultListByName = array();
+      $collection = Firestore::collection('Users');
+      $documents = $collection->orderBy('name')->startAt([$input])->endAt([$input.'z'])->documents();
+
+      foreach ($documents as $document) {
+          $user = UsersManager::transformArrayUserIntoUser($document->data());
+          $user->setIdDatabase($document->id());
+          array_push($usersResultListByName,$user);
+      }
+
+      return $usersResultListByName;
+    }
+
+    public static function searchUsersPartiallyBySurname($input){
+      $usersResultListBySurname = array();
+      $collection = Firestore::collection('Users');
+      $documents = $collection->orderBy('surname')->startAt([$input])->endAt([$input.'z'])->documents();
+
+      foreach ($documents as $document) {
+          $user = UsersManager::transformArrayUserIntoUser($document->data());
+          $user->setIdDatabase($document->id());
+          array_push($usersResultListBySurname,$user);
+      }
+
+      return $usersResultListBySurname;
+    }
+
+    public static function searchUsersPartially($input){
+      $usersResultListByName = UsersManager::searchUsersPartiallyByName($input);
+      $usersResultListBySurname = UsersManager::searchUsersPartiallyBySurname($input);
+      $usersResultList = $usersResultListByName + $usersResultListBySurname;
+
+      return $usersResultList;
+    }
+
+    public static function searchUsers(Request $request){
+      $currentPage = LengthAwarePaginator::resolveCurrentPage();
+      $input = $request->all();
+
+      if(isset($input['searchInput'])){
+        $input = $input['searchInput'];
+        $request->session()->put('searchInput', $input);
+      }else{
+        $input = $request->session()->pull('searchInput');
+        $request->session()->put('searchInput', $input);
+      }
+
+      $url = substr($request->url(), 0, strlen($request->url())-21);
+      $url = $url.'userPageSearchResults';
+
+      $usersResultList = UsersManager::getUserDBOrUserSessionForSearchPage($request,$currentPage,$input);
+
+      $itemCollection = collect($usersResultList);
+      $perPage = 1;
+      $currentPageItems = $itemCollection->slice(($currentPage * $perPage) - $perPage, $perPage)->all();
+      $usersResultList= new LengthAwarePaginator($currentPageItems , count($itemCollection), $perPage);
+      $usersResultList->setPath($url);
+
+
+
+      return view('usersPageSearchResult', compact('usersResultList'));
+    }
+
+    public static function getUserDBOrUserSessionForSearchPage($request,$currentPage,$input){
+      if($currentPage == 1){
+        $usersResultListByName = UsersManager::searchUsersPartiallyByName($input);
+        $usersResultListBySurname = UsersManager::searchUsersPartiallyBySurname($input);
+        $usersResultList = $usersResultListByName + $usersResultListBySurname;
+        $request->session()->put('usersResultList', $usersResultList);
+      }
+      else{
+        $usersResultList = $request->session()->pull('usersResultList');
+        $request->session()->put('usersResultList', $usersResultList);
+      }
+      return $usersResultList;
+    }
+
+    public static function getAllUserForView(Request $request){
       $currentPage = LengthAwarePaginator::resolveCurrentPage();
       $users = UsersManager::getUserDBOrUserSession($request,$currentPage);
       $coursesForUsers = array();

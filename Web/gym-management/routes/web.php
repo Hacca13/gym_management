@@ -39,21 +39,19 @@ Route::get('/modificaEsercizio', function (){
 
 //UTENTI
 Route::post('/addUserPost', 'UsersManager@createUser');
+Route::post('/userSearchResultsPage', 'UsersManager@searchUsers');
+Route::get('/userPageSearchResults', 'UsersManager@searchUsers');
+
 
 Route::get('/nuovoIscritto', function (){
-    return view('userAdd');
+    return view('insertNewUser');
 });
 
 Route::get('/gestioneIscritti', 'UsersManager@getAllUserForView');
 
-Route::get('/prova', function (){
-    return view('prova');
+Route::get('/pdf', function (){
+    return view('pdf');
 });
-
-Route::get('/prova1', function (){
-    return view('prova1');
-});
-
 
 //ABBONAMENTI
 Route::get('/gestioneAbbonamenti', 'SubscriptionManager@getAllSubscriptionForView');
@@ -68,25 +66,27 @@ Route::get('/nuovoAbbonamento', function (){
 
 
 //SCHEDA
-Route::get('/nuovaScheda', function (){
-    return view('newCard');
-});
+
 
 Route::get('/gestioneSchede', 'TrainingCardsManager@getAllTrainingCardsForView');
 
-Route::get('/nuovaSched', 'TrainingCardsManager@exercisePage');
-Route::get('/salvatore', 'TrainingCardsManager@exercisePage2');
+Route::get('/nuovaScheda', 'TrainingCardsManager@exercisePage');
+Route::post('/trainingCardsSearchResultsPage', 'TrainingCardsManager@searchTrainingCards');
+Route::get('/trainingCardsPageSearchResult', 'TrainingCardsManager@searchTrainingCards');
 
 
 
 
 
 //CORSI
-Route::get('/gestioneCorsi', 'CoursesManager@getAllCoursesPage');
+Route::get('/gestioneCorsi', 'CoursesManager@getAllCoursesView');//->middleware('auth')
 Route::post('/insertFormCourse', 'CoursesManager@addCourse');
 Route::get('/nuovoCorso', function () {
     return view('insertNewCourse');
 });
+Route::post('/coursesSearchResultsPage', 'CoursesManager@searchCourses');
+Route::get('/coursesPageSearchResults', 'CoursesManager@searchCourses');
+
 
 
 Auth::routes();

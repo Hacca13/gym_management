@@ -12,13 +12,13 @@
                     @include('components.courses.courseOption')
                 </div>
             </div>
-            @foreach($courses as $course)
+            @foreach($coursesResultList as $course)
             <div class="col-md-12">
                     @include('components.courses.courseCard')
                 </div>
             @endforeach
             <div class="row d-flex justify-content-center">
-                {{$courses->links()}}
+                {{$coursesResultList->links()}}
             </div>
         </div>
 

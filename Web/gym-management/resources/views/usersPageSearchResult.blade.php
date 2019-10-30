@@ -4,23 +4,21 @@
 
     <div class="card" style="border-radius: 10px;background-color: #d6d8d8">
         <div class="card-body">
-            <div class="row">
+            <div class="row justify-content-center">
                 <div class="col-md-12" style="text-align: center;">
-                    <h1>Corsi</h1>
+                    <h1>Iscritti</h1>
                 </div>
                 <div class="col-md-12" style="margin-top: 2.5%">
-                    @include('components.courses.courseOption')
+                    @include('components.users.usersOption')
+
+                    @foreach($usersResultList as $user)
+                        @include('components.users.userCard')
+                    @endforeach
                 </div>
-            </div>
-            @foreach($courses as $course)
-            <div class="col-md-12">
-                    @include('components.courses.courseCard')
+                <div>
+                    {{$usersResultList->links()}}
                 </div>
-            @endforeach
-            <div class="row d-flex justify-content-center">
-                {{$courses->links()}}
             </div>
         </div>
-
     </div>
 @endsection

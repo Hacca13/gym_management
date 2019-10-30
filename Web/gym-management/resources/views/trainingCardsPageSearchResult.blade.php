@@ -54,13 +54,24 @@
                 </div>
             </div>
                 <div class="col-md-12">
-                    @foreach($trainingCardsList as $trainingCard)
+                  @if(count($trainingCardsResultList) == 0)
+                    <div class="row text-center">
+                      <br>
+                      <br>
+                      <br>
+                        <h1 class="col-md-12 text-center">Non ci sono risultati</h1>
+                      <br>
+                      <br>
+                      <br>
+                    </div>
+                  @endif
+                    @foreach($trainingCardsResultList as $trainingCard)
                       @include('components.trainingCards.TrainingCardsList')
                     @endforeach
 
                 </div>
                 <div>
-                      {{ $trainingCardsList->links()}}
+                      {{ $trainingCardsResultList->links()}}
                 </div>
         </div>
     </div>

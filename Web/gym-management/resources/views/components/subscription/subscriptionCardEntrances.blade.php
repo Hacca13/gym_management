@@ -20,7 +20,17 @@
           <div class="collapse multi-collapse" id="multiCollapseExample">
             <div class="card card-body">
               <div class="row justify-content-center">
-                @include('components.subscription.recordSubscriptionEntrance')
+                  @foreach($subscriptionList as $subscription)
+                      @if($subscription->getType() == 'revenue')
+                          @include('components.subscription.subEntrance')
+                      @endif
+                      @if($subscription->getType() == 'period')
+                          @include('components.subscription.subPeriod')
+                      @endif
+                      @if($subscription->getType() == 'course')
+                          @include('components.subscription.subCourse')
+                      @endif
+                  @endforeach
               </div>
             </div>
           </div>
