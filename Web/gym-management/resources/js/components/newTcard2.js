@@ -88,24 +88,44 @@ class NewTcard2 extends Component {
     addExercise(suggest) {
         let tmp_ex = this.state.exerr;
         let ind = tmp_ex.findIndex(ex => ex.name === suggest);
-        let toAdd = {
-            idExerciseDatabase: tmp_ex[ind].idDatabase,
-            name: tmp_ex[ind].name,
-            atTime: tmp_ex[ind].exerciseIsATime,
-            numberOfRepetitions: '',
-            workoutTime: {
-                minutes: '',
-                seconds: ''
-            },
-            restTime: {
-                minutes: '',
-                seconds: ''
-            },
-            day: '',
-            gif: tmp_ex[ind].gif,
-            description: tmp_ex[ind].description,
-            link: tmp_ex[ind].link
-        };
+        let toAdd;
+        if (tmp_ex[ind].exerciseIsATime) {
+            toAdd = {
+                idExerciseDatabase: tmp_ex[ind].idDatabase,
+                name: tmp_ex[ind].name,
+                atTime: tmp_ex[ind].exerciseIsATime,
+                numberOfSeries: '',
+                workoutTime: {
+                    minutes: '',
+                    seconds: ''
+                },
+                restTime: {
+                    minutes: '',
+                    seconds: ''
+                },
+                day: '',
+                gif: tmp_ex[ind].gif,
+                description: tmp_ex[ind].description,
+                link: tmp_ex[ind].link
+            };
+        } else {
+            toAdd = {
+                idExerciseDatabase: tmp_ex[ind].idDatabase,
+                name: tmp_ex[ind].name,
+                atTime: tmp_ex[ind].exerciseIsATime,
+                numberOfRepetitions: '',
+                weight: '',
+                numberOfSeries: '',
+                restTime: {
+                    minutes: '',
+                    seconds: ''
+                },
+                day: '',
+                gif: tmp_ex[ind].gif,
+                description: tmp_ex[ind].description,
+                link: tmp_ex[ind].link
+            };
+        }
         let temp_arr = this.state.exercisesList;
         temp_arr.push(toAdd);
         this.setState({ exercisesList: temp_arr, suggest: [], value: ''});
@@ -332,7 +352,13 @@ class NewTcard2 extends Component {
                                                                                 key={index}
                                                                                 retrieveState={this.returnInfo}/>
                                                 } else {
-                                                    return <h1>not a time</h1>
+                                                    return  <ExerciseToAdd
+                                                        removeEx={this.removeExercise}
+                                                        name={value.name}
+                                                        indexed={index}
+                                                        key={index}
+                                                        retrieveState={this.returnInfo}
+                                                    />
                                                 }
 
                                                 /*

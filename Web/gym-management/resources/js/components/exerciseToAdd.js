@@ -5,14 +5,12 @@ class ExerciseToAdd extends Component {
         super(props);
         this.state = {
             atTime: true,
-            series: '',
-            work: {
-                min: '',
-                sec: ''
-            },
+            series: '1',
+            weight: '0',
+            reps: '1',
             rest: {
-                min: '',
-                sec: ''
+                min: '00',
+                sec: '00'
             },
             day: 'Lunedì',
         }
@@ -25,101 +23,81 @@ class ExerciseToAdd extends Component {
         }
     }
 
+
     render() {
         return (
-
-            <div className="card">
-
-                <div className="card-body row justify-content-center">
-
-                    <div className="col-md-6">
-                        <h4>{this.props.name}</h4>
-                        <hr/>
-                        <img src="https://firebasestorage.googleapis.com/v0/b/fitandfight.appspot.com/o/Kick%20Boxing.png?alt=media&token=a547e100-168a-4374-9754-f8779c9da9d7"
-                             className="img-fluid" alt=""/>
+            <div className="card" style={{borderRadius: '10px', backgroundColor: '#d6d8d8', marginTop: '2%'}}>
+                <div className="card-header row justify-content-between">
+                    <div className="col-md-8">
+                        <h3>{this.props.name}</h3>
+                    </div>
+                    <div className="col-md-2" style={{textAlign: 'right'}}>
+                        <button onClick={() => {this.props.removeEx(this.props.indexed)}} className="bttn-material-circle bttn-sm bttn-danger">
+                            <i className="fas fa-times"/>
+                        </button>
                     </div>
 
-                    <div className="col-md-4 text-center" style={{borderLeft: '0.5px grey solid'}}>
-                        <br/>
-                        {
-                            this.state.atTime &&
-                            <div>
+                </div>
+                <div className="card-body">
 
-                                <div className="form-group">
-                                    <label htmlFor="series">Numero serie</label>
-                                    <br/>
+                    <div className="row">
+
+
+
+                        <div className="col-md-6" style={{borderRight: '1px solid gray'}}>
+
+                            <div className="form-group row justify-content-center">
+                                <label htmlFor="userName">Numero Serie :</label>
+                                <div className="col-md-12 col-sm-12 text-center">
                                     <input name={"series" + this.props.indexed} type="number" value={this.state.series}
                                            onChange={event => {
                                                this.setState({
                                                    series: event.target.value
                                                })
-
                                            }}
-                                           style={{width: '50%'}}/>
+                                           style={{width: '30%'}}
+                                    />
                                 </div>
+                            </div>
 
-                                <div className="form-group">
-                                    <label htmlFor="series">Tempo lavoro</label>
-                                    <br/>
-                                    <input name={"workMin" + this.props.indexed}
-                                           value={this.state.work.min}
+                            <div className="form-group row justify-content-center">
+                                <label htmlFor="userName">Peso:</label>
+                                <div className="col-md-12 col-sm-12 text-center">
+                                    <input name={"weight" + this.props.indexed}
+                                           value={this.state.weight}
                                            onChange={event => {
                                                this.setState({
-                                                   work: {
-                                                       min: event.target.value,
-                                                       sec: this.state.work.sec
-                                                   }
+                                                   weight: event.target.value
                                                })
                                            }}
-                                           type="number" style={{width: '40%'}}/>
-
-                                    <h6>:</h6>
-
-                                    <input name={"workSec" + this.props.indexed}
-                                           value={this.state.work.sec}
-                                           onChange={event => {
-                                               this.setState({
-                                                   work: {
-                                                       sec: event.target.value,
-                                                       min: this.state.work.min
-                                                   }
-                                               })
-                                           }}
-                                           type="number" style={{width: '40%'}}/>
+                                           type="number" style={{width: '30%'}}/>
                                 </div>
 
-                                <div className="form-group">
-                                    <label htmlFor="series">Tempo riposo</label>
-                                    <br/>
-                                    <input name={"restMin" + this.props.indexed}
-                                           value={this.state.rest.min}
+
+                            </div>
+                            <div className="form-group row justify-content-center">
+                                <label htmlFor="userName">Ripetizioni:</label>
+                                <div className="col-md-12 col-sm-12 text-center">
+
+                                    <input name={"reps" + this.props.indexed}
+                                           value={this.state.reps}
                                            onChange={event => {
                                                this.setState({
-                                                   rest: {
-                                                       min: event.target.value,
-                                                       sec: this.state.rest.sec
-                                                   }
-                                               });
-                                           }}
-                                           type="number" style={{width: '40%'}}/>
-
-                                    <h6>:</h6>
-
-                                    <input name={"restSec" + this.props.indexed}
-                                           value={this.state.rest.sec}
-                                           onChange={event => {
-                                               this.setState({
-                                                   rest: {
-                                                       min: this.state.rest.min,
-                                                       sec: event.target.value
-                                                   }
+                                                   reps: event.target.value
                                                })
                                            }}
-                                           type="number" style={{width: '40%'}}/>
+                                           type="number" style={{width: '30%'}}/>
                                 </div>
 
-                                <div className="form-group">
-                                    <label htmlFor="select">Giorno</label>
+                            </div>
+
+                        </div>
+
+
+                        <div className="col-md-6 text-center" style={{borderLeft: '1px solid gray'}}>
+                            <label htmlFor="userName">Giorno :</label>
+                            <div className="form-group row justify-content-center">
+                                <div className="col-md-6 col-sm-6">
                                     <select className="select2 form-control custom-select"
                                             name={"EerciseDay" + this.props.indexed}
                                             value={this.state.day}
@@ -129,29 +107,64 @@ class ExerciseToAdd extends Component {
                                                 })
                                             }}
                                             style={{width: '100%' , height:'36px'}}>
-                                        <option>Lunedì</option>
-                                        <option>Martedì</option>
-                                        <option>Mercoledì</option>
-                                        <option>Giovedì</option>
-                                        <option>Venerdì</option>
+                                        <option>Lunedi</option>
+                                        <option>Martedi</option>
+                                        <option>Mercoledi</option>
+                                        <option>Giovedi</option>
+                                        <option>Venerdi</option>
                                         <option>Sabato</option>
+                                        <option>Domenica</option>
                                     </select>
                                 </div>
+
                             </div>
-                        }
-                    </div>
 
-                    <div className="col-md-2 text-right">
+                            <div className="form-group row justify-content-center">
+                                <label htmlFor="userName">Tempo Allenamento:</label>
+                                <div className="col-md-12 col-sm-12 row justify-content-center">
 
-                        <button onClick={() => {this.props.removeEx(this.props.indexed)}} className="bttn-material-circle bttn-sm bttn-danger">
-                            <i className="fas fa-times"/>
-                        </button>
+                                    <div className="col-md-5" style={{textAlign: 'right'}}>
+                                        <input name={"restMin" + this.props.indexed}
+                                               value={this.state.rest.min}
+                                               onChange={event => {
+                                                   this.setState({
+                                                       rest: {
+                                                           min: event.target.value,
+                                                           sec: this.state.rest.sec
+                                                       }
+                                                   });
+                                               }}
+                                               type="number" style={{width: '50%'}}/>
+                                    </div>
+
+
+                                    <h4>:</h4>
+                                    <div className="col-md-5">
+
+                                        <input name={"restSec" + this.props.indexed}
+                                               value={this.state.rest.sec}
+                                               onChange={event => {
+                                                   this.setState({
+                                                       rest: {
+                                                           min: this.state.rest.min,
+                                                           sec: event.target.value
+                                                       }
+                                                   })
+                                               }}
+                                               type="number" style={{width: '50%'}}/>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
 
                     </div>
 
 
 
                 </div>
+
 
             </div>
 

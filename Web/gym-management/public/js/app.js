@@ -86540,14 +86540,12 @@ function (_Component) {
     _this = _possibleConstructorReturn(this, _getPrototypeOf(ExerciseToAdd).call(this, props));
     _this.state = {
       atTime: true,
-      series: '',
-      work: {
-        min: '',
-        sec: ''
-      },
+      series: '1',
+      weight: '0',
+      reps: '1',
       rest: {
-        min: '',
-        sec: ''
+        min: '00',
+        sec: '00'
       },
       day: 'Lunedì'
     };
@@ -86567,25 +86565,44 @@ function (_Component) {
       var _this2 = this;
 
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "card"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "card-body row justify-content-center"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-md-6"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, this.props.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-        src: "https://firebasestorage.googleapis.com/v0/b/fitandfight.appspot.com/o/Kick%20Boxing.png?alt=media&token=a547e100-168a-4374-9754-f8779c9da9d7",
-        className: "img-fluid",
-        alt: ""
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-md-4 text-center",
+        className: "card",
         style: {
-          borderLeft: '0.5px grey solid'
+          borderRadius: '10px',
+          backgroundColor: '#d6d8d8',
+          marginTop: '2%'
         }
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), this.state.atTime && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "form-group"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "card-header row justify-content-between"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-md-8"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, this.props.name)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-md-2",
+        style: {
+          textAlign: 'right'
+        }
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: function onClick() {
+          _this2.props.removeEx(_this2.props.indexed);
+        },
+        className: "bttn-material-circle bttn-sm bttn-danger"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "fas fa-times"
+      })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "card-body"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "row"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-md-6",
+        style: {
+          borderRight: '1px solid gray'
+        }
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group row justify-content-center"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-        htmlFor: "series"
-      }, "Numero serie"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        htmlFor: "userName"
+      }, "Numero Serie :"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-md-12 col-sm-12 text-center"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         name: "series" + this.props.indexed,
         type: "number",
         value: this.state.series,
@@ -86595,81 +86612,56 @@ function (_Component) {
           });
         },
         style: {
-          width: '50%'
+          width: '30%'
         }
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "form-group"
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group row justify-content-center"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-        htmlFor: "series"
-      }, "Tempo lavoro"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        name: "workMin" + this.props.indexed,
-        value: this.state.work.min,
+        htmlFor: "userName"
+      }, "Peso:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-md-12 col-sm-12 text-center"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        name: "weight" + this.props.indexed,
+        value: this.state.weight,
         onChange: function onChange(event) {
           _this2.setState({
-            work: {
-              min: event.target.value,
-              sec: _this2.state.work.sec
-            }
+            weight: event.target.value
           });
         },
         type: "number",
         style: {
-          width: '40%'
+          width: '30%'
         }
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, ":"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        name: "workSec" + this.props.indexed,
-        value: this.state.work.sec,
-        onChange: function onChange(event) {
-          _this2.setState({
-            work: {
-              sec: event.target.value,
-              min: _this2.state.work.min
-            }
-          });
-        },
-        type: "number",
-        style: {
-          width: '40%'
-        }
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "form-group"
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group row justify-content-center"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-        htmlFor: "series"
-      }, "Tempo riposo"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        name: "restMin" + this.props.indexed,
-        value: this.state.rest.min,
+        htmlFor: "userName"
+      }, "Ripetizioni:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-md-12 col-sm-12 text-center"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        name: "reps" + this.props.indexed,
+        value: this.state.reps,
         onChange: function onChange(event) {
           _this2.setState({
-            rest: {
-              min: event.target.value,
-              sec: _this2.state.rest.sec
-            }
+            reps: event.target.value
           });
         },
         type: "number",
         style: {
-          width: '40%'
+          width: '30%'
         }
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, ":"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        name: "restSec" + this.props.indexed,
-        value: this.state.rest.sec,
-        onChange: function onChange(event) {
-          _this2.setState({
-            rest: {
-              min: _this2.state.rest.min,
-              sec: event.target.value
-            }
-          });
-        },
-        type: "number",
+      })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-md-6 text-center",
         style: {
-          width: '40%'
+          borderLeft: '1px solid gray'
         }
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "form-group"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-        htmlFor: "select"
-      }, "Giorno"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+        htmlFor: "userName"
+      }, "Giorno :"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group row justify-content-center"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-md-6 col-sm-6"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
         className: "select2 form-control custom-select",
         name: "EerciseDay" + this.props.indexed,
         value: this.state.day,
@@ -86682,16 +86674,50 @@ function (_Component) {
           width: '100%',
           height: '36px'
         }
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, "Luned\xEC"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, "Marted\xEC"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, "Mercoled\xEC"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, "Gioved\xEC"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, "Venerd\xEC"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, "Sabato"))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-md-2 text-right"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        onClick: function onClick() {
-          _this2.props.removeEx(_this2.props.indexed);
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, "Lunedi"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, "Martedi"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, "Mercoledi"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, "Giovedi"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, "Venerdi"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, "Sabato"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, "Domenica")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group row justify-content-center"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        htmlFor: "userName"
+      }, "Tempo Allenamento:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-md-12 col-sm-12 row justify-content-center"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-md-5",
+        style: {
+          textAlign: 'right'
+        }
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        name: "restMin" + this.props.indexed,
+        value: this.state.rest.min,
+        onChange: function onChange(event) {
+          _this2.setState({
+            rest: {
+              min: event.target.value,
+              sec: _this2.state.rest.sec
+            }
+          });
         },
-        className: "bttn-material-circle bttn-sm bttn-danger"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-        className: "fas fa-times"
-      })))));
+        type: "number",
+        style: {
+          width: '50%'
+        }
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, ":"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-md-5"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        name: "restSec" + this.props.indexed,
+        value: this.state.rest.sec,
+        onChange: function onChange(event) {
+          _this2.setState({
+            rest: {
+              min: _this2.state.rest.min,
+              sec: event.target.value
+            }
+          });
+        },
+        type: "number",
+        style: {
+          width: '50%'
+        }
+      }))))))));
     }
   }]);
 
@@ -87181,24 +87207,46 @@ function (_Component) {
       var ind = tmp_ex.findIndex(function (ex) {
         return ex.name === suggest;
       });
-      var toAdd = {
-        idExerciseDatabase: tmp_ex[ind].idDatabase,
-        name: tmp_ex[ind].name,
-        atTime: tmp_ex[ind].exerciseIsATime,
-        numberOfRepetitions: '',
-        workoutTime: {
-          minutes: '',
-          seconds: ''
-        },
-        restTime: {
-          minutes: '',
-          seconds: ''
-        },
-        day: '',
-        gif: tmp_ex[ind].gif,
-        description: tmp_ex[ind].description,
-        link: tmp_ex[ind].link
-      };
+      var toAdd;
+
+      if (tmp_ex[ind].exerciseIsATime) {
+        toAdd = {
+          idExerciseDatabase: tmp_ex[ind].idDatabase,
+          name: tmp_ex[ind].name,
+          atTime: tmp_ex[ind].exerciseIsATime,
+          numberOfSeries: '',
+          workoutTime: {
+            minutes: '',
+            seconds: ''
+          },
+          restTime: {
+            minutes: '',
+            seconds: ''
+          },
+          day: '',
+          gif: tmp_ex[ind].gif,
+          description: tmp_ex[ind].description,
+          link: tmp_ex[ind].link
+        };
+      } else {
+        toAdd = {
+          idExerciseDatabase: tmp_ex[ind].idDatabase,
+          name: tmp_ex[ind].name,
+          atTime: tmp_ex[ind].exerciseIsATime,
+          numberOfRepetitions: '',
+          weight: '',
+          numberOfSeries: '',
+          restTime: {
+            minutes: '',
+            seconds: ''
+          },
+          day: '',
+          gif: tmp_ex[ind].gif,
+          description: tmp_ex[ind].description,
+          link: tmp_ex[ind].link
+        };
+      }
+
       var temp_arr = this.state.exercisesList;
       temp_arr.push(toAdd);
       this.setState({
@@ -87378,7 +87426,13 @@ function (_Component) {
             retrieveState: _this3.returnInfo
           });
         } else {
-          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "not a time");
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_exerciseToAdd__WEBPACK_IMPORTED_MODULE_5__["default"], {
+            removeEx: _this3.removeExercise,
+            name: value.name,
+            indexed: index,
+            key: index,
+            retrieveState: _this3.returnInfo
+          });
         }
         /*
         <ExerciseToAdd
