@@ -153,43 +153,58 @@
 <script>
     function myFunction() {
 
-        var x = document.getElementById("myDiv");
-        if (x.style.display === "block") {
-            x.style.display = "none";
+        var myDiv = document.getElementById("myDiv");
+        if (myDiv.style.display === "block") {
+            myDiv.style.display = "none";
         } else {
-            x.style.display = "block";
+            myDiv.style.display = "block";
         }
 
-        let inputs = [
-            document.getElementById('parentName'),
-            document.getElementById('parentSurname'),
-            document.getElementById('parentGender'),
-            document.getElementById('parentDateOfBirth'),
-            document.getElementById('parentbirthPlace'),
-            document.getElementById('parentResidence'),
-            document.getElementById('parentNation'),
-            document.getElementById('parentCap'),
-            document.getElementById('parentStreet'),
-            document.getElementById('parentTelephone'),
-            document.getElementById('parentEmail'),
-            document.getElementById('parentDocumentImage'),
-            document.getElementById('parentDocumentNumber'),
-            document.getElementById('parentDocumentType'),
-            document.getElementById('parentDocumentReleaseDate'),
-            document.getElementById('parentDocumentReleaser'),
-        ];
-        if (x.style.display === "block") {
-            x.style.display = "none";
-            inputs.forEach(value => {
-                value.removeAttribute("required")
-            })
+
+
+
+
+        if (myDiv.style.display == "block") {
+          myDiv.style.display = "none";
+
+          document.getElementById('parentName').required = false;
+          document.getElementById('parentSurname').required = false;
+          document.getElementById('parentDateOfBirth').required = false;
+          document.getElementById('parentbirthPlace').required = false;
+          document.getElementById('parentResidence').required = false;
+          document.getElementById('parentNation').required = false;
+          document.getElementById('parentCap').required = false;
+          document.getElementById('parentResidenceStreet').required = false;
+          document.getElementById('parentTelephoneNumber').required = false;
+          document.getElementById('parentEmail').required = false;
+          document.getElementById('parentDocumentImage').required = false;
+          document.getElementById('parentDocumentNumber').required = false;
+          document.getElementById('parentDocumentType').required = false;
+          document.getElementById('parentDocumentReleaseDate').required = false;
+          document.getElementById('parentDocumentReleaser').required = false;
+
+
         } else {
-            x.style.display = "block";
-            inputs.forEach(value => {
-                value.setAttribute("required", "");
-            })
+          myDiv.style.display = "block";
+
+          document.getElementById('parentName').required = true;
+          document.getElementById('parentSurname').required = true;
+          document.getElementById('parentDateOfBirth').required = true;
+          document.getElementById('parentbirthPlace').required = true;
+          document.getElementById('parentResidence').required = true;
+          document.getElementById('parentNation').required = true;
+          document.getElementById('parentCap').required = true;
+          document.getElementById('parentResidenceStreet').required = true;
+          document.getElementById('parentTelephoneNumber').required = true;
+          document.getElementById('parentEmail').required = true;
+          document.getElementById('parentDocumentImage').required = true;
+          document.getElementById('parentDocumentNumber').required = true;
+          document.getElementById('parentDocumentType').required = true;
+          document.getElementById('parentDocumentReleaseDate').required = true;
+          document.getElementById('parentDocumentReleaser').required = true;
 
         }
+
     }</script>
 
 
@@ -207,8 +222,7 @@
                     alert(
                         "File too Big, please select a file less than 4mb");
                 } else if (file < 1024) {
-                    alert(
-                        "");
+
                 } else {
                     document.getElementById('size').innerHTML = '<b>'
                         + file + '</b> KB';

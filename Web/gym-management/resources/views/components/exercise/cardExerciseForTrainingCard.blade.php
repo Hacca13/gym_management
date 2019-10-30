@@ -8,9 +8,7 @@
                     </a>
                 </div>
                 <div class="col-md-6" style="text-align: end">
-                    <a href="nuovoEsercizio">
-                        <i class="fas fa-times" style="font-size: 170%; color: red; margin-left: 2.5%"></i>
-                    </a>
+
                 </div>
             </div>
         </div>
@@ -28,9 +26,30 @@
                         </div>
                         <div class="col-md-12 text-center"><!--CAMBIARE QUESTO HREF-->
                           <div class="col-md-12" style="border-radius: 10px;">
-                              <h5>
+                              <h6>
+                                Descrizione:
+
                                 {{$exercise->getDescription()}}
-                              </h5>
+
+                                @foreach($trainingCard->getExercises() as $exerciseTrainingCard)
+                                  @if($exerciseTrainingCard['idExerciseDatabase'] == $exercise->getIdDatabase())
+                                    Numero di Serie: {{$exerciseTrainingCard['numberOfSeries']}}
+                                    @if($exerciseTrainingCard['atTime'] == FALSE)
+                                      Numero di Ripetizioni: {{$exerciseTrainingCard['numberOfRepetitions']}}
+                                    @endif
+                                    @if($exerciseTrainingCard['atTime'] == TRUE)
+                                      Workout Time:
+                                      Minuti: {{data_get($exerciseTrainingCard['workoutTime'],'minutes')}}
+                                      Secondi: {{data_get($exerciseTrainingCard['workoutTime'],'seconds')}}
+                                    @endif
+                                    Tempo di Riposo:
+
+                                    Minuti: {{data_get($exerciseTrainingCard['restTime'],'minutes')}}
+                                    Secondi: {{data_get($exerciseTrainingCard['restTime'],'seconds')}}
+                                  @endif
+                                @endforeach
+
+                              </h6>
                           </div>
                         </div>
                     </div>

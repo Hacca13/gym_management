@@ -125,6 +125,8 @@ class TrainingCardsManager extends Controller
 
       }
 
+
+
       return view('trainingCardPage', compact('trainingCardsList', 'usersList', 'exerciseListBig' ));
     }
 
