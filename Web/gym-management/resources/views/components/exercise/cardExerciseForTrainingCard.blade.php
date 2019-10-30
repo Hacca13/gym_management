@@ -26,19 +26,30 @@
                         </div>
                         <div class="col-md-12 text-center"><!--CAMBIARE QUESTO HREF-->
                           <div class="col-md-12" style="border-radius: 10px;">
-                              <h5>
+                              <h6>
                                 Descrizione:
 
                                 {{$exercise->getDescription()}}
 
                                 @foreach($trainingCard->getExercises() as $exerciseTrainingCard)
                                   @if($exerciseTrainingCard['idExerciseDatabase'] == $exercise->getIdDatabase())
-                                    
-                                    Numero di Ripetizioni : {{$exerciseTrainingCard['numberOfRepetitions']}}
+                                    Numero di Serie: {{$exerciseTrainingCard['numberOfSeries']}}
+                                    @if($exerciseTrainingCard['atTime'] == FALSE)
+                                      Numero di Ripetizioni: {{$exerciseTrainingCard['numberOfRepetitions']}}
+                                    @endif
+                                    @if($exerciseTrainingCard['atTime'] == TRUE)
+                                      Workout Time:
+                                      Minuti: {{data_get($exerciseTrainingCard['workoutTime'],'minutes')}}
+                                      Secondi: {{data_get($exerciseTrainingCard['workoutTime'],'seconds')}}
+                                    @endif
+                                    Tempo di Riposo:
+
+                                    Minuti: {{data_get($exerciseTrainingCard['restTime'],'minutes')}}
+                                    Secondi: {{data_get($exerciseTrainingCard['restTime'],'seconds')}}
                                   @endif
                                 @endforeach
 
-                              </h5>
+                              </h6>
                           </div>
                         </div>
                     </div>
