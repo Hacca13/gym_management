@@ -3,12 +3,14 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
     <!-- Favicon icon -->
-    <link rel="icon"  href="/images/rsz_fit&fight_ok.png">
+    <link rel="icon"  href="/images/Fit&Fight.png">
     <title>Fit & Fight</title>
     <!-- Custom CSS -->
     <link href="../matrix-admin-bt4/assets/libs/flot/css/float-chart.css" rel="stylesheet">
@@ -16,7 +18,8 @@
     <link href="../matrix-admin-bt4/dist/css/style.min.css" rel="stylesheet">
 
     <link href="../css/bttn.min.css" rel="stylesheet">
-
+    <link href="../matrix-admin-bt4/assets/libs/jquery-steps/jquery.steps.css" rel="stylesheet">
+    <link href="../matrix-admin-bt4/assets/libs/jquery-steps/steps.css" rel="stylesheet">
     <script src="https://www.gstatic.com/firebasejs/7.2.0/firebase-auth.js"></script>
 
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -25,6 +28,15 @@
     @toastr_css
 
 </head>
+
+<style>
+    .form-control {
+        border-radius: 10px;
+    }
+    .input-group {
+        border-radius: 10px;
+    }
+</style>
 
 <body style="background: transparent">
 
@@ -97,6 +109,47 @@
 <script src="../matrix-admin-bt4/assets/libs/flot/jquery.flot.crosshair.js"></script>
 <script src="../matrix-admin-bt4/assets/libs/flot.tooltip/js/jquery.flot.tooltip.min.js"></script>
 <script src="../matrix-admin-bt4/dist/js/pages/chart/chart-page-init.js"></script>
+<script src="../matrix-admin-bt4/assets/libs/jquery-steps/build/jquery.steps.min.js"></script>
+<script src="../matrix-admin-bt4/assets/libs/jquery-validation/dist/jquery.validate.min.js"></script>
+<script src="../matrix-admin-bt4/assets/libs/jquery/dist/js/custom.min.js"></script>
+<script src="../matrix-admin-bt4/assets/libs/popper.js/dist/umd/popper.min.js"></script>
+<script src="../matrix-admin-bt4/assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="../matrix-admin-bt4/assets/assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js"></script>
+<script src="../matrix-admin-bt4/assets/assets/extra-libs/sparkline/sparkline.js"></script>
+<script src="../matrix-admin-bt4/assets/assets/libs/jquery/dist/jquery.min.js"></script>
+
+
+<script>
+    // Basic Example with form
+    var form = $("#example-form");
+    form.validate({
+        errorPlacement: function errorPlacement(error, element) { element.before(error); },
+        rules: {
+            confirm: {
+                equalTo: "#password"
+            }
+        }
+    });
+    form.children("div").steps({
+        headerTag: "h3",
+        bodyTag: "section",
+        transitionEffect: "slideLeft",
+        onStepChanging: function(event, currentIndex, newIndex) {
+            form.validate().settings.ignore = ":disabled,:hidden";
+            return form.valid();
+        },
+        onFinishing: function(event, currentIndex) {
+            form.validate().settings.ignore = ":disabled";
+            return form.valid();
+        },
+        onFinished: function(event, currentIndex) {
+            alert("Submitted!");
+        }
+    });
+
+
+</script>
+
 <script>
     function myFunction() {
 
@@ -107,7 +160,6 @@
             x.style.display = "block";
         }
 
-        var x = document.getElementById("myDIV");
         let inputs = [
             document.getElementById('parentName'),
             document.getElementById('parentSurname'),
@@ -156,7 +208,7 @@
                         "File too Big, please select a file less than 4mb");
                 } else if (file < 1024) {
                     alert(
-                        "File too small, please select a file greater than 2mb");
+                        "");
                 } else {
                     document.getElementById('size').innerHTML = '<b>'
                         + file + '</b> KB';

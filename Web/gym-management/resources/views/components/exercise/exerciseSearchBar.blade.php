@@ -8,6 +8,13 @@
                         <i class="fas fa-search"></i>
                         <div class="ripple-container"></div>
                     </button>
+                    <div class="col-md-1">
+                        <a href="nuovoEsercizio" role="button">
+                            <button class="bttn-material-circle bttn-md bttn-success" style="background-color: #21252E">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>

@@ -7,6 +7,12 @@
                         <h3>{{$course->getName()}}</h3>
                     </div>
                     <div class="col-md-1">
+                      @if($course->getIsActive() == TRUE)
+                      <h4>ATTIVO</h4>
+                      @endif
+                      @if($course->getIsActive() == FALSE)
+                      <h4>INATTIVO</h4>
+                      @endif
                     </div>
                     <div class="col-md-3" style="text-align: right; margin-top: auto; margin-bottom: auto;">
                         <h4>Dal: {{$course->getPeriod()['startDate']}}</h4>

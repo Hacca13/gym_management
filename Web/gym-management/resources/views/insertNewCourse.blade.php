@@ -8,7 +8,7 @@
 
     <div class="row justify-content-center">
         <div class="col-md-10">
-            <div class="card">
+            <div class="card" style="border-radius: 10px;background-color: #d6d8d8">
                 <form class="form-horizontal" method="post" enctype="multipart/form-data" action="/insertFormCourse">
                     @csrf
                     <div class="card-body">
@@ -17,26 +17,26 @@
                         <div class="form-group row">
                             <label for="fname" class="col-sm-3 text-right control-label col-form-label">Nome Corso</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" id="fname" name="name">
+                                <input type="text" class="form-control" id="fname" name="name" required>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="fname" class="col-sm-3 text-right control-label col-form-label">Nome Istruttore</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" id="fname" name="instructor">
+                                <input type="text" class="form-control" id="fname" name="instructor" required>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="fname" class="col-sm-3 text-right control-label col-form-label">Data Inizio</label>
                             <div class="col-sm-9">
-                                <input type="date" class="form-control" id="fname" name="startDate">
+                                <input type="date" class="form-control" id="fname" name="startDate" required>
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label for="fname" class="col-sm-3 text-right control-label col-form-label">Data Fine</label>
                             <div class="col-sm-9">
-                                <input type="date" class="form-control" id="fname" name="endDate">
+                                <input type="date" class="form-control" id="fname" name="endDate" required>
                             </div>
                         </div>
 
@@ -76,22 +76,22 @@
                                 <label class="col-sm-1 text-right control-label col-form-label">Dalle</label>
 
                                 <div class="col-sm-1">
-                                    <input type="text" class="form-control" id="{{"hourFrom" . $index}}" name={{"hourFrom" . $index}}>
+                                    <input type="text" class="form-control" id="{{"hourFrom" . $index}}" name={{"hourFrom" . $index}} required>
                                 </div>
                                 <h3>:</h3>
                                 <div class="col-sm-1">
-                                    <input type="text" class="form-control" id="{{"minutesFrom" . $index}}" name={{"minutesFrom" . $index}}>
+                                    <input type="text" class="form-control" id="{{"minutesFrom" . $index}}" name={{"minutesFrom" . $index}} required>
                                 </div>
 
 
 
                                 <label class="col-sm-1 text-right control-label col-form-label">Alle</label>
                                 <div class="col-sm-1">
-                                    <input type="text" class="form-control" id="{{"hourTo" . $index}}" name="{{"hourTo" . $index}}">
+                                    <input type="text" class="form-control" id="{{"hourTo" . $index}}" name="{{"hourTo" . $index}}" required>
                                 </div>
                                 <h3>:</h3>
                                 <div class="col-sm-1">
-                                    <input type="text" class="form-control" id="{{"minutesTo" . $index}}" name="{{"minutesTo" . $index}}">
+                                    <input type="text" class="form-control" id="{{"minutesTo" . $index}}" name="{{"minutesTo" . $index}}" required>
                                 </div>
 
 
@@ -111,7 +111,7 @@
                         <div class="form-group row">
                             <label for="fname" class="col-sm-3 text-right control-label col-form-label">Immagine del Corso</label>
                             <div class="col-sm-9">
-                                <input type="file" class="form-control" id="courseImage" name="courseImage">
+                                <input type="file" class="form-control" id="courseImage" name="courseImage" required>
                             </div>
                         </div>
                         <div class="border-top">

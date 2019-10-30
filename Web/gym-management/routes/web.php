@@ -36,12 +36,12 @@ Route::get('/modificaEsercizio', function (){
     return view('changeEx');
 });
 
-Route::get('/nuovaSched', 'TrainingCardsManager@exercisePage');
-Route::get('/gestioneScheda', 'TrainingCardsManager@trainingCardPage');
-
 
 //UTENTI
 Route::post('/addUserPost', 'UsersManager@createUser');
+Route::post('/userSearchResultsPage', 'UsersManager@searchUsers');
+Route::get('/userPageSearchResults', 'UsersManager@searchUsers');
+
 
 Route::get('/nuovoIscritto', function (){
     return view('userAdd');
@@ -49,14 +49,18 @@ Route::get('/nuovoIscritto', function (){
 
 Route::get('/gestioneIscritti', 'UsersManager@getAllUserForView');
 
+Route::get('/prova', function (){
+    return view('prova');
+});
 
-
+Route::get('/prova1', function (){
+    return view('prova1');
+});
 
 
 //ABBONAMENTI
-Route::get('/gestioneAbbonamenti', function () {
-    return view('subscriptionPage');
-});
+Route::get('/gestioneAbbonamenti', 'SubscriptionManager@getAllSubscriptionForView');
+
 
 Route::get('/nuovoAbbonamento', function (){
     return view('insertNewSubscription');
@@ -67,22 +71,27 @@ Route::get('/nuovoAbbonamento', function (){
 
 
 //SCHEDA
-Route::get('/nuovaScheda', function (){
-    return view('newCard');
-});
 
-Route::get('/gestioneSchede', function () {
-    return view('trainingCards');
-});
+
+Route::get('/gestioneSchede', 'TrainingCardsManager@getAllTrainingCardsForView');
+
+Route::get('/nuovaScheda', 'TrainingCardsManager@exercisePage');
+Route::post('/trainingCardsSearchResultsPage', 'TrainingCardsManager@searchTrainingCards');
+Route::get('/trainingCardsPageSearchResult', 'TrainingCardsManager@searchTrainingCards');
+
+
 
 
 
 //CORSI
-Route::get('/gestioneCorsi', 'CoursesManager@getAllCoursesPage');
+Route::get('/gestioneCorsi', 'CoursesManager@getAllCoursesView');//->middleware('auth')
 Route::post('/insertFormCourse', 'CoursesManager@addCourse');
 Route::get('/nuovoCorso', function () {
     return view('insertNewCourse');
 });
+Route::post('/coursesSearchResultsPage', 'CoursesManager@searchCourses');
+Route::get('/coursesPageSearchResults', 'CoursesManager@searchCourses');
+
 
 
 Auth::routes();

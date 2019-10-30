@@ -38,19 +38,24 @@ class Firetest extends Controller
 
   public function test() {
 
-    $collection = Firestore::collection('Users');
-    $user = $collection->document('UEMkxzS6DodLuYRlMnSH')->snapshot()->data();
-    $collection2 = Firestore::collection('Exercises');
-    $exercise = $collection2->document('U68MHeUUjjbAzgBpXTTt')->snapshot()->data();
-    var_dump($user);
-    var_dump($exercise);
+    $collection = Firestore::collection('Exercises');
+    $user = $collection->orderBy('name')->startAt(['esercizio'])->endAt(['esercizio\uf8ff'])->documents();
+
+    foreach ($user as $key) {
+      $key = ExercisesManager::trasformArrayExerciseToExercise($key->data());
+      var_dump($key);
+    }
+
+
+
+
 
   }
 
 
   public function test2(Request $request){
 
-    $currentPage = LengthAwarePaginator::resolveCurrentPage();
+    /*$currentPage = LengthAwarePaginator::resolveCurrentPage();
     $documents = Firetest::testPage($request,$currentPage);
     $itemCollection = collect($documents);
     $perPage = 1;
@@ -58,9 +63,18 @@ class Firetest extends Controller
     $paginatedItems= new LengthAwarePaginator($currentPageItems , count($itemCollection), $perPage);
     $paginatedItems->setPath($request->url());
 
+    <?php
+          $exercisesList = array();
+    ?>
+  <!--  @foreach($trainingCard->getExercises() as $exercise)
+      @include('components.exercise.cardExercise')
+    @endforeach -->
 
-    return view('items_view', compact('paginatedItems'));
 
+    return view('items_view', compact('paginatedItems'));*/
+
+    $ciao = ExercisesManager::getExerciseByName('eserci');
+    var_dump(count($ciao));
   }
 
   public static function testPage(Request $request,$currentPage){
@@ -77,13 +91,12 @@ class Firetest extends Controller
       }
       return $documents;
   }
-  
+
 
   public function test3(){
-  $array0 = array('aaaaa' => 'aaaaa', 'bbbbb'=> 'bbbbb');
-  $array1 = array('cccc' => 'cccc', 'ddddd' => 'ddddd' );
-  $array2 = $array0 + $array1;
-    var_dump($array2);
+  $array = CoursesManager::getAllCourses();
+
+
 
   }
 

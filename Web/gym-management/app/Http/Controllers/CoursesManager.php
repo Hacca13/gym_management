@@ -9,8 +9,63 @@ use Illuminate\Support\Facades\Storage;
 use Spatie\LaravelImageOptimizer\Facades\ImageOptimizer;
 use Stichoza\GoogleTranslate\GoogleTranslate;
 use Kreait\Firebase;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class CoursesManager extends Controller{
+
+    public static function searchCourses(Request $request){
+      $currentPage = LengthAwarePaginator::resolveCurrentPage();
+      $input = $request->all();
+
+      if(isset($input['searchInput'])){
+        $input = $input['searchInput'];
+        $request->session()->put('searchInput', $input);
+      }else{
+        $input = $request->session()->pull('searchInput');
+        $request->session()->put('searchInput', $input);
+      }
+      $url = substr($request->url(), 0, strlen($request->url())-24);
+      $url = $url.'coursesPageSearchResults';
+
+      $coursesResultList = CoursesManager::getCoursesDBOrCoursesSessionForSearchPage($request,$currentPage,$input);
+
+      $itemCollection = collect($coursesResultList);
+      $perPage = 1;
+      $currentPageItems = $itemCollection->slice(($currentPage * $perPage) - $perPage, $perPage)->all();
+      $coursesResultList = new LengthAwarePaginator($currentPageItems , count($itemCollection), $perPage);
+      $coursesResultList->setPath($url);
+
+
+      return view('coursesPageSearchResult', compact('coursesResultList'));
+    }
+
+    public static function getCoursesDBOrCoursesSessionForSearchPage($request,$currentPage,$input){
+      if($currentPage == 1){
+        $coursesResultList = CoursesManager::searchCoursesPartially($input);
+        $request->session()->put('coursesResultList', $coursesResultList);
+      }
+      else{
+        $coursesResultList = $request->session()->pull('coursesResultList');
+        $request->session()->put('coursesResultList', $coursesResultList);
+      }
+      return $coursesResultList;
+    }
+
+    public static function searchCoursesPartially($input){
+      $coursesResultList = array();
+      $collection = Firestore::collection('Courses');
+      $documents = $collection->orderBy('name')->startAt([$input])->endAt([$input.'z'])->documents();
+
+      foreach ($documents as $document) {
+          $course = CoursesManager::trasformArrayCourseToCourse($document->data());
+          $course->setIdDatabase($document->id());
+          array_push($coursesResultList,$course);
+      }
+
+      return $coursesResultList;
+
+    }
+
 
     public static function theUserForWhichCourseIsRegistered($idUserDatabase){
         $courses = array();
@@ -35,6 +90,8 @@ class CoursesManager extends Controller{
             $course->setIdDatabase($document->id());
             array_push($courses,$course);
         }
+
+
         return $courses;
     }
 
@@ -45,26 +102,51 @@ class CoursesManager extends Controller{
         foreach ($documents as $document) {
             $course = CoursesManager::trasformArrayCourseToCourse($document->data());
             $course->setIdDatabase($document->id());
+
             array_push($allCourses,$course);
         }
+
         return $allCourses;
     }
-    public static function getAllCoursesView(){
-      $courses = CoursesManager::getAllCourses();
-      
+
+    public static function getAllCoursesView(Request $request){
+      $currentPage = LengthAwarePaginator::resolveCurrentPage();
+      $courses = CoursesManager::getCoursesDBOrCoursesSession($request,$currentPage);
+
+      $itemCollection = collect($courses);
+      $perPage = 1;
+      $currentPageItems = $itemCollection->slice(($currentPage * $perPage) - $perPage, $perPage)->all();
+      $courses = new LengthAwarePaginator($currentPageItems , count($itemCollection), $perPage);
+      $courses->setPath($request->url());
+
       return view('courses', compact('courses'));
+    }
+
+    public static function getCoursesDBOrCoursesSession(Request $request,$currentPage){
+      if($currentPage == 1){
+        $documents = CoursesManager::getAllCourses();
+        $request->session()->put('Courses', $documents);
+
+      }
+      else{
+        $documents = $request->session()->pull('Courses');
+        $request->session()->put('Courses', $documents);
+      }
+      return $documents;
+
     }
 
     public static function trasformArrayCourseToCourse($arrayCourse){
         $idDatabase = data_get($arrayCourse,'idDatabase');
         $name = data_get($arrayCourse,'name');
         $image = data_get($arrayCourse,'image');
+        $isActive = data_get($arrayCourse,'isActive');
         $instructor = data_get($arrayCourse,'instructor');
         $period = data_get($arrayCourse,'period');
         $weeklyFrequency = data_get($arrayCourse,'weeklyFrequency') ;
         $usersList = data_get($arrayCourse,'usersList') ;
 
-        $course = new CourseModel($idDatabase,$name,$image,$instructor,$period,$weeklyFrequency,$usersList);
+        $course = new CourseModel($idDatabase,$name,$image,$isActive,$instructor,$period,$weeklyFrequency,$usersList);
 
         return $course;
     }
@@ -72,6 +154,7 @@ class CoursesManager extends Controller{
         $idDatabase = $course->getIdDatabase();
         $name = $course->getName();
         $image = $course->getImage();
+        $isActive = $course->getIsActive();
         $instructor = $course->getInstructor();
         $period = $course->getPeriod();
         $weeklyFrequency = $course->getWeeklyFrequency();
@@ -81,6 +164,7 @@ class CoursesManager extends Controller{
             'idDatabase' => $idDatabase,
             'name' => $name,
             'image' => $image,
+            'isActive' => $isActive,
             'instructor' => $instructor,
             'period' => $period,
             'weeklyFrequency' => $weeklyFrequency,
@@ -88,11 +172,6 @@ class CoursesManager extends Controller{
         );
 
         return $arrayCourse;
-    }
-
-    public function getAllCoursesPage() {
-        $courses = CoursesManager::getAllCourses();
-        return view('courses', compact('courses'));
     }
 
     public function addCourse(Request $request) {
@@ -146,6 +225,7 @@ class CoursesManager extends Controller{
         $corso = array(
             'name' => $name,
             'image' => $image,
+            'isActive' => TRUE,
             'instructor' => $instructor,
             'period' => $period,
             'weeklyFrequency' => $weeklyFrequency,

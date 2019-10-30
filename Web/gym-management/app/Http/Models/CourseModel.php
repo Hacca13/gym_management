@@ -13,6 +13,7 @@ class CourseModel{
   private $name;
   private $image;
   private $instructor;
+  private $isActive;
   private $period;
   /*
       $period:
@@ -41,11 +42,12 @@ class CourseModel{
   */
   private $usersList;
 
-  function __construct($idDatabase,$name,$image,$instructor,$period,$weeklyFrequency,$usersList){
+  function __construct($idDatabase,$name,$image,$isActive,$instructor,$period,$weeklyFrequency,$usersList){
 
     $this->idDatabase = $idDatabase;
     $this->name = $name;
     $this->image = $image;
+    $this->isActive = $isActive;
     $this->instructor = $instructor;
     $this->period = array(
       'startDate' => data_get($period, 'startDate'),
@@ -65,7 +67,6 @@ class CourseModel{
     }
 
   }
-
 
 
 
@@ -167,25 +168,25 @@ class CourseModel{
     }
 
     /**
-     * Get the value of Number Of Subscribers
+     * Get the value of Is Active
      *
      * @return mixed
      */
-    public function getNumberOfSubscribers()
+    public function getIsActive()
     {
-        return $this->numberOfSubscribers;
+        return $this->isActive;
     }
 
     /**
-     * Set the value of Number Of Subscribers
+     * Set the value of Is Active
      *
-     * @param mixed numberOfSubscribers
+     * @param mixed isActive
      *
      * @return self
      */
-    public function setNumberOfSubscribers($numberOfSubscribers)
+    public function setIsActive($isActive)
     {
-        $this->numberOfSubscribers = $numberOfSubscribers;
+        $this->isActive = $isActive;
 
         return $this;
     }
