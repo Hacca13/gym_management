@@ -23,7 +23,10 @@
                           @endforeach
 
                         </div>
-                        {{ $subscriptionList->links()}}
+                        <div class="row justify-content-center">
+
+                            {{ $subscriptionList->links()}}
+                        </div>
                     </div>
                 </div>
 

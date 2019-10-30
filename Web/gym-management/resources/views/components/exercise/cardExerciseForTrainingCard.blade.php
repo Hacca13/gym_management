@@ -2,9 +2,10 @@
     <div class="card" style="border-radius: 10px;">
         <div class="card-header">
             <div class="row">
-                <div class="col-md-6" style="text-align: start">
+                <div class="col-md-6"></div>
+                <div class="col-md-6" style="text-align: end">
                     <a href="modificaEsercizio">
-                        <i class="fas fa-edit" style="font-size: 150%; color: black;"></i>
+                        <i class="fas fa-times" style="font-size: 170%; color: red; margin-left: 2.5%"></i>
                     </a>
                 </div>
                 <div class="col-md-6" style="text-align: end">
@@ -33,19 +34,26 @@
 
                                 @foreach($trainingCard->getExercises() as $exerciseTrainingCard)
                                   @if($exerciseTrainingCard['idExerciseDatabase'] == $exercise->getIdDatabase())
+                                          <br>
                                     Numero di Serie: {{$exerciseTrainingCard['numberOfSeries']}}
                                     @if($exerciseTrainingCard['atTime'] == FALSE)
+                                              <br>
                                       Numero di Ripetizioni: {{$exerciseTrainingCard['numberOfRepetitions']}}
+
                                     @endif
                                     @if($exerciseTrainingCard['atTime'] == TRUE)
-                                      Workout Time:
+                                              <br>
+                                              Workout Time:
                                       Minuti: {{data_get($exerciseTrainingCard['workoutTime'],'minutes')}}
                                       Secondi: {{data_get($exerciseTrainingCard['workoutTime'],'seconds')}}
                                     @endif
+                                          <br>
                                     Tempo di Riposo:
 
                                     Minuti: {{data_get($exerciseTrainingCard['restTime'],'minutes')}}
+
                                     Secondi: {{data_get($exerciseTrainingCard['restTime'],'seconds')}}
+
                                   @endif
                                 @endforeach
 

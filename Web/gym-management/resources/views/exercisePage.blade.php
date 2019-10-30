@@ -18,7 +18,7 @@
 
 
                 </div>
-                <div>
+                <div class="row justify-content-center">
                     {{ $exercises->links()}}
                 </div>
         </div>
