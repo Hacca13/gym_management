@@ -44,7 +44,7 @@ Route::get('/userPageSearchResults', 'UsersManager@searchUsers');
 
 
 Route::get('/nuovoIscritto', function (){
-    return view('userAdd');
+    return view('insertNewUser');
 });
 
 Route::get('/gestioneIscritti', 'UsersManager@getAllUserForView');
