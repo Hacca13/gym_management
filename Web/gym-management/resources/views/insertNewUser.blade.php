@@ -6,7 +6,7 @@
     <div class="container-fluid">
         <div class="card col-md-12" style="border-radius: 10px;background-color: #d6d8d8">
             <div class="card-body wizard-content">
-                <h3 class="card-title text-center" >Inserimento Dati Utente</h3>
+                <h2 class="card-title text-center" >Inserimento Dati Utente</h2>
                 <br>
                 <h6 class="card-subtitle"></h6>
                 <form id="example-form" action="#" class="m-t-40">
@@ -186,7 +186,8 @@
                             </div>
                         </section>
                         <h3>Dati Tutore</h3>
-                        <section id="myDiv" style="display: none">
+                        <section>
+                        <div id="myDiv" style="display: none">
                             <label for="fname" class="text-right control-label col-form-label">Nome Tutore:</label>
                             <input type="text" class="form-control" id="parentName" name="parentName">
                             <label for="fname" class="text-right control-label col-form-label">Cognome Tutore:</label>
@@ -234,6 +235,7 @@
                             <input type="text" class="form-control" id="parentDocumentType" name="parentDocumentType">
                             <label for="cono1" class="text-right control-label col-form-label">Data di Rilascio:</label>
                             <input type="date" class="form-control" id="parentDocumentReleaseDate" name="parentDocumentReleaseDate">
+                        </div>
                         </section>
                         <h3>Completa</h3>
                         <section>
@@ -255,12 +257,16 @@
                 if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
                     age--;
                 }
-                if (age < 18) {
+                if (age > 18) {
+                    document.getElementById('steps-uid-0-t-2').style.display = "none";
                     myFunction();
-                } else {
-                    document.getElementById('myDiv').style.display = "none";
+                } else{
+                    document.getElementById('steps-uid-0-t-2').style.display = "block";
                 }
             }
         </script>
+
+
+
 
 @endsection

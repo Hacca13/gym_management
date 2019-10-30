@@ -10,7 +10,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <!-- Favicon icon -->
-    <link rel="icon"  href="/images/rsz_fit&fight_ok.png">
+    <link rel="icon"  href="/images/Fit&Fight.png">
     <title>Fit & Fight</title>
     <!-- Custom CSS -->
     <link href="../matrix-admin-bt4/assets/libs/flot/css/float-chart.css" rel="stylesheet">
