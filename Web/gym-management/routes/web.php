@@ -49,14 +49,9 @@ Route::get('/nuovoIscritto', function (){
 
 Route::get('/gestioneIscritti', 'UsersManager@getAllUserForView');
 
-Route::get('/prova', function (){
-    return view('prova');
+Route::get('/pdf', function (){
+    return view('pdf');
 });
-
-Route::get('/prova1', function (){
-    return view('prova1');
-});
-
 
 //ABBONAMENTI
 Route::get('/gestioneAbbonamenti', 'SubscriptionManager@getAllSubscriptionForView');
