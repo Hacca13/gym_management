@@ -28,8 +28,15 @@
                           <div class="col-md-12" style="border-radius: 10px;">
                               <h5>
                                 Descrizione:
-                                
+
                                 {{$exercise->getDescription()}}
+
+                                @foreach($trainingCard->getExercises() as $exerciseTrainingCard)
+                                  @if($exerciseTrainingCard['idExerciseDatabase'] == $exercise->getIdDatabase())
+                                    
+                                    Numero di Ripetizioni : {{$exerciseTrainingCard['numberOfRepetitions']}}
+                                  @endif
+                                @endforeach
 
                               </h5>
                           </div>
