@@ -67,7 +67,6 @@ class NewTcard2 extends Component {
                 startDate: this.state.from,
                 endDate: this.state.to
             }
-
         }).then(response => {
             window.location.href = response.data;
         }).catch(e => {

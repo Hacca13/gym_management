@@ -209,7 +209,7 @@ class TrainingCardsManager extends Controller
         $collection = Firestore::collection('TrainingCards');
         $input = $request->all();
         $collection->add($input);
-        return '/nuovaScheda';
+        return '/gestioneIscritti';
     }
 
 
