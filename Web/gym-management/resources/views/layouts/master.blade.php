@@ -122,6 +122,7 @@
 <script>
     // Basic Example with form
     var form = $("#example-form");
+
     form.validate({
         errorPlacement: function errorPlacement(error, element) { element.before(error); },
         rules: {
@@ -143,7 +144,8 @@
             return form.valid();
         },
         onFinished: function(event, currentIndex) {
-            alert("Submitted!");
+            event.preventDefault();
+            form.submit();
         }
     });
 
@@ -209,12 +211,11 @@
 
 
 <script>
-    Filevalidation = () => {
+    function Filevalidation() {
         const fi = document.getElementById('documentImage');
         // Check if any file is selected.
         if (fi.files.length > 0) {
-            for (const i = 0; i <= fi.files.length - 1; i++) {
-
+            for (let i = 0; i <= fi.files.length - 1; i++) {
                 const fsize = fi.files.item(i).size;
                 const file = Math.round((fsize / 1024));
                 // The size of the file.

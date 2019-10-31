@@ -5,12 +5,12 @@ class ExerciseToAdd extends Component {
         super(props);
         this.state = {
             atTime: true,
-            series: '1',
-            weight: '0',
-            reps: '1',
+            numberOfSeries: '',
+            weight: '',
+            numberOfRepetitions: '',
             rest: {
-                min: '00',
-                sec: '00'
+                min: '',
+                sec: ''
             },
             day: 'Lunedì',
         }
@@ -49,10 +49,10 @@ class ExerciseToAdd extends Component {
                             <div className="form-group row justify-content-center">
                                 <label htmlFor="userName">Numero Serie :</label>
                                 <div className="col-md-12 col-sm-12 text-center">
-                                    <input name={"series" + this.props.indexed} type="number" value={this.state.series}
+                                    <input name={"series" + this.props.indexed} type="number" value={this.state.numberOfSeries}
                                            onChange={event => {
                                                this.setState({
-                                                   series: event.target.value
+                                                   numberOfSeries: event.target.value
                                                })
                                            }}
                                            style={{width: '30%'}}
@@ -80,10 +80,10 @@ class ExerciseToAdd extends Component {
                                 <div className="col-md-12 col-sm-12 text-center">
 
                                     <input name={"reps" + this.props.indexed}
-                                           value={this.state.reps}
+                                           value={this.state.numberOfRepetitions}
                                            onChange={event => {
                                                this.setState({
-                                                   reps: event.target.value
+                                                   numberOfRepetitions: event.target.value
                                                })
                                            }}
                                            type="number" style={{width: '30%'}}/>
@@ -120,7 +120,7 @@ class ExerciseToAdd extends Component {
                             </div>
 
                             <div className="form-group row justify-content-center">
-                                <label htmlFor="userName">Tempo Allenamento:</label>
+                                <label htmlFor="userName">Tempo Riposo:</label>
                                 <div className="col-md-12 col-sm-12 row justify-content-center">
 
                                     <div className="col-md-5" style={{textAlign: 'right'}}>

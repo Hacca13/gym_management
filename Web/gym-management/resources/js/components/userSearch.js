@@ -120,7 +120,7 @@ class UserSearch extends Component {
             className: "form-control",
             placeholder: "Prepend",
             value,
-            onChange: this.onChange
+            onChange: this.onChange,
         };
 
         const containerProps = {

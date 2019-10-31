@@ -207,7 +207,8 @@ class TrainingCardsManager extends Controller
     public function insertTrainingCard(Request $request) {
 
         $collection = Firestore::collection('TrainingCards');
-        $collection->add($request->all());
+        $input = $request->all();
+        $collection->add($input);
         return '/nuovaScheda';
     }
 

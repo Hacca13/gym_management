@@ -20,7 +20,7 @@ class App extends Component {
             <BrowserRouter>
                 <div>
                     <Route exact path="/salvatore" component={addUsrToCourse} />
-                    <Route exact path="/nuovaSched" component={InsertTCard} />
+                    <Route exact path="/nuovaScheda" component={InsertTCard} />
                 </div>
             </BrowserRouter>
         );

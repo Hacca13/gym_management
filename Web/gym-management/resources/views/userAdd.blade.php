@@ -4,6 +4,7 @@
 
     <form action="/addUserPost" method="post" enctype="multipart/form-data">
         @csrf
+
         <div class="row">
             <div class="card col-md-12" style="border-radius: 10px;background-color: #d6d8d8">
                 <div class="card-body">
@@ -238,15 +239,6 @@
                 </div>
             </div>
             </div>
-        </div>
-
-
-
-
-    </form>
-
-
-
 
     <!-- PARENT FORM -->
         <div class="row" id="parentDiv">

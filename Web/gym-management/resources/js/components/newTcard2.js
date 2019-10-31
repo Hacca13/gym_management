@@ -70,8 +70,7 @@ class NewTcard2 extends Component {
 
         }).then(response => {
             window.location.href = response.data;
-        })
-            .catch(e => {
+        }).catch(e => {
                 console.log(e);
             });
     }
@@ -95,13 +94,13 @@ class NewTcard2 extends Component {
                 name: tmp_ex[ind].name,
                 atTime: tmp_ex[ind].exerciseIsATime,
                 numberOfSeries: '',
-                workoutTime: {
-                    minutes: '',
-                    seconds: ''
+                work: {
+                    min: '',
+                    sec: ''
                 },
-                restTime: {
-                    minutes: '',
-                    seconds: ''
+                rest: {
+                    min: '',
+                    sec: ''
                 },
                 day: '',
                 gif: tmp_ex[ind].gif,
@@ -116,9 +115,9 @@ class NewTcard2 extends Component {
                 numberOfRepetitions: '',
                 weight: '',
                 numberOfSeries: '',
-                restTime: {
-                    minutes: '',
-                    seconds: ''
+                rest: {
+                    min: '',
+                    sec: ''
                 },
                 day: '',
                 gif: tmp_ex[ind].gif,
@@ -141,15 +140,24 @@ class NewTcard2 extends Component {
     returnInfo(item, index) {
         let tmp_exercises = this.state.exercisesList;
         let tmp_exercise = this.state.exercisesList[index];
-        tmp_exercise.numberOfRepetitions = item.series;
-        tmp_exercise.workoutTime = {
-            minutes: item.work.min,
-            seconds: item.work.sec
-        };
-        tmp_exercise.restTime = {
-            minutes: item.rest.min,
-            seconds: item.rest.sec
-        };
+        tmp_exercise.numberOfSeries = item.numberOfSeries;
+        if(tmp_exercise.atTime) {
+            tmp_exercise.work = {
+                min: item.work.min,
+                sec: item.work.sec
+            };
+            tmp_exercise.rest = {
+                min: item.rest.min,
+                sec: item.rest.sec
+            };
+        } else {
+            tmp_exercise.weight = item.weight;
+            tmp_exercise.numberOfRepetitions = item.numberOfRepetitions;
+            tmp_exercise.rest = {
+                min: item.rest.min,
+                sec: item.rest.sec
+            };
+        }
         tmp_exercise.day = item.day;
         this.setState({
             exercisesList: tmp_exercises
@@ -287,6 +295,7 @@ class NewTcard2 extends Component {
                                         <label htmlFor="fname"
                                                className="col-sm-12 text-center control-label col-form-label">Data inizio</label>
                                         <DatePicker
+                                            required={true}
                                             selected={this.state.from}
                                             onChange={date =>
                                                 this.setState({
@@ -303,6 +312,7 @@ class NewTcard2 extends Component {
                                         <label htmlFor="fname"
                                                className="col-sm-12 text-center control-label col-form-label">Data fine</label>
                                         <DatePicker
+                                            required={true}
                                             selected={this.state.to}
                                             onChange={date =>
                                                 this.setState({
@@ -344,7 +354,7 @@ class NewTcard2 extends Component {
 
                                     <div className="col-md-12">
                                         {
-                                            this.state.exercisesList.reverse().map(((value, index) => {
+                                            this.state.exercisesList.map(((value, index) => {
                                                 if (value.atTime) {
                                                     return <ExerciseToAddByTime removeEx={this.removeExercise}
                                                                                 name={value.name}

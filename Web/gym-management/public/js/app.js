@@ -86397,7 +86397,7 @@ function (_Component) {
         component: addUsrToCourse
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
         exact: true,
-        path: "/nuovaSched",
+        path: "/nuovaScheda",
         component: InsertTCard
       })));
     }
@@ -86540,12 +86540,12 @@ function (_Component) {
     _this = _possibleConstructorReturn(this, _getPrototypeOf(ExerciseToAdd).call(this, props));
     _this.state = {
       atTime: true,
-      series: '1',
-      weight: '0',
-      reps: '1',
+      numberOfSeries: '',
+      weight: '',
+      numberOfRepetitions: '',
       rest: {
-        min: '00',
-        sec: '00'
+        min: '',
+        sec: ''
       },
       day: 'Lunedì'
     };
@@ -86605,10 +86605,10 @@ function (_Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         name: "series" + this.props.indexed,
         type: "number",
-        value: this.state.series,
+        value: this.state.numberOfSeries,
         onChange: function onChange(event) {
           _this2.setState({
-            series: event.target.value
+            numberOfSeries: event.target.value
           });
         },
         style: {
@@ -86640,10 +86640,10 @@ function (_Component) {
         className: "col-md-12 col-sm-12 text-center"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         name: "reps" + this.props.indexed,
-        value: this.state.reps,
+        value: this.state.numberOfRepetitions,
         onChange: function onChange(event) {
           _this2.setState({
-            reps: event.target.value
+            numberOfRepetitions: event.target.value
           });
         },
         type: "number",
@@ -86678,7 +86678,7 @@ function (_Component) {
         className: "form-group row justify-content-center"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         htmlFor: "userName"
-      }, "Tempo Allenamento:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, "Tempo Riposo:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-md-12 col-sm-12 row justify-content-center"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-md-5",
@@ -86772,14 +86772,14 @@ function (_Component) {
     _this = _possibleConstructorReturn(this, _getPrototypeOf(ExerciseToAddByTime).call(this, props));
     _this.state = {
       atTime: true,
-      series: '1',
+      numberOfSeries: '',
       work: {
-        min: '00',
-        sec: '00'
+        min: '',
+        sec: ''
       },
       rest: {
-        min: '00',
-        sec: '00'
+        min: '',
+        sec: ''
       },
       day: 'Lunedì'
     };
@@ -86839,10 +86839,10 @@ function (_Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         name: "series" + this.props.indexed,
         type: "number",
-        value: this.state.series,
+        value: this.state.numberOfSeries,
         onChange: function onChange(event) {
           _this2.setState({
-            series: event.target.value
+            numberOfSeries: event.target.value
           });
         },
         style: {
@@ -86919,7 +86919,7 @@ function (_Component) {
         className: "form-group row justify-content-center"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         htmlFor: "userName"
-      }, "Tempo Allenamento:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, "Tempo Riposo:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-md-12 col-sm-12 row justify-content-center"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-md-5",
@@ -87215,13 +87215,13 @@ function (_Component) {
           name: tmp_ex[ind].name,
           atTime: tmp_ex[ind].exerciseIsATime,
           numberOfSeries: '',
-          workoutTime: {
-            minutes: '',
-            seconds: ''
+          work: {
+            min: '',
+            sec: ''
           },
-          restTime: {
-            minutes: '',
-            seconds: ''
+          rest: {
+            min: '',
+            sec: ''
           },
           day: '',
           gif: tmp_ex[ind].gif,
@@ -87236,9 +87236,9 @@ function (_Component) {
           numberOfRepetitions: '',
           weight: '',
           numberOfSeries: '',
-          restTime: {
-            minutes: '',
-            seconds: ''
+          rest: {
+            min: '',
+            sec: ''
           },
           day: '',
           gif: tmp_ex[ind].gif,
@@ -87269,15 +87269,26 @@ function (_Component) {
     value: function returnInfo(item, index) {
       var tmp_exercises = this.state.exercisesList;
       var tmp_exercise = this.state.exercisesList[index];
-      tmp_exercise.numberOfRepetitions = item.series;
-      tmp_exercise.workoutTime = {
-        minutes: item.work.min,
-        seconds: item.work.sec
-      };
-      tmp_exercise.restTime = {
-        minutes: item.rest.min,
-        seconds: item.rest.sec
-      };
+      tmp_exercise.numberOfSeries = item.numberOfSeries;
+
+      if (tmp_exercise.atTime) {
+        tmp_exercise.work = {
+          min: item.work.min,
+          sec: item.work.sec
+        };
+        tmp_exercise.rest = {
+          min: item.rest.min,
+          sec: item.rest.sec
+        };
+      } else {
+        tmp_exercise.weight = item.weight;
+        tmp_exercise.numberOfRepetitions = item.numberOfRepetitions;
+        tmp_exercise.rest = {
+          min: item.rest.min,
+          sec: item.rest.sec
+        };
+      }
+
       tmp_exercise.day = item.day;
       this.setState({
         exercisesList: tmp_exercises
@@ -87366,6 +87377,7 @@ function (_Component) {
         htmlFor: "fname",
         className: "col-sm-12 text-center control-label col-form-label"
       }, "Data inizio"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_datepicker__WEBPACK_IMPORTED_MODULE_8___default.a, {
+        required: true,
         selected: this.state.from,
         onChange: function onChange(date) {
           return _this3.setState({
@@ -87382,6 +87394,7 @@ function (_Component) {
         htmlFor: "fname",
         className: "col-sm-12 text-center control-label col-form-label"
       }, "Data fine"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_datepicker__WEBPACK_IMPORTED_MODULE_8___default.a, {
+        required: true,
         selected: this.state.to,
         onChange: function onChange(date) {
           return _this3.setState({
@@ -87416,7 +87429,7 @@ function (_Component) {
         className: "bttn-pill bttn-success bttn-md"
       }, "Inserisci scheda")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-md-12"
-      }, this.state.exercisesList.reverse().map(function (value, index) {
+      }, this.state.exercisesList.map(function (value, index) {
         if (value.atTime) {
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_exerciseToAddByTime__WEBPACK_IMPORTED_MODULE_6__["default"], {
             removeEx: _this3.removeExercise,
