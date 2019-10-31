@@ -5,14 +5,14 @@ class ExerciseToAddByTime extends Component {
         super(props);
         this.state = {
             atTime: true,
-            series: '1',
+            numberOfSeries: '',
             work: {
-                min: '00',
-                sec: '00'
+                min: '',
+                sec: ''
             },
             rest: {
-                min: '00',
-                sec: '00'
+                min: '',
+                sec: ''
             },
             day: 'Lunedì',
         }
@@ -51,10 +51,10 @@ class ExerciseToAddByTime extends Component {
                             <div className="form-group row justify-content-center">
                                 <label htmlFor="userName">Numero Serie :</label>
                                 <div className="col-md-12 col-sm-12 text-center">
-                                    <input name={"series" + this.props.indexed} type="number" value={this.state.series}
+                                    <input name={"series" + this.props.indexed} type="number" value={this.state.numberOfSeries}
                                            onChange={event => {
                                                this.setState({
-                                                   series: event.target.value
+                                                   numberOfSeries: event.target.value
                                                })
                                            }}
                                            style={{width: '30%'}}
@@ -129,7 +129,7 @@ class ExerciseToAddByTime extends Component {
                             </div>
 
                             <div className="form-group row justify-content-center">
-                                <label htmlFor="userName">Tempo Allenamento:</label>
+                                <label htmlFor="userName">Tempo Riposo:</label>
                                 <div className="col-md-12 col-sm-12 row justify-content-center">
 
                                     <div className="col-md-5" style={{textAlign: 'right'}}>

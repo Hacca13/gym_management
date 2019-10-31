@@ -194,14 +194,22 @@ class TrainingCardsManager extends Controller
     public function exercisePage() {
         $exercises = ExercisesManager::getAllExercises();
         $users = UsersManager::getAllUser();
-        return view('insertNewTCARD', compact('exercises', 'users'));
+        return view('insertNewTCARD', compact('exercises', 'i'));
+    }
+
+
+    public function exercisePage2() {
+        $exercises = ExercisesManager::getAllExercises();
+        $users = UsersManager::getAllUser();
+        return view('addUserToCourse', compact('exercises', 'users'));
     }
 
     public function insertTrainingCard(Request $request) {
 
         $collection = Firestore::collection('TrainingCards');
-        $collection->add($request->all());
-        return '/nuovaScheda';
+        $input = $request->all();
+        $collection->add($input);
+        return '/gestioneIscritti';
     }
 
 

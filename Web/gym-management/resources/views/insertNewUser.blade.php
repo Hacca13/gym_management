@@ -9,7 +9,8 @@
                 <h2 class="card-title text-center" >Inserimento Dati Utente</h2>
                 <br>
                 <h6 class="card-subtitle"></h6>
-                <form id="example-form" action="#" class="m-t-40">
+                <form id="example-form" action="/addUserPost"  method="post" class="m-t-40" enctype="multipart/form-data">
+                    @csrf
                     <div>
                         <h3>Dati Utente</h3>
                         <section>
@@ -27,6 +28,8 @@
                                     <input type="date" class="form-control mydatepicker" oninput="testAge()" id="dateOfBirth" name="dateOfBirth" required>
                                     <label for="fname" class="text-right control-label col-form-label">Nazionalità di Nascita:</label>
                                     <input type="text" class="form-control" id="fname" name="birthNation" required>
+                                    <label for="fname" class="text-right control-label col-form-label">Luogo di Nascita:</label>
+                                    <input type="text" class="form-control" id="fname" name="birthPlace" required>
                                     <div class="form-group" id="">
                                         <label class="">Sesso:</label><br>
                                         <div class="col-sm-5 row">
@@ -187,57 +190,57 @@
                         </section>
                         <h3>Dati Tutore</h3>
                         <section>
-                        <div id="myDiv" style="display: none">
-                            <label for="fname" class="text-right control-label col-form-label">Nome Tutore:</label>
-                            <input type="text" class="form-control" id="parentName" name="parentName" value="">
-                            <label for="fname" class="text-right control-label col-form-label">Cognome Tutore:</label>
-                            <input type="text" class="form-control" id="parentSurname" name="parentSurname" value="">
-                            <div class="form-group" id="">
-                                <label class="">Sesso:</label><br>
-                                <div class="col-sm-5 row">
-                                    <div class="custom-control custom-radio col-md-5">
-                                        <input type="radio" class="custom-control-input" id="gemale" name="parentGender" >
-                                        <label class="custom-control-label" for="gemale">Uomo</label>
-                                    </div>
-                                    <div class="custom-control custom-radio col-md-5">
-                                        <input type="radio" class="custom-control-input" id="gefemale" name="parentGender" >
-                                        <label class="custom-control-label" for="gefemale">Donna</label>
-                                    </div>
-                                    <div class="custom-control custom-radio col-md-5">
-                                        <input type="radio" checked class="custom-control-input" id="geother" name="parentGender" >
-                                        <label class="custom-control-label" for="geother">Altro</label>
+                            <div id="myDiv" style="display: none">
+                                <label for="fname" class="text-right control-label col-form-label">Nome Tutore:</label>
+                                <input type="text" class="form-control" id="parentName" name="parentName" value="">
+                                <label for="fname" class="text-right control-label col-form-label">Cognome Tutore:</label>
+                                <input type="text" class="form-control" id="parentSurname" name="parentSurname" value="">
+                                <div class="form-group" id="">
+                                    <label class="">Sesso:</label><br>
+                                    <div class="col-sm-5 row">
+                                        <div class="custom-control custom-radio col-md-5">
+                                            <input type="radio" class="custom-control-input" id="gemale" name="parentGender" >
+                                            <label class="custom-control-label" for="gemale">Uomo</label>
+                                        </div>
+                                        <div class="custom-control custom-radio col-md-5">
+                                            <input type="radio" class="custom-control-input" id="gefemale" name="parentGender" >
+                                            <label class="custom-control-label" for="gefemale">Donna</label>
+                                        </div>
+                                        <div class="custom-control custom-radio col-md-5">
+                                            <input type="radio" checked class="custom-control-input" id="geother" name="parentGender" >
+                                            <label class="custom-control-label" for="geother">Altro</label>
+                                        </div>
                                     </div>
                                 </div>
+                                <label for="fname" class="text-right control-label col-form-label">Data di Nascita Tutore:</label>
+                                <input type="date" class="form-control" id="parentDateOfBirth" name="parentDateOfBirth" value="12/12/1995">
+                                <label for="fname" class="text-right control-label col-form-label">Luogo di Nascita Tutore:</label>
+                                <input type="text" class="form-control" id="parentbirthPlace" name="parentbirthPlace" value="">
+                                <label for="fname" class="text-right control-label col-form-label">Città Residenza del Tutore:</label>
+                                <input class="form-control" id="parentResidence" name="parentCityOfResidence" value="">
+                                <label for="lname" class="text-right control-label col-form-label">Nazione di Residenza Tutore:</label>
+                                <input type="text" class="form-control" id="parentNation" name="parentNation" value="">
+                                <label for="lname" class=" text-right control-label col-form-label">Cap:</label>
+                                <input type="number" class="form-control" id="parentCap" name="parentCap" value="">
+                                <label for="email1" class="text-right control-label col-form-label">Via:</label>
+                                <input type="text" class="form-control" id="parentResidenceStreet" name="parentResidenceStreet" value="">
+                                <label for="email1" class="text-right control-label col-form-label">Cap:</label>
+                                <input type="text" class="form-control" id="parentCap" name="parentCap" value="">
+                                <label for="cono1" class="text-right control-label col-form-label">Numero Tutore:</label>
+                                <input type="text" class="form-control" id="parentTelephoneNumber" name="parentTelephoneNumber" value="">
+                                <label for="cono1" class="text-right control-label col-form-label">E-mail del Tutore:</label>
+                                <input type="email" class="form-control" id="parentEmail" name="parentEmail" value="pippo@gmail.com">
+                                <label for="cono1" class="text-right control-label col-form-label">Numero documento d'Identità del Tutore:</label>
+                                <input type="text" class="form-control" id="parentDocumentNumber" name="parentDocumentNumber" value="">
+                                <label for="lname" class="text-right control-label col-form-label">Imagine Documento d'Identità:</label>
+                                <input type="text" class="form-control" id="parentDocumentImage" name="parentDocumentImage" value="">
+                                <label for="email1" class="text-right control-label col-form-label">Tipo di Documento:</label>
+                                <input type="text" class="form-control" id="parentDocumentType" name="parentDocumentType" value="">
+                                <label for="cono1" class="text-right control-label col-form-label">Data di Rilascio:</label>
+                                <input type="date" class="form-control" id="parentDocumentReleaseDate" name="parentDocumentReleaseDate" value="12/12/2001">
+                                <label for="cono1" class="text-right control-label col-form-label">Rilasciato da:</label>
+                                <input type="text" class="form-control" id="parentDocumentReleaser" name="parentDocumentReleaser" value="">
                             </div>
-                            <label for="fname" class="text-right control-label col-form-label">Data di Nascita Tutore:</label>
-                            <input type="date" class="form-control" id="parentDateOfBirth" name="parentDateOfBirth" value="12/12/1995">
-                            <label for="fname" class="text-right control-label col-form-label">Luogo di Nascita Tutore:</label>
-                            <input type="text" class="form-control" id="parentbirthPlace" name="parentbirthPlace" value="">
-                            <label for="fname" class="text-right control-label col-form-label">Città Residenza del Tutore:</label>
-                            <input class="form-control" id="parentResidence" name="parentCityOfResidence" value="">
-                            <label for="lname" class="text-right control-label col-form-label">Nazione di Residenza Tutore:</label>
-                            <input type="text" class="form-control" id="parentNation" name="parentNation" value="">
-                            <label for="lname" class=" text-right control-label col-form-label">Cap:</label>
-                            <input type="number" class="form-control" id="parentCap" name="parentCap" value="">
-                            <label for="email1" class="text-right control-label col-form-label">Via:</label>
-                            <input type="text" class="form-control" id="parentResidenceStreet" name="parentResidenceStreet" value="">
-                            <label for="email1" class="text-right control-label col-form-label">Cap:</label>
-                            <input type="text" class="form-control" id="parentCap" name="parentCap" value="">
-                            <label for="cono1" class="text-right control-label col-form-label">Numero Tutore:</label>
-                            <input type="text" class="form-control" id="parentTelephoneNumber" name="parentTelephoneNumber" value="">
-                            <label for="cono1" class="text-right control-label col-form-label">E-mail del Tutore:</label>
-                            <input type="email" class="form-control" id="parentEmail" name="parentEmail" value="pippo@gmail.com">
-                            <label for="cono1" class="text-right control-label col-form-label">Numero documento d'Identità del Tutore:</label>
-                            <input type="text" class="form-control" id="parentDocumentNumber" name="parentDocumentNumber" value="">
-                            <label for="lname" class="text-right control-label col-form-label">Imagine Documento d'Identità:</label>
-                            <input type="text" class="form-control" id="parentDocumentImage" name="parentDocumentImage" value="">
-                            <label for="email1" class="text-right control-label col-form-label">Tipo di Documento:</label>
-                            <input type="text" class="form-control" id="parentDocumentType" name="parentDocumentType" value="">
-                            <label for="cono1" class="text-right control-label col-form-label">Data di Rilascio:</label>
-                            <input type="date" class="form-control" id="parentDocumentReleaseDate" name="parentDocumentReleaseDate" value="12/12/2001">
-                            <label for="cono1" class="text-right control-label col-form-label">Rilasciato da:</label>
-                            <input type="text" class="form-control" id="parentDocumentReleaser" name="parentDocumentReleaser" value="">
-                        </div>
                         </section>
                         <h3>Completa</h3>
                         <section>
@@ -248,30 +251,31 @@
                 </form>
             </div>
         </div>
+    </div>
 
-        <script>
-            function testAge() {
-                let birthDateString = document.getElementById('dateOfBirth').value;
-                var today = new Date();
-                var birthDate = new Date(birthDateString);
-                var age = today.getFullYear() - birthDate.getFullYear();
-                var m = today.getMonth() - birthDate.getMonth();
+    <script>
+        function testAge() {
+            let birthDateString = document.getElementById('dateOfBirth').value;
+            var today = new Date();
+            var birthDate = new Date(birthDateString);
+            var age = today.getFullYear() - birthDate.getFullYear();
+            var m = today.getMonth() - birthDate.getMonth();
 
 
 
-                if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
-                    age--;
-                }
-                if (age > 18) {
-                    document.getElementById('steps-uid-0-t-2').style.display = "none";
-                    myFunction();
-
-                } else{
-                    document.getElementById('parentDocumentImage').type = "file";
-                    document.getElementById('steps-uid-0-t-2').style.display = "block";
-                }
+            if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+                age--;
             }
-        </script>
+            if (age > 18) {
+                document.getElementById('steps-uid-0-t-2').style.display = "none";
+                myFunction();
+
+            } else{
+                document.getElementById('parentDocumentImage').type = "file";
+                document.getElementById('steps-uid-0-t-2').style.display = "block";
+            }
+        }
+    </script>
 
 
 
