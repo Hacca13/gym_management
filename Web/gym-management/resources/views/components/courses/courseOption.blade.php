@@ -14,7 +14,7 @@
                 </div>
               </form>
             </div>
-            <div class="col-md-3" >
+            <div class="col-md-3" style="text-align: center; margin-top: auto; margin-bottom: auto;">
                 <div class="input-group no-border">
                     <div class="form-check" >
                         <input type="checkbox" class="form-check-input" id="exampleCheck1">
@@ -22,7 +22,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-3"  style="text-align: center; margin-top: auto; margin-bottom: auto;">
                 <div class="input-group no-border">
                     <div class="form-check">
                         <input type="checkbox" class="form-check-input" id="exampleCheck1">
