@@ -12,27 +12,27 @@
                         <div class="col-md-12">
                             <div class="text-center">
                                 <a href="/nuovaScheda">
-                                    <i class="bttn-jelly bttn-md bttn-primary" style="border-radius: 30px;">Nuova Scheda</i>
+                                    <button type="button" class="btn btn-secondary" style="border-radius: 10px;">Nuova Scheda</button>
                                 </a>
                                 <br>
                                 <br>
                                 <a href="/nuovoAbbonamento">
-                                    <i class="bttn-jelly bttn-md bttn-primary" style="border-radius: 30px;">Nuovo Abbonamento</i>
+                                    <button type="button" class="btn btn-secondary" style="border-radius: 10px;">Nuovo Abbonamento</button>
                                 </a>
                                 <br>
                                 <br>
                                 <a href="/nuovoEsercizio">
-                                    <i class="bttn-jelly bttn-md bttn-primary" style="border-radius: 30px;">Nuovo Esercizio</i>
+                                    <button type="button" class="btn btn-secondary" style="border-radius: 10px;">Nuovo Esercizio</button>
                                 </a>
                                 <br>
                                 <br>
                                 <a href="/nuovoIscritto">
-                                    <i class="bttn-jelly bttn-md bttn-primary" style="border-radius: 30px;">Nuovo Iscritto</i>
+                                    <button type="button" class="btn btn-secondary" style="border-radius: 10px;">Nuovo Iscritto</button>
                                 </a>
                                 <br>
                                 <br>
                                 <a href="/nuovoCorso">
-                                    <i class="bttn-jelly bttn-md bttn-primary" style="border-radius: 30px;">Nuovo Corso</i>
+                                    <button type="button" class="btn btn-secondary" style="border-radius: 10px;">Nuovo Corso</button>
                                 </a>
                                 <br>
                                 <br>
@@ -52,27 +52,27 @@
                         <div class="col-md-12">
                             <div id="calendar-events" class="text-center">
                                 <a href="/gestioneSchede">
-                                    <i class="bttn-jelly bttn-md bttn-primary" style="border-radius: 30px;">Gestione Schede</i>
+                                    <button type="button" class="btn btn-secondary" style="border-radius: 10px;">Gestione Schede</button>
                                 </a>
                                 <br>
                                 <br>
                                 <a href="/gestioneAbbonamenti">
-                                    <i class="bttn-jelly bttn-md bttn-primary" style="border-radius: 30px;">Gestione Abbonamenti</i>
+                                    <button type="button" class="btn btn-secondary" style="border-radius: 10px;">Gestione Abbonamenti</button>
                                 </a>
                                 <br>
                                 <br>
                                 <a href="/gestioneEsercizi">
-                                    <i class="bttn-jelly bttn-md bttn-primary" style="border-radius: 30px;">Gestione Esercizi</i>
+                                    <button type="button" class="btn btn-secondary" style="border-radius: 10px;">Gestione Esercizi</button>
                                 </a>
                                 <br>
                                 <br>
                                 <a href="/gestioneIscritti">
-                                    <i class="bttn-jelly bttn-md bttn-primary" style="border-radius: 30px;">Gestione Iscritti</i>
+                                    <button type="button" class="btn btn-secondary" style="border-radius: 10px;">Gestione Iscritti</button>
                                 </a>
                                 <br>
                                 <br>
                                 <a href="/gestioneCorsi">
-                                    <i class="bttn-jelly bttn-md bttn-primary" style="border-radius: 30px;">Gestione Corsi</i>
+                                    <button type="button" class="btn btn-secondary" style="border-radius: 10px;">Gestione Corsi</button>
                                 </a>
                                 <br>
                                 <br>
@@ -89,7 +89,7 @@
                 </div>
                 <div class="card-body text-center">
                     <a href="/gestioneAbbonamenti">
-                        <i class="bttn-jelly bttn-md bttn-primary" style="border-radius: 30px;">Nome del pezzente</i>
+                        <button type="button" class="btn btn-secondary" style="border-radius: 10px;">Nome del pezzente</button>
                     </a>
                 </div>
             </div>
