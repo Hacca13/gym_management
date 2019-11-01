@@ -42,7 +42,7 @@
                                                 <label class="custom-control-label" for="genfemale">Donna</label>
                                             </div>
                                             <div class="custom-control custom-radio col-md-5">
-                                                <input type="radio" class="custom-control-input" id="genother" name="gender" required>
+                                                <input type="radio" checked class="custom-control-input" id="genother" name="gender" required>
                                                 <label class="custom-control-label" for="genother">Altro</label>
                                             </div>
                                         </div>
@@ -75,7 +75,7 @@
                                 </div>
                                 <hr>
                                 <div class="card-body">
-                                    <input type="checkbox" hidden name="isUnderage" value="TRUE"></input>
+                                    <input type="text" id="isUnderage" hidden name="isUnderage" value='false' required></input>
                                 </div>
                             </div>
                         </section>
@@ -179,11 +179,7 @@
                                         </div>
                                         <label for="cono1" class="text-right control-label col-form-label">Altri Obiettivi:</label>
                                         <input type="text" class="form-control" id="cono1" name="otherGoals" required>
-                                        <div class="border-top">
-                                            <div class="card-body">
-                                                <input type="checkbox" hidden name="isUnderage" value="TRUE"></input>
-                                            </div>
-                                        </div>
+
                                     </div>
                                 </div>
                             </div>
@@ -199,15 +195,15 @@
                                     <label class="">Sesso:</label><br>
                                     <div class="col-sm-5 row">
                                         <div class="custom-control custom-radio col-md-5">
-                                            <input type="radio" class="custom-control-input" id="gemale" name="parentGender" >
+                                            <input type="radio" class="custom-control-input" id="gemale" name="parentGender" value="Uomo" >
                                             <label class="custom-control-label" for="gemale">Uomo</label>
                                         </div>
                                         <div class="custom-control custom-radio col-md-5">
-                                            <input type="radio" class="custom-control-input" id="gefemale" name="parentGender" >
+                                            <input type="radio" class="custom-control-input" id="gefemale" name="parentGender" value="Donna">
                                             <label class="custom-control-label" for="gefemale">Donna</label>
                                         </div>
                                         <div class="custom-control custom-radio col-md-5">
-                                            <input type="radio" checked class="custom-control-input" id="geother" name="parentGender" >
+                                            <input type="radio" checked class="custom-control-input" id="geother" name="parentGender" value="Altro">
                                             <label class="custom-control-label" for="geother">Altro</label>
                                         </div>
                                     </div>
@@ -221,11 +217,11 @@
                                 <label for="lname" class="text-right control-label col-form-label">Nazione di Residenza Tutore:</label>
                                 <input type="text" class="form-control" id="parentNation" name="parentNation" value="">
                                 <label for="lname" class=" text-right control-label col-form-label">Cap:</label>
-                                <input type="number" class="form-control" id="parentCap" name="parentCap" value="">
+                                <input type="text" class="form-control" id="parentCap" name="parentCap" value="">
                                 <label for="email1" class="text-right control-label col-form-label">Via:</label>
                                 <input type="text" class="form-control" id="parentResidenceStreet" name="parentResidenceStreet" value="">
-                                <label for="email1" class="text-right control-label col-form-label">Cap:</label>
-                                <input type="text" class="form-control" id="parentCap" name="parentCap" value="">
+                                <label for="email1" class="text-right control-label col-form-label">Numero Civico:</label>
+                                <input type="text" class="form-control" id="parentResidenceNumber" name="parentResidenceNumber" value="">
                                 <label for="cono1" class="text-right control-label col-form-label">Numero Tutore:</label>
                                 <input type="text" class="form-control" id="parentTelephoneNumber" name="parentTelephoneNumber" value="">
                                 <label for="cono1" class="text-right control-label col-form-label">E-mail del Tutore:</label>
@@ -248,7 +244,7 @@
                             <label for="acceptTerms">I agree with the Terms and Conditions.</label>
                         </section>
                     </div>
-                    
+
                 </form>
             </div>
         </div>
@@ -261,21 +257,68 @@
             var birthDate = new Date(birthDateString);
             var age = today.getFullYear() - birthDate.getFullYear();
             var m = today.getMonth() - birthDate.getMonth();
+            var myDiv = document.getElementById("myDiv");
 
 
 
             if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
                 age--;
             }
+
             if (age > 18) {
+
+              document.getElementById('isUnderage').value = 'false';
+
                 document.getElementById('steps-uid-0-t-2').style.display = "none";
-                myFunction();
+
+                myDiv.style.display = "none";
+                document.getElementById('parentName').required = false;
+                document.getElementById('parentSurname').required = false;
+                document.getElementById('parentDateOfBirth').required = false;
+                document.getElementById('parentbirthPlace').required = false;
+                document.getElementById('parentResidence').required = false;
+                document.getElementById('parentResidenceNumber').required = false;
+                document.getElementById('parentNation').required = false;
+                document.getElementById('parentCap').required = false;
+                document.getElementById('parentResidenceStreet').required = false;
+                document.getElementById('parentTelephoneNumber').required = false;
+                document.getElementById('parentEmail').required = false;
+                document.getElementById('parentDocumentImage').required = false;
+                document.getElementById('parentDocumentNumber').required = false;
+                document.getElementById('parentDocumentType').required = false;
+                document.getElementById('parentDocumentReleaseDate').required = false;
+                document.getElementById('parentDocumentReleaser').required = false;
 
             } else{
+
+              document.getElementById('isUnderage').value = 'true';
+
+
                 document.getElementById('parentDocumentImage').type = "file";
                 document.getElementById('steps-uid-0-t-2').style.display = "block";
+                  myDiv.style.display = "block";
+                  document.getElementById('parentName').required = true;
+                  document.getElementById('parentSurname').required = true;
+                  document.getElementById('parentDateOfBirth').required = true;
+                  document.getElementById('parentbirthPlace').required = true;
+                  document.getElementById('parentResidence').required = true;
+                  document.getElementById('parentResidenceNumber').required = true;
+                  document.getElementById('parentNation').required = true;
+                  document.getElementById('parentCap').required = true;
+                  document.getElementById('parentResidenceStreet').required = true;
+                  document.getElementById('parentTelephoneNumber').required = true;
+                  document.getElementById('parentEmail').required = true;
+                  document.getElementById('parentEmail').value = "";
+                  document.getElementById('parentDocumentImage').required = true;
+                  document.getElementById('parentDocumentNumber').required = true;
+                  document.getElementById('parentDocumentType').required = true;
+                  document.getElementById('parentDocumentReleaseDate').required = true;
+                  document.getElementById('parentDocumentReleaser').required = true;
             }
         }
+
+
+
     </script>
 
 

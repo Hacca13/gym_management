@@ -177,11 +177,9 @@ class UsersManager extends Controller{
         $documentImage = $request->file('documentImage');
         $parentDocumentImage = null;
 
-        if(!(isset($input['isUnderage']))){
-            $input['isUnderage'] = 'FALSE';
-        }
 
-        if($input['isUnderage'] == 'TRUE'){
+
+        if($input['isUnderage'] == 'true'){
             $parentDocumentImage = $request->file('parentDocumentImage');
         }
 
@@ -194,7 +192,7 @@ class UsersManager extends Controller{
                 'name' => $documentImage->getClientOriginalName()
             ])->name();
 
-        if($input['isUnderage'] == 'TRUE'){
+        if($input['isUnderage'] == 'true'){
             $str2 = $firebase->createStorage()->getBucket()->upload(file_get_contents($parentDocumentImage),
                 [
                     'name' => $parentDocumentImage->getClientOriginalName()
@@ -421,7 +419,7 @@ class UsersManager extends Controller{
             'releaseDate' => $input['releaseDateDocument']
         );
 
-        if($input['isUnderage'] == 'FALSE'){
+        if($input['isUnderage'] == 'false'){
             $isAdult = TRUE;
         }
         else{
@@ -429,13 +427,13 @@ class UsersManager extends Controller{
         }
 
 
-        if($input['isUnderage'] == 'TRUE'){
+        if($input['isUnderage'] == 'true'){
             $parentResidence = array(
                 'nation' => $input['parentNation'],
                 'cityOfResidence' => $input['parentCityOfResidence'],
                 'cap' => $input['parentCap'],
                 'street' => $input['parentResidenceStreet'],
-                'number' => $input['parentResidence.number']
+                'number' => $input['parentResidenceNumber']
 
             );
 
@@ -447,7 +445,7 @@ class UsersManager extends Controller{
                 'releaseDate' => $input['parentDocumentReleaseDate']
             );
         }
-        if($input['isUnderage'] == 'TRUE'){
+        if($input['isUnderage'] == 'true'){
             $arrayUser1 = array(
                 'parentName' => $input['parentName'],
                 'parentSurname' => $input['parentSurname'],

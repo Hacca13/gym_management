@@ -7,6 +7,7 @@ use Google\Cloud\Firestore\FirestoreClient;
 use Firevel\Firestore\Facades\Firestore;
 use App\Http\Models\TrainingCardsModel;
 use Illuminate\Pagination\LengthAwarePaginator;
+use PDF;
 
 class TrainingCardsManager extends Controller
 {
