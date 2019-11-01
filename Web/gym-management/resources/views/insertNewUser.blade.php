@@ -245,6 +245,7 @@
                             <label for="acceptTerms">I agree with the Terms and Conditions.</label>
                         </section>
                     </div>
+                    
                 </form>
             </div>
         </div>

@@ -10,6 +10,14 @@ use Illuminate\Pagination\LengthAwarePaginator;
 
 class TrainingCardsManager extends Controller
 {
+
+    public static function  DownloadTrainingCardsPDF(){
+      $data = ['title' => 'PATANE'];
+              $pdf = PDF::loadView('trainingCardPDF', $data);
+
+              return $pdf->download('TrainingCard.pdf');
+    }
+
     public static function searchTrainingCards(Request $request){
       $currentPage = LengthAwarePaginator::resolveCurrentPage();
       $input = $request->all();

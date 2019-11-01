@@ -66,7 +66,7 @@ Route::get('/nuovoAbbonamento', function (){
 
 
 //SCHEDA
-
+Route::get('/getTrainingCardsPDFDownloads','TrainingCardsManager@DownloadTrainingCardsPDF');
 
 Route::get('/gestioneSchede', 'TrainingCardsManager@getAllTrainingCardsForView');
 
