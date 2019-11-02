@@ -189,6 +189,59 @@ class ExercisesManager extends Controller{
       return $documents;
     }
 
+  public static function searchExercise(Request $request){
+    $currentPage = LengthAwarePaginator::resolveCurrentPage();
 
+    $input = $request->all();
+
+    if(isset($input['searchInput'])){
+      $input = $input['searchInput'];
+      $request->session()->put('searchInput', $input);
+    }else{
+      $input = $request->session()->pull('searchInput');
+      $request->session()->put('searchInput', $input);
+    }
+
+    $url = substr($request->url(), 0, strlen($request->url())-26);
+    $url = $url.'exercisesPageSearchResults';
+
+    $exercisesResultList = ExercisesManager::getExercisesDBOrExercisesSessionForSearchPage($request,$currentPage,$input);
+
+    $itemCollection = collect($exercisesResultList);
+    $perPage = 9;
+    $currentPageItems = $itemCollection->slice(($currentPage * $perPage) - $perPage, $perPage)->all();
+    $exercisesResultList = new LengthAwarePaginator($currentPageItems , count($itemCollection), $perPage);
+    $exercisesResultList->setPath($url);
+
+
+    return view('exercisesPageSearchResult', compact('exercisesResultList'));
+  }
+
+  public static function getExercisesDBOrExercisesSessionForSearchPage($request,$currentPage,$input){
+    if($currentPage == 1){
+      $exerciseResultList = ExercisesManager::searchExercisesPartially($input);
+      $request->session()->put('exerciseResultList', $exerciseResultList);
+    }
+    else{
+      $exerciseResultList = $request->session()->pull('exerciseResultList');
+      $request->session()->put('exerciseResultList', $exerciseResultList);
+    }
+    return $exerciseResultList;
+  }
+
+  public static function searchExercisesPartially($input){
+    $exercisesResultList = array();
+    $collection = Firestore::collection('Exercises');
+    $documents = $collection->orderBy('name')->startAt([$input])->endAt([$input.'z'])->documents();
+
+    foreach ($documents as $document) {
+        $exercise = ExercisesManager::trasformArrayExerciseToExercise($document->data());
+        $exercise->setIdDatabase($document->id());
+        array_push($exercisesResultList,$exercise);
+    }
+
+    return $exercisesResultList;
+
+  }
 
 }

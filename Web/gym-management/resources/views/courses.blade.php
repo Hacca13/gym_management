@@ -17,6 +17,7 @@
                     </div>
                 @endforeach
             </div>
+            <br>
             <div class="row d-flex justify-content-center">
                 {{$courses->links()}}
             </div>
