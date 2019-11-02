@@ -34,15 +34,15 @@
                                         <label class="">Sesso:</label><br>
                                         <div class="col-sm-5 row">
                                             <div class="custom-control custom-radio col-md-5">
-                                                <input type="radio" class="custom-control-input" id="genmale" name="gender" required>
+                                                <input type="radio" class="custom-control-input" id="genmale" name="gender" value="Uomo" required>
                                                 <label class="custom-control-label" for="genmale">Uomo</label>
                                             </div>
                                             <div class="custom-control custom-radio col-md-5">
-                                                <input type="radio" class="custom-control-input" id="genfemale" name="gender" required>
+                                                <input type="radio" class="custom-control-input" id="genfemale" name="gender" value="Donna" required>
                                                 <label class="custom-control-label" for="genfemale">Donna</label>
                                             </div>
                                             <div class="custom-control custom-radio col-md-5">
-                                                <input type="radio" checked class="custom-control-input" id="genother" name="gender" required>
+                                                <input type="radio" checked class="custom-control-input" id="genother" name="gender" value="Altro" required>
                                                 <label class="custom-control-label" for="genother">Altro</label>
                                             </div>
                                         </div>
@@ -83,12 +83,14 @@
                         <section>
                             <div class="row">
                                 <div class="col-md-6">
-                                    <label for="fname" class="text-right control-label col-form-label">Peso:</label>
-                                    <input type="text" class="form-control" id="fname" name="weight" required>
-                                    <label for="fname" class="text-right control-label col-form-label">Altezza:</label>
-                                    <input type="text" class="form-control" id="fname" name="height" required>
+                                    <label for="fname" class="text-right control-label col-form-label">Peso (kg):</label>
+                                    <input type="number" class="form-control" id="weight" oninput="imcCalculation()" name="weight" value=1 required>
+                                    <label for="fname" class="text-right control-label col-form-label">Altezza (cm):</label>
+                                    <input type="number" class="form-control" id="height" oninput="imcCalculation()" name="height" value=1 required>
                                     <label for="fname" class="text-right control-label col-form-label">IMC:</label>
-                                    <input type="text" class="form-control" id="email" name="imc" required>
+                                    <label for="fname" class="text-right control-label col-form-label" id="imcLabel" ></label>
+                                    <br>
+                                    <input type="text" hidden class="form-control" id="imc" name="imc" required>
                                     <label for="fname" class="text-right control-label col-form-label">Sport Praticati Precedentemente:</label>
                                     <input type="text" class="form-control" id="fname" name="previousSport" required>
                                     <label for="fname" class="text-right control-label col-form-label">Tempo Sport Praticati Precedentemente:</label>
@@ -210,28 +212,31 @@
                                 </div>
                                 <label for="fname" class="text-right control-label col-form-label">Data di Nascita Tutore:</label>
                                 <input type="date" class="form-control" id="parentDateOfBirth" name="parentDateOfBirth" value="12/12/1995">
+                                <label for="fname" class="text-right control-label col-form-label">Nazione di Nascita Tutore:</label>
+                                <input type="date" class="form-control" id="parentBirthNation" name="parentBirthNation" value="12/12/1995">
                                 <label for="fname" class="text-right control-label col-form-label">Luogo di Nascita Tutore:</label>
-                                <input type="text" class="form-control" id="parentbirthPlace" name="parentbirthPlace" value="">
-                                <label for="fname" class="text-right control-label col-form-label">Città Residenza del Tutore:</label>
-                                <input class="form-control" id="parentResidence" name="parentCityOfResidence" value="">
+                                <input type="text" class="form-control" id="parentBirthPlace" name="parentBirthPlace" value="">
                                 <label for="lname" class="text-right control-label col-form-label">Nazione di Residenza Tutore:</label>
                                 <input type="text" class="form-control" id="parentNation" name="parentNation" value="">
+                                <label for="fname" class="text-right control-label col-form-label">Città Residenza del Tutore:</label>
+                                <input class="form-control" id="parentCityOfResidence" name="parentCityOfResidence" value="">
                                 <label for="lname" class=" text-right control-label col-form-label">Cap:</label>
                                 <input type="text" class="form-control" id="parentCap" name="parentCap" value="">
                                 <label for="email1" class="text-right control-label col-form-label">Via:</label>
                                 <input type="text" class="form-control" id="parentResidenceStreet" name="parentResidenceStreet" value="">
                                 <label for="email1" class="text-right control-label col-form-label">Numero Civico:</label>
                                 <input type="text" class="form-control" id="parentResidenceNumber" name="parentResidenceNumber" value="">
-                                <label for="cono1" class="text-right control-label col-form-label">Numero Tutore:</label>
+                                <label for="cono1" class="text-right control-label col-form-label">Numero Cellulare Tutore:</label>
                                 <input type="text" class="form-control" id="parentTelephoneNumber" name="parentTelephoneNumber" value="">
                                 <label for="cono1" class="text-right control-label col-form-label">E-mail del Tutore:</label>
                                 <input type="email" class="form-control" id="parentEmail" name="parentEmail" value="pippo@gmail.com">
+                                <label for="email1" class="text-right control-label col-form-label">Tipo di Documento:</label>
+                                <input type="text" class="form-control" id="parentDocumentType" name="parentDocumentType" value="">
                                 <label for="cono1" class="text-right control-label col-form-label">Numero documento d'Identità del Tutore:</label>
                                 <input type="text" class="form-control" id="parentDocumentNumber" name="parentDocumentNumber" value="">
                                 <label for="lname" class="text-right control-label col-form-label">Imagine Documento d'Identità:</label>
                                 <input type="text" class="form-control" id="parentDocumentImage" name="parentDocumentImage" value="">
-                                <label for="email1" class="text-right control-label col-form-label">Tipo di Documento:</label>
-                                <input type="text" class="form-control" id="parentDocumentType" name="parentDocumentType" value="">
+
                                 <label for="cono1" class="text-right control-label col-form-label">Data di Rilascio:</label>
                                 <input type="date" class="form-control" id="parentDocumentReleaseDate" name="parentDocumentReleaseDate" value="12/12/2001">
                                 <label for="cono1" class="text-right control-label col-form-label">Rilasciato da:</label>
@@ -270,22 +275,24 @@
               document.getElementById('isUnderage').value = 'false';
 
                 document.getElementById('steps-uid-0-t-2').style.display = "none";
+                document.getElementById('parentDocumentImage').type = "text";
 
                 myDiv.style.display = "none";
                 document.getElementById('parentName').required = false;
                 document.getElementById('parentSurname').required = false;
                 document.getElementById('parentDateOfBirth').required = false;
-                document.getElementById('parentbirthPlace').required = false;
-                document.getElementById('parentResidence').required = false;
-                document.getElementById('parentResidenceNumber').required = false;
+                document.getElementById('parentBirthNation').required = false;
+                document.getElementById('parentBirthPlace').required = false;
                 document.getElementById('parentNation').required = false;
+                document.getElementById('parentCityOfResidence').required = false;
                 document.getElementById('parentCap').required = false;
                 document.getElementById('parentResidenceStreet').required = false;
+                document.getElementById('parentResidenceNumber').required = false;
                 document.getElementById('parentTelephoneNumber').required = false;
                 document.getElementById('parentEmail').required = false;
-                document.getElementById('parentDocumentImage').required = false;
-                document.getElementById('parentDocumentNumber').required = false;
                 document.getElementById('parentDocumentType').required = false;
+                document.getElementById('parentDocumentNumber').required = false;
+                document.getElementById('parentDocumentImage').required = false;
                 document.getElementById('parentDocumentReleaseDate').required = false;
                 document.getElementById('parentDocumentReleaser').required = false;
 
@@ -300,24 +307,35 @@
                   document.getElementById('parentName').required = true;
                   document.getElementById('parentSurname').required = true;
                   document.getElementById('parentDateOfBirth').required = true;
-                  document.getElementById('parentbirthPlace').required = true;
-                  document.getElementById('parentResidence').required = true;
-                  document.getElementById('parentResidenceNumber').required = true;
+                  document.getElementById('parentBirthNation').required = true;
+                  document.getElementById('parentBirthPlace').required = true;
                   document.getElementById('parentNation').required = true;
+                  document.getElementById('parentCityOfResidence').required = true;
                   document.getElementById('parentCap').required = true;
                   document.getElementById('parentResidenceStreet').required = true;
+                  document.getElementById('parentResidenceNumber').required = true;
                   document.getElementById('parentTelephoneNumber').required = true;
                   document.getElementById('parentEmail').required = true;
                   document.getElementById('parentEmail').value = "";
-                  document.getElementById('parentDocumentImage').required = true;
-                  document.getElementById('parentDocumentNumber').required = true;
                   document.getElementById('parentDocumentType').required = true;
+                  document.getElementById('parentDocumentNumber').required = true;
+                  document.getElementById('parentDocumentImage').required = true;
                   document.getElementById('parentDocumentReleaseDate').required = true;
                   document.getElementById('parentDocumentReleaser').required = true;
             }
         }
 
+        function imcCalculation(){
+          var weight = document.getElementById('weight').value;
+          var height = document.getElementById('height').value;
+          height = height/100;
+          height = height * height;
+          var imc = weight/height;
+          imc = imc.toFixed(2);
+          document.getElementById('imcLabel').innerHTML = imc;
+          document.getElementById('imc').value = imc;
 
+        }
 
     </script>
 

@@ -203,7 +203,7 @@ class TrainingCardsManager extends Controller
     public function exercisePage() {
         $exercises = ExercisesManager::getAllExercises();
         $users = UsersManager::getAllUser();
-        return view('insertNewTCARD', compact('exercises', 'i'));
+        return view('insertNewTCARD', compact('exercises',  'users'));
     }
 
 

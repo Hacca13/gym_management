@@ -189,14 +189,16 @@ class UsersManager extends Controller{
 
         $str = $firebase->createStorage()->getBucket()->upload(file_get_contents($documentImage),
             [
-                'name' => $documentImage->getClientOriginalName()
+                'name' => $input['name'].$input['surname'].'DocumentImage'
             ])->name();
 
         if($input['isUnderage'] == 'true'){
             $str2 = $firebase->createStorage()->getBucket()->upload(file_get_contents($parentDocumentImage),
                 [
-                    'name' => $parentDocumentImage->getClientOriginalName()
+                    'name' => $input['parentName'].$input['parentSurname'].'ParentDocumentImage'
                 ])->name();
+
+                $parentDocumentImage = "https://firebasestorage.googleapis.com/v0/b/fitandfight.appspot.com/o/". $str2 ."?alt=media";
         }
         $documentImage =  "https://firebasestorage.googleapis.com/v0/b/fitandfight.appspot.com/o/". $str ."?alt=media";
 
