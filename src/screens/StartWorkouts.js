@@ -9,6 +9,7 @@ import gifff from './../assets/test.gif';
 import EditModal from '../components/modals/editModal';
 import InfoModal from '../components/modals/infoModal';
 import firebase from "react-native-firebase";
+import Spinner from "react-native-loading-spinner-overlay";
 
 export default class StartWorkouts extends Component {
     constructor(props) {
@@ -18,7 +19,8 @@ export default class StartWorkouts extends Component {
             status: null,
             editModalVisible: false,
             infoModalVisible: false,
-            workouts: []
+            workouts: [],
+            spinner: true
         };
         this.returnData = this.returnData.bind(this);
         this.setInfoModalVisible = this.setInfoModalVisible.bind(this);
@@ -31,6 +33,9 @@ export default class StartWorkouts extends Component {
         firebase.auth().onAuthStateChanged(user => {
             if (user) {
                 this.getTrainingCard(user.uid);
+                this.setState({
+                    spinner: false
+                })
             } else {
                 Reactotron.log('NO USER');
             }
@@ -42,8 +47,6 @@ export default class StartWorkouts extends Component {
             this.setState({
                 workouts: value.docs[0].data().exercises
             })
-            Reactotron.log(this.state.fireWorkouts);
-            Reactotron.log(this.state.workouts);
         }).catch(error => {
             Reactotron.log(error);
         })
@@ -89,53 +92,61 @@ export default class StartWorkouts extends Component {
 
             <SafeAreaView style={{flex: 1, backgroundColor: 'black'}}>
 
-                <EditModal visible={this.state.editModalVisible} setEditModalVisible={this.setEditModalVisible.bind(this)}/>
+                {
+                    this.state.workouts.length > 0 ? (<View>
+                        <EditModal visible={this.state.editModalVisible} setEditModalVisible={this.setEditModalVisible.bind(this)}/>
 
-                <InfoModal visible={this.state.infoModalVisible} setInfoModalVisible={this.setInfoModalVisible.bind(this)}/>
+                        <InfoModal visible={this.state.infoModalVisible} setInfoModalVisible={this.setInfoModalVisible.bind(this)}/>
 
-                <TouchableOpacity activeOpacity={0.5} delayPressIn={50} onPress={() => this.startTraining(this.state.workouts[0], 0) }>
-                    <View style={{backgroundColor: '#D8D8D8', height: height/3, alignItems: 'center', justifyContent: 'center'}}>
-                        <Text style={{fontSize: 40}}>
-                            <Ionicons name={Platform.OS === 'ios' ? 'ios-play' : 'md-play'} size={40}/>
-                            {' '} Inizia allenamento
-                        </Text>
-                    </View>
-                </TouchableOpacity>
-
-
-                <ScrollView contentContainerStyle={{paddingBottom: 20}}>
-
-                    {this.state.workouts.map((workout, index) => (
-
-                        workout.status ?
-
-                            (
-                                <WorkoutCard key={index}
-                                             bgColor={'#4CD964'}
-                                             doneWorkout={workout.status}
-                                             workout={workout}
-
-                                />
-                            )
-
-                            :
-
-                            (
-                                <TouchableOpacity activeOpacity={0.5} delayPressIn={50} key={index} onPress={() => {
-                                    this.startTraining(workout, index);
-                                }}>
-
-                                    <WorkoutCard workout={workout}
-                                                 setEditModalVisible={this.setEditModalVisible.bind(this)}
-                                                 setInfoModalVisible={this.setInfoModalVisible.bind(this)}
-                                                 bgColor={'white'}/>
-                                </TouchableOpacity>
-                            )
-
-                    ))}
+                        <TouchableOpacity activeOpacity={0.5} delayPressIn={50} onPress={() => this.startTraining(this.state.workouts[0], 0) }>
+                            <View style={{backgroundColor: '#D8D8D8', height: height/3, alignItems: 'center', justifyContent: 'center'}}>
+                                <Text style={{fontSize: 40}}>
+                                    <Ionicons name={Platform.OS === 'ios' ? 'ios-play' : 'md-play'} size={40}/>
+                                    {' '} Inizia allenamento
+                                </Text>
+                            </View>
+                        </TouchableOpacity>
 
 
-                </ScrollView>
+                        <ScrollView contentContainerStyle={{paddingBottom: 20}}>
+
+                            {this.state.workouts.map((workout, index) => (
+
+                                workout.status ?
+
+                                    (
+                                        <WorkoutCard key={index}
+                                                     bgColor={'#4CD964'}
+                                                     doneWorkout={workout.status}
+                                                     workout={workout}
+
+                                        />
+                                    )
+
+                                    :
+
+                                    (
+                                        <TouchableOpacity activeOpacity={0.5} delayPressIn={50} key={index} onPress={() => {
+                                            this.startTraining(workout, index);
+                                        }}>
+
+                                            <WorkoutCard workout={workout}
+                                                         setEditModalVisible={this.setEditModalVisible.bind(this)}
+                                                         setInfoModalVisible={this.setInfoModalVisible.bind(this)}
+                                                         bgColor={'white'}/>
+                                        </TouchableOpacity>
+                                    )
+
+                            ))}
+
+
+                        </ScrollView>
+                    </View>) :
+                        (<Spinner visible={this.state.spinner}/>)
+                }
+
+
+
 
             </SafeAreaView>
         );

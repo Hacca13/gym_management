@@ -11,6 +11,7 @@ import {Card, Divider} from 'react-native-paper';
 import plank from '../assets/plank.png';
 import CardView from 'react-native-cardview';
 const { height, width } = Dimensions.get("window");
+import Reactotron from 'reactotron-react-native'
 
 const timer = require('react-native-timer');
 
@@ -33,6 +34,7 @@ export default class CircleWorkout extends Component {
             isWorking: false, //CHRONO IS ACTIVE
             doneWorkout: false, //WORKOUT IS DONE
             circularProgressAction: 'Inizia', //ACTION
+            restSeries: 0
         };
 
         this.setWorkoutDone = this.setWorkoutDone.bind(this);
@@ -46,39 +48,34 @@ export default class CircleWorkout extends Component {
     }
 
 
+   componentDidUpdate(prevProps, prevState, snapshot) {
+       if (prevState.work.sec === 0) {
 
-    componentDidUpdate(prevProps: Readonly<P>, prevState: Readonly<S>, snapshot: SS) {
+           if (prevState.work.min === 0 || prevState.work.min === '0' || prevState.work.min === '00') {
+               this.stopWorkouTimer();
+           }
 
-        //CHECK IN THE PREVIOUS STATE IF WORKOUT IS DONE
+           this.setState({
+               work: {
+                   min: this.state.work.min - 1,
+                   sec: 60
+               }
+           })
+       }
 
-        if (prevState.workoutTime.seconds === 1) {
+       if (prevState.rest.sec === 1) {
+           if (prevState.rest.min === 0 || prevState.rest.min === '0' || prevState.rest.min === '00') {
+               this.stopRestTimer();
+           }
+           this.setState({
+               rest: {
+                   min: this.state.rest.min - 1,
+                   sec: 60
+               }
+           })
+       }
 
-            if (prevState.workoutTime.minutes === 0 ) {
-                this.stopWorkouTimer();
-            }
-
-            this.setState({
-                workoutTime: {
-                    minutes: this.state.workoutTime.minutes - 1,
-                    seconds: 60
-                }
-            })
-        }
-
-        if (prevState.restTime.seconds === 1) {
-            if (prevState.restTime.minutes === 0 ) {
-                this.stopRestTimer();
-            }
-            this.setState({
-                restTime: {
-                    minutes: this.state.restTime.minutes - 1,
-                    seconds: 60
-                }
-            })
-        }
-
-
-    }
+   }
 
 
     startWorkouTimer() {
@@ -90,15 +87,15 @@ export default class CircleWorkout extends Component {
         });
         timer.setInterval(this, 'workCounter', () => {
             this.setState({
-                workoutTime: {
-                    minutes: this.state.workoutTime.minutes,
-                    seconds: this.state.workoutTime.seconds - 1
+                work: {
+                    min: this.state.work.min,
+                    sec: this.state.work.sec - 1
                 }
             })
         }, 1000);
 
-        this.circularProgress.animate(100, (this.state.workoutTime.minutes * 60 * 1000) +
-            (this.state.workoutTime.seconds * 1000), Easing.quad);
+        this.circularProgress.animate(100, (this.state.work.min * 60 * 1000) +
+            (this.state.work.sec * 1000), Easing.quad);
 
 
     }
@@ -122,14 +119,14 @@ export default class CircleWorkout extends Component {
         timer.setTimeout(this, 'workCounter', () => {
             this.setState({
                 workOrRest: false,
-                restTime: {
-                    minutes: this.state.snapshot.restTime.minutes,
-                    seconds: this.state.snapshot.restTime.seconds
+                rest: {
+                    min: this.state.snapshot.rest.min,
+                    sec: this.state.snapshot.rest.sec
                 }
             });
             this.startRestTimer();
         }, 2000);
-        this.setState({numberOfRepetitions: this.state.numberOfRepetitions - 1})
+        this.setState({numberOfSeries: this.state.numberOfSeries - 1})
         this.circularProgress.animate(0, 2000, Easing.quad);
 
     }
@@ -140,15 +137,15 @@ export default class CircleWorkout extends Component {
         this.setState({timeOrAction: true, progressColor: '#FCD533'});
         timer.setInterval(this, 'restCounter', () => {
             this.setState({
-                restTime: {
-                    minutes: this.state.restTime.minutes,
-                    seconds: this.state.restTime.seconds - 1
+                rest: {
+                    min: this.state.rest.min,
+                    sec: this.state.rest.sec - 1
                 }
             })
         }, 1000);
 
-        this.circularProgress.animate(100, (this.state.restTime.minutes * 60 * 1000) +
-            (this.state.restTime.seconds * 1000), Easing.quad);
+        this.circularProgress.animate(100, (this.state.rest.min * 60 * 1000) +
+            (this.state.rest.sec * 1000), Easing.quad);
 
     }
 
@@ -157,20 +154,22 @@ export default class CircleWorkout extends Component {
         this.setState({
             timeOrAction: false,
             progressColor: '#4CD964',
-            circularProgressAction: this.state.numberOfRepetitions === 0 ? 'Fine' : 'Allenati',
+            circularProgressAction: this.state.numberOfSeries === 0 ? 'Fine' : 'Allenati',
             restSeries: this.state.restSeries - 1
         });
         timer.clearInterval(this);
         timer.setTimeout(this, 'restCounter', () => {
             this.setState({
                 workOrRest: true,
-                workoutTime: {
-                    minutes: this.state.snapshot.workoutTime.minutes,
-                    seconds: this.state.snapshot.workoutTime.seconds
+                work: {
+                    min: this.state.snapshot.work.min,
+                    sec: this.state.snapshot.work.sec
                 }
             });
-            if (this.state.restSeries === 0 && this.state.numberOfRepetitions === 0) {
+            if (this.state.restSeries === 0 && this.state.numberOfSeries === 0) {
                 this.setWorkoutDone();
+            } else {
+                Reactotron.log(this.state.restSeries + ' ' + this.state.numberOfSeries);
             }}, 2000);
 
         this.circularProgress.animate(0, 2000, Easing.quad);
@@ -188,6 +187,7 @@ export default class CircleWorkout extends Component {
             progressColor: '#4CD964',
             circularProgressAction: 'Avanti'
         });
+        Reactotron.log('end');
         this.circularProgress.animate(100, 0, Easing.quad)
 
     }
@@ -198,8 +198,8 @@ export default class CircleWorkout extends Component {
         this.pauseTimer();
         this.circularProgress.animate(0,0,Easing.quad);
         this.setState({
-            workoutTime: this.state.snapshot.workoutTime,
-            rest: this.state.snapshot.restTime,
+            work: this.state.snapshot.work,
+            rest: this.state.snapshot.rest,
             timeOrAction: false
         })
     }
@@ -215,6 +215,12 @@ export default class CircleWorkout extends Component {
         clearTimeout(this);
         this.circularProgress.animate().stop();
 
+    }
+
+    componentDidMount() {
+        this.setState({
+            restSeries: this.state.numberOfSeries
+        })
     }
 
 
@@ -272,17 +278,17 @@ export default class CircleWorkout extends Component {
 
                             <View style={{justifyContent: 'space-between', flexDirection: 'row', marginTop: 10, marginLeft: 20, marginRight: 20}}>
                                 <Text style={{fontSize: 25, color: '#007AFF'}}>Ripetizioni:</Text>
-                                <Text style={{fontSize: 25}}>{this.state.snapshot.numberOfRepetitions}</Text>
+                                <Text style={{fontSize: 25}}>{this.state.numberOfSeries}</Text>
                             </View>
 
                             <View style={{justifyContent: 'space-between', flexDirection: 'row', marginTop: 10, marginLeft: 20, marginRight: 20}}>
                                 <Text style={{fontSize: 25, color: '#007AFF'}}>Riposo:</Text>
-                                <Text style={{fontSize: 25}}>{this.state.snapshot.workoutTime.minutes + ':' + this.state.snapshot.workoutTime.seconds}</Text>
+                                <Text style={{fontSize: 25}}>{this.state.snapshot.work.min + ':' + this.state.snapshot.work.sec}</Text>
                             </View>
 
                             <View style={{justifyContent: 'space-between', flexDirection: 'row', marginTop: 10, marginLeft: 20, marginRight: 20}}>
                                 <Text style={{fontSize: 25, color: '#007AFF'}}>Lavoro:</Text>
-                                <Text style={{fontSize: 25}}>{this.state.snapshot.restTime.minutes + ':' + this.state.snapshot.restTime.seconds}</Text>
+                                <Text style={{fontSize: 25}}>{this.state.snapshot.rest.min + ':' + this.state.snapshot.rest.sec}</Text>
                             </View>
 
 
@@ -296,6 +302,7 @@ export default class CircleWorkout extends Component {
                         ref={(ref) => this.circularProgress = ref}
                         size={260}
                         width={40}
+                        rotation={0}
                         fill={this.state.doneWorkout ? 100 : this.state.animationFill}
                         backgroundColor="#3d5875"
                         tintColor={this.state.doneWorkout ? '#4CD964' : this.state.progressColor }
@@ -343,7 +350,7 @@ export default class CircleWorkout extends Component {
 
                                                                 <View style={{flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}>
                                                                     <Text style={{fontSize: 35, color: 'white'}}>
-                                                                        {this.state.workoutTime.minutes + ':' + this.state.workoutTime.seconds}
+                                                                        {this.state.work.min + ':' + this.state.work.sec}
                                                                     </Text>
                                                                 </View>
 
@@ -406,7 +413,7 @@ export default class CircleWorkout extends Component {
                                                         (
 
                                                             <Text style={{fontSize: 35, color: 'white'}}>
-                                                                {this.state.restTime.minutes + ':' + this.state.restTime.seconds}
+                                                                {this.state.rest.min + ':' + this.state.rest.sec}
                                                             </Text>
 
                                                         )

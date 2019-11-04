@@ -41,7 +41,7 @@ export default class WorkoutCard extends Component {
                         this.props.workout.atTime  &&
                         <View style={{flexDirection: 'column', justifyContent: 'center'}}>
                             <Text style={{fontSize: 25}}>{this.props.workout.name}</Text>
-                            <Text style={{fontSize: 20, marginTop: 5, color: 'grey'}}>{this.props.workout.workoutTime.minutes + ':' + this.props.workout.workoutTime.seconds}</Text>
+                            <Text style={{fontSize: 20, marginTop: 5, color: 'grey'}}>{this.props.workout.work.min + ':' + this.props.workout.work.sec}</Text>
                         </View>
 
                     }
@@ -51,7 +51,7 @@ export default class WorkoutCard extends Component {
 
                         <View style={{flexDirection: 'column', justifyContent: 'center'}}>
                             <Text style={{fontSize: 25}}>{this.props.workout.name}</Text>
-                            <Text style={{fontSize: 20, marginTop: 5, color: 'grey'}}>{this.props.workout.weight + 'kg ' + 'x' +this.props.workout.series}</Text>
+                            <Text style={{fontSize: 20, marginTop: 5, color: 'grey'}}>{this.props.workout.weight + 'kg ' + 'x' +this.props.workout.numberOfSeries}</Text>
                         </View>
                     }
 
