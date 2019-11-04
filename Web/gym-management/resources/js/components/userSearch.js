@@ -57,8 +57,8 @@ class UserSearch extends Component {
     getSuggestions = (value, exer) => {
         const inputValue = value.trim().toLowerCase();
         const inputLength = inputValue.length;
-        var arrayName;
-        var arraySurame;
+        let arrayName;
+        let arraySurame;
 
         if(inputLength === 0){
             arrayName = [];
@@ -70,11 +70,8 @@ class UserSearch extends Component {
             lang.surname.toLowerCase().slice(0, inputLength) === inputValue);
         }
 
-
-        var usersList = arrayName.concat(arraySurame);
-
-
-        return usersList;
+        let usersList = arrayName.concat(arraySurame);
+        return [...new Set(usersList)];
     };
 
     getSuggestionValue = suggestion => suggestion.surname;

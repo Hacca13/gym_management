@@ -58,13 +58,7 @@ Route::get('/pdf', function (){
 //ABBONAMENTI
 Route::get('/gestioneAbbonamenti', 'SubscriptionManager@getAllSubscriptionForView');
 
-Route::get('/newSubscription', 'SubscriptionManager@addSubscription');
-
-Route::get('/nuovoAbbonamento', function (){
-    return view('insertNewSubscription');
-});
-
-
+Route::get('/nuovoAbbonamento', 'SubscriptionManager@addSubscription');
 
 
 

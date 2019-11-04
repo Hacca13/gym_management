@@ -85157,7 +85157,7 @@ function (_Component) {
         component: InsertTCard
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
         exact: true,
-        path: "/newSubscription",
+        path: "/nuovoAbbonamento",
         component: InsertSubs
       })));
     }
@@ -85882,6 +85882,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -85967,7 +85975,7 @@ function (_Component) {
       }
 
       var usersList = arrayName.concat(arraySurame);
-      return usersList;
+      return _toConsumableArray(new Set(usersList));
     });
 
     _defineProperty(_assertThisInitialized(_this), "getSuggestionValue", function (suggestion) {
@@ -87099,7 +87107,7 @@ function (_Component) {
             key={index}
             retrieveState={this.returnInfo}
         />
-           */
+          */
 
       }))))))));
     }
@@ -87130,8 +87138,8 @@ function (_Component) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Atom Project\gym_management\Web\gym-management\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Atom Project\gym_management\Web\gym-management\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Users/ironsiuv/PhpstormProjects/gym_management/Web/gym-management/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/ironsiuv/PhpstormProjects/gym_management/Web/gym-management/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
