@@ -78420,7 +78420,7 @@ var safeInvoke = function safeInvoke(fn) {
 /*!***************************************************************!*\
   !*** ./node_modules/react-router-dom/esm/react-router-dom.js ***!
   \***************************************************************/
-/*! exports provided: BrowserRouter, HashRouter, Link, NavLink, MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, __RouterContext, generatePath, matchPath, useHistory, useLocation, useParams, useRouteMatch, withRouter */
+/*! exports provided: MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, __RouterContext, generatePath, matchPath, useHistory, useLocation, useParams, useRouteMatch, withRouter, BrowserRouter, HashRouter, Link, NavLink */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -85952,9 +85952,22 @@ function (_Component) {
     _defineProperty(_assertThisInitialized(_this), "getSuggestions", function (value, exer) {
       var inputValue = value.trim().toLowerCase();
       var inputLength = inputValue.length;
-      return inputLength === 0 ? [] : exer.filter(function (lang) {
-        return lang.surname.toLowerCase().slice(0, inputLength) === inputValue;
-      });
+      var arrayName;
+      var arraySurame;
+
+      if (inputLength === 0) {
+        arrayName = [];
+      } else {
+        arrayName = exer.filter(function (lang) {
+          return lang.name.toLowerCase().slice(0, inputLength) === inputValue;
+        });
+        arraySurame = exer.filter(function (lang) {
+          return lang.surname.toLowerCase().slice(0, inputLength) === inputValue;
+        });
+      }
+
+      var usersList = arrayName.concat(arraySurame);
+      return usersList;
     });
 
     _defineProperty(_assertThisInitialized(_this), "getSuggestionValue", function (suggestion) {

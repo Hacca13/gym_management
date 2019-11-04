@@ -57,9 +57,24 @@ class UserSearch extends Component {
     getSuggestions = (value, exer) => {
         const inputValue = value.trim().toLowerCase();
         const inputLength = inputValue.length;
-        return inputLength === 0 ? [] : exer.filter(lang =>
-            lang.surname.toLowerCase().slice(0, inputLength) === inputValue
-        );
+        var arrayName;
+        var arraySurame;
+
+        if(inputLength === 0){
+            arrayName = [];
+        }
+        else{
+          arrayName = exer.filter(lang =>
+            lang.name.toLowerCase().slice(0, inputLength) === inputValue);
+          arraySurame = exer.filter(lang =>
+            lang.surname.toLowerCase().slice(0, inputLength) === inputValue);
+        }
+
+
+        var usersList = arrayName.concat(arraySurame);
+
+
+        return usersList;
     };
 
     getSuggestionValue = suggestion => suggestion.surname;
