@@ -3,13 +3,11 @@ import ReactDOM from 'react-dom';
 import axios from 'axios';
 import Autocomplete from 'react-autocomplete';
 import Autosuggest from 'react-autosuggest';
-import ExerciseToAdd from "./exerciseToAdd";
-import ExerciseToAddByTime from "./exerciseToAddByTime";
-import UserSearch from "./userSearch";
+import ExerciseToAdd from "../components/exerciseToAdd";
+import ExerciseToAddByTime from "../components/exerciseToAddByTime";
+import UserSearch from "../components/userSearch";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-
-
 
 class NewTcard2 extends Component {
 

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import UserSearch from "./userSearch";
+import UserSearch from "../components/userSearch";
 
 class AddUserToCourse extends Component {
     render() {

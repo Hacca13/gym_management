@@ -144,6 +144,11 @@ class SubscriptionManager extends Controller
         return view('subscriptionPage', compact('allUser'));
     }
 
+    public static function addSubscription() {
+        $users = UsersManager::getAllUser();
+        return view('insertSubscription', compact('users'));
+    }
+
 
 
 }
