@@ -2,6 +2,9 @@ import React, {Component} from 'react';
 import UserSearch from "../components/userSearch";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import CourseSearch from "../components/courseSearch";
+import axios from "axios";
+
 
 class InsertSubscription extends Component {
     constructor(props) {
@@ -9,14 +12,21 @@ class InsertSubscription extends Component {
         this.state = {
             userID: '',
             userName: '',
-            from: '',
-            to: ''
+            annuale_from: '',
+            annuale_to: '',
+            corso_from: '',
+            corso_to: '',
+            courseID: '',
+            courseName: '',
+            typeOfSubs: 'period',
+            numberOfEntries: 1
         };
 
         this.Entrate = this.Entrate.bind(this);
         this.Annuale = this.Annuale.bind(this);
         this.Corso = this.Corso.bind(this);
         this.addUser = this.addUser.bind(this);
+        this.addCourse = this.addCourse.bind(this);
     }
 
 
@@ -28,6 +38,11 @@ class InsertSubscription extends Component {
     }
 
     Annuale() {
+
+        this.setState({
+            typeOfSubs: 'period'
+        })
+
         var checkBox = document.getElementById("myCheck");
 
         var inizio = document.getElementById("inizio");
@@ -49,10 +64,13 @@ class InsertSubscription extends Component {
 
     Entrate() {
 
+        this.setState({
+            typeOfSubs: 'revenue'
+        })
+
         var entrata = document.getElementById("entrata");
 
         var entrate = document.getElementById("entrate");
-
 
         if (entrata.checked === true){
             entrate.style.display = "block";
@@ -67,6 +85,10 @@ class InsertSubscription extends Component {
     }
 
     Corso() {
+
+        this.setState({
+            typeOfSubs: 'course'
+        })
 
         var corso = document.getElementById("corso");
 
@@ -91,6 +113,59 @@ class InsertSubscription extends Component {
         }
     }
 
+    submitForm = event => {
+        event.preventDefault();
+        let subsToAdd = {
+            idUserDatabase: this.state.userID,
+            isActive: true,
+        };
+        switch (this.state.typeOfSubs) {
+            case "period":
+                subsToAdd = {
+                    ...subsToAdd,
+                    startDate: this.formatDate(this.state.annuale_from),
+                    endDate: this.formatDate(this.state.annuale_to),
+                    type: this.state.typeOfSubs
+                };
+                break;
+            case "revenue":
+                subsToAdd = {
+                    ...subsToAdd,
+                    numberOfEntries: this.state.numberOfEntries,
+                    numberOfEntriesMade: 0,
+                    type: this.state.typeOfSubs
+                };
+                break;
+            case "course":
+                subsToAdd = {
+                    ...subsToAdd,
+                    idCourseDatabase: this.state.courseID,
+                    startDate: this.formatDate(this.state.corso_from),
+                    endDate: this.formatDate(this.state.corso_to)
+                };
+                break;
+        }
+
+        axios.post('/api/insertSubscription', subsToAdd).then(response => {
+            window.location.href = response.data;
+        }).catch(err => {
+            console.log(err);
+        })
+
+    };
+
+    formatDate(date) {
+        return date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear();
+    }
+
+    addCourse(course) {
+        this.setState({
+            courseID: course.idDatabase,
+            courseName: course.name
+        });
+    }
+
+
     render() {
 
         const ExampleCustomInput = ({ value, onClick }) => (
@@ -109,13 +184,14 @@ class InsertSubscription extends Component {
                         <div className="row">
                             <div className="col-md-12">
                                 <div className="card" style={{borderRadius: '10px', backgroundColor: '#d6d8d8'}}>
-                                    <div className="card-body wizard-content">
+                                    <div className="card-body">
                                         <div className="col-md-12">
                                             <h2 className="text-center">Inserisci Dati Abbonamento</h2>
                                         </div>
                                         <br/>
                                         <br/>
-                                        <form id="example-form" action="#" className="m-t-40">
+                                        <form onSubmit={this.submitForm}>
+
 
                                             <div>
                                                 <section>
@@ -149,10 +225,10 @@ class InsertSubscription extends Component {
                                                     <div className="input-group">
                                                         <DatePicker
                                                             required={true}
-                                                            selected={this.state.from}
+                                                            selected={this.state.annuale_from}
                                                             onChange={date =>
                                                                 this.setState({
-                                                                    from: date
+                                                                    annuale_from: date
                                                                 })}
                                                             dateFormat="dd/MM/yyyy"
                                                             customInput={<ExampleCustomInput
@@ -167,10 +243,10 @@ class InsertSubscription extends Component {
                                                     <div className="input-group">
                                                         <DatePicker
                                                             required={true}
-                                                            selected={this.state.to}
+                                                            selected={this.state.annuale_to}
                                                             onChange={date =>
                                                                 this.setState({
-                                                                    to: date
+                                                                    annuale_to: date
                                                                 })}
                                                             dateFormat="dd/MM/yyyy"
                                                             customInput={<ExampleCustomInput
@@ -184,29 +260,45 @@ class InsertSubscription extends Component {
 
                                             <div className="row">
                                                 <div className="col-md-6"  id="corsi" style={{display: 'none'}}>
-                                                    <label>Nome Corso</label>
-                                                    <div className="input-group">
-                                                        <input type="text" className="form-control mydatepicker" placeholder=""/>
-                                                        <div className="input-group-append">
-                                                        </div>
-                                                    </div>
+                                                    <section>
+                                                        <label htmlFor="userName" className="row">Nome corso: </label>
+                                                        <CourseSearch
+                                                            retrieveCourse={this.addCourse}
+                                                        />
+                                                    </section>
                                                 </div>
-                                                <div className="col-md-6"  id="iniziocorso" style={{display: 'none'}}>
+                                                <div className="col-md-12"  id="iniziocorso" style={{display: 'none'}}>
                                                     <label>Inzio</label>
                                                     <div className="input-group">
-                                                        <input type="text" className="form-control mydatepicker" placeholder="mm/dd/yyyy"/>
-                                                        <div className="input-group-append">
-                                                            <span className="input-group-text"><i className="fa fa-calendar"/></span>
-                                                        </div>
+                                                        <DatePicker
+                                                            required={true}
+                                                            selected={this.state.corso_from}
+                                                            onChange={date =>
+                                                                this.setState({
+                                                                    corso_from: date
+                                                                })}
+                                                            dateFormat="dd/MM/yyyy"
+                                                            customInput={<ExampleCustomInput
+                                                                dateName={'iniziocorso'}/>
+                                                            }
+                                                        />
                                                     </div>
                                                 </div>
-                                                <div className="col-md-6"  id="finecorso" style={{display: 'none'}}>
+                                                <div className="col-md-12"  id="finecorso" style={{display: 'none'}}>
                                                     <label>Fine</label>
                                                     <div className="input-group">
-                                                        <input type="text" className="form-control mydatepicker" placeholder="mm/dd/yyyy"/>
-                                                        <div className="input-group-append">
-                                                            <span className="input-group-text"><i className="fa fa-calendar"/></span>
-                                                        </div>
+                                                        <DatePicker
+                                                            required={true}
+                                                            selected={this.state.corso_to}
+                                                            onChange={date =>
+                                                                this.setState({
+                                                                    corso_to: date
+                                                                })}
+                                                            dateFormat="dd/MM/yyyy"
+                                                            customInput={<ExampleCustomInput
+                                                                dateName={'finecorso'}/>
+                                                            }
+                                                        />
                                                     </div>
                                                 </div>
                                             </div>
@@ -214,7 +306,11 @@ class InsertSubscription extends Component {
                                                 <div className="col-md-6" id="entrate" style={{display: 'none'}}>
                                                     <div className="form-group">
                                                         <label htmlFor="exampleFormControlSelect1">Numero Entrate</label>
-                                                        <select className="form-control" id="exampleFormControlSelect1">
+                                                        <select className="form-control" id="exampleFormControlSelect1"
+                                                                value={this.state.numberOfEntries}
+                                                                onChange={(event) => {
+                                                                    event.preventDefault();
+                                                                    this.setState({numberOfEntries: event.target.value})}}>
                                                             <option>1</option>
                                                             <option>2</option>
                                                             <option>3</option>
@@ -224,17 +320,18 @@ class InsertSubscription extends Component {
                                                     </div>
                                                 </div>
                                             </div>
+                                            <div className="col-md-12 row">
+                                                <p align="left">
+                                                    <button id="corso" name="acceptTerms" className="btn btn-danger">Annulla</button>
+                                                </p>
+                                                <hr/>
+                                                <p align="right">
+                                                    <button type="submit" id="corso" name="acceptTerms" className="btn btn-success">Inserisci</button>
+                                                </p>
+                                            </div>
                                         </form>
                                         <br/>
-                                        <div className="col-md-12 row">
-                                            <p align="left">
-                                                <button id="corso" name="acceptTerms" className="btn btn-danger">Annulla</button>
-                                            </p>
-                                            <hr/>
-                                            <p align="right">
-                                                <button id="corso" name="acceptTerms" className="btn btn-success">Inserisci</button>
-                                            </p>
-                                        </div>
+
                                     </div>
                                 </div>
                             </div>

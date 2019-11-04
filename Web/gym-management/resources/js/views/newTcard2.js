@@ -1,7 +1,5 @@
 import React, {Component} from 'react';
-import ReactDOM from 'react-dom';
 import axios from 'axios';
-import Autocomplete from 'react-autocomplete';
 import Autosuggest from 'react-autosuggest';
 import ExerciseToAdd from "../components/exerciseToAdd";
 import ExerciseToAddByTime from "../components/exerciseToAddByTime";
@@ -62,8 +60,8 @@ class NewTcard2 extends Component {
             idUserDatabase: this.state.userID,
             exercises: this.state.exercisesList,
             period: {
-                startDate: this.state.from,
-                endDate: this.state.to
+                startDate: this.formatDate(this.state.from),
+                endDate: this.formatDate(this.state.to)
             }
         }).then(response => {
             window.location.href = response.data;
@@ -231,6 +229,10 @@ class NewTcard2 extends Component {
         </div>
     );
 
+    formatDate(date) {
+        return date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear();
+    }
+
     setFrom(date) {
         this.setState({
             from: date
@@ -272,8 +274,6 @@ class NewTcard2 extends Component {
 
                         <div className="card-body">
                             <form onSubmit={this.handleSubmit}>
-
-
 
                                 <div className="form-group row justify-content-center">
                                     <div className="col-sm-6">

@@ -149,6 +149,12 @@ class SubscriptionManager extends Controller
         return view('insertSubscription', compact('users'));
     }
 
+    public function insertSubscription(Request $request) {
+        $collection = Firestore::collection('Subscriptions');
+        $input = $request->all();
+        $collection->add($input);
+        return '/gestioneAbbonamenti';
+    }
 
 
 }
