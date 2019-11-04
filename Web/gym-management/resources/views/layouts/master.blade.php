@@ -21,7 +21,7 @@
     <link href="../matrix-admin-bt4/assets/libs/jquery-steps/jquery.steps.css" rel="stylesheet">
     <link href="../matrix-admin-bt4/assets/libs/jquery-steps/steps.css" rel="stylesheet">
     <script src="https://www.gstatic.com/firebasejs/7.2.0/firebase-auth.js"></script>
-
+    <script src="https://kit.fontawesome.com/b9480319ec.js" crossorigin="anonymous"></script>
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 
@@ -151,6 +151,58 @@
 
 
 </script>
+
+<script>
+    function myFunction() {
+
+        var myDiv = document.getElementById("myDiv");
+        if (myDiv.style.display === "block") {
+            myDiv.style.display = "none";
+        } else {
+            myDiv.style.display = "block";
+        }
+        if (myDiv.style.display == "block") {
+          myDiv.style.display = "none";
+
+          document.getElementById('parentName').required = false;
+          document.getElementById('parentSurname').required = false;
+          document.getElementById('parentDateOfBirth').required = false;
+          document.getElementById('parentbirthPlace').required = false;
+          document.getElementById('parentResidence').required = false;
+          document.getElementById('parentNation').required = false;
+          document.getElementById('parentCap').required = false;
+          document.getElementById('parentResidenceStreet').required = false;
+          document.getElementById('parentTelephoneNumber').required = false;
+          document.getElementById('parentEmail').required = false;
+          document.getElementById('parentDocumentImage').required = false;
+          document.getElementById('parentDocumentNumber').required = false;
+          document.getElementById('parentDocumentType').required = false;
+          document.getElementById('parentDocumentReleaseDate').required = false;
+          document.getElementById('parentDocumentReleaser').required = false;
+
+
+        } else {
+          myDiv.style.display = "block";
+
+          document.getElementById('parentName').required = true;
+          document.getElementById('parentSurname').required = true;
+          document.getElementById('parentDateOfBirth').required = true;
+          document.getElementById('parentbirthPlace').required = true;
+          document.getElementById('parentResidence').required = true;
+          document.getElementById('parentNation').required = true;
+          document.getElementById('parentCap').required = true;
+          document.getElementById('parentResidenceStreet').required = true;
+          document.getElementById('parentTelephoneNumber').required = true;
+          document.getElementById('parentEmail').required = true;
+          document.getElementById('parentDocumentImage').required = true;
+          document.getElementById('parentDocumentNumber').required = true;
+          document.getElementById('parentDocumentType').required = true;
+          document.getElementById('parentDocumentReleaseDate').required = true;
+          document.getElementById('parentDocumentReleaser').required = true;
+
+        }
+
+    }</script>
 
 
 <script>

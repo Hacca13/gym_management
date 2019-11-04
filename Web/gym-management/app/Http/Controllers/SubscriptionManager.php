@@ -144,6 +144,17 @@ class SubscriptionManager extends Controller
         return view('subscriptionPage', compact('allUser'));
     }
 
+    public static function addSubscription() {
+        $users = UsersManager::getAllUser();
+        return view('insertSubscription', compact('users'));
+    }
+
+    public function insertSubscription(Request $request) {
+        $collection = Firestore::collection('Subscriptions');
+        $input = $request->all();
+        $collection->add($input);
+        return '/gestioneAbbonamenti';
+    }
 
 
 }

@@ -239,4 +239,15 @@ class CoursesManager extends Controller{
 
     }
 
+    public function jsonCrs() {
+        $courses = CoursesManager::getAllCourses();
+        $arr = [];
+        foreach ($courses as $crs) {
+            array_push($arr, CoursesManager::trasformCourseToArrayCourse($crs));
+        }
+        return response()->json($arr);
+    }
+
+
+
 }
