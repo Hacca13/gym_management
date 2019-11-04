@@ -7,9 +7,18 @@ use Google\Cloud\Firestore\FirestoreClient;
 use Firevel\Firestore\Facades\Firestore;
 use App\Http\Models\TrainingCardsModel;
 use Illuminate\Pagination\LengthAwarePaginator;
+use PDF;
 
 class TrainingCardsManager extends Controller
 {
+
+    public static function  DownloadTrainingCardsPDF(){
+      $data = ['title' => 'PATANE'];
+              $pdf = PDF::loadView('trainingCardPDF', $data);
+
+              return $pdf->download('TrainingCard.pdf');
+    }
+
     public static function searchTrainingCards(Request $request){
       $currentPage = LengthAwarePaginator::resolveCurrentPage();
       $input = $request->all();
@@ -194,7 +203,7 @@ class TrainingCardsManager extends Controller
     public function exercisePage() {
         $exercises = ExercisesManager::getAllExercises();
         $users = UsersManager::getAllUser();
-        return view('insertNewTCARD', compact('exercises', 'i'));
+        return view('insertNewTCARD', compact('exercises',  'users'));
     }
 
 

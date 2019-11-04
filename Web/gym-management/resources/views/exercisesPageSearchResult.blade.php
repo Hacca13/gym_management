@@ -11,12 +11,12 @@
                 </div>
                 <div class="col-md-12" >
                     <div class="row justify-content-center" style="margin-top: 2.5%;">
-                        @foreach($exercises as $exercise)
+                        @foreach($exercisesResultList as $exercise)
                             @include('components.exercise.cardExercise')
                         @endforeach
                     </div>
                     <div class="row justify-content-center">
-                        {{ $exercises->links()}}
+                        {{ $exercisesResultList->links()}}
                     </div>
                 </div>
             </div>

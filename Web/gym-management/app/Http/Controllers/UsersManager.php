@@ -177,11 +177,9 @@ class UsersManager extends Controller{
         $documentImage = $request->file('documentImage');
         $parentDocumentImage = null;
 
-        if(!(isset($input['isUnderage']))){
-            $input['isUnderage'] = 'FALSE';
-        }
 
-        if($input['isUnderage'] == 'TRUE'){
+
+        if($input['isUnderage'] == 'true'){
             $parentDocumentImage = $request->file('parentDocumentImage');
         }
 
@@ -191,14 +189,16 @@ class UsersManager extends Controller{
 
         $str = $firebase->createStorage()->getBucket()->upload(file_get_contents($documentImage),
             [
-                'name' => $documentImage->getClientOriginalName()
+                'name' => $input['name'].$input['surname'].'DocumentImage'
             ])->name();
 
-        if($input['isUnderage'] == 'TRUE'){
+        if($input['isUnderage'] == 'true'){
             $str2 = $firebase->createStorage()->getBucket()->upload(file_get_contents($parentDocumentImage),
                 [
-                    'name' => $parentDocumentImage->getClientOriginalName()
+                    'name' => $input['parentName'].$input['parentSurname'].'ParentDocumentImage'
                 ])->name();
+
+                $parentDocumentImage = "https://firebasestorage.googleapis.com/v0/b/fitandfight.appspot.com/o/". $str2 ."?alt=media";
         }
         $documentImage =  "https://firebasestorage.googleapis.com/v0/b/fitandfight.appspot.com/o/". $str ."?alt=media";
 
@@ -421,7 +421,7 @@ class UsersManager extends Controller{
             'releaseDate' => $input['releaseDateDocument']
         );
 
-        if($input['isUnderage'] == 'FALSE'){
+        if($input['isUnderage'] == 'false'){
             $isAdult = TRUE;
         }
         else{
@@ -429,13 +429,13 @@ class UsersManager extends Controller{
         }
 
 
-        if($input['isUnderage'] == 'TRUE'){
+        if($input['isUnderage'] == 'true'){
             $parentResidence = array(
                 'nation' => $input['parentNation'],
                 'cityOfResidence' => $input['parentCityOfResidence'],
                 'cap' => $input['parentCap'],
                 'street' => $input['parentResidenceStreet'],
-                'number' => $input['parentResidence.number']
+                'number' => $input['parentResidenceNumber']
 
             );
 
@@ -447,7 +447,7 @@ class UsersManager extends Controller{
                 'releaseDate' => $input['parentDocumentReleaseDate']
             );
         }
-        if($input['isUnderage'] == 'TRUE'){
+        if($input['isUnderage'] == 'true'){
             $arrayUser1 = array(
                 'parentName' => $input['parentName'],
                 'parentSurname' => $input['parentSurname'],

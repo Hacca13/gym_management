@@ -6,7 +6,7 @@
                 @csrf
                 <div class="input-group no-border">
                     <input type="text" value="" name='searchInput' class="form-control" placeholder="Cerca...">
-                    <button type="submit" class="btn btn-default btn-round btn-just-icon">
+                    <button type="submit" class="btn btn-default btn-round btn-just-icon" style="background-color: #3F5469">
                         <i class="fas fa-search"></i>
                         <div class="ripple-container">
                         </div>
@@ -14,7 +14,7 @@
                 </div>
               </form>
             </div>
-            <div class="col-md-3" >
+            <div class="col-md-3" style="text-align: center; margin-top: auto; margin-bottom: auto;">
                 <div class="input-group no-border">
                     <div class="form-check" >
                         <input type="checkbox" class="form-check-input" id="exampleCheck1">
@@ -22,7 +22,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-3"  style="text-align: center; margin-top: auto; margin-bottom: auto;">
                 <div class="input-group no-border">
                     <div class="form-check">
                         <input type="checkbox" class="form-check-input" id="exampleCheck1">
@@ -32,7 +32,7 @@
             </div>
             <div class="col-md-1" style="text-align: center; margin-top: auto; margin-bottom: auto">
                 <a href="nuovoCorso" role="button">
-                    <button class="bttn-material-circle bttn-md bttn-success" style="background-color: #21252E">
+                    <button class="bttn-material-circle bttn-md bttn-success" style="background-color: #3F5469">
                         <i class="fas fa-plus"></i>
                     </button>
                 </a>
