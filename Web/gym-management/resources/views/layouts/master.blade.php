@@ -161,11 +161,6 @@
         } else {
             myDiv.style.display = "block";
         }
-
-
-
-
-
         if (myDiv.style.display == "block") {
           myDiv.style.display = "none";
 
