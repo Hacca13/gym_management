@@ -76,22 +76,22 @@
                                 <label class="col-sm-1 text-right control-label col-form-label">Dalle</label>
 
                                 <div class="col-sm-1">
-                                    <input type="text" class="form-control" id="{{"hourFrom" . $index}}" name={{"hourFrom" . $index}} required>
+                                    <input type="number" min="0" max="24" class="form-control" id="{{"hourFrom" . $index}}" name={{"hourFrom" . $index}} required>
                                 </div>
                                 <h3>:</h3>
                                 <div class="col-sm-1">
-                                    <input type="text" class="form-control" id="{{"minutesFrom" . $index}}" name={{"minutesFrom" . $index}} required>
+                                    <input type="number" min="0" max="59" class="form-control" id="{{"minutesFrom" . $index}}" name={{"minutesFrom" . $index}} required>
                                 </div>
 
 
 
                                 <label class="col-sm-1 text-right control-label col-form-label">Alle</label>
                                 <div class="col-sm-1">
-                                    <input type="text" class="form-control" id="{{"hourTo" . $index}}" name="{{"hourTo" . $index}}" required>
+                                    <input type="number" min="0" max="24" class="form-control" id="{{"hourTo" . $index}}" name="{{"hourTo" . $index}}" required>
                                 </div>
                                 <h3>:</h3>
                                 <div class="col-sm-1">
-                                    <input type="text" class="form-control" id="{{"minutesTo" . $index}}" name="{{"minutesTo" . $index}}" required>
+                                    <input type="number" min="0" max="59" class="form-control" id="{{"minutesTo" . $index}}" name="{{"minutesTo" . $index}}" required>
                                 </div>
 
 

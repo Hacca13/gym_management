@@ -98,9 +98,29 @@ class TrainingCardsManager extends Controller
       foreach ($documents as $document) {
         $trainingCards = TrainingCardsManager::transformArrayTrainingCardsIntoTrainingCards($document->data());
         $trainingCards->setIdDatabase($document->id());
+
+        $endDate = data_get($trainingCards->getPeriod() ,'endDate');
+        if(TrainingCardsManager::isExpired($endDate)){
+            $trainingCards->setIsActive(false);
+        }
+
         array_push($allTrainingCards,$trainingCards);
       }
       return $allTrainingCards;
+    }
+
+    public static function isExpired($endDate){
+      $today = date("Y-m-d");
+      $timestamp = strtotime($endDate);
+      $endDate = date("Y-m-d", $timestamp);
+
+      if($endDate < $today){
+        return true;
+      }
+      else{
+        return false;
+      }
+
     }
 
 

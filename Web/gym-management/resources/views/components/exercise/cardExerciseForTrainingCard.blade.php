@@ -44,15 +44,15 @@
                                     @if($exerciseTrainingCard['atTime'] == TRUE)
                                               <br>
                                               Workout Time:
-                                      Minuti: {{data_get($exerciseTrainingCard['workoutTime'],'minutes')}}
-                                      Secondi: {{data_get($exerciseTrainingCard['workoutTime'],'seconds')}}
+                                      Minuti: {{data_get($exerciseTrainingCard['work'],'min')}}
+                                      Secondi: {{data_get($exerciseTrainingCard['work'],'sec')}}
                                     @endif
                                           <br>
                                     Tempo di Riposo:
 
-                                    Minuti: {{data_get($exerciseTrainingCard['restTime'],'minutes')}}
+                                    Minuti: {{data_get($exerciseTrainingCard['rest'],'min')}}
 
-                                    Secondi: {{data_get($exerciseTrainingCard['restTime'],'seconds')}}
+                                    Secondi: {{data_get($exerciseTrainingCard['rest'],'sec')}}
 
                                   @endif
                                 @endforeach
