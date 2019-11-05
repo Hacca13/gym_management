@@ -12,8 +12,8 @@
                     </button>
                   </form>
                     <div class="col-md-1">
-                        <a href="nuovoEsercizio" role="button">
-                            <button class="bttn-material-circle bttn-md bttn-success" style="background-color: #3F5469">
+                        <a href="/nuovoEsercizio" role="button">
+                            <button href="/nuovoEsercizio" class="bttn-material-circle bttn-md bttn-success" style="background-color: #3F5469">
                                 <i class="fas fa-plus"></i>
                             </button>
                         </a>

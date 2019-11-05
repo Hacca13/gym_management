@@ -16,6 +16,7 @@ class CoursesManager extends Controller{
     public static function searchCourses(Request $request){
       $currentPage = LengthAwarePaginator::resolveCurrentPage();
       $input = $request->all();
+      $input['searchInput'] = strtolower($input['searchInput']);
 
       if(isset($input['searchInput'])){
         $input = $input['searchInput'];
@@ -53,11 +54,14 @@ class CoursesManager extends Controller{
 
     public static function searchCoursesPartially($input){
       $coursesResultList = array();
+      $input = strtolower($input);
       $collection = Firestore::collection('Courses');
       $documents = $collection->orderBy('name')->startAt([$input])->endAt([$input.'z'])->documents();
 
       foreach ($documents as $document) {
           $course = CoursesManager::trasformArrayCourseToCourse($document->data());
+          $course->setName(ucfirst($course->getName()));
+          $course->setInstructor(ucfirst($course->getInstructor()));
           $course->setIdDatabase($document->id());
           array_push($coursesResultList,$course);
       }
@@ -82,11 +86,14 @@ class CoursesManager extends Controller{
 
     public static function getCoursesByInstructor($instructor){
         $courses = array();
+        $instructor = strtolower($instructor);
         $collection = Firestore::collection('Courses');
         $query = $collection->where('instructor', '=' ,$instructor);
         $documents = $query->documents();
         foreach ($documents as $document){
             $course = CoursesManager::trasformArrayCourseToCourse($document->data());
+            $course->setName(ucfirst($course->getName()));
+            $course->setInstructor(ucfirst($course->getInstructor()));
             $course->setIdDatabase($document->id());
             array_push($courses,$course);
         }
@@ -101,12 +108,34 @@ class CoursesManager extends Controller{
         $documents = $collection->documents();
         foreach ($documents as $document) {
             $course = CoursesManager::trasformArrayCourseToCourse($document->data());
+            $course->setName(ucfirst($course->getName()));
+            $course->setInstructor(ucfirst($course->getInstructor()));
             $course->setIdDatabase($document->id());
+
+            $endDate = data_get($course->getPeriod() ,'endDate');
+
+            if(CoursesManager::isExpired($endDate)){
+                $course->setIsActive(false);
+            }
 
             array_push($allCourses,$course);
         }
 
         return $allCourses;
+    }
+
+    public static function isExpired($endDate){
+      $today = date("Y-m-d");
+      $timestamp = strtotime($endDate);
+      $endDate = date("Y-m-d", $timestamp);
+
+      if($endDate < $today){
+        return true;
+      }
+      else{
+        return false;
+      }
+
     }
 
     public static function getAllCoursesView(Request $request){
@@ -177,11 +206,17 @@ class CoursesManager extends Controller{
     public function addCourse(Request $request) {
         $input = $request->all();
 
+        $timestampStartDate = strtotime($input['startDate']);
+        $startDate = date("d-m-Y", $timestampStartDate);
+        $timestampEndDate = strtotime($input['endDate']);
+        $endDate = date("d-m-Y", $timestampEndDate);
+
         $uploadedImage = $request->file('courseImage');
 
         $firebase = (new Firebase\Factory());
 
         $bucket = $firebase->createStorage()->getBucket();
+        $input['name'] = strtolower($input['name']);
 
         $name = $input['name'] . '.' . $uploadedImage->getClientOriginalExtension();
 
@@ -209,12 +244,12 @@ class CoursesManager extends Controller{
                 ]);
             }
         }
-
+        $input['instructor'] = strtolower($input['instructor']);
         $name = $input['name'];
         $instructor = $input['instructor'];
         $period = [
-            'startDate' => $input['startDate'],
-            'endDate' => $input['endDate']
+            'startDate' => $startDate,
+            'endDate' => $endDate
         ];
         $weeklyFrequency = $days;
         $usersList = array();

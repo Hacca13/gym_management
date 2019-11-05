@@ -94,11 +94,11 @@
                                     <label for="fname" class="text-right control-label col-form-label">Sport Praticati Precedentemente:</label>
                                     <input type="text" class="form-control" id="fname" name="previousSport" required>
                                     <label for="fname" class="text-right control-label col-form-label">Tempo Sport Praticati Precedentemente:</label>
-                                    <input type="text" class="form-control" id="$previousSportTime" name="previousSportTime" required>
+                                    <input type="text" class="form-control" id="previousSportTime" name="previousSportTime" required>
                                     <label for="fname" class="text-right control-label col-form-label">Tempo Inattivo:</label>
                                     <input type="text" class="form-control" id="fname" name="inactiveTime" required>
                                     <label for="fname" class="text-right control-label col-form-label">Dati Plicometrici:</label>
-                                    <input type="text" class="form-control" id="$previousSportTime" name="plicometricData" required>
+                                    <input type="text" class="form-control" id="plicometricData" name="plicometricData" required>
                                 </div>
                                 <br>
                                 <div class="col-md-6">
@@ -181,7 +181,8 @@
                                         </div>
                                         <label for="cono1" class="text-right control-label col-form-label">Altri Obiettivi:</label>
                                         <input type="text" class="form-control" id="cono1" name="otherGoals" required>
-
+                                        <label for="cono1" class="text-right control-label col-form-label">Informazioni Importanti:</label>
+                                        <input type="text" class="form-control" id="importantInformation" name="importantInformation" required>
                                     </div>
                                 </div>
                             </div>
@@ -213,7 +214,7 @@
                                 <label for="fname" class="text-right control-label col-form-label">Data di Nascita Tutore:</label>
                                 <input type="date" class="form-control" id="parentDateOfBirth" name="parentDateOfBirth" value="12/12/1995">
                                 <label for="fname" class="text-right control-label col-form-label">Nazione di Nascita Tutore:</label>
-                                <input type="date" class="form-control" id="parentBirthNation" name="parentBirthNation" value="12/12/1995">
+                                <input type="text" class="form-control" id="parentBirthNation" name="parentBirthNation" value="12/12/1995">
                                 <label for="fname" class="text-right control-label col-form-label">Luogo di Nascita Tutore:</label>
                                 <input type="text" class="form-control" id="parentBirthPlace" name="parentBirthPlace" value="">
                                 <label for="lname" class="text-right control-label col-form-label">Nazione di Residenza Tutore:</label>
