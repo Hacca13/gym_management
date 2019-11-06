@@ -29,7 +29,7 @@
                         <div class="form-group row">
                             <label for="fname" class="col-sm-3 text-right control-label col-form-label">Data Inizio</label>
                             <div class="col-sm-9">
-                                <input type="date" class="form-control" id="fname" name="startDate" required>
+                                <input type="date" class="form-control" id="startDate" name="startDate" required>
                             </div>
                         </div>
 
@@ -148,6 +148,8 @@
                 elem.parentNode.removeChild(elem);
             }
         }
+
+        
 
     </script>
 

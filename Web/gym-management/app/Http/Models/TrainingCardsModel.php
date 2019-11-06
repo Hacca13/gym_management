@@ -11,6 +11,7 @@ class TrainingCardsModel{
 
     private $idDatabase;
     private $idUserDatabase;
+    private $isActive;
     private $period;
     /*
       $period:
@@ -52,9 +53,10 @@ class TrainingCardsModel{
     */
 
 
-    function __construct($idDatabase,$idUserDatabase,$period,$exercises){
+    function __construct($idDatabase,$idUserDatabase,$isActive,$period,$exercises){
         $this->idDatabase = $idDatabase;
         $this->idUserDatabase = $idUserDatabase;
+        $this->isActive = $isActive;
         $this->period = array(
           'startDate' => data_get($period, 'startDate'),
           'endDate' => data_get($period, 'endDate')
@@ -111,6 +113,30 @@ class TrainingCardsModel{
     public function setIdUserDatabase($idUserDatabase)
     {
         $this->idUserDatabase = $idUserDatabase;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of isActive
+     *
+     * @return mixed
+     */
+    public function getIsActive()
+    {
+        return $this->isActive;
+    }
+
+    /**
+     * Set the value of Exercises
+     *
+     * @param mixed exercises
+     *
+     * @return self
+     */
+    public function setIsActive($isActive)
+    {
+        $this->isActive = $isActive;
 
         return $this;
     }

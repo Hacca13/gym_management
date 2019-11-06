@@ -196,12 +196,14 @@ class TrainingCardsManager extends Controller
     public static function transformTrainingCardsIntoArrayTrainingCards($trainingCards){
       $idDatabase = $trainingCards->getIdDatabase();
       $idUserDatabase = $trainingCards->getIdUserDatabase();
+      $isActive = $trainingCards->getIsActive();
       $period = $trainingCards->getPeriod();
       $exercises = $trainingCards->getExercises();
 
       $arrayTrainingCards = array(
         'idDatabase' => $idDatabase,
         'idUserDatabase' => $idUserDatabase,
+        'isActive' => $isActive,
         'period' => $period,
         'exercises' => $exercises
       );
@@ -212,10 +214,11 @@ class TrainingCardsManager extends Controller
     public static function transformArrayTrainingCardsIntoTrainingCards($arrayTrainingCards){
       $idDatabase = data_get($arrayTrainingCards,'idDatabase');
       $idUserDatabase = data_get($arrayTrainingCards,'idUserDatabase');
+      $isActive = data_get($arrayTrainingCards,'isActive');
       $period = data_get($arrayTrainingCards,'period');
       $exercises = data_get($arrayTrainingCards,'exercises');
 
-      $trainingCards = new TrainingCardsModel($idDatabase,$idUserDatabase,$period,$exercises);
+      $trainingCards = new TrainingCardsModel($idDatabase,$idUserDatabase,$isActive,$period,$exercises);
 
       return $trainingCards;
     }
@@ -237,6 +240,7 @@ class TrainingCardsManager extends Controller
 
         $collection = Firestore::collection('TrainingCards');
         $input = $request->all();
+        $input['isActive'] = true;
         $collection->add($input);
         return '/gestioneIscritti';
     }
