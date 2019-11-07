@@ -2,15 +2,18 @@
     <div class="card-body">
         <div class="row">
             <div class="col-md-12">
+              <form action="/exercisesSearchResultsPage" method="post">
+                @csrf
                 <div class="input-group no-border" >
-                    <input type="text" value="" class="form-control" placeholder="Search...">
-                    <button type="submit" class="btn btn-default btn-round btn-just-icon">
+                    <input type="text" value="" name='searchInput' class="form-control" placeholder="Cerca esercizio...">
+                    <button type="submit" class="btn btn-default btn-round btn-just-icon" style="background-color: #3F5469">
                         <i class="fas fa-search"></i>
                         <div class="ripple-container"></div>
                     </button>
+                  </form>
                     <div class="col-md-1">
-                        <a href="nuovoEsercizio" role="button">
-                            <button class="bttn-material-circle bttn-md bttn-success" style="background-color: #21252E">
+                        <a href="/nuovoEsercizio" role="button">
+                            <button href="/nuovoEsercizio" class="bttn-material-circle bttn-md bttn-success" style="background-color: #3F5469">
                                 <i class="fas fa-plus"></i>
                             </button>
                         </a>

@@ -16,7 +16,7 @@
                     </div>
                     <a data-toggle="collapse" href="{{'#multiCollapseExample' . $loop->index}}" role="button" aria-expanded="false" aria-controls="{{'multiCollapseExample' . $loop->index}}">
                         <h2>
-                            <i class="mdi mdi-arrow-down-drop-circle" style="color: black"></i>
+                            <i class="mdi mdi-arrow-down-drop-circle" style="color: #3F5469"></i>
                         </h2>
                     </a>
                     <div class="col-md-12">

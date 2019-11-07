@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import Autosuggest from 'react-autosuggest';
 import axios from "axios";
 
-class UserSearch extends Component {
+class CourseSearch extends Component {
 
     constructor(props) {
         super(props);
@@ -21,10 +21,11 @@ class UserSearch extends Component {
 
     //COMPONENTS FUNCTIONS
     componentDidMount() {
-        axios.get('/api/jsonUsers').then(value => {
+        axios.get('/api/jsonCourses').then(value => {
             this.setState({
                 exerr: value.data
             });
+
         }).catch(e => {
             console.log(e);
         }).then(() => {
@@ -44,7 +45,7 @@ class UserSearch extends Component {
 
         <div className="input-group">
             <div className="input-group-prepend">
-                <span className="input-group-text" id="basic-addon1"><i className="fas fa-user"/></span>
+                <span className="input-group-text" id="basic-addon1"><i className="fas fa-running" style={{fontSize: '120%'}}/></span>
             </div>
             <input type="text" className="form-control" placeholder="Prepend"aria-label="Username"
                    aria-describedby="basic-addon1" {...inputProps} style={{width: '80%'}}/>
@@ -57,30 +58,18 @@ class UserSearch extends Component {
     getSuggestions = (value, exer) => {
         const inputValue = value.trim().toLowerCase();
         const inputLength = inputValue.length;
-        let arrayName;
-        let arraySurame;
-
-        if(inputLength === 0){
-            arrayName = [];
-        }
-        else{
-          arrayName = exer.filter(lang =>
-            lang.name.toLowerCase().slice(0, inputLength) === inputValue);
-          arraySurame = exer.filter(lang =>
-            lang.surname.toLowerCase().slice(0, inputLength) === inputValue);
-        }
-
-        let usersList = arrayName.concat(arraySurame);
-        return [...new Set(usersList)];
+        return inputLength === 0 ? [] : exer.filter(lang =>
+            lang.name.toLowerCase().slice(0, inputLength) === inputValue
+        );
     };
 
-    getSuggestionValue = suggestion => suggestion.surname;
+    getSuggestionValue = suggestion => suggestion.name;
 
     renderSuggestion = suggestion => {
 
         return (
             <div>
-                <h4 style={{paddingTop: '2.4%'}}>{suggestion.name + ' ' + suggestion.surname + ' ' + suggestion.dateOfBirth}</h4>
+                <h4 style={{paddingTop: '2.4%'}}>{suggestion.name}</h4>
                 <hr/>
             </div>
         )
@@ -88,9 +77,9 @@ class UserSearch extends Component {
 
 
     onSuggestionSelected = (event, { suggestion, suggestionValue, suggestionIndex, sectionIndex, method }) => {
-        this.props.retrieveUser(suggestion);
+        this.props.retrieveCourse(suggestion);
         this.setState({
-            value: suggestion.name + ' ' + suggestion.surname,
+            value: suggestion.name,
             suggestion: [],
             visible: false
         });
@@ -155,4 +144,4 @@ class UserSearch extends Component {
     }
 }
 
-export default UserSearch;
+export default CourseSearch;

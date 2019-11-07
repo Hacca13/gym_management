@@ -1,15 +1,11 @@
 import React, {Component} from 'react';
-import ReactDOM from 'react-dom';
 import axios from 'axios';
-import Autocomplete from 'react-autocomplete';
 import Autosuggest from 'react-autosuggest';
-import ExerciseToAdd from "./exerciseToAdd";
-import ExerciseToAddByTime from "./exerciseToAddByTime";
-import UserSearch from "./userSearch";
+import ExerciseToAdd from "../components/exerciseToAdd";
+import ExerciseToAddByTime from "../components/exerciseToAddByTime";
+import UserSearch from "../components/userSearch";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-
-
 
 class NewTcard2 extends Component {
 
@@ -64,8 +60,8 @@ class NewTcard2 extends Component {
             idUserDatabase: this.state.userID,
             exercises: this.state.exercisesList,
             period: {
-                startDate: this.state.from,
-                endDate: this.state.to
+                startDate: this.formatDate(this.state.from),
+                endDate: this.formatDate(this.state.to)
             }
         }).then(response => {
             window.location.href = response.data;
@@ -233,6 +229,10 @@ class NewTcard2 extends Component {
         </div>
     );
 
+    formatDate(date) {
+        return date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear();
+    }
+
     setFrom(date) {
         this.setState({
             from: date
@@ -274,8 +274,6 @@ class NewTcard2 extends Component {
 
                         <div className="card-body">
                             <form onSubmit={this.handleSubmit}>
-
-
 
                                 <div className="form-group row justify-content-center">
                                     <div className="col-sm-6">

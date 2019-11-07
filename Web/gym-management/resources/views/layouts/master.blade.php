@@ -21,7 +21,7 @@
     <link href="../matrix-admin-bt4/assets/libs/jquery-steps/jquery.steps.css" rel="stylesheet">
     <link href="../matrix-admin-bt4/assets/libs/jquery-steps/steps.css" rel="stylesheet">
     <script src="https://www.gstatic.com/firebasejs/7.2.0/firebase-auth.js"></script>
-
+    <script src="https://kit.fontawesome.com/b9480319ec.js" crossorigin="anonymous"></script>
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 
@@ -161,11 +161,6 @@
         } else {
             myDiv.style.display = "block";
         }
-
-
-
-
-
         if (myDiv.style.display == "block") {
           myDiv.style.display = "none";
 

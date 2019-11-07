@@ -8,6 +8,7 @@ use Kreait\Firebase\Exception\AuthException;
 use Kreait\Firebase\Exception\FirebaseException;
 use Kreait\Firebase;
 use App\Http\Controllers\CoursesManager;
+use App\Http\Controllers\MedicalHistoryManager;
 use Firevel\Firestore\Facades\Firestore;
 use App\Http\Models\UserModels\UserModel;
 use App\Http\Models\UserModels\UserUnderageModel;
@@ -24,6 +25,8 @@ class UsersManager extends Controller{
         $documents = $collection->documents();
         foreach ($documents as $document) {
             $user = UsersManager::transformArrayUserIntoUser($document->data());
+            $user->setName(ucfirst($user->getName()));
+            $user->setSurname(ucfirst($user->getSurname()));
             $user->setIdDatabase($document->id());
             array_push($allUser,$user);
         }
@@ -34,11 +37,14 @@ class UsersManager extends Controller{
 
     public static function searchUsersPartiallyByName($input){
         $usersResultListByName = array();
+        $input = strtolower($input);
         $collection = Firestore::collection('Users');
         $documents = $collection->orderBy('name')->startAt([$input])->endAt([$input.'z'])->documents();
 
         foreach ($documents as $document) {
             $user = UsersManager::transformArrayUserIntoUser($document->data());
+            $user->setName(ucfirst($user->getName()));
+            $user->setSurname(ucfirst($user->getSurname()));
             $user->setIdDatabase($document->id());
             array_push($usersResultListByName,$user);
         }
@@ -48,11 +54,14 @@ class UsersManager extends Controller{
 
     public static function searchUsersPartiallyBySurname($input){
         $usersResultListBySurname = array();
+        $input = strtolower($input);
         $collection = Firestore::collection('Users');
         $documents = $collection->orderBy('surname')->startAt([$input])->endAt([$input.'z'])->documents();
 
         foreach ($documents as $document) {
             $user = UsersManager::transformArrayUserIntoUser($document->data());
+            $user->setName(ucfirst($user->getName()));
+            $user->setSurname(ucfirst($user->getSurname()));
             $user->setIdDatabase($document->id());
             array_push($usersResultListBySurname,$user);
         }
@@ -71,6 +80,7 @@ class UsersManager extends Controller{
     public static function searchUsers(Request $request){
         $currentPage = LengthAwarePaginator::resolveCurrentPage();
         $input = $request->all();
+        $input['searchInput'] = strtolower($input['searchInput']);
 
         if(isset($input['searchInput'])){
             $input = $input['searchInput'];
@@ -149,11 +159,14 @@ class UsersManager extends Controller{
 
     public static function getUsersByName($name){
         $users = array();
+        $name = strtolower($name);
         $collection = Firestore::collection('Users');
         $query = $collection->where('name', '=' ,$name);
         $documents = $query->documents();
         foreach ($documents as $document) {
             $user = UsersManager::transformArrayUserIntoUser($document->data());
+            $user->setName(ucfirst($user->getName()));
+            $user->setSurname(ucfirst($user->getSurname()));
             $user->setIdDatabase($document->id());
             array_push($users,$user);
         }
@@ -166,6 +179,8 @@ class UsersManager extends Controller{
         $arrayUser = $collection->document($idDatabase)->snapshot()->data();
 
         $user = UsersManager::transformArrayUserIntoUser($arrayUser);
+        $user->setName(ucfirst($user->getName()));
+        $user->setSurname(ucfirst($user->getSurname()));
         $user->setIdDatabase($idDatabase);
         return $user;
     }
@@ -177,11 +192,9 @@ class UsersManager extends Controller{
         $documentImage = $request->file('documentImage');
         $parentDocumentImage = null;
 
-        if(!(isset($input['isUnderage']))){
-            $input['isUnderage'] = 'FALSE';
-        }
 
-        if($input['isUnderage'] == 'TRUE'){
+
+        if($input['isUnderage'] == 'true'){
             $parentDocumentImage = $request->file('parentDocumentImage');
         }
 
@@ -191,25 +204,48 @@ class UsersManager extends Controller{
 
         $str = $firebase->createStorage()->getBucket()->upload(file_get_contents($documentImage),
             [
-                'name' => $documentImage->getClientOriginalName()
+                'name' => $input['name'].$input['surname'].'DocumentImage'
             ])->name();
 
-        if($input['isUnderage'] == 'TRUE'){
+        if($input['isUnderage'] == 'true'){
             $str2 = $firebase->createStorage()->getBucket()->upload(file_get_contents($parentDocumentImage),
                 [
-                    'name' => $parentDocumentImage->getClientOriginalName()
+                    'name' => $input['parentName'].$input['parentSurname'].'ParentDocumentImage'
                 ])->name();
+
+                $parentDocumentImage = "https://firebasestorage.googleapis.com/v0/b/fitandfight.appspot.com/o/". $str2 ."?alt=media";
+
+            $timestamp = strtotime($input['parentDateOfBirth']);
+            $input['parentDateOfBirth'] = date("d-m-Y", $timestamp);
+            $timestamp = strtotime($input['parentDocumentReleaseDate']);
+            $input['parentDocumentReleaseDate'] = date("d-m-Y", $timestamp);
         }
         $documentImage =  "https://firebasestorage.googleapis.com/v0/b/fitandfight.appspot.com/o/". $str ."?alt=media";
 
         $collection = Firestore::collection('Users');
+
+
+        $timestamp = strtotime($input['dateOfBirth']);
+        $input['dateOfBirth'] = date("d-m-Y", $timestamp);
+        $timestamp = strtotime($input['releaseDateDocument']);
+        $input['releaseDateDocument'] = date("d-m-Y", $timestamp);
+
 
         try {
             $uid = $firebase->createAuth()->createUserWithEmailAndPassword($input['email'], $input['password'])->uid;
 
             $arrayUser = UsersManager::trasformRequestIntoArrayUser($input, $documentImage, $parentDocumentImage);
 
+            $input['name'] = strtolower($input['name']);
+            $input['surname'] = strtolower($input['surname']);
+
             $collection->document($uid)->set($arrayUser);
+
+            $input['idUserDatabase'] = $uid;
+
+            $arrayMedicalHistory = MedicalHistoryManager::trasformRequestToArrayMedicalHistory($input);
+
+            MedicalHistoryManager::addMedicalHistory($arrayMedicalHistory);
 
             toastr()->success('Utente registrato');
             return redirect('/gestioneIscritti');
@@ -421,7 +457,7 @@ class UsersManager extends Controller{
             'releaseDate' => $input['releaseDateDocument']
         );
 
-        if($input['isUnderage'] == 'FALSE'){
+        if($input['isUnderage'] == 'false'){
             $isAdult = TRUE;
         }
         else{
@@ -429,13 +465,13 @@ class UsersManager extends Controller{
         }
 
 
-        if($input['isUnderage'] == 'TRUE'){
+        if($input['isUnderage'] == 'true'){
             $parentResidence = array(
                 'nation' => $input['parentNation'],
                 'cityOfResidence' => $input['parentCityOfResidence'],
                 'cap' => $input['parentCap'],
                 'street' => $input['parentResidenceStreet'],
-                'number' => $input['parentResidence.number']
+                'number' => $input['parentResidenceNumber']
 
             );
 
@@ -447,7 +483,7 @@ class UsersManager extends Controller{
                 'releaseDate' => $input['parentDocumentReleaseDate']
             );
         }
-        if($input['isUnderage'] == 'TRUE'){
+        if($input['isUnderage'] == 'true'){
             $arrayUser1 = array(
                 'parentName' => $input['parentName'],
                 'parentSurname' => $input['parentSurname'],

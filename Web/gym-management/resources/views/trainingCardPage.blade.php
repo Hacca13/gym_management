@@ -17,7 +17,7 @@
                                     @csrf
                                     <div class="input-group no-border">
                                         <input type="text" value="" name='searchInputTrainingCards' class="form-control" placeholder="Cerca scheda di...">
-                                        <button type="submit" class="btn btn-default btn-round btn-just-icon">
+                                        <button type="submit" class="btn btn-default btn-round btn-just-icon" style="background-color: #3F5469">
                                             <i class="fas fa-search"></i>
                                             <div class="ripple-container"></div>
                                         </button>
@@ -43,7 +43,7 @@
                                 </div>
                                 <div class="col-md-1" style="text-align: center; margin-top: auto; margin-bottom: auto">
                                     <a href="nuovaScheda" role="button">
-                                        <button class="bttn-material-circle bttn-md bttn-primary">
+                                        <button class="bttn-material-circle bttn-md bttn-primary" style="background-color: #3F5469">
                                             <i class="fas fa-plus"></i>
                                         </button>
                                     </a>
@@ -59,7 +59,7 @@
                     @endforeach
 
                 </div>
-                <div>
+                <div class="row justify-content-center">
                       {{ $trainingCardsList->links()}}
                 </div>
         </div>

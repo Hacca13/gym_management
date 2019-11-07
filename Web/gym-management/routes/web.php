@@ -25,6 +25,8 @@ Route::get('/firetest3', 'Firetest@test3');
 //ESERCIZI
 //Route::get('/esercizi', 'ExercisesManager@exercisePage');
 Route::post('/insertFormExercise', 'ExercisesManager@addExercise');
+Route::post('/exercisesSearchResultsPage', 'ExercisesManager@searchExercise');
+Route::get('/exercisesPageSearchResults', 'ExercisesManager@searchExercise');
 
 Route::get('/gestioneEsercizi', 'ExercisesManager@getAllExercisesForView');
 
@@ -50,23 +52,18 @@ Route::get('/nuovoIscritto', function (){
 Route::get('/gestioneIscritti', 'UsersManager@getAllUserForView');
 
 Route::get('/pdf', function (){
-    return view('pdf');
+    return view('trainingCardPdf');
 });
 
 //ABBONAMENTI
 Route::get('/gestioneAbbonamenti', 'SubscriptionManager@getAllSubscriptionForView');
 
-
-Route::get('/nuovoAbbonamento', function (){
-    return view('insertNewSubscription');
-});
-
-
+Route::get('/nuovoAbbonamento', 'SubscriptionManager@addSubscription');
 
 
 
 //SCHEDA
-
+Route::get('/getTrainingCardsPDFDownloads','TrainingCardsManager@DownloadTrainingCardsPDF');
 
 Route::get('/gestioneSchede', 'TrainingCardsManager@getAllTrainingCardsForView');
 

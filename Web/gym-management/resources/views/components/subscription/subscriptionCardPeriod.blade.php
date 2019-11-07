@@ -1,8 +1,8 @@
-<div class="col-md-10">
+<div class="col-md-12">
     <div class="card" style="border-radius: 10px">
         <div class="card-body">
             <div class="row">
-                <div class="col-md-5" style="margin-top: auto; margin-bottom: auto;">
+                <div class="col-md-5" style="text-align: right; margin-top: auto; margin-bottom: auto;">
                     <h3>Mirko Aliberti</h3>
                 </div>
                 <div class="col-md-3" style="text-align: right; margin-top: auto; margin-bottom: auto;">
@@ -20,7 +20,7 @@
                   <div class="collapse multi-collapse" id="multiCollapseExample4">
                     <div class="card card-body">
                       <div class="row justify-content-center">
-                        @include('components.subscription.recordSubPeriod')
+                        @include('components.subscription.subPeriod')
                       </div>
                     </div>
                   </div>

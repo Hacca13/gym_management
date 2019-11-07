@@ -7,9 +7,18 @@ use Google\Cloud\Firestore\FirestoreClient;
 use Firevel\Firestore\Facades\Firestore;
 use App\Http\Models\TrainingCardsModel;
 use Illuminate\Pagination\LengthAwarePaginator;
+use PDF;
 
 class TrainingCardsManager extends Controller
 {
+
+    public static function  DownloadTrainingCardsPDF(){
+      $data = ['title' => 'PATANE'];
+              $pdf = PDF::loadView('trainingCardPDF', $data);
+
+              return $pdf->download('TrainingCard.pdf');
+    }
+
     public static function searchTrainingCards(Request $request){
       $currentPage = LengthAwarePaginator::resolveCurrentPage();
       $input = $request->all();
@@ -89,9 +98,29 @@ class TrainingCardsManager extends Controller
       foreach ($documents as $document) {
         $trainingCards = TrainingCardsManager::transformArrayTrainingCardsIntoTrainingCards($document->data());
         $trainingCards->setIdDatabase($document->id());
+
+        $endDate = data_get($trainingCards->getPeriod() ,'endDate');
+        if(TrainingCardsManager::isExpired($endDate)){
+            $trainingCards->setIsActive(false);
+        }
+
         array_push($allTrainingCards,$trainingCards);
       }
       return $allTrainingCards;
+    }
+
+    public static function isExpired($endDate){
+      $today = date("Y-m-d");
+      $timestamp = strtotime($endDate);
+      $endDate = date("Y-m-d", $timestamp);
+
+      if($endDate < $today){
+        return true;
+      }
+      else{
+        return false;
+      }
+
     }
 
 
@@ -167,12 +196,14 @@ class TrainingCardsManager extends Controller
     public static function transformTrainingCardsIntoArrayTrainingCards($trainingCards){
       $idDatabase = $trainingCards->getIdDatabase();
       $idUserDatabase = $trainingCards->getIdUserDatabase();
+      $isActive = $trainingCards->getIsActive();
       $period = $trainingCards->getPeriod();
       $exercises = $trainingCards->getExercises();
 
       $arrayTrainingCards = array(
         'idDatabase' => $idDatabase,
         'idUserDatabase' => $idUserDatabase,
+        'isActive' => $isActive,
         'period' => $period,
         'exercises' => $exercises
       );
@@ -183,10 +214,11 @@ class TrainingCardsManager extends Controller
     public static function transformArrayTrainingCardsIntoTrainingCards($arrayTrainingCards){
       $idDatabase = data_get($arrayTrainingCards,'idDatabase');
       $idUserDatabase = data_get($arrayTrainingCards,'idUserDatabase');
+      $isActive = data_get($arrayTrainingCards,'isActive');
       $period = data_get($arrayTrainingCards,'period');
       $exercises = data_get($arrayTrainingCards,'exercises');
 
-      $trainingCards = new TrainingCardsModel($idDatabase,$idUserDatabase,$period,$exercises);
+      $trainingCards = new TrainingCardsModel($idDatabase,$idUserDatabase,$isActive,$period,$exercises);
 
       return $trainingCards;
     }
@@ -194,7 +226,7 @@ class TrainingCardsManager extends Controller
     public function exercisePage() {
         $exercises = ExercisesManager::getAllExercises();
         $users = UsersManager::getAllUser();
-        return view('insertNewTCARD', compact('exercises', 'i'));
+        return view('insertNewTCARD', compact('exercises',  'users'));
     }
 
 
@@ -208,6 +240,7 @@ class TrainingCardsManager extends Controller
 
         $collection = Firestore::collection('TrainingCards');
         $input = $request->all();
+        $input['isActive'] = true;
         $collection->add($input);
         return '/gestioneIscritti';
     }
