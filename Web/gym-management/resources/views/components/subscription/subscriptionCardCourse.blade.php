@@ -3,7 +3,7 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-md-5" style="text-align: right; margin-top: auto; margin-bottom: auto;">
-                    <h3>Mirko Al3erti</h3>
+                    <h3>Mirko ACorso</h3>
                 </div>
                 <div class="col-md-3" style="text-align: right; margin-top: auto; margin-bottom: auto;">
                     <h4>Dal: 23/03/2019</h4>
@@ -20,7 +20,7 @@
                   <div class="collapse multi-collapse" id="multiCollapseExample4">
                     <div class="card card-body">
                       <div class="row justify-content-center">
-                        @include('components.subscription.subPeriod')
+                        @include('components.subscription.subCourse')
                       </div>
                     </div>
                   </div>

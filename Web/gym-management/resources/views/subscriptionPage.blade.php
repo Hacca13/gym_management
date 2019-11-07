@@ -18,7 +18,7 @@
                                   @include('components.subscription.subscriptionCardPeriod')
                               @endif
                               @if($subscription->getType() == 'course')
-                                  @include('components.subscription.subscriptionCardEntrances')
+                                  @include('components.subscription.subscriptionCardCourse')
                               @endif
                           @endforeach
 

@@ -26,10 +26,10 @@
         </div>
         <div class="collapse multi-collapse" id="days">
             <div class="row justify-content-center">
+              
 
                 @include('components.exercise.cardDay')
-                @include('components.exercise.cardDay')
-                @include('components.exercise.cardDay')
+
 
             </div>
         </div>

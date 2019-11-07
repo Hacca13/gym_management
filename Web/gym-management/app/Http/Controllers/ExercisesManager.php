@@ -28,6 +28,45 @@ class ExercisesManager extends Controller{
 
     }
 
+    public static function setExerciseView($request){
+        $exercise = ExercisesManager::getExerciseById($request);
+        return view('setExercise', compact('exercise'));
+    }
+
+    public static function setExercise(Request $request){
+      $input=$request->all();
+
+      if(!isset($input['exerciseIsATime'])){
+        $input['exerciseIsATime'] = false;
+      }
+
+      if(isset($input['imageExercise'])){
+        $exerciseImage = $request->file('imageExercise');
+
+
+        $firebase = (new Firebase\Factory());
+
+        $imageRef = $firebase->createStorage()->getBucket()->upload(file_get_contents($exerciseImage),
+            [
+                'name' => str_replace(' ','-',$input['nameExercise']).'-gif'
+            ])->name();
+
+        $gif =  "https://firebasestorage.googleapis.com/v0/b/fitandfight.appspot.com/o/". $imageRef ."?alt=media";
+
+
+        $arrayExercise = ExercisesManager::trasformRequestToArrayExercise($input,$gif);
+      }else {
+        $arrayExercise = ExercisesManager::trasformRequestToArrayExercise($input,$input['oldImageExercise']);
+      }
+
+      $collection = Firestore::collection('Exercises');
+      $collection->document($input['idDatabase'])->set($arrayExercise);
+
+      toastr()->success('Esercizio Modificato');
+      return redirect('gestioneEsercizi');
+    }
+
+
     public static function getExerciseByName($name){
         $exercises = array();
         $name = strtolower($name);
@@ -101,6 +140,10 @@ class ExercisesManager extends Controller{
         $input = $request->all();
         $input['nameExercise'] = strtolower($input['nameExercise']);
         $name = $input['nameExercise'];
+
+        if(!isset($input['exerciseIsATime'])){
+          $input['exerciseIsATime'] = false;
+        }
 
         if(ExercisesManager::existsAExerciseWithThisName($name)){
           toastr()->error('Esiste già un esercizio con questo nome');
