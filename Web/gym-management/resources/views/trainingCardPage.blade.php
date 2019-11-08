@@ -2,14 +2,14 @@
 
 @section('content')
 
-    <div class="card" style="border-radius: 10px;background-color: #d6d8d8">
+    <div class="card" style="border-radius: 10px;background-color: rgb(31, 38, 45, 0.8)">
         <div class="card-body">
-            <div class="row">
+            <div class="row justify-content-center">
                 <div class="col-md-12" style="text-align: center;">
-                    <h1>Gestione Schede</h1>
+                    <h1 style="color: #d6d8d8">Gestione schede</h1>
                 </div>
                 <div class="col-md-12" style="margin-top: 2.5%">
-                    <div class="card" style="border-radius: 10px;background-color:rgb(255, 255, 255,0.7)">
+                    <div class="card" style="border-radius: 10px;background-color: #d6d8d8">
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-5">
@@ -52,14 +52,15 @@
                         </div>
                     </div>
                 </div>
-            </div>
                 <div class="col-md-12">
                     @foreach($trainingCardsList as $trainingCard)
-                      @include('components.trainingCards.TrainingCardsList')
+                        @include('components.trainingCards.TrainingCardsList')
                     @endforeach
 
                 </div>
-                <div class="row justify-content-center">
+            </div>
+
+                <div class="row justify-content-center" style="margin-top: 2.5%">
                       {{ $trainingCardsList->links()}}
                 </div>
         </div>

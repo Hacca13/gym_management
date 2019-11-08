@@ -1,11 +1,12 @@
-<div class="col-md-4">
+
+<div class="col-md-4" style="margin-top: 2.5%">
     <div class="card" style="border-radius: 10px;">
         <div class="card-header">
             <div class="row">
                 <div class="col-md-6"></div>
                 <div class="col-md-6" style="text-align: end">
                     <a href="modificaEsercizio">
-                        <i class="fas fa-times" style="font-size: 170%; color: red; margin-left: 2.5%"></i>
+                        <i class="fas fa-edit" style="font-size: 170%; color: black; margin-left: 2.5%"></i>
                     </a>
                 </div>
                 <div class="col-md-6" style="text-align: end">
@@ -13,7 +14,7 @@
                 </div>
             </div>
         </div>
-        <div class="card-body">
+        <div class="card-body" >
             <div class="row">
                 <div class="col-md-12">
                     <div class="card-body">

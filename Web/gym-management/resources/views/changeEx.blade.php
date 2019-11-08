@@ -1,24 +1,30 @@
 @extends('layouts.master')
 @section('content')
-    <div class="row justify-content-center">
-        <div class="col-md-10">
-            <div class="card" style="border-radius: 10px;background-color: rgb(255, 255, 255,0.7);">
-                <div class="card-header">
-                    <div class="row">
-                        <div class="col-md-8" style="text-align: left">
-                            <h4>Modifica esercizio</h4>
-                        </div>
-                        <div class="col-md-4" style="text-align: end">
-                            <!--Pagina precedente-->
-                            <a href="/gestioniEsercizi">
-                                <h3>
-                                    <i class="fas fa-times" style="color: red"></i>
-                                </h3>
-                            </a>
-                        </div>
+    <div class="card" style="border-radius: 10px;background-color: rgb(31, 38, 45, 0.8)">
+        <div class="card-body">
+            <div class="row justify-content-center">
+
+                <div class="col-md-12 row">
+
+                    <div class="col-md-4"></div>
+
+                    <div class="col-md-4" style="text-align: center;">
+                        <h1 style="color: #d6d8d8">Modifica esercizio</h1>
                     </div>
+
+                    <div class="col-md-4" style="text-align: end">
+                        <a href="/gestioniEsercizi">
+                            <h3>
+                                <i class="fas fa-times" style="color: red"></i>
+                            </h3>
+                        </a>
+                    </div>
+
                 </div>
-                <div class="card-body">
+            </div>
+
+            <div class="col-md-12" style="margin-top: 2.5%">
+                <div class="card-body" style="background-color: #d6d8d8; border-radius: 10px;">
                     <form action="/insertFormExercise" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group row">
@@ -70,4 +76,5 @@
             </div>
         </div>
     </div>
+
 @endsection

@@ -1,24 +1,24 @@
-<div class="card card-body">
-  <div class="row">
-    <div class="col-md-6">
-      <label>Inzio</label>
-      <div class="input-group">
-        <input type="text" class="form-control mydatepicker" placeholder="mm/dd/yyyy">
-        <div class="input-group-append">
-          <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+<div class="card card-body" style="border-radius: 10px;background-color:rgb(255, 255, 255,0.4);">
+    <div class="row">
+        <div class="col-md-6">
+            <label>Inzio</label>
+            <div class="input-group">
+                <input type="text" class="form-control mydatepicker" placeholder="mm/dd/yyyy">
+                <div class="input-group-append">
+                    <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-    <div class="col-md-6">
-      <label>Fine</label>
-      <div class="input-group">
-        <input type="text" class="form-control mydatepicker" placeholder="mm/dd/yyyy">
-        <div class="input-group-append">
-          <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+        <div class="col-md-6">
+            <label>Fine</label>
+            <div class="input-group">
+                <input type="text" class="form-control mydatepicker" placeholder="mm/dd/yyyy">
+                <div class="input-group-append">
+                    <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
     <br>
     <br>
     <br>
