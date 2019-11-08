@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use DateTime;
 use Illuminate\Http\Request;
 use Kreait\Firebase\Exception\AuthException;
 use Kreait\Firebase\Exception\FirebaseException;
@@ -192,6 +193,9 @@ class UsersManager extends Controller{
         $documentImage = $request->file('documentImage');
         $parentDocumentImage = null;
 
+        $external = "19/10/2100 14:48:21";
+        $format = "d/m/Y H:i:s";
+        $dateobj = DateTime::createFromFormat($format, $external);
 
 
         if($input['isUnderage'] == 'true'){
@@ -205,22 +209,28 @@ class UsersManager extends Controller{
         $str = $firebase->createStorage()->getBucket()->upload(file_get_contents($documentImage),
             [
                 'name' => $input['name'].$input['surname'].'DocumentImage'
-            ])->name();
+            ]);
 
         if($input['isUnderage'] == 'true'){
             $str2 = $firebase->createStorage()->getBucket()->upload(file_get_contents($parentDocumentImage),
                 [
                     'name' => $input['parentName'].$input['parentSurname'].'ParentDocumentImage'
-                ])->name();
+                ]);
+            $parentDocumentImage = $str2->signedUrl($dateobj).PHP_EOL;
 
-                $parentDocumentImage = "https://firebasestorage.googleapis.com/v0/b/fitandfight.appspot.com/o/". $str2 ."?alt=media";
+
+
+            // $parentDocumentImage = "https://firebasestorage.googleapis.com/v0/b/fitandfight.appspot.com/o/". $str2 ."?alt=media";
 
             $timestamp = strtotime($input['parentDateOfBirth']);
             $input['parentDateOfBirth'] = date("d-m-Y", $timestamp);
             $timestamp = strtotime($input['parentDocumentReleaseDate']);
             $input['parentDocumentReleaseDate'] = date("d-m-Y", $timestamp);
         }
-        $documentImage =  "https://firebasestorage.googleapis.com/v0/b/fitandfight.appspot.com/o/". $str ."?alt=media";
+       // $documentImage =  "https://firebasestorage.googleapis.com/v0/b/fitandfight.appspot.com/o/". $str ."?alt=media";
+
+
+        $documentImage = $str->signedUrl($dateobj).PHP_EOL;
 
         $collection = Firestore::collection('Users');
 
