@@ -3,12 +3,12 @@
         <div class="card-header">
             <div class="row">
                 <div class="col-md-6" style="text-align: start">
-                    <a href="modificaEsercizio">
-                        <i class="fas fa-edit" style="font-size: 150%; color: black;"></i>
+                  <a href="modificaEsercizio/{{$exercise->getIdDatabase()}}">
+                      <i class="fas fa-edit" style="font-size: 150%; color: black;"></i>
                     </a>
                 </div>
                 <div class="col-md-6" style="text-align: end">
-                    <a href="nuovoEsercizio">
+                    <a href="Esercizio">
                         <i class="fas fa-times" style="font-size: 170%; color: red; margin-left: 2.5%"></i>
                     </a>
                 </div>

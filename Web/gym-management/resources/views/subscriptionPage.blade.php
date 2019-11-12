@@ -12,7 +12,19 @@
 
                 <div class="col-md-12" style="margin-top: 2.5%">
                     @include('components.subscription.subscriptionOption')
-                </div>
+                    <div class="col-md-12" style="margin-top: 2.5%">
+                        <div class="row justify-content-center">
+                          @foreach($subscriptionList as $subscription)
+                              @if($subscription->getType() == 'revenue')
+                                  @include('components.subscription.subscriptionCardEntrances')
+                              @endif
+                              @if($subscription->getType() == 'period')
+                                  @include('components.subscription.subscriptionCardPeriod')
+                              @endif
+                              @if($subscription->getType() == 'course')
+                                  @include('components.subscription.subscriptionCardCourse')
+                              @endif
+                          @endforeach
 
                 <div class="col-md-12">
                     @foreach($subscriptionList as $subscription)

@@ -25,6 +25,7 @@ Route::get('/firetest3', 'Firetest@test3');
 //ESERCIZI
 //Route::get('/esercizi', 'ExercisesManager@exercisePage');
 Route::post('/insertFormExercise', 'ExercisesManager@addExercise');
+Route::post('/setFormExercise', 'ExercisesManager@setExercise');
 Route::post('/exercisesSearchResultsPage', 'ExercisesManager@searchExercise');
 Route::get('/exercisesPageSearchResults', 'ExercisesManager@searchExercise');
 
@@ -34,12 +35,12 @@ Route::get('/nuovoEsercizio', function () {
     return view('insertNewExercise');
 });
 
-Route::get('/modificaEsercizio', function (){
-    return view('changeEx');
-});
+Route::get('/modificaEsercizio/{id}', 'ExercisesManager@setExerciseView');
+
 
 
 //UTENTI
+Route::get('/modificaUtente/{id}', 'UsersManager@setUserView');
 Route::post('/addUserPost', 'UsersManager@createUser');
 Route::post('/userSearchResultsPage', 'UsersManager@searchUsers');
 Route::get('/userPageSearchResults', 'UsersManager@searchUsers');

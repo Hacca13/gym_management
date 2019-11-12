@@ -5,8 +5,8 @@
             <div class="row">
                 <div class="col-md-6"></div>
                 <div class="col-md-6" style="text-align: end">
-                    <a href="modificaEsercizio">
-                        <i class="fas fa-edit" style="font-size: 170%; color: black; margin-left: 2.5%"></i>
+                    <a href="#">
+                        <i class="fas fa-times" style="font-size: 170%; color: red; margin-left: 2.5%"></i>
                     </a>
                 </div>
                 <div class="col-md-6" style="text-align: end">
