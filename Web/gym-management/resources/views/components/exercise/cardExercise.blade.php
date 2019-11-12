@@ -1,5 +1,5 @@
-<div class="col-md-4">
-    <div class="card" style="border-radius: 10px;">
+<div class="col-md-4" style="margin-top: 2.5%">
+    <div class="card" style="border-radius: 10px; background-color: #d6d8d8">
         <div class="card-header">
             <div class="row">
                 <div class="col-md-6" style="text-align: start">

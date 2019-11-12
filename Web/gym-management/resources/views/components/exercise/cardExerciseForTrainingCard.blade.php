@@ -1,4 +1,5 @@
-<div class="col-md-4">
+
+<div class="col-md-4" style="margin-top: 2.5%">
     <div class="card" style="border-radius: 10px;">
         <div class="card-header">
             <div class="row">
@@ -13,7 +14,7 @@
                 </div>
             </div>
         </div>
-        <div class="card-body">
+        <div class="card-body" >
             <div class="row">
                 <div class="col-md-12">
                     <div class="card-body">
