@@ -13,10 +13,12 @@ class TrainingCardsManager extends Controller
 {
 
     public static function  DownloadTrainingCardsPDF(){
-      $data = ['title' => 'PATANE'];
-              $pdf = PDF::loadView('trainingCardPDF', $data);
 
-              return $pdf->download('TrainingCard.pdf');
+      $data = ['title' => 'trainingCard'];
+
+      $pdf= PDF::loadView('trainingCardPdf', $data);
+
+      $pdf->stream();
     }
 
     public static function searchTrainingCards(Request $request){

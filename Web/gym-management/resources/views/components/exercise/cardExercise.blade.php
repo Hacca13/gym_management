@@ -1,14 +1,14 @@
-<div class="col-md-4">
-    <div class="card" style="border-radius: 10px;">
+<div class="col-md-4" style="margin-top: 2.5%">
+    <div class="card" style="border-radius: 10px; background-color: #d6d8d8">
         <div class="card-header">
             <div class="row">
                 <div class="col-md-6" style="text-align: start">
-                    <a href="modificaEsercizio">
-                        <i class="fas fa-edit" style="font-size: 150%; color: black;"></i>
+                  <a href="modificaEsercizio/{{$exercise->getIdDatabase()}}">
+                      <i class="fas fa-edit" style="font-size: 150%; color: black;"></i>
                     </a>
                 </div>
                 <div class="col-md-6" style="text-align: end">
-                    <a href="nuovoEsercizio">
+                    <a href="Esercizio">
                         <i class="fas fa-times" style="font-size: 170%; color: red; margin-left: 2.5%"></i>
                     </a>
                 </div>

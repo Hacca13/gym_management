@@ -1,120 +1,112 @@
 @extends('layouts.master')
 
 @section('content')
-
-    <div class="col-md-12">
-        <div class="card" style="border-radius: 10px;background-color: #d6d8d8">
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="card" style="border-radius: 10px;background-color: #d6d8d8">
-                            <div class="card-body wizard-content">
-                                <div class="col-md-12">
-                                    <h2 class="text-center">Inserisci Dati Abbonamento</h2>
-                                </div>
-                                <br>
-                                <br>
-                                <form id="example-form" action="#" class="m-t-40">
-                                    <div>
-                                        <section>
-                                            <label for="userName" class="row">Abbonamento di: </label>
-                                            <input type="text" class="form-control text">
-                                        </section>
+    <div class="card" style="border-radius: 10px;background-color: rgb(31, 38, 45, 0.8)">
+        <div class="card-body">
+            <div class="row justify-content-center">
+                <div class="col-md-12" style="text-align: center;">
+                    <h1 style="color: #d6d8d8">Inserisci abbonamento</h1>
+                </div>
+                <div class="col-md-12">
+                    <form id="example-form" action="#" class="m-t-40">
+                        <div>
+                            <section>
+                                <label for="userName" class="row">Abbonamento di: </label>
+                                <input type="text" class="form-control text">
+                            </section>
+                        </div>
+                        <div>
+                            <br>
+                            <label for="userName" class="row">Tipo di abbonamento:</label>
+                            <br>
+                            <section>
+                                <input id="myCheck" onclick="Annuale()" name="acceptTerms" type="radio" class="required">
+                                <label for="acceptTerms">Periodico</label>
+                                <input id="entrata" onclick="Entrate()" name="acceptTerms" type="radio" class="required">
+                                <label for="acceptTerms">Entrate</label>
+                                <input id="corso" onclick="Corso()" name="acceptTerms" type="radio" class="required">
+                                <label for="acceptTerms">Corso</label>
+                            </section>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-6"  id="inizio" style="display: none">
+                                <label>Inzio</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control mydatepicker" placeholder="mm/dd/yyyy">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text"><i class="fa fa-calendar"></i></span>
                                     </div>
-                                    <div>
-                                        <br>
-                                        <label for="userName" class="row">Tipo di abbonamento:</label>
-                                        <br>
-                                        <section>
-                                            <input id="myCheck" onclick="Annuale()" name="acceptTerms" type="radio" class="required">
-                                            <label for="acceptTerms">Periodico</label>
-                                            <input id="entrata" onclick="Entrate()" name="acceptTerms" type="radio" class="required">
-                                            <label for="acceptTerms">Entrate</label>
-                                            <input id="corso" onclick="Corso()" name="acceptTerms" type="radio" class="required">
-                                            <label for="acceptTerms">Corso</label>
-                                        </section>
-                                    </div>
-                                    <br>
-                                    <div class="row">
-                                        <div class="col-md-6"  id="inizio" style="display: none">
-                                            <label>Inzio</label>
-                                            <div class="input-group">
-                                                <input type="text" class="form-control mydatepicker" placeholder="mm/dd/yyyy">
-                                                <div class="input-group-append">
-                                                    <span class="input-group-text"><i class="fa fa-calendar"></i></span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6"  id="fine" style="display: none">
-                                            <label>Fine</label>
-                                            <div class="input-group">
-                                                <input type="text" class="form-control mydatepicker" placeholder="mm/dd/yyyy">
-                                                <div class="input-group-append">
-                                                    <span class="input-group-text"><i class="fa fa-calendar"></i></span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6"  id="corsi" style="display: none">
-                                            <label>Nome Corso</label>
-                                            <div class="input-group">
-                                                <input type="text" class="form-control mydatepicker" placeholder="">
-                                                <div class="input-group-append">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6"  id="iniziocorso" style="display: none">
-                                            <label>Inzio</label>
-                                            <div class="input-group">
-                                                <input type="text" class="form-control mydatepicker" placeholder="mm/dd/yyyy">
-                                                <div class="input-group-append">
-                                                    <span class="input-group-text"><i class="fa fa-calendar"></i></span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6"  id="finecorso" style="display: none">
-                                            <label>Fine</label>
-                                            <div class="input-group">
-                                                <input type="text" class="form-control mydatepicker" placeholder="mm/dd/yyyy">
-                                                <div class="input-group-append">
-                                                    <span class="input-group-text"><i class="fa fa-calendar"></i></span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6" id="entrate" style="display: none">
-                                            <div class="form-group">
-                                                <label for="exampleFormControlSelect1">Numero Entrate</label>
-                                                <select class="form-control" id="exampleFormControlSelect1">
-                                                    <option>1</option>
-                                                    <option>2</option>
-                                                    <option>3</option>
-                                                    <option>4</option>
-                                                    <option>5</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
-                                <br>
-                                    <div class="col-md-12 row">
-                                    <p align="left">
-                                        <button id="corso" name="acceptTerms" class="btn btn-danger">Annulla</button>
-                                    </p>
-                                        <hr>
-                                    <p align="right">
-                                    <button id="corso" name="acceptTerms" class="btn btn-success">Inserisci</button>
-                                    </p>
                                 </div>
                             </div>
-                        </form>
-                    </div>
+                            <div class="col-md-6"  id="fine" style="display: none">
+                                <label>Fine</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control mydatepicker" placeholder="mm/dd/yyyy">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6"  id="corsi" style="display: none">
+                                <label>Nome Corso</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control mydatepicker" placeholder="">
+                                    <div class="input-group-append">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6"  id="iniziocorso" style="display: none">
+                                <label>Inzio</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control mydatepicker" placeholder="mm/dd/yyyy">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6"  id="finecorso" style="display: none">
+                                <label>Fine</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control mydatepicker" placeholder="mm/dd/yyyy">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6" id="entrate" style="display: none">
+                                <div class="form-group">
+                                    <label for="exampleFormControlSelect1">Numero Entrate</label>
+                                    <select class="form-control" id="exampleFormControlSelect1">
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                        <option>5</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="col-md-12 row">
+                    <p align="left">
+                        <button id="corso" name="acceptTerms" class="btn btn-danger">Annulla</button>
+                    </p>
+                    <hr>
+                    <p align="right">
+                        <button id="corso" name="acceptTerms" class="btn btn-success">Inserisci</button>
+                    </p>
                 </div>
             </div>
         </div>
     </div>
+
 
     <script>
         function Annuale() {

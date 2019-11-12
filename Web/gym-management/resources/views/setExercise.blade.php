@@ -1,59 +1,59 @@
+
 @extends('layouts.master')
+
 @section('content')
-    <div class="card" style="border-radius: 10px;background-color: rgb(31, 38, 45, 0.8)">
-        <div class="card-body">
-            <div class="row justify-content-center">
-
-                <div class="col-md-12 row">
-
-                    <div class="col-md-4"></div>
-
-                    <div class="col-md-4" style="text-align: center;">
-                        <h1 style="color: #d6d8d8">Modifica esercizio</h1>
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            <div class="card" style="border-radius: 10px;background-color: #d6d8d8">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-md-8" style="text-align: left">
+                            <h4>Modifica Eserizio</h4>
+                        </div>
+                        <div class="col-md-4" style="text-align: end">
+                            <!--Pagina precedente-->
+                            <a href="gestioneEsercizi">
+                                <h3>
+                                    <i class="fas fa-times" style="color: red"></i>
+                                </h3>
+                            </a>
+                        </div>
                     </div>
-
-                    <div class="col-md-4" style="text-align: end">
-                        <a href="/gestioniEsercizi">
-                            <h3>
-                                <i class="fas fa-times" style="color: red"></i>
-                            </h3>
-                        </a>
-                    </div>
-
                 </div>
-            </div>
-
-            <div class="col-md-12" style="margin-top: 2.5%">
-                <div class="card-body" style="background-color: #d6d8d8; border-radius: 10px;">
-                    <form action="/insertFormExercise" method="post" enctype="multipart/form-data">
+                <div class="card-body">
+                    <form action="/setFormExercise" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group row">
                             <div class="col-sm-6">
                                 <label for="fname" class="col-sm-12 text-left control-label col-form-label">Nome Esercizio</label>
-                                <input type="text" class="form-control" placeholder="#" id="fname" name="name" style="border-radius: 10px;background-color: rgb(255, 255, 255,0.7);">
+                                <input type="text" value="{{$exercise->getName()}}" class="form-control" id="nameExercise" name="nameExercise" style="border-radius: 10px;background-color: rgb(255, 255, 255,0.7);" required>
+                                <input type="text" value="{{$exercise->getIdDatabase()}}" hidden id="idDatabase" name="idDatabase">
                             </div>
                             <div class="col-md-6"></div>
                         </div>
                         <div class="form-group row">
                             <div class="col-sm-6">
                                 <label for="fname" class="col-sm-12 text-left control-label col-form-label">Descrizione</label>
-                                <textarea  class="form-control" placeholder="#" id="fname" name="description" rows="5" style="border-radius: 10px;background-color: rgb(255, 255, 255,0.7);"></textarea>
+                                <textarea  class="form-control" id="descriptionExercise" name="descriptionExercise" rows="5" style="border-radius: 10px;background-color: rgb(255, 255, 255,0.7);"required>{{$exercise->getDescription()}}</textarea>
                             </div>
                             <div class="col-md-6">
                                 <label for="fname" class="col-sm-12 text-left control-label col-form-label">Carica Gif</label>
-                                <input type="file" class="form-control" id="fname" name="image" style="border-radius: 10px;background-color: rgb(255, 255, 255,0.7);">
+                                <input type="file" class="form-control" id="imageExercise" name="imageExercise" style="border-radius: 10px;background-color: rgb(255, 255, 255,0.7);" >
+                                <input type="text" id="oldImageExercise" name="oldImageExercise" hidden  value="{{$exercise->getGif()}}">
+
                             </div>
+                          
                         </div>
                         <div class="form-group row">
                             <div class="col-sm-12">
                                 <label for="fname" class="col-sm-12 text-left control-label col-form-label">Link esercizio</label>
-                                <input class="form-control" placeholder="#" id="fname" name="link" style="border-radius: 10px; background-color: rgb(255, 255, 255,0.7);">
+                                <input class="form-control" value="{{$exercise->getLink()}}" id="linkExercise" name="linkExercise" style="border-radius: 10px; background-color: rgb(255, 255, 255,0.7);"required>
                             </div>
                         </div>
                         <div class="form-group row">
                             <div class="col-sm-4">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="exerciseIsATime" id="exerciseIsATime" value="option1">
+                                    <input class="form-check-input" <?php if($exercise->getExerciseIsATime()==true){ ?> checked <?php } ?> type="checkbox" name="exerciseIsATime" id="exerciseIsATime" value="TRUE">
                                     <label class="form-check-label" for="fname">
                                         L'esercicio è a tempo?
                                     </label>
@@ -76,5 +76,4 @@
             </div>
         </div>
     </div>
-
 @endsection

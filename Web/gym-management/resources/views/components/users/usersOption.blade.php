@@ -1,4 +1,4 @@
-<div class="card" style="border-radius: 10px;background-color: rgb(255, 255, 255,0.7);">
+<div class="card" style="border-radius: 10px;background-color: #d6d8d8">
     <div class="card-body">
         <div class="row">
             <div class="col-md-6">
@@ -6,7 +6,7 @@
                   @csrf
                   <div class="input-group no-border">
 
-                      <input type="text" class="form-control" name='searchInput' placeholder="Cerca...">
+                      <input type="text" class="form-control" name='searchInput' placeholder="Cerca Utente...">
                       <button type="submit" class="btn btn-default btn-round btn-just-icon" style="background-color: #3F5469">
                           <i class="fas fa-search"></i>
                           <div class="ripple-container"></div>
