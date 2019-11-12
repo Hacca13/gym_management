@@ -5,7 +5,7 @@
             <div class="row">
                 <div class="col-md-3" style="margin-top: auto; margin-bottom: auto;">
                     <h3>{{$course->getName()}}</h3>
-                </div><!- corso>
+                </div>
                 <div class="col-md-3" style="text-align: center; margin-top: auto; margin-bottom: auto;">
                     @if($course->getIsActive() == TRUE)
                         <h4>ATTIVO</h4>
@@ -13,15 +13,15 @@
                     @if($course->getIsActive() == FALSE)
                         <h4>INATTIVO</h4>
                     @endif
-                </div><!- attivo>
+                </div>
                 <div class="col-md-3" style="text-align: center; margin-top: auto; margin-bottom: auto;">
                     <h4>Inizio</h4>
                     <h4>{{$course->getPeriod()['startDate']}}</h4>
-                </div><!- inizio>
+                </div>
                 <div class="col-md-3" style="text-align: center; margin-top: auto; margin-bottom: auto;">
                     <h4>Fine</h4>
                     <h4>{{$course->getPeriod()['endDate']}}</h4>
-                </div><!- fine>
+                </div>
             </div>
         </div>
     </a>
@@ -35,4 +35,3 @@
         </div>
     </div>
 </div>
-

@@ -19,7 +19,10 @@
                             <div class="form-group row">
                                 <div class="col-sm-9">
                                     <label for="fname" class="col-sm-6 text-left control-label col-form-label" style="font-family: bold">Durata:</label>
-                                    <label>Dal: {{$course->getPeriod()['startDate']}} Al: {{$course->getPeriod()['endDate']}}</label>
+                                    <br>
+                                    <label class="col-sm-6 text-right control-label col-form-label" style="font-family: bold">Dal:</label> {{$course->getPeriod()['startDate']}}
+                                    <br>
+                                    <label class="col-sm-6 text-right control-label col-form-label" style="font-family: bold">Al:</label> {{$course->getPeriod()['endDate']}}
                                 </div>
                             </div>
                             <div class="form-group row">

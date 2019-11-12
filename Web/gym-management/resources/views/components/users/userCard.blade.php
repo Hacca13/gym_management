@@ -5,14 +5,20 @@
                 <div class="col-md-4" style="margin-top: auto; margin-bottom: auto;">
                     <h3>{{$user->getName()}} {{$user->getSurname()}}</h3>
                 </div>
+                <div class="col-md-3" style="text-align: center; margin-top: auto; margin-bottom: auto;">
+                    @if($user->getStatus() == TRUE)
+                        <h4>ATTIVO</h4>
+                    @endif
+                    @if($user->getStatus() == FALSE)
+                        <h4>INATTIVO</h4>
+                    @endif
+                </div>
                 <div class="col-md-1">
                 </div>
                 <div class="col-md-3" style="text-align: right; margin-top: auto; margin-bottom: auto;">
-                    <h4>Dal: </h4>
+                    <h4>{{$user->getDateOfBirth()}} </h4>
                 </div>
-                <div class="col-md-3" style="text-align: right; margin-top: auto; margin-bottom: auto;">
-                    <h4>Al: </h4>
-                </div>
+
             </div>
         </div>
     </a>

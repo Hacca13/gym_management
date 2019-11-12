@@ -40,6 +40,7 @@ Route::get('/modificaEsercizio/{id}', 'ExercisesManager@setExerciseView');
 
 
 //UTENTI
+Route::get('/modificaUtente/{id}', 'UsersManager@setUserView');
 Route::post('/addUserPost', 'UsersManager@createUser');
 Route::post('/userSearchResultsPage', 'UsersManager@searchUsers');
 Route::get('/userPageSearchResults', 'UsersManager@searchUsers');
