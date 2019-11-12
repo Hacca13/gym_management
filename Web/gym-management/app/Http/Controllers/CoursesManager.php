@@ -223,9 +223,15 @@ class CoursesManager extends Controller{
         $str = $bucket->upload(file_get_contents($uploadedImage),
             [
                 'name' => $name
-            ])->name();
+            ]);
 
-        $image =  "https://firebasestorage.googleapis.com/v0/b/fitandfight.appspot.com/o/". $str ."?alt=media";
+        $external = "19/10/2100 14:48:21";
+        $format = "d/m/Y H:i:s";
+        $dateobj = DateTime::createFromFormat($format, $external);
+
+        $image = $str->signedUrl($dateobj).PHP_EOL;
+
+        //$image =  "https://firebasestorage.googleapis.com/v0/b/fitandfight.appspot.com/o/". $str ."?alt=media";
 
         $days = array();
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Models\TrainingCardsModel;
+use DateTime;
 use Illuminate\Http\Request;
 use Google\Cloud\Firestore\FirestoreClient;
 use Kreait\Firebase\Exception\FirebaseException;
@@ -75,10 +76,10 @@ class ExercisesManager extends Controller{
         $documents = $query->documents();
 
         foreach ($documents as $document) {
-          $exercise = ExercisesManager::trasformArrayExerciseToExercise($document->data());
-          $exercise->setName(ucfirst($exercise->getName()));
-          $exercise->setIdDatabase($document->id());
-          array_push($exercises,$exercise);
+            $exercise = ExercisesManager::trasformArrayExerciseToExercise($document->data());
+            $exercise->setName(ucfirst($exercise->getName()));
+            $exercise->setIdDatabase($document->id());
+            array_push($exercises,$exercise);
         }
 
         return $exercises;
@@ -127,12 +128,12 @@ class ExercisesManager extends Controller{
     }
 
     public static function existsAExerciseWithThisName($name){
-      $exercisesList = ExercisesManager::getExerciseByName($name);
-      if(count($exercisesList) == 0){
-        return FALSE;
-      }else{
-        return TRUE;
-      }
+        $exercisesList = ExercisesManager::getExerciseByName($name);
+        if(count($exercisesList) == 0){
+            return FALSE;
+        }else{
+            return TRUE;
+        }
 
     }
 
@@ -146,8 +147,8 @@ class ExercisesManager extends Controller{
         }
 
         if(ExercisesManager::existsAExerciseWithThisName($name)){
-          toastr()->error('Esiste già un esercizio con questo nome');
-          return redirect('nuovoEsercizio');
+            toastr()->error('Esiste già un esercizio con questo nome');
+            // return redirect('nuovoEsercizio');
         }
 
         $exerciseImage = $request->file('imageExercise');
@@ -157,10 +158,14 @@ class ExercisesManager extends Controller{
 
         $imageRef = $firebase->createStorage()->getBucket()->upload(file_get_contents($exerciseImage),
             [
-                'name' => $exerciseImage->getClientOriginalName()
-            ])->name();
+                'name' => $exerciseImage->getClientOriginalName(),
+            ]);
 
-        $gif =  "https://firebasestorage.googleapis.com/v0/b/fitandfight.appspot.com/o/". $imageRef ."?alt=media";
+         $external = "19/10/2100 14:48:21";
+         $format = "d/m/Y H:i:s";
+         $dateobj = DateTime::createFromFormat($format, $external);
+
+        $gif = $imageRef->signedUrl($dateobj).PHP_EOL;
 
         $collection = Firestore::collection('Exercises');
 
@@ -171,6 +176,27 @@ class ExercisesManager extends Controller{
         return redirect('gestioneEsercizi');
 
     }
+
+    public static function gif(Request $request){
+        $input = $request->all();
+        $exerciseImage = $request->file('imageExercise');
+
+        $firebase = (new Firebase\Factory());
+
+        $imageRef = $firebase->createStorage()->getBucket()->upload(file_get_contents($exerciseImage),
+            [
+                'name' => $exerciseImage->getClientOriginalName()
+            ]);
+
+        //$gif =  "https://firebasestorage.googleapis.com/v0/b/fitandfight.appspot.com/o/". $imageRef ."?alt=media";
+
+        $pelo = $imageRef->info()['mediaLink'];
+
+        return redirect('testGif')->with('pelo',  $pelo);
+
+    }
+
+
 
     public static function trasformRequestToArrayExercise($input,$gif){
         $arrayExercise = array(
@@ -212,86 +238,86 @@ class ExercisesManager extends Controller{
     }
 
     public static function getAllExercisesForView(Request $request) {
-      $currentPage = LengthAwarePaginator::resolveCurrentPage();
-      $exercises = ExercisesManager::getExercisesDBOrExercises($request,$currentPage);
+        $currentPage = LengthAwarePaginator::resolveCurrentPage();
+        $exercises = ExercisesManager::getExercisesDBOrExercises($request,$currentPage);
 
-      $itemCollection = collect($exercises);
-      $perPage = 9;
-      $currentPageItems = $itemCollection->slice(($currentPage * $perPage) - $perPage, $perPage)->all();
-      $exercises = new LengthAwarePaginator($currentPageItems , count($itemCollection), $perPage);
-      $exercises->setPath($request->url());
+        $itemCollection = collect($exercises);
+        $perPage = 9;
+        $currentPageItems = $itemCollection->slice(($currentPage * $perPage) - $perPage, $perPage)->all();
+        $exercises = new LengthAwarePaginator($currentPageItems , count($itemCollection), $perPage);
+        $exercises->setPath($request->url());
 
-      return view('exercisePage', compact('exercises'));
+        return view('exercisePage', compact('exercises'));
     }
 
     public static function getExercisesDBOrExercises(Request $request,$currentPage){
-      if($currentPage == 1){
-        $documents = ExercisesManager::getAllExercises();
-        $request->session()->put('exercises', $documents);
+        if($currentPage == 1){
+            $documents = ExercisesManager::getAllExercises();
+            $request->session()->put('exercises', $documents);
 
-      }
-      else{
-        $documents = $request->session()->pull('exercises');
-        $request->session()->put('exercises', $documents);
-      }
-      return $documents;
+        }
+        else{
+            $documents = $request->session()->pull('exercises');
+            $request->session()->put('exercises', $documents);
+        }
+        return $documents;
     }
 
-  public static function searchExercise(Request $request){
-    $currentPage = LengthAwarePaginator::resolveCurrentPage();
+    public static function searchExercise(Request $request){
+        $currentPage = LengthAwarePaginator::resolveCurrentPage();
 
-    $input = $request->all();
-    $input['searchInput'] = strtolower($input['searchInput']);
+        $input = $request->all();
+        $input['searchInput'] = strtolower($input['searchInput']);
 
-    if(isset($input['searchInput'])){
-      $input = $input['searchInput'];
-      $request->session()->put('searchInput', $input);
-    }else{
-      $input = $request->session()->pull('searchInput');
-      $request->session()->put('searchInput', $input);
+        if(isset($input['searchInput'])){
+            $input = $input['searchInput'];
+            $request->session()->put('searchInput', $input);
+        }else{
+            $input = $request->session()->pull('searchInput');
+            $request->session()->put('searchInput', $input);
+        }
+
+        $url = substr($request->url(), 0, strlen($request->url())-26);
+        $url = $url.'exercisesPageSearchResults';
+
+        $exercisesResultList = ExercisesManager::getExercisesDBOrExercisesSessionForSearchPage($request,$currentPage,$input);
+
+        $itemCollection = collect($exercisesResultList);
+        $perPage = 9;
+        $currentPageItems = $itemCollection->slice(($currentPage * $perPage) - $perPage, $perPage)->all();
+        $exercisesResultList = new LengthAwarePaginator($currentPageItems , count($itemCollection), $perPage);
+        $exercisesResultList->setPath($url);
+
+
+        return view('exercisesPageSearchResult', compact('exercisesResultList'));
     }
 
-    $url = substr($request->url(), 0, strlen($request->url())-26);
-    $url = $url.'exercisesPageSearchResults';
-
-    $exercisesResultList = ExercisesManager::getExercisesDBOrExercisesSessionForSearchPage($request,$currentPage,$input);
-
-    $itemCollection = collect($exercisesResultList);
-    $perPage = 9;
-    $currentPageItems = $itemCollection->slice(($currentPage * $perPage) - $perPage, $perPage)->all();
-    $exercisesResultList = new LengthAwarePaginator($currentPageItems , count($itemCollection), $perPage);
-    $exercisesResultList->setPath($url);
-
-
-    return view('exercisesPageSearchResult', compact('exercisesResultList'));
-  }
-
-  public static function getExercisesDBOrExercisesSessionForSearchPage($request,$currentPage,$input){
-    if($currentPage == 1){
-      $exerciseResultList = ExercisesManager::searchExercisesPartially($input);
-      $request->session()->put('exerciseResultList', $exerciseResultList);
-    }
-    else{
-      $exerciseResultList = $request->session()->pull('exerciseResultList');
-      $request->session()->put('exerciseResultList', $exerciseResultList);
-    }
-    return $exerciseResultList;
-  }
-
-  public static function searchExercisesPartially($input){
-    $exercisesResultList = array();
-    $input = strtolower($input);
-    $collection = Firestore::collection('Exercises');
-    $documents = $collection->orderBy('name')->startAt([$input])->endAt([$input.'z'])->documents();
-
-    foreach ($documents as $document) {
-        $exercise = ExercisesManager::trasformArrayExerciseToExercise($document->data());
-        $exercise->setIdDatabase($document->id());
-        array_push($exercisesResultList,$exercise);
+    public static function getExercisesDBOrExercisesSessionForSearchPage($request,$currentPage,$input){
+        if($currentPage == 1){
+            $exerciseResultList = ExercisesManager::searchExercisesPartially($input);
+            $request->session()->put('exerciseResultList', $exerciseResultList);
+        }
+        else{
+            $exerciseResultList = $request->session()->pull('exerciseResultList');
+            $request->session()->put('exerciseResultList', $exerciseResultList);
+        }
+        return $exerciseResultList;
     }
 
-    return $exercisesResultList;
+    public static function searchExercisesPartially($input){
+        $exercisesResultList = array();
+        $input = strtolower($input);
+        $collection = Firestore::collection('Exercises');
+        $documents = $collection->orderBy('name')->startAt([$input])->endAt([$input.'z'])->documents();
 
-  }
+        foreach ($documents as $document) {
+            $exercise = ExercisesManager::trasformArrayExerciseToExercise($document->data());
+            $exercise->setIdDatabase($document->id());
+            array_push($exercisesResultList,$exercise);
+        }
+
+        return $exercisesResultList;
+
+    }
 
 }
