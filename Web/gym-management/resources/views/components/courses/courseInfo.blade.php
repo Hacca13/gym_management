@@ -41,6 +41,15 @@
                             </div>
                         </div>
                     </div>
+                    <div class="form-group row">
+                        <div class="card-body">
+                            <a href="modificaCorso">
+                                <button class="btn btn-warning" id="fname" name="" style="border-radius: 10px;">Modifica</button>
+                            </a>                        </div>
+                        <a href="/gestioneCorsi">
+                            <button class="btn btn-danger" id="fname" name="" style="border-radius: 10px;">Disattiva</button>
+                        </a>
+                    </div>
                 </div>
         </div>
     </div>
