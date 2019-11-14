@@ -9,35 +9,35 @@
         <div class="card-body">
             <div class="row justify-content-center" style="margin-top: 2.5%">
                 <div class="col-md-12" style="text-align: center;">
-                    <h1 style="color: #d6d8d8">Inserisci corso</h1>
+                    <h1 style="color: #d6d8d8">Modifica corso</h1>
                 </div>
                 <div class="col-md-12" style="margin-top: 2.5%">
                     <div class="card" style="border-radius: 10px;background-color: #d6d8d8">
-                        <form class="form-horizontal" method="post" enctype="multipart/form-data" action="/insertFormCourse">
+                        <form class="form-horizontal" method="post" enctype="multipart/form-data" action="/setCourse">
                             @csrf
                             <div class="card-body">
                                 <div class="form-group row">
                                     <label for="fname" class="col-sm-3 text-right control-label col-form-label">Nome Corso</label>
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control" id="fname" name="name" required>
+                                        <input type="text" class="form-control" id="fname" name="name" value="{{$course->getName()}}" required>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="fname" class="col-sm-3 text-right control-label col-form-label">Nome Istruttore</label>
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control" id="fname" name="instructor" required>
+                                        <input type="text" class="form-control" id="fname" name="instructor" value="{{$course->getInstructor()}}" required>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="fname" class="col-sm-3 text-right control-label col-form-label">Data Inizio</label>
                                     <div class="col-sm-9">
-                                        <input type="date" class="form-control" id="startDate" name="startDate" required>
+                                        <input type="date" class="form-control" id="startDate" name="startDate" value="{{data_get($course->getPeriod(), 'startDate')}}" required>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="fname" class="col-sm-3 text-right control-label col-form-label">Data Fine</label>
                                     <div class="col-sm-9">
-                                        <input type="date" class="form-control" id="fname" name="endDate" required>
+                                        <input type="date" class="form-control" id="fname" name="endDate" value="{{data_get($course->getPeriod(), 'endDate')}}" required>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -99,7 +99,8 @@
                                 <div class="form-group row">
                                     <label for="fname" class="col-sm-3 text-right control-label col-form-label">Immagine del Corso</label>
                                     <div class="col-sm-9">
-                                        <input type="file" class="form-control" id="courseImage" name="courseImage" required>
+                                        <input type="text" hidden class="form-control" id="fname" name="oldCourseImage" value="{{$course->getImage()}}">
+                                        <input type="file" class="form-control" id="courseImage" name="courseImage" >
                                     </div>
                                 </div>
                                 <div class="form-group row">

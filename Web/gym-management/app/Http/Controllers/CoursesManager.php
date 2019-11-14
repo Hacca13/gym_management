@@ -14,6 +14,19 @@ use Illuminate\Pagination\LengthAwarePaginator;
 
 class CoursesManager extends Controller{
 
+    public static function setCourseView($id,Request $request){
+        $documents = $request->session()->pull('Courses');
+        $request->session()->put('Courses', $documents);
+
+        foreach ($documents as $document) {
+          if($id == $document->getIdDatabase()){
+            $course = $document;
+          }
+        }
+
+        return view('setCourse', compact('course'));
+    }
+
     public static function searchCourses(Request $request){
         $currentPage = LengthAwarePaginator::resolveCurrentPage();
         $input = $request->all();

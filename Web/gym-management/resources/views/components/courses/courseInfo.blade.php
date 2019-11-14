@@ -43,12 +43,28 @@
                     </div>
                     <div class="form-group row">
                         <div class="card-body">
-                            <a href="modificaCorso">
+                            <a href="/modificaCorso/{{$course->getIdDatabase()}}">
                                 <button class="btn btn-warning" id="fname" name="" style="border-radius: 10px;">Modifica</button>
-                            </a>                        </div>
-                        <a href="/gestioneCorsi">
-                            <button class="btn btn-danger" id="fname" name="" style="border-radius: 10px;">Disattiva</button>
-                        </a>
+                            </a>
+                        </div>
+
+                        @if($course->getIsActive() == TRUE)
+                          <div class="card-body offset-8">
+                            <a href="/gestioneCorsi">
+                                <button class="btn btn-danger" id="fname" name="" style="border-radius: 10px;">Disattiva</button>
+                            </a>
+                          </div>
+                        @endif
+                        @if($course->getIsActive() == FALSE)
+                        <div class="card-body offset-8">
+                          <a href="/gestioneCorsi">
+                              <button class="btn btn-success" id="fname" name="" style="border-radius: 10px;">Attiva</button>
+                          </a>
+                        </div>
+                        @endif
+
+
+
                     </div>
                 </div>
         </div>
