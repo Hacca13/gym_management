@@ -242,11 +242,8 @@
                                     <label for="cono1" class="text-right control-label col-form-label">Rilasciato da:</label>
                                     <input type="text" class="form-control" id="parentDocumentReleaser" name="parentDocumentReleaser" value="">
                                 </div>
-                            </section>
-                            <h3>Completa</h3>
-                            <section>
                                 <input id="acceptTerms" name="acceptTerms" type="checkbox" class="required">
-                                <label for="acceptTerms">I agree with the Terms and Conditions.</label>
+                                <label for="acceptTerms">Premere sulla checkbox pre completare.</label>
                             </section>
                         </div>
 

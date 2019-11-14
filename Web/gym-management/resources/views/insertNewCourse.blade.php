@@ -48,7 +48,14 @@
 
                                     </div>
                                 </div>
+                                <div class="form-group row">
+                                    <div class="col-md-1  offset-1">
+                                        <button type="button" class="bttn-material-flat bttn-sm bttn-success"
+                                                id="addbutton" onclick="addDay()"><i class="fas fa-plus"></i>
+                                        </button>
 
+                                    </div>
+                                </div>
                                 <div id="boxes">
 
                                     <div id="{{"Entireday" . $index}}">
@@ -102,9 +109,12 @@
                                         <input type="file" class="form-control" id="courseImage" name="courseImage" required>
                                     </div>
                                 </div>
-                                <div class="border-top">
+                                <div class="form-group row">
                                     <div class="card-body">
-                                        <button type="submit" class="btn btn-success">Inserisci Corso</button>
+                                        <button type="submit" class="btn btn-success" style="border-radius: 10px;">Inserisci Corso</button>
+                                    </div>
+                                    <div class="card-body offset-8">
+                                        <button type="submit" class="btn btn-danger" style="border-radius: 10px;">Annulla</button>
                                     </div>
                                 </div>
                             </div>

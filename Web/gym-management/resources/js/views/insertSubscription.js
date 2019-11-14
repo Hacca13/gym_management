@@ -179,42 +179,51 @@ class InsertSubscription extends Component {
         );
         return (
             <div className="col-md-12">
-                <div className="card" style={{borderRadius: '10px', backgroundColor: '#d6d8d8'}}>
+                <div className="card" style={{borderRadius: '10px', backgroundColor: 'rgb(31,30,45,0.8)'}}>
                     <div className="card-body">
+                        <div className="col-md-12">
+                            <h2 className="text-center" style={{color: '#d6d8d8'}}>Inserisci Dati Abbonamento</h2>
+                        </div>
                         <div className="row">
                             <div className="col-md-12">
                                 <div className="card" style={{borderRadius: '10px', backgroundColor: '#d6d8d8'}}>
                                     <div className="card-body">
-                                        <div className="col-md-12">
-                                            <h2 className="text-center">Inserisci Dati Abbonamento</h2>
-                                        </div>
                                         <br/>
                                         <br/>
                                         <form onSubmit={this.submitForm}>
 
+                                            <div className="row">
 
-                                            <div>
-                                                <section>
-                                                    <label htmlFor="userName" className="row">Abbonamento di: </label>
-                                                    <UserSearch
-                                                        retrieveUser={this.addUser}
-                                                    />
+                                                <div className="col-md-4">
+                                                    <section>
+                                                        <label htmlFor="userName" className="row">Abbonamento di: </label>
+                                                        <UserSearch
+                                                            retrieveUser={this.addUser}
+                                                        />
 
-                                                </section>
-                                            </div>
+                                                    </section>
+                                                </div>
 
-                                            <div>
-                                                <br/>
-                                                <label htmlFor="userName" className="row">Tipo di abbonamento:</label>
-                                                <br/>
-                                                <section>
-                                                    <input id="myCheck" onClick={this.Annuale} name="acceptTerms" type="radio" className="required"/>
-                                                    <label htmlFor="acceptTerms">Periodico</label>
-                                                    <input id="entrata" onClick={this.Entrate} name="acceptTerms" type="radio" className="required"/>
-                                                    <label htmlFor="acceptTerms">Entrate</label>
-                                                    <input id="corso" onClick={this.Corso} name="acceptTerms" type="radio" className="required"/>
-                                                    <label htmlFor="acceptTerms">Corso</label>
-                                                </section>
+                                                <div className="col-md-12">
+
+                                                    <br/>
+                                                    <label htmlFor="userName" className="row">Tipo di abbonamento:</label>
+                                                    <br/>
+                                                    <section>
+                                                        <div className="custom-control custom-radio">
+                                                        <input id="myCheck" onClick={this.Annuale} name="acceptTerms" type="radio" className="required custom-control-input" style={{marginLeft: '2%'}}/>
+                                                        <label htmlFor="myCheck" style={{marginLeft: '1%'}} className="custom-control-label" >Periodico</label>
+                                                        </div>
+                                                        <div className="custom-control custom-radio">
+                                                        <input id="entrata" onClick={this.Entrate} name="acceptTerms" type="radio" className="required custom-control-input"style={{marginLeft: '2%'}}/>
+                                                        <label htmlFor="entrata"style={{marginLeft: '1%'}} className="custom-control-label">Entrate</label>
+                                                        </div>
+                                                        <div className="custom-control custom-radio">
+                                                        <input id="corso" onClick={this.Corso} name="acceptTerms" type="radio" className="required custom-control-input" style={{marginLeft: '2%'}}/>
+                                                            <label htmlFor="corso"style={{marginLeft: '1%'}} className="custom-control-label">Corso</label>
+                                                        </div>
+                                                    </section>
+                                                </div>
                                             </div>
                                             <br/>
 
@@ -339,8 +348,8 @@ class InsertSubscription extends Component {
                     </div>
                 </div>
             </div>
-        );
+    );
     }
-}
+    }
 
-export default InsertSubscription;
+    export default InsertSubscription;
