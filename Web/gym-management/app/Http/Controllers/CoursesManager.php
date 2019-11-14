@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use DateTime;
 use Google\Cloud\Firestore\FirestoreClient;
 use Firevel\Firestore\Facades\Firestore;
 use Illuminate\Http\Request;
@@ -14,59 +15,59 @@ use Illuminate\Pagination\LengthAwarePaginator;
 class CoursesManager extends Controller{
 
     public static function searchCourses(Request $request){
-      $currentPage = LengthAwarePaginator::resolveCurrentPage();
-      $input = $request->all();
-      $input['searchInput'] = strtolower($input['searchInput']);
+        $currentPage = LengthAwarePaginator::resolveCurrentPage();
+        $input = $request->all();
+        $input['searchInput'] = strtolower($input['searchInput']);
 
-      if(isset($input['searchInput'])){
-        $input = $input['searchInput'];
-        $request->session()->put('searchInput', $input);
-      }else{
-        $input = $request->session()->pull('searchInput');
-        $request->session()->put('searchInput', $input);
-      }
-      $url = substr($request->url(), 0, strlen($request->url())-24);
-      $url = $url.'coursesPageSearchResults';
+        if(isset($input['searchInput'])){
+            $input = $input['searchInput'];
+            $request->session()->put('searchInput', $input);
+        }else{
+            $input = $request->session()->pull('searchInput');
+            $request->session()->put('searchInput', $input);
+        }
+        $url = substr($request->url(), 0, strlen($request->url())-24);
+        $url = $url.'coursesPageSearchResults';
 
-      $coursesResultList = CoursesManager::getCoursesDBOrCoursesSessionForSearchPage($request,$currentPage,$input);
+        $coursesResultList = CoursesManager::getCoursesDBOrCoursesSessionForSearchPage($request,$currentPage,$input);
 
-      $itemCollection = collect($coursesResultList);
-      $perPage = 1;
-      $currentPageItems = $itemCollection->slice(($currentPage * $perPage) - $perPage, $perPage)->all();
-      $coursesResultList = new LengthAwarePaginator($currentPageItems , count($itemCollection), $perPage);
-      $coursesResultList->setPath($url);
+        $itemCollection = collect($coursesResultList);
+        $perPage = 1;
+        $currentPageItems = $itemCollection->slice(($currentPage * $perPage) - $perPage, $perPage)->all();
+        $coursesResultList = new LengthAwarePaginator($currentPageItems , count($itemCollection), $perPage);
+        $coursesResultList->setPath($url);
 
 
-      return view('coursesPageSearchResult', compact('coursesResultList'));
+        return view('coursesPageSearchResult', compact('coursesResultList'));
     }
 
     public static function getCoursesDBOrCoursesSessionForSearchPage($request,$currentPage,$input){
-      if($currentPage == 1){
-        $coursesResultList = CoursesManager::searchCoursesPartially($input);
-        $request->session()->put('coursesResultList', $coursesResultList);
-      }
-      else{
-        $coursesResultList = $request->session()->pull('coursesResultList');
-        $request->session()->put('coursesResultList', $coursesResultList);
-      }
-      return $coursesResultList;
+        if($currentPage == 1){
+            $coursesResultList = CoursesManager::searchCoursesPartially($input);
+            $request->session()->put('coursesResultList', $coursesResultList);
+        }
+        else{
+            $coursesResultList = $request->session()->pull('coursesResultList');
+            $request->session()->put('coursesResultList', $coursesResultList);
+        }
+        return $coursesResultList;
     }
 
     public static function searchCoursesPartially($input){
-      $coursesResultList = array();
-      $input = strtolower($input);
-      $collection = Firestore::collection('Courses');
-      $documents = $collection->orderBy('name')->startAt([$input])->endAt([$input.'z'])->documents();
+        $coursesResultList = array();
+        $input = strtolower($input);
+        $collection = Firestore::collection('Courses');
+        $documents = $collection->orderBy('name')->startAt([$input])->endAt([$input.'z'])->documents();
 
-      foreach ($documents as $document) {
-          $course = CoursesManager::trasformArrayCourseToCourse($document->data());
-          $course->setName(ucfirst($course->getName()));
-          $course->setInstructor(ucfirst($course->getInstructor()));
-          $course->setIdDatabase($document->id());
-          array_push($coursesResultList,$course);
-      }
+        foreach ($documents as $document) {
+            $course = CoursesManager::trasformArrayCourseToCourse($document->data());
+            $course->setName(ucfirst($course->getName()));
+            $course->setInstructor(ucfirst($course->getInstructor()));
+            $course->setIdDatabase($document->id());
+            array_push($coursesResultList,$course);
+        }
 
-      return $coursesResultList;
+        return $coursesResultList;
 
     }
 
@@ -125,43 +126,43 @@ class CoursesManager extends Controller{
     }
 
     public static function isExpired($endDate){
-      $today = date("Y-m-d");
-      $timestamp = strtotime($endDate);
-      $endDate = date("Y-m-d", $timestamp);
+        $today = date("Y-m-d");
+        $timestamp = strtotime($endDate);
+        $endDate = date("Y-m-d", $timestamp);
 
-      if($endDate < $today){
-        return true;
-      }
-      else{
-        return false;
-      }
+        if($endDate < $today){
+            return true;
+        }
+        else{
+            return false;
+        }
 
     }
 
     public static function getAllCoursesView(Request $request){
-      $currentPage = LengthAwarePaginator::resolveCurrentPage();
-      $courses = CoursesManager::getCoursesDBOrCoursesSession($request,$currentPage);
+        $currentPage = LengthAwarePaginator::resolveCurrentPage();
+        $courses = CoursesManager::getCoursesDBOrCoursesSession($request,$currentPage);
 
-      $itemCollection = collect($courses);
-      $perPage = 1;
-      $currentPageItems = $itemCollection->slice(($currentPage * $perPage) - $perPage, $perPage)->all();
-      $courses = new LengthAwarePaginator($currentPageItems , count($itemCollection), $perPage);
-      $courses->setPath($request->url());
+        $itemCollection = collect($courses);
+        $perPage = 1;
+        $currentPageItems = $itemCollection->slice(($currentPage * $perPage) - $perPage, $perPage)->all();
+        $courses = new LengthAwarePaginator($currentPageItems , count($itemCollection), $perPage);
+        $courses->setPath($request->url());
 
-      return view('courses', compact('courses'));
+        return view('courses', compact('courses'));
     }
 
     public static function getCoursesDBOrCoursesSession(Request $request,$currentPage){
-      if($currentPage == 1){
-        $documents = CoursesManager::getAllCourses();
-        $request->session()->put('Courses', $documents);
+        if($currentPage == 1){
+            $documents = CoursesManager::getAllCourses();
+            $request->session()->put('Courses', $documents);
 
-      }
-      else{
-        $documents = $request->session()->pull('Courses');
-        $request->session()->put('Courses', $documents);
-      }
-      return $documents;
+        }
+        else{
+            $documents = $request->session()->pull('Courses');
+            $request->session()->put('Courses', $documents);
+        }
+        return $documents;
 
     }
 
@@ -211,7 +212,7 @@ class CoursesManager extends Controller{
         $timestampEndDate = strtotime($input['endDate']);
         $endDate = date("d-m-Y", $timestampEndDate);
 
-        $uploadedImage = $request->file('courseImage');
+        $uploadedImage = $request->file("courseImage");
 
         $firebase = (new Firebase\Factory());
 
@@ -261,9 +262,10 @@ class CoursesManager extends Controller{
         $usersList = array();
 
 
-        $coll = Firestore::collection('Courses');
+        $coll = Firestore::collection('Courses')->newDocument();
 
         $corso = array(
+            'idDatabase' => $coll->id(),
             'name' => $name,
             'image' => $image,
             'isActive' => TRUE,
@@ -273,7 +275,7 @@ class CoursesManager extends Controller{
             'usersList' => $usersList
         );
 
-        $coll->add($corso);
+        $coll->set($corso);
 
         toastr()->success('Corso inserito');
         return redirect('/gestioneCorsi');
@@ -289,6 +291,48 @@ class CoursesManager extends Controller{
         return response()->json($arr);
     }
 
+    public static function addUserToCourse(Request $request) {
+        $input = $request->all();
+        //var_dump($input);
+        $courses = self::getCourseByID($input["course"]);
+        $userList = $courses->getUsersList();
+        array_push($userList, $input["user"]);
+        $courses->setUsersList($userList);
+        $corso = array(
+            'idDatabase' => $courses->getIdDatabase(),
+            'name' => $courses->getName(),
+            'image' => $courses->getImage(),
+            'isActive' => $courses->getIsActive(),
+            'instructor' => $courses->getInstructor(),
+            'period' => $courses->getPeriod(),
+            'weeklyFrequency' => $courses->getWeeklyFrequency(),
+            'usersList' => $courses->getUsersList()
+        );
+        $factory = (new Firebase\Factory());
+        $firestore = $factory->createFirestore();
+        $database = $firestore->database();
+        $ref = $database->collection('Courses')->document($input["course"]);
+        $ref->set($corso);
+        return "/";
 
+    }
+
+    public static function getCourseByID($id) {
+        $courses = Firestore::collection('Courses')->document($id)->snapshot();
+        $arrCourse = CoursesManager::trasformArrayCourseToCourse($courses);
+        return $arrCourse;
+    }
+
+    public static function pelo() {
+
+        $factory = (new Firebase\Factory());
+        $firestore = $factory->createFirestore();
+        $database = $firestore->database();
+        $ref = $database->collection('Courses')->document('a405eea7aabd467d95d4');
+        $doc = $ref->snapshot();
+        $ref->set($doc);
+
+
+    }
 
 }

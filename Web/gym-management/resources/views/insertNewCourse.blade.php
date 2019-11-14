@@ -93,7 +93,7 @@
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <div class="col-sm-6    deleter text-right">
+                                            <div class="col-sm-6 deleter text-right">
                                                 <button type="button" id="{{$index}}" class="bttn-material-flat bttn-sm bttn-danger"
                                                         onclick="removeButton(this.id)"><i class="fas fa-times"></i>
                                                 </button>
@@ -128,17 +128,31 @@
         <script>
             var index = JSON.parse({{json_encode($index)}});
             function addDay () {
-                index++;
+                index += 1;
+                console.log(index);
                 let boxes = document.getElementById("boxes");
                 let clone = boxes.firstElementChild.cloneNode(true);
                 clone.setAttribute("id", "Entireday" + index);
                 boxes.appendChild(clone);
                 document.getElementById("Entireday" + index).lastElementChild.lastElementChild.setAttribute("id", index);
+
                 document.getElementById('Entireday' + index).getElementsByTagName('select')[0].setAttribute('name', 'singleDay' + index);
+                document.getElementById('Entireday' + index).getElementsByTagName('select')[0].setAttribute('name', 'singleDay' + index);
+
                 document.getElementById('Entireday' + index).getElementsByTagName('input')[0].setAttribute('name', 'hourFrom' + index);
+                document.getElementById('Entireday' + index).getElementsByTagName('input')[0].setAttribute('id', 'hourFrom' + index);
+
                 document.getElementById('Entireday' + index).getElementsByTagName('input')[1].setAttribute('name', 'minutesFrom' + index);
+                document.getElementById('Entireday' + index).getElementsByTagName('input')[1].setAttribute('id', 'minutesFrom' + index);
+
                 document.getElementById('Entireday' + index).getElementsByTagName('input')[2].setAttribute('name', 'hourTo' + index);
+                document.getElementById('Entireday' + index).getElementsByTagName('input')[2].setAttribute('id', 'hourTo' + index);
+
                 document.getElementById('Entireday' + index).getElementsByTagName('input')[3].setAttribute('name', 'minutesTo' + index);
+                document.getElementById('Entireday' + index).getElementsByTagName('input')[3].setAttribute('id', 'minutesTo' + index);
+
+                document.getElementById('Entireday' + index).getElementsByTagName('button')[0].setAttribute('id', 'removeDay' + index);
+                document.getElementById('Entireday' + index).getElementsByTagName('button')[0].setAttribute('id', index);
             }
             function removeButton(index) {
                 let deleter = document.getElementsByClassName('deleter');

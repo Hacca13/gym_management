@@ -17,6 +17,10 @@ let InsertSubs = (props) => {
     return <InsertSubscription/>;
 };
 
+let insertUserToCourse = (props) => {
+    return <AddUserToCourse/>;
+};
+
 
 class App extends Component {
     render() {
@@ -27,6 +31,7 @@ class App extends Component {
                     <Route exact path="/salvatore" component={addUsrToCourse} />
                     <Route exact path="/nuovaScheda" component={InsertTCard} />
                     <Route exact path="/nuovoAbbonamento" component={InsertSubs} />
+                    <Route exact path="/inserisciUtenteCorso" component={insertUserToCourse} />
                 </div>
             </BrowserRouter>
         );

@@ -85,6 +85,9 @@ Route::get('/nuovoCorso', function () {
 Route::post('/coursesSearchResultsPage', 'CoursesManager@searchCourses');
 Route::get('/coursesPageSearchResults', 'CoursesManager@searchCourses');
 
+Route::get('/inserisciUtenteCorso', function () {
+    return view('addUserToCourse');
+});
 
 
 Auth::routes();
