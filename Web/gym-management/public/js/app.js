@@ -86337,7 +86337,8 @@ function (_Component) {
           subsToAdd = _objectSpread({}, subsToAdd, {
             idCourseDatabase: _this.state.courseID,
             startDate: _this.formatDate(_this.state.corso_from),
-            endDate: _this.formatDate(_this.state.corso_to)
+            endDate: _this.formatDate(_this.state.corso_to),
+            type: _this.state.typeOfSubs
           });
           break;
       }
@@ -86488,11 +86489,18 @@ function (_Component) {
         className: "card",
         style: {
           borderRadius: '10px',
-          backgroundColor: '#d6d8d8'
+          backgroundColor: 'rgb(31,30,45,0.8)'
         }
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "card-body"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-md-12"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
+        className: "text-center",
+        style: {
+          color: '#d6d8d8'
+        }
+      }, "Inserisci Dati Abbonamento")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "row"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-md-12"
@@ -86504,45 +86512,74 @@ function (_Component) {
         }
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "card-body"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-md-12"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
-        className: "text-center"
-      }, "Inserisci Dati Abbonamento")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         onSubmit: this.submitForm
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "row"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-md-4"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         htmlFor: "userName",
         className: "row"
       }, "Abbonamento di: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_userSearch__WEBPACK_IMPORTED_MODULE_1__["default"], {
         retrieveUser: this.addUser
-      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-md-12"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         htmlFor: "userName",
         className: "row"
-      }, "Tipo di abbonamento:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }, "Tipo di abbonamento:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "custom-control custom-radio"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         id: "myCheck",
         onClick: this.Annuale,
         name: "acceptTerms",
         type: "radio",
-        className: "required"
+        className: "required custom-control-input",
+        style: {
+          marginLeft: '2%'
+        }
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-        htmlFor: "acceptTerms"
-      }, "Periodico"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        htmlFor: "myCheck",
+        style: {
+          marginLeft: '1%'
+        },
+        className: "custom-control-label"
+      }, "Periodico")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "custom-control custom-radio"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         id: "entrata",
         onClick: this.Entrate,
         name: "acceptTerms",
         type: "radio",
-        className: "required"
+        className: "required custom-control-input",
+        style: {
+          marginLeft: '2%'
+        }
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-        htmlFor: "acceptTerms"
-      }, "Entrate"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        htmlFor: "entrata",
+        style: {
+          marginLeft: '1%'
+        },
+        className: "custom-control-label"
+      }, "Entrate")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "custom-control custom-radio"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         id: "corso",
         onClick: this.Corso,
         name: "acceptTerms",
         type: "radio",
-        className: "required"
+        className: "required custom-control-input",
+        style: {
+          marginLeft: '2%'
+        }
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-        htmlFor: "acceptTerms"
-      }, "Corso"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        htmlFor: "corso",
+        style: {
+          marginLeft: '1%'
+        },
+        className: "custom-control-label"
+      }, "Corso"))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "row"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-md-6 text-left",
@@ -87171,7 +87208,7 @@ function (_Component) {
             key={index}
             retrieveState={this.returnInfo}
         />
-          */
+           */
 
       }))))))));
     }
@@ -87202,8 +87239,8 @@ function (_Component) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/ironsiuv/PhpstormProjects/gym_management/Web/gym-management/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Users/ironsiuv/PhpstormProjects/gym_management/Web/gym-management/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Atom Project\gym_management\Web\gym-management\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Atom Project\gym_management\Web\gym-management\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

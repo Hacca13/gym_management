@@ -141,7 +141,8 @@ class InsertSubscription extends Component {
                     ...subsToAdd,
                     idCourseDatabase: this.state.courseID,
                     startDate: this.formatDate(this.state.corso_from),
-                    endDate: this.formatDate(this.state.corso_to)
+                    endDate: this.formatDate(this.state.corso_to),
+                    type: this.state.typeOfSubs
                 };
                 break;
         }
@@ -328,7 +329,9 @@ class InsertSubscription extends Component {
                                                         </select>
                                                     </div>
                                                 </div>
+
                                             </div>
+
                                             <div className="col-md-12 row">
                                                 <p align="left">
                                                     <button id="corso" name="acceptTerms" className="btn btn-danger">Annulla</button>

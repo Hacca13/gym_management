@@ -23,13 +23,24 @@ class SubscriptionManager extends Controller
       $subscriptionList= new LengthAwarePaginator($currentPageItems , count($itemCollection), $perPage);
       $subscriptionList->setPath($request->url());
 
-      return view('subscriptionPage', compact('subscriptionList'));
+      $userForSubscriptionPage = $request->session()->pull('userForSubscriptionPage');
+      $request->session()->put('userForSubscriptionPage', $userForSubscriptionPage);
+
+      return view('subscriptionPage', compact('subscriptionList','userForSubscriptionPage'));
     }
 
     public static function getSubscriptionDBOrSubscriptionSession(Request $request,$currentPage){
       if($currentPage == 1){
         $documents = SubscriptionManager::getAllSubscription();
         $request->session()->put('allSubscription', $documents);
+        $userForSubscriptionPage = array();
+
+        foreach ($documents as $document) {
+          $user = UsersManager::getUserById($document->getIdUserDatabase());
+          array_push($userForSubscriptionPage, $user);
+        }
+
+        $request->session()->put('userForSubscriptionPage', $userForSubscriptionPage);
       }
       else{
         $documents = $request->session()->pull('allSubscription');
@@ -132,15 +143,18 @@ class SubscriptionManager extends Controller
     }
 
     public static function getAllUser(){
-
+      
         $allUser = array();
-        $collection = Firestore::collection('Users');
-        $documents = $collection->documents();
-        foreach ($documents as $document) {
-            $user = UsersManager::transformArrayUserIntoUser($document->data());
-            $user->setIdDatabase($document->id());
-            array_push($allUser,$user);
-        }
+
+          $collection = Firestore::collection('Users');
+          $documents = $collection->documents();
+          foreach ($documents as $document) {
+              $user = UsersManager::transformArrayUserIntoUser($document->data());
+              $user->setIdDatabase($document->id());
+              array_push($allUser,$user);
+          }
+
+
         return view('subscriptionPage', compact('allUser'));
     }
 
