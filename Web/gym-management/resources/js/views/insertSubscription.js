@@ -331,11 +331,11 @@ class InsertSubscription extends Component {
                                             </div>
                                             <div className="col-md-12 row">
                                                 <p align="left">
-                                                    <button id="corso" name="acceptTerms" className="btn btn-danger">Annulla</button>
+                                                    <button id="corso" name="acceptTerms" className="btn btn-danger" style={{borderRadius: '10px'}}>Annulla</button>
                                                 </p>
                                                 <hr/>
                                                 <p align="right">
-                                                    <button type="submit" id="corso" name="acceptTerms" className="btn btn-success">Inserisci</button>
+                                                    <button type="submit" id="corso" name="acceptTerms" className="btn btn-success" style={{borderRadius: '10px'}}>Inserisci</button>
                                                 </p>
                                             </div>
                                         </form>

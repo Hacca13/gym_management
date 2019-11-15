@@ -42,40 +42,40 @@ class AddUserToCourse extends Component {
             <div className="row justify-content-center">
                 <div className="col-md-10">
                     <div className="card"
-                         style={{borderRadius: '10px', backgroundColor: 'rgb(255, 255, 255,0.7)', marginBottom: '10%'}}>
-
-                        <form onSubmit={this.submitForm}>
-
-                        <div className="card-header">
-                            <div className="row">
-                                <div className="col-md-8" style={{textAlign: 'left'}}>
-                                    <h2>Aggiugi utente ad un corso</h2>
-                                </div>
-                            </div>
-                        </div>
-
+                         style={{borderRadius: '10px', backgroundColor: 'rgb(30, 31, 45,0.8)', marginBottom: '10%'}}>
                         <div className="card-body">
 
-                            <div className="col-md-6" >
-                                <h3>Utente</h3>
-                                <UserSearch retrieveUser={this.addUser}/>
-                            </div>
+                                <div className="col-md-12">
+                                    <h2 className="text-center" style={{color: '#d6d8d8'}}>Aggiugi Utente Ad Un Corso</h2>
+                                </div>
 
-                            <div className="col-md-6" >
-                                <h3>Corso</h3>
-                                <CourseSearch retrieveCourse={this.addCourse}/>
-                            </div>
+                            <form onSubmit={this.submitForm}>
+                                <div className="card" style={{borderRadius: '10px', backgroundColor: '#d6d8d8'}}>
+                                    <div className="card-body">
 
-                            <div>
+                                        <div className="col-md-6" >
+                                            <h3>Utente</h3>
+                                            <UserSearch retrieveUser={this.addUser}/>
+                                        </div>
+                                        <br></br>
+                                        <div className="col-md-6" >
+                                            <h3>Corso</h3>
+                                            <CourseSearch retrieveCourse={this.addCourse}/>
+                                        </div>
 
-                                <button type="submit">Inserisci</button>
+                                        <div>
+                                            <br></br>
+                                            <br></br>
+                                            <div className="col-md-6 row ">
+                                                <button id="corso" name="acceptTerms" className="btn btn-success" style={{borderRadius: '10px', marginLeft: '2%'}}>Inserisci Utente</button>
+                                            </div>
+                                        </div>
 
-                            </div>
+                                    </div>
+                                </div>
 
+                            </form>
                         </div>
-
-
-                        </form>
                     </div>
                 </div>
             </div>
