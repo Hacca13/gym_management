@@ -20,6 +20,7 @@
                     </button>
                 </a>
             </div><!-Dati Plicometrici>
+            @include('components.users.plicometricData')
 
             <div class="col-md-3" id="parentDiv">
                 <a data-toggle="collapse" href="#tutorData" role="button" aria-expanded="false" aria-controls="{{'multiCollapseExample1' . $loop->index}}">
@@ -28,6 +29,7 @@
                     </button>
                 </a>
             </div><!-Dati Tutore>
+            @include('components.users.tutorData')
 
         </div>
 
@@ -55,8 +57,6 @@
 
 </form>
 </div>
-@include('components.users.plicometricData')
-@include('components.users.tutorData')
 
 <script>
     function testAge() {

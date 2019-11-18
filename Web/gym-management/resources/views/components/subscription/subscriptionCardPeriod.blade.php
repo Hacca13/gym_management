@@ -2,14 +2,14 @@
     <a data-toggle="collapse" href="#subPeriod" role="button" aria-expanded="false" onclick="border()" aria-controls="{{'multiCollapseExample' . $loop->index}}">
         <div class="card-body" >
             <div class="row">
-                <div class="col-md-3" style="text-align: right; margin-top: auto; margin-bottom: auto;">
+                <div class="col-md-3" style="text-align: left; margin-top: auto; margin-bottom: auto;">
                     <h3>Mirko Al3erti</h3>
                 </div>
                 <div class="col-md-3"></div>
-                <div class="col-md-3" style="text-align: right; margin-top: auto; margin-bottom: auto;">
+                <div class="col-md-3" style="text-align: left; margin-top: auto; margin-bottom: auto;">
                     <h4>Dal: f23/03/2019</h4>
                 </div>
-                <div class="col-md-3" style="text-align: right; margin-top: auto; margin-bottom: auto;">
+                <div class="col-md-3" style="text-align: left; margin-top: auto; margin-bottom: auto;">
                     <h4>Al: 23/04/2019</h4>
                 </div>
             </div>

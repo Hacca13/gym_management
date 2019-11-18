@@ -259,7 +259,7 @@ class NewTcard2 extends Component {
 
         return (
             <div className="row justify-content-center">
-                <div className="col-md-10">
+                <div className="col-md-12">
                     <div className="card"
                          style={{borderRadius: '10px', backgroundColor: 'rgb(31, 30, 45,0.8)'}}>
                         <div className="card-body">
@@ -277,7 +277,7 @@ class NewTcard2 extends Component {
                                                 <div className="form-group row">
                                                     <div className="col-sm-6">
                                                         <label htmlFor="fname"
-                                                               className="col-sm-12 text-center control-label col-form-label">Utente</label>
+                                                               className="col-sm-12 text-left control-label col-form-label">Utente</label>
                                                         <UserSearch
                                                             retrieveUser={this.addUser}
                                                         />
@@ -325,7 +325,7 @@ class NewTcard2 extends Component {
 
                                                 <div className="form-group row">
                                                     <div className="col-sm-6">
-                                                        <label htmlFor="fname" className="col-sm-12 control-label col-form-label">Utente</label>
+                                                        <label htmlFor="fname" className="col-sm-12 control-label col-form-label">Esercizio</label>
                                                         <Autosuggest
                                                             suggestions={suggestions}
                                                             onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
@@ -336,7 +336,6 @@ class NewTcard2 extends Component {
                                                             onSuggestionSelected={this.onSuggestionSelected}
                                                             renderSuggestionsContainer={this.renderSuggestionsContainer}
                                                             renderInputComponent={this.renderInputComponent}
-
                                                         />
                                                     </div>
 

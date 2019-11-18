@@ -66,7 +66,7 @@ class AddUserToCourse extends Component {
                                         <div>
                                             <br></br>
                                             <br></br>
-                                            <div className="col-md-6 row ">
+                                            <div className="col-md-6 row">
                                                 <button id="corso" name="acceptTerms" className="btn btn-success" style={{borderRadius: '10px', marginLeft: '2%'}}>Inserisci Utente</button>
                                             </div>
                                         </div>
