@@ -167,16 +167,13 @@ class SubscriptionManager extends Controller
         $collection = Firestore::collection('Subscriptions');
         $input = $request->all();
 
-        var_dump($input['type']);
-        var_dump($input['idUserDatabase']);
-
         if($input['type'] == 'course'){
-
+          CoursesManager::addUserToCourse($input['idCourseDatabase'],$input['idUserDatabase']);
         }
 
-      //  $collection->add($input);
-      //  toastr()->success('Abbonamento creato con successo');
-      //  return '/gestioneAbbonamenti';
+        $collection->add($input);
+        toastr()->success('Abbonamento creato con successo');
+        return '/gestioneAbbonamenti';
     }
 
 

@@ -22,4 +22,5 @@ Route::get('/jsonUsers', 'ExercisesManager@jsonUsr');
 Route::get('/jsonCourses', 'CoursesManager@jsonCrs');
 
 Route::post('/insertTrainCard', 'TrainingCardsManager@insertTrainingCard');
+
 Route::post('/insertSubscription', 'SubscriptionManager@insertSubscription');
