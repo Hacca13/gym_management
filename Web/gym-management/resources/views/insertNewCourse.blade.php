@@ -7,41 +7,41 @@
     ?>
     <div class="card" style="border-radius: 10px;background-color: rgb(31, 38, 45, 0.8)">
         <div class="card-body">
-            <div class="row justify-content-center" style="margin-top: 2.5%">
+            <div class="row">
                 <div class="col-md-12" style="text-align: center;">
                     <h1 style="color: #d6d8d8">Inserisci corso</h1>
                 </div>
-                <div class="col-md-12" style="margin-top: 2.5%">
+                <div class="col-md-12">
                     <div class="card" style="border-radius: 10px;background-color: #d6d8d8">
                         <form class="form-horizontal" method="post" enctype="multipart/form-data" action="/insertFormCourse">
                             @csrf
                             <div class="card-body">
                                 <div class="form-group row">
-                                    <label for="fname" class="col-sm-3 text-right control-label col-form-label">Nome Corso</label>
-                                    <div class="col-sm-9">
+                                    <div class="col-sm-3">
+                                        <label for="fname" class="text-left control-label col-form-label">Nome Corso</label>
                                         <input type="text" class="form-control" id="fname" name="name" required>
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="fname" class="col-sm-3 text-right control-label col-form-label">Nome Istruttore</label>
-                                    <div class="col-sm-9">
+                                    <div class="col-sm-3">
+                                        <label for="fname" class="text-left control-label col-form-label">Nome Istruttore</label>
                                         <input type="text" class="form-control" id="fname" name="instructor" required>
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="fname" class="col-sm-3 text-right control-label col-form-label">Data Inizio</label>
-                                    <div class="col-sm-9">
+                                    <div class="col-sm-3">
+                                        <label for="fname" class="text-left control-label col-form-label">Data Inizio</label>
                                         <input type="date" class="form-control" id="startDate" name="startDate" required>
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="fname" class="col-sm-3 text-right control-label col-form-label">Data Fine</label>
-                                    <div class="col-sm-9">
+                                    <div class="col-sm-3">
+                                        <label for="fname" class="text-left control-label col-form-label">Data Fine</label>
                                         <input type="date" class="form-control" id="fname" name="endDate" required>
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <div class="col-md-1  offset-1">
+                                    <div class="offset-1">
                                         <button type="button" class="bttn-material-flat bttn-sm bttn-success"
                                                 id="addbutton" onclick="addDay()"><i class="fas fa-plus"></i>
                                         </button>
@@ -53,7 +53,7 @@
 
                                     <div id="{{"Entireday" . $index}}">
                                         <div class="form-group row">
-                                            <label for="select" class="col-sm-5 text-right control-label col-form-label">Giorno</label>
+                                            <label for="select" class="text-right control-label col-form-label">Giorno</label>
                                             <div class="col-sm-2">
                                                 <select class="select2 form-control custom-select" id="select" name="singleDay1" style="width: 100%; height:36px;">
                                                     <option>Lunedì</option>
@@ -66,27 +66,27 @@
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label class="col-sm-4 text-right control-label col-form-label">Dalle</label>
+                                            <label class="text-left control-label col-form-label">Dalle :</label>
                                             <div class="col-sm-2">
                                                 <input type="number" min="0" max="24" class="form-control" id="{{"hourFrom" . $index}}" name={{"hourFrom" . $index}} required>
                                             </div>
-                                            <h3 class="text-right control-label col-form-label">:</h3>
+                                            <h3 class="text-left control-label col-form-label">:</h3>
                                             <div class="col-sm-2">
                                                 <input type="number" min="0" max="59" class="form-control" id="{{"minutesFrom" . $index}}" name={{"minutesFrom" . $index}} required>
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label class="col-sm-4 text-right control-label col-form-label">Alle</label>
+                                            <label class="text-left control-label col-form-label">Alle : </label>
                                             <div class="col-sm-2">
                                                 <input type="number" min="0" max="24" class="form-control" id="{{"hourTo" . $index}}" name="{{"hourTo" . $index}}" required>
                                             </div>
-                                            <h3 class="text-right control-label col-form-label">:</h3>
+                                            <h3 class="control-label col-form-label">:</h3>
                                             <div class="col-sm-2">
                                                 <input type="number" min="0" max="59" class="form-control" id="{{"minutesTo" . $index}}" name="{{"minutesTo" . $index}}" required>
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <div class="col-sm-6 deleter text-right">
+                                            <div class="offset-1 deleter text-right">
                                                 <button type="button" id="{{$index}}" class="bttn-material-flat bttn-sm bttn-danger"
                                                         onclick="removeButton(this.id)"><i class="fas fa-times"></i>
                                                 </button>
@@ -97,8 +97,8 @@
                                 </div>
 
                                 <div class="form-group row">
-                                    <label for="fname" class="col-sm-3 text-right control-label col-form-label">Immagine del Corso</label>
-                                    <div class="col-sm-9">
+                                    <div class="col-sm-4">
+                                        <label for="fname" class="text-right control-label col-form-label">Immagine del Corso</label>
                                         <input type="file" class="form-control" id="courseImage" name="courseImage" required>
                                     </div>
                                 </div>

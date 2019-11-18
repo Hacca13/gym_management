@@ -3,7 +3,7 @@
 @section('content')
     <div class="card" style="border-radius: 10px;background-color: rgb(31, 38, 45, 0.8)">
         <div class="card-body">
-            <div class="row justify-content-center" style="margin-top: 2.5%">
+            <div class="row justify-content-center">
                 <div class="col-md-12" style="text-align: center;">
                     <h1 style="color: #d6d8d8">Corsi</h1>
                 </div>

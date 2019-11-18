@@ -66,8 +66,8 @@ class NewTcard2 extends Component {
         }).then(response => {
             window.location.href = response.data;
         }).catch(e => {
-                console.log(e);
-            });
+            console.log(e);
+        });
     }
 
     addUser(user) {
@@ -259,136 +259,140 @@ class NewTcard2 extends Component {
 
         return (
             <div className="row justify-content-center">
-                <div className="col-md-10">
+                <div className="col-md-12">
                     <div className="card"
-                         style={{borderRadius: '10px', backgroundColor: 'rgb(255, 255, 255,0.7)', marginBottom: '10%'}}>
+                         style={{borderRadius: '10px', backgroundColor: 'rgb(31, 30, 45,0.8)'}}>
+                        <div className="card-body">
+                            <div className="col-md-12">
+                                <h2 className="text-center" style={{color: '#d6d8d8'}}>Inserisci Nuova Scheda</h2>
+                            </div>
 
-                        <div className="card-header">
-                            <div className="row">
-                                <div className="col-md-8" style={{textAlign: 'left'}}>
-                                    <h2>Inserisci Scheda</h2>
+
+                            <div className="row justify-content-center">
+                                <div className="col-md-12">
+                                    <div className="card" style={{borderRadius: '10px', backgroundColor: 'rgb(255, 255, 255,0.8)'}}>
+                                        <div className="card-body">
+                                            <form onSubmit={this.handleSubmit}>
+
+                                                <div className="form-group row">
+                                                    <div className="col-sm-6">
+                                                        <label htmlFor="fname"
+                                                               className="col-sm-12 text-left control-label col-form-label">Utente</label>
+                                                        <UserSearch
+                                                            retrieveUser={this.addUser}
+                                                        />
+                                                    </div>
+
+                                                </div>
+
+                                                <div className="form-group row">
+
+                                                    <div className="col-sm-6">
+                                                        <label htmlFor="fname"
+                                                               className="col-sm-12 control-label col-form-label">Data inizio</label>
+                                                        <DatePicker
+                                                            required={true}
+                                                            selected={this.state.from}
+                                                            onChange={date =>
+                                                                this.setState({
+                                                                    from: date
+                                                                })}
+                                                            dateFormat="dd/MM/yyyy"
+                                                            customInput={<ExampleCustomInput
+                                                                fromOrTo={true}
+                                                            />}
+                                                        />
+                                                    </div>
+
+                                                    <div className="col-sm-6">
+                                                        <label htmlFor="fname"
+                                                               className="col-sm-12 control-label col-form-label">Data fine</label>
+                                                        <DatePicker
+                                                            required={true}
+                                                            selected={this.state.to}
+                                                            onChange={date =>
+                                                                this.setState({
+                                                                    to: date
+                                                                })}
+                                                            dateFormat="dd/MM/yyyy"
+                                                            customInput={<ExampleCustomInput
+                                                                fromOrTo={false}/>
+                                                            }
+                                                        />
+                                                    </div>
+
+                                                </div>
+
+                                                <div className="form-group row">
+                                                    <div className="col-sm-6">
+                                                        <label htmlFor="fname" className="col-sm-12 control-label col-form-label">Esercizio</label>
+                                                        <Autosuggest
+                                                            suggestions={suggestions}
+                                                            onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
+                                                            onSuggestionsClearRequested={this.onSuggestionsClearRequested}
+                                                            getSuggestionValue={this.getSuggestionValue}
+                                                            renderSuggestion={this.renderSuggestion}
+                                                            inputProps={inputProps}
+                                                            onSuggestionSelected={this.onSuggestionSelected}
+                                                            renderSuggestionsContainer={this.renderSuggestionsContainer}
+                                                            renderInputComponent={this.renderInputComponent}
+                                                        />
+                                                    </div>
+
+
+
+
+
+
+                                                    <div className="col-md-12">
+                                                        {
+                                                            this.state.exercisesList.map(((value, index) => {
+                                                                if (value.atTime) {
+                                                                    return <ExerciseToAddByTime removeEx={this.removeExercise}
+                                                                                                name={value.name}
+                                                                                                indexed={index}
+                                                                                                key={index}
+                                                                                                retrieveState={this.returnInfo}/>
+                                                                } else {
+                                                                    return  <ExerciseToAdd
+                                                                        removeEx={this.removeExercise}
+                                                                        name={value.name}
+                                                                        indexed={index}
+                                                                        key={index}
+                                                                        retrieveState={this.returnInfo}
+                                                                    />
+                                                                }
+
+                                                                /*
+                                                                <ExerciseToAdd
+                                                                    removeEx={this.removeExercise}
+                                                                    name={value.name}
+                                                                    indexed={index}
+                                                                    key={index}
+                                                                    retrieveState={this.returnInfo}
+                                                                />
+
+                                                                 */
+                                                            }))
+                                                        }
+
+                                                    </div>
+
+                                                </div>
+
+                                                <br></br>
+                                                <div className="col-md-6 row ">
+                                                    <p align="left">
+                                                        <button id="corso" name="acceptTerms" className="btn btn-success" style={{borderRadius: '10px'}}>Inserisci Scheda</button>
+                                                    </p>
+                                                </div>
+
+                                            </form>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-
-
-                        <div className="card-body">
-                            <form onSubmit={this.handleSubmit}>
-
-                                <div className="form-group row justify-content-center">
-                                    <div className="col-sm-6">
-                                        <label htmlFor="fname"
-                                               className="col-sm-12 text-center control-label col-form-label">Utente</label>
-                                        <UserSearch
-                                            retrieveUser={this.addUser}
-                                        />
-                                    </div>
-
-                                </div>
-
-                                <div className="form-group row text-center justify-content-center">
-
-                                    <div className="col-sm-6">
-                                        <label htmlFor="fname"
-                                               className="col-sm-12 text-center control-label col-form-label">Data inizio</label>
-                                        <DatePicker
-                                            required={true}
-                                            selected={this.state.from}
-                                            onChange={date =>
-                                                this.setState({
-                                                    from: date
-                                                })}
-                                            dateFormat="dd/MM/yyyy"
-                                            customInput={<ExampleCustomInput
-                                                fromOrTo={true}
-                                            />}
-                                        />
-                                    </div>
-
-                                    <div className="col-sm-6">
-                                        <label htmlFor="fname"
-                                               className="col-sm-12 text-center control-label col-form-label">Data fine</label>
-                                        <DatePicker
-                                            required={true}
-                                            selected={this.state.to}
-                                            onChange={date =>
-                                                this.setState({
-                                                    to: date
-                                                })}
-                                            dateFormat="dd/MM/yyyy"
-                                            customInput={<ExampleCustomInput
-                                                fromOrTo={false}/>
-                                            }
-                                        />
-                                    </div>
-
-                                </div>
-
-                                <div className="form-group row justify-content-center">
-                                    <div className="col-md-6">
-                                        <label htmlFor="fname"
-                                               className="col-sm-12 text-center control-label col-form-label">Utente</label>
-                                        <Autosuggest
-                                            suggestions={suggestions}
-                                            onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
-                                            onSuggestionsClearRequested={this.onSuggestionsClearRequested}
-                                            getSuggestionValue={this.getSuggestionValue}
-                                            renderSuggestion={this.renderSuggestion}
-                                            inputProps={inputProps}
-                                            onSuggestionSelected={this.onSuggestionSelected}
-                                            renderSuggestionsContainer={this.renderSuggestionsContainer}
-                                            renderInputComponent={this.renderInputComponent}
-                                        />
-                                    </div>
-
-
-
-                                    <div className="col-md-6 text-center">
-                                        <button type="submit" className="bttn-pill bttn-success bttn-md">Inserisci scheda</button>
-                                    </div>
-
-
-
-                                    <div className="col-md-12">
-                                        {
-                                            this.state.exercisesList.map(((value, index) => {
-                                                if (value.atTime) {
-                                                    return <ExerciseToAddByTime removeEx={this.removeExercise}
-                                                                                name={value.name}
-                                                                                indexed={index}
-                                                                                key={index}
-                                                                                retrieveState={this.returnInfo}/>
-                                                } else {
-                                                    return  <ExerciseToAdd
-                                                        removeEx={this.removeExercise}
-                                                        name={value.name}
-                                                        indexed={index}
-                                                        key={index}
-                                                        retrieveState={this.returnInfo}
-                                                    />
-                                                }
-
-                                                /*
-                                                <ExerciseToAdd
-                                                    removeEx={this.removeExercise}
-                                                    name={value.name}
-                                                    indexed={index}
-                                                    key={index}
-                                                    retrieveState={this.returnInfo}
-                                                />
-
-                                                 */
-                                            }))
-                                        }
-
-                                    </div>
-
-                                </div>
-
-
-                            </form>
-                        </div>
-
                     </div>
                 </div>
             </div>

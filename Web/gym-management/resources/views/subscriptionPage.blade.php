@@ -12,7 +12,6 @@
 
                 <div class="col-md-12" style="margin-top: 2.5%">
                     @include('components.subscription.subscriptionOption')
-                    <div class="col-md-12" style="margin-top: 2.5%">
                           @foreach($subscriptionList as $subscription)
                               @if($subscription->getType() == 'revenue')
                                   @include('components.subscription.subscriptionCardEntrances')
@@ -33,8 +32,7 @@
         </div>
 
     </div>
-    </div>
-    </div>
+
 
 
 

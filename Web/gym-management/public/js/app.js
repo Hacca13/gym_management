@@ -86548,14 +86548,20 @@ function (_Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         id: "corso",
         name: "acceptTerms",
-        className: "btn btn-danger"
+        className: "btn btn-danger",
+        style: {
+          borderRadius: '10px'
+        }
       }, "Annulla")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         align: "right"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         type: "submit",
         id: "corso",
         name: "acceptTerms",
-        className: "btn btn-success"
+        className: "btn btn-success",
+        style: {
+          borderRadius: '10px'
+        }
       }, "Inserisci")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null))))))));
     }
   }]);
@@ -86936,43 +86942,52 @@ function (_Component) {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "row justify-content-center"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-md-10"
+        className: "col-md-12"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "card",
         style: {
           borderRadius: '10px',
-          backgroundColor: 'rgb(255, 255, 255,0.7)',
-          marginBottom: '10%'
+          backgroundColor: 'rgb(31, 30, 45,0.8)'
         }
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "card-header"
+        className: "card-body"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "row"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-md-8",
+        className: "col-md-12"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
+        className: "text-center",
         style: {
-          textAlign: 'left'
+          color: '#d6d8d8'
         }
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Inserisci Scheda")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, "Inserisci Nuova Scheda")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "row justify-content-center"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-md-12"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "card",
+        style: {
+          borderRadius: '10px',
+          backgroundColor: 'rgb(255, 255, 255,0.8)'
+        }
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "card-body"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         onSubmit: this.handleSubmit
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "form-group row justify-content-center"
+        className: "form-group row"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-sm-6"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         htmlFor: "fname",
-        className: "col-sm-12 text-center control-label col-form-label"
+        className: "col-sm-12 text-left control-label col-form-label"
       }, "Utente"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_userSearch__WEBPACK_IMPORTED_MODULE_5__["default"], {
         retrieveUser: this.addUser
       }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "form-group row text-center justify-content-center"
+        className: "form-group row"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-sm-6"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         htmlFor: "fname",
-        className: "col-sm-12 text-center control-label col-form-label"
+        className: "col-sm-12 control-label col-form-label"
       }, "Data inizio"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_datepicker__WEBPACK_IMPORTED_MODULE_6___default.a, {
         required: true,
         selected: this.state.from,
@@ -86989,7 +87004,7 @@ function (_Component) {
         className: "col-sm-6"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         htmlFor: "fname",
-        className: "col-sm-12 text-center control-label col-form-label"
+        className: "col-sm-12 control-label col-form-label"
       }, "Data fine"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_datepicker__WEBPACK_IMPORTED_MODULE_6___default.a, {
         required: true,
         selected: this.state.to,
@@ -87003,13 +87018,13 @@ function (_Component) {
           fromOrTo: false
         })
       }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "form-group row justify-content-center"
+        className: "form-group row"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-md-6"
+        className: "col-sm-6"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         htmlFor: "fname",
-        className: "col-sm-12 text-center control-label col-form-label"
-      }, "Utente"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_autosuggest__WEBPACK_IMPORTED_MODULE_2___default.a, {
+        className: "col-sm-12 control-label col-form-label"
+      }, "Esercizio"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_autosuggest__WEBPACK_IMPORTED_MODULE_2___default.a, {
         suggestions: suggestions,
         onSuggestionsFetchRequested: this.onSuggestionsFetchRequested,
         onSuggestionsClearRequested: this.onSuggestionsClearRequested,
@@ -87020,11 +87035,6 @@ function (_Component) {
         renderSuggestionsContainer: this.renderSuggestionsContainer,
         renderInputComponent: this.renderInputComponent
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-md-6 text-center"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        type: "submit",
-        className: "bttn-pill bttn-success bttn-md"
-      }, "Inserisci scheda")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-md-12"
       }, this.state.exercisesList.map(function (value, index) {
         if (value.atTime) {
@@ -87054,7 +87064,18 @@ function (_Component) {
         />
            */
 
-      }))))))));
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-md-6 row "
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        align: "left"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        id: "corso",
+        name: "acceptTerms",
+        className: "btn btn-success",
+        style: {
+          borderRadius: '10px'
+        }
+      }, "Inserisci Scheda"))))))))))));
     }
   }]);
 

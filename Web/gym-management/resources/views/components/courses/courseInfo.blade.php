@@ -17,18 +17,12 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <div class="col-sm-9">
+                                <div class="col-sm-12">
                                     <label for="fname" class="col-sm-6 text-left control-label col-form-label" style="font-family: bold">Durata:</label>
                                     <br>
-                                    <label class="col-sm-6 text-right control-label col-form-label" style="font-family: bold">Dal:</label> {{$course->getPeriod()['startDate']}}
+                                    <label class="col-sm-2 text-left control-label col-form-label" style="font-family: bold">Dal:</label> {{$course->getPeriod()['startDate']}}
                                     <br>
-                                    <label class="col-sm-6 text-right control-label col-form-label" style="font-family: bold">Al:</label> {{$course->getPeriod()['endDate']}}
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <div class="col-sm-9">
-                                    <label for="fname" class="col-sm-6 text-left control-label col-form-label" style="font-family: bold">Iscritti al Corso:</label>
-                                    <label>1</label>
+                                    <label class="col-sm-2 text-left control-label col-form-label" style="font-family: bold">Al:</label> {{$course->getPeriod()['endDate']}}
                                 </div>
                             </div>
                         </div>
@@ -41,7 +35,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="form-group row">
+                    <div class="row">
                         <div class="card-body">
                             <a href="/modificaCorso/{{$course->getIdDatabase()}}">
                                 <button class="btn btn-warning" id="fname" name="" style="border-radius: 10px;">Modifica</button>
