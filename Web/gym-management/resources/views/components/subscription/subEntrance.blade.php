@@ -1,8 +1,8 @@
 <div class="col-md-12 row">
     <div class="col-md-3" id="entrate">
         <div class="form-group">
-            <label for="exampleFormControlSelect1">Numero Entrate</label>
-            <h1>1</h1>
+            <label for="exampleFormControlSelect1">Numero Entrate Effettuate</label>
+            <h1>{{$subscription->getNumberOfEntriesMade()}}</h1>
         </div>
     </div>
 </div>
@@ -12,5 +12,3 @@
         <button name="acceptTerms" class="btn btn-success" style="margin-left: 5%"><i class="fas fa-minus"></i></button>
     </div>
     </div>
-
-

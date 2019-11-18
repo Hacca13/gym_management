@@ -143,7 +143,7 @@ class SubscriptionManager extends Controller
     }
 
     public static function getAllUser(){
-      
+
         $allUser = array();
 
           $collection = Firestore::collection('Users');
@@ -166,8 +166,17 @@ class SubscriptionManager extends Controller
     public function insertSubscription(Request $request) {
         $collection = Firestore::collection('Subscriptions');
         $input = $request->all();
-        $collection->add($input);
-        return '/gestioneAbbonamenti';
+
+        var_dump($input['type']);
+        var_dump($input['idUserDatabase']);
+
+        if($input['type'] == 'course'){
+
+        }
+
+      //  $collection->add($input);
+      //  toastr()->success('Abbonamento creato con successo');
+      //  return '/gestioneAbbonamenti';
     }
 
 

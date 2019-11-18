@@ -86,9 +86,7 @@ Route::post('/coursesSearchResultsPage', 'CoursesManager@searchCourses');
 Route::get('/coursesPageSearchResults', 'CoursesManager@searchCourses');
 Route::get('/modificaCorso/{id}', 'CoursesManager@setCourseView');
 Route::post('/setFormCourse','CoursesManager@setCourse');
-Route::get('/inserisciUtenteCorso', function () {
-    return view('addUserToCourse');
-});
+
 
 
 Auth::routes();

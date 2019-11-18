@@ -20,10 +20,10 @@
                     @endif
                 </div>
                 <div class="col-md-3" style="text-align: right; margin-top: auto; margin-bottom: auto;">
-                    <h4>Dal: f23/03/2019</h4>
+                    <h4>Dal: {{$subscription->getStartDate()}}</h4>
                 </div>
                 <div class="col-md-3" style="text-align: right; margin-top: auto; margin-bottom: auto;">
-                    <h4>Al: 23/04/2019</h4>
+                    <h4>Al: {{$subscription->getEndDate()}}</h4>
                 </div>
             </div>
 

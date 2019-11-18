@@ -104,9 +104,7 @@ class Firetest extends Controller
 
 
   public function test3(){
-  $array = CoursesManager::getAllCourses();
-
-
+    CoursesManager::removeUserToCourse('a405eea7aabd467d95d4', 'OKe34tMZw7M8IOJmX2RCods2CLL2');
 
   }
 
