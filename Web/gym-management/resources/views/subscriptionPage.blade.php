@@ -24,15 +24,14 @@
                               @endif
                           @endforeach
                     </div>
-                <div class="row justify-content-center" style="margin-top: 2.5%">
 
-                    {{ $subscriptionList->links()}}
-                </div>
             </div>
         </div>
+        <div class="row justify-content-center" style="margin-top: 2.5%">
 
+            {{ $subscriptionList->links()}}
+        </div>
     </div>
-
 
 
 
