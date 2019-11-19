@@ -104,6 +104,8 @@ class TrainingCardsManager extends Controller
         $endDate = data_get($trainingCards->getPeriod() ,'endDate');
         if(TrainingCardsManager::isExpired($endDate)){
             $trainingCards->setIsActive(false);
+            $trainingCardSet = TrainingCardsManager::transformTrainingCardsIntoArrayTrainingCards($trainingCards);
+            $collection->document($trainingCards->getIdDatabase())->set($trainingCardSet);
         }
 
         array_push($allTrainingCards,$trainingCards);

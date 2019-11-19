@@ -57,9 +57,52 @@ class SubscriptionManager extends Controller
         foreach ($documents as $document) {
             $subscription = SubscriptionManager::trasformArraySubscriptionToSubscription($document->data());
             $subscription->setIdDatabase($document->id());
+
+            if($subscription instanceof SubscriptionRevenueModel){
+                if($subscription->getNumberOfEntries() <= $subscription->getNumberOfEntriesMade() ){
+                    $subscription->setIsActive(false);
+                    $subscriptionSet = SubscriptionManager::trasformSubscriptionToArraySubscription($subscription);
+                    unset($subscriptionSet['idDatabase']);
+                    $collection->document($subscription->getIdDatabase())->set($subscriptionSet);
+                }
+            }
+            elseif ($subscription instanceof SubscriptionCourseModel) {
+              $endDate = $subscription->getEndDate();
+              if(SubscriptionManager::isExpired($endDate)){
+                  $subscription->setIsActive(false);
+                  CoursesManager::removeUserToCourse($subscription->getIdCourseDatabase(),$subscription->getIdUserDatabase());
+                  $subscriptionSet = SubscriptionManager::trasformSubscriptionToArraySubscription($subscription);
+                  unset($subscriptionSet['idDatabase']);
+                  $collection->document($subscription->getIdDatabase())->set($subscriptionSet);
+              }
+            }
+            else {
+              $endDate = $subscription->getEndDate();
+              if(SubscriptionManager::isExpired($endDate)){
+                  $subscription->setIsActive(false);
+                  $subscriptionSet = SubscriptionManager::trasformSubscriptionToArraySubscription($subscription);
+                  unset($subscriptionSet['idDatabase']);
+                  $collection->document($subscription->getIdDatabase())->set($subscriptionSet);
+              }
+            }
+
+
             array_push($allSubscriptions,$subscription);
         }
         return $allSubscriptions;
+    }
+
+    public static function isExpired($endDate){
+      $today = date("Y-m-d");
+      $timestamp = strtotime($endDate);
+      $endDate = date("Y-m-d", $timestamp);
+
+      if($endDate < $today){
+        return true;
+      }
+      else{
+        return false;
+      }
     }
 
     public static function getSubscriptionByUser($idUserDatabase){
