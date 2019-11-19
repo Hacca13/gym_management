@@ -3,10 +3,6 @@
 @section('content')
 <div class="container">
   <br>
-  <br>
-  <br>
-  <br>
-  <br>
     <div class="row justify-content-center">
         <div class="col-md-6">
             <div class="card" style="border-radius: 10px;background-color: #d6d8d8">
@@ -43,6 +39,9 @@
                                 @enderror
                             </div>
                         </div>
+                        <a href="/password/reset" class="offset-1">Hai dimenticato la password?</a>
+                        <br>
+                        <br>
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-5">
                                 <button type="submit" class="btn btn-success col-md-4">
