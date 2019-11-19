@@ -118,7 +118,7 @@ class TrainingCardsManager extends Controller
       $timestamp = strtotime($endDate);
       $endDate = date("Y-m-d", $timestamp);
 
-      if($endDate < $today){
+      if($endDate > $today){
         return true;
       }
       else{

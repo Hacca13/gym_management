@@ -1,16 +1,18 @@
 <div class="card" style="border-radius: 10px;background-color: #d6d8d8">
     <div class="card-body">
         <div class="row">
-
             <div class="col-md-6">
+              <form action="/subscriptionSearchResultsPage" method="post">
+                @csrf
                 <div class="input-group no-border">
-                    <input type="text" value="" class="form-control" placeholder="Search...">
+                    <input type="text" value="" class="form-control" name='searchInput' placeholder="Abbonamento di...">
                     <button type="submit" class="btn btn-default btn-round btn-just-icon" style="background-color: #3F5469">
                         <i class="fas fa-search"></i>
                         <div class="ripple-container"></div>
                     </button>
                 </div>
-            </div><!-Search>
+              </form>
+            </div>
 
             <div class="col-md-6">
                 <div class="row">

@@ -15,7 +15,9 @@
                         @include('components.users.userCard')
                     @endforeach
                 </div>
+
                 <div>
+                  <br>
                     {{$usersResultList->links()}}
                 </div>
             </div>

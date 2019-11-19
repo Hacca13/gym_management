@@ -81,15 +81,16 @@ class UsersManager extends Controller{
     public static function searchUsers(Request $request){
         $currentPage = LengthAwarePaginator::resolveCurrentPage();
         $input = $request->all();
-        $input['searchInput'] = strtolower($input['searchInput']);
+
 
         if(isset($input['searchInput'])){
-            $input = $input['searchInput'];
+            $input = strtolower($input['searchInput']);
             $request->session()->put('searchInput', $input);
         }else{
             $input = $request->session()->pull('searchInput');
             $request->session()->put('searchInput', $input);
         }
+      
 
         $url = substr($request->url(), 0, strlen($request->url())-21);
         $url = $url.'userPageSearchResults';
@@ -244,10 +245,10 @@ class UsersManager extends Controller{
         try {
             $uid = $firebase->createAuth()->createUserWithEmailAndPassword($input['email'], $input['password'])->uid;
 
-            $arrayUser = UsersManager::trasformRequestIntoArrayUser($input, $documentImage, $parentDocumentImage);
-
             $input['name'] = strtolower($input['name']);
             $input['surname'] = strtolower($input['surname']);
+
+            $arrayUser = UsersManager::trasformRequestIntoArrayUser($input, $documentImage, $parentDocumentImage);
 
             $collection->document($uid)->set($arrayUser);
 

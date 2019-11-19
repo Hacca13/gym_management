@@ -9,7 +9,8 @@
                         Dati Anagrafici
                     </button>
                 </a>
-            </div><!-Dati Anagrafici>
+            </div>
+
             @include('components.users.anagraficData')
 
 
@@ -19,9 +20,8 @@
                         Dati Plicometrici
                     </button>
                 </a>
-            </div><!-Dati Plicometrici>
+            </div>
             @include('components.users.plicometricData')
-
 
             @if($user->getIsAdult() == false)
             <div class="col-md-3" id="parentDiv">
@@ -30,7 +30,7 @@
                         Dati tutore
                     </button>
                 </a>
-            </div><!-Dati Tutore>
+            </div>
             @include('components.users.tutorData')
             @endif
         </div>
