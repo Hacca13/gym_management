@@ -186,8 +186,8 @@
                                     </div>
                                 </div>
                             </section>
-                            <h3>Dati Tutore</h3>
-                            <section>
+                            <h3 id="parentTitle">Dati Tutore</h3>
+                            <section id="parentData">
                                 <div id="myDiv" style="display: none">
                                     <label for="fname" class="text-right control-label col-form-label">Nome Tutore:</label>
                                     <input type="text" class="form-control" id="parentName" name="parentName" value="">
@@ -242,8 +242,6 @@
                                     <label for="cono1" class="text-right control-label col-form-label">Rilasciato da:</label>
                                     <input type="text" class="form-control" id="parentDocumentReleaser" name="parentDocumentReleaser" value="">
                                 </div>
-                                <input id="acceptTerms" name="acceptTerms" type="checkbox" class="required">
-                                <label for="acceptTerms">Premere sulla checkbox pre completare.</label>
                             </section>
                         </div>
 

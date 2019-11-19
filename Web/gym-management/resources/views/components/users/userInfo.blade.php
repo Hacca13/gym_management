@@ -22,6 +22,8 @@
             </div><!-Dati Plicometrici>
             @include('components.users.plicometricData')
 
+
+            @if($user->getIsAdult() == false)
             <div class="col-md-3" id="parentDiv">
                 <a data-toggle="collapse" href="#tutorData" role="button" aria-expanded="false" aria-controls="{{'multiCollapseExample1' . $loop->index}}">
                     <button type="button" class="btn btn-secondary" style="border-radius: 10px;">
@@ -30,7 +32,7 @@
                 </a>
             </div><!-Dati Tutore>
             @include('components.users.tutorData')
-
+            @endif
         </div>
 
         <div class="card-body">
