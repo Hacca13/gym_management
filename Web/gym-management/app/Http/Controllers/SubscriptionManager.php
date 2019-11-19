@@ -14,6 +14,51 @@ use Illuminate\Pagination\LengthAwarePaginator;
 class SubscriptionManager extends Controller
 {
 
+    public static function searchSubscription(Request $request){
+      $currentPage = LengthAwarePaginator::resolveCurrentPage();
+      $input = $request->all();
+
+     if(isset($input['searchInput'])){
+          $input = strtolower($input['searchInput']);
+          $request->session()->put('searchInput', $input);
+      }else{
+          $input = $request->session()->pull('searchInput');
+          $request->session()->put('searchInput', $input);
+      }
+
+      $url = substr($request->url(), 0, strlen($request->url())-29);
+      $url = $url.'subscriptionPageSearchResults';
+
+      $userForSubscriptionPage = UsersManager::getUserDBOrUserSessionForSearchPage($request,$currentPage,$input);
+      $subscriptionResultList = array();
+
+      $subscriptionlistTemp= $request->session()->pull('allSubscription');
+      $request->session()->put('allSubscription', $subscriptionlistTemp);
+
+      foreach ($userForSubscriptionPage as $user) {
+        foreach ($subscriptionlistTemp as $subscription) {
+          if($user->getIdDatabase() == $subscription->getIdUserDatabase()){
+            array_push($subscriptionResultList,$subscription);
+          }
+        }
+      }
+
+      $itemCollection = collect($subscriptionResultList);
+      $perPage = 1;
+      $currentPageItems = $itemCollection->slice(($currentPage * $perPage) - $perPage, $perPage)->all();
+      $subscriptionResultList= new LengthAwarePaginator($currentPageItems , count($itemCollection), $perPage);
+      $subscriptionResultList->setPath($url);
+
+
+
+      return view('subscriptionPageSearchResult', compact('subscriptionResultList','userForSubscriptionPage'));
+
+    }
+
+
+
+
+
     public static function getAllSubscriptionForView(Request $request){
       $currentPage = LengthAwarePaginator::resolveCurrentPage();
       $subscriptionList = SubscriptionManager::getSubscriptionDBOrSubscriptionSession($request,$currentPage);
@@ -68,7 +113,7 @@ class SubscriptionManager extends Controller
             }
             elseif ($subscription instanceof SubscriptionCourseModel) {
               $endDate = $subscription->getEndDate();
-              if(!SubscriptionManager::isExpired($endDate)){
+              if(SubscriptionManager::isExpired($endDate)){
                   $subscription->setIsActive(false);
                   CoursesManager::removeUserToCourse($subscription->getIdCourseDatabase(),$subscription->getIdUserDatabase());
                   $subscriptionSet = SubscriptionManager::trasformSubscriptionToArraySubscription($subscription);
@@ -78,7 +123,7 @@ class SubscriptionManager extends Controller
             }
             else {
               $endDate = $subscription->getEndDate();
-              if(!SubscriptionManager::isExpired($endDate)){
+              if(SubscriptionManager::isExpired($endDate)){
                   $subscription->setIsActive(false);
                   $subscriptionSet = SubscriptionManager::trasformSubscriptionToArraySubscription($subscription);
                   unset($subscriptionSet['idDatabase']);
@@ -97,7 +142,7 @@ class SubscriptionManager extends Controller
       $timestamp = strtotime($endDate);
       $endDate = date("Y-m-d", $timestamp);
 
-      if($endDate < $today){
+      if($endDate > $today){
         return true;
       }
       else{
