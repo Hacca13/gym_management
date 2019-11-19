@@ -36,7 +36,7 @@ Route::get('/nuovoEsercizio', function () {
 });
 
 Route::get('/modificaEsercizio/{id}', 'ExercisesManager@setExerciseView');
-
+Route::get('/eliminaEsercizio/{id}', 'ExercisesManager@deleteExercise');
 
 
 //UTENTI
