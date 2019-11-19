@@ -68,7 +68,7 @@ class SubscriptionManager extends Controller
             }
             elseif ($subscription instanceof SubscriptionCourseModel) {
               $endDate = $subscription->getEndDate();
-              if(SubscriptionManager::isExpired($endDate)){
+              if(!SubscriptionManager::isExpired($endDate)){
                   $subscription->setIsActive(false);
                   CoursesManager::removeUserToCourse($subscription->getIdCourseDatabase(),$subscription->getIdUserDatabase());
                   $subscriptionSet = SubscriptionManager::trasformSubscriptionToArraySubscription($subscription);
@@ -78,7 +78,7 @@ class SubscriptionManager extends Controller
             }
             else {
               $endDate = $subscription->getEndDate();
-              if(SubscriptionManager::isExpired($endDate)){
+              if(!SubscriptionManager::isExpired($endDate)){
                   $subscription->setIsActive(false);
                   $subscriptionSet = SubscriptionManager::trasformSubscriptionToArraySubscription($subscription);
                   unset($subscriptionSet['idDatabase']);
