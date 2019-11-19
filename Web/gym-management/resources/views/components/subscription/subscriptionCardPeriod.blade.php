@@ -30,6 +30,7 @@
         </div>
     </a>
 </div>
+
 <div class="col-md-12">
     <div class="collapse multi-collapse" id="subPeriod">
         <div class="card card-body"  style="background-color: #d6d8d8; border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;">
@@ -40,10 +41,3 @@
     </div>
 </div>
 
-<script>
-
-    function border() {
-
-        let x = document.getElementById('scroll').setAttribute('style', 'border-bottom-left-radius: 0px; border-bottom-right-radius: 0px; border-top-left-radius: 10px; border-top-right-radius: 10px; background-color: #d6d8d8');
-    }
-</script>

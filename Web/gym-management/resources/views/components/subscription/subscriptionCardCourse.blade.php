@@ -1,5 +1,6 @@
 <div class="col-md-12">
-    <div class="card" style="border-radius: 10px">
+    <div class="card-hover" style="border-radius: 10px; background-color: #d6d8d8">
+        <a data-toggle="collapse" href="#subCourse" role="button" aria-expanded="false"aria-controls="{{'multiCollapseExample' . $loop->index}}">
         <div class="card-body">
           <?php foreach ($userForSubscriptionPage as $document) {
             if($subscription->getIdUserDatabase() == $document->getIdDatabase()){
@@ -33,11 +34,12 @@
     </a>
 </div>
 <div class="col-md-12">
-    <div class="collapse multi-collapse" id="subPeriod">
+    <div class="collapse multi-collapse" id="subCourse">
         <div class="card card-body"  style="background-color: #d6d8d8; border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;">
             <div class="row justify-content-center">
                 @include('components.subscription.subCourse')
             </div>
         </div>
     </div>
+</div>
 </div>
