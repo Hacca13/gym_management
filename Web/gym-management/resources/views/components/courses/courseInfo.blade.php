@@ -37,16 +37,28 @@
                     </div>
                     <div class="row">
                         <div class="card-body">
-                            <a href="#">
+                            <a href="/modificaCorso/{{$course->getIdDatabase()}}">
                                 <button class="btn btn-warning" id="fname" name="" style="border-radius: 10px;">Modifica</button>
                             </a>
-                            <a href="#" class="offset-4">
-                                <button class="btn btn-primary" id="fname" name="" style="border-radius: 10px;">Elimina</button>
-                            </a>
-                            <a href="/gestioneCorsi" class="offset-4">
+                        </div>
+
+                        @if($course->getIsActive() == TRUE)
+                          <div class="card-body offset-8">
+                            <a href="/gestioneCorsi">
                                 <button class="btn btn-danger" id="fname" name="" style="border-radius: 10px;">Disattiva</button>
                             </a>
+                          </div>
+                        @endif
+                        @if($course->getIsActive() == FALSE)
+                        <div class="card-body offset-8">
+                          <a href="/gestioneCorsi">
+                              <button class="btn btn-success" id="fname" name="" style="border-radius: 10px;">Attiva</button>
+                          </a>
                         </div>
+                        @endif
+
+
+
                     </div>
                 </div>
         </div>

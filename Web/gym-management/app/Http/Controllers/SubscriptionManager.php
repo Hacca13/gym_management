@@ -23,13 +23,24 @@ class SubscriptionManager extends Controller
       $subscriptionList= new LengthAwarePaginator($currentPageItems , count($itemCollection), $perPage);
       $subscriptionList->setPath($request->url());
 
-      return view('subscriptionPage', compact('subscriptionList'));
+      $userForSubscriptionPage = $request->session()->pull('userForSubscriptionPage');
+      $request->session()->put('userForSubscriptionPage', $userForSubscriptionPage);
+
+      return view('subscriptionPage', compact('subscriptionList','userForSubscriptionPage'));
     }
 
     public static function getSubscriptionDBOrSubscriptionSession(Request $request,$currentPage){
       if($currentPage == 1){
         $documents = SubscriptionManager::getAllSubscription();
         $request->session()->put('allSubscription', $documents);
+        $userForSubscriptionPage = array();
+
+        foreach ($documents as $document) {
+          $user = UsersManager::getUserById($document->getIdUserDatabase());
+          array_push($userForSubscriptionPage, $user);
+        }
+
+        $request->session()->put('userForSubscriptionPage', $userForSubscriptionPage);
       }
       else{
         $documents = $request->session()->pull('allSubscription');
@@ -46,9 +57,52 @@ class SubscriptionManager extends Controller
         foreach ($documents as $document) {
             $subscription = SubscriptionManager::trasformArraySubscriptionToSubscription($document->data());
             $subscription->setIdDatabase($document->id());
+
+            if($subscription instanceof SubscriptionRevenueModel){
+                if($subscription->getNumberOfEntries() <= $subscription->getNumberOfEntriesMade() ){
+                    $subscription->setIsActive(false);
+                    $subscriptionSet = SubscriptionManager::trasformSubscriptionToArraySubscription($subscription);
+                    unset($subscriptionSet['idDatabase']);
+                    $collection->document($subscription->getIdDatabase())->set($subscriptionSet);
+                }
+            }
+            elseif ($subscription instanceof SubscriptionCourseModel) {
+              $endDate = $subscription->getEndDate();
+              if(SubscriptionManager::isExpired($endDate)){
+                  $subscription->setIsActive(false);
+                  CoursesManager::removeUserToCourse($subscription->getIdCourseDatabase(),$subscription->getIdUserDatabase());
+                  $subscriptionSet = SubscriptionManager::trasformSubscriptionToArraySubscription($subscription);
+                  unset($subscriptionSet['idDatabase']);
+                  $collection->document($subscription->getIdDatabase())->set($subscriptionSet);
+              }
+            }
+            else {
+              $endDate = $subscription->getEndDate();
+              if(SubscriptionManager::isExpired($endDate)){
+                  $subscription->setIsActive(false);
+                  $subscriptionSet = SubscriptionManager::trasformSubscriptionToArraySubscription($subscription);
+                  unset($subscriptionSet['idDatabase']);
+                  $collection->document($subscription->getIdDatabase())->set($subscriptionSet);
+              }
+            }
+
+
             array_push($allSubscriptions,$subscription);
         }
         return $allSubscriptions;
+    }
+
+    public static function isExpired($endDate){
+      $today = date("Y-m-d");
+      $timestamp = strtotime($endDate);
+      $endDate = date("Y-m-d", $timestamp);
+
+      if($endDate < $today){
+        return true;
+      }
+      else{
+        return false;
+      }
     }
 
     public static function getSubscriptionByUser($idUserDatabase){
@@ -134,13 +188,16 @@ class SubscriptionManager extends Controller
     public static function getAllUser(){
 
         $allUser = array();
-        $collection = Firestore::collection('Users');
-        $documents = $collection->documents();
-        foreach ($documents as $document) {
-            $user = UsersManager::transformArrayUserIntoUser($document->data());
-            $user->setIdDatabase($document->id());
-            array_push($allUser,$user);
-        }
+
+          $collection = Firestore::collection('Users');
+          $documents = $collection->documents();
+          foreach ($documents as $document) {
+              $user = UsersManager::transformArrayUserIntoUser($document->data());
+              $user->setIdDatabase($document->id());
+              array_push($allUser,$user);
+          }
+
+
         return view('subscriptionPage', compact('allUser'));
     }
 
@@ -152,7 +209,13 @@ class SubscriptionManager extends Controller
     public function insertSubscription(Request $request) {
         $collection = Firestore::collection('Subscriptions');
         $input = $request->all();
+
+        if($input['type'] == 'course'){
+          CoursesManager::addUserToCourse($input['idCourseDatabase'],$input['idUserDatabase']);
+        }
+
         $collection->add($input);
+        toastr()->success('Abbonamento creato con successo');
         return '/gestioneAbbonamenti';
     }
 

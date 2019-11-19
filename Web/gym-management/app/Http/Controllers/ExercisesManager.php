@@ -29,8 +29,15 @@ class ExercisesManager extends Controller{
 
     }
 
-    public static function setExerciseView($request){
-        $exercise = ExercisesManager::getExerciseById($request);
+    public static function setExerciseView($id,Request $request){
+        $documents = $request->session()->pull('exercises');
+        $request->session()->put('exercises', $documents);
+
+        foreach ($documents as $document) {
+          if($id == $document->getIdDatabase()){
+            $exercise = $document;
+          }
+        }
         return view('setExercise', compact('exercise'));
     }
 

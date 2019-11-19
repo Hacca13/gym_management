@@ -14,6 +14,19 @@ use Illuminate\Pagination\LengthAwarePaginator;
 
 class CoursesManager extends Controller{
 
+    public static function setCourseView($id,Request $request){
+        $documents = $request->session()->pull('Courses');
+        $request->session()->put('Courses', $documents);
+
+        foreach ($documents as $document) {
+          if($id == $document->getIdDatabase()){
+            $course = $document;
+          }
+        }
+
+        return view('setCourse', compact('course'));
+    }
+
     public static function searchCourses(Request $request){
         $currentPage = LengthAwarePaginator::resolveCurrentPage();
         $input = $request->all();
@@ -291,29 +304,25 @@ class CoursesManager extends Controller{
         return response()->json($arr);
     }
 
-    public static function addUserToCourse(Request $request) {
-        $input = $request->all();
-        //var_dump($input);
-        $courses = self::getCourseByID($input["course"]);
-        $userList = $courses->getUsersList();
-        array_push($userList, $input["user"]);
-        $courses->setUsersList($userList);
-        $corso = array(
-            'idDatabase' => $courses->getIdDatabase(),
-            'name' => $courses->getName(),
-            'image' => $courses->getImage(),
-            'isActive' => $courses->getIsActive(),
-            'instructor' => $courses->getInstructor(),
-            'period' => $courses->getPeriod(),
-            'weeklyFrequency' => $courses->getWeeklyFrequency(),
-            'usersList' => $courses->getUsersList()
-        );
-        $factory = (new Firebase\Factory());
-        $firestore = $factory->createFirestore();
-        $database = $firestore->database();
-        $ref = $database->collection('Courses')->document($input["course"]);
-        $ref->set($corso);
-        return "/";
+    public static function removeUserToCourse($idCourseDatabase,$idUserDatabase) {
+      $collection = Firestore::collection('Courses');
+      $documents = $collection->document($idCourseDatabase)->snapshot()->data();
+
+      for ($i=0; $i < count($documents['usersList']) ; $i++) {
+        if($documents['usersList'][$i] == $idUserDatabase){
+          array_splice($documents['usersList'],$i, $i);
+        }
+      }
+
+      $collection->document($idCourseDatabase)->set($documents);
+    }
+
+    public static function addUserToCourse($idCourseDatabase,$idUserDatabase) {
+
+      $collection = Firestore::collection('Courses');
+      $documents = $collection->document($idCourseDatabase)->snapshot()->data();
+      array_push($documents['usersList'],$idUserDatabase);
+      $collection->document($idCourseDatabase)->set($documents);
 
     }
 
