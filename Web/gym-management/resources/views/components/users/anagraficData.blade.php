@@ -25,29 +25,30 @@
                     </div>
                     <br>
                     <label for="fname" class="col-sm-9 text-left control-label col-form-label" style="font-family: bold">Città di Residenza:</label>
-                    <label></label>
+                    <label>{{data_get($user->getResidence(),'cityOfResidence')}}</label>
                     <label for="fname" class="col-sm-9 text-left control-label col-form-label" style="font-family: bold">Telefono:</label>
                     <label>{{$user->getTelephoneNumber()}}</label>
                 </div>
                 <div class="col-md-6">
                     <label for="fname" class="col-sm-9 text-left control-label col-form-label" style="font-family: bold">Nazione:</label>
-                    <label></label>
+                    <label>{{data_get($user->getResidence(),'nation')}}</label>
                     <label for="fname" class="col-sm-9 text-left control-label col-form-label" style="font-family: bold">Cap:</label>
-                    <label></label>
+                    <label>{{data_get($user->getResidence(),'cap')}}</label>
                     <label for="fname" class="col-sm-9 text-left control-label col-form-label" style="font-family: bold">Via:</label>
-                    <label></label>
+                    <label>{{data_get($user->getResidence(),'street')}}</label>
                     <label for="fname" class="col-sm-9 text-left control-label col-form-label" style="font-family: bold">Numero Civico:</label>
-                    <label></label>
+                    <label>{{data_get($user->getResidence(),'number')}}</label>
                     <label for="fname" class="col-sm-9 text-left control-label col-form-label" style="font-family: bold">Tipo Documento:</label>
-                    <label></label>
+                    <label for="fname" class="col-sm-9 text-left control-label col-form-label" style="font-family: bold">Tipo Documento:</label>
+                    <label>{{data_get($user->getDocument(),'type')}}</label>
                     <label for="fname" class="col-sm-9 text-left control-label col-form-label" style="font-family: bold">Numero Documento:</label>
-                    <label></label>
+                    <label>{{data_get($user->getResidence(),'number')}}</label>
                     <label for="fname" class="col-sm-9 text-left control-label col-form-label" style="font-family: bold">Data Rilascio:</label>
-                    <label></label>
+                    <label>{{data_get($user->getResidence(),'releaseDate')}}</label>
                     <label for="fname" class="col-sm-9 text-left control-label col-form-label" style="font-family: bold">Rilasciato Da:</label>
-                    <label></label>
+                    <label>{{data_get($user->getResidence(),'released')}}</label>
                     <label for="fname" class="col-sm-9 text-left control-label col-form-label" style="font-family: bold">Immagine del Documento:</label>
-                    <label></label>
+                    <label>{{data_get($user->getResidence(),'documentImage')}}</label>
                 </div>
                 <hr>
                 <div class="card-body">
