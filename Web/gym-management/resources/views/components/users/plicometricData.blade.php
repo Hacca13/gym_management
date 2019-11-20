@@ -1,5 +1,5 @@
 <div class="collapse multi-collapse" id="plicometricData">
-  <br>
+    <br>
     <div class="col-md-12">
         <div class="card card-body" style="border-radius: 10px;">
             <div class="row justify-content-center">
@@ -24,37 +24,25 @@
                 </div>
                 <br>
                 <div class="col-md-6">
-                    <div class="form-group" id="">
-                        <label for="fname" class="col-sm-6 text-left control-label col-form-label" style="font-family: bold">Ipertrofia:</label><br>
-                        <label></label>
-                    </div>
-                    <div class="form-group" id="">
-                        <label for="fname" class="col-sm-6 text-left control-label col-form-label" style="font-family: bold">Dimagrimento:</label><br>
-                        <label></label>
-                    </div>
-                    <div class="form-group" id="">
-                        <label for="fname" class="col-sm-6 text-left control-label col-form-label" style="font-family: bold">Tonificazione:</label><br>
-                        <label></label>
-
-                        <div class="form-group" id="">
-                            <label for="fname" class="col-sm-6 text-left control-label col-form-label" style="font-family: bold">Allenamento Atletico:</label><br>
-                            <label></label>
-                        </div>
-                        <div class="form-group" id="">
-                            <label for="fname" class="col-sm-6 text-left control-label col-form-label" style="font-family: bold">Riabilitazione:</label><br>
-                            <label></label>
-                        </div>
-                        <div class="form-group" id="">
-                            <label for="fname" class="col-sm-6 text-left control-label col-form-label" style="font-family: bold">Sport di Combattimento:</label><br>
-                            <label></label>
-                        </div>
-                        <label for="fname" class="col-sm-6 text-left control-label col-form-label" style="font-family: bold">Altri Obiettivi:</label>
-                        <label></label>
-                        <label for="fname" class="col-sm-6 text-left control-label col-form-label" style="font-family: bold">Informazioni Importanti:</label>
-                        <label></label>
-                    </div>
+                    <label for="fname" class="col-sm-6 text-left control-label col-form-label" style="font-family: bold">Ipertrofia:</label><br>
+                    <label></label>
+                    <label for="fname" class="col-sm-6 text-left control-label col-form-label" style="font-family: bold">Dimagrimento:</label><br>
+                    <label></label>
+                    <label for="fname" class="col-sm-6 text-left control-label col-form-label" style="font-family: bold">Tonificazione:</label><br>
+                    <label></label>
+                    <label for="fname" class="col-sm-6 text-left control-label col-form-label" style="font-family: bold">Allenamento Atletico:</label><br>
+                    <label></label>
+                    <label for="fname" class="col-sm-6 text-left control-label col-form-label" style="font-family: bold">Riabilitazione:</label><br>
+                    <label></label>
+                    <label for="fname" class="col-sm-6 text-left control-label col-form-label" style="font-family: bold">Sport di Combattimento:</label><br>
+                    <label></label>
+                    <label for="fname" class="col-sm-6 text-left control-label col-form-label" style="font-family: bold">Altri Obiettivi:</label>
+                    <label></label>
+                    <label for="fname" class="col-sm-6 text-left control-label col-form-label" style="font-family: bold">Informazioni Importanti:</label>
+                    <label></label>
                 </div>
             </div>
         </div>
     </div>
+</div>
 </div>

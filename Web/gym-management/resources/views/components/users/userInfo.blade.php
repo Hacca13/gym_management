@@ -36,7 +36,6 @@
         </div>
 
         <div class="card-body">
-
             <div class="form-group row">
                 <div class="col-md-2">
                         <a href="modificaScheda">
@@ -49,8 +48,6 @@
                         <button class="btn btn-danger" id="fname" name="" style="border-radius: 10px;">Disattiva</button>
                     </a>
                 </div>
-
-
             </div>
         </div><!-Disattiva>
 
