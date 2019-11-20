@@ -2,8 +2,9 @@
 
 @section('content')
     <div class="row" style="align-content: center">
-        <div class="col-md-12">
-            <div class="card" style="border-radius: 30px; background-color: rgb(31, 38, 45, 0.8)">
+
+        <div class="col-md-12 col-lg-12 col-sm-12">
+            <div class="card" style="border-radius: 10px; background-color: rgb(31, 38, 45, 0.8)">
                 <div class="card-body">
                     <h2 class="card-title m-t-10 text-center" style="color: #d6d8d8">Azioni Rapide</h2>
                 </div>
@@ -61,29 +62,60 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
-            <div class="card" style="border-radius: 30px; background-color: #d6d8d8">
+        <div class="col-lg-8 col-md-6 col-sm-12">
+            <div class="card" style="border-radius: 10px; background-color: rgb(31, 38, 45, 0.8)">
                 <div class="card-body">
-                    <h2 class="card-title m-t-10 text-center">Scadenze Vicine</h2>
+                    <h2 class="card-title m-t-10 text-center" style="color: #d6d8d8">Scadenze Vicine</h2>
                 </div>
-                <div class="card-body text-center">
-                    <a href="/gestioneAbbonamenti">
-                        <button type="button" class="btn btn-secondary" style="border-radius: 10px;">Nome del pezzente</button>
-                    </a>
+                <div class="row justify-content-center">
+                    <div class="col-md-6 col-lg-4 col-xlg-3">
+                        <div class="card card-hover">
+                            <a href="/nuovaScheda">
+                                <div class="box bg-dark text-center">
+                                    <h6 class="text-white">Przemyslaw Szopian</h6>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4 col-xlg-3">
+                        <div class="card card-hover">
+                            <a href="/nuovaScheda">
+                                <div class="box bg-dark text-center">
+                                    <h6 class="text-white">Przemyslaw Szopian</h6>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4 col-xlg-3">
+                        <div class="card card-hover">
+                            <a href="/nuovaScheda">
+                                <div class="box bg-dark text-center">
+                                    <h6 class="text-white">Przemyslaw Szopian</h6>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
-            <div class="card" style="border-radius: 30px; background-color: #d6d8d8">
+        <div class="col-lg-4 col-md-6 col-sm-12">
+            <div class="card" style="border-radius: 10px; background-color: rgb(31, 38, 45, 0.8)">
                 <div class="card-body">
-                    <h2 class="card-title m-t-10 text-center">I corsi di questa giornata</h2>
+                    <h2 class="card-title m-t-10 text-center" style="color: #d6d8d8">I corsi di questa giornata</h2>
                 </div>
-                <div class="card-body text-center">
-                    <a href="/gestioneAbbonamenti">
-                        <button type="button" class="btn btn-secondary" style="border-radius: 10px;">Nome del pezzente</button>
-                    </a>
+                <div class="row justify-content-center">
+                    <div class="col-md-6 col-lg-6 col-xlg-3">
+                        <div class="card card-hover">
+                            <a href="/nuovaScheda">
+                                <div class="box bg-dark text-center">
+                                    <h6 class="text-white">La pecorina</h6>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+
     </div>
 @endsection
