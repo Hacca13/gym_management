@@ -16,7 +16,7 @@
             <div class="col-lg-6 col-md-9 col-sm-9">
                 <div class="row justify-content-center">
 
-                    <div class="col-lg-6 col-md-12 col-sm-12" style="text-align: center; margin-top: auto; margin-bottom: auto;">
+                    <div class="col-lg-6 col-md-12 col-sm-12" style="padding: 8px 0 0 10px">
                         <div class="input-group no-border">
                             <div class="form-check" >
                                 <input type="checkbox" class="form-check-input" id="exampleCheck1">
@@ -25,7 +25,7 @@
                         </div>
                     </div>
 
-                    <div class="col-lg-6 col-md-12 col-sm-12" style="text-align: center; margin-top: auto; margin-bottom: auto;">
+                    <div class="col-lg-6 col-md-12 col-sm-12" style="padding: 8px 0 0 10px">
 
                         <div class="input-group no-border">
                             <div class="form-check">

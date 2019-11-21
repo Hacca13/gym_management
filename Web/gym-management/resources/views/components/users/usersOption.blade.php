@@ -18,7 +18,7 @@
 
             <div class="col-md-6">
                 <div class="row">
-                    <div class="col-md-5" >
+                    <div class="col-md-5" style="padding: 8px 0 0 10px">
                         <div class="input-group no-border">
                             <div class="form-check" >
                                 <input type="checkbox" class="form-check-input" id="utenteAttivo" checked="checked">
@@ -26,7 +26,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-5">
+                    <div class="col-md-5" style="padding: 8px 0 0 10px">
                         <div class="input-group no-border">
                             <div class="form-check">
                                 <input type="checkbox" class="form-check-input" id="utenteInattivo" checked="checked">
