@@ -94,5 +94,7 @@ Route::get('/inserisciUtenteCorso', function () {
     return view('addUserToCourse');
 });
 
+Route::get('/modificaCorso/{id}', 'CoursesManager@setCourseView');
+
 
 Auth::routes();

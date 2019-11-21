@@ -394,12 +394,30 @@ class CoursesManager extends Controller{
       $collection->document($idCourseDatabase)->set($documents);
     }
 
-    public static function addUserToCourse($idCourseDatabase,$idUserDatabase) {
+    public static function addUserToCourse(Request $request) {
 
-      $collection = Firestore::collection('Courses');
-      $documents = $collection->document($idCourseDatabase)->snapshot()->data();
-      array_push($documents['usersList'],$idUserDatabase);
-      $collection->document($idCourseDatabase)->set($documents);
+        $input = $request->all();
+        //var_dump($input);
+        $courses = self::getCourseByID($input["course"]);
+        $userList = $courses->getUsersList();
+        array_push($userList, $input["user"]);
+        $courses->setUsersList($userList);
+        $corso = array(
+            'idDatabase' => $courses->getIdDatabase(),
+            'name' => $courses->getName(),
+            'image' => $courses->getImage(),
+            'isActive' => $courses->getIsActive(),
+            'instructor' => $courses->getInstructor(),
+            'period' => $courses->getPeriod(),
+            'weeklyFrequency' => $courses->getWeeklyFrequency(),
+            'usersList' => $courses->getUsersList()
+        );
+        $factory = (new Firebase\Factory());
+        $firestore = $factory->createFirestore();
+        $database = $firestore->database();
+        $ref = $database->collection('Courses')->document($input["course"]);
+        $ref->set($corso);
+        return "/gestioneCorsi";
 
     }
 
