@@ -19,13 +19,13 @@
                                 <div class="form-group row">
                                     <label for="fname" class="col-sm-3 text-right control-label col-form-label">Nome Corso</label>
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control" id="fname" name="name" value="{{$course->getName()}}">
+                                        <input type="text" class="form-control" id="fname" name="name" value="{{$course->getName()}}" required>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="fname" class="col-sm-3 text-right control-label col-form-label">Nome Istruttore</label>
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control" id="fname" name="instructor" value="{{$course->getInstructor()}}">
+                                        <input type="text" class="form-control" id="fname" name="instructor" value="{{$course->getInstructor()}}" required>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -33,14 +33,14 @@
                                     <div class="col-sm-9">
                                         <input type="text" class="form-control" id="startDate" name="startDate"
                                                placeholder="{{data_get($course->getPeriod(), 'endDate')}}" onfocus="(this.type='date')"
-                                               onblur="(this.type='text')" value="{{data_get($course->getPeriod(), 'startDate')}}">
+                                               onblur="(this.type='text')" value="{{data_get($course->getPeriod(), 'startDate')}}" required>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="fname" class="col-sm-3 text-right control-label col-form-label">Data Fine</label>
                                     <div class="col-sm-9">
                                         <input type="text" class="form-control" id="fname" name="endDate" placeholder="{{data_get($course->getPeriod(), 'endDate')}}" onfocus="(this.type='date')"
-                                               onblur="(this.type='text')" value="{{data_get($course->getPeriod(), 'endDate')}}">
+                                               onblur="(this.type='text')" value="{{data_get($course->getPeriod(), 'endDate')}}" required>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -60,7 +60,7 @@
                                             <div class="form-group row">
                                                 <label for="select" class="col-sm-5 text-right control-label col-form-label">Giorno</label>
                                                 <div class="col-sm-2">
-                                                    <select class="select2 form-control custom-select" id="select" name="singleDay1" style="width: 100%; height:36px;">
+                                                    <select class="select2 form-control custom-select" id="select" name="singleDay1" style="width: 100%; height:36px;" required>
                                                         <option>{{$day['day']}}</option>
                                                         <option>Martedì</option>
                                                         <option>Mercoledì</option>
@@ -73,21 +73,22 @@
                                             <div class="form-group row">
                                                 <label class="col-sm-4 text-right control-label col-form-label">Dalle</label>
                                                 <div class="col-sm-2">
-                                                    <input type="number" min="0" max="24" class="form-control" id="{{"hourFrom" . $index}}" name="{{"hourFrom" . $index}}" placeholder="{{$day['startTime']['hour']}}">
+                                                    <input type="number" min="0" max="24" class="form-control" id="{{"hourFrom" . $index}}" name="{{"hourFrom" . $index}}" placeholder="{{$day['startTime']['hour']}}" required>
                                                 </div>
                                                 <h3 class="text-right control-label col-form-label">:</h3>
                                                 <div class="col-sm-2">
-                                                    <input type="number" min="0" max="59" class="form-control" id="{{"minutesFrom" . $index}}" name="{{"minutesFrom" . $index}}" placeholder="{{$day['startTime']['minutes']}}">
+                                                    <input type="number" min="0" max="59" class="form-control" id="{{"minutesFrom" . $index}}" name="{{"minutesFrom" . $index}}" placeholder="{{$day['startTime']['minutes']}}" required>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label class="col-sm-4 text-right control-label col-form-label">Alle</label>
                                                 <div class="col-sm-2">
-                                                    <input type="number" min="0" max="24" class="form-control" id="{{"hourTo" . $index}}" name="{{"hourTo" . $index}}" placeholder="{{$day['endTime']['minutes']}}">
+                                                    <input type="number" min="0" max="24" class="form-control" id="{{"hourTo" . $index}}" name="{{"hourTo" . $index}}" placeholder="{{$day['endTime']['minutes']}}" required>
                                                 </div>
                                                 <h3 class="text-right control-label col-form-label">:</h3>
                                                 <div class="col-sm-2">
-                                                    <input type="number" min="0" max="59" class="form-control" id="{{"minutesTo" . $index}}" name="{{"minutesTo" . $index}}" placeholder="{{$day['endTime']['minutes']}}">
+                                                    <input type="number" min="0" max="59" class="form-control" id="{{"minutesTo" . $index}}" name="{{"minutesTo" . $index}}" placeholder="{{$day['endTime']['minutes']}}"                                                     <input type="number" min="0" max="24" class="form-control" id="{{"hourTo" . $index}}" name="{{"hourTo" . $index}}" placeholder="{{$day['endTime']['minutes']}}"required>
+                                                    >
                                                 </div>
                                             </div>
                                             <div class="form-group row">
