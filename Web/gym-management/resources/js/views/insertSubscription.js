@@ -180,7 +180,7 @@ class InsertSubscription extends Component {
         );
         return (
             <div className="col-md-12">
-                <div className="card" style={{borderRadius: '10px', backgroundColor: 'rgb(31,30,45,0.8)'}}>
+                <div className="card" style={{borderRadius: '10px', backgroundColor: 'rgb(31,38,45,0.8)'}}>
                     <div className="card-body">
                         <div className="col-md-12">
                             <h2 className="text-center" style={{color: '#d6d8d8'}}>Inserisci Dati Abbonamento</h2>
@@ -193,11 +193,11 @@ class InsertSubscription extends Component {
                                         <br/>
                                         <form onSubmit={this.submitForm}>
 
-                                            <div className="row">
+                                            <div className="row justify-content-center">
 
-                                                <div className="col-md-4">
+                                                <div className="col-lg-8 col-md-12 col-sm-12">
                                                     <section>
-                                                        <label htmlFor="userName" className="row">Abbonamento di: </label>
+                                                        <label htmlFor="userName" className="row col-form-label">Abbonamento di: </label>
                                                         <UserSearch
                                                             retrieveUser={this.addUser}
                                                         />
@@ -205,32 +205,33 @@ class InsertSubscription extends Component {
                                                     </section>
                                                 </div>
 
-                                                <div className="col-md-12">
+                                                <div className="col-lg-8 col-md-12 col-sm-12" style={{textAlign: "center"}}>
 
                                                     <br/>
-                                                    <label htmlFor="userName" className="row">Tipo di abbonamento:</label>
+                                                    <label htmlFor="userName" className="col-form-label">Tipo di abbonamento:</label>
                                                     <br/>
                                                     <section>
-                                                        <div className="custom-control custom-radio">
-                                                        <input id="myCheck" onClick={this.Annuale} name="acceptTerms" type="radio" className="required custom-control-input" style={{marginLeft: '2%'}}/>
-                                                        <label htmlFor="myCheck" style={{marginLeft: '1%'}} className="custom-control-label" >Periodico</label>
-                                                        </div>
-                                                        <div className="custom-control custom-radio">
-                                                        <input id="entrata" onClick={this.Entrate} name="acceptTerms" type="radio" className="required custom-control-input"style={{marginLeft: '2%'}}/>
-                                                        <label htmlFor="entrata"style={{marginLeft: '1%'}} className="custom-control-label">Entrate</label>
-                                                        </div>
-                                                        <div className="custom-control custom-radio">
-                                                        <input id="corso" onClick={this.Corso} name="acceptTerms" type="radio" className="required custom-control-input" style={{marginLeft: '2%'}}/>
-                                                            <label htmlFor="corso"style={{marginLeft: '1%'}} className="custom-control-label">Corso</label>
+                                                        <div className="row justify-content-center">
+                                                            <div className="custom-control custom-radio" style={{marginRight: '5%'}}>
+                                                                <input id="myCheck" onClick={this.Annuale} name="acceptTerms" type="radio" className="required custom-control-input"/>
+                                                                <label htmlFor="myCheck" className="custom-control-label" >Periodico</label>
+                                                            </div>
+                                                            <div className="custom-control custom-radio" style={{marginRight: '5%'}}>
+                                                                <input id="entrata" onClick={this.Entrate} name="acceptTerms" type="radio" className="required custom-control-input"/>
+                                                                <label htmlFor="entrata" className="custom-control-label">Entrate</label>
+                                                            </div>
+                                                            <div className="custom-control custom-radio" style={{marginRight: '5%'}}>
+                                                                <input id="corso" onClick={this.Corso} name="acceptTerms" type="radio" className="required custom-control-input"/>
+                                                                <label htmlFor="corso" className="custom-control-label">Corso</label>
+                                                            </div>
                                                         </div>
                                                     </section>
                                                 </div>
                                             </div>
                                             <br/>
 
-                                            <div className="row">
-
-                                                <div className="col-md-6 text-left"  id="inizio" style={{display: 'none'}}>
+                                            <div className="row justify-content-center">
+                                                <div className="col-md-6" id="inizio" style={{display: 'none'}}>
                                                     <label>Inzio</label>
                                                     <div className="input-group">
                                                         <DatePicker
@@ -312,8 +313,8 @@ class InsertSubscription extends Component {
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div className="row">
-                                                <div className="col-md-6" id="entrate" style={{display: 'none'}}>
+                                            <div className="row justify-content-center">
+                                                <div className="col-md-4" id="entrate" style={{display: 'none'}}>
                                                     <div className="form-group">
                                                         <label htmlFor="exampleFormControlSelect1">Numero Entrate</label>
                                                         <select className="form-control" id="exampleFormControlSelect1"
@@ -326,24 +327,26 @@ class InsertSubscription extends Component {
                                                             <option>3</option>
                                                             <option>4</option>
                                                             <option>5</option>
+
                                                         </select>
                                                     </div>
                                                 </div>
 
                                             </div>
+                                            <div className="form-group row">
 
-                                            <div className="col-md-12 row">
-                                                <p align="left">
-                                                    <button id="corso" name="acceptTerms" className="btn btn-danger" style={{borderRadius: '10px'}}>Annulla</button>
-                                                </p>
-                                                <hr/>
-                                                <p align="right">
-                                                    <button type="submit" id="corso" name="acceptTerms" className="btn btn-success" style={{borderRadius: '10px'}}>Inserisci</button>
-                                                </p>
+                                                <div className="col-md-6">
+                                                    <p align="center">
+                                                        <button id="corso" name="acceptTerms" className="btn btn-danger" style={{borderRadius: '10px'}}>Annulla</button>
+                                                    </p>
+                                                </div>
+                                                <div className="col-md-6">
+                                                    <p align="center">
+                                                        <button type="submit" id="corso" name="acceptTerms" className="btn btn-success" style={{borderRadius: '10px'}}>Inserisci</button>
+                                                    </p>
+                                                </div>
                                             </div>
                                         </form>
-                                        <br/>
-
                                     </div>
                                 </div>
                             </div>
@@ -351,8 +354,8 @@ class InsertSubscription extends Component {
                     </div>
                 </div>
             </div>
-    );
+        );
     }
-    }
+}
 
-    export default InsertSubscription;
+export default InsertSubscription;

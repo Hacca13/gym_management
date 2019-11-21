@@ -1,4 +1,4 @@
-<div class="card-hover" style="border-radius: 10px;background-color: #d6d8d8" id="scroll" >
+<div class="card-hover" style="border-radius:10px;background-color: #d6d8d8" id="scroll" >
     <a data-toggle="collapse" href="#subPeriod" role="button" aria-expanded="false" onclick="border()" aria-controls="{{'multiCollapseExample' . $loop->index}}">
         <div class="card-body" >
           <?php foreach ($userForSubscriptionPage as $document) {

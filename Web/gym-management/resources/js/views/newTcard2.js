@@ -261,70 +261,64 @@ class NewTcard2 extends Component {
             <div className="row justify-content-center">
                 <div className="col-md-12">
                     <div className="card"
-                         style={{borderRadius: '10px', backgroundColor: 'rgb(31, 30, 45,0.8)'}}>
+                         style={{borderRadius: '10px', backgroundColor: 'rgb(31, 38, 45,0.8)'}}>
                         <div className="card-body">
                             <div className="col-md-12">
-                                <h2 className="text-center" style={{color: '#d6d8d8'}}>Inserisci Nuova Scheda</h2>
+                                <h2 className="text-center" style={{color: '#d6d8d8'}}>Inserisci nuova scheda</h2>
                             </div>
 
 
                             <div className="row justify-content-center">
                                 <div className="col-md-12">
-                                    <div className="card" style={{borderRadius: '10px', backgroundColor: 'rgb(255, 255, 255,0.8)'}}>
+                                    <div className="card" style={{borderRadius: '10px', backgroundColor: '#d6d8d8'}}>
                                         <div className="card-body">
                                             <form onSubmit={this.handleSubmit}>
 
-                                                <div className="form-group row">
-                                                    <div className="col-sm-6">
+                                                <div className="form-group row justify-content-center">
+                                                    <div className="col-sm-12 col-md-12 col-lg-6">
                                                         <label htmlFor="fname"
                                                                className="col-sm-12 text-left control-label col-form-label">Utente</label>
                                                         <UserSearch
                                                             retrieveUser={this.addUser}
                                                         />
                                                     </div>
-
-                                                </div>
-
-                                                <div className="form-group row">
-
-                                                    <div className="col-sm-6">
-                                                        <label htmlFor="fname"
-                                                               className="col-sm-12 control-label col-form-label">Data inizio</label>
-                                                        <DatePicker
-                                                            required={true}
-                                                            selected={this.state.from}
-                                                            onChange={date =>
-                                                                this.setState({
-                                                                    from: date
-                                                                })}
-                                                            dateFormat="dd/MM/yyyy"
-                                                            customInput={<ExampleCustomInput
-                                                                fromOrTo={true}
-                                                            />}
-                                                        />
+                                                    <div className="col-md-12 col-sm-12 col-lg-6">
+                                                        <div className="form-group row">
+                                                            <div className="col-sm-12 col-md-6">
+                                                                <label htmlFor="fname"
+                                                                       className="col-sm-12 control-label col-form-label">Data inizio</label>
+                                                                <DatePicker
+                                                                    required={true}
+                                                                    selected={this.state.from}
+                                                                    onChange={date =>
+                                                                        this.setState({
+                                                                            from: date
+                                                                        })}
+                                                                    dateFormat="dd/MM/yyyy"
+                                                                    customInput={<ExampleCustomInput
+                                                                        fromOrTo={true}
+                                                                    />}
+                                                                />
+                                                            </div>
+                                                            <div className="col-sm-12 col-md-6">
+                                                                <label htmlFor="fname"
+                                                                       className="col-sm-12 control-label col-form-label">Data fine</label>
+                                                                <DatePicker
+                                                                    required={true}
+                                                                    selected={this.state.to}
+                                                                    onChange={date =>
+                                                                        this.setState({
+                                                                            to: date
+                                                                        })}
+                                                                    dateFormat="dd/MM/yyyy"
+                                                                    customInput={<ExampleCustomInput
+                                                                        fromOrTo={false}/>
+                                                                    }
+                                                                />
+                                                            </div>
+                                                        </div>
                                                     </div>
-
-                                                    <div className="col-sm-6">
-                                                        <label htmlFor="fname"
-                                                               className="col-sm-12 control-label col-form-label">Data fine</label>
-                                                        <DatePicker
-                                                            required={true}
-                                                            selected={this.state.to}
-                                                            onChange={date =>
-                                                                this.setState({
-                                                                    to: date
-                                                                })}
-                                                            dateFormat="dd/MM/yyyy"
-                                                            customInput={<ExampleCustomInput
-                                                                fromOrTo={false}/>
-                                                            }
-                                                        />
-                                                    </div>
-
-                                                </div>
-
-                                                <div className="form-group row">
-                                                    <div className="col-sm-6">
+                                                    <div className="col-sm-12 col-md-10 col-lg-6">
                                                         <label htmlFor="fname" className="col-sm-12 control-label col-form-label">Esercizio</label>
                                                         <Autosuggest
                                                             suggestions={suggestions}
@@ -338,11 +332,9 @@ class NewTcard2 extends Component {
                                                             renderInputComponent={this.renderInputComponent}
                                                         />
                                                     </div>
+                                                </div>
 
-
-
-
-
+                                                <div className="form-group row">
 
                                                     <div className="col-md-12">
                                                         {
@@ -381,12 +373,18 @@ class NewTcard2 extends Component {
                                                 </div>
 
                                                 <br></br>
-                                                <div className="col-md-6 row ">
-                                                    <p align="left">
-                                                        <button id="corso" name="acceptTerms" className="btn btn-success" style={{borderRadius: '10px'}}>Inserisci Scheda</button>
-                                                    </p>
+                                                <div className="form-group row">
+                                                    <div className="col-md-6">
+                                                        <p align="center">
+                                                            <button id="corso" name="acceptTerms" className="btn btn-danger" style={{borderRadius: '10px'}}>Annulla</button>
+                                                        </p>
+                                                    </div>
+                                                    <div className="col-md-6">
+                                                        <p align="center">
+                                                            <button id="corso" name="acceptTerms" className="btn btn-success" style={{borderRadius: '10px'}}>Inserisci Scheda</button>
+                                                        </p>
+                                                    </div>
                                                 </div>
-
                                             </form>
                                         </div>
                                     </div>
