@@ -80,6 +80,7 @@ Route::get('/trainingCardsPageSearchResult', 'TrainingCardsManager@searchTrainin
 //CORSI
 Route::get('/gestioneCorsi', 'CoursesManager@getAllCoursesView');//->middleware('auth')
 Route::post('/insertFormCourse', 'CoursesManager@addCourse');
+Route::post('/setCourse', 'CoursesManager@setCourse');
 Route::get('/nuovoCorso', function () {
     return view('insertNewCourse');
 });
@@ -90,5 +91,6 @@ Route::get('/inserisciUtenteCorso', function () {
     return view('addUserToCourse');
 });
 
+Route::get('/modificaCorso/{id}', 'CoursesManager@setCourseView');
 
 Auth::routes();
