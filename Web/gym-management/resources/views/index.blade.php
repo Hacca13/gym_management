@@ -90,7 +90,7 @@
                         <div class="card card-hover">
                             <a href="/nuovaScheda">
                                 <div class="box bg-dark text-center">
-                                    <h6 class="text-white">Przemyslaw Szopian</h6>
+                                    <h6 class="text-white">Famoso porco di tre lettere</h6>
                                 </div>
                             </a>
                         </div>
