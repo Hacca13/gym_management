@@ -29,6 +29,13 @@ class ExercisesManager extends Controller{
 
     }
 
+    public static function deleteExercise($id){
+      $collection = Firestore::collection('Exercises');
+
+      toastr()->error('Esercizio Eliminato');
+      return redirect('gestioneEsercizi');
+    }
+
     public static function setExerciseView($id,Request $request){
         $documents = $request->session()->pull('exercises');
         $request->session()->put('exercises', $documents);

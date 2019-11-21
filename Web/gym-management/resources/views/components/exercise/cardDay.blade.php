@@ -1,9 +1,11 @@
-<div class="col-md-3">
-    <a data-toggle="collapse" href="{{'#multiCollapseExample' . $loop->index}}" role="button" aria-expanded="false" aria-controls="{{'multiCollapseExample' . $loop->index}}">
-        <button type="button" class="btn btn-secondary" style="border-radius: 10px;">
-            Giorno della settimana
-        </button>
-    </a>
+<div class="col-md-6 col-lg-2 col-sm-12">
+    <div class="card card-hover">
+        <a data-toggle="collapse" href="{{'#multiCollapseExample' . $loop->index}}" role="button" aria-expanded="false" aria-controls="{{'multiCollapseExample' . $loop->index}}">
+            <div class="box bg-dark text-center">
+                <h3 class="text-white">Lunedì</h3>
+            </div>
+        </a>
+    </div>
 </div>
 <div class="collapse multi-collapse" id="{{'multiCollapseExample' . $loop->index}}">
     <div class="col-md-12">
