@@ -8,7 +8,7 @@
                     </a>
                 </div>
                 <div class="col-md-6" style="text-align: end">
-                    <a href="Esercizio">
+                    <a href="eliminaEsercizio/{{$exercise->getIdDatabase()}}">
                         <i class="fas fa-times" style="font-size: 170%; color: red; margin-left: 2.5%"></i>
                     </a>
                 </div>

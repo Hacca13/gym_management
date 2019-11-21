@@ -31,7 +31,8 @@ class ExercisesManager extends Controller{
 
     public static function deleteExercise($id){
       $collection = Firestore::collection('Exercises');
-
+      $collection->document($id)->delete();
+      TrainingCardsManager::deleteExerciseFromTrainingCard($id);
       toastr()->error('Esercizio Eliminato');
       return redirect('gestioneEsercizi');
     }
