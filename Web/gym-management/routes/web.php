@@ -39,6 +39,7 @@ Route::get('/modificaEsercizio/{id}', 'ExercisesManager@setExerciseView');
 Route::get('/eliminaEsercizio/{id}', 'ExercisesManager@deleteExercise');
 
 
+
 //UTENTI
 Route::get('/modificaUtente/{id}', 'UsersManager@setUserView');
 Route::post('/addUserPost', 'UsersManager@createUser');
@@ -80,6 +81,9 @@ Route::get('/trainingCardsPageSearchResult', 'TrainingCardsManager@searchTrainin
 //CORSI
 Route::get('/gestioneCorsi', 'CoursesManager@getAllCoursesView');//->middleware('auth')
 Route::post('/insertFormCourse', 'CoursesManager@addCourse');
+Route::get('/modificaCorso/{id}', 'CoursesManager@setCourseView');
+Route::post('/setCourse', 'CoursesManager@setCourse');
+Route::get('/attivaCorso/{id}', 'CoursesManager@setCourseView');
 Route::get('/nuovoCorso', function () {
     return view('insertNewCourse');
 });

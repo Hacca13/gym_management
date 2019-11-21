@@ -19,6 +19,7 @@
                                 <div class="form-group row">
                                     <label for="fname" class="col-sm-3 text-right control-label col-form-label">Nome Corso</label>
                                     <div class="col-sm-9">
+                                        <input type="text" hidden class="form-control" id="fname" name="idDatabase" value="{{$course->getIdDatabase()}}">
                                         <input type="text" class="form-control" id="fname" name="name" value="{{$course->getName()}}" required>
                                     </div>
                                 </div>
@@ -108,7 +109,7 @@
                                         <button href="/gestioneCorsi" class="btn btn-danger" style="border-radius: 10px;">Annulla</button>
                                     </div>
                                     <div class="card-body  offset-8">
-                                        <button  type="submit" class="btn btn-success" style="border-radius: 10px;">Inserisci Corso</button>
+                                        <button  type="submit" class="btn btn-success" style="border-radius: 10px;">Modifica Corso</button>
                                     </div>
 
                                 </div>
