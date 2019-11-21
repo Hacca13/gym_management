@@ -15,12 +15,10 @@
                     @endif
                 </div>
                 <div class="col-md-3" style="text-align: center; margin-top: auto; margin-bottom: auto;">
-                    <h4>Inizio</h4>
-                    <h4>{{$course->getPeriod()['startDate']}}</h4>
+                    <h4>Inizio: {{$course->getPeriod()['startDate']}}</h4>
                 </div>
                 <div class="col-md-3" style="text-align: center; margin-top: auto; margin-bottom: auto;">
-                    <h4>Fine</h4>
-                    <h4>{{$course->getPeriod()['endDate']}}</h4>
+                    <h4>Fine: {{$course->getPeriod()['endDate']}}</h4>
                 </div>
             </div>
         </div>
