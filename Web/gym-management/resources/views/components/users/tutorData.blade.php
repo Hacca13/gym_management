@@ -36,7 +36,7 @@
                     <label for="cono1" class="col-sm-6 text-left control-label col-form-label"style="font-family: bold">Numero documento d'Identità del Tutore:</label>
                     <label>{{data_get($user->getParentDocument(),'number')}}</label>
                     <label for="lname" class="col-sm-6 text-left control-label col-form-label"style="font-family: bold">Imagine Documento d'Identità:</label>
-                    <label>{{data_get($user->getParentDocument(),'documentImage')}}</label>
+                    <img  height="180dpi" width="200dpi" class="img embed-responsive" src="{{data_get($user->getParentDocument(),'documentImage')}}">
                     <label for="cono1" class="col-sm-6 text-left control-label col-form-label"style="font-family: bold">Data di Rilascio:</label>
                     <label>{{data_get($user->getParentDocument(),'releaseDate')}}</label>
                 </div>
