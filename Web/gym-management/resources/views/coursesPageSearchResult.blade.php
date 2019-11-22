@@ -12,11 +12,22 @@
                     @include('components.courses.courseOption')
                 </div>
             </div>
-            @foreach($coursesResultList as $course)
+            @if(count($coursesResultList) == 0)
+              <div class="row text-center">
+                <br>
+                <br>
+                <br>
+                  <h1 class="col-md-12 text-center" style="color: #d6d8d8">Non ci sono risultati</h1>
+                <br>
+                <br>
+                <br>
+              </div>
+            @endif
             <div class="col-md-12">
+                @foreach($coursesResultList as $course)
                     @include('components.courses.courseCard')
-                </div>
-            @endforeach
+                @endforeach
+            </div>
             <div class="row d-flex justify-content-center">
                 {{$coursesResultList->links()}}
             </div>

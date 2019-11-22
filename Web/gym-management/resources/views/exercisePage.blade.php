@@ -9,6 +9,17 @@
                 <div class="col-md-12" style="margin-top: 2.5%">
                     @include('components.exercise.exerciseSearchBar')
                 </div>
+                @if(count($exercises) == 0)
+                  <div class="row text-center">
+                    <br>
+                    <br>
+                    <br>
+                      <h1 class="col-md-12 text-center" style="color: #d6d8d8">Non ci sono risultati</h1>
+                    <br>
+                    <br>
+                    <br>
+                  </div>
+                @endif
                 <div class="col-md-12" >
                     <div class="row justify-content-center">
                         @foreach($exercises as $exercise)

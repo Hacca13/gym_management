@@ -240,7 +240,7 @@ class CoursesManager extends Controller{
         $courses = new LengthAwarePaginator($currentPageItems , count($itemCollection), $perPage);
         $courses->setPath($request->url());
 
-        return view('courses', compact('courses'));
+        return view('coursesPage', compact('courses'));
     }
 
     public static function getCoursesDBOrCoursesSession(Request $request,$currentPage){

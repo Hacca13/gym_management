@@ -56,6 +56,17 @@
                         </div>
                     </div>
                 </div>
+                @if(count($trainingCardsList) == 0)
+                  <div class="row text-center">
+                    <br>
+                    <br>
+                    <br>
+                      <h1 class="col-md-12 text-center" style="color: #d6d8d8">Non ci sono risultati</h1>
+                    <br>
+                    <br>
+                    <br>
+                  </div>
+                @endif
                 <div class="col-md-12">
                     @foreach($trainingCardsList as $trainingCard)
                         @include('components.trainingCards.TrainingCardsList')
