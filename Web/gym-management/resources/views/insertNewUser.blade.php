@@ -23,6 +23,8 @@
                                         <input type="email" class="form-control" id="email" name="email" required>
                                         <label for="fname" class="text-right control-label col-form-label">Password:</label>
                                         <input type="password" class="form-control" id="fname" name="password" required>
+                                        <label for="fname" class="text-right control-label col-form-label">Conferma Password:</label>
+                                        <input type="password" class="form-control" id="fname" name="password" required>
                                         <label for="fname" class="text-right control-label col-form-label">Data di Nascita:</label>
                                         <input type="date" class="form-control mydatepicker" oninput="testAge()" id="dateOfBirth" name="dateOfBirth" required>
                                         <label for="fname" class="text-right control-label col-form-label">Nazionalità di Nascita:</label>
@@ -62,7 +64,12 @@
                                         <label for="cono1" class="text-right control-label col-form-label">Numero:</label>
                                         <input type="text" class="form-control" id="cono1" name="number" required>
                                         <label for="email1" class="text-right control-label col-form-label">Tipo di Documento:</label>
-                                        <input type="text" class="form-control" id="email1" name="documentType" required>
+                                        <div class="col-md-12 col-form-label control-label ">
+                                            <select class="select2 form-control" id="select" name="" style="width: 100%; height:36px; ">
+                                                <option>Carta D'Identità</option>
+                                                <option>Patente</option>
+                                            </select>
+                                        </div>
                                         <label for="cono1" class="text-right control-label col-form-label">Numero documento d'Identità:</label>
                                         <input type="text" class="form-control" id="lname" name="documentNumber" required>
                                         <label for="cono1" class=" text-right control-label col-form-label">Data di Rilascio:</label>
