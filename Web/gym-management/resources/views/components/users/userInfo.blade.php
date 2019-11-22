@@ -1,46 +1,45 @@
-<div class="col-md-12">
-    <form action="/" method="get" enctype="multipart/form-data">
-        @csrf
-        <div class="row justify-content-center">
 
-            <div class="col-md-3">
-                <a data-toggle="collapse" href="#anagraficData" role="button" aria-expanded="false" aria-controls="{{'multiCollapseExample1' . $loop->index}}">
-                    <button type="button" class="btn btn-secondary" style="border-radius: 10px;">
-                        Dati Anagrafici
-                    </button>
+
+        <div class="col-md-6 col-lg-3 col-sm-12">
+            <div class="card card-hover" style="background-color: rgb(31, 38, 45, 0.8)">
+                <a data-toggle="collapse" href="#anagraficData" role="button" aria-expanded="false" aria-controls="{{'multiCollapseExample' . $loop->index}}">
+                    <div class="box bg-dark text-center">
+                        <h6 class="text-white">Dati anagrafici</h6>
+                    </div>
                 </a>
             </div>
-
-            @include('components.users.anagraficData')
-
-
-            <div class="col-md-3">
-                <a data-toggle="collapse" href="#plicometricData" role="button" aria-expanded="false" aria-controls="{{'multiCollapseExample1' . $loop->index}}">
-                    <button type="button" class="btn btn-secondary" style="border-radius: 10px;">
-                        Dati Plicometrici
-                    </button>
+        </div>
+        @include('components.users.anagraficData')
+        <div class="col-md-6 col-lg-3 col-sm-12">
+            <div class="card card-hover" style="background-color: rgb(31, 38, 45, 0.8)">
+                <a data-toggle="collapse" href="#plicometricData" role="button" aria-expanded="false" aria-controls="{{'multiCollapseExample' . $loop->index}}">
+                    <div class="box bg-dark text-center">
+                        <h6 class="text-white">Dati plicometrici</h6>
+                    </div>
                 </a>
             </div>
-            @include('components.users.plicometricData')
+        </div>
+        @include('components.users.plicometricData')
 
-            @if($user->getIsAdult() == false)
-            <div class="col-md-3" id="parentDiv">
-                <a data-toggle="collapse" href="#tutorData" role="button" aria-expanded="false" aria-controls="{{'multiCollapseExample1' . $loop->index}}">
-                    <button type="button" class="btn btn-secondary" style="border-radius: 10px;">
-                        Dati tutore
-                    </button>
-                </a>
+        @if($user->getIsAdult() == false)
+            <div class="col-md-6 col-lg-3 col-sm-12">
+                <div class="card card-hover" style="background-color: rgb(31, 38, 45, 0.8)">
+                    <a data-toggle="collapse" href="#tutorData" role="button" aria-expanded="false" aria-controls="{{'multiCollapseExample' . $loop->index}}">
+                        <div class="box bg-dark text-center">
+                            <h6 class="text-white">Dati tutore</h6>
+                        </div>
+                    </a>
+                </div>
             </div>
             @include('components.users.tutorData')
-            @endif
-        </div>
+        @endif
 
         <div class="card-body">
             <div class="form-group row">
                 <div class="col-md-2">
-                        <a href="modificaScheda">
-                            <button class="btn btn-warning" id="fname" name="" style="border-radius: 10px;">Modifica</button>
-                        </a>
+                    <a href="/modificaScheda">
+                        <button class="btn btn-warning" id="fname" name="" style="border-radius: 10px;">Modifica</button>
+                    </a>
                 </div>
                 <div class="col-md-8"></div>
                 <div class="col-md-2">
@@ -49,13 +48,8 @@
                     </a>
                 </div>
             </div>
-        </div><!-Disattiva>
+        </div>
 
-<!-- PARENT FORM -->
-
-
-</form>
-</div>
 
 <script>
     function testAge() {
