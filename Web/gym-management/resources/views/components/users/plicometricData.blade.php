@@ -27,17 +27,17 @@
                 </div>
                 <br>
                 <div class="col-md-6">
-                    <label for="fname" class="col-sm-6 text-left control-label col-form-label" style="font-family: bold">Ipertrofia:</label><br>
+                    <label for="fname" class="col-sm-6 text-left control-label col-form-label" style="font-family: bold">Ipertrofia:</label>
                     <label>{{$medicalHistory->getHypertrophy()}}</label>
-                    <label for="fname" class="col-sm-6 text-left control-label col-form-label" style="font-family: bold">Dimagrimento:</label><br>
+                    <label for="fname" class="col-sm-6 text-left control-label col-form-label" style="font-family: bold">Dimagrimento:</label>
                     <label>{{$medicalHistory->getSlimming()}}</label>
-                    <label for="fname" class="col-sm-6 text-left control-label col-form-label" style="font-family: bold">Tonificazione:</label><br>
+                    <label for="fname" class="col-sm-6 text-left control-label col-form-label" style="font-family: bold">Tonificazione:</label>
                     <label>{{$medicalHistory->getToning()}}</label>
-                    <label for="fname" class="col-sm-6 text-left control-label col-form-label" style="font-family: bold">Allenamento Atletico:</label><br>
+                    <label for="fname" class="col-sm-6 text-left control-label col-form-label" style="font-family: bold">Allenamento Atletico:</label>
                     <label>{{$medicalHistory->getAthleticTraining()}}</label>
-                    <label for="fname" class="col-sm-6 text-left control-label col-form-label" style="font-family: bold">Riabilitazione:</label><br>
+                    <label for="fname" class="col-sm-6 text-left control-label col-form-label" style="font-family: bold">Riabilitazione:</label>
                     <label>{{$medicalHistory->getRehabilitation()}}</label>
-                    <label for="fname" class="col-sm-6 text-left control-label col-form-label" style="font-family: bold">Sport di Combattimento:</label><br>
+                    <label for="fname" class="col-sm-6 text-left control-label col-form-label" style="font-family: bold">Sport di Combattimento:</label>
                     <label>{{$medicalHistory->getCombatSports()}}</label>
                     <label for="fname" class="col-sm-6 text-left control-label col-form-label" style="font-family: bold">Altri Obiettivi:</label>
                     <label>{{$medicalHistory->getOtherGoals()}}</label>

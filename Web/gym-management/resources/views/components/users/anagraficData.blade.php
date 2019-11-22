@@ -47,7 +47,7 @@
                     <label for="fname" class="col-sm-6 text-left control-label col-form-label" style="font-family: bold">Rilasciato Da:</label>
                     <label>{{data_get($user->getResidence(),'released')}}</label>
                     <label for="fname" class="col-sm-6 text-left control-label col-form-label" style="font-family: bold">Immagine del Documento:</label>
-                    <label>{{data_get($user->getResidence(),'documentImage')}}</label>
+                    <img  height="180dpi" width="200dpi" class="img embed-responsive" src="{{data_get($user->getDocument(),'documentImage')}}">
                 </div>
                 <hr>
                 <div class="card-body">

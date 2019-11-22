@@ -37,7 +37,7 @@
 </div>
 <div class="col-md-12">
     <div class="collapse multi-collapse" id="subEntrance">
-        <div class="card card-body"  style="background-color: #d6d8d8; border-radius: 0 0 10px 10px;">
+        <div class="card card-body"  style="background-color: #d6d8d8;">
             <div class="row justify-content-center">
                 @include('components.subscription.subEntrance')
             </div>

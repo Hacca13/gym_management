@@ -333,15 +333,16 @@ class InsertSubscription extends Component {
                                                 </div>
 
                                             </div>
+                                            <br></br>
                                             <div className="form-group row">
 
                                                 <div className="col-md-6">
-                                                    <p align="center">
-                                                        <button id="corso" name="acceptTerms" className="btn btn-danger" style={{borderRadius: '10px'}}>Annulla</button>
+                                                    <p align="left">
+                                                        <button id="corso" name="acceptTerms" className="btn btn-danger" style={{borderRadius: '10px', marginRight: '55%'}}>Annulla</button>
                                                     </p>
                                                 </div>
                                                 <div className="col-md-6">
-                                                    <p align="center">
+                                                    <p align="right">
                                                         <button type="submit" id="corso" name="acceptTerms" className="btn btn-success" style={{borderRadius: '10px'}}>Inserisci</button>
                                                     </p>
                                                 </div>
