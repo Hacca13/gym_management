@@ -310,7 +310,7 @@ class CoursesManager extends Controller{
 
       for ($i=0; $i < count($documents['usersList']) ; $i++) {
         if($documents['usersList'][$i] == $idUserDatabase){
-          array_splice($documents['usersList'],$i, $i);
+          array_splice($documents['usersList'],$i, 1);
         }
       }
 

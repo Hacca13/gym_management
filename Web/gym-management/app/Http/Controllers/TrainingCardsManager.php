@@ -100,14 +100,15 @@ class TrainingCardsManager extends Controller
       foreach ($documents as $document) {
         $trainingCards = TrainingCardsManager::transformArrayTrainingCardsIntoTrainingCards($document->data());
         $trainingCards->setIdDatabase($document->id());
-
-        $endDate = data_get($trainingCards->getPeriod() ,'endDate');
-        if(TrainingCardsManager::isExpired($endDate)){
-            $trainingCards->setIsActive(false);
-            $trainingCardSet = TrainingCardsManager::transformTrainingCardsIntoArrayTrainingCards($trainingCards);
-            $collection->document($trainingCards->getIdDatabase())->set($trainingCardSet);
+        if($trainingCards->getIsActive() == true){
+            $endDate = data_get($trainingCards->getPeriod() ,'endDate');
+            if(TrainingCardsManager::isExpired($endDate)){
+                $trainingCards->setIsActive(false);
+                $trainingCardSet = TrainingCardsManager::transformTrainingCardsIntoArrayTrainingCards($trainingCards);
+                unset($trainingCardSet['idDatabase']);
+                $collection->document($trainingCards->getIdDatabase())->set($trainingCardSet);
+            }
         }
-
         array_push($allTrainingCards,$trainingCards);
       }
       return $allTrainingCards;
@@ -249,6 +250,30 @@ class TrainingCardsManager extends Controller
         return '/gestioneIscritti';
     }
 
+    public static function setTrainingCard($trainingCard){
+      $collection = Firestore::collection('TrainingCards');
+      $arrayTrainingCard = TrainingCardsManager::transformTrainingCardsIntoArrayTrainingCards($trainingCard);
+      unset($arrayTrainingCard['idDatabase']);
+      $collection->document($trainingCard->getIdDatabase())->set($arrayTrainingCard);
+    }
+
+    public static function deleteExerciseFromTrainingCard($idExerciseDatabase){
+        $collection = Firestore::collection('TrainingCards');
+        $documents = TrainingCardsManager::getAllTrainingCards();
+
+        foreach ($documents as $document) {
+          $document = TrainingCardsManager::transformTrainingCardsIntoArrayTrainingCards($document);
+          for ($i=0; $i < count(data_get($document,'exercises')) ; $i++) {
+            if(data_get(data_get($document,'exercises')[$i],'idExerciseDatabase') == $idExerciseDatabase){
+              array_splice($document['exercises'],$i,1);
+
+            }
+          }
+          $document = TrainingCardsManager::transformArrayTrainingCardsIntoTrainingCards($document);
+          TrainingCardsManager::setTrainingCard($document);
+        }
+
+    }
 
 
 }
