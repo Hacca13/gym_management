@@ -1,7 +1,7 @@
 <div class="card" style="border-radius: 10px;background-color: #d6d8d8">
     <div class="card-body">
         <div class="row">
-            <div class="col-lg-5 col-md-12 col-sm-12">
+            <div class="col-md-6">
                 <form action="/userSearchResultsPage" method="post">
                   @csrf
                   <div class="input-group no-border">
@@ -16,9 +16,9 @@
                 </form>
             </div>
 
-            <div class="col-lg-7 col-md-12 col-sm-12">
+            <div class="col-md-6">
                 <div class="row">
-                    <div class="col-lg-5 col-md-5 col-sm-3" >
+                    <div class="col-md-5" style="padding: 8px 0 0 10px">
                         <div class="input-group no-border">
                             <div class="form-check" >
                                 <input type="checkbox" class="form-check-input" id="utenteAttivo" checked="checked">
@@ -26,7 +26,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-5 col-md-4 col-sm-3" >
+                    <div class="col-md-5" style="padding: 8px 0 0 10px">
                         <div class="input-group no-border">
                             <div class="form-check">
                                 <input type="checkbox" class="form-check-input" id="utenteInattivo" checked="checked">

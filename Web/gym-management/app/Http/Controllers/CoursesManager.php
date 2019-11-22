@@ -27,6 +27,81 @@ class CoursesManager extends Controller{
         return view('setCourse', compact('course'));
     }
 
+    public static function setCourse(Request $request){
+      $input = $request->all();
+
+      $timestampStartDate = strtotime($input['startDate']);
+      $startDate = date("d-m-Y", $timestampStartDate);
+      $timestampEndDate = strtotime($input['endDate']);
+      $endDate = date("d-m-Y", $timestampEndDate);
+      $days = array();
+
+      for ($i = 0; $i<7; $i++) {
+          if (isset($input['singleDay' . strval($i)])) {
+              array_push($days, [
+                  'day' => $input['singleDay' . strval($i)],
+                  'startTime' => [
+                      'hour' => $input['hourFrom' . strval($i)],
+                      'minutes' => $input['minutesFrom' . strval($i)],
+                  ],
+                  'endTime' => [
+                      'hour' => $input['hourTo' . strval($i)],
+                      'minutes' => $input['minutesTo' . strval($i)],
+                  ]
+              ]);
+          }
+      }
+      $input['instructor'] = strtolower($input['instructor']);
+      $name = $input['name'];
+      $instructor = $input['instructor'];
+      $period = [
+          'startDate' => $startDate,
+          'endDate' => $endDate
+      ];
+      $weeklyFrequency = $days;
+      $usersList = array();
+
+      if(isset($input['courseImage'])){
+        $uploadedImage = $request->file("courseImage");
+        $firebase = (new Firebase\Factory());
+        $bucket = $firebase->createStorage()->getBucket();
+        $input['name'] = strtolower($input['name']);
+        $name = $input['name'] . '.' . $uploadedImage->getClientOriginalExtension();
+        $str = $bucket->upload(file_get_contents($uploadedImage),
+            [
+                'name' => $name
+            ]);
+
+        $external = "19/10/2100 14:48:21";
+        $format = "d/m/Y H:i:s";
+        $dateobj = DateTime::createFromFormat($format, $external);
+
+        $image = $str->signedUrl($dateobj).PHP_EOL;
+
+      
+      }
+      else{
+        $image = $input['oldCourseImage'];
+      }
+
+      $corso = array(
+          'name' => $name,
+          'image' => $image,
+          'isActive' => TRUE,
+          'instructor' => $instructor,
+          'period' => $period,
+          'weeklyFrequency' => $weeklyFrequency,
+          'usersList' => $usersList
+      );
+
+      $collection = Firestore::collection('Courses');
+      $collection->document($input['idDatabase'])->set($corso);
+
+      toastr()->success('Corso modificato con successo');
+      return redirect('/gestioneCorsi');
+    }
+
+
     public static function searchCourses(Request $request){
         $currentPage = LengthAwarePaginator::resolveCurrentPage();
         $input = $request->all();
@@ -130,6 +205,9 @@ class CoursesManager extends Controller{
 
             if(CoursesManager::isExpired($endDate)){
                 $course->setIsActive(false);
+                $courseSet = CoursesManager::trasformCourseToArrayCourse($course);
+                unset($courseSet['idDatabase']);
+                $collection->document($document->id())->set($courseSet);
             }
 
             array_push($allCourses,$course);
@@ -278,7 +356,6 @@ class CoursesManager extends Controller{
         $coll = Firestore::collection('Courses')->newDocument();
 
         $corso = array(
-            'idDatabase' => $coll->id(),
             'name' => $name,
             'image' => $image,
             'isActive' => TRUE,
@@ -317,12 +394,30 @@ class CoursesManager extends Controller{
       $collection->document($idCourseDatabase)->set($documents);
     }
 
-    public static function addUserToCourse($idCourseDatabase,$idUserDatabase) {
+    public static function addUserToCourse(Request $request) {
 
-      $collection = Firestore::collection('Courses');
-      $documents = $collection->document($idCourseDatabase)->snapshot()->data();
-      array_push($documents['usersList'],$idUserDatabase);
-      $collection->document($idCourseDatabase)->set($documents);
+        $input = $request->all();
+        //var_dump($input);
+        $courses = self::getCourseByID($input["course"]);
+        $userList = $courses->getUsersList();
+        array_push($userList, $input["user"]);
+        $courses->setUsersList($userList);
+        $corso = array(
+            'idDatabase' => $courses->getIdDatabase(),
+            'name' => $courses->getName(),
+            'image' => $courses->getImage(),
+            'isActive' => $courses->getIsActive(),
+            'instructor' => $courses->getInstructor(),
+            'period' => $courses->getPeriod(),
+            'weeklyFrequency' => $courses->getWeeklyFrequency(),
+            'usersList' => $courses->getUsersList()
+        );
+        $factory = (new Firebase\Factory());
+        $firestore = $factory->createFirestore();
+        $database = $firestore->database();
+        $ref = $database->collection('Courses')->document($input["course"]);
+        $ref->set($corso);
+        return "/gestioneCorsi";
 
     }
 

@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {BrowserRouter, Route} from 'react-router-dom'
 import NewTcard2 from "../views/newTcard2";
+import AddUserToCourse from "../views/addUserToCourse";
 import ReactDOM from "react-dom";
 
 import InsertSubscription from "../views/insertSubscription";
@@ -14,6 +15,10 @@ let InsertSubs = (props) => {
     return <InsertSubscription/>;
 };
 
+let insertUserToCourse = (props) => {
+    return <AddUserToCourse />;
+};
+
 
 class App extends Component {
     render() {
@@ -21,9 +26,10 @@ class App extends Component {
         return (
             <BrowserRouter>
                 <div>
-                  
+
                     <Route exact path="/nuovaScheda" component={InsertTCard} />
                     <Route exact path="/nuovoAbbonamento" component={InsertSubs} />
+                    <Route exact path="/inserisciUtenteCorso" component={insertUserToCourse} />
 
                 </div>
             </BrowserRouter>
