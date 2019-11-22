@@ -8,7 +8,7 @@
             } ?>
             <div class="row">
 
-                <div class="col-lg-3 col-md-6 col-sm-12" style="margin-top: auto; margin-bottom: auto;">
+                <div class="col-lg-3 col-md-6 col-sm-12" style="text-align: center; margin-top: auto; margin-bottom: auto;">
                     <h3>{{$user->getName()}} {{$user->getSurname()}}</h3>
                 </div>
 
@@ -23,10 +23,10 @@
                 <div class="col-lg-7 col-md-12 col-sm-12">
                     <div class="row">
 
-                        <div class="col-lg-6 col-md-6 col-sm-12" style="text-align: right; margin-top: auto; margin-bottom: auto;">
+                        <div class="col-lg-6 col-md-6 col-sm-12" style="text-align: center; margin-top: auto; margin-bottom: auto;">
                             <h4>Numero di entrate effettuate: {{$subscription->getNumberOfEntries()}}</h4>
                         </div>
-                        <div class="col-lg-6 col-md-6 col-sm-12" style="text-align: right; margin-top: auto; margin-bottom: auto;">
+                        <div class="col-lg-6 col-md-6 col-sm-12" style="text-align: center; margin-top: auto; margin-bottom: auto;">
                             <h4>Numero di entrate totali: {{$subscription->getNumberOfEntriesMade()}}</h4>
                         </div>
                     </div>
