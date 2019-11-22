@@ -2,7 +2,7 @@
     <div class="card-body">
         <div class="row">
             <div class="col-lg-5 col-md-12 col-sm-12">
-              <form action="/coursesSearchResultsPage" method="post">
+              <form action="/admin/coursesSearchResultsPage" method="post">
                 @csrf
                 <div class="input-group no-border">
                     <input type="text" value="" name='searchInput' class="form-control" placeholder="Cerca corso...">
@@ -31,7 +31,7 @@
                 </div>
             </div>
             <div class="col-lg-2 col-md-8 col-sm-12" style="text-align: center; margin-left: 7%">
-                <a href="nuovoCorso" role="button">
+                <a href="/admin/nuovoCorso" role="button">
                     <button class="bttn-material-circle bttn-md bttn-success" style="background-color: #3F5469">
                         <i class="fas fa-plus"></i>
                     </button>

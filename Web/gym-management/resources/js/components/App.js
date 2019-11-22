@@ -27,9 +27,9 @@ class App extends Component {
             <BrowserRouter>
                 <div>
 
-                    <Route exact path="/nuovaScheda" component={InsertTCard} />
-                    <Route exact path="/nuovoAbbonamento" component={InsertSubs} />
-                    <Route exact path="/inserisciUtenteCorso" component={insertUserToCourse} />
+                    <Route exact path="/admin/nuovaScheda" component={InsertTCard} />
+                    <Route exact path="/admin/nuovoAbbonamento" component={InsertSubs} />
+                    <Route exact path="/admin/inserisciUtenteCorso" component={insertUserToCourse} />
 
                 </div>
             </BrowserRouter>

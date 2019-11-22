@@ -2,7 +2,7 @@
     <div class="card-body">
         <div class="row">
             <div class="col-md-10">
-              <form action="/exercisesSearchResultsPage" method="post">
+              <form action="/admin/exercisesSearchResultsPage" method="post">
                 @csrf
                 <div class="input-group no-border" >
                     <input type="text" value="" name='searchInput' class="form-control" placeholder="Cerca esercizio...">
@@ -15,7 +15,7 @@
             </div>
             <div class="col-md-2">
                         <a href="/nuovoEsercizio" role="button" style="padding-left: 60%">
-                            <button href="/nuovoEsercizio" class="bttn-material-circle bttn-md bttn-success" style="background-color: #3F5469">
+                            <button href="/admin/nuovoEsercizio" class="bttn-material-circle bttn-md bttn-success" style="background-color: #3F5469">
                                 <i class="fas fa-plus"></i>
                             </button>
                         </a>

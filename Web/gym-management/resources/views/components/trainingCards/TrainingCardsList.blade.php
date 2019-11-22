@@ -43,7 +43,7 @@
                     </a>
                 </div>
                 <div class="col-lg-4 col-md-6 col-sm-12" style="text-align: center; margin-bottom: 5px;">
-                    <a href="/gestioneSchede">
+                    <a href="/admin/gestioneSchede">
                         <button class="btn btn-danger" id="fname" name="" style="border-radius: 10px;">Disattiva</button>
                     </a>
                 </div>

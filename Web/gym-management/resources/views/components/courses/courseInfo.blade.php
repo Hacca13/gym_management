@@ -37,21 +37,21 @@
                     </div>
                     <div class="row">
                         <div class="card-body">
-                            <a href="/modificaCorso/{{$course->getIdDatabase()}}">
+                            <a href="/admin/modificaCorso/{{$course->getIdDatabase()}}">
                                 <button class="btn btn-warning" id="fname" name="" style="border-radius: 10px;">Modifica</button>
                             </a>
                         </div>
 
                         @if($course->getIsActive() == TRUE)
                           <div class="card-body offset-8">
-                            <a href="/gestioneCorsi">
+                            <a href="/admin/gestioneCorsi">
                                 <button class="btn btn-danger" id="fname" name="" style="border-radius: 10px;">Disattiva</button>
                             </a>
                           </div>
                         @endif
                         @if($course->getIsActive() == FALSE)
                         <div class="card-body offset-8">
-                          <a href="/gestioneCorsi">
+                          <a href="/admin/gestioneCorsi">
                               <button class="btn btn-success" id="fname" name="" style="border-radius: 10px;">Attiva</button>
                           </a>
                         </div>

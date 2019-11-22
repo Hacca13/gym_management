@@ -21,7 +21,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="/insertExercisePost" method="post" enctype="multipart/form-data">
+                    <form action="/admin/insertExercisePost" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group row">
                             <div class="col-sm-6">
@@ -65,7 +65,7 @@
                                 <input type='submit' class="btn btn-success" id="fname" name="" style="border-radius: 10px;">
                             </div>
                             <div class="col-md-2">
-                                <a href="/gestioneEsercizi">
+                                <a href="/admin/gestioneEsercizi">
                                     <button class="btn btn-danger" id="fname" name="" style="border-radius: 10px;">Annulla</button>
                                 </a>
                             </div>

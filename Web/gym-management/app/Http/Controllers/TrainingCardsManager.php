@@ -52,7 +52,7 @@ class TrainingCardsManager extends Controller
 
 
       $url = substr($request->url(), 0, strlen($request->url())-30);
-      $url = $url.'/trainingCardsPageSearchResult';
+      $url = $url.'/admin/trainingCardsPageSearchResult';
 
       $itemCollection = collect($trainingCardsResultList);
       $perPage = 1;
@@ -187,12 +187,12 @@ class TrainingCardsManager extends Controller
         $arrayTrainingCard = TrainingCardsManager::transformTrainingCardsIntoArrayTrainingCards($trainingCard);
         $collection->add($arrayTrainingCard);
         toastr()->success('Scheda inserita con successo.');
-        return redirect('/nuovaScheda');
+        return redirect('/admin/nuovaScheda');
 
       } catch (FirebaseException $e) {
 
           toastr()->error($tr->translate($e->getMessage()));
-          return redirect('/nuovaScheda');
+          return redirect('/admin/nuovaScheda');
       }
     }
 

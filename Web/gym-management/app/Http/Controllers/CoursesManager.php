@@ -78,7 +78,7 @@ class CoursesManager extends Controller{
 
         $image = $str->signedUrl($dateobj).PHP_EOL;
 
-      
+
       }
       else{
         $image = $input['oldCourseImage'];
@@ -98,7 +98,7 @@ class CoursesManager extends Controller{
       $collection->document($input['idDatabase'])->set($corso);
 
       toastr()->success('Corso modificato con successo');
-      return redirect('/gestioneCorsi');
+      return redirect('/admin/gestioneCorsi');
     }
 
 
@@ -115,7 +115,7 @@ class CoursesManager extends Controller{
             $request->session()->put('searchInput', $input);
         }
         $url = substr($request->url(), 0, strlen($request->url())-24);
-        $url = $url.'coursesPageSearchResults';
+        $url = $url.'/admin/coursesPageSearchResults';
 
         $coursesResultList = CoursesManager::getCoursesDBOrCoursesSessionForSearchPage($request,$currentPage,$input);
 
@@ -368,7 +368,7 @@ class CoursesManager extends Controller{
         $coll->set($corso);
 
         toastr()->success('Corso inserito');
-        return redirect('/gestioneCorsi');
+        return redirect('/admin/gestioneCorsi');
 
     }
 

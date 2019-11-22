@@ -11,7 +11,7 @@
                 <div class="row justify-content-center">
                     <div class="col-md-6 col-lg-2 col-sm-12">
                         <div class="card card-hover">
-                            <a href="/nuovaScheda">
+                            <a href="/admin/nuovaScheda">
                                 <div class="box bg-dark text-center">
                                     <h1 class="font-light text-white"><i class="fas fa-clipboard-list"></i></h1>
                                     <h6 class="text-white">Nuova scheda</h6>
@@ -21,7 +21,7 @@
                     </div>
                     <div class="col-md-6 col-lg-2 col-sm-12">
                         <div class="card card-hover">
-                            <a href="/nuovoCorso">
+                            <a href="/admin/nuovoCorso">
                                 <div class="box bg-dark text-center">
                                     <h1 class="font-light text-white"><i class="mdi mdi-av-timer"></i></h1>
                                     <h6 class="text-white">Nuovo corso</h6>
@@ -31,7 +31,7 @@
                     </div>
                     <div class="col-md-6 col-lg-2 col-sm-12">
                         <div class="card card-hover" style="border-radius: 10px">
-                            <a href="/nuovoIscritto">
+                            <a href="/admin/nuovoIscritto">
                                 <div class="box bg-dark text-center">
                                     <h1 class="font-light text-white"><i class="fas fa-user"></i></h1>
                                     <h6 class="text-white">Nuovo iscritto</h6>
@@ -41,7 +41,7 @@
                     </div>
                     <div class="col-md-6 col-lg-2 col-sm-12">
                         <div class="card card-hover">
-                            <a href="/nuovoEsercizio">
+                            <a href="/admin/nuovoEsercizio">
                                 <div class="box bg-dark text-center">
                                     <h1 class="font-light text-white"><i class="fab fa-algolia"></i></h1>
                                     <h6 class="text-white">Nuovo esercizio</h6>
@@ -51,7 +51,7 @@
                     </div>
                     <div class="col-md-6 col-lg-2 col-sm-12">
                         <div class="card card-hover">
-                            <a href="/nuovoAbbonamento">
+                            <a href="/admin/nuovoAbbonamento">
                                 <div class="box bg-dark text-center">
                                     <h1 class="font-light text-white"><i class="fas fa-euro-sign"></i></h1>
                                     <h6 class="text-white">Nuovo abbonamento</h6>
@@ -70,7 +70,7 @@
                 <div class="row justify-content-center">
                     <div class="col-md-12 col-lg-5 col-sm-10">
                         <div class="card card-hover">
-                            <a href="/nuovaScheda">
+                            <a href="/admin/nuovaScheda">
                                 <div class="box bg-dark text-center">
                                     <h6 class="text-white">Przemyslaw Szopian</h6>
                                 </div>
@@ -79,7 +79,7 @@
                     </div>
                     <div class="col-md-12 col-lg-5 col-sm-10">
                         <div class="card card-hover">
-                            <a href="/nuovaScheda">
+                            <a href="/admin/nuovaScheda">
                                 <div class="box bg-dark text-center">
                                     <h6 class="text-white">Przemyslaw Szopian</h6>
                                 </div>
@@ -88,9 +88,9 @@
                     </div>
                     <div class="col-md-12 col-lg-5 col-sm-10">
                         <div class="card card-hover">
-                            <a href="/nuovaScheda">
+                            <a href="/admin/nuovaScheda">
                                 <div class="box bg-dark text-center">
-                                    <h6 class="text-white">Famoso porco di tre lettere</h6>
+                                    <h6 class="text-white">Fit</h6>
                                 </div>
                             </a>
                         </div>
@@ -106,9 +106,9 @@
                 <div class="row justify-content-center">
                     <div class="col-md-6 col-lg-4 col-sm-10">
                         <div class="card card-hover">
-                            <a href="/nuovaScheda">
+                            <a href="/admin/nuovaScheda">
                                 <div class="box bg-dark text-center">
-                                    <h6 class="text-white">La pecorina</h6>
+                                    <h6 class="text-white">Fit</h6>
                                 </div>
                             </a>
                         </div>

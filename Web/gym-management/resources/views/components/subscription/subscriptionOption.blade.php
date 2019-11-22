@@ -2,7 +2,7 @@
     <div class="card-body">
         <div class="row justify-content-center">
             <div class="col-lg-5 col-md-12 col-sm-12">
-              <form action="/subscriptionSearchResultsPage" method="post">
+              <form action="/admin/subscriptionSearchResultsPage" method="post">
                 @csrf
                 <div class="input-group no-border">
                     <input type="text" value="" class="form-control" name='searchInput' placeholder="Abbonamento di...">
@@ -35,10 +35,10 @@
                         </div>
                     </div>
                 </div>
-            </div><!-Attivi/Non e aggiungi>
+            </div>
             <div class="col-lg-1 col-md-3 col-sm-3" style="text-align: right; margin-top: auto; margin-bottom: auto">
 
-                <a href="nuovoAbbonamento" role="button">
+                <a href="/admin/nuovoAbbonamento" role="button">
                     <button class="bttn-material-circle bttn-md bttn-primary" style="background-color: #3F5469">
                         <i class="fas fa-plus"></i>
                     </button>

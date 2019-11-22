@@ -2,7 +2,7 @@
     <div class="card-body">
         <div class="row">
             <div class="col-md-6">
-                <form action="/userSearchResultsPage" method="post">
+                <form action="/admin/userSearchResultsPage" method="post">
                   @csrf
                   <div class="input-group no-border">
 
@@ -36,7 +36,7 @@
                     </div>
 
                     <div class="col-md-2">
-                        <a href="nuovoIscritto" role="button">
+                        <a href="/admin/nuovoIscritto" role="button">
                             <button class="bttn-material-circle bttn-md bttn-success" style="background-color: #3F5469">
                                 <i class="fas fa-plus"></i>
                             </button>

@@ -37,13 +37,13 @@
         <div class="card-body">
             <div class="form-group row">
                 <div class="col-md-2">
-                    <a href="/modificaScheda">
+                    <a href="/admin/modificaScheda">
                         <button class="btn btn-warning" id="fname" name="" style="border-radius: 10px;">Modifica</button>
                     </a>
                 </div>
                 <div class="col-md-8"></div>
                 <div class="col-md-2">
-                    <a href="/gestioneEsercizi">
+                    <a href="/admin/gestioneEsercizi">
                         <button class="btn btn-danger" id="fname" name="" style="border-radius: 10px;">Disattiva</button>
                     </a>
                 </div>

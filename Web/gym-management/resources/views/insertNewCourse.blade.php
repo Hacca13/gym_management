@@ -13,7 +13,7 @@
                 </div>
                 <div class="col-md-12">
                     <div class="card" style="border-radius: 10px;background-color: #d6d8d8">
-                        <form class="form-horizontal" method="post" enctype="multipart/form-data" action="/insertFormCourse">
+                        <form class="form-horizontal" method="post" enctype="multipart/form-data" action="/admin/insertFormCourse">
                             @csrf
                             <div class="card-body">
                                 <div class="form-group row">
@@ -104,7 +104,7 @@
                                 </div>
                                 <div class="form-group row">
                                     <div class="card-body">
-                                        <button href="/gestioneCorsi" class="btn btn-danger" style="border-radius: 10px;">Annulla</button>
+                                        <button href="/admin/gestioneCorsi" class="btn btn-danger" style="border-radius: 10px;">Annulla</button>
                                     </div>
                                     <div class="card-body  offset-8">
                                         <button  type="submit" class="btn btn-success" style="border-radius: 10px;">Inserisci Corso</button>

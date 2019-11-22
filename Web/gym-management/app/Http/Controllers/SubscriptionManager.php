@@ -27,7 +27,7 @@ class SubscriptionManager extends Controller
       }
 
       $url = substr($request->url(), 0, strlen($request->url())-29);
-      $url = $url.'subscriptionPageSearchResults';
+      $url = $url.'/admin/subscriptionPageSearchResults';
 
       $userForSubscriptionPage = UsersManager::getUserDBOrUserSessionForSearchPage($request,$currentPage,$input);
       $subscriptionResultList = array();

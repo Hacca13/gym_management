@@ -34,7 +34,7 @@ class ExercisesManager extends Controller{
       $collection->document($id)->delete();
       TrainingCardsManager::deleteExerciseFromTrainingCard($id);
       toastr()->error('Esercizio Eliminato');
-      return redirect('gestioneEsercizi');
+      return redirect('/admin/gestioneEsercizi');
     }
 
     public static function setExerciseView($id,Request $request){
@@ -81,7 +81,7 @@ class ExercisesManager extends Controller{
       $collection->document($input['idDatabase'])->set($arrayExercise);
 
       toastr()->success('Esercizio Modificato');
-      return redirect('gestioneEsercizi');
+      return redirect('/admin/gestioneEsercizi');
     }
 
 
@@ -165,7 +165,7 @@ class ExercisesManager extends Controller{
 
         if(ExercisesManager::existsAExerciseWithThisName($name)){
             toastr()->error('Esiste già un esercizio con questo nome');
-            // return redirect('nuovoEsercizio');
+             return redirect('/admin/nuovoEsercizio');
         }
 
         $exerciseImage = $request->file('imageExercise');
@@ -190,7 +190,7 @@ class ExercisesManager extends Controller{
         $collection->add($exercise);
 
         toastr()->success('Esercizio inserito');
-        return redirect('gestioneEsercizi');
+        return redirect('/admin/gestioneEsercizi');
 
     }
 
@@ -209,7 +209,7 @@ class ExercisesManager extends Controller{
 
         $pelo = $imageRef->info()['mediaLink'];
 
-        return redirect('testGif')->with('pelo',  $pelo);
+        return redirect('/admin/testGif')->with('pelo',  $pelo);
 
     }
 
@@ -295,7 +295,7 @@ class ExercisesManager extends Controller{
         }
 
         $url = substr($request->url(), 0, strlen($request->url())-26);
-        $url = $url.'exercisesPageSearchResults';
+        $url = $url.'/admin/exercisesPageSearchResults';
 
         $exercisesResultList = ExercisesManager::getExercisesDBOrExercisesSessionForSearchPage($request,$currentPage,$input);
 

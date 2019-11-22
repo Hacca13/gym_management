@@ -8,7 +8,7 @@
                     <h1 style="color: #d6d8d8">Inserimento dati utente</h1>
                 </div>
                 <div class="col-md-12" style="margin-top: 2.5%">
-                    <form id="example-form" action="/addUserPost"  method="post" class="m-t-40" enctype="multipart/form-data">
+                    <form id="example-form" action="/admin/addUserPost"  method="post" class="m-t-40" enctype="multipart/form-data">
                         @csrf
                         <div>
                             <h3>Dati Utente</h3>
