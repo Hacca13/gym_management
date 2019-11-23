@@ -120,7 +120,7 @@ class CoursesManager extends Controller{
         $coursesResultList = CoursesManager::getCoursesDBOrCoursesSessionForSearchPage($request,$currentPage,$input);
 
         $itemCollection = collect($coursesResultList);
-        $perPage = 1;
+        $perPage = 6;
         $currentPageItems = $itemCollection->slice(($currentPage * $perPage) - $perPage, $perPage)->all();
         $coursesResultList = new LengthAwarePaginator($currentPageItems , count($itemCollection), $perPage);
         $coursesResultList->setPath($url);
@@ -235,7 +235,7 @@ class CoursesManager extends Controller{
         $courses = CoursesManager::getCoursesDBOrCoursesSession($request,$currentPage);
 
         $itemCollection = collect($courses);
-        $perPage = 1;
+        $perPage = 6;
         $currentPageItems = $itemCollection->slice(($currentPage * $perPage) - $perPage, $perPage)->all();
         $courses = new LengthAwarePaginator($currentPageItems , count($itemCollection), $perPage);
         $courses->setPath($request->url());

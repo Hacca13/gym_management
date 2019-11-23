@@ -112,7 +112,7 @@ class UsersManager extends Controller{
 
 
         $itemCollection = collect($usersResultList);
-        $perPage = 1;
+        $perPage = 6;
         $currentPageItems = $itemCollection->slice(($currentPage * $perPage) - $perPage, $perPage)->all();
         $usersResultList= new LengthAwarePaginator($currentPageItems , count($itemCollection), $perPage);
         $usersResultList->setPath($url);
@@ -149,7 +149,7 @@ class UsersManager extends Controller{
 
         }
         $itemCollection = collect($users);
-        $perPage = 1;
+        $perPage = 6;
         $currentPageItems = $itemCollection->slice(($currentPage * $perPage) - $perPage, $perPage)->all();
         $users= new LengthAwarePaginator($currentPageItems , count($itemCollection), $perPage);
         $users->setPath($request->url());

@@ -29,7 +29,7 @@
                 </div>
 
                 <div>
-                  <br>
+                  <div class="row justify-content-center" style="margin-top: 2.5%">
                     {{$usersResultList->links()}}
                 </div>
             </div>
