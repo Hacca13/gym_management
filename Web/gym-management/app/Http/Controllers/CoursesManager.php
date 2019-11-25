@@ -14,6 +14,25 @@ use Illuminate\Pagination\LengthAwarePaginator;
 
 class CoursesManager extends Controller{
 
+    public static function getDayCourse($dayName){
+      $allCourses = CoursesManager::getAllCourses();
+      $listCoursesToday = array();
+
+      foreach ($allCourses as $course) {
+        foreach ($course->getWeeklyFrequency() as $day) {
+          $nameDay = data_get($day, 'day');
+
+          if($nameDay == $dayName){
+            array_push($listCoursesToday,$course);
+
+            break;
+          }
+        }
+      }
+
+      return $listCoursesToday;
+    }
+
     public static function setCourseView($id,Request $request){
         $documents = $request->session()->pull('Courses');
         $request->session()->put('Courses', $documents);
@@ -52,8 +71,10 @@ class CoursesManager extends Controller{
           }
       }
       $input['instructor'] = strtolower($input['instructor']);
-      $name = $input['name'];
+      $name = strtolower($input['name']);
+      $name = mb_convert_encoding($name, 'UTF-8', 'UTF-8');
       $instructor = $input['instructor'];
+      $instructor = mb_convert_encoding($instructor, 'UTF-8', 'UTF-8');
       $period = [
           'startDate' => $startDate,
           'endDate' => $endDate
@@ -309,7 +330,7 @@ class CoursesManager extends Controller{
 
         $bucket = $firebase->createStorage()->getBucket();
         $input['name'] = strtolower($input['name']);
-
+        $input['name'] = mb_convert_encoding($input['name'], 'UTF-8', 'UTF-8');
         $name = $input['name'] . '.' . $uploadedImage->getClientOriginalExtension();
 
         $str = $bucket->upload(file_get_contents($uploadedImage),
@@ -345,6 +366,7 @@ class CoursesManager extends Controller{
         $input['instructor'] = strtolower($input['instructor']);
         $name = $input['name'];
         $instructor = $input['instructor'];
+        $instructor = mb_convert_encoding($instructor, 'UTF-8', 'UTF-8');
         $period = [
             'startDate' => $startDate,
             'endDate' => $endDate

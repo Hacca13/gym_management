@@ -62,7 +62,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-4 col-md-4 col-sm-12">
+        <div class="col-lg-8 col-md-4 col-sm-12">
             <div class="card" style="border-radius: 10px; background-color: rgb(31, 38, 45, 0.8)">
                 <div class="card-body">
                     <h2 class="card-title m-t-10 text-center" style="color: #d6d8d8">Scadenze Vicine</h2>
@@ -98,20 +98,20 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-8 col-md-8 col-sm-12">
+        <div class="col-lg-4 col-md-8 col-sm-12">
             <div class="card" style="border-radius: 10px; background-color: rgb(31, 38, 45, 0.8)">
                 <div class="card-body">
                     <h2 class="card-title m-t-10 text-center" style="color: #d6d8d8">I corsi di questa giornata</h2>
                 </div>
                 <div class="row justify-content-center">
-                    <div class="col-md-6 col-lg-4 col-sm-10">
+                    <div class="col-md-6 col-lg-8 col-sm-10">
+                       @foreach($listCoursesToday as $course)
                         <div class="card card-hover">
-                            <a href="/admin/nuovaScheda">
-                                <div class="box bg-dark text-center">
-                                    <h6 class="text-white">Fit</h6>
-                                </div>
-                            </a>
+                            <div class="box bg-dark text-center">
+                                <h6 class="text-white">{{$course->getName()}}</h6>
+                            </div>
                         </div>
+                      @endforeach
                     </div>
                 </div>
             </div>

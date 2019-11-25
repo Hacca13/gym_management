@@ -13,7 +13,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+      //  $this->middleware('auth');
     }
 
     /**
@@ -23,6 +23,35 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $datetime = date("l");
+        $nameDay = strtolower( $datetime);
+
+        if($nameDay == 'monday'){
+          $nameDay = 'Lunedì';
+        }
+        elseif ($nameDay == 'tuesday') {
+          $nameDay = 'Martedí';
+        }
+        elseif ($nameDay == 'wednesday') {
+          $nameDay = 'Mercoledí';
+        }
+        elseif ($nameDay == 'thursday') {
+          $nameDay = 'Giovedì';
+        }
+        elseif ($nameDay == 'friday') {
+          $nameDay = 'Venerdì';
+        }
+        elseif ($nameDay == 'saturday') {
+          $nameDay = 'Sabato';
+        }
+        else {
+          $nameDay = 'Domenica';
+        }
+
+        $listCoursesToday = CoursesManager::getDayCourse($nameDay);
+
+        return view('index', compact('listCoursesToday'));
+
     }
+
 }

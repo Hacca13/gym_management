@@ -104,7 +104,37 @@ class Firetest extends Controller
 
 
   public function test3(){
-    TrainingCardsManager::deleteExerciseFromTrainingCard('58dbf9a50d8947c6802e');
+    $datetime = date("l");
+    $nameDay = strtolower( $datetime);
+    if($nameDay == 'monday'){
+      $nameDay = 'Lunedì';
+    }
+    elseif ($nameDay == 'tuesday') {
+      $nameDay = 'Martedí';
+    }
+    elseif ($nameDay == 'wednesday') {
+      $nameDay = 'Mercoledí';
+    }
+    elseif ($nameDay == 'thursday') {
+      $nameDay = 'Giovedì';
+    }
+    elseif ($nameDay == 'friday') {
+      $nameDay = 'Venerdì';
+    }
+    elseif ($nameDay == 'saturday') {
+      $nameDay = 'Sabato';
+    }
+    else {
+      $nameDay = 'Domenica';
+    }
+  /*  monday = lunedì
+tuesday = martedí
+wednesday = mercoledí
+thursday = giovedì
+friday = venerdì
+saturday = sabato
+sunday = domenica*/
+    CoursesManager::getDayCourse($nameDay);
 
   }
 
