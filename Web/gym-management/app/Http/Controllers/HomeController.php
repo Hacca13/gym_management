@@ -50,7 +50,9 @@ class HomeController extends Controller
 
         $listCoursesToday = CoursesManager::getDayCourse($nameDay);
 
-        return view('index', compact('listCoursesToday'));
+        $listSubscription = SubscriptionManager::subscriptionsThatExpireSoon();
+
+        return view('index', compact('listCoursesToday','listSubscription'));
 
     }
 

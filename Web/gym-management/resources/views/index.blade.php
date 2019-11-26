@@ -68,33 +68,33 @@
                     <h2 class="card-title m-t-10 text-center" style="color: #d6d8d8">Scadenze Vicine</h2>
                 </div>
                 <div class="row justify-content-center">
-                    <div class="col-md-12 col-lg-5 col-sm-10">
+
+                  @if(count($listSubscription) == 0)
+                    <div class="box text-center">
+                        <h4 class="text-white">Non ci sono abbonamenti che scadono a breve</h4>
+                    </div>
+                  @endif
+
+                  @foreach($listSubscription as $subscriptionAndUser)
+                    <div class="col-md-12 col-lg-10 col-sm-10">
                         <div class="card card-hover">
-                            <a href="/admin/nuovaScheda">
-                                <div class="box bg-dark text-center">
-                                    <h6 class="text-white">Przemyslaw Szopian</h6>
-                                </div>
-                            </a>
+                            <div class="box bg-dark row">
+                                <h6 class="text-white" style="text-align: left;">{{data_get($subscriptionAndUser,'userNameAndSurname')}}</h6>
+                                <?php $subscription = data_get($subscriptionAndUser,'subscription'); ?>
+                                @if($subscription instanceof SubscriptionPeriodModel)
+                                  <h6 class="text-white offset-9" style="text-align: right;">dcdcd</h6>
+                                @endif
+                                @if($subscription instanceof SubscriptionRevenueModel)
+                                  <h6 class="text-white offset-9" style="text-align: right;">Entrate rimanenti : {{$subscription->getNumberOfEntries()-$subscription->getNumberOfEntriesMade()}}</h6>
+                                @endif
+                                @if($subscription instanceof SubscriptionCourseModel)
+                                  <h6 class="text-white offset-9" style="text-align: right;">dcdcd</h6>
+                                @endif
+                            </div>
                         </div>
                     </div>
-                    <div class="col-md-12 col-lg-5 col-sm-10">
-                        <div class="card card-hover">
-                            <a href="/admin/nuovaScheda">
-                                <div class="box bg-dark text-center">
-                                    <h6 class="text-white">Przemyslaw Szopian</h6>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-md-12 col-lg-5 col-sm-10">
-                        <div class="card card-hover">
-                            <a href="/admin/nuovaScheda">
-                                <div class="box bg-dark text-center">
-                                    <h6 class="text-white">Fit</h6>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
+                  @endforeach
+
                 </div>
             </div>
         </div>
@@ -105,7 +105,14 @@
                 </div>
                 <div class="row justify-content-center">
                     <div class="col-md-6 col-lg-8 col-sm-10">
-                       @foreach($listCoursesToday as $course)
+
+                      @if(count($listCoursesToday) == 0)
+                        <div class="box text-center">
+                            <h4 class="text-white">Non ci sono corsi oggi</h4>
+                        </div>
+                      @endif
+
+                      @foreach($listCoursesToday as $course)
                         <div class="card card-hover">
                             <div class="box bg-dark text-center">
                                 <h6 class="text-white">{{$course->getName()}}</h6>

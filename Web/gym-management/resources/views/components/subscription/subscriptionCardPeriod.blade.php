@@ -20,11 +20,11 @@
                     @endif
                 </div>
                 <div class="col-lg-7 col-md-12 col-sm-12">
-                    <div class="row">
-                        <div class="col-lg-6 col-md-6 col-sm-12" style="text-align: right; margin-top: auto; margin-bottom: auto;">
+                    <div class="row" style="padding: 10px 0 0 0">
+                        <div class="col-lg-6 col-md-6 col-sm-12" style="text-align: center; margin-top: auto; margin-bottom: auto;">
                             <h4>Dal: {{$subscription->getStartDate()}}</h4>
                         </div>
-                        <div class="col-lg-6 col-md-6 col-sm-12" style="text-align: right; margin-top: auto; margin-bottom: auto;">
+                        <div class="col-lg-6 col-md-6 col-sm-12" style="text-align: center; margin-top: auto; margin-bottom: auto;">
                             <h4>Al: {{$subscription->getEndDate()}}</h4>
                         </div>
                     </div>
@@ -44,4 +44,3 @@
         </div>
     </div>
 </div>
-
