@@ -19,13 +19,15 @@ class CoursesManager extends Controller{
       $listCoursesToday = array();
 
       foreach ($allCourses as $course) {
-        foreach ($course->getWeeklyFrequency() as $day) {
-          $nameDay = data_get($day, 'day');
+        if($course->getIsActive() == True ){
+          foreach ($course->getWeeklyFrequency() as $day) {
+            $nameDay = data_get($day, 'day');
 
-          if($nameDay == $dayName){
-            array_push($listCoursesToday,$course);
+            if($nameDay == $dayName){
+              array_push($listCoursesToday,$course);
 
-            break;
+              break;
+            }
           }
         }
       }

@@ -23,6 +23,7 @@ use App\Http\Models\SubscriptionModels\SubscriptionModel;
 use App\Http\Models\SubscriptionModels\SubscriptionRevenueModel;
 use App\Http\Models\SubscriptionModels\SubscriptionCourseModel;
 use App\Http\Models\SubscriptionModels\SubscriptionPeriodModel;
+use Kreait\Firebase;
 
 use Illuminate\Pagination\LengthAwarePaginator;
 
@@ -104,37 +105,19 @@ class Firetest extends Controller
 
 
   public function test3(){
-    $datetime = date("l");
-    $nameDay = strtolower( $datetime);
-    if($nameDay == 'monday'){
-      $nameDay = 'Lunedì';
+    $today = date("Y-m-d");
+    $todayPlus5Day = strtotime ( '+5 day' , strtotime ( $today ) ) ;
+    $todayPlus5Day = date ( 'Y-m-d' , $todayPlus5Day );
+
+    $timestamp = strtotime('30/11/2019');
+    $endDate = date("Y-m-d", $timestamp);
+
+
+    if($today >= $endDate and $endDate <= $todayPlus5Day){
+
+      echo "scade tra qualche giorno";
+
     }
-    elseif ($nameDay == 'tuesday') {
-      $nameDay = 'Martedí';
-    }
-    elseif ($nameDay == 'wednesday') {
-      $nameDay = 'Mercoledí';
-    }
-    elseif ($nameDay == 'thursday') {
-      $nameDay = 'Giovedì';
-    }
-    elseif ($nameDay == 'friday') {
-      $nameDay = 'Venerdì';
-    }
-    elseif ($nameDay == 'saturday') {
-      $nameDay = 'Sabato';
-    }
-    else {
-      $nameDay = 'Domenica';
-    }
-  /*  monday = lunedì
-tuesday = martedí
-wednesday = mercoledí
-thursday = giovedì
-friday = venerdì
-saturday = sabato
-sunday = domenica*/
-    CoursesManager::getDayCourse($nameDay);
 
   }
 

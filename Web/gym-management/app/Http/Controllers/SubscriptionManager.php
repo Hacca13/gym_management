@@ -14,6 +14,65 @@ use Illuminate\Pagination\LengthAwarePaginator;
 class SubscriptionManager extends Controller
 {
 
+
+    public static function subscriptionsThatExpireSoon(){
+      $listSubscription = array();
+      $today = date("Y-m-d");
+      $todayPlus5Day = strtotime ( '+5 day' , strtotime ( $today ) ) ;
+      $todayPlus5Day = date ( 'Y-m-d' , $todayPlus5Day );
+
+      $subscriptions = SubscriptionManager::getAllSubscription();
+
+      foreach ($subscriptions as $subscription) {
+        if($subscription->getIsActive() == TRUE){
+            if($subscription instanceof SubscriptionPeriodModel){
+              $timestamp = strtotime($subscription->getEndDate());
+              $endDate = date("Y-m-d", $timestamp);
+              if($today >= $endDate && $endDate <= $todayPlus5Day){
+                $user = UsersManager::getUserById($subscription->getIdUserDatabase());
+                $userNameAndSurname = $user->getName().' '.$user->getSurname();
+                $userNameAndSubscription = array(
+                    'userNameAndSurname' => $userNameAndSurname,
+                    'subscription' => $subscription);
+
+                array_push($listSubscription,$userNameAndSubscription);
+              }
+            }
+            elseif ($subscription instanceof SubscriptionRevenueModel) {
+              if(($subscription->getNumberOfEntriesMade()+3) >= $subscription->getNumberOfEntries() ){
+                $user = UsersManager::getUserById($subscription->getIdUserDatabase());
+                $userNameAndSurname = $user->getName().' '.$user->getSurname();
+                $userNameAndSubscription = array(
+                    'userNameAndSurname' => $userNameAndSurname,
+                    'subscription' => $subscription);
+
+                array_push($listSubscription,$userNameAndSubscription);
+              }
+            }
+            else{
+              $timestamp = strtotime($subscription->getEndDate());
+              $endDate = date("Y-m-d", $timestamp);
+              if($today >= $endDate && $endDate <= $todayPlus5Day){
+                $user = UsersManager::getUserById($subscription->getIdUserDatabase());
+                $userNameAndSurname = $user->getName().' '.$user->getSurname();
+                $userNameAndSubscription = array(
+                    'userNameAndSurname' => $userNameAndSurname,
+                    'subscription' => $subscription);
+
+                array_push($listSubscription,$userNameAndSubscription);
+              }
+            }
+        }
+      }
+
+
+
+
+
+      return $listSubscription;
+    }
+
+
     public static function searchSubscription(Request $request){
       $currentPage = LengthAwarePaginator::resolveCurrentPage();
       $input = $request->all();
