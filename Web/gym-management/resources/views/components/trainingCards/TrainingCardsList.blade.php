@@ -25,29 +25,6 @@
 </div>
 <div class="col-md-12">
     <div class="collapse multi-collapse" id="days">
-        <div class="card card-body" style="border-radius: 0 0 10px 10px;background-color: #d6d8d8">
-            <div class="row justify-content-center">
-
-                @include('components.exercise.cardDay')
-
-            </div>
-            <div class="row justify-content-center">
-                <div class="col-lg-4 col-md-12 col-sm-12" style="text-align: center; margin-bottom: 5px;">
-                    <a href="#">
-                        <button class="btn btn-warning" id="fname" name="" style="border-radius: 10px;">Modifica</button>
-                    </a>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-12" style="text-align: center; margin-bottom: 5px;">
-                    <a href="#">
-                        <button class="btn btn-primary" id="fname" name="" style="border-radius: 10px;">Elimina</button>
-                    </a>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-12" style="text-align: center; margin-bottom: 5px;">
-                    <a href="/gestioneSchede">
-                        <button class="btn btn-danger" id="fname" name="" style="border-radius: 10px;">Disattiva</button>
-                    </a>
-                </div>
-            </div>
-        </div>
+        @include('components.exercise.cardDay')
     </div>
 </div>
