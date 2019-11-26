@@ -12,6 +12,7 @@ class UserUnderageModel extends UserModel
   protected $parentName;
   protected $parentSurname;
   protected $parentGender;
+  protected $profileImageName;
   protected $parentDateOfBirth;
   protected $parentBirthNation;
   protected $parentBirthPlace;
@@ -36,9 +37,9 @@ class UserUnderageModel extends UserModel
   protected $parentEmail;
   protected $parentTelephoneNumber;
 
-  function __construct($idDatabase,$name,$surname,$gender,$profileImage,$status,$isAdult,$dateOfBirth,$birthNation,$birthPlace,$residence,$document,$email,$telephoneNumber,$parentName,$parentSurname,$parentGender,$parentDateOfBirth,$parentBirthNation,$parentBirthPlace,$parentResidence,$parentDocument,$parentEmail,$parentTelephoneNumber){
+  function __construct($idDatabase,$name,$surname,$gender,$profileImage,$profileImageName,$status,$isAdult,$dateOfBirth,$birthNation,$birthPlace,$residence,$document,$email,$telephoneNumber,$parentName,$parentSurname,$parentGender,$parentDateOfBirth,$parentBirthNation,$parentBirthPlace,$parentResidence,$parentDocument,$parentEmail,$parentTelephoneNumber){
 
-    parent::__construct($idDatabase,$name,$surname,$gender,$profileImage,$status,$isAdult,$dateOfBirth,$birthNation,$birthPlace,$residence,$document,$email,$telephoneNumber);
+    parent::__construct($idDatabase,$name,$surname,$gender,$profileImage,$profileImageName,$status,$isAdult,$dateOfBirth,$birthNation,$birthPlace,$residence,$document,$email,$telephoneNumber);
 
     $this->parentName = $parentName;
     $this->parentSurname = $parentSurname;
