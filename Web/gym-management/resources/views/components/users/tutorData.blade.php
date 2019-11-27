@@ -1,4 +1,4 @@
-<div class="collapse multi-collapse" id="tutorData">
+<div class="collapse multi-collapse" id="{{'tutorData' . $loop->index}}">
   <br>
     <div class="col-md-12">
         <div class="card card-body" style="border-radius: 10px;background-color: #d6d8d8">

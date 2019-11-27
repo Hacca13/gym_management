@@ -10,7 +10,7 @@
                 <div class="col-md-12" style="text-align: center;">
                     <h1 style="color: #d6d8d8">Inserisci Esercizio</h1>
                 </div>
-                <div class="col-md-12">
+                <div class="col-md-12" style="margin-top: 2.5%">
                     <div class="card col-md-12 justify-content-center" style="border-radius: 10px;background-color: #d6d8d8">
                         <form class="form-horizontal" action="/insertFormExercise" method="post" enctype="multipart/form-data">
                             @csrf

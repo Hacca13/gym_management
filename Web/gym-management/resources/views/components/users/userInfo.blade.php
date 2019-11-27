@@ -1,11 +1,11 @@
-<div  id="bAcK" class="card card-body" style="border-radius: 0 0 10px 10px; background-color: #d6d8d8">
+<div  id="{{'bAcK' . $loop->index}}" class="card card-body" style="border-radius: 0 0 10px 10px; background-color: #d6d8d8">
     <div class="row justify-content-center">
         <table>
             <tr>
                 <td style="padding: 0 15px 0 0">
                     <div class="card card-hover">
-                        <a id="anaGraph" onclick="scendilo(this.id)" data-toggle="collapse" href="#anagraficData" role="button" aria-expanded="false" aria-controls="{{'multiCollapseExample' . $loop->index}}">
-                            <div class="box bg-dark text-center" id="aNaGrAf">
+                        <a id="{{'anaGraph' . $loop->index}}" onclick="scendilo({{$loop->index}})" data-toggle="collapse" href="#{{'anagraficData' . $loop->index}}" role="button" aria-expanded="false" aria-controls="{{'multiCollapseExample' . $loop->index}}">
+                            <div class="box bg-dark text-center" id="{{'aNaGrAf' . $loop->index}}">
                                 <h6 class="text-white">Dati anagrafici</h6>
                             </div>
                         </a>
@@ -13,8 +13,8 @@
                 </td>
                 <td style="padding: 0 15px 0 0">
                     <div class="card card-hover" style="background-color: rgb(31, 38, 45, 0.8)">
-                        <a id="plicMetr" onclick="scendilo(this.id)" data-toggle="collapse" href="#plicometricData" role="button" aria-expanded="false" aria-controls="{{'multiCollapseExample' . $loop->index}}">
-                            <div class="box bg-dark text-center" id="pLiC">
+                        <a id="{{'plicMetr' . $loop->index}}" onclick="scendilo({{$loop->index}})" data-toggle="collapse" href="#{{'plicometricData' . $loop->index}}" role="button" aria-expanded="false" aria-controls="{{'multiCollapseExample' . $loop->index}}">
+                            <div class="box bg-dark text-center" id="{{'pLiC' . $loop->index}}">
                                 <h6 class="text-white">Dati plicometrici</h6>
                             </div>
                         </a>
@@ -23,8 +23,8 @@
                 @if($user->getIsAdult() == false)
                     <td style="padding: 0 15px 0 0">
                         <div class="card card-hover" style="background-color: rgb(31, 38, 45, 0.8)">
-                            <a id="tutoDa" onclick="scendilo(this.id)" data-toggle="collapse" href="#tutorData" role="button" aria-expanded="false" aria-controls="{{'multiCollapseExample' . $loop->index}}">
-                                <div class="box bg-dark text-center" id="tUtO">
+                            <a id="{{'tutoDa' . $loop->index}}" onclick="scendilo({{$loop->index}})" data-toggle="collapse" href="#{{'tutorData' . $loop->index}}" role="button" aria-expanded="false" aria-controls="{{'multiCollapseExample' . $loop->index}}">
+                                <div class="box bg-dark text-center" id="{{'tUtO' . $loop->index}}">
                                     <h6 class="text-white">Dati tutore</h6>
                                 </div>
                             </a>
@@ -35,13 +35,19 @@
         </table>
 
         @include('components.users.anagraficData')
+        @include('components.users.anagraficSet')
+
         @include('components.users.plicometricData')
+        @include('components.users.plicometricSet')
+
         @include('components.users.tutorData')
+        @include('components.users.tutorSet')
+
 
     </div>
     <div class="row justify-content-center">
         <div class="col-lg-6 col-md-12 col-sm-12" style="text-align: center; margin-bottom: 5px;">
-            <a href="#">
+            <a href="#" onclick="setNew()">
                 <button class="btn btn-warning" id="fname" name="" style="border-radius: 10px;">Modifica</button>
             </a>
         </div>
@@ -52,6 +58,7 @@
         </div>
     </div>
 </div>
+
 <script>
 
     function testAge() {
@@ -74,65 +81,146 @@
     function scendilo(id){
 
         if(id === "anaGraph"){
-            $("#plicMetr").attr("aria-expanded","false");
-            $("#plicMetr").attr("class","");
-            $("#tutorData").attr("class","multi-collapse collapse");
-            $("#tutotDa").attr("aria-expanded","false");
-            $("#tutotDa").attr("class","");
-            $("#plicometricData").attr("class","multi-collapse collapse");
+            $("#plicMetr" +id).attr("aria-expanded","false");
+            $("#plicMetr" +id).attr("class","");
+            $("#tutorData" +id).attr("class","multi-collapse collapse");
+            $("#tutorSet" +id).attr("class","multi-collapse collapse");
+            $("#tutotDa" +id).attr("aria-expanded","false");
+            $("#tutotDa" +id).attr("class","");
+            $("#plicometricData" +id).attr("class","multi-collapse collapse");
+            $("#plicometricSet" +id).attr("class","multi-collapse collapse");
 
-            $("#pLiC").css("background-color", "#3F5469");
-            $("#tUtO").css("background-color", "#3F5469");
+            $("#pLiC" +id).css("background-color", "#3F5469");
+            $("#tUtO" +id).css("background-color", "#3F5469");
 
-            if ((document.getElementById("aNaGrAf").style.backgroundColor) === "rgb(31, 38, 45)"){
-                $("#aNaGrAf").css("background-color", "#3F5469");
-                document.getElementById("bAcK").style.backgroundColor="#d6d8d8";
+            if ((document.getElementById("aNaGrAf" +id).style.backgroundColor) === "rgb(31, 38, 45)"){
+                $("#aNaGrAf" +id).css("background-color", "#3F5469");
+                document.getElementById("bAcK" +id).style.backgroundColor="#d6d8d8";
             }else {
-                $("#aNaGrAf").css("background-color", "#1F262D");
-                document.getElementById("bAcK").style.backgroundColor ="rgb(214, 216, 216, 0.9)";
+                $("#aNaGrAf" +id).css("background-color", "#1F262D");
+                document.getElementById("bAcK" +id).style.backgroundColor ="rgb(214, 216, 216, 0.9)";
             }
 
         }
         if(id === "plicMetr"){
-            $("#anaGraph").attr("aria-expanded","false");
-            $("#anaGraph").attr("class","");
-            $("#tutorData").attr("class","multi-collapse collapse");
-            $("#anagraficData").attr("class","multi-collapse collapse");
-            $("#tutotDa").attr("class","");
-            $("#tutotDa").attr("aria-expanded","false");
+            $("#anaGraph" +id).attr("aria-expanded","false");
+            $("#anaGraph" +id).attr("class","");
+            $("#anagraficData" +id).attr("class","multi-collapse collapse");
+            $("#anagraficSet" +id).attr("class","multi-collapse collapse");
+            $("#tutorData" +id).attr("class","multi-collapse collapse");
+            $("#tutorSet" +id).attr("class","multi-collapse collapse");
+            $("#tutotDa" +id).attr("class","");
+            $("#tutotDa" +id).attr("aria-expanded","false");
 
-            $("#aNaGrAf").css("background-color", "#3F5469");
-            $("#tUtO").css("background-color", "#3F5469");
+            $("#aNaGrAf" +id).css("background-color", "#3F5469");
+            $("#tUtO" +id).css("background-color", "#3F5469");
 
-            if ((document.getElementById("pLiC").style.backgroundColor) === "rgb(31, 38, 45)"){
-                $("#pLiC").css("background-color", "#3F5469");
-                document.getElementById("bAcK").style.backgroundColor="#d6d8d8";
+            if ((document.getElementById("pLiC" +id).style.backgroundColor) === "rgb(31, 38, 45)"){
+                $("#pLiC" +id).css("background-color", "#3F5469");
+                document.getElementById("bAcK" +id).style.backgroundColor="#d6d8d8";
             }else {
-                $("#pLiC").css("background-color", "#1F262D");
-                document.getElementById("bAcK").style.backgroundColor ="rgb(214, 216, 216, 0.9)";
+                $("#pLiC" +id).css("background-color", "#1F262D");
+                document.getElementById("bAcK" +id).style.backgroundColor ="rgb(214, 216, 216, 0.9)";
             }
 
         }
-        if(id === "tutoDa"){
+        if(id === "tutoDa" +id){
 
-            $("#plicMetr").attr("aria-expanded","false")
-            $("#plicMetr").attr("class","")
-            $("#plicometricData").attr("class","multi-collapse collapse")
-            $("#anagraficData").attr("class","multi-collapse collapse")
-            $("#anaGraph").attr("class","")
-            $("#anaGraph").attr("aria-expanded","false");
+            $("#plicMetr" +id).attr("aria-expanded","false");
+            $("#plicMetr" +id).attr("class","");
+            $("#plicometricData" +id).attr("class","multi-collapse collapse");
+            $("#plicometricSet" +id).attr("class","multi-collapse collapse");
+            $("#anagraficData" +id).attr("class","multi-collapse collapse");
+            $("#anagraficSet" +id).attr("class","multi-collapse collapse");
+            $("#anaGraph" +id).attr("class","");
+            $("#anaGraph" +id).attr("aria-expanded","false");
 
-            $("#aNaGrAf").css("background-color", "#3F5469");
-            $("#pLiC").css("background-color", "#3F5469");
+            $("#aNaGrAf" +id).css("background-color", "#3F5469");
+            $("#pLiC" +id).css("background-color", "#3F5469");
 
-            if ((document.getElementById("tUtO").style.backgroundColor) === "rgb(31, 38, 45)"){
-                $("#tUtO").css("background-color", "#3F5469");
-                document.getElementById("bAcK").style.backgroundColor="#d6d8d8";
+            if ((document.getElementById("tUtO" +id).style.backgroundColor) === "rgb(31, 38, 45)"){
+                $("#tUtO" +id).css("background-color", "#3F5469");
+                document.getElementById("bAcK" +id).style.backgroundColor="#d6d8d8";
             }else {
-                $("#tUtO").css("background-color", "#1F262D");
-                document.getElementById("bAcK").style.backgroundColor ="rgb(214, 216, 216, 0.9)";
+                $("#tUtO" +id).css("background-color", "#1F262D");
+                document.getElementById("bAcK" +id).style.backgroundColor ="rgb(214, 216, 216, 0.9)";
             }
         }
     }
 
+    function setNew(id){
+
+        let x = $("#plicMetr" + id).attr("href");
+
+        if(x === "#plicometricData" + id){
+            $("#plicMetr" + id).attr("href","#plicometricSet");
+            $("#plicMetr" + id).attr("aria-expanded","false");
+            $("#plicMetr" + id).attr("class","");
+            $("#plicometricData" + id).attr("class","multi-collapse collapse");
+
+            if ((document.getElementById("pLiC" + id).style.backgroundColor) === "rgb(31, 38, 45)"){
+                $("#plicMetr").attr("aria-expanded","true");
+                $("#plicMetr").attr("class","");
+                $("#plicometricSet").attr("class","multi-collapse collapse show");
+            }
+
+            $("#anaGraph" + id).attr("href","#anagraficSet");
+            $("#anagraficData" + id).attr("class","multi-collapse collapse");
+            $("#anaGraph" + id).attr("class","");
+            $("#anaGraph" + id).attr("aria-expanded","false");
+
+            if ((document.getElementById("aNaGrAf" + id).style.backgroundColor) === "rgb(31, 38, 45)"){
+                $("#anagraficSet").attr("class","multi-collapse collapse show");
+                $("#anaGraph").attr("class","");
+                $("#anaGraph").attr("aria-expanded","true");
+            }
+
+            $("#tutorData" + id).attr("class","multi-collapse collapse");
+            $("#tutotDa" + id).attr("class","");
+            $("#tutoDa" + id).attr("href","#tutorSet");
+            $("#tutotDa" + id).attr("aria-expanded","false");
+
+            if ((document.getElementById("tUtO" + id).style.backgroundColor) === "rgb(31, 38, 45)"){
+                $("#tutotDa" + id).attr("aria-expanded","true");
+                $("#tutorSet" + id).attr("class","multi-collapse collapse show");
+                $("#tutotDa" + id).attr("class","");
+
+            }
+
+        }else{
+            $("#plicMetr" + id).attr("href","#plicometricData");
+            $("#plicMetr" + id).attr("aria-expanded","false");
+            $("#plicMetr" + id).attr("class","");
+            $("#plicometricSet" + id).attr("class","multi-collapse collapse");
+
+            if ((document.getElementById("pLiC" + id).style.backgroundColor) === "rgb(31, 38, 45)"){
+                $("#plicMetr" + id).attr("aria-expanded","true");
+                $("#plicMetr" + id).attr("class","");
+                $("#plicometricData" + id).attr("class","multi-collapse collapse show");
+            }
+
+            $("#anagraficSet" + id).attr("class","multi-collapse collapse");
+            $("#anaGraph" + id).attr("class","");
+            $("#anaGraph" + id).attr("aria-expanded","false");
+            $("#anaGraph" + id).attr("href","#anagraficData");
+
+            if ((document.getElementById("aNaGrAf" + id).style.backgroundColor) === "rgb(31, 38, 45)"){
+                $("#anagraficData" + id).attr("class","multi-collapse collapse show");
+                $("#anaGraph" + id).attr("class","");
+                $("#anaGraph" + id).attr("aria-expanded","true");
+            }
+
+            $("#tutoDa" + id).attr("href","#tutorData");
+            $("#tutorSet" + id).attr("class","multi-collapse collapse");
+            $("#tutotDa" + id).attr("class","");
+            $("#tutotDa" + id).attr("aria-expanded","false");
+
+            if ((document.getElementById("tUtO" + id).style.backgroundColor) === "rgb(31, 38, 45)"){
+                $("#tutorSet" + id).attr("class","multi-collapse collapse show");
+                $("#tutotDa" + id).attr("class","collapse");
+                $("#tutotDa" + id).attr("aria-expanded","true");
+            }
+
+        }
+    }
 </script>
