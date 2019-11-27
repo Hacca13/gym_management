@@ -30,11 +30,11 @@ class ExercisesManager extends Controller{
     }
 
     public static function deleteExercise($id){
-      $collection = Firestore::collection('Exercises');
-      $collection->document($id)->delete();
-      TrainingCardsManager::deleteExerciseFromTrainingCard($id);
-      toastr()->error('Esercizio Eliminato');
-      return redirect('/admin/gestioneEsercizi');
+        $collection = Firestore::collection('Exercises');
+        $collection->document($id)->delete();
+        TrainingCardsManager::deleteExerciseFromTrainingCard($id);
+        toastr()->error('Esercizio Eliminato');
+        return redirect('/admin/gestioneEsercizi');
     }
 
     public static function setExerciseView($id,Request $request){
@@ -42,49 +42,57 @@ class ExercisesManager extends Controller{
         $request->session()->put('exercises', $documents);
 
         foreach ($documents as $document) {
-          if($id == $document->getIdDatabase()){
-            $exercise = $document;
-          }
+            if($id == $document->getIdDatabase()){
+                $exercise = $document;
+            }
         }
         return view('setExercise', compact('exercise'));
     }
 
-    public static function setExercise(Request $request, $gifName){
-      $input=$request->all();
-    var_dump($input);
-      if(!isset($input['exerciseIsATime'])){
-        $input['exerciseIsATime'] = false;
-      }
+    public static function setExercise(Request $request){
+        $input=$request->all();
+        var_dump($input);
+        if(!isset($input['exerciseIsATime'])){
+            $input['exerciseIsATime'] = false;
+        }
 
-      if(isset($input['imageExercise'])){
-        $exerciseImage = $request->file('imageExercise');
+        if(isset($input['imageExercise']))  {
+            $exerciseImage = $request->file('imageExercise');
+
+            $firebase = (new Firebase\Factory());
+
+            $exerciseImageName = rtrim(base64_encode(md5(microtime())),"=");
+
+            $bucket = $firebase->createStorage()->getBucket();
+
+            $obj = $bucket->object($input['gifName']);
+
+            $obj->delete();
+
+            $imageRef = $bucket->upload(file_get_contents($exerciseImage),
+                [
+                    'name' => $exerciseImageName
+                ])->name();
+
+            $external = "19/10/2100 14:48:21";
+            $format = "d/m/Y H:i:s";
+            $dateobj = DateTime::createFromFormat($format, $external);
+
+            $gif = $imageRef->signedUrl($dateobj).PHP_EOL;
+
+            $arrayExercise = ExercisesManager::trasformRequestToArrayExercise($input,$gif,$exerciseImageName);
+            unset($arrayExercise['idDatabase']);
+        }else {
+            $arrayExercise = ExercisesManager::trasformRequestToArrayExercise($input,$input['oldImageExercise'], $input['gifName']);
+            unset($arrayExercise['idDatabase']);
+        }
 
 
-        $firebase = (new Firebase\Factory());
+        $collection = Firestore::collection('Exercises');
+        $collection->document($input['idDatabase'])->set($arrayExercise);
 
-        $exerciseImageName = rtrim(base64_encode(md5(microtime())),"=");
-
-
-          $imageRef = $firebase->createStorage()->getBucket()->upload(file_get_contents($exerciseImage),
-            [
-                'name' => $exerciseImageName
-            ])->name();
-
-        $gif =  "https://firebasestorage.googleapis.com/v0/b/fitandfight.appspot.com/o/". $imageRef ."?alt=media";
-
-
-        $arrayExercise = ExercisesManager::trasformRequestToArrayExercise($input,$gif,$gifName);
-        unset($arrayExercise['idDatabase']);
-      }else {
-        $arrayExercise = ExercisesManager::trasformRequestToArrayExercise($input,$input['oldImageExercise'],$gifName);
-        unset($arrayExercise['idDatabase']);
-      }
-
-      $collection = Firestore::collection('Exercises');
-      $collection->document($input['idDatabase'])->set($arrayExercise);
-
-      toastr()->success('Esercizio Modificato');
-//      return redirect('/admin/gestioneEsercizi');
+        toastr()->success('Esercizio Modificato');
+        return redirect('/admin/gestioneEsercizi');
     }
 
 
@@ -166,12 +174,12 @@ class ExercisesManager extends Controller{
         $name = $input['nameExercise'];
 
         if(!isset($input['exerciseIsATime'])){
-          $input['exerciseIsATime'] = false;
+            $input['exerciseIsATime'] = false;
         }
 
         if(ExercisesManager::existsAExerciseWithThisName($name)){
             toastr()->error('Esiste già un esercizio con questo nome');
-             return redirect('/admin/nuovoEsercizio');
+            return redirect('/admin/nuovoEsercizio');
         }
 
         $exerciseImage = $request->file('imageExercise');
@@ -186,9 +194,9 @@ class ExercisesManager extends Controller{
                 'name' => $exerciseImageName
             ]);
 
-         $external = "19/10/2100 14:48:21";
-         $format = "d/m/Y H:i:s";
-         $dateobj = DateTime::createFromFormat($format, $external);
+        $external = "19/10/2100 14:48:21";
+        $format = "d/m/Y H:i:s";
+        $dateobj = DateTime::createFromFormat($format, $external);
 
         $gif = $imageRef->signedUrl($dateobj).PHP_EOL;
 
