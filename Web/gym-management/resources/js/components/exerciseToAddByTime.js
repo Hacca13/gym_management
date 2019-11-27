@@ -25,6 +25,23 @@ class ExerciseToAddByTime extends Component {
         }
     }
 
+    componentDidMount() {
+        if (this.props.currEx !== false) {
+            this.setState({
+                atTime: this.props.currEx.atTime,
+                numberOfSeries: this.props.currEx.numberOfSeries,
+                work: {
+                    min: this.props.currEx.work.min,
+                    sec: this.props.currEx.work.sec
+                },
+                rest: {
+                    min: this.props.currEx.rest.min,
+                    sec: this.props.currEx.rest.sec
+                },
+                day: this.props.currEx.day
+            })
+        }
+    }
 
     render() {
         return (

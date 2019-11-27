@@ -23,6 +23,21 @@ class ExerciseToAdd extends Component {
         }
     }
 
+    componentDidMount() {
+        if (this.props.currEx !== false) {
+            this.setState({
+                atTime: this.props.currEx.atTime,
+                numberOfSeries: this.props.currEx.numberOfSeries,
+                weight: this.props.currEx.weight,
+                numberOfRepetitions: this.props.currEx.numberOfRepetitions,
+                rest: {
+                    min: this.props.currEx.rest.min,
+                    sec: this.props.currEx.rest.sec
+                },
+                day: this.props.currEx.day
+            })
+        }
+    }
 
     render() {
         return (
