@@ -28,7 +28,7 @@ class SubscriptionManager extends Controller
             if($subscription instanceof SubscriptionPeriodModel){
               $timestamp = strtotime($subscription->getEndDate());
               $endDate = date("Y-m-d", $timestamp);
-              if($today >= $endDate && $endDate <= $todayPlus5Day){
+              if($today <= $endDate && $endDate <= $todayPlus5Day){
                 $user = UsersManager::getUserById($subscription->getIdUserDatabase());
                 $userNameAndSurname = $user->getName().' '.$user->getSurname();
                 $userNameAndSubscription = array(
@@ -52,7 +52,7 @@ class SubscriptionManager extends Controller
             else{
               $timestamp = strtotime($subscription->getEndDate());
               $endDate = date("Y-m-d", $timestamp);
-              if($today >= $endDate && $endDate <= $todayPlus5Day){
+              if($today <= $endDate && $endDate <= $todayPlus5Day){
                 $user = UsersManager::getUserById($subscription->getIdUserDatabase());
                 $userNameAndSurname = $user->getName().' '.$user->getSurname();
                 $userNameAndSubscription = array(
@@ -201,7 +201,7 @@ class SubscriptionManager extends Controller
       $timestamp = strtotime($endDate);
       $endDate = date("Y-m-d", $timestamp);
 
-      if($endDate > $today){
+      if($endDate < $today){
         return true;
       }
       else{

@@ -12,6 +12,7 @@ class CourseModel{
   private $idDatabase;
   private $name;
   private $image;
+  private $imageName;
   private $instructor;
   private $isActive;
   private $period;
@@ -42,11 +43,12 @@ class CourseModel{
   */
   private $usersList;
 
-  function __construct($idDatabase,$name,$image,$isActive,$instructor,$period,$weeklyFrequency,$usersList){
+  function __construct($idDatabase,$name,$image,$imageName,$isActive,$instructor,$period,$weeklyFrequency,$usersList){
 
     $this->idDatabase = $idDatabase;
     $this->name = $name;
     $this->image = $image;
+    $this->imageName = $imageName;
     $this->isActive = $isActive;
     $this->instructor = $instructor;
     $this->period = array(
@@ -139,6 +141,30 @@ class CourseModel{
     public function setImage($image)
     {
         $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of ImageName
+     *
+     * @return mixed
+     */
+    public function getImageName()
+    {
+        return $this->imageName;
+    }
+
+    /**
+     * Set the value of ImageName
+     *
+     * @param mixed imageName
+     *
+     * @return self
+     */
+    public function setImageName($imageName)
+    {
+        $this->imageName = $imageName;
 
         return $this;
     }

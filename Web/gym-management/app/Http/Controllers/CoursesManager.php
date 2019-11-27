@@ -413,14 +413,15 @@ class CoursesManager extends Controller{
     public static function removeUserToCourse($idCourseDatabase,$idUserDatabase) {
       $collection = Firestore::collection('Courses');
       $documents = $collection->document($idCourseDatabase)->snapshot()->data();
+      if(is_array($documents['usersList'])){
+          for ($i=0; $i < count($documents['usersList']) ; $i++) {
+            if($documents['usersList'][$i] == $idUserDatabase){
+              array_splice($documents['usersList'],$i, 1);
+            }
+          }
 
-      for ($i=0; $i < count($documents['usersList']) ; $i++) {
-        if($documents['usersList'][$i] == $idUserDatabase){
-          array_splice($documents['usersList'],$i, 1);
-        }
+          $collection->document($idCourseDatabase)->set($documents);
       }
-
-      $collection->document($idCourseDatabase)->set($documents);
     }
 
     public static function addUserToCourse(Request $request) {

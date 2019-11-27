@@ -30,6 +30,22 @@ class UsersManager extends Controller{
             $user->setSurname(ucfirst($user->getSurname()));
             $user->setIdDatabase($document->id());
             array_push($allUser,$user);
+
+            $allSubscriptionsByUser = SubscriptionManager::getSubscriptionByUser($user->getIdDatabase());
+            $flag = true;
+            foreach ($allSubscriptionsByUser as $subscription) {
+              if($subscription->getIsActive() == TRUE){
+                $flag = false;
+              }
+            }
+
+            if($flag){
+              $user->setStatus(false);
+              $user = UsersManager::transformUserIntoArrayUser($user);
+              unset($user['idDatabase']);
+              $collection->document($document->id())->set($user);
+            }
+
         }
         return $allUser;
     }

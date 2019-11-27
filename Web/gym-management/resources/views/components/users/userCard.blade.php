@@ -10,7 +10,7 @@
                         <h4 style="color: green">ATTIVO</h4>
                     @endif
                     @if($user->getStatus() == FALSE)
-                        <h4 style="color: red">INATTIVO</h4>
+                        <h4 style="color: #D5300D">INATTIVO</h4>
                     @endif
                 </div>
                 <div class="col-lg-4 col-md-12 col-sm-12" style="text-align: right; margin-top: auto; margin-bottom: auto;">
