@@ -1,15 +1,15 @@
-<div class="col-md-4" style="margin-top: 2.5%">
+<div class="col-lg-4 col-md-6 col-sm-12" style="margin-top: 2.5%">
     <div class="card" style="border-radius: 10px; background-color: #d6d8d8">
         <div class="card-header">
             <div class="row">
-                <div class="col-md-6" style="text-align: start">
+                <div class="col-lg-6 col-md-6 col-sm-6" style="text-align: left; margin-top: auto; margin-bottom: auto">
                   <a href="modificaEsercizio/{{$exercise->getIdDatabase()}}">
                       <i class="fas fa-edit" style="font-size: 150%; color: black;"></i>
                     </a>
                 </div>
-                <div class="col-md-6" style="text-align: end">
-                    <a href="Esercizio">
-                        <i class="fas fa-times" style="font-size: 170%; color: red; margin-left: 2.5%"></i>
+                <div class="col-lg-6 col-md-6 col-sm-6" style="text-align: right; margin-top: auto; margin-bottom: auto">
+                    <a href="eliminaEsercizio/{{$exercise->getIdDatabase()}}">
+                        <i class="fas fa-times" style="font-size: 170%; color: red"></i>
                     </a>
                 </div>
             </div>

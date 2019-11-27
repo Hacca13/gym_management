@@ -1,4 +1,4 @@
-<div class="card card-body" style="border-radius: 10px;background-color: #d6d8d8">
+<div class="card card-body" style="background-color: #d6d8d8">
     <div class="row">
         <div class="col-md-6">
             <label>Inzio</label>

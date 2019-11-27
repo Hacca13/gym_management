@@ -31,7 +31,8 @@ class ExercisesManager extends Controller{
 
     public static function deleteExercise($id){
       $collection = Firestore::collection('Exercises');
-
+      $collection->document($id)->delete();
+      TrainingCardsManager::deleteExerciseFromTrainingCard($id);
       toastr()->error('Esercizio Eliminato');
       return redirect('gestioneEsercizi');
     }
@@ -70,8 +71,10 @@ class ExercisesManager extends Controller{
 
 
         $arrayExercise = ExercisesManager::trasformRequestToArrayExercise($input,$gif);
+        unset($arrayExercise['idDatabase']);
       }else {
         $arrayExercise = ExercisesManager::trasformRequestToArrayExercise($input,$input['oldImageExercise']);
+        unset($arrayExercise['idDatabase']);
       }
 
       $collection = Firestore::collection('Exercises');

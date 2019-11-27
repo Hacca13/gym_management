@@ -104,7 +104,7 @@ class Firetest extends Controller
 
 
   public function test3(){
-    CoursesManager::removeUserToCourse('a405eea7aabd467d95d4', 'OKe34tMZw7M8IOJmX2RCods2CLL2');
+    TrainingCardsManager::deleteExerciseFromTrainingCard('58dbf9a50d8947c6802e');
 
   }
 

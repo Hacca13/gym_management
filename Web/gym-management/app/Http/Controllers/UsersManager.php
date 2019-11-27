@@ -90,12 +90,26 @@ class UsersManager extends Controller{
             $input = $request->session()->pull('searchInput');
             $request->session()->put('searchInput', $input);
         }
-      
+
 
         $url = substr($request->url(), 0, strlen($request->url())-21);
         $url = $url.'userPageSearchResults';
 
         $usersResultList = UsersManager::getUserDBOrUserSessionForSearchPage($request,$currentPage,$input);
+
+        $coursesForUsers = array();
+        $medicalHistoryForUsers = array();
+
+        foreach ($usersResultList as $user) {
+            $coursesForUser = CoursesManager::theUserForWhichCourseIsRegistered($user->getIdDatabase());
+            $medicalHistory = MedicalHistoryManager::getMedicalHistoryByUserId($user->getIdDatabase());
+
+            $coursesForUsers[$user->getIdDatabase()] = $coursesForUser;
+            $medicalHistoryForUsers[$user->getIdDatabase()] =$medicalHistory;
+
+
+        }
+
 
         $itemCollection = collect($usersResultList);
         $perPage = 1;
@@ -103,9 +117,7 @@ class UsersManager extends Controller{
         $usersResultList= new LengthAwarePaginator($currentPageItems , count($itemCollection), $perPage);
         $usersResultList->setPath($url);
 
-
-
-        return view('usersPageSearchResult', compact('usersResultList'));
+        return view('usersPageSearchResult', compact('usersResultList','coursesForUsers','medicalHistoryForUsers'));
     }
 
     public static function getUserDBOrUserSessionForSearchPage($request,$currentPage,$input){
@@ -126,21 +138,23 @@ class UsersManager extends Controller{
         $currentPage = LengthAwarePaginator::resolveCurrentPage();
         $users = UsersManager::getUserDBOrUserSession($request,$currentPage);
         $coursesForUsers = array();
-
+        $medicalHistoryForUsers = array();
         foreach ($users as $user) {
             $coursesForUser = CoursesManager::theUserForWhichCourseIsRegistered($user->getIdDatabase());
-            $userIdAndCourse = array(
-                'idUser' => $user->getIdDatabase(),
-                'courses'  => $coursesForUser );
-            array_push($coursesForUsers,$userIdAndCourse);
+            $medicalHistory = MedicalHistoryManager::getMedicalHistoryByUserId($user->getIdDatabase());
+
+            $coursesForUsers[$user->getIdDatabase()] = $coursesForUser;
+            $medicalHistoryForUsers[$user->getIdDatabase()] =$medicalHistory;
+
+
         }
         $itemCollection = collect($users);
-        $perPage = 1;
+        $perPage = 6;
         $currentPageItems = $itemCollection->slice(($currentPage * $perPage) - $perPage, $perPage)->all();
         $users= new LengthAwarePaginator($currentPageItems , count($itemCollection), $perPage);
         $users->setPath($request->url());
 
-        return view('usersPage', compact('users','coursesForUsers'));
+        return view('usersPage', compact('users','coursesForUsers','medicalHistoryForUsers'));
     }
 
     public static function getUserDBOrUserSession(Request $request,$currentPage){

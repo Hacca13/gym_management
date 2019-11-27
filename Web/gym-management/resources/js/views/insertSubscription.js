@@ -183,21 +183,21 @@ class InsertSubscription extends Component {
                 <div className="card" style={{borderRadius: '10px', backgroundColor: 'rgb(31,38,45,0.8)'}}>
                     <div className="card-body">
                         <div className="col-md-12">
-                            <h2 className="text-center" style={{color: '#d6d8d8'}}>Inserisci Dati Abbonamento</h2>
+                            <h2 className="text-center" style={{color: '#d6d8d8'}}>Inserisci dati abbonamento</h2>
                         </div>
-                        <div className="row">
+                        <div className="row"
+                             style={{marginTop: '2.5%'}}>
                             <div className="col-md-12">
                                 <div className="card" style={{borderRadius: '10px', backgroundColor: '#d6d8d8'}}>
                                     <div className="card-body">
-                                        <br/>
-                                        <br/>
+
                                         <form onSubmit={this.submitForm}>
 
                                             <div className="row justify-content-center">
 
-                                                <div className="col-lg-8 col-md-12 col-sm-12">
+                                                <div className="col-lg-8 col-md-12 col-sm-12" style={{textAlign: "center"}}>
                                                     <section>
-                                                        <label htmlFor="userName" className="row col-form-label">Abbonamento di: </label>
+                                                        <label htmlFor="userName" className="col-form-label" style={{backgroundColor: 'transparent', border: 'none', color: 'rgb(31, 38, 45, 0.8)', fontSize: '18px'}}>Abbonamento di: </label>
                                                         <UserSearch
                                                             retrieveUser={this.addUser}
                                                         />
@@ -208,21 +208,21 @@ class InsertSubscription extends Component {
                                                 <div className="col-lg-8 col-md-12 col-sm-12" style={{textAlign: "center"}}>
 
                                                     <br/>
-                                                    <label htmlFor="userName" className="col-form-label">Tipo di abbonamento:</label>
+                                                    <label htmlFor="userName" className="col-form-label" style={{backgroundColor: 'transparent', border: 'none', color: 'rgb(31, 38, 45, 0.8)', fontSize: '18px'}}>Tipo di abbonamento:</label>
                                                     <br/>
                                                     <section>
                                                         <div className="row justify-content-center">
                                                             <div className="custom-control custom-radio" style={{marginRight: '5%'}}>
                                                                 <input id="myCheck" onClick={this.Annuale} name="acceptTerms" type="radio" className="required custom-control-input"/>
-                                                                <label htmlFor="myCheck" className="custom-control-label" >Periodico</label>
+                                                                <label htmlFor="myCheck" className="custom-control-label" style={{fontSize: '15px'}}>Periodico</label>
                                                             </div>
                                                             <div className="custom-control custom-radio" style={{marginRight: '5%'}}>
                                                                 <input id="entrata" onClick={this.Entrate} name="acceptTerms" type="radio" className="required custom-control-input"/>
-                                                                <label htmlFor="entrata" className="custom-control-label">Entrate</label>
+                                                                <label htmlFor="entrata" className="custom-control-label" style={{fontSize: '15px'}}>Entrate</label>
                                                             </div>
                                                             <div className="custom-control custom-radio" style={{marginRight: '5%'}}>
                                                                 <input id="corso" onClick={this.Corso} name="acceptTerms" type="radio" className="required custom-control-input"/>
-                                                                <label htmlFor="corso" className="custom-control-label">Corso</label>
+                                                                <label htmlFor="corso" className="custom-control-label" style={{fontSize: '15px'}}>Corso</label>
                                                             </div>
                                                         </div>
                                                     </section>
@@ -231,8 +231,8 @@ class InsertSubscription extends Component {
                                             <br/>
 
                                             <div className="row justify-content-center">
-                                                <div className="col-md-6" id="inizio" style={{display: 'none'}}>
-                                                    <label>Inzio</label>
+                                                <div className="col-md-4" id="inizio" style={{display: 'none'}}>
+                                                    <label style={{color: 'rgb(31, 38, 45, 0.8)', fontSize: '13px'}}>Inzio</label>
                                                     <div className="input-group">
                                                         <DatePicker
                                                             required={true}
@@ -249,8 +249,8 @@ class InsertSubscription extends Component {
                                                     </div>
                                                 </div>
 
-                                                <div className="col-md-6"  id="fine" style={{display: 'none'}}>
-                                                    <label>Fine</label>
+                                                <div className="col-md-4"  id="fine" style={{display: 'none'}}>
+                                                    <label style={{color: 'rgb(31, 38, 45, 0.8)', fontSize: '13px'}}>Fine</label>
                                                     <div className="input-group">
                                                         <DatePicker
                                                             required={true}
@@ -269,17 +269,17 @@ class InsertSubscription extends Component {
 
                                             </div>
 
-                                            <div className="row">
-                                                <div className="col-md-6"  id="corsi" style={{display: 'none'}}>
+                                            <div className="row justify-content-center">
+                                                <div className="col-md-12 col-lg-9 col-sm-12"  id="corsi" style={{display: 'none'}}>
                                                     <section>
-                                                        <label htmlFor="userName" className="row">Nome corso: </label>
+                                                        <label htmlFor="userName" className="row" style={{color: 'rgb(31, 38, 45, 0.8)', fontSize: '13px'}}>Nome corso: </label>
                                                         <CourseSearch
                                                             retrieveCourse={this.addCourse}
                                                         />
                                                     </section>
                                                 </div>
-                                                <div className="col-md-12"  id="iniziocorso" style={{display: 'none'}}>
-                                                    <label>Inzio</label>
+                                                <div className="col-md-6 col-lg-4 col-sm-12"  id="iniziocorso" style={{display: 'none'}}>
+                                                    <label style={{color: 'rgb(31, 38, 45, 0.8)', fontSize: '13px'}}>Inzio</label>
                                                     <div className="input-group">
                                                         <DatePicker
                                                             required={true}
@@ -295,8 +295,8 @@ class InsertSubscription extends Component {
                                                         />
                                                     </div>
                                                 </div>
-                                                <div className="col-md-12"  id="finecorso" style={{display: 'none'}}>
-                                                    <label>Fine</label>
+                                                <div className="col-md-6 col-lg-4 col-sm-12"  id="finecorso" style={{display: 'none'}}>
+                                                    <label style={{color: 'rgb(31, 38, 45, 0.8)', fontSize: '13px'}}>Fine</label>
                                                     <div className="input-group">
                                                         <DatePicker
                                                             required={true}
@@ -313,34 +313,29 @@ class InsertSubscription extends Component {
                                                     </div>
                                                 </div>
                                             </div>
+
                                             <div className="row justify-content-center">
-                                                <div className="col-md-4" id="entrate" style={{display: 'none'}}>
+                                                <div className="col-md-2" id="entrate" style={{display: 'none'}}>
                                                     <div className="form-group">
-                                                        <label htmlFor="exampleFormControlSelect1">Numero Entrate</label>
-                                                        <select className="form-control" id="exampleFormControlSelect1"
+                                                        <label htmlFor="exampleFormControlSelect1" style={{color: 'rgb(31, 38, 45, 0.8)', fontSize: '13px'}}>Numero Entrate</label>
+                                                        <input className="form-control" type="number"
                                                                 value={this.state.numberOfEntries}
                                                                 onChange={(event) => {
                                                                     event.preventDefault();
                                                                     this.setState({numberOfEntries: event.target.value})}}>
-                                                            <option>1</option>
-                                                            <option>2</option>
-                                                            <option>3</option>
-                                                            <option>4</option>
-                                                            <option>5</option>
-
-                                                        </select>
+                                                        </input>
                                                     </div>
                                                 </div>
 
                                             </div>
-                                            <div className="form-group row">
 
-                                                <div className="col-md-6">
+                                            <div className="form-group row" style={{padding: '10px 0 0 0'}}>
+                                                <div className="col-lg-6 col-md-6 col-sm-12">
                                                     <p align="center">
                                                         <button id="corso" name="acceptTerms" className="btn btn-danger" style={{borderRadius: '10px'}}>Annulla</button>
                                                     </p>
                                                 </div>
-                                                <div className="col-md-6">
+                                                <div className="col-lg-6 col-md-6 col-sm-12">
                                                     <p align="center">
                                                         <button type="submit" id="corso" name="acceptTerms" className="btn btn-success" style={{borderRadius: '10px'}}>Inserisci</button>
                                                     </p>

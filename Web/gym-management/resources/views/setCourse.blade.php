@@ -19,6 +19,7 @@
                                 <div class="form-group row">
                                     <label for="fname" class="col-sm-3 text-right control-label col-form-label">Nome Corso</label>
                                     <div class="col-sm-9">
+                                        <input type="text" hidden class="form-control" id="fname" name="idDatabase" value="{{$course->getIdDatabase()}}">
                                         <input type="text" class="form-control" id="fname" name="name" value="{{$course->getName()}}" required>
                                     </div>
                                 </div>

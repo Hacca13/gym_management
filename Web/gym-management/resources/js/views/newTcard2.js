@@ -277,7 +277,7 @@ class NewTcard2 extends Component {
                                                 <div className="form-group row justify-content-center">
                                                     <div className="col-sm-12 col-md-12 col-lg-6">
                                                         <label htmlFor="fname"
-                                                               className="col-sm-12 text-left control-label col-form-label">Utente</label>
+                                                               className="col-sm-12 text-left control-label col-form-label" style={{backgroundColor: 'transparent', border: 'none', color: '#1F262D'}}>Utente</label>
                                                         <UserSearch
                                                             retrieveUser={this.addUser}
                                                         />
@@ -286,7 +286,7 @@ class NewTcard2 extends Component {
                                                         <div className="form-group row">
                                                             <div className="col-sm-12 col-md-6">
                                                                 <label htmlFor="fname"
-                                                                       className="col-sm-12 control-label col-form-label">Data inizio</label>
+                                                                       className="col-sm-12 control-label col-form-label" style={{backgroundColor: 'transparent', border: 'none', color: '#1F262D'}}>Data inizio</label>
                                                                 <DatePicker
                                                                     required={true}
                                                                     selected={this.state.from}
@@ -302,7 +302,7 @@ class NewTcard2 extends Component {
                                                             </div>
                                                             <div className="col-sm-12 col-md-6">
                                                                 <label htmlFor="fname"
-                                                                       className="col-sm-12 control-label col-form-label">Data fine</label>
+                                                                       className="col-sm-12 control-label col-form-label" style={{backgroundColor: 'transparent', border: 'none', color: '#1F262D'}}>Data fine</label>
                                                                 <DatePicker
                                                                     required={true}
                                                                     selected={this.state.to}
@@ -319,7 +319,7 @@ class NewTcard2 extends Component {
                                                         </div>
                                                     </div>
                                                     <div className="col-sm-12 col-md-10 col-lg-6">
-                                                        <label htmlFor="fname" className="col-sm-12 control-label col-form-label">Esercizio</label>
+                                                        <label htmlFor="fname" className="col-sm-12 control-label col-form-label" style={{backgroundColor: 'transparent', border: 'none', color: '#1F262D'}}>Esercizio</label>
                                                         <Autosuggest
                                                             suggestions={suggestions}
                                                             onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
