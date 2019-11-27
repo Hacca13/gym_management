@@ -13,7 +13,7 @@
                 </div>
                 <div class="col-md-12">
                     <div class="card" style="border-radius: 10px;background-color: #d6d8d8">
-                        <form class="form-horizontal" method="post" enctype="multipart/form-data" action="/insertFormCourse">
+                        <form class="form-horizontal" method="post" enctype="multipart/form-data" action="/admin/insertFormCourse">
                             @csrf
                             <div class="card-body">
                                 <div class="row justify-content-center">
