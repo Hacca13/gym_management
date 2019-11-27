@@ -196,6 +196,24 @@ class TrainingCardsManager extends Controller
       }
     }
 
+    public function updateTCardView($id) {
+        $exercises = Firestore::collection('Exercises')->documents();
+        $exes = [];
+        foreach ($exercises as $ex) {
+            array_push($exes, $ex->data());
+        }
+        $card = Firestore::collection('TrainingCards')->document($id)->snapshot()->data();
+        $user = Firestore::collection('Users')->document($card['idUserDatabase'])->snapshot()->data();
+        return response()->json([$card, $exes, $user]);
+    }
+
+    public function updatePostTCardView(Request $request, $id) {
+        $input = $request->all();
+        $collection = Firestore::collection('TrainingCards')->document($id);
+        $collection->set($input);
+        return 'setted';
+    }
+
 
 
     public static function transformTrainingCardsIntoArrayTrainingCards($trainingCards){

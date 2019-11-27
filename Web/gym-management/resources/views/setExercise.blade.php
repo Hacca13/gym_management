@@ -10,13 +10,14 @@
                 </div>
                 <div class="col-md-12" style="margin-top: 2.5%">
                     <div class="card col-md-12 justify-content-center" style="border-radius: 10px;background-color: #d6d8d8">
-                        <form class="form-horizontal" action="/admin/insertFormExercise" method="post" enctype="multipart/form-data">
+                        <form class="form-horizontal" action="/admin/setFormExercise" method="post" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group row justify-content-center">
                                 <div class="col-sm-12 col-md-12 col-lg-8">
                                     <label for="fname" class="col-sm-12 text-left control-label col-form-label">Nome Esercizio</label>
                                     <input type="text" value="{{$exercise->getName()}}" class="form-control" id="nameExercise" name="nameExercise" style="border-radius: 10px;background-color: rgb(255, 255, 255,0.7);" required>
                                     <input type="text" value="{{$exercise->getIdDatabase()}}" hidden id="idDatabase" name="idDatabase">
+                                    <input type="text" value="{{$exercise->getGifName()}}" hidden id="gifName" name="gifName">
                                 </div>
                             </div>
                             <div class="form-group row">

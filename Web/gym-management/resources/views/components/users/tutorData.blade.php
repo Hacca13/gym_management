@@ -1,44 +1,50 @@
 <div class="collapse multi-collapse" id="tutorData">
   <br>
     <div class="col-md-12">
-        <div class="card card-body" style="border-radius: 10px;">
+        <div class="card card-body" style="border-radius: 10px;background-color: #d6d8d8">
             <div class="row justify-content-center">
                 <div class="col-md-12">
                     <h3 style="text-align: center;">Dati tutore</h3>
                 </div>
-                <div class="col-sm-6">
-                    <label for="fname" class="col-sm-6 text-left control-label col-form-label" style="font-family: bold">Nome Tutore:</label>
-                    <label>{{$user->getParentName()}}</label>
-                    <label for="fname" class="col-sm-6 text-left control-label col-form-label" style="font-family: bold">Cognome Tutore:</label>
-                    <label>{{$user->getParentSurname()}}</label>
-                    <label for="fname" class="col-sm-6 text-left control-label col-form-label" style="font-family: bold">Sesso Tutore:</label>
-                    <label>{{$user->getParentGender()}}</label>
-                    <label for="fname" class="col-sm-6 text-left control-label col-form-label" style="font-family: bold">Data di Nascita Tutore:</label>
-                    <label>{{$user->getParentDateOfBirth()}}</label>
-                    <label for="fname" class="col-sm-6 text-left control-label col-form-label" style="font-family: bold">Luogo di Nascita Tutore:</label>
-                    <label>{{$user->getParentBirthPlace()}}</label>
-                    <label for="fname" class="col-sm-6 text-left control-label col-form-label" style="font-family: bold">Città Residenza del Tutore:</label>
-                    <label>{{data_get($user->getParentResidence(),'cityOfResidence')}}</label>
-                    <label for="fname" class="col-sm-6 text-left control-label col-form-label" style="font-family: bold">Nazione di Residenza Tutore:</label>
-                    <label>{{data_get($user->getParentResidence(),'nation')}}</label>
-                    <label for="fname" class="col-sm-6 text-left control-label col-form-label" style="font-family: bold">Cap:</label>
-                    <label>{{data_get($user->getParentResidence(),'cap')}}</label>
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                    <label for="fname" class="col-lg-5 text-right control-label">Nome:</label>
+                    <label class="col-lg-6 text-center col-form-label" style="color:rgb(31, 38, 45, 0.8)">{{$user->getName()}}</label>
+                    <label for="fname" class="col-lg-5 text-right control-label">Cognome:</label>
+                    <label class="col-lg-6 text-center col-form-label" style="color:rgb(31, 38, 45, 0.8)">{{$user->getSurname()}}</label>
+                    <label for="fname" class="col-lg-5 text-right control-label">E-Mail:</label>
+                    <label class="col-lg-6 text-center col-form-label" style="color:rgb(31, 38, 45, 0.8)">{{$user->getEmail()}}</label>
+                    <label for="fname" class="col-lg-5 text-right control-label">Nato il:</label>
+                    <label class="col-lg-6 text-center col-form-label" style="color:rgb(31, 38, 45, 0.8)">{{$user->getDateOfBirth()}}</label>
+                    <label for="fname" class="col-lg-5 text-right control-label">Luogo di nascita:</label>
+                    <label class="col-lg-6 text-center col-form-label" style="color:rgb(31, 38, 45, 0.8)">{{$user->getBirthPLace()}}</label>
+                    <label for="fname" class="col-lg-5 text-right control-label">Nazione di nascita:</label>
+                    <label class="col-lg-6 text-center col-form-label" style="color:rgb(31, 38, 45, 0.8)">{{$user->getBirthNation()}}</label>
+                    <label for="fname" class="col-lg-5 text-right control-label">Sesso</label>
+                    <label class="col-lg-6 text-center col-form-label" style="color:rgb(31, 38, 45, 0.8)">{{$user->getGender()}}</label>
+                    <label for="fname" class="col-lg-5 text-right control-label">Città di residenza:</label>
+                    <label class="col-lg-6 text-center col-form-label" style="color:rgb(31, 38, 45, 0.8)">{{data_get($user->getResidence(),'cityOfResidence')}}</label>
+                    <label for="fname" class="col-lg-5 text-right control-label">Telefono:</label>
+                    <label class="col-lg-6 text-center col-form-label" style="color:rgb(31, 38, 45, 0.8)">{{$user->getTelephoneNumber()}}</label>
                 </div>
-                <div class="col-sm-6">
-                    <label for="email" class="col-sm-6 text-left control-label col-form-label"style="font-family: bold">Via:</label>
-                    <label>{{data_get($user->getParentResidence(),'street')}}</label>
-                    <label for="cono1" class="col-sm-6 text-left control-label col-form-label"style="font-family: bold">Numero Tutore:</label>
-                    <label>{{data_get($user->getParentResidence(),'number')}}</label>
-                    <label for="cono1" class="col-sm-6 text-left control-label col-form-label"style="font-family: bold">E-mail del Tutore:</label>
-                    <label></label>
-                    <label for="email1" class="col-sm-6 text-left control-label col-form-label"style="font-family: bold">Tipo di Documento:</label>
-                    <label>{{data_get($user->getParentDocument(),'type')}}</label>
-                    <label for="cono1" class="col-sm-6 text-left control-label col-form-label"style="font-family: bold">Numero documento d'Identità del Tutore:</label>
-                    <label>{{data_get($user->getParentDocument(),'number')}}</label>
-                    <label for="lname" class="col-sm-6 text-left control-label col-form-label"style="font-family: bold">Imagine Documento d'Identità:</label>
-                    <img  height="180dpi" width="200dpi" class="img embed-responsive" src="{{data_get($user->getParentDocument(),'documentImage')}}">
-                    <label for="cono1" class="col-sm-6 text-left control-label col-form-label"style="font-family: bold">Data di Rilascio:</label>
-                    <label>{{data_get($user->getParentDocument(),'releaseDate')}}</label>
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                    <label for="fname" class="col-lg-5 text-right control-label">Nazione:</label>
+                    <label class="col-lg-6 text-center col-form-label" style="color:rgb(31, 38, 45, 0.8)">{{data_get($user->getResidence(),'nation')}}</label>
+                    <label for="fname" class="col-lg-5 text-right control-label">Cap:</label>
+                    <label class="col-lg-6 text-center col-form-label" style="color:rgb(31, 38, 45, 0.8)">{{data_get($user->getResidence(),'cap')}}</label>
+                    <label for="fname" class="col-lg-5 text-right control-label">Via:</label>
+                    <label class="col-lg-6 text-center col-form-label" style="color:rgb(31, 38, 45, 0.8)">{{data_get($user->getResidence(),'street')}}</label>
+                    <label for="fname" class="col-lg-5 text-right control-label">Numero Civico:</label>
+                    <label class="col-lg-6 text-center col-form-label" style="color:rgb(31, 38, 45, 0.8)">{{data_get($user->getResidence(),'number')}}</label>
+                    <label for="fname" class="col-lg-5 text-right control-label">Tipo Documento:</label>
+                    <label class="col-lg-6 text-center col-form-label" style="color:rgb(31, 38, 45, 0.8)">{{data_get($user->getDocument(),'type')}}</label>
+                    <label for="fname" class="col-lg-5 text-right control-label">Numero Documento:</label>
+                    <label class="col-lg-6 text-center col-form-label" style="color:rgb(31, 38, 45, 0.8)">{{data_get($user->getResidence(),'number')}}</label>
+                    <label for="fname" class="col-lg-5 text-right control-label">Data Rilascio:</label>
+                    <label class="col-lg-6 text-center col-form-label" style="color:rgb(31, 38, 45, 0.8)">{{data_get($user->getResidence(),'releaseDate')}}</label>
+                    <label for="fname" class="col-lg-5 text-right control-label">Rilasciato Da:</label>
+                    <label class="col-lg-6 text-center col-form-label" style="color:rgb(31, 38, 45, 0.8)">{{data_get($user->getResidence(),'released')}}</label>
+                    <label for="fname" class="col-lg-5 text-right control-label">Immagine del Documento:</label>
+                    <label class="col-lg-6 text-center col-form-label" style="color:rgb(31, 38, 45, 0.8)">{{data_get($user->getResidence(),'documentImage')}}</label>
                 </div>
             </div>
         </div>
