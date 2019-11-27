@@ -49,9 +49,9 @@ class ExercisesManager extends Controller{
         return view('setExercise', compact('exercise'));
     }
 
-    public static function setExercise(Request $request){
+    public static function setExercise(Request $request, $gifName){
       $input=$request->all();
-
+    var_dump($input);
       if(!isset($input['exerciseIsATime'])){
         $input['exerciseIsATime'] = false;
       }
@@ -62,18 +62,21 @@ class ExercisesManager extends Controller{
 
         $firebase = (new Firebase\Factory());
 
-        $imageRef = $firebase->createStorage()->getBucket()->upload(file_get_contents($exerciseImage),
+        $exerciseImageName = rtrim(base64_encode(md5(microtime())),"=");
+
+
+          $imageRef = $firebase->createStorage()->getBucket()->upload(file_get_contents($exerciseImage),
             [
-                'name' => str_replace(' ','-',$input['nameExercise']).'-gif'
+                'name' => $exerciseImageName
             ])->name();
 
         $gif =  "https://firebasestorage.googleapis.com/v0/b/fitandfight.appspot.com/o/". $imageRef ."?alt=media";
 
 
-        $arrayExercise = ExercisesManager::trasformRequestToArrayExercise($input,$gif);
+        $arrayExercise = ExercisesManager::trasformRequestToArrayExercise($input,$gif,$gifName);
         unset($arrayExercise['idDatabase']);
       }else {
-        $arrayExercise = ExercisesManager::trasformRequestToArrayExercise($input,$input['oldImageExercise']);
+        $arrayExercise = ExercisesManager::trasformRequestToArrayExercise($input,$input['oldImageExercise'],$gifName);
         unset($arrayExercise['idDatabase']);
       }
 
@@ -81,7 +84,7 @@ class ExercisesManager extends Controller{
       $collection->document($input['idDatabase'])->set($arrayExercise);
 
       toastr()->success('Esercizio Modificato');
-      return redirect('/admin/gestioneEsercizi');
+//      return redirect('/admin/gestioneEsercizi');
     }
 
 
@@ -117,9 +120,10 @@ class ExercisesManager extends Controller{
         $description = data_get($arrayExercise, 'description');
         $exerciseIsATime = data_get($arrayExercise, 'exerciseIsATime');
         $gif = data_get($arrayExercise, 'gif');
+        $gifName = data_get($arrayExercise, 'gifName');
         $link = data_get($arrayExercise, 'link');
 
-        $exercise = new ExerciseModel($idDatabase,$name,$description,$exerciseIsATime,$gif,$link);
+        $exercise = new ExerciseModel($idDatabase,$name,$description,$exerciseIsATime,$gif,$gifName,$link);
 
         return $exercise;
     }
@@ -130,6 +134,7 @@ class ExercisesManager extends Controller{
         $description = $exercise->getDescription();
         $exerciseIsATime = $exercise->getExerciseIsATime();
         $gif = $exercise->getGif();
+        $gifName = $exercise->getGifName();
         $link = $exercise->getLink();
 
         $arrayExercise = array(
@@ -138,6 +143,7 @@ class ExercisesManager extends Controller{
             'description' => $description,
             'exerciseIsATime' => $exerciseIsATime,
             'gif' => $gif,
+            'gifName' => $gifName,
             'link' => $link
         );
 
@@ -172,10 +178,12 @@ class ExercisesManager extends Controller{
 
 
         $firebase = (new Firebase\Factory());
+        $exerciseImageName = rtrim(base64_encode(md5(microtime())),"=");
+
 
         $imageRef = $firebase->createStorage()->getBucket()->upload(file_get_contents($exerciseImage),
             [
-                'name' => $exerciseImage->getClientOriginalName(),
+                'name' => $exerciseImageName
             ]);
 
          $external = "19/10/2100 14:48:21";
@@ -186,7 +194,7 @@ class ExercisesManager extends Controller{
 
         $collection = Firestore::collection('Exercises');
 
-        $exercise = ExercisesManager::trasformRequestToArrayExercise($input,$gif);
+        $exercise = ExercisesManager::trasformRequestToArrayExercise($input,$gif,$exerciseImageName);
         $collection->add($exercise);
 
         toastr()->success('Esercizio inserito');
@@ -200,9 +208,11 @@ class ExercisesManager extends Controller{
 
         $firebase = (new Firebase\Factory());
 
+        $exerciseImageName = rtrim(base64_encode(md5(microtime())),"=");
+
         $imageRef = $firebase->createStorage()->getBucket()->upload(file_get_contents($exerciseImage),
             [
-                'name' => $exerciseImage->getClientOriginalName()
+                'name' => $exerciseImageName
             ]);
 
         //$gif =  "https://firebasestorage.googleapis.com/v0/b/fitandfight.appspot.com/o/". $imageRef ."?alt=media";
@@ -215,12 +225,13 @@ class ExercisesManager extends Controller{
 
 
 
-    public static function trasformRequestToArrayExercise($input,$gif){
+    public static function trasformRequestToArrayExercise($input,$gif,$gifName){
         $arrayExercise = array(
             'name' => $input['nameExercise'],
             'description' => $input['descriptionExercise'],
             'exerciseIsATime' => $input['exerciseIsATime'],
             'gif' => $gif,
+            'gifName' => $gifName,
             'link' => $input['linkExercise']
         );
 
