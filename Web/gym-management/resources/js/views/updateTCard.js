@@ -1,14 +1,12 @@
 import React, {Component} from 'react';
-import axios from 'axios';
-import Autosuggest from 'react-autosuggest';
-import ExerciseToAdd from "../components/exerciseToAdd";
-import ExerciseToAddByTime from "../components/exerciseToAddByTime";
+import axios from "axios";
 import UserSearch from "../components/userSearch";
 import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
+import Autosuggest from "react-autosuggest";
+import ExerciseToAddByTime from "../components/exerciseToAddByTime";
+import ExerciseToAdd from "../components/exerciseToAdd";
 
-class NewTcard2 extends Component {
-
+class UpdateTCard extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -20,7 +18,8 @@ class NewTcard2 extends Component {
             suggestions: [],
             from: new Date(),
             to: new Date(),
-            visible: false
+            visible: false,
+
         };
         this.removeExercise = this.removeExercise.bind(this);
         this.returnInfo = this.returnInfo.bind(this);
@@ -29,17 +28,22 @@ class NewTcard2 extends Component {
 
     //COMPONENTS FUNCTIONS
     componentDidMount() {
-        axios.get('/api/jsonExercises').then(value => {
+        axios.get('/api/updateTCard/' + this.props.pesp.match.params.id).then(value => {
             this.setState({
-                exerr: value.data
-            });
+                exercisesList: value.data[0].exercises,
+                userName: value.data[2].name + ' ' + value.data[2].surname,
+                userID: value.data[2].idDatabase
+            })
         }).catch(e => {
             console.log(e);
         }).then(() => {
+            axios.get('/api/jsonExercises').then(value => {
+                this.setState({
+                    exerr: value.data
+                })
+            })
         })
-
     }
-
     //FORM FUNCTIONS
     onChange = (event, { newValue }) => {
         this.setState({
@@ -56,7 +60,7 @@ class NewTcard2 extends Component {
 
     handleSubmit = event => {
         event.preventDefault();
-        axios.post('/api/insertTrainCard', {
+        axios.post('/api/updatePostTCard/' + this.props.pesp.match.params.id , {
             idUserDatabase: this.state.userID,
             exercises: this.state.exercisesList,
             period: {
@@ -64,7 +68,7 @@ class NewTcard2 extends Component {
                 endDate: this.formatDate(this.state.to)
             }
         }).then(response => {
-            window.location.href = response.data;
+            console.log(response)
         }).catch(e => {
             console.log(e);
         });
@@ -264,7 +268,7 @@ class NewTcard2 extends Component {
                          style={{borderRadius: '10px', backgroundColor: 'rgb(31, 38, 45,0.8)'}}>
                         <div className="card-body">
                             <div className="col-md-12">
-                                <h2 className="text-center" style={{color: '#d6d8d8'}}>Inserisci nuova scheda</h2>
+                                <h2 className="text-center" style={{color: '#d6d8d8'}}>Modifica scheda</h2>
                             </div>
 
 
@@ -277,16 +281,14 @@ class NewTcard2 extends Component {
                                                 <div className="form-group row justify-content-center">
                                                     <div className="col-sm-12 col-md-12 col-lg-6">
                                                         <label htmlFor="fname"
-                                                               className="col-sm-12 text-left control-label col-form-label" style={{backgroundColor: 'transparent', border: 'none', color: '#1F262D'}}>Utente</label>
-                                                        <UserSearch
-                                                            retrieveUser={this.addUser}
-                                                        />
+                                                               className="col-sm-12 text-left control-label col-form-label">Utente</label>
+                                                        <input type="text" disabled={true} className="form-control" placeholder={this.state.userName}/>
                                                     </div>
                                                     <div className="col-md-12 col-sm-12 col-lg-6">
                                                         <div className="form-group row">
                                                             <div className="col-sm-12 col-md-6">
                                                                 <label htmlFor="fname"
-                                                                       className="col-sm-12 control-label col-form-label" style={{backgroundColor: 'transparent', border: 'none', color: '#1F262D'}}>Data inizio</label>
+                                                                       className="col-sm-12 control-label col-form-label">Data inizio</label>
                                                                 <DatePicker
                                                                     required={true}
                                                                     selected={this.state.from}
@@ -302,7 +304,7 @@ class NewTcard2 extends Component {
                                                             </div>
                                                             <div className="col-sm-12 col-md-6">
                                                                 <label htmlFor="fname"
-                                                                       className="col-sm-12 control-label col-form-label" style={{backgroundColor: 'transparent', border: 'none', color: '#1F262D'}}>Data fine</label>
+                                                                       className="col-sm-12 control-label col-form-label">Data fine</label>
                                                                 <DatePicker
                                                                     required={true}
                                                                     selected={this.state.to}
@@ -319,7 +321,7 @@ class NewTcard2 extends Component {
                                                         </div>
                                                     </div>
                                                     <div className="col-sm-12 col-md-10 col-lg-6">
-                                                        <label htmlFor="fname" className="col-sm-12 control-label col-form-label" style={{backgroundColor: 'transparent', border: 'none', color: '#1F262D'}}>Esercizio</label>
+                                                        <label htmlFor="fname" className="col-sm-12 control-label col-form-label">Esercizio</label>
                                                         <Autosuggest
                                                             suggestions={suggestions}
                                                             onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
@@ -345,7 +347,7 @@ class NewTcard2 extends Component {
                                                                                                 indexed={index}
                                                                                                 key={index}
                                                                                                 retrieveState={this.returnInfo}
-                                                                                                currEx={false}
+                                                                                                currEx={value}
                                                                     />
                                                                 } else {
                                                                     return  <ExerciseToAdd
@@ -354,20 +356,9 @@ class NewTcard2 extends Component {
                                                                         indexed={index}
                                                                         key={index}
                                                                         retrieveState={this.returnInfo}
-                                                                        currEx={false}
+                                                                        currEx={value}
                                                                     />
                                                                 }
-
-                                                                /*
-                                                                <ExerciseToAdd
-                                                                    removeEx={this.removeExercise}
-                                                                    name={value.name}
-                                                                    indexed={index}
-                                                                    key={index}
-                                                                    retrieveState={this.returnInfo}
-                                                                />
-
-                                                                 */
                                                             }))
                                                         }
 
@@ -401,10 +392,6 @@ class NewTcard2 extends Component {
         );
     }
 
-
 }
 
-export default NewTcard2;
-
-
-
+export default UpdateTCard;

@@ -1,13 +1,12 @@
 
-<div class="col-md-4" style="margin-top: 2.5%">
+<div class="col-lg-4 col-md-6 col-sm-12" style="margin-top: 2.5%">
     <div class="card" style="border-radius: 10px; background-color: #d6d8d8">
         <div class="card-header">
             <div class="row">
-                <div class="col-md-2"></div>
-                <div class="col-md-8" style="text-align: center">
+                <div class="col-lg-10 col-md-10 col-sm-10" style="text-align: left; margin-top: auto; margin-bottom: auto">
                     <h3>{{$exercise->getName()}}</h3>
                 </div>
-                <div class="col-md-2" style="text-align: end">
+                <div class="col-lg-2 col-md-2 col-sm-2" style="text-align: right; margin-top: auto; margin-bottom: auto">
                     <a href="#">
                         <i class="fas fa-times" style="font-size: 170%; color: red; margin-left: 2.5%"></i>
                     </a>

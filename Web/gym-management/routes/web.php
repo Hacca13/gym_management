@@ -19,7 +19,6 @@ Route::prefix('admin')->group(function () {
 
 
 
-
 //ESERCIZI
 Route::prefix('admin')->group(function () {
     Route::post('/insertFormExercise', 'ExercisesManager@addExercise') ;
