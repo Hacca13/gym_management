@@ -11,18 +11,34 @@ class ExerciseModel{
   private $description;
   private $exerciseIsATime;
   private $gif;
+  private $gifName;
   private $link;
 
-  function __construct($idDatabase,$name,$description,$exerciseIsATime,$gif,$link){
+  function __construct($idDatabase,$name,$description,$exerciseIsATime,$gif,$gifName,$link){
     $this->idDatabase = $idDatabase;
     $this->name = $name;
     $this->description = $description;
     $this->exerciseIsATime = $exerciseIsATime;
     $this->gif = $gif;
+    $this->gifName = $gifName;
     $this->link = $link;
   }
 
+    /**
+     * @return mixed
+     */
+    public function getGifName()
+    {
+        return $this->gifName;
+    }
 
+    /**
+     * @param mixed $gifName
+     */
+    public function setGifName($gifName)
+    {
+        $this->gifName = $gifName;
+    }
 
     /**
      * Get the value of Id Database

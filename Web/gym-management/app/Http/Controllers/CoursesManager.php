@@ -14,6 +14,27 @@ use Illuminate\Pagination\LengthAwarePaginator;
 
 class CoursesManager extends Controller{
 
+    public static function getDayCourse($dayName){
+      $allCourses = CoursesManager::getAllCourses();
+      $listCoursesToday = array();
+
+      foreach ($allCourses as $course) {
+        if($course->getIsActive() == True ){
+          foreach ($course->getWeeklyFrequency() as $day) {
+            $nameDay = data_get($day, 'day');
+
+            if($nameDay == $dayName){
+              array_push($listCoursesToday,$course);
+
+              break;
+            }
+          }
+        }
+      }
+
+      return $listCoursesToday;
+    }
+
     public static function setCourseView($id,Request $request){
         $documents = $request->session()->pull('Courses');
         $request->session()->put('Courses', $documents);
@@ -52,8 +73,10 @@ class CoursesManager extends Controller{
           }
       }
       $input['instructor'] = strtolower($input['instructor']);
-      $name = $input['name'];
+      $name = strtolower($input['name']);
+      $name = mb_convert_encoding($name, 'UTF-8', 'UTF-8');
       $instructor = $input['instructor'];
+      $instructor = mb_convert_encoding($instructor, 'UTF-8', 'UTF-8');
       $period = [
           'startDate' => $startDate,
           'endDate' => $endDate
@@ -78,7 +101,7 @@ class CoursesManager extends Controller{
 
         $image = $str->signedUrl($dateobj).PHP_EOL;
 
-      
+
       }
       else{
         $image = $input['oldCourseImage'];
@@ -98,7 +121,7 @@ class CoursesManager extends Controller{
       $collection->document($input['idDatabase'])->set($corso);
 
       toastr()->success('Corso modificato con successo');
-      return redirect('/gestioneCorsi');
+      return redirect('/admin/gestioneCorsi');
     }
 
 
@@ -115,12 +138,12 @@ class CoursesManager extends Controller{
             $request->session()->put('searchInput', $input);
         }
         $url = substr($request->url(), 0, strlen($request->url())-24);
-        $url = $url.'coursesPageSearchResults';
+        $url = $url.'/admin/coursesPageSearchResults';
 
         $coursesResultList = CoursesManager::getCoursesDBOrCoursesSessionForSearchPage($request,$currentPage,$input);
 
         $itemCollection = collect($coursesResultList);
-        $perPage = 1;
+        $perPage = 6;
         $currentPageItems = $itemCollection->slice(($currentPage * $perPage) - $perPage, $perPage)->all();
         $coursesResultList = new LengthAwarePaginator($currentPageItems , count($itemCollection), $perPage);
         $coursesResultList->setPath($url);
@@ -235,12 +258,12 @@ class CoursesManager extends Controller{
         $courses = CoursesManager::getCoursesDBOrCoursesSession($request,$currentPage);
 
         $itemCollection = collect($courses);
-        $perPage = 1;
+        $perPage = 6;
         $currentPageItems = $itemCollection->slice(($currentPage * $perPage) - $perPage, $perPage)->all();
         $courses = new LengthAwarePaginator($currentPageItems , count($itemCollection), $perPage);
         $courses->setPath($request->url());
 
-        return view('courses', compact('courses'));
+        return view('coursesPage', compact('courses'));
     }
 
     public static function getCoursesDBOrCoursesSession(Request $request,$currentPage){
@@ -309,7 +332,7 @@ class CoursesManager extends Controller{
 
         $bucket = $firebase->createStorage()->getBucket();
         $input['name'] = strtolower($input['name']);
-
+        $input['name'] = mb_convert_encoding($input['name'], 'UTF-8', 'UTF-8');
         $name = $input['name'] . '.' . $uploadedImage->getClientOriginalExtension();
 
         $str = $bucket->upload(file_get_contents($uploadedImage),
@@ -345,6 +368,7 @@ class CoursesManager extends Controller{
         $input['instructor'] = strtolower($input['instructor']);
         $name = $input['name'];
         $instructor = $input['instructor'];
+        $instructor = mb_convert_encoding($instructor, 'UTF-8', 'UTF-8');
         $period = [
             'startDate' => $startDate,
             'endDate' => $endDate
@@ -368,7 +392,7 @@ class CoursesManager extends Controller{
         $coll->set($corso);
 
         toastr()->success('Corso inserito');
-        return redirect('/gestioneCorsi');
+        return redirect('/admin/gestioneCorsi');
 
     }
 

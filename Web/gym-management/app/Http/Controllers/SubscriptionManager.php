@@ -14,6 +14,65 @@ use Illuminate\Pagination\LengthAwarePaginator;
 class SubscriptionManager extends Controller
 {
 
+
+    public static function subscriptionsThatExpireSoon(){
+      $listSubscription = array();
+      $today = date("Y-m-d");
+      $todayPlus5Day = strtotime ( '+5 day' , strtotime ( $today ) ) ;
+      $todayPlus5Day = date ( 'Y-m-d' , $todayPlus5Day );
+
+      $subscriptions = SubscriptionManager::getAllSubscription();
+
+      foreach ($subscriptions as $subscription) {
+        if($subscription->getIsActive() == TRUE){
+            if($subscription instanceof SubscriptionPeriodModel){
+              $timestamp = strtotime($subscription->getEndDate());
+              $endDate = date("Y-m-d", $timestamp);
+              if($today >= $endDate && $endDate <= $todayPlus5Day){
+                $user = UsersManager::getUserById($subscription->getIdUserDatabase());
+                $userNameAndSurname = $user->getName().' '.$user->getSurname();
+                $userNameAndSubscription = array(
+                    'userNameAndSurname' => $userNameAndSurname,
+                    'subscription' => $subscription);
+
+                array_push($listSubscription,$userNameAndSubscription);
+              }
+            }
+            elseif ($subscription instanceof SubscriptionRevenueModel) {
+              if(($subscription->getNumberOfEntriesMade()+3) >= $subscription->getNumberOfEntries() ){
+                $user = UsersManager::getUserById($subscription->getIdUserDatabase());
+                $userNameAndSurname = $user->getName().' '.$user->getSurname();
+                $userNameAndSubscription = array(
+                    'userNameAndSurname' => $userNameAndSurname,
+                    'subscription' => $subscription);
+
+                array_push($listSubscription,$userNameAndSubscription);
+              }
+            }
+            else{
+              $timestamp = strtotime($subscription->getEndDate());
+              $endDate = date("Y-m-d", $timestamp);
+              if($today >= $endDate && $endDate <= $todayPlus5Day){
+                $user = UsersManager::getUserById($subscription->getIdUserDatabase());
+                $userNameAndSurname = $user->getName().' '.$user->getSurname();
+                $userNameAndSubscription = array(
+                    'userNameAndSurname' => $userNameAndSurname,
+                    'subscription' => $subscription);
+
+                array_push($listSubscription,$userNameAndSubscription);
+              }
+            }
+        }
+      }
+
+
+
+
+
+      return $listSubscription;
+    }
+
+
     public static function searchSubscription(Request $request){
       $currentPage = LengthAwarePaginator::resolveCurrentPage();
       $input = $request->all();
@@ -27,7 +86,7 @@ class SubscriptionManager extends Controller
       }
 
       $url = substr($request->url(), 0, strlen($request->url())-29);
-      $url = $url.'subscriptionPageSearchResults';
+      $url = $url.'/admin/subscriptionPageSearchResults';
 
       $userForSubscriptionPage = UsersManager::getUserDBOrUserSessionForSearchPage($request,$currentPage,$input);
       $subscriptionResultList = array();
@@ -44,7 +103,7 @@ class SubscriptionManager extends Controller
       }
 
       $itemCollection = collect($subscriptionResultList);
-      $perPage = 1;
+      $perPage = 6;
       $currentPageItems = $itemCollection->slice(($currentPage * $perPage) - $perPage, $perPage)->all();
       $subscriptionResultList= new LengthAwarePaginator($currentPageItems , count($itemCollection), $perPage);
       $subscriptionResultList->setPath($url);
@@ -63,7 +122,7 @@ class SubscriptionManager extends Controller
       $currentPage = LengthAwarePaginator::resolveCurrentPage();
       $subscriptionList = SubscriptionManager::getSubscriptionDBOrSubscriptionSession($request,$currentPage);
       $itemCollection = collect($subscriptionList);
-      $perPage = 1;
+      $perPage = 6;
       $currentPageItems = $itemCollection->slice(($currentPage * $perPage) - $perPage, $perPage)->all();
       $subscriptionList= new LengthAwarePaginator($currentPageItems , count($itemCollection), $perPage);
       $subscriptionList->setPath($request->url());

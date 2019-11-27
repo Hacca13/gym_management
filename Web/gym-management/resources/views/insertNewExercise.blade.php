@@ -12,7 +12,7 @@
                 </div>
                 <div class="col-md-12">
                     <div class="card col-md-12 justify-content-center" style="border-radius: 10px;background-color: #d6d8d8">
-                        <form class="form-horizontal" action="/insertFormExercise" method="post" enctype="multipart/form-data">
+                        <form class="form-horizontal" action="/admin/insertFormExercise" method="post" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group row justify-content-center">
                                 <div class="col-sm-12 col-md-12 col-lg-8">
@@ -52,7 +52,7 @@
                             <div class="form-group row justify-content-center">
                                 <div class="col-md-6">
                                     <p align="center">
-                                        <a href="/gestioneEsercizi">
+                                        <a href="/admin/gestioneEsercizi">
                                             <button type="submit" class="btn btn-danger" style="border-radius: 10px;">Annulla</button>
                                         </a>
                                     </p>

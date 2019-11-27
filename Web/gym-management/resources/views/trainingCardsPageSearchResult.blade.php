@@ -13,7 +13,7 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-5">
-                                  <form action="/trainingCardsSearchResultsPage" method="post">
+                                  <form action="/admin/trainingCardsSearchResultsPage" method="post">
                                     @csrf
                                     <div class="input-group no-border">
                                         <input type="text" value="" name='searchInputTrainingCards' class="form-control" placeholder="Cerca scheda di...">
@@ -42,7 +42,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-1" style="text-align: center; margin-top: auto; margin-bottom: auto">
-                                    <a href="nuovaScheda" role="button">
+                                    <a href="/admin/nuovaScheda" role="button">
                                         <button class="bttn-material-circle bttn-md bttn-primary">
                                             <i class="fas fa-plus"></i>
                                         </button>

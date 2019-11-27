@@ -11,6 +11,17 @@
                 <div class="col-md-12" style="margin-top: 2.5%">
                     @include('components.users.usersOption')
                 </div>
+                @if(count($users) == 0)
+                  <div class="row text-center">
+                    <br>
+                    <br>
+                    <br>
+                      <h1 class="col-md-12 text-center" style="color: #d6d8d8">Non ci sono risultati</h1>
+                    <br>
+                    <br>
+                    <br>
+                  </div>
+                @endif
                 @foreach($users as $user)
                     <div class="col-md-12">
                         @include('components.users.userCard')

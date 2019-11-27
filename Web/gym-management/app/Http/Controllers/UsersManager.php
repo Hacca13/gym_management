@@ -93,7 +93,7 @@ class UsersManager extends Controller{
 
 
         $url = substr($request->url(), 0, strlen($request->url())-21);
-        $url = $url.'userPageSearchResults';
+        $url = $url.'/admin/userPageSearchResults';
 
         $usersResultList = UsersManager::getUserDBOrUserSessionForSearchPage($request,$currentPage,$input);
 
@@ -112,7 +112,7 @@ class UsersManager extends Controller{
 
 
         $itemCollection = collect($usersResultList);
-        $perPage = 1;
+        $perPage = 6;
         $currentPageItems = $itemCollection->slice(($currentPage * $perPage) - $perPage, $perPage)->all();
         $usersResultList= new LengthAwarePaginator($currentPageItems , count($itemCollection), $perPage);
         $usersResultList->setPath($url);
@@ -273,17 +273,17 @@ class UsersManager extends Controller{
             MedicalHistoryManager::addMedicalHistory($arrayMedicalHistory);
 
             toastr()->success('Utente registrato');
-            return redirect('/gestioneIscritti');
+            return redirect('/admin/gestioneIscritti');
 
         } catch (AuthException $e) {
 
             toastr()->error($tr->translate($e->getMessage()));
-            return redirect('/nuovoIscritto');
+            return redirect('/admin/nuovoIscritto');
 
         } catch (FirebaseException $e) {
 
             toastr()->error($tr->translate($e->getMessage()));
-            return redirect('/nuovoIscritto');
+            return redirect('/admin/nuovoIscritto');
         }
 
     }

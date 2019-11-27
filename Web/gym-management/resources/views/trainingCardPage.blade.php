@@ -13,7 +13,7 @@
                         <div class="card-body">
                             <div class="row justify-content-center">
                                 <div class="col-lg-5 col-md-12 col-sm-12">
-                                    <form action="/trainingCardsSearchResultsPage" method="post">
+                                    <form action="/admin/trainingCardsSearchResultsPage" method="post">
                                         @csrf
                                         <div class="input-group no-border">
                                             <input type="text" value="" name='searchInputTrainingCards' class="form-control" placeholder="Cerca scheda di...">
@@ -46,7 +46,7 @@
                                     </div>
                                 </div>
                                 <div class="col-lg-1 col-md-3 col-sm-3" style="text-align: right; margin-top: auto; margin-bottom: auto">
-                                    <a href="nuovaScheda" role="button">
+                                    <a href="/admin/nuovaScheda" role="button">
                                         <button class="bttn-material-circle bttn-md bttn-primary" style="background-color: #3F5469">
                                             <i class="fas fa-plus"></i>
                                         </button>
@@ -56,6 +56,17 @@
                         </div>
                     </div>
                 </div>
+                @if(count($trainingCardsList) == 0)
+                  <div class="row text-center">
+                    <br>
+                    <br>
+                    <br>
+                      <h1 class="col-md-12 text-center" style="color: #d6d8d8">Non ci sono risultati</h1>
+                    <br>
+                    <br>
+                    <br>
+                  </div>
+                @endif
                 <div class="col-md-12">
                     @foreach($trainingCardsList as $trainingCard)
                         @include('components.trainingCards.TrainingCardsList')
