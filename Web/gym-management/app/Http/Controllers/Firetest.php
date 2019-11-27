@@ -23,6 +23,7 @@ use App\Http\Models\SubscriptionModels\SubscriptionModel;
 use App\Http\Models\SubscriptionModels\SubscriptionRevenueModel;
 use App\Http\Models\SubscriptionModels\SubscriptionCourseModel;
 use App\Http\Models\SubscriptionModels\SubscriptionPeriodModel;
+use Kreait\Firebase;
 
 use Illuminate\Pagination\LengthAwarePaginator;
 
@@ -53,28 +54,38 @@ class Firetest extends Controller
   }
 
 
-  public function test2(Request $request){
+  public function test2(){
 
-    /*$currentPage = LengthAwarePaginator::resolveCurrentPage();
-    $documents = Firetest::testPage($request,$currentPage);
-    $itemCollection = collect($documents);
-    $perPage = 1;
-    $currentPageItems = $itemCollection->slice(($currentPage * $perPage) - $perPage, $perPage)->all();
-    $paginatedItems= new LengthAwarePaginator($currentPageItems , count($itemCollection), $perPage);
-    $paginatedItems->setPath($request->url());
+  /*  $original_date = "2019-03-31";
 
-    <?php
-          $exercisesList = array();
-    ?>
-  <!--  @foreach($trainingCard->getExercises() as $exercise)
-      @include('components.exercise.cardExercise')
-    @endforeach -->
+    // Creating timestamp from given date
+    $timestamp = strtotime($original_date);
+
+    // Creating new date format from that timestamp
+    $new_date = date("d-m-Y", $timestamp);
 
 
-    return view('items_view', compact('paginatedItems'));*/
+    $timestamp = strtotime($new_date);
+    // Creating new date format from that timestamp
+    $new_date = date("Y-m-d", $timestamp);
 
-    $ciao = ExercisesManager::getExerciseByName('eserci');
-    var_dump(count($ciao));
+    echo $new_date;
+
+    $today = date("Y-m-d");
+
+    echo $today;*/
+
+    $today = '2019-11-05';
+    $endDate = '2019-11-04';
+
+    if($endDate < $today){
+      echo 'true';
+    }
+    else{
+      echo 'false';
+    }
+
+
   }
 
   public static function testPage(Request $request,$currentPage){
@@ -94,9 +105,19 @@ class Firetest extends Controller
 
 
   public function test3(){
-  $array = CoursesManager::getAllCourses();
+    $today = date("Y-m-d");
+    $todayPlus5Day = strtotime ( '+5 day' , strtotime ( $today ) ) ;
+    $todayPlus5Day = date ( 'Y-m-d' , $todayPlus5Day );
+
+    $timestamp = strtotime('30/11/2019');
+    $endDate = date("Y-m-d", $timestamp);
 
 
+    if($today >= $endDate and $endDate <= $todayPlus5Day){
+
+      echo "scade tra qualche giorno";
+
+    }
 
   }
 

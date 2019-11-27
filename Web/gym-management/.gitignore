@@ -3,6 +3,7 @@
 /public/storage
 /storage/*.key
 /vendor
+\resources\js\app.js
 .env
 .env.backup
 .phpunit.result.cache
@@ -13,3 +14,4 @@ FitAndFight-d18fd34bc5db.json
 yarn-error.log
 /.idea/laravel-plugin.xml
 /.idea/vcs.xml
+/.idea/*
