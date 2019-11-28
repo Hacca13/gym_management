@@ -45,13 +45,11 @@
         </div>
     </div>
 </div>
-
 <script>
     function myFunction() {
         document.getElementById("utenteInattivo").disabled = true;
     }
 </script>
-
 <script>
     function myFunction() {
         document.getElementById("utenteAttivo").disabled = true;
