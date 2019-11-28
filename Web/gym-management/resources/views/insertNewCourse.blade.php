@@ -80,19 +80,25 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-lg-6 col-md-8 col-sm-10" style="text-align: center; margin-top: auto; margin-bottom: auto; padding: 10px 0 0 0">
-                                            <label for="fname" class="text-right control-label col-form-label" style="background-color: transparent; border: none; color: #1F262D">Immagine del Corso</label>
-                                            <input type="file" class="form-control" id="courseImage" name="courseImage" required>
-                                        </div>
-
-                                        <div class="col-lg-12 col-md-12 col-sm-12" style="text-align: center; margin-top: auto; margin-bottom: auto; padding: 10px 0 0 0">
-                                            <button type="button" id="{{$index}}" class="bttn-material-flat bttn-sm bttn-danger"
+                                        <div class="col-lg-12 col-md-12 col-sm-12 deleter" style="text-align: center; margin-top: auto; margin-bottom: auto; padding: 10px 0 0 0">
+                                            <button type="button" style="" id="{{$index}}" class="bttn-material-flat bttn-sm bttn-danger"
                                                     onclick="removeButton(this.id)"><i class="fas fa-times"></i>
                                             </button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+
+                            <br>
+                            <br>
+
+                            <div class="row justify-content-center">
+                                <div class="col-lg-6 col-md-8 col-sm-10" style="text-align: center; margin-top: auto; margin-bottom: auto; padding: 10px 0 0 0">
+                                    <label for="fname" class="text-right control-label col-form-label" style="background-color: transparent; border: none; color: #1F262D">Immagine del Corso</label>
+                                    <input type="file" class="form-control" id="courseImage" name="courseImage" required>
+                                </div>
+                            </div>
+
                             <div class="row justify-content-center">
                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                     <div class="card-body" style="text-align: center">
@@ -141,6 +147,7 @@
             document.getElementById('Entireday' + index).getElementsByTagName('button')[0].setAttribute('id', 'removeDay' + index);
             document.getElementById('Entireday' + index).getElementsByTagName('button')[0].setAttribute('id', index);
         }
+
         function removeButton(index) {
             let deleter = document.getElementsByClassName('deleter');
             if (deleter.length !== 1) {
@@ -148,8 +155,6 @@
                 elem.parentNode.removeChild(elem);
             }
         }
-
-
 
     </script>
 
