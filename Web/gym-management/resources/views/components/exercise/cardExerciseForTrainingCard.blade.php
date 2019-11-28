@@ -1,11 +1,12 @@
 
 <div class="col-lg-4 col-md-6 col-sm-12" style="margin-top: 2.5%">
-    <div class="card" style="border-radius: 10px; background-color: #d6d8d8">
-        <div class="card-header">
+    <div class="card">
+        <div class="card-header" style="background-color: #bababa; border-radius: 10px 10px 0 0; border-right: 0.5px solid rgb(31, 38, 45, 0.6); border-left: 0.5px solid rgb(31, 38, 45, 0.4); border-top: 0.5px solid rgb(31, 38, 45, 0.3)">
             <div class="row">
                 <div class="col-lg-10 col-md-10 col-sm-10" style="text-align: left; margin-top: auto; margin-bottom: auto">
-                    <h3>{{$exercise->getName()}}</h3>
+                    <h3 style="color: rgb(31, 38, 45, 0.8)">{{$exercise->getName()}}</h3>
                 </div>
+
                 <div class="col-lg-2 col-md-2 col-sm-2" style="text-align: right; margin-top: auto; margin-bottom: auto">
                     <a href="#">
                         <i class="fas fa-times" style="font-size: 170%; color: red; margin-left: 2.5%"></i>
@@ -13,7 +14,8 @@
                 </div>
             </div>
         </div>
-        <div class="card-body" >
+
+        <div class="card-body" style="background-color: #d6d8d8; border-radius: 0 0 10px 10px; border-right: 0.5px solid rgb(31, 38, 45, 0.6); border-left: 0.5px solid rgb(31, 38, 45, 0.4); border-bottom: 0.5px solid rgb(31, 38, 45, 0.8)">
             <div class="row">
                 <div class="col-md-12">
                     <div class="car-title">

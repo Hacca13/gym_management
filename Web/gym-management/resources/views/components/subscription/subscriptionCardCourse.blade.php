@@ -8,7 +8,7 @@
             } ?>
             <div class="row">
 
-                <div class="col-lg-3 col-md-6 col-sm-12" style="margin-top: auto; margin-bottom: auto;">
+                <div class="col-lg-3 col-md-6 col-sm-12" style="text-align: center; margin-top: auto; margin-bottom: auto;">
                     <h3>{{$user->getName()}} {{$user->getSurname()}}</h3>
                 </div>
 

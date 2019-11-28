@@ -10,10 +10,14 @@
                     @include('components.exercise.exerciseSearchBar')
                 </div>
                 <div class="col-md-12" >
-                    <div class="row justify-content-center">
-                        @foreach($exercises as $exercise)
-                            @include('components.exercise.cardExercise')
-                        @endforeach
+                    <div class="card">
+                        <div class="card-body" style="background-color: rgb(214, 216, 216, 0.9); border-radius: 10px">
+                            <div class="row justify-content-center">
+                                @foreach($exercises as $exercise)
+                                    @include('components.exercise.cardExercise')
+                                @endforeach
+                            </div>
+                        </div>
                     </div>
                     <div class="row justify-content-center" style="margin-top: 2.5%">
                         {{ $exercises->links()}}
