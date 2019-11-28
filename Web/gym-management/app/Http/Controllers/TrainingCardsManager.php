@@ -134,7 +134,7 @@ class TrainingCardsManager extends Controller
       $usersList = array();
       $trainingCardsList = TrainingCardsManager::getAllTrainingCards();
       $itemCollection = collect($trainingCardsList);
-      $perPage = 1;
+      $perPage = 6;
       $currentPageItems = $itemCollection->slice(($currentPage * $perPage) - $perPage, $perPage)->all();
       $trainingCardsList= new LengthAwarePaginator($currentPageItems , count($itemCollection), $perPage);
       $trainingCardsList->setPath($request->url());
