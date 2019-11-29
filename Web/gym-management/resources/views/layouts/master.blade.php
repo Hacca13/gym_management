@@ -10,7 +10,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <!-- Favicon icon -->
-    <link rel="icon"  href="/images/Fit&Fight.png">
+    <link rel="icon"  href="../images/iconFit&Fight.jpg">
     <title>Fit & Fight</title>
     <!-- Custom CSS -->
     <link href="../matrix-admin-bt4/assets/libs/flot/css/float-chart.css" rel="stylesheet">
@@ -44,7 +44,7 @@
 
 
 
-<div id="main-wrapper"  style="background-image: url('images/wall.jpg'); background-size: cover; padding-bottom: 14%;background-attachment: fixed;">
+<div id="main-wrapper"  style="background-image:url('../images/wall.jpg'); background-size: cover; padding-bottom: 14%;background-attachment: fixed;">
 
 @include('components.navbar')
 @include('components.sidebar')
