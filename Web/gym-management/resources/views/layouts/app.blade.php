@@ -6,8 +6,9 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <!-- Favicon icon -->
+    <link rel="icon"  href="../images/iconFit&Fight.jpg">
+    <title>Fit & Fight</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -20,7 +21,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
-    <div id="app" style="background-image: url('images/wall.jpg'); background-size: cover; padding-bottom: 20%;background-attachment: fixed;">
+    <div id="app" style="background-image: url('../images/wall.jpg'); background-size: cover; padding-bottom: 20%;background-attachment: fixed;">
 
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>

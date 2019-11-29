@@ -85456,6 +85456,23 @@ function (_Component) {
       }
     }
   }, {
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      if (this.props.currEx !== false) {
+        this.setState({
+          atTime: this.props.currEx.atTime,
+          numberOfSeries: this.props.currEx.numberOfSeries,
+          weight: this.props.currEx.weight,
+          numberOfRepetitions: this.props.currEx.numberOfRepetitions,
+          rest: {
+            min: this.props.currEx.rest.min,
+            sec: this.props.currEx.rest.sec
+          },
+          day: this.props.currEx.day
+        });
+      }
+    }
+  }, {
     key: "render",
     value: function render() {
       var _this2 = this;
@@ -85687,6 +85704,25 @@ function (_Component) {
     value: function componentDidUpdate(prevProps, prevState, snapshot) {
       if (prevState !== this.state) {
         this.props.retrieveState(this.state, this.props.indexed);
+      }
+    }
+  }, {
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      if (this.props.currEx !== false) {
+        this.setState({
+          atTime: this.props.currEx.atTime,
+          numberOfSeries: this.props.currEx.numberOfSeries,
+          work: {
+            min: this.props.currEx.work.min,
+            sec: this.props.currEx.work.sec
+          },
+          rest: {
+            min: this.props.currEx.rest.min,
+            sec: this.props.currEx.rest.sec
+          },
+          day: this.props.currEx.day
+        });
       }
     }
   }, {
@@ -86492,8 +86528,11 @@ function (_Component) {
         style: {
           color: '#d6d8d8'
         }
-      }, "Inserisci Dati Abbonamento")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "row"
+      }, "Inserisci dati abbonamento")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "row",
+        style: {
+          marginTop: '2.5%'
+        }
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-md-12"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -86504,15 +86543,24 @@ function (_Component) {
         }
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "card-body"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         onSubmit: this.submitForm
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "row justify-content-center"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-lg-8 col-md-12 col-sm-12"
+        className: "col-lg-8 col-md-12 col-sm-12",
+        style: {
+          textAlign: "center"
+        }
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         htmlFor: "userName",
-        className: "row col-form-label"
+        className: "col-form-label",
+        style: {
+          backgroundColor: 'transparent',
+          border: 'none',
+          color: 'rgb(31, 38, 45, 0.8)',
+          fontSize: '18px'
+        }
       }, "Abbonamento di: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_userSearch__WEBPACK_IMPORTED_MODULE_1__["default"], {
         retrieveUser: this.addUser
       }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -86522,7 +86570,13 @@ function (_Component) {
         }
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         htmlFor: "userName",
-        className: "col-form-label"
+        className: "col-form-label",
+        style: {
+          backgroundColor: 'transparent',
+          border: 'none',
+          color: 'rgb(31, 38, 45, 0.8)',
+          fontSize: '18px'
+        }
       }, "Tipo di abbonamento:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "row justify-content-center"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -86538,7 +86592,10 @@ function (_Component) {
         className: "required custom-control-input"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         htmlFor: "myCheck",
-        className: "custom-control-label"
+        className: "custom-control-label",
+        style: {
+          fontSize: '15px'
+        }
       }, "Periodico")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "custom-control custom-radio",
         style: {
@@ -86552,7 +86609,10 @@ function (_Component) {
         className: "required custom-control-input"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         htmlFor: "entrata",
-        className: "custom-control-label"
+        className: "custom-control-label",
+        style: {
+          fontSize: '15px'
+        }
       }, "Entrate")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "custom-control custom-radio",
         style: {
@@ -86566,16 +86626,24 @@ function (_Component) {
         className: "required custom-control-input"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         htmlFor: "corso",
-        className: "custom-control-label"
+        className: "custom-control-label",
+        style: {
+          fontSize: '15px'
+        }
       }, "Corso")))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "row justify-content-center"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-md-6",
+        className: "col-md-4",
         id: "inizio",
         style: {
           display: 'none'
         }
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Inzio"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        style: {
+          color: 'rgb(31, 38, 45, 0.8)',
+          fontSize: '13px'
+        }
+      }, "Inzio"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "input-group"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_datepicker__WEBPACK_IMPORTED_MODULE_2___default.a, {
         required: true,
@@ -86590,12 +86658,17 @@ function (_Component) {
           dateName: 'inizio'
         })
       }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-md-6",
+        className: "col-md-4",
         id: "fine",
         style: {
           display: 'none'
         }
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Fine"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        style: {
+          color: 'rgb(31, 38, 45, 0.8)',
+          fontSize: '13px'
+        }
+      }, "Fine"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "input-group"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_datepicker__WEBPACK_IMPORTED_MODULE_2___default.a, {
         required: true,
@@ -86610,25 +86683,34 @@ function (_Component) {
           dateName: 'fine'
         })
       })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "row"
+        className: "row justify-content-center"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-md-6",
+        className: "col-md-12 col-lg-9 col-sm-12",
         id: "corsi",
         style: {
           display: 'none'
         }
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         htmlFor: "userName",
-        className: "row"
+        className: "row",
+        style: {
+          color: 'rgb(31, 38, 45, 0.8)',
+          fontSize: '13px'
+        }
       }, "Nome corso: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_courseSearch__WEBPACK_IMPORTED_MODULE_4__["default"], {
         retrieveCourse: this.addCourse
       }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-md-12",
+        className: "col-md-6 col-lg-4 col-sm-12",
         id: "iniziocorso",
         style: {
           display: 'none'
         }
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Inzio"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        style: {
+          color: 'rgb(31, 38, 45, 0.8)',
+          fontSize: '13px'
+        }
+      }, "Inzio"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "input-group"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_datepicker__WEBPACK_IMPORTED_MODULE_2___default.a, {
         required: true,
@@ -86643,12 +86725,17 @@ function (_Component) {
           dateName: 'iniziocorso'
         })
       }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-md-12",
+        className: "col-md-6 col-lg-4 col-sm-12",
         id: "finecorso",
         style: {
           display: 'none'
         }
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Fine"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        style: {
+          color: 'rgb(31, 38, 45, 0.8)',
+          fontSize: '13px'
+        }
+      }, "Fine"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "input-group"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_datepicker__WEBPACK_IMPORTED_MODULE_2___default.a, {
         required: true,
@@ -86665,7 +86752,7 @@ function (_Component) {
       })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "row justify-content-center"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-md-4",
+        className: "col-md-2",
         id: "entrate",
         style: {
           display: 'none'
@@ -86673,10 +86760,14 @@ function (_Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "form-group"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-        htmlFor: "exampleFormControlSelect1"
-      }, "Numero Entrate"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+        htmlFor: "exampleFormControlSelect1",
+        style: {
+          color: 'rgb(31, 38, 45, 0.8)',
+          fontSize: '13px'
+        }
+      }, "Numero Entrate"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         className: "form-control",
-        id: "exampleFormControlSelect1",
+        type: "number",
         value: this.state.numberOfEntries,
         onChange: function onChange(event) {
           event.preventDefault();
@@ -86685,24 +86776,26 @@ function (_Component) {
             numberOfEntries: event.target.value
           });
         }
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, "1"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, "2"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, "3"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, "4"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, "5"))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "form-group row"
+      })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group row",
+        style: {
+          padding: '10px 0 0 0'
+        }
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-md-6"
+        className: "col-lg-6 col-md-6 col-sm-12"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-        align: "left"
+        align: "center"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         id: "corso",
         name: "acceptTerms",
         className: "btn btn-danger",
         style: {
-          borderRadius: '10px',
-          marginRight: '55%'
+          borderRadius: '10px'
         }
       }, "Annulla"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-md-6"
+        className: "col-lg-6 col-md-6 col-sm-12"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-        align: "right"
+        align: "center"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         type: "submit",
         id: "corso",
@@ -87127,7 +87220,12 @@ function (_Component) {
         className: "col-sm-12 col-md-12 col-lg-6"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         htmlFor: "fname",
-        className: "col-sm-12 text-left control-label col-form-label"
+        className: "col-sm-12 text-left control-label col-form-label",
+        style: {
+          backgroundColor: 'transparent',
+          border: 'none',
+          color: '#1F262D'
+        }
       }, "Utente"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_userSearch__WEBPACK_IMPORTED_MODULE_5__["default"], {
         retrieveUser: this.addUser
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -87138,7 +87236,12 @@ function (_Component) {
         className: "col-sm-12 col-md-6"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         htmlFor: "fname",
-        className: "col-sm-12 control-label col-form-label"
+        className: "col-sm-12 control-label col-form-label",
+        style: {
+          backgroundColor: 'transparent',
+          border: 'none',
+          color: '#1F262D'
+        }
       }, "Data inizio"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_datepicker__WEBPACK_IMPORTED_MODULE_6___default.a, {
         required: true,
         selected: this.state.from,
@@ -87155,7 +87258,12 @@ function (_Component) {
         className: "col-sm-12 col-md-6"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         htmlFor: "fname",
-        className: "col-sm-12 control-label col-form-label"
+        className: "col-sm-12 control-label col-form-label",
+        style: {
+          backgroundColor: 'transparent',
+          border: 'none',
+          color: '#1F262D'
+        }
       }, "Data fine"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_datepicker__WEBPACK_IMPORTED_MODULE_6___default.a, {
         required: true,
         selected: this.state.to,
@@ -87172,7 +87280,12 @@ function (_Component) {
         className: "col-sm-12 col-md-10 col-lg-6"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         htmlFor: "fname",
-        className: "col-sm-12 control-label col-form-label"
+        className: "col-sm-12 control-label col-form-label",
+        style: {
+          backgroundColor: 'transparent',
+          border: 'none',
+          color: '#1F262D'
+        }
       }, "Esercizio"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_autosuggest__WEBPACK_IMPORTED_MODULE_2___default.a, {
         suggestions: suggestions,
         onSuggestionsFetchRequested: this.onSuggestionsFetchRequested,
@@ -87194,7 +87307,8 @@ function (_Component) {
             name: value.name,
             indexed: index,
             key: index,
-            retrieveState: _this3.returnInfo
+            retrieveState: _this3.returnInfo,
+            currEx: false
           });
         } else {
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_exerciseToAdd__WEBPACK_IMPORTED_MODULE_3__["default"], {
@@ -87202,7 +87316,8 @@ function (_Component) {
             name: value.name,
             indexed: index,
             key: index,
-            retrieveState: _this3.returnInfo
+            retrieveState: _this3.returnInfo,
+            currEx: false
           });
         }
         /*

@@ -14,6 +14,27 @@ use Illuminate\Pagination\LengthAwarePaginator;
 
 class CoursesManager extends Controller{
 
+    public static function getDayCourse($dayName){
+      $allCourses = CoursesManager::getAllCourses();
+      $listCoursesToday = array();
+
+      foreach ($allCourses as $course) {
+        if($course->getIsActive() == True ){
+          foreach ($course->getWeeklyFrequency() as $day) {
+            $nameDay = data_get($day, 'day');
+
+            if($nameDay == $dayName){
+              array_push($listCoursesToday,$course);
+
+              break;
+            }
+          }
+        }
+      }
+
+      return $listCoursesToday;
+    }
+
     public static function setCourseView($id,Request $request){
         $documents = $request->session()->pull('Courses');
         $request->session()->put('Courses', $documents);
@@ -52,8 +73,10 @@ class CoursesManager extends Controller{
           }
       }
       $input['instructor'] = strtolower($input['instructor']);
-      $name = $input['name'];
+      $name = strtolower($input['name']);
+      $name = mb_convert_encoding($name, 'UTF-8', 'UTF-8');
       $instructor = $input['instructor'];
+      $instructor = mb_convert_encoding($instructor, 'UTF-8', 'UTF-8');
       $period = [
           'startDate' => $startDate,
           'endDate' => $endDate
@@ -64,12 +87,16 @@ class CoursesManager extends Controller{
       if(isset($input['courseImage'])){
         $uploadedImage = $request->file("courseImage");
         $firebase = (new Firebase\Factory());
-        $bucket = $firebase->createStorage()->getBucket();
         $input['name'] = strtolower($input['name']);
-        $name = $input['name'] . '.' . $uploadedImage->getClientOriginalExtension();
-        $str = $bucket->upload(file_get_contents($uploadedImage),
+          $imageName = rtrim(base64_encode(md5(microtime())),"=");
+          $bucket = $firebase->createStorage()->getBucket();
+
+          $obj = $bucket->object($input['imageName']);
+
+          $obj->delete();
+          $str = $bucket->upload(file_get_contents($uploadedImage),
             [
-                'name' => $name
+                'name' => $imageName
             ]);
 
         $external = "19/10/2100 14:48:21";
@@ -78,15 +105,16 @@ class CoursesManager extends Controller{
 
         $image = $str->signedUrl($dateobj).PHP_EOL;
 
-
       }
       else{
         $image = $input['oldCourseImage'];
+        $imageName = $input['imageName'];
       }
 
       $corso = array(
           'name' => $name,
           'image' => $image,
+          'imageName' => $imageName,
           'isActive' => TRUE,
           'instructor' => $instructor,
           'period' => $period,
@@ -261,13 +289,14 @@ class CoursesManager extends Controller{
         $idDatabase = data_get($arrayCourse,'idDatabase');
         $name = data_get($arrayCourse,'name');
         $image = data_get($arrayCourse,'image');
+        $imageName = data_get($arrayCourse, 'imageName');
         $isActive = data_get($arrayCourse,'isActive');
         $instructor = data_get($arrayCourse,'instructor');
         $period = data_get($arrayCourse,'period');
         $weeklyFrequency = data_get($arrayCourse,'weeklyFrequency') ;
         $usersList = data_get($arrayCourse,'usersList') ;
 
-        $course = new CourseModel($idDatabase,$name,$image,$isActive,$instructor,$period,$weeklyFrequency,$usersList);
+        $course = new CourseModel($idDatabase,$name,$image,$imageName,$isActive,$instructor,$period,$weeklyFrequency,$usersList);
 
         return $course;
     }
@@ -275,6 +304,7 @@ class CoursesManager extends Controller{
         $idDatabase = $course->getIdDatabase();
         $name = $course->getName();
         $image = $course->getImage();
+        $imageName = $course->getImageName();
         $isActive = $course->getIsActive();
         $instructor = $course->getInstructor();
         $period = $course->getPeriod();
@@ -285,6 +315,7 @@ class CoursesManager extends Controller{
             'idDatabase' => $idDatabase,
             'name' => $name,
             'image' => $image,
+            'imageName' => $imageName,
             'isActive' => $isActive,
             'instructor' => $instructor,
             'period' => $period,
@@ -306,15 +337,13 @@ class CoursesManager extends Controller{
         $uploadedImage = $request->file("courseImage");
 
         $firebase = (new Firebase\Factory());
+        $imageName = rtrim(base64_encode(md5(microtime())),"=");
 
         $bucket = $firebase->createStorage()->getBucket();
-        $input['name'] = strtolower($input['name']);
-
-        $name = $input['name'] . '.' . $uploadedImage->getClientOriginalExtension();
 
         $str = $bucket->upload(file_get_contents($uploadedImage),
             [
-                'name' => $name
+                'name' => $imageName
             ]);
 
         $external = "19/10/2100 14:48:21";
@@ -322,8 +351,6 @@ class CoursesManager extends Controller{
         $dateobj = DateTime::createFromFormat($format, $external);
 
         $image = $str->signedUrl($dateobj).PHP_EOL;
-
-        //$image =  "https://firebasestorage.googleapis.com/v0/b/fitandfight.appspot.com/o/". $str ."?alt=media";
 
         $days = array();
 
@@ -345,6 +372,7 @@ class CoursesManager extends Controller{
         $input['instructor'] = strtolower($input['instructor']);
         $name = $input['name'];
         $instructor = $input['instructor'];
+        $instructor = mb_convert_encoding($instructor, 'UTF-8', 'UTF-8');
         $period = [
             'startDate' => $startDate,
             'endDate' => $endDate
@@ -358,6 +386,7 @@ class CoursesManager extends Controller{
         $corso = array(
             'name' => $name,
             'image' => $image,
+            'imageName' => $imageName,
             'isActive' => TRUE,
             'instructor' => $instructor,
             'period' => $period,
@@ -384,14 +413,15 @@ class CoursesManager extends Controller{
     public static function removeUserToCourse($idCourseDatabase,$idUserDatabase) {
       $collection = Firestore::collection('Courses');
       $documents = $collection->document($idCourseDatabase)->snapshot()->data();
+      if(is_array($documents['usersList'])){
+          for ($i=0; $i < count($documents['usersList']) ; $i++) {
+            if($documents['usersList'][$i] == $idUserDatabase){
+              array_splice($documents['usersList'],$i, 1);
+            }
+          }
 
-      for ($i=0; $i < count($documents['usersList']) ; $i++) {
-        if($documents['usersList'][$i] == $idUserDatabase){
-          array_splice($documents['usersList'],$i, 1);
-        }
+          $collection->document($idCourseDatabase)->set($documents);
       }
-
-      $collection->document($idCourseDatabase)->set($documents);
     }
 
     public static function addUserToCourse(Request $request) {

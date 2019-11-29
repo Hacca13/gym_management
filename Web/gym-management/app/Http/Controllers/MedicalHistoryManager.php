@@ -18,7 +18,7 @@ class MedicalHistoryManager extends Controller{
       $collection = Firestore::collection('MedicalHistory');
       $query = $collection->where('idUserDatabase','=', $idUserDatabase);
       $documents = $query->documents();
-
+      $medicalHistory=array();
       foreach ($documents as $document) {
         $medicalHistory = MedicalHistoryManager::trasformArrayMedicalHistoryToMedicalHistory($document->data());
         $medicalHistory->setIdDatabase($document->id());

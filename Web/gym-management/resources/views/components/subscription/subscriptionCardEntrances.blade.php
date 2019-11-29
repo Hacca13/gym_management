@@ -20,13 +20,13 @@
                         <h4 style="color: red">INATTIVO</h4>
                     @endif
                 </div>
-                <div class="col-lg-7 col-md-12 col-sm-12">
+                <div class="col-lg-7 col-md-12 col-sm-12" style="text-align: center; margin-top: auto; margin-bottom: auto;">
                     <div class="row">
 
-                        <div class="col-lg-6 col-md-6 col-sm-12" style="text-align: center; margin-top: auto; margin-bottom: auto;">
+                        <div class="col-lg-6 col-md-6 col-sm-12">
                             <h4>Numero di entrate effettuate: {{$subscription->getNumberOfEntries()}}</h4>
                         </div>
-                        <div class="col-lg-6 col-md-6 col-sm-12" style="text-align: center; margin-top: auto; margin-bottom: auto;">
+                        <div class="col-lg-6 col-md-6 col-sm-12">
                             <h4>Numero di entrate totali: {{$subscription->getNumberOfEntriesMade()}}</h4>
                         </div>
                     </div>
@@ -37,7 +37,7 @@
 </div>
 <div class="col-md-12">
     <div class="collapse multi-collapse" id="subEntrance">
-        <div class="card card-body"  style="background-color: #d6d8d8;">
+        <div class="card card-body"  style="background-color: #d6d8d8; border-radius: 0 0 10px 10px;">
             <div class="row justify-content-center">
                 @include('components.subscription.subEntrance')
             </div>

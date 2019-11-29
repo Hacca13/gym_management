@@ -23,6 +23,7 @@ use App\Http\Models\SubscriptionModels\SubscriptionModel;
 use App\Http\Models\SubscriptionModels\SubscriptionRevenueModel;
 use App\Http\Models\SubscriptionModels\SubscriptionCourseModel;
 use App\Http\Models\SubscriptionModels\SubscriptionPeriodModel;
+use Kreait\Firebase;
 
 use Illuminate\Pagination\LengthAwarePaginator;
 
@@ -104,7 +105,19 @@ class Firetest extends Controller
 
 
   public function test3(){
-    TrainingCardsManager::deleteExerciseFromTrainingCard('58dbf9a50d8947c6802e');
+    $today = date("Y-m-d");
+    $todayPlus5Day = strtotime ( '+5 day' , strtotime ( $today ) ) ;
+    $todayPlus5Day = date ( 'Y-m-d' , $todayPlus5Day );
+
+    $timestamp = strtotime('30/11/2019');
+    $endDate = date("Y-m-d", $timestamp);
+
+
+    if($today >= $endDate and $endDate <= $todayPlus5Day){
+
+      echo "scade tra qualche giorno";
+
+    }
 
   }
 
