@@ -51,7 +51,7 @@ class ExercisesManager extends Controller{
 
     public static function setExercise(Request $request){
         $input=$request->all();
-        var_dump($input);
+
         if(!isset($input['exerciseIsATime'])){
             $input['exerciseIsATime'] = false;
         }

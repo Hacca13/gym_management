@@ -16,6 +16,8 @@ Route::prefix('admin')->group(function () {
   Route::get('/firetest3','Firetest@test3')->middleware('auth') ;
   Auth::routes();
   Route::get('/logout', 'Auth\LoginController@logout');
+
+  Route::any('/', 'HomeController@index');
 });
 
 
