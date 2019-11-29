@@ -102,7 +102,7 @@
                             <div class="row justify-content-center">
                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                     <div class="card-body" style="text-align: center">
-                                        <button href="/gestioneCorsi" class="btn btn-danger" style="border-radius: 10px;">Annulla</button>
+                                        <button href="/admin/gestioneCorsi" class="btn btn-danger" style="border-radius: 10px;">Annulla</button>
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-12">

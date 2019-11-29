@@ -78420,7 +78420,7 @@ var safeInvoke = function safeInvoke(fn) {
 /*!***************************************************************!*\
   !*** ./node_modules/react-router-dom/esm/react-router-dom.js ***!
   \***************************************************************/
-/*! exports provided: MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, __RouterContext, generatePath, matchPath, useHistory, useLocation, useParams, useRouteMatch, withRouter, BrowserRouter, HashRouter, Link, NavLink */
+/*! exports provided: BrowserRouter, HashRouter, Link, NavLink, MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, __RouterContext, generatePath, matchPath, useHistory, useLocation, useParams, useRouteMatch, withRouter */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -85149,15 +85149,15 @@ function (_Component) {
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["BrowserRouter"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
         exact: true,
-        path: "/nuovaScheda",
+        path: "/admin/nuovaScheda",
         component: InsertTCard
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
         exact: true,
-        path: "/nuovoAbbonamento",
+        path: "/admin/nuovoAbbonamento",
         component: InsertSubs
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
         exact: true,
-        path: "/inserisciUtenteCorso",
+        path: "/admin/inserisciUtenteCorso",
         component: insertUserToCourse
       })));
     }
@@ -85456,6 +85456,23 @@ function (_Component) {
       }
     }
   }, {
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      if (this.props.currEx !== false) {
+        this.setState({
+          atTime: this.props.currEx.atTime,
+          numberOfSeries: this.props.currEx.numberOfSeries,
+          weight: this.props.currEx.weight,
+          numberOfRepetitions: this.props.currEx.numberOfRepetitions,
+          rest: {
+            min: this.props.currEx.rest.min,
+            sec: this.props.currEx.rest.sec
+          },
+          day: this.props.currEx.day
+        });
+      }
+    }
+  }, {
     key: "render",
     value: function render() {
       var _this2 = this;
@@ -85687,6 +85704,25 @@ function (_Component) {
     value: function componentDidUpdate(prevProps, prevState, snapshot) {
       if (prevState !== this.state) {
         this.props.retrieveState(this.state, this.props.indexed);
+      }
+    }
+  }, {
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      if (this.props.currEx !== false) {
+        this.setState({
+          atTime: this.props.currEx.atTime,
+          numberOfSeries: this.props.currEx.numberOfSeries,
+          work: {
+            min: this.props.currEx.work.min,
+            sec: this.props.currEx.work.sec
+          },
+          rest: {
+            min: this.props.currEx.rest.min,
+            sec: this.props.currEx.rest.sec
+          },
+          day: this.props.currEx.day
+        });
       }
     }
   }, {
@@ -87271,7 +87307,8 @@ function (_Component) {
             name: value.name,
             indexed: index,
             key: index,
-            retrieveState: _this3.returnInfo
+            retrieveState: _this3.returnInfo,
+            currEx: false
           });
         } else {
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_exerciseToAdd__WEBPACK_IMPORTED_MODULE_3__["default"], {
@@ -87279,7 +87316,8 @@ function (_Component) {
             name: value.name,
             indexed: index,
             key: index,
-            retrieveState: _this3.returnInfo
+            retrieveState: _this3.returnInfo,
+            currEx: false
           });
         }
         /*
