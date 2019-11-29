@@ -11,13 +11,13 @@
 |
 */
 Route::prefix('admin')->group(function () {
-  Route::get('/', 'HomeController@index')->middleware('auth')->middleware('auth') ;
+  Route::get('/', 'HomeController@index')->middleware('auth');
   Route::get('/home', 'HomeController@index')->name('home')->middleware('auth') ;
   Route::get('/firetest3','Firetest@test3')->middleware('auth') ;
   Auth::routes();
-  Route::get('/logout', 'Auth\LoginController@logout');
+  Route::get('/logout', 'Auth\LoginController@logout')->middleware('auth');
 
-  Route::any('/', 'HomeController@index');
+  Route::any('/', 'HomeController@index')->middleware('auth');
 });
 
 
