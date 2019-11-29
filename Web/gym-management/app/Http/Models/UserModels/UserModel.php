@@ -13,6 +13,7 @@ class UserModel
   protected $surname;
   protected $gender ;
   protected $profileImage;
+  protected $profileImageName;
   protected $status;
   protected $isAdult;
   protected $dateOfBirth;
@@ -39,13 +40,14 @@ class UserModel
   protected $email;
   protected $telephoneNumber;
 
-  public function __construct($idDatabase,$name,$surname,$gender,$profileImage,$status,$isAdult,$dateOfBirth,$birthNation,$birthPlace,$residence,$document,$email,$telephoneNumber){
+  public function __construct($idDatabase,$name,$surname,$gender,$profileImage,$profileImageName,$status,$isAdult,$dateOfBirth,$birthNation,$birthPlace,$residence,$document,$email,$telephoneNumber){
 
     $this->idDatabase = $idDatabase;
     $this->name = $name;
     $this->surname = $surname;
     $this->gender = $gender;
     $this->profileImage = $profileImage ;
+    $this->profileImageName = $profileImageName ;
     $this->status = $status;
     $this->isAdult = $isAdult;
     $this->dateOfBirth = $dateOfBirth;
@@ -71,6 +73,7 @@ class UserModel
 
     $this->email = $email;
     $this->telephoneNumber = $telephoneNumber;
+
   }
 
 
@@ -98,6 +101,22 @@ class UserModel
         $this->idDatabase = $idDatabase;
 
         return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getProfileImageName()
+    {
+        return $this->profileImageName;
+    }
+
+    /**
+     * @param mixed $profileImageName
+     */
+    public function setProfileImageName($profileImageName)
+    {
+        $this->profileImageName = $profileImageName;
     }
 
     /**
