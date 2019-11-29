@@ -7,10 +7,10 @@
                 <div class="col-md-12" style="text-align: center;">
                     <h1 style="color: #d6d8d8">Inserimento dati utente</h1>
                 </div>
-                <div class="col-md-12" style="margin-top: 2.5%">
-                    <form id="example-form" action="/addUserPost"  method="post" class="m-t-40" enctype="multipart/form-data">
+                <div class="col-md-12" style="margin-top: 2.5%; padding-top: 15px; background-color: #d6d8d8; border-radius: 10px">
+                    <form id="example-form" action="/admin/addUserPost"  method="post" class="m-t-40" enctype="multipart/form-data">
                         @csrf
-                        <div class="card-body" style="background-color: #d6d8d8; border-radius: 10px">
+                        <div>
                             <h3>Dati Utente</h3>
                             <section>
                                 <div class="row justify-content-center">
@@ -138,7 +138,9 @@
                                         <label for="height" class="text-left control-label" style="font-size: 16px;">Altezza (cm):</label>
                                         <input type="number" class="form-control" id="height" oninput="imcCalculation()" name="height" value=1 required>
                                         <label for="imcLabel" class="text-left control-label" style="font-size: 16px;">IMC:</label>
-                                        <input type="number" class="form-control" id="imcLabel">
+                                        <br>
+                                        <input type="text" hidden class="form-control" id="imc" name="imc">
+                                        <label id="imcLabel"></label>
                                         <br>
                                         <label for="previosSport" class="text-left control-label" style="font-size: 16px;">Sport Praticati Precedentemente:</label>
                                         <input type="text" class="form-control" id="previosSport" name="previousSport" required>
@@ -248,6 +250,10 @@
                                 </div>
                             </section>
 
+                            <div class="card-body">
+                                <input type="text" id="isUnderage" hidden name="isUnderage" value='false' required></input>
+                            </div>
+
                             <h3 id="parentTitle">Dati Tutore</h3>
                             <section id="parentData">
                                 <div id="myDiv">
@@ -348,10 +354,6 @@
                                     </div>
                                 </div>
                             </section>
-                        </div>
-
-                        <div class="card-body">
-                            <input type="text" id="isUnderage" hidden name="isUnderage" value='false' required></input>
                         </div>
                     </form>
                 </div>
