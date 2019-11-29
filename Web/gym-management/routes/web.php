@@ -102,6 +102,7 @@ Route::prefix('admin')->group(function () {
 
 
 });
-Route::get('/vetrina', function (){
+
+Route::get('/', function (){
     return view('vetrinaHome');
 });
