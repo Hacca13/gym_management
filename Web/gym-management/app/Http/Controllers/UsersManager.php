@@ -15,6 +15,7 @@ use App\Http\Models\UserModels\UserModel;
 use App\Http\Models\UserModels\UserUnderageModel;
 use Stichoza\GoogleTranslate\GoogleTranslate;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Thomaswelton\LaravelGravatar\Gravatar;
 
 class UsersManager extends Controller{
 
@@ -218,7 +219,6 @@ class UsersManager extends Controller{
     }
 
 
-
     public static function createUser(Request $request){
         $input = $request->all();
         $documentImage = $request->file('documentImage');
@@ -239,7 +239,7 @@ class UsersManager extends Controller{
 
         $str = $firebase->createStorage()->getBucket()->upload(file_get_contents($documentImage),
             [
-                'name' => $input['name'].$input['surname'].'DocumentImage'
+                'name' => '/esercizi/' . $input['name'].$input['surname'].'DocumentImage'
             ]);
 
         if($input['isUnderage'] == 'true'){
@@ -262,6 +262,16 @@ class UsersManager extends Controller{
 
 
         $documentImage = $str->signedUrl($dateobj).PHP_EOL;
+
+        $grave = new \Thomaswelton\LaravelGravatar\Facades\Gravatar();
+
+        $profileImageName = rtrim(base64_encode(md5(microtime())),"=");
+        $profileImage = Gravatar::src($input['email'], $profileImageName, ['width'=> 200, 'height'=> 200]);
+        $input['profileImageName'] = $profileImageName;
+        $str = $firebase->createStorage()->getBucket()->upload(file_get_contents($profileImage),
+            [
+                'name' => $profileImageName
+            ]);
 
         $collection = Firestore::collection('Users');
 
@@ -340,6 +350,7 @@ class UsersManager extends Controller{
         $surname = data_get($arrayUser,'surname');
         $gender = data_get($arrayUser,'gender');
         $profileImage = data_get($arrayUser,'profileImage');
+        $profileImageName = data_get($arrayUser, 'profileImageName');
         $status = data_get($arrayUser,'status');
         $isAdult = data_get($arrayUser,'isAdult');
         $dateOfBirth = data_get($arrayUser,'dateOfBirth');
@@ -395,11 +406,11 @@ class UsersManager extends Controller{
             $parentEmail = data_get($arrayUser,'parentEmail');
             $parentTelephoneNumber = data_get($arrayUser,'parentTelephoneNumber');
 
-            $user = new UserUnderageModel($idDatabase,$name,$surname,$gender,$profileImage,$status,$isAdult,$dateOfBirth,$birthNation,$birthPlace,$residence,$document,$email,$telephoneNumber,$parentName,$parentSurname,$parentGender,$parentDateOfBirth,$parentBirthNation,$parentBirthPlace,$parentResidence,$parentDocument,$parentEmail,$parentTelephoneNumber);
+            $user = new UserUnderageModel($idDatabase,$name,$surname,$gender,$profileImage,$profileImageName,$status,$isAdult,$dateOfBirth,$birthNation,$birthPlace,$residence,$document,$email,$telephoneNumber,$parentName,$parentSurname,$parentGender,$parentDateOfBirth,$parentBirthNation,$parentBirthPlace,$parentResidence,$parentDocument,$parentEmail,$parentTelephoneNumber);
 
         }
         else{
-            $user = new UserModel($idDatabase,$name,$surname,$gender,$profileImage,$status,$isAdult,$dateOfBirth,$birthNation,$birthPlace,$residence,$document,$email,$telephoneNumber);
+            $user = new UserModel($idDatabase,$name,$surname,$gender,$profileImage,$profileImageName,$status,$isAdult,$dateOfBirth,$birthNation,$birthPlace,$residence,$document,$email,$telephoneNumber);
         }
 
 
@@ -431,6 +442,7 @@ class UsersManager extends Controller{
             'surname' => $user->getSurname(),
             'gender' => $user->getGender(),
             'profilePicture' => $user->getProfilePicture(),
+            'profileImageName' => $user->getProfileImageName(),
             'status' => $user->getStatus(),
             'isAdult' => $user->getIsAdult(),
             'dateOfBirth' => $user->getDateOfBirth(),
@@ -480,7 +492,7 @@ class UsersManager extends Controller{
         return $arrayUser;
     }
 
-    private static function trasformRequestIntoArrayUser( $input, $documentImage, $parentDocumentImage){
+    private static function transformRequestIntoArrayUser( $input, $documentImage, $parentDocumentImage){
 
         $residence = array(
             'nation' => $input['nation'],
@@ -544,6 +556,7 @@ class UsersManager extends Controller{
             'surname' => $input['surname'],
             'gender' => $input['gender'],
             'profileImage' => null,
+            'profileImageName'=> $input['profileImageName'],
             'status' => TRUE,
             'isAdult' =>$isAdult,
             'dateOfBirth' => $input['dateOfBirth'],
