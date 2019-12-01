@@ -78,7 +78,7 @@ class CoursesManager extends Controller{
 
         $image = $str->signedUrl($dateobj).PHP_EOL;
 
-
+      
       }
       else{
         $image = $input['oldCourseImage'];
@@ -235,7 +235,7 @@ class CoursesManager extends Controller{
         $courses = CoursesManager::getCoursesDBOrCoursesSession($request,$currentPage);
 
         $itemCollection = collect($courses);
-        $perPage = 6;
+        $perPage = 1;
         $currentPageItems = $itemCollection->slice(($currentPage * $perPage) - $perPage, $perPage)->all();
         $courses = new LengthAwarePaginator($currentPageItems , count($itemCollection), $perPage);
         $courses->setPath($request->url());
