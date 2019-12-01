@@ -5,7 +5,7 @@
     <?php
     $index = 1;
     ?>
-    <div class="card" style="border-radius: 10px;background-color: rgb(31, 38, 45, 0.8)">
+    <div class="card" style="border-radius: 10px;background-color: rgba(31, 38, 45, 0.8)">
         <div class="card-body">
             <div class="row justify-content-center" style="margin-top: 2.5%">
                 <div class="col-md-12" style="text-align: center;">
@@ -89,8 +89,8 @@
                                                 </div>
                                                 <h3 class="text-right control-label col-form-label">:</h3>
                                                 <div class="col-sm-2">
-                                                    <input type="number" min="0" max="59" class="form-control" id="{{"minutesTo" . $index}}" name="{{"minutesTo" . $index}}" placeholder="{{$day['endTime']['minutes']}}"                                                     <input type="number" min="0" max="24" class="form-control" id="{{"hourTo" . $index}}" name="{{"hourTo" . $index}}" placeholder="{{$day['endTime']['minutes']}}"required>
-                                                    >
+                                                    <input type="number" min="0" max="59" class="form-control" id="{{"minutesTo" . $index}}" name="{{"minutesTo" . $index}}" placeholder="{{$day['endTime']['minutes']}}">
+                                                    <input type="number" min="0" max="24" class="form-control" id="{{"hourTo" . $index}}" name="{{"hourTo" . $index}}" placeholder="{{$day['endTime']['minutes']}}"required>
                                                 </div>
                                             </div>
                                             <div class="form-group row">

@@ -4,7 +4,7 @@
             <tr>
                 <td style="padding: 0 15px 0 0">
                     <div class="card card-hover">
-                        <a id="{{'anaGraph' . $loop->index}}" onclick="scendilo({{$loop->index}}, this.id)" data-toggle="collapse" href="#{{'anagraficData' . $loop->index}}" role="button" aria-expanded="false" aria-controls="{{'multiCollapseExample' . $loop->index}}">
+                        <a id="{{'anaGraph' . $loop->index}}" onclick="setButton({{$loop->index}}, this.id)" data-toggle="collapse" href="#{{'anagraficData' . $loop->index}}" role="button" aria-expanded="false" aria-controls="{{'multiCollapseExample' . $loop->index}}">
                             <div class="box bg-dark text-center" id="{{'aNaGrAf' . $loop->index}}">
                                 <h6 class="text-white">Dati anagrafici</h6>
                             </div>
@@ -12,8 +12,8 @@
                     </div>
                 </td>
                 <td style="padding: 0 15px 0 0">
-                    <div class="card card-hover" style="background-color: rgb(31, 38, 45, 0.8)">
-                        <a id="{{'plicMetr' . $loop->index}}" onclick="scendilo({{$loop->index}}, this.id)" data-toggle="collapse" href="#{{'plicometricData' . $loop->index}}" role="button" aria-expanded="false" aria-controls="{{'multiCollapseExample' . $loop->index}}">
+                    <div class="card card-hover" style="background-color: rgba(31, 38, 45, 0.8)">
+                        <a id="{{'plicMetr' . $loop->index}}" onclick="setButton({{$loop->index}}, this.id)" data-toggle="collapse" href="#{{'plicometricData' . $loop->index}}" role="button" aria-expanded="false" aria-controls="{{'multiCollapseExample' . $loop->index}}">
                             <div class="box bg-dark text-center" id="{{'pLiC' . $loop->index}}">
                                 <h6 class="text-white">Dati plicometrici</h6>
                             </div>
@@ -22,8 +22,8 @@
                 </td>
                 @if($user->getIsAdult() == false)
                     <td style="padding: 0 15px 0 0">
-                        <div class="card card-hover" style="background-color: rgb(31, 38, 45, 0.8)">
-                            <a id="{{'tutoDa' . $loop->index}}" onclick="scendilo({{$loop->index}}, this.id)" data-toggle="collapse" href="#{{'tutorData' . $loop->index}}" role="button" aria-expanded="false" aria-controls="{{'multiCollapseExample' . $loop->index}}">
+                        <div class="card card-hover" style="background-color: rgba(31, 38, 45, 0.8)">
+                            <a id="{{'tutoDa' . $loop->index}}" onclick="setButton({{$loop->index}}, this.id)" data-toggle="collapse" href="#{{'tutorData' . $loop->index}}" role="button" aria-expanded="false" aria-controls="{{'multiCollapseExample' . $loop->index}}">
                                 <div class="box bg-dark text-center" id="{{'tUtO' . $loop->index}}">
                                     <h6 class="text-white">Dati tutore</h6>
                                 </div>
@@ -78,8 +78,7 @@
         }
     }
 
-    function scendilo(id, btnName){
-        console.log(id);
+    function setButton(id, btnName){
         if(btnName === "anaGraph"+id){
             $("#plicMetr"+id).attr("aria-expanded","false");
             $("#plicMetr"+id).attr("class","");

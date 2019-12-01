@@ -1,5 +1,5 @@
 
-<div class="card-hover" style="border-radius: 10px;background-color: #d6d8d8">
+<div class="card-hover" style="border-radius: 10px;background-color: #d6d8d8; margin-top: 2.5%">
     <a data-toggle="collapse" href="{{'#multiCollapseExample' . $loop->index}}" role="button" aria-expanded="false" aria-controls="{{'multiCollapseExample' . $loop->index}}">
         <div class="card-body">
             <div class="row">
@@ -30,7 +30,7 @@
 </div>
 <div class="col-md-12">
     <div class="collapse multi-collapse" id="{{'multiCollapseExample' . $loop->index}}">
-        <div class="card card-body" style="background-color: rgb(214, 216, 216, 0.9); border-radius: 0 0 10px 10px;">
+        <div class="card card-body" style="background-color: rgba(214, 216, 216, 0.9); border-radius: 0 0 10px 10px;">
             <div class="row justify-content-center">
                 @include('components.courses.courseInfo')
             </div>

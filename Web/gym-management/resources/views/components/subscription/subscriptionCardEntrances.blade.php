@@ -1,5 +1,5 @@
-<div class="card-hover" style="border-radius:10px;background-color: #d6d8d8">
-    <a data-toggle="collapse" href="#subEntrance" role="button" aria-expanded="false" aria-controls="{{'multiCollapseExample' . $loop->index}}">
+<div class="card-hover" style="border-radius:10px;background-color: #d6d8d8; margin-top: 2.5%">
+    <a data-toggle="collapse" href="{{'#subEntrance' . $loop->index}}" role="button" aria-expanded="false" aria-controls="{{'subEntrance' . $loop->index}}">
         <div class="card-body">
             <?php foreach ($userForSubscriptionPage as $document) {
                 if($subscription->getIdUserDatabase() == $document->getIdDatabase()){
@@ -36,7 +36,7 @@
     </a>
 </div>
 <div class="col-md-12">
-    <div class="collapse multi-collapse" id="subEntrance">
+    <div class="collapse multi-collapse" id="{{'subEntrance' . $loop->index}}">
         <div class="card card-body"  style="background-color: #d6d8d8; border-radius: 0 0 10px 10px;">
             <div class="row justify-content-center">
                 @include('components.subscription.subEntrance')
