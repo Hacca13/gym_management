@@ -40,7 +40,7 @@ class BodyG extends Component{
 
                             <h2>Connect</h2>
 
-                            <p>Pelo pelo pelo pelo pelo pelo pelo pelo pelo pelo pelo pelo pelo pelo pelo pelo pelo pelo pelo pelo pelo pelo.</p>
+                            <p>Ciao Ciao Ciao Ciao Ciao Ciao Ciao Ciao Ciao Ciao Ciao Ciao Ciao Ciao Ciao Ciao Ciao Ciao Ciao Ciao Ciao Ciao.</p>
 
 
                         </div>

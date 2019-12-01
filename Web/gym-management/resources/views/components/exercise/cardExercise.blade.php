@@ -3,13 +3,13 @@
         <div class="card-header" style="background-color: #bababa; border-radius: 10px 10px 0 0; border-right: 0.5px solid rgba(31, 38, 45, 0.6); border-left: 0.5px solid rgba(31, 38, 45, 0.4); border-top: 0.5px solid rgba(31, 38, 45, 0.3)">
             <div class="row">
                 <div class="col-lg-6 col-md-6 col-sm-6" style="text-align: left; margin-top: auto; margin-bottom: auto">
-                  <a href="modificaEsercizio/{{$exercise->getIdDatabase()}}">
+                  <a href="/admin/modificaEsercizio/{{$exercise->getIdDatabase()}}">
                       <i class="fas fa-edit" style="font-size: 150%; color:rgba(31, 38, 45, 0.8)"></i>
                     </a>
                 </div>
 
                 <div class="col-lg-6 col-md-6 col-sm-6" style="text-align: right; margin-top: auto; margin-bottom: auto">
-                    <a href="eliminaEsercizio/{{$exercise->getIdDatabase()}}">
+                    <a href="/admin/eliminaEsercizio/{{$exercise->getIdDatabase()}}">
                         <i class="fas fa-times" style="font-size: 170%; color: red"></i>
                     </a>
                 </div>

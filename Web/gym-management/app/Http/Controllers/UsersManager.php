@@ -15,7 +15,7 @@ use App\Http\Models\UserModels\UserModel;
 use App\Http\Models\UserModels\UserUnderageModel;
 use Stichoza\GoogleTranslate\GoogleTranslate;
 use Illuminate\Pagination\LengthAwarePaginator;
-use Thomaswelton\LaravelGravatar\Gravatar;
+
 
 class UsersManager extends Controller{
 
@@ -263,15 +263,10 @@ class UsersManager extends Controller{
 
         $documentImage = $str->signedUrl($dateobj).PHP_EOL;
 
-        $grave = new \Thomaswelton\LaravelGravatar\Facades\Gravatar();
 
-        $profileImageName = rtrim(base64_encode(md5(microtime())),"=");
-        $profileImage = Gravatar::src($input['email'], $profileImageName, ['width'=> 200, 'height'=> 200]);
-        $input['profileImageName'] = $profileImageName;
-        $str = $firebase->createStorage()->getBucket()->upload(file_get_contents($profileImage),
-            [
-                'name' => $profileImageName
-            ]);
+
+         //rtrim(base64_encode(md5(microtime())),"=");
+
 
         $collection = Firestore::collection('Users');
 
