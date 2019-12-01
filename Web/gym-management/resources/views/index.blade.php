@@ -4,7 +4,7 @@
     <div class="row" style="align-content: center">
 
         <div class="col-md-12 col-lg-12 col-sm-12">
-            <div class="card" style="border-radius: 10px; background-color: rgb(31, 38, 45, 0.8)">
+            <div class="card" style="border-radius: 10px; background-color: rgba(31, 38, 45, 0.8)">
                 <div class="card-body">
                     <h2 class="card-title m-t-10 text-center" style="color: #d6d8d8">Azioni Rapide</h2>
                 </div>
@@ -123,6 +123,5 @@
                 </div>
             </div>
         </div>
-
     </div>
 @endsection

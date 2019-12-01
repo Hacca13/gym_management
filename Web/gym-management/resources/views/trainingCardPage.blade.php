@@ -2,14 +2,15 @@
 
 @section('content')
 
-    <div class="card" style="border-radius: 10px;background-color: rgb(31, 38, 45, 0.8)">
+    <div class="card" style="border-radius: 10px;background-color: rgba(31, 38, 45, 0.8)">
         <div class="card-body">
             <div class="row justify-content-center">
                 <div class="col-md-12" style="text-align: center;">
                     <h1 style="color: #d6d8d8">Gestione schede</h1>
                 </div>
+
                 <div class="col-md-12" style="margin-top: 2.5%">
-                    <div class="card" style="border-radius: 10px;background-color: #d6d8d8">
+                    <div class="card" style="border-radius: 10px;background-color: #d6d8d8; margin-bottom: -0.5%">
                         <div class="card-body">
                             <div class="row justify-content-center">
                                 <div class="col-lg-5 col-md-12 col-sm-12">
@@ -23,8 +24,8 @@
                                             </button>
                                         </div>
                                     </form>
+                                </div><!--Ricerca-->
 
-                                </div>
                                 <div class="col-lg-6 col-md-9 col-sm-9">
                                     <div class="row justify-content-center">
                                         <div class="col-lg-6 col-md-12 col-sm-12" style="padding: 8px 0 0 10px">
@@ -35,6 +36,7 @@
                                                 </div>
                                             </div>
                                         </div>
+
                                         <div class="col-lg-6 col-md-12 col-sm-12" style="padding: 8px 0 0 10px">
                                             <div class="input-group no-border">
                                                 <div class="form-check">
@@ -44,15 +46,16 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div><!--Radio button-->
+
                                 <div class="col-lg-1 col-md-3 col-sm-3" style="text-align: right; margin-top: auto; margin-bottom: auto">
                                     <a href="/admin/nuovaScheda" role="button">
                                         <button class="bttn-material-circle bttn-md bttn-primary" style="background-color: #3F5469">
                                             <i class="fas fa-plus"></i>
                                         </button>
                                     </a>
-                                </div>
-                            </div>
+                                </div><!--Nuova scheda-->
+                            </div><!--Barra ricerca-->
                         </div>
                     </div>
                 </div>
@@ -79,4 +82,5 @@
             </div>
         </div>
     </div>
+
 @endsection

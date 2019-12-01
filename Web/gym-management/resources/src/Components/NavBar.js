@@ -20,7 +20,7 @@ class NavBar extends Component{
                         <ul className="nav">
 
                             <li><a href="#Body">Cosa offriamo</a></li>
-                            <li><a href="#Body2">Un po' di pelo noi</a></li>
+                            <li><a href="#Body2">Un po' di noi</a></li>
                             <li><a href="#Footer">Dove trovarci</a></li>
 
                         </ul>
