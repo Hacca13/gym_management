@@ -4,7 +4,7 @@
 @section('content')
 
 
-    <div class="card" style="border-radius: 10px;background-color: rgb(31, 38, 45, 0.8)">
+    <div class="card" style="border-radius: 10px;background-color: rgba(31, 38, 45, 0.8)">
         <div class="card-body">
             <div class="row justify-content-center">
                 <div class="col-md-12" style="text-align: center;">
@@ -17,18 +17,18 @@
                             <div class="form-group row justify-content-center">
                                 <div class="col-sm-12 col-md-12 col-lg-8">
                                     <label for="fname" class="col-sm-12 text-left control-label col-form-label" style="background-color: transparent; border: none; color: #1F262D">Nome Esercizio</label>
-                                    <input type="text" class="form-control" id="nameExercise" name="nameExercise" style="border-radius: 10px;background-color: rgb(255, 255, 255,0.7);" required>
+                                    <input type="text" class="form-control" id="nameExercise" name="nameExercise" style="border-radius: 10px;background-color: rgba(255, 255, 255,0.7);" required>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <div class="col-sm-12 col-md-12 col-lg-6">
                                     <label for="fname" class="col-sm-12 text-left control-label col-form-label" style="background-color: transparent; border: none; color: #1F262D">Descrizione</label>
 
-                                    <textarea  class="form-control" id="descriptionExercise" name="descriptionExercise" rows="5" style="border-radius: 10px;background-color: rgb(255, 255, 255,0.7);"required></textarea>
+                                    <textarea  class="form-control" id="descriptionExercise" name="descriptionExercise" rows="5" style="border-radius: 10px;background-color: rgba(255, 255, 255,0.7);"required></textarea>
                                 </div>
                                 <div class="col-sm-12 col-md-12 col-lg-6">
                                     <label for="fname" class="col-sm-12 text-left control-label col-form-label" style="background-color: transparent; border: none; color: #1F262D">Carica Gif</label>
-                                    <input type="file" class="form-control" id="imageExercise" name="imageExercise" style="border-radius: 10px;background-color: rgb(255, 255, 255,0.7);" required>
+                                    <input type="file" class="form-control" id="imageExercise" name="imageExercise" style="border-radius: 10px;background-color: rgba(255, 255, 255,0.7);" required>
                                 </div>
 
                             </div>

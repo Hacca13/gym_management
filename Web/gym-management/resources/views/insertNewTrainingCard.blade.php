@@ -19,7 +19,7 @@
                         <div class="form-group row">
                             <div class="col-sm-6">
                                 <label for="fname" class="col-sm-12 text-left control-label col-form-label">Scheda Di:</label>
-                                <input type="text" class="form-control" id="fname" name="name" style="border-radius: 10px;background-color: rgb(255, 255, 255,0.7);">
+                                <input type="text" class="form-control" id="fname" name="name" style="border-radius: 10px;background-color: rgba(255, 255, 255,0.7);">
                             </div>
                             <div class="col-md-6">
 
@@ -28,11 +28,11 @@
                         <div class="form-group row">
                             <div class="col-sm-6">
                                 <label for="fname" class="col-sm-12 text-left control-label col-form-label">Dal:</label>
-                                <input  type="date" class="form-control" id="fname" name="description" rows="5" style="border-radius: 10px;background-color: rgb(255, 255, 255,0.7);"></input>
+                                <input  type="date" class="form-control" id="fname" name="description" rows="5" style="border-radius: 10px;background-color: rgba(255, 255, 255,0.7);"></input>
                             </div>
                             <div class="col-md-6">
                                 <label for="fname" class="col-sm-12 text-left control-label col-form-label">Al:</label>
-                                <input type="date" class="form-control" id="" name="image" style="border-radius: 10px;background-color: rgb(255, 255, 255,0.7);">
+                                <input type="date" class="form-control" id="" name="image" style="border-radius: 10px;background-color: rgba(255, 255, 255,0.7);">
                             </div>
 
                         </div>

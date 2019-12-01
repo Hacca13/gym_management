@@ -63,7 +63,7 @@ class SubscriptionManager extends Controller
       $currentPage = LengthAwarePaginator::resolveCurrentPage();
       $subscriptionList = SubscriptionManager::getSubscriptionDBOrSubscriptionSession($request,$currentPage);
       $itemCollection = collect($subscriptionList);
-      $perPage = 1;
+      $perPage = 6;
       $currentPageItems = $itemCollection->slice(($currentPage * $perPage) - $perPage, $perPage)->all();
       $subscriptionList= new LengthAwarePaginator($currentPageItems , count($itemCollection), $perPage);
       $subscriptionList->setPath($request->url());

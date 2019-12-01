@@ -1,6 +1,6 @@
 <div class="card card-body" style=" background-color: #d6d8d8;" >
-    <div class="row">
-        <div class="col-md-6">
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-md-8 col-sm-10">
             <label>Nome Corso</label>
             <div class="input-group">
                 <input type="text" class="form-control" placeholder="">
@@ -8,8 +8,8 @@
         </div>
     </div>
     <br>
-    <div class="row">
-        <div class="col-md-6">
+    <div class="row justify-content-center">
+        <div class="col-lg-4 col-md-6 col-sm-5">
             <label>Data Inzio</label>
             <div class="input-group">
                 <input type="text" class="form-control mydatepicker" placeholder="mm/dd/yyyy">
@@ -18,7 +18,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-lg-4 col-md-6 col-sm-5">
             <label>Data Fine</label>
             <div class="input-group">
                 <input type="text" class="form-control mydatepicker" placeholder="mm/dd/yyyy">
@@ -31,10 +31,12 @@
     <br>
     <br>
     <br>
-    <div class="col-md-12 row">
-        <hr>
-        <p align="right">
-            <button name="acceptTerms" class="btn btn-success">Rinnova Abbonamento</button>
-        </p>
+    <div class="row justify-content-center">
+        <div class="col-md-12">
+            <hr>
+            <p align="center">
+                <button name="acceptTerms" class="btn btn-success">Rinnova Abbonamento</button>
+            </p>
+        </div>
     </div>
 </div>

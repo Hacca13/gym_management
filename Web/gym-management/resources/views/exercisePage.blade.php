@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @section('content')
-    <div class="card" style="border-radius: 10px;background-color: rgb(31, 38, 45, 0.8)">
+    <div class="card" style="border-radius: 10px;background-color: rgba(31, 38, 45, 0.8)">
         <div class="card-body">
             <div class="row justify-content-center">
                 <div class="col-md-12" style="text-align: center;">
@@ -11,7 +11,7 @@
                 </div>
                 <div class="col-md-12" >
                     <div class="card">
-                        <div class="card-body" style="background-color: rgb(214, 216, 216, 0.9); border-radius: 10px">
+                        <div class="card-body" style="background-color: rgba(214, 216, 216, 0.9); border-radius: 10px">
                             <div class="row justify-content-center">
                                 @foreach($exercises as $exercise)
                                     @include('components.exercise.cardExercise')

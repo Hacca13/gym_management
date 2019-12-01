@@ -1,15 +1,15 @@
-<div class="card card-body" style="border-radius: 0 0 10px 10px;background-color: #d6d8d8" id="swing">
+<div class="card card-body" style="border-radius: 0 0 10px 10px;background-color: #d6d8d8" id="{{'bodyCard' . $loop->index}}">
     <div class="row justify-content-center">
-        <div class="col-md-6 col-lg-3 col-sm-12">
+        <div class="col-md-6 col-lg-4 col-sm-12">
             <div class="card card-hover">
-                <a id="swing2" data-toggle="collapse" onclick="cambialo(this.id)" href="{{'#multiCollapseExample' . $loop->index}}" role="button" aria-expanded="false" aria-controls="{{'multiCollapseExample' . $loop->index}}">
-                    <div class="box bg-dark text-center" id="swing3">
-                        <h3 class="text-white">Lunedì</h3>
+                <a id="{{'day' . $loop->index}}" data-toggle="collapse" onclick="setButton({{$loop->index}})" href="{{'#dayOfWeek' . $loop->index}}" role="button" aria-expanded="false" aria-controls="{{'dayOfWeek' . $loop->index}}">
+                    <div class="box bg-dark text-center" id="{{'color' . $loop->index}}">
+                        <h3 class="text-white">NOME DEL GIORNO</h3>
                     </div>
                 </a>
             </div>
         </div>
-        <div class="collapse multi-collapse" id="{{'multiCollapseExample' . $loop->index}}">
+        <div class="collapse multi-collapse" id="{{'dayOfWeek' . $loop->index}}">
             <div class="card" style="background-color: transparent">
                 <div class="col-md-12">
                     <div class="row justify-content-center">
@@ -44,14 +44,14 @@
     </div>
 </div>
 <script>
-    function cambialo(id){
+    function setButton(id){
 
-        if ((document.getElementById("swing3").style.backgroundColor) === "rgb(31, 38, 45)"){
-            $("#swing3").css("background-color", "#3F5469");
-            document.getElementById("swing").style.backgroundColor="#d6d8d8";
+        if ((document.getElementById("color"+id).style.backgroundColor) === "rgb(31, 38, 45)"){
+            $("#color"+id).css("background-color", "#3F5469");
+            document.getElementById("bodyCard"+id).style.backgroundColor="#d6d8d8";
         }else {
-            $("#swing3").css("background-color", "#1F262D");
-            document.getElementById("swing").style.backgroundColor ="rgb(214, 216, 216, 0.9)";
+            $("#color"+id).css("background-color", "#1F262D");
+            document.getElementById("bodyCard"+id).style.backgroundColor ="rgb(214, 216, 216, 0.9)";
         }
     }
 </script>

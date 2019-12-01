@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <div class="card" style="border-radius: 10px;background-color: rgb(31, 38, 45, 0.8)">
+    <div class="card" style="border-radius: 10px;background-color: rgba(31, 38, 45, 0.8)">
         <div class="card-body">
             <div class="row justify-content-center">
                 <div class="col-md-12" style="text-align: center;">
