@@ -283,7 +283,7 @@ class UsersManager extends Controller{
             $input['name'] = strtolower($input['name']);
             $input['surname'] = strtolower($input['surname']);
 
-            $arrayUser = UsersManager::trasformRequestIntoArrayUser($input, $documentImage, $parentDocumentImage);
+            $arrayUser = UsersManager::transformRequestIntoArrayUser($input, $documentImage, $parentDocumentImage);
 
             $collection->document($uid)->set($arrayUser);
 
@@ -345,7 +345,6 @@ class UsersManager extends Controller{
         $surname = data_get($arrayUser,'surname');
         $gender = data_get($arrayUser,'gender');
         $profileImage = data_get($arrayUser,'profileImage');
-        $profileImageName = data_get($arrayUser, 'profileImageName');
         $status = data_get($arrayUser,'status');
         $isAdult = data_get($arrayUser,'isAdult');
         $dateOfBirth = data_get($arrayUser,'dateOfBirth');
@@ -401,11 +400,11 @@ class UsersManager extends Controller{
             $parentEmail = data_get($arrayUser,'parentEmail');
             $parentTelephoneNumber = data_get($arrayUser,'parentTelephoneNumber');
 
-            $user = new UserUnderageModel($idDatabase,$name,$surname,$gender,$profileImage,$profileImageName,$status,$isAdult,$dateOfBirth,$birthNation,$birthPlace,$residence,$document,$email,$telephoneNumber,$parentName,$parentSurname,$parentGender,$parentDateOfBirth,$parentBirthNation,$parentBirthPlace,$parentResidence,$parentDocument,$parentEmail,$parentTelephoneNumber);
+            $user = new UserUnderageModel($idDatabase,$name,$surname,$gender,$profileImage,$status,$isAdult,$dateOfBirth,$birthNation,$birthPlace,$residence,$document,$email,$telephoneNumber,$parentName,$parentSurname,$parentGender,$parentDateOfBirth,$parentBirthNation,$parentBirthPlace,$parentResidence,$parentDocument,$parentEmail,$parentTelephoneNumber);
 
         }
         else{
-            $user = new UserModel($idDatabase,$name,$surname,$gender,$profileImage,$profileImageName,$status,$isAdult,$dateOfBirth,$birthNation,$birthPlace,$residence,$document,$email,$telephoneNumber);
+            $user = new UserModel($idDatabase,$name,$surname,$gender,$profileImage,$status,$isAdult,$dateOfBirth,$birthNation,$birthPlace,$residence,$document,$email,$telephoneNumber);
         }
 
 
@@ -437,7 +436,6 @@ class UsersManager extends Controller{
             'surname' => $user->getSurname(),
             'gender' => $user->getGender(),
             'profilePicture' => $user->getProfilePicture(),
-            'profileImageName' => $user->getProfileImageName(),
             'status' => $user->getStatus(),
             'isAdult' => $user->getIsAdult(),
             'dateOfBirth' => $user->getDateOfBirth(),
@@ -551,7 +549,6 @@ class UsersManager extends Controller{
             'surname' => $input['surname'],
             'gender' => $input['gender'],
             'profileImage' => null,
-            'profileImageName'=> $input['profileImageName'],
             'status' => TRUE,
             'isAdult' =>$isAdult,
             'dateOfBirth' => $input['dateOfBirth'],

@@ -10,7 +10,7 @@
                     <h1 style="color: #d6d8d8">Abbonamenti</h1>
                 </div>
                 @if(count($subscriptionResultList) == 0)
-                  <div class="row text-center">
+                  <div class="row text-center" style="margin-top: 5%">
                     <br>
                     <br>
                     <br>

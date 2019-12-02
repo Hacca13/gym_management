@@ -201,7 +201,7 @@ class SubscriptionManager extends Controller
       $timestamp = strtotime($endDate);
       $endDate = date("Y-m-d", $timestamp);
 
-      if($endDate < $today){
+      if($endDate > $today){
         return true;
       }
       else{
@@ -320,7 +320,7 @@ class SubscriptionManager extends Controller
 
         $collection->add($input);
         toastr()->success('Abbonamento creato con successo');
-        return '/gestioneAbbonamenti';
+        return '/admin/gestioneAbbonamenti';
     }
 
 

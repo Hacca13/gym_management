@@ -10,7 +10,7 @@
                     @include('components.exercise.exerciseSearchBar')
                 </div>
                 @if(count($exercisesResultList) == 0)
-                  <div class="row text-center">
+                  <div class="row text-center" style="margin-top: 5%">
                     <br>
                     <br>
                     <br>

@@ -11,7 +11,7 @@
                     @include('components.courses.courseOption')
                 </div>
                 @if(count($courses) == 0)
-                  <div class="row text-center">
+                  <div class="row text-center" style="margin-top: 5%">
                     <br>
                     <br>
                     <br>

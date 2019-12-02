@@ -265,7 +265,7 @@ class TrainingCardsManager extends Controller
         $input = $request->all();
         $input['isActive'] = true;
         $collection->add($input);
-        return '/gestioneIscritti';
+        return '/admin/gestioneIscritti';
     }
 
     public static function setTrainingCard($trainingCard){

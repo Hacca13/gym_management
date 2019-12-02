@@ -60,7 +60,7 @@
                     </div>
                 </div>
                 @if(count($trainingCardsList) == 0)
-                  <div class="row text-center">
+                  <div class="row text-center" style="margin-top: 5%">
                     <br>
                     <br>
                     <br>
@@ -70,7 +70,7 @@
                     <br>
                   </div>
                 @endif
-                <div class="col-md-12">
+                <div class="col-md-12" style="margin-top: 2.5%">
                     @foreach($trainingCardsList as $trainingCard)
                         @include('components.trainingCards.TrainingCardsList')
                     @endforeach
