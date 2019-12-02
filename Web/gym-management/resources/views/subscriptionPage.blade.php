@@ -9,18 +9,9 @@
                 <div class="col-md-12" style="text-align: center;">
                     <h1 style="color: #d6d8d8">Abbonamenti</h1>
                 </div>
-                @if(count($subscriptionList) == 0)
-                  <div class="row text-center">
-                    <br>
-                    <br>
-                    <br>
-                      <h1 class="col-md-12 text-center" style="color: #d6d8d8">Non ci sono risultati</h1>
-                    <br>
-                    <br>
-                    <br>
-                  </div>
-                @endif
+
                 <div class="col-md-12" style="margin-top: 2.5%">
+
                     @include('components.subscription.subscriptionOption')
                           @foreach($subscriptionList as $subscription)
                               @if($subscription->getType() == 'revenue')
@@ -33,7 +24,18 @@
                                   @include('components.subscription.subscriptionCardCourse')
                               @endif
                           @endforeach
-                    </div>
+                </div>
+                    @if(count($subscriptionList) == 0)
+                      <div class="row text-center" style="margin-top: 5%">
+                        <br>
+                        <br>
+                        <br>
+                          <h1 class="col-md-12 text-center" style="color: #d6d8d8">Non ci sono risultati</h1>
+                        <br>
+                        <br>
+                        <br>
+                      </div>
+                    @endif
 
             </div>
         </div>

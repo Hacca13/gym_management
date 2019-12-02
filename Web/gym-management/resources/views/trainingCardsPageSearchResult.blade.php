@@ -55,7 +55,7 @@
             </div>
                 <div class="col-md-12">
                   @if(count($trainingCardsResultList) == 0)
-                    <div class="row text-center">
+                    <div class="row text-center" style="margin-top: 5%">
                       <br>
                       <br>
                       <br>

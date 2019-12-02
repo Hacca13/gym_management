@@ -13,7 +13,7 @@
                 </div>
             </div>
             @if(count($coursesResultList) == 0)
-              <div class="row text-center">
+              <div class="row text-center" style="margin-top: 5%">
                 <br>
                 <br>
                 <br>
