@@ -2,14 +2,22 @@
     <a data-toggle="collapse" href="#days" role="button" aria-expanded="false" aria-controls="{{'multiCollapseExample' . $loop->index}}">
         <div class="card-body">
             <div class="row">
-                <div class="col-md-4 col-lg-4 col-sm-6" style="margin-top: auto; margin-bottom: auto;">
+                <div class="col-md-4 col-lg-4 col-sm-4" style="margin-top: auto; margin-bottom: auto;">
                     @foreach ($usersList as $user)
                         @if($trainingCard->getIdUserDatabase() == $user->getIdDatabase())
                             <h3 style="color: rgba(31, 38, 45, 0.8)">{{$user->getName()}} {{$user->getSurname()}}</h3>
                         @endif
                     @endforeach
                 </div>
-                <div class="col-sm-6 col-md-8 col-lg-8" style="margin-top: auto; margin-bottom: auto;">
+                <div class="col-lg-4 col-md-4 col-sm-4" style="text-align: center; margin-top: auto; margin-bottom: auto;">
+                    @if($trainingCard->getIsActive() == TRUE)
+                        <h4 style="color: green">ATTIVO</h4>
+                    @endif
+                    @if($trainingCard->getIsActive() == FALSE)
+                        <h4 style="color: #D5300D">INATTIVO</h4>
+                    @endif
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" style="margin-top: auto; margin-bottom: auto;">
                     <div class="row">
                         <div class="col-md-6 col-lg-6 col-sm-12" style="text-align: right; margin-top: auto; margin-bottom: auto;">
                             <h4 style="color: #1F262D; opacity: 0.8">Dal: {{$trainingCard->getPeriod()['startDate']}}</h4>
