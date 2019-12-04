@@ -5,14 +5,14 @@ class ExerciseToAddByTime extends Component {
         super(props);
         this.state = {
             atTime: true,
-            numberOfSeries: '',
+            numberOfSeries: '1',
             work: {
-                min: '',
-                sec: ''
+                min: '1',
+                sec: '0'
             },
             rest: {
-                min: '',
-                sec: ''
+                min: '1',
+                sec: '0'
             },
             day: 'Lunedì',
         }
