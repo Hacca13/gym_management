@@ -25,6 +25,10 @@ let Vetrina = (props) => {
 };
 
 
+let UpdateTCard = (props) => {
+    return <UpdateTCard />;
+};
+
 class App extends Component {
     render() {
 
@@ -37,7 +41,7 @@ class App extends Component {
                     <Route exact path="/admin/nuovaScheda" component={InsertTCard} />
                     <Route exact path="/admin/nuovoAbbonamento" component={InsertSubs} />
                     <Route exact path="/admin/inserisciUtenteCorso" component={InsertUserToCourse} />
-
+                    <Route exact path="/admin/modificaScheda/:id" component={UpdateTCard} />
                 </div>
             </BrowserRouter>
         );

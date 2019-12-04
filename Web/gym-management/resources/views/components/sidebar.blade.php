@@ -8,6 +8,16 @@
             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/admin/gestioneIscritti" aria-expanded="false"><i class="fas fa-users"></i><span class="hide-menu">Gestione Iscritti</span></a></li>
             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/admin/gestioneCorsi" aria-expanded="false"><i class="mdi mdi-av-timer"></i><span class="hide-menu">Gestione Corsi</span></a></li>
         </ul>
+        <ul id="sidebar-nav">
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/admin/logout" aria-expanded="false"><i class="far fa-caret-square-right"></i><span class="hide-menu">Loguot</span></a></li>
+        </ul>
     </nav>
 </aside>
-

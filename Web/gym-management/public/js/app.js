@@ -80744,7 +80744,7 @@ var safeInvoke = function safeInvoke(fn) {
 /*!***************************************************************!*\
   !*** ./node_modules/react-router-dom/esm/react-router-dom.js ***!
   \***************************************************************/
-/*! exports provided: BrowserRouter, HashRouter, Link, NavLink, MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, __RouterContext, generatePath, matchPath, useHistory, useLocation, useParams, useRouteMatch, withRouter */
+/*! exports provided: MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, __RouterContext, generatePath, matchPath, useHistory, useLocation, useParams, useRouteMatch, withRouter, BrowserRouter, HashRouter, Link, NavLink */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -88089,6 +88089,10 @@ var Vetrina = function Vetrina(props) {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_vetrina_vetrinaHome__WEBPACK_IMPORTED_MODULE_6__["default"], null);
 };
 
+var UpdateTCard = function UpdateTCard(props) {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(UpdateTCard, null);
+};
+
 var App =
 /*#__PURE__*/
 function (_Component) {
@@ -88123,6 +88127,10 @@ function (_Component) {
         exact: true,
         path: "/admin/inserisciUtenteCorso",
         component: InsertUserToCourse
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+        exact: true,
+        path: "/admin/modificaScheda/:id",
+        component: UpdateTCard
       })));
     }
   }]);
@@ -88400,12 +88408,12 @@ function (_Component) {
     _this = _possibleConstructorReturn(this, _getPrototypeOf(ExerciseToAdd).call(this, props));
     _this.state = {
       atTime: true,
-      numberOfSeries: '',
+      numberOfSeries: '1',
       weight: '',
-      numberOfRepetitions: '',
+      numberOfRepetitions: '1',
       rest: {
-        min: '',
-        sec: ''
+        min: '1',
+        sec: '0'
       },
       day: 'Lunedì'
     };
@@ -88649,14 +88657,14 @@ function (_Component) {
     _this = _possibleConstructorReturn(this, _getPrototypeOf(ExerciseToAddByTime).call(this, props));
     _this.state = {
       atTime: true,
-      numberOfSeries: '',
+      numberOfSeries: '1',
       work: {
-        min: '',
-        sec: ''
+        min: '1',
+        sec: '0'
       },
       rest: {
-        min: '',
-        sec: ''
+        min: '1',
+        sec: '0'
       },
       day: 'Lunedì'
     };
@@ -90691,10 +90699,7 @@ function (_Component) {
     key: "render",
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("header", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "fixed-navbar",
-        style: {
-          backgroundColor: "rgba(0, 0, 15, 0.8)"
-        }
+        className: "fixed-navbar"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "navbar-lockup"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {

@@ -27,20 +27,31 @@
     </div>
     <div class="row justify-content-center">
         <div class="col-lg-4 col-md-12 col-sm-12" style="text-align: center; margin-bottom: 5px;">
-            <a href="#">
+            <a href="/admin/modificaScheda/{{$trainingCard->getIdDatabase()}}">
                 <button class="btn btn-warning" id="fname" name="" style="border-radius: 10px;">Modifica</button>
             </a>
         </div>
         <div class="col-lg-4 col-md-6 col-sm-12" style="text-align: center; margin-bottom: 5px;">
-            <a href="#">
+            <a href="/admin/eliminaScheda/{{$trainingCard->getIdDatabase()}}">
                 <button class="btn btn-primary" id="fname" name="" style="border-radius: 10px;">Elimina</button>
             </a>
         </div>
+
+        @if($trainingCard->getIsActive() == TRUE)
         <div class="col-lg-4 col-md-6 col-sm-12" style="text-align: center; margin-bottom: 5px;">
-            <a href="/gestioneSchede">
+            <a href="/admin/disattivaScheda/{{$trainingCard->getIdDatabase()}}">
                 <button class="btn btn-danger" id="fname" name="" style="border-radius: 10px;">Disattiva</button>
             </a>
         </div>
+        @endif
+        @if($trainingCard->getIsActive() == FALSE)
+        <div class="col-lg-4 col-md-6 col-sm-12" style="text-align: center; margin-bottom: 5px;">
+            <a href="/admin/attivaScheda/{{$trainingCard->getIdDatabase()}}">
+                <button class="btn btn-success" id="fname" name="" style="border-radius: 10px;">Attiva</button>
+            </a>
+        </div>
+        @endif
+
     </div>
 </div>
 <script>
@@ -55,5 +66,3 @@
         }
     }
 </script>
-
-

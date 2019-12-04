@@ -12,6 +12,16 @@ use PDF;
 class TrainingCardsManager extends Controller
 {
 
+    public static function deleteTrainingCard($idDatabase){
+      $collection = Firestore::collection('TrainingCards');
+      $arrayTrainingCard = $collection->document($idDatabase)->snapshot()->data();
+
+      $collection->document($idDatabase)->delete();
+
+      toastr()->success('Scheda eliminata con successo.');
+      return redirect('/admin/gestioneSchede');
+    }
+
     public static function activeTrainingCard($idDatabase){
       $collection = Firestore::collection('TrainingCards');
       $arrayTrainingCard = $collection->document($idDatabase)->snapshot()->data();
@@ -28,7 +38,7 @@ class TrainingCardsManager extends Controller
       return redirect('/admin/gestioneSchede');
     }
 
-    public static function inactiveTrainingCard($idDatabase){
+    public static function disabledTrainingCard($idDatabase){
       $collection = Firestore::collection('TrainingCards');
       $arrayTrainingCard = $collection->document($idDatabase)->snapshot()->data();
 
@@ -40,7 +50,7 @@ class TrainingCardsManager extends Controller
 
       $collection->document($idDatabase)->set($trainingCard);
 
-      toastr()->error('Scheda disattivata con successo.');
+      toastr()->success('Scheda disattivata con successo.');
       return redirect('/admin/gestioneSchede');
     }
 
@@ -243,7 +253,7 @@ class TrainingCardsManager extends Controller
         $input = $request->all();
         $collection = Firestore::collection('TrainingCards')->document($id);
         $collection->set($input);
-        return 'setted';
+        return '/admin/gestioneSchede';
     }
 
 
@@ -297,7 +307,7 @@ class TrainingCardsManager extends Controller
         $input = $request->all();
         $input['isActive'] = true;
         $collection->add($input);
-        return '/admin/gestioneIscritti';
+        return '/admin/gestioneSchede';
     }
 
     public static function setTrainingCard($trainingCard){

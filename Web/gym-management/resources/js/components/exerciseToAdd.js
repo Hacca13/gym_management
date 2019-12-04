@@ -5,12 +5,12 @@ class ExerciseToAdd extends Component {
         super(props);
         this.state = {
             atTime: true,
-            numberOfSeries: '',
+            numberOfSeries: '1',
             weight: '',
-            numberOfRepetitions: '',
+            numberOfRepetitions: '1',
             rest: {
-                min: '',
-                sec: ''
+                min: '1',
+                sec: '0'
             },
             day: 'Lunedì',
         }
