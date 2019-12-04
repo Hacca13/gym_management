@@ -8,13 +8,14 @@ class NavBar extends Component{
     render(){
         return(
             <header>
-                <div className="fixed-navbar" style={{backgroundColor:"rgba(0, 0, 15, 0.8)"}}>
+                <div className="fixed-navbar">
 
                     <div className="navbar-lockup">
 
                         <div className="logo">
 
                             <a href=""><img src="assets/img/rsz_fit&fight_ok.png" style={{width: '100%'}} alt="Fit & Fight"/></a>
+
                         </div>
 
                         <ul className="nav">
