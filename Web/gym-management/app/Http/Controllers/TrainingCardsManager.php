@@ -12,6 +12,38 @@ use PDF;
 class TrainingCardsManager extends Controller
 {
 
+    public static function activeTrainingCard($idDatabase){
+      $collection = Firestore::collection('TrainingCards');
+      $arrayTrainingCard = $collection->document($idDatabase)->snapshot()->data();
+
+      $trainingCard = TrainingCardsManager::transformArrayTrainingCardsIntoTrainingCards($arrayTrainingCard);
+      $trainingCard->setIdDatabase($idDatabase);
+      $trainingCard->setIsActive(true);
+      $trainingCard = TrainingCardsManager::transformTrainingCardsIntoArrayTrainingCards($trainingCard);
+      unset($trainingCard['idDatabase']);
+
+      $collection->document($idDatabase)->set($trainingCard);
+
+      toastr()->success('Scheda attivata con successo.');
+      return redirect('/admin/gestioneSchede');
+    }
+
+    public static function inactiveTrainingCard($idDatabase){
+      $collection = Firestore::collection('TrainingCards');
+      $arrayTrainingCard = $collection->document($idDatabase)->snapshot()->data();
+
+      $trainingCard = TrainingCardsManager::transformArrayTrainingCardsIntoTrainingCards($arrayTrainingCard);
+      $trainingCard->setIdDatabase($idDatabase);
+      $trainingCard->setIsActive(false);
+      $trainingCard = TrainingCardsManager::transformTrainingCardsIntoArrayTrainingCards($trainingCard);
+      unset($trainingCard['idDatabase']);
+
+      $collection->document($idDatabase)->set($trainingCard);
+
+      toastr()->error('Scheda disattivata con successo.');
+      return redirect('/admin/gestioneSchede');
+    }
+
     public static function  DownloadTrainingCardsPDF(){
 
       $data = ['title' => 'trainingCard'];

@@ -218,6 +218,18 @@ class UsersManager extends Controller{
         return $user;
     }
 
+    public static function activeUser($idDatabase){
+      $collection = Firestore::collection('Users');
+      $arrayUser = $collection->document($idDatabase)->snapshot()->data();
+
+      $user = UsersManager::transformArrayUserIntoUser($arrayUser);
+      $user->setIdDatabase($idDatabase);
+      $user->setStatus(true);
+      $user = UsersManager::transformUserIntoArrayUser($user);
+      unset($user['idDatabase']);
+
+      $collection->document($idDatabase)->set($user);
+    }
 
     public static function createUser(Request $request){
         $input = $request->all();

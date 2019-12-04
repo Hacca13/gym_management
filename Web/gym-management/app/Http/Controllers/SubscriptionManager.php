@@ -318,6 +318,8 @@ class SubscriptionManager extends Controller
           CoursesManager::addUserToCourse($input['idCourseDatabase'],$input['idUserDatabase']);
         }
 
+        UsersManager::activeUser($input['idUserDatabase']);
+
         $collection->add($input);
         toastr()->success('Abbonamento creato con successo');
         return '/admin/gestioneAbbonamenti';
