@@ -3,11 +3,11 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-md-4 col-lg-4 col-sm-4" style="margin-top: auto; margin-bottom: auto;">
-                  <?php $stamp = true; ?>
+                  <?php $flag = true; ?>
                     @foreach ($usersList as $user)
-                        @if(($trainingCard->getIdUserDatabase() == $user->getIdDatabase()) && ($stamp==true))
+                        @if(($trainingCard->getIdUserDatabase() == $user->getIdDatabase()) && ($flag==true))
                             <h3 style="color: rgba(31, 38, 45, 0.8)">{{$user->getName()}} {{$user->getSurname()}}</h3>
-                            <?php $stamp = false; ?>
+                            <?php $flag = false; ?>
                         @endif
                     @endforeach
                 </div>

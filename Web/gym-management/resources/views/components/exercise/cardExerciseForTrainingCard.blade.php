@@ -8,7 +8,7 @@
                 </div>
 
                 <div class="col-lg-2 col-md-2 col-sm-2" style="text-align: right; margin-top: auto; margin-bottom: auto">
-                    <a href="#">
+                    <a href="/eliminaEsercizioDallaScheda/{{$trainingCard->getIdDatabase().'/'.$exercise->getIdDatabase()}}">
                         <i class="fas fa-times" style="font-size: 170%; color: #980f00"></i>
                     </a>
                 </div>
@@ -25,10 +25,11 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-12 text-center">
-
+                                <?php $flag2 = true; ?>
                                     @foreach($trainingCard->getExercises() as $exerciseTrainingCard)
 
-                                        @if($exerciseTrainingCard['idExerciseDatabase'] == $exercise->getIdDatabase())
+                                        @if(($exerciseTrainingCard['idExerciseDatabase'] == $exercise->getIdDatabase()) && ($flag2==true))
+                                        <?php $flag2 = false; ?>
                                         <h6 style="color: #1F262D; opacity: 0.6">
                                             Numero di Serie: {{$exerciseTrainingCard['numberOfSeries']}}
                                             @if($exerciseTrainingCard['atTime'] == FALSE)
