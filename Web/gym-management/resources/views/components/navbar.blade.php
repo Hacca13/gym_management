@@ -5,7 +5,7 @@
                 <b class="logo-icon p-l-10">
                     <img src="../images/rsz_fit&Fight_ok.png" alt="Fit & Fight" class="light-logo embed-responsive"/>
                 </b>
-            </br></br>
+                </br></br>
                 <span style="font-family:'Impact';font-size:40px;">Fit & Fight</span>
             </a>
         </div>
