@@ -24,10 +24,10 @@
                     <div class="row">
 
                         <div class="col-lg-6 col-md-6 col-sm-12">
-                            <h4>Numero di entrate effettuate: {{$subscription->getNumberOfEntries()}}</h4>
+                            <h4>Numero di entrate effettuate: {{$subscription->getNumberOfEntriesMade()}}</h4>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-12">
-                            <h4>Numero di entrate totali: {{$subscription->getNumberOfEntriesMade()}}</h4>
+                            <h4>Numero di entrate totali: {{$subscription->getNumberOfEntries()}}</h4>
                         </div>
                     </div>
                 </div>

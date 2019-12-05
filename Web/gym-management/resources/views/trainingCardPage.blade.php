@@ -59,6 +59,17 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="row text-center" style="margin-top: 5%">
+                  <br>
+                  <br>
+                  <br>
+                    <h1 class="col-md-12 text-center" style="color: #d6d8d8">Sezione in allestimento</h1>
+                  <br>
+                  <br>
+                  <br>
+                </div>
+  <!--
                 @if(count($trainingCardsList) == 0)
                   <div class="row text-center" style="margin-top: 5%">
                     <br>
@@ -80,6 +91,7 @@
             <div class="row justify-content-center" style="margin-top: 2.5%">
                 {{ $trainingCardsList->links()}}
             </div>
+            -->
         </div>
     </div>
 

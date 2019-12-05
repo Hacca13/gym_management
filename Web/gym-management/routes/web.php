@@ -75,7 +75,7 @@ Route::prefix('admin')->group(function () {
     Route::get('/attivaScheda/{id}', 'TrainingCardsManager@activeTrainingCard');//patane
     Route::get('/eliminaScheda/{id}', 'TrainingCardsManager@deleteTrainingCard');//patane
     Route::get('/gestioneSchede', 'TrainingCardsManager@getAllTrainingCardsForView');//patane
-
+  //  Route::get('/updateTCardView', 'TrainingCardsManager@updateTCardView');//patane
     Route::get('/nuovaScheda', 'TrainingCardsManager@exercisePage');//patane
     Route::post('/trainingCardsSearchResultsPage', 'TrainingCardsManager@searchTrainingCards');//patane
     Route::get('/trainingCardsPageSearchResult', 'TrainingCardsManager@searchTrainingCards');//patane
