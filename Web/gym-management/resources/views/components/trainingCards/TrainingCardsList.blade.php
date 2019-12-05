@@ -1,11 +1,13 @@
 <div class="card-hover" style="border-radius: 10px;background-color: #d6d8d8">
-    <a data-toggle="collapse" href="#days" role="button" aria-expanded="false" aria-controls="{{'multiCollapseExample' . $loop->index}}">
+    <a data-toggle="collapse" href="{{'#days' . $loop -> index}}" role="button" aria-expanded="false" aria-controls="{{'multiCollapseExample' . $loop->index}}">
         <div class="card-body">
             <div class="row">
                 <div class="col-md-4 col-lg-4 col-sm-4" style="margin-top: auto; margin-bottom: auto;">
+                  <?php $stamp = true; ?>
                     @foreach ($usersList as $user)
-                        @if($trainingCard->getIdUserDatabase() == $user->getIdDatabase())
+                        @if(($trainingCard->getIdUserDatabase() == $user->getIdDatabase()) && ($stamp==true))
                             <h3 style="color: rgba(31, 38, 45, 0.8)">{{$user->getName()}} {{$user->getSurname()}}</h3>
+                            <?php $stamp = false; ?>
                         @endif
                     @endforeach
                 </div>
@@ -32,7 +34,7 @@
     </a>
 </div>
 <div class="col-md-12">
-    <div class="collapse multi-collapse" id="days">
+    <div class="collapse multi-collapse" id="{{'days' . $loop -> index}}">
         @include('components.exercise.cardDay')
     </div>
 </div>
