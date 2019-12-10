@@ -16,6 +16,7 @@
     <link href="../matrix-admin-bt4/assets/libs/flot/css/float-chart.css" rel="stylesheet">
     <!-- Custom CSS -->
     <link href="../matrix-admin-bt4/dist/css/style.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css">
 
     <link href="../css/bttn.min.css" rel="stylesheet">
     <link href="../matrix-admin-bt4/assets/libs/jquery-steps/jquery.steps.css" rel="stylesheet">
@@ -82,7 +83,6 @@
         <!-- ============================================================== -->
         <!-- footer -->
         <!-- ============================================================== -->
-
         <!-- ============================================================== -->
         <!-- End footer -->
         <!-- ============================================================== -->

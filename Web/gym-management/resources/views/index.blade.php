@@ -78,8 +78,8 @@
                   @foreach($listSubscription as $subscriptionAndUser)
                     <div class="col-md-12 col-lg-10 col-sm-10">
                         <div class="card card-hover">
-                            <div class="box bg-dark row">
-                                <h6 class="text-white" style="text-align: left;">{{data_get($subscriptionAndUser,'userNameAndSurname')}}</h6>
+                            <div class="box bg-dark text-center">
+                                <h6 class="text-white">{{data_get($subscriptionAndUser,'userNameAndSurname')}}</h6>
                                 <?php $subscription = data_get($subscriptionAndUser,'subscription'); ?>
                                 @if($subscription instanceof SubscriptionPeriodModel)
                                   <h6 class="text-white offset-9" style="text-align: right;">dcdcd</h6>

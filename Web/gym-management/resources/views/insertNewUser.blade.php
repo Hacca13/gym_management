@@ -8,10 +8,10 @@
                     <h1 style="color: #d6d8d8">Inserimento dati utente</h1>
                 </div>
                 <div class="col-md-12" style="margin-top: 2.5%; padding-top: 15px; background-color: #d6d8d8; border-radius: 10px">
-                    <form id="example-form" action="/admin/addUserPost"  method="post" class="m-t-40" enctype="multipart/form-data">
+                    <form id="example-form" action="/admin/addUserPost"  onsubmit="return testpass(this)" method="post" class="m-t-40" enctype="multipart/form-data">
                         @csrf
                         <div>
-                            <h3>Dati Utente</h3>
+                            <h3 id="parentTitle">Dati Utente</h3>
                             <section>
                                 <div class="row justify-content-center">
                                     <div class="col-lg-6 col-md-8 col-sm-12">
@@ -26,6 +26,8 @@
                                         <input type="email" class="form-control" id="email" name="email" required>
                                         <label for="pass" class="text-right control-label" style="font-size: 16px;">Password:</label>
                                         <input type="password" class="form-control" id="pass" name="password" required>
+                                        <label for="pass" class="text-right control-label" style="font-size: 16px;">Conferma password:</label>
+                                        <input type="password" class="form-control" id="pass" name="password2" required>
                                     </div>
                                 </div>
 
@@ -143,13 +145,13 @@
                                         <label id="imcLabel"></label>
                                         <br>
                                         <label for="previosSport" class="text-left control-label" style="font-size: 16px;">Sport Praticati Precedentemente:</label>
-                                        <input type="text" class="form-control" id="previosSport" name="previousSport" required>
+                                        <input type="text" class="form-control" id="previosSport" name="previousSport">
                                         <label for="previousSportTime" class="text-left control-label" style="font-size: 16px;">Tempo Sport Praticati Precedentemente:</label>
-                                        <input type="text" class="form-control" id="previousSportTime" name="previousSportTime" required>
+                                        <input type="text" class="form-control" id="previousSportTime" name="previousSportTime">
                                         <label for="inactiveTime" class="text-left control-label">Tempo Inattivo:</label>
-                                        <input type="text" class="form-control" id="inactiveTime" name="inactiveTime" required>
+                                        <input type="text" class="form-control" id="inactiveTime" name="inactiveTime">
                                         <label for="plicometricData" class="text-left control-label" style="font-size: 16px;">Dati Plicometrici:</label>
-                                        <input type="text" class="form-control" id="plicometricData" name="plicometricData" required>
+                                        <input type="text" class="form-control" id="plicometricData" name="plicometricData">
                                     </div>
 
                                     <br>
@@ -160,11 +162,11 @@
                                             <label class="text-left control-label" style="font-size: 16px;">Ipertrofia:</label><br>
                                             <div class="row justify-content-center">
                                                 <div class="custom-control custom-radio" style="margin-right: 5%;">
-                                                    <input type="radio" class="custom-control-input" id="ipertrue" name="hypertrophy" required>
+                                                    <input type="radio" class="custom-control-input" id="ipertrue" name="hypertrophy" value="true" required>
                                                     <label class="custom-control-label" for="ipertrue">Si</label>
                                                 </div>
                                                 <div class="custom-control custom-radio">
-                                                    <input type="radio" checked class="custom-control-input" id="iperfalse" name="hypertrophy" required>
+                                                    <input type="radio" checked class="custom-control-input" id="iperfalse" name="hypertrophy" value="false" required>
                                                     <label class="custom-control-label" for="iperfalse">No</label>
                                                 </div>
                                             </div>
@@ -173,11 +175,11 @@
                                             <label class="text-left control-label" style="font-size: 16px;">Dimagrimento:</label><br>
                                             <div class="row justify-content-center">
                                                 <div class="custom-control custom-radio" style="margin-right: 5%;">
-                                                    <input type="radio" class="custom-control-input" id="slimtrue" name="slimming" required>
+                                                    <input type="radio" class="custom-control-input" id="slimtrue" name="slimming" value="true" required>
                                                     <label class="custom-control-label" for="slimtrue">Si</label>
                                                 </div>
                                                 <div class="custom-control custom-radio">
-                                                    <input type="radio" checked class="custom-control-input" id="slimfalse" name="slimming" required>
+                                                    <input type="radio" checked class="custom-control-input" id="slimfalse" name="slimming" value="false" required>
                                                     <label class="custom-control-label" for="slimfalse">No</label>
                                                 </div>
                                             </div>
@@ -186,11 +188,11 @@
                                             <label class="text-left control-label" style="font-size: 16px;">Tonificazione:</label><br>
                                             <div class="row justify-content-center">
                                                 <div class="custom-control custom-radio" style="margin-right: 5%">
-                                                    <input type="radio" class="custom-control-input" id="toningtrue" name="toning" required>
+                                                    <input type="radio" class="custom-control-input" id="toningtrue" name="toning" value="true" required>
                                                     <label class="custom-control-label" for="toningtrue">Si</label>
                                                 </div>
                                                 <div class="custom-control custom-radio">
-                                                    <input type="radio" checked class="custom-control-input" id="toningfalse" name="toning" required>
+                                                    <input type="radio" checked class="custom-control-input" id="toningfalse" name="toning" value="false" required>
                                                     <label class="custom-control-label" for="toningfalse">No</label>
                                                 </div>
                                             </div>
@@ -198,11 +200,11 @@
                                                 <label class="text-left control-label" style="font-size: 16px;">Allenamento Atletico:</label><br>
                                                 <div class="row justify-content-center">
                                                     <div class="custom-control custom-radio" style="margin-right: 5%">
-                                                        <input type="radio" class="custom-control-input" id="atltrue" name="athleticTraining" required>
+                                                        <input type="radio" class="custom-control-input" id="atltrue" name="athleticTraining" value="true" required>
                                                         <label class="custom-control-label" for="atltrue">Si</label>
                                                     </div>
                                                     <div class="custom-control custom-radio">
-                                                        <input type="radio" checked class="custom-control-input" id="atlfalse" name="athleticTraining" required>
+                                                        <input type="radio" checked class="custom-control-input" id="atlfalse" name="athleticTraining" value="false" required>
                                                         <label class="custom-control-label" for="atlfalse">No</label>
                                                     </div>
                                                 </div>
@@ -211,11 +213,11 @@
                                                 <label class="text-left control-label" style="font-size: 16px;">Riabilitazione:</label><br>
                                                 <div class="row justify-content-center">
                                                     <div class="custom-control custom-radio" style="margin-right: 5%">
-                                                        <input type="radio" class="custom-control-input" id="rehatrue" name="rehabilitation" required>
+                                                        <input type="radio" class="custom-control-input" id="rehatrue" name="rehabilitation" value="true" required>
                                                         <label class="custom-control-label" for="rehatrue">Si</label>
                                                     </div>
                                                     <div class="custom-control custom-radio">
-                                                        <input type="radio" checked class="custom-control-input" id="rehafalse" name="rehabilitation" required>
+                                                        <input type="radio" checked class="custom-control-input" id="rehafalse" name="rehabilitation" value="false" required>
                                                         <label class="custom-control-label" for="rehafalse">No</label>
                                                     </div>
                                                 </div>
@@ -224,11 +226,11 @@
                                                 <label class="text-left control-label" style="font-size: 16px;">Sport di Combattimento:</label><br>
                                                 <div class="row justify-content-center">
                                                     <div class="custom-control custom-radio" style="margin-right: 5%">
-                                                        <input type="radio" class="custom-control-input" id="comtrue" name="combatSports" required>
+                                                        <input type="radio" class="custom-control-input" id="comtrue" name="combatSports" value="true" required>
                                                         <label class="custom-control-label" for="comtrue">Si</label>
                                                     </div>
                                                     <div class="custom-control custom-radio">
-                                                        <input type="radio" checked class="custom-control-input" id="comfalse" name="combatSports" required>
+                                                        <input type="radio" checked class="custom-control-input" id="comfalse" name="combatSports" value="false" required>
                                                         <label class="custom-control-label" for="comfalse">No</label>
                                                     </div>
                                                 </div>
@@ -243,9 +245,9 @@
                                 <div class="row justify-content-center">
                                     <div class="col-md-8 col-lg- col-sm-12">
                                         <label for="goals" class="text-right control-label" style="font-size: 16px;">Altri Obiettivi:</label>
-                                        <input type="text" class="form-control" id="goals" name="otherGoals" required>
+                                        <input type="text" class="form-control" id="goals" name="otherGoals" >
                                         <label for="importantInformation" class="text-right control-label" style="font-size: 16px;">Informazioni Importanti:</label>
-                                        <input type="text" class="form-control" id="importantInformation" name="importantInformation" required>
+                                        <input type="text" class="form-control" id="importantInformation" name="importantInformation">
                                     </div>
                                 </div>
                             </section>
@@ -354,6 +356,8 @@
                                     </div>
                                 </div>
                             </section>
+
+
                         </div>
                     </form>
                 </div>
@@ -462,6 +466,29 @@
         document.getElementById("parentDateOfBirth").setAttribute("max", today);
 
 
+
+    </script>
+
+    <script language="Javascript" type="text/javascript">
+
+        function testpass(modulo){
+            // Verifico che il campo password sia valorizzato in caso contrario
+            // avverto dell'errore tramite un Alert
+            if (modulo.password.value === ""){
+                alert("Errore: inserire una password!")
+                modulo.password.focus()
+                return false
+            }
+            // Verifico che le due password siano uguali, in caso contrario avverto
+            // dell'errore con un Alert
+            if (modulo.password.value !== modulo.password_2.value) {
+                alert("La password inserita non coincide con la prima!")
+                modulo.password.focus()
+                modulo.password.select()
+                return false
+            }
+            return true
+        }
 
     </script>
 

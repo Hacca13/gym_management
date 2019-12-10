@@ -47,13 +47,13 @@
     </div>
     <div class="row justify-content-center">
         <div class="col-lg-6 col-md-12 col-sm-12" style="text-align: center; margin-bottom: 5px;">
-            <a href="#" onclick="setNew({{$loop->index}})">
-                <button class="btn btn-warning" id="fname" name="" style="border-radius: 10px;">Modifica</button>
+            <a id="{{'button_1' . $loop->index}}" href="#" onclick="setNew({{$loop->index}})">
+                <button id="{{'button1' . $loop->index}}" class="btn btn-warning" id="fname" name="" style="border-radius: 10px;">Modifica</button>
             </a>
         </div>
         <div class="col-lg-6 col-md-12 col-sm-12" style="text-align: center; margin-bottom: 5px;">
-            <a href="/admin/gestioneIscritti">
-                <button class="btn btn-danger" id="fname" name="" style="border-radius: 10px;">Disattiva</button>
+            <a id="{{'button_2' . $loop->index}}" href="#" onclick="buttonRed({{$loop->index}})">
+                <button id="{{'button2' . $loop->index}}" class="btn btn-danger" id="fname" name="" style="border-radius: 10px;">Disattiva</button>
             </a>
         </div>
     </div>
@@ -158,6 +158,14 @@
             $("#plicMetr"+id).attr("class","");
             $("#plicometricData"+id).attr("class","multi-collapse collapse");
 
+
+            $("#button1"+id).attr("class", "btn btn-success");
+            $("#button1"+id).text("Aggiorna");
+
+            $("#button_2"+id).attr("href", "#");
+            $("#button2"+id).text("Annulla");
+
+
             if ((document.getElementById("pLiC"+id).style.backgroundColor) === "rgb(31, 38, 45)"){
                 $("#plicMetr"+id).attr("aria-expanded","true");
                 $("#plicMetr"+id).attr("class","");
@@ -193,6 +201,9 @@
             $("#plicMetr"+id).attr("class","");
             $("#plicometricSet"+id).attr("class","multi-collapse collapse");
 
+            $("#button_1"+id).attr("href", "/admin");
+
+
             if ((document.getElementById("pLiC"+id).style.backgroundColor) === "rgb(31, 38, 45)"){
                 $("#plicMetr"+id).attr("aria-expanded","true");
                 $("#plicMetr"+id).attr("class","");
@@ -212,6 +223,48 @@
 
             $("#tutoDa"+id).attr("href","#tutorData"+id);
             $("#tutorSet"+id).attr("class","multi-collapse collapse");
+            $("#tutotDa"+id).attr("class","");
+            $("#tutotDa"+id).attr("aria-expanded","false");
+
+            if ((document.getElementById("tUtO"+id).style.backgroundColor) === "rgb(31, 38, 45)"){
+                $("#tutorSet"+id).attr("class","multi-collapse collapse show");
+                $("#tutotDa"+id).attr("class","collapse");
+                $("#tutotDa"+id).attr("aria-expanded","true");
+            }
+
+        }
+    }
+
+    function buttonRed(id) {
+        if(($("#button_2"+id).attr("href"))==="#"){
+            $("#button2"+id).text("Disattiva");
+            $("#button1"+id).attr("class", "btn btn-warning");
+            $("#button1"+id).text("Modifica");
+
+            $("#plicometricSet"+id).attr("class","multi-collapse collapse");
+            $("#plicMetr"+id).attr("href","#plicometricData"+id);
+            $("#plicMetr"+id).attr("aria-expanded","false");
+            $("#plicMetr"+id).attr("class","");
+
+            if ((document.getElementById("pLiC"+id).style.backgroundColor) === "rgb(31, 38, 45)"){
+                $("#plicMetr"+id).attr("aria-expanded","true");
+                $("#plicMetr"+id).attr("class","");
+                $("#plicometricData"+id).attr("class","multi-collapse collapse show");
+            }
+
+            $("#anagraficSet"+id).attr("class","multi-collapse collapse");
+            $("#anaGraph"+id).attr("class","");
+            $("#anaGraph"+id).attr("aria-expanded","false");
+            $("#anaGraph"+id).attr("href","#anagraficData"+id);
+
+            if ((document.getElementById("aNaGrAf"+id).style.backgroundColor) === "rgb(31, 38, 45)"){
+                $("#anagraficData"+id).attr("class","multi-collapse collapse show");
+                $("#anaGraph"+id).attr("class","");
+                $("#anaGraph"+id).attr("aria-expanded","true");
+            }
+
+            $("#tutorSet"+id).attr("class","multi-collapse collapse");
+            $("#tutoDa"+id).attr("href","#tutorData"+id);
             $("#tutotDa"+id).attr("class","");
             $("#tutotDa"+id).attr("aria-expanded","false");
 

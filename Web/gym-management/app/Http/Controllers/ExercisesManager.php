@@ -176,6 +176,9 @@ class ExercisesManager extends Controller{
         if(!isset($input['exerciseIsATime'])){
             $input['exerciseIsATime'] = false;
         }
+        if(!isset($input['linkExercise'])){
+            $input['linkExercise'] = null;
+        }
 
         if(ExercisesManager::existsAExerciseWithThisName($name)){
             toastr()->error('Esiste già un esercizio con questo nome');

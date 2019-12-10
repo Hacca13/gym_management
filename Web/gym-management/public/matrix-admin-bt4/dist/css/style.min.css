@@ -4718,7 +4718,7 @@ input[type=submit].btn-block {
 }
 
 .navbar {
-    position: relative;
+    position: fixed;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -10610,7 +10610,8 @@ html[dir=ltr] body .p-l-0 {
 }
 
 .left-sidebar[data-sidebarbg=skin5] ul {
-    background: transparent
+    background: transparent;
+    position: fixed;
 }
 
 #main-wrapper .left-sidebar[data-sidebarbg=skin5] .create-btn,
@@ -10647,7 +10648,7 @@ html[dir=ltr] body .p-l-0 {
 @media (min-width:768px) {
     #main-wrapper {}
     #main-wrapper[data-sidebartype=full] .topbar .top-navbar .navbar-header {
-        width: 250px
+        width: 0px
     }
     #main-wrapper.mini-sidebar .topbar .top-navbar .navbar-header {
         width: 65px
@@ -10690,26 +10691,31 @@ html[dir=ltr] body .p-l-0 {
     }
 }
 
-@media (max-width:766px) {
-    #main-wrapper {}
-    #main-wrapper[data-sidebartype=mini-sidebar] .page-wrapper {
-        margin-left: 0px
+
+@media (max-width:800px) {
+    .sidebar-link span{
+        display: none;
     }
-    #main-wrapper[data-sidebartype=mini-sidebar] .left-sidebar {
-        left: -250px
+    .page-wrapper{
+        margin-left: 80px;
     }
-    #main-wrapper.show-sidebar .left-sidebar {
-        left: 0
+    .navbar-brand span{
+        display: none;
     }
-    #main-wrapper[data-layout=vertical][data-sidebar-position=fixed] .topbar .top-navbar .navbar-collapse {
-        position: relative;
-        top: 64px
+    .left-sidebar[data-sidebarbg=skin5]{
+        background-color: rgb(31, 38, 45, 0.9);
+        width: 70px;
     }
-    #main-wrapper[data-layout=vertical][data-header-position=fixed][data-sidebar-position=fixed] .topbar .top-navbar .navbar-collapse {
-        position: relative;
-        top: 64px
+    .left-sidebar{
+        width: 80px
+    }
+
+    .sidebar-nav ul .sidebar-item .sidebar-link:hover i{
+        font-size: 40px;
+        padding: 0 0 0 10px;
     }
 }
+
 
 * {
     outline: none
@@ -11539,7 +11545,7 @@ ul.list-style-none li a:hover {
 
 .sidebar-nav ul .sidebar-item .sidebar-link {
     color: #fff;
-    padding: 14px 15px;
+    padding: 14px 15px 14px 15px;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -11564,7 +11570,9 @@ ul.list-style-none li a:hover {
 .sidebar-nav ul .sidebar-item .sidebar-link.active,
 .sidebar-nav ul .sidebar-item .sidebar-link:hover {
     opacity: 1;
-    background-color: rgb(31, 38, 45, 1)
+    background-color: rgba(31, 38, 45);
+    font-size: 20px;
+    padding: 15px 0 15px 0;
 }
 
 .sidebar-nav ul .sidebar-item.selected>.sidebar-link {

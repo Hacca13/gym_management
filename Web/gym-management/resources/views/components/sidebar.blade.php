@@ -7,11 +7,6 @@
             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/admin/gestioneAbbonamenti" aria-expanded="false"><i class="fas fa-euro-sign"></i><span class="hide-menu">Gestione Abbonamenti</span></a></li>
             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/admin/gestioneIscritti" aria-expanded="false"><i class="fas fa-users"></i><span class="hide-menu">Gestione Iscritti</span></a></li>
             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/admin/gestioneCorsi" aria-expanded="false"><i class="mdi mdi-av-timer"></i><span class="hide-menu">Gestione Corsi</span></a></li>
-        </ul>
-        <ul id="sidebar-nav">
-            <br>
-            <br>
-            <br>
             <br>
             <br>
             <br>
@@ -21,3 +16,4 @@
         </ul>
     </nav>
 </aside>
+
