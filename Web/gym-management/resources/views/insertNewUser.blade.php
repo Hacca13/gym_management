@@ -8,7 +8,7 @@
                     <h1 style="color: #d6d8d8">Inserimento dati utente</h1>
                 </div>
                 <div class="col-md-12" style="margin-top: 2.5%; padding-top: 15px; background-color: #d6d8d8; border-radius: 10px">
-                    <form id="example-form" action="/admin/addUserPost"  onsubmit="return testpass(this)" method="post" class="m-t-40" enctype="multipart/form-data">
+                    <form id="example-form" action="/admin/addUserPost"   method="post" class="m-t-40" enctype="multipart/form-data">
                         @csrf
                         <div>
                             <h3 id="parentTitle">Dati Utente</h3>
@@ -27,7 +27,7 @@
                                         <label for="pass" class="text-right control-label" style="font-size: 16px;">Password:</label>
                                         <input type="password" class="form-control" id="pass" name="password" required>
                                         <label for="pass" class="text-right control-label" style="font-size: 16px;">Conferma password:</label>
-                                        <input type="password" class="form-control" id="pass" name="password2" required>
+                                        <input type="password" class="form-control" id="passconf" onchange="testpass()" name="password2" required>
                                     </div>
                                 </div>
 
@@ -471,23 +471,27 @@
 
     <script language="Javascript" type="text/javascript">
 
-        function testpass(modulo){
-            // Verifico che il campo password sia valorizzato in caso contrario
-            // avverto dell'errore tramite un Alert
-            if (modulo.password.value === ""){
-                alert("Errore: inserire una password!")
-                modulo.password.focus()
-                return false
+        function testpass(){
+
+            pass = document.getElementById("pass");
+            passconf = document.getElementById("passconf");
+            if (passconf.value !== ""){
+              // Verifico che il campo password sia valorizzato in caso contrario
+              // avverto dell'errore tramite un Alert
+              if (pass.value === ""){
+                  alert("Errore: inserire una password!")
+                  pass.focus()
+              }
+              // Verifico che le due password siano uguali, in caso contrario avverto
+              // dell'errore con un Alert
+              if ((pass.value !== passconf.value) && (pass.value !== "")) {
+                  alert("La password inserita non coincide!")
+                  passconf.focus()
+
+              }
             }
-            // Verifico che le due password siano uguali, in caso contrario avverto
-            // dell'errore con un Alert
-            if (modulo.password.value !== modulo.password_2.value) {
-                alert("La password inserita non coincide con la prima!")
-                modulo.password.focus()
-                modulo.password.select()
-                return false
-            }
-            return true
+
+
         }
 
     </script>
