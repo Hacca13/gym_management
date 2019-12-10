@@ -301,6 +301,27 @@ class UsersManager extends Controller{
 
             $input['idUserDatabase'] = $uid;
 
+            if(!isset($input['importantInformation'])){
+              $input['importantInformation'] = null;
+            }
+            if(!isset($input['otherGoals'])){
+              $input['otherGoals'] = null;
+            }
+            if(!isset($input['plicometricData'])){
+              $input['plicometricData'] = null;
+            }
+            if(!isset($input['inactiveTime'])){
+              $input['inactiveTime'] = null;
+            }
+            if(!isset($input['previousSportTime'])){
+              $input['previousSportTime'] = null;
+            }
+            if(!isset($input['previousSport'])){
+              $input['previousSport'] = null;
+            }
+
+
+
             $arrayMedicalHistory = MedicalHistoryManager::trasformRequestToArrayMedicalHistory($input);
 
             MedicalHistoryManager::addMedicalHistory($arrayMedicalHistory);

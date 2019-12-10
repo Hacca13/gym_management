@@ -35,7 +35,7 @@
                             <div class="form-group row justify-content-center">
                                 <div class="col-sm-12 col-md-12 col-lg-8">
                                     <label for="fname" class="col-sm-12 text-left control-label col-form-label" style="background-color: transparent; border: none; color: #1F262D">Link esercizio</label>
-                                    <input class="form-control" id="linkExercise" name="linkExercise"required>
+                                    <input class="form-control" id="linkExercise" name="linkExercise">
                                 </div>
                             </div>
                             <div class="form-group row justify-content-center">

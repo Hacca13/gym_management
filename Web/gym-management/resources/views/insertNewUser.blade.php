@@ -145,13 +145,13 @@
                                         <label id="imcLabel"></label>
                                         <br>
                                         <label for="previosSport" class="text-left control-label" style="font-size: 16px;">Sport Praticati Precedentemente:</label>
-                                        <input type="text" class="form-control" id="previosSport" name="previousSport" required>
+                                        <input type="text" class="form-control" id="previosSport" name="previousSport">
                                         <label for="previousSportTime" class="text-left control-label" style="font-size: 16px;">Tempo Sport Praticati Precedentemente:</label>
-                                        <input type="text" class="form-control" id="previousSportTime" name="previousSportTime" required>
+                                        <input type="text" class="form-control" id="previousSportTime" name="previousSportTime">
                                         <label for="inactiveTime" class="text-left control-label">Tempo Inattivo:</label>
-                                        <input type="text" class="form-control" id="inactiveTime" name="inactiveTime" required>
+                                        <input type="text" class="form-control" id="inactiveTime" name="inactiveTime">
                                         <label for="plicometricData" class="text-left control-label" style="font-size: 16px;">Dati Plicometrici:</label>
-                                        <input type="text" class="form-control" id="plicometricData" name="plicometricData" required>
+                                        <input type="text" class="form-control" id="plicometricData" name="plicometricData">
                                     </div>
 
                                     <br>
@@ -162,11 +162,11 @@
                                             <label class="text-left control-label" style="font-size: 16px;">Ipertrofia:</label><br>
                                             <div class="row justify-content-center">
                                                 <div class="custom-control custom-radio" style="margin-right: 5%;">
-                                                    <input type="radio" class="custom-control-input" id="ipertrue" name="hypertrophy" required>
+                                                    <input type="radio" class="custom-control-input" id="ipertrue" name="hypertrophy" value="true" required>
                                                     <label class="custom-control-label" for="ipertrue">Si</label>
                                                 </div>
                                                 <div class="custom-control custom-radio">
-                                                    <input type="radio" checked class="custom-control-input" id="iperfalse" name="hypertrophy" required>
+                                                    <input type="radio" checked class="custom-control-input" id="iperfalse" name="hypertrophy" value="false" required>
                                                     <label class="custom-control-label" for="iperfalse">No</label>
                                                 </div>
                                             </div>
@@ -175,11 +175,11 @@
                                             <label class="text-left control-label" style="font-size: 16px;">Dimagrimento:</label><br>
                                             <div class="row justify-content-center">
                                                 <div class="custom-control custom-radio" style="margin-right: 5%;">
-                                                    <input type="radio" class="custom-control-input" id="slimtrue" name="slimming" required>
+                                                    <input type="radio" class="custom-control-input" id="slimtrue" name="slimming" value="true" required>
                                                     <label class="custom-control-label" for="slimtrue">Si</label>
                                                 </div>
                                                 <div class="custom-control custom-radio">
-                                                    <input type="radio" checked class="custom-control-input" id="slimfalse" name="slimming" required>
+                                                    <input type="radio" checked class="custom-control-input" id="slimfalse" name="slimming" value="false" required>
                                                     <label class="custom-control-label" for="slimfalse">No</label>
                                                 </div>
                                             </div>
@@ -188,11 +188,11 @@
                                             <label class="text-left control-label" style="font-size: 16px;">Tonificazione:</label><br>
                                             <div class="row justify-content-center">
                                                 <div class="custom-control custom-radio" style="margin-right: 5%">
-                                                    <input type="radio" class="custom-control-input" id="toningtrue" name="toning" required>
+                                                    <input type="radio" class="custom-control-input" id="toningtrue" name="toning" value="true" required>
                                                     <label class="custom-control-label" for="toningtrue">Si</label>
                                                 </div>
                                                 <div class="custom-control custom-radio">
-                                                    <input type="radio" checked class="custom-control-input" id="toningfalse" name="toning" required>
+                                                    <input type="radio" checked class="custom-control-input" id="toningfalse" name="toning" value="false" required>
                                                     <label class="custom-control-label" for="toningfalse">No</label>
                                                 </div>
                                             </div>
@@ -200,11 +200,11 @@
                                                 <label class="text-left control-label" style="font-size: 16px;">Allenamento Atletico:</label><br>
                                                 <div class="row justify-content-center">
                                                     <div class="custom-control custom-radio" style="margin-right: 5%">
-                                                        <input type="radio" class="custom-control-input" id="atltrue" name="athleticTraining" required>
+                                                        <input type="radio" class="custom-control-input" id="atltrue" name="athleticTraining" value="true" required>
                                                         <label class="custom-control-label" for="atltrue">Si</label>
                                                     </div>
                                                     <div class="custom-control custom-radio">
-                                                        <input type="radio" checked class="custom-control-input" id="atlfalse" name="athleticTraining" required>
+                                                        <input type="radio" checked class="custom-control-input" id="atlfalse" name="athleticTraining" value="false" required>
                                                         <label class="custom-control-label" for="atlfalse">No</label>
                                                     </div>
                                                 </div>
@@ -213,11 +213,11 @@
                                                 <label class="text-left control-label" style="font-size: 16px;">Riabilitazione:</label><br>
                                                 <div class="row justify-content-center">
                                                     <div class="custom-control custom-radio" style="margin-right: 5%">
-                                                        <input type="radio" class="custom-control-input" id="rehatrue" name="rehabilitation" required>
+                                                        <input type="radio" class="custom-control-input" id="rehatrue" name="rehabilitation" value="true" required>
                                                         <label class="custom-control-label" for="rehatrue">Si</label>
                                                     </div>
                                                     <div class="custom-control custom-radio">
-                                                        <input type="radio" checked class="custom-control-input" id="rehafalse" name="rehabilitation" required>
+                                                        <input type="radio" checked class="custom-control-input" id="rehafalse" name="rehabilitation" value="false" required>
                                                         <label class="custom-control-label" for="rehafalse">No</label>
                                                     </div>
                                                 </div>
@@ -226,11 +226,11 @@
                                                 <label class="text-left control-label" style="font-size: 16px;">Sport di Combattimento:</label><br>
                                                 <div class="row justify-content-center">
                                                     <div class="custom-control custom-radio" style="margin-right: 5%">
-                                                        <input type="radio" class="custom-control-input" id="comtrue" name="combatSports" required>
+                                                        <input type="radio" class="custom-control-input" id="comtrue" name="combatSports" value="true" required>
                                                         <label class="custom-control-label" for="comtrue">Si</label>
                                                     </div>
                                                     <div class="custom-control custom-radio">
-                                                        <input type="radio" checked class="custom-control-input" id="comfalse" name="combatSports" required>
+                                                        <input type="radio" checked class="custom-control-input" id="comfalse" name="combatSports" value="false" required>
                                                         <label class="custom-control-label" for="comfalse">No</label>
                                                     </div>
                                                 </div>
@@ -245,9 +245,9 @@
                                 <div class="row justify-content-center">
                                     <div class="col-md-8 col-lg- col-sm-12">
                                         <label for="goals" class="text-right control-label" style="font-size: 16px;">Altri Obiettivi:</label>
-                                        <input type="text" class="form-control" id="goals" name="otherGoals" required>
+                                        <input type="text" class="form-control" id="goals" name="otherGoals" >
                                         <label for="importantInformation" class="text-right control-label" style="font-size: 16px;">Informazioni Importanti:</label>
-                                        <input type="text" class="form-control" id="importantInformation" name="importantInformation" required>
+                                        <input type="text" class="form-control" id="importantInformation" name="importantInformation">
                                     </div>
                                 </div>
                             </section>
@@ -357,46 +357,7 @@
                                 </div>
                             </section>
 
-                            <h3 id="parentTitle">Riepilogo</h3>
-                            <section id="parentData">
-                                <div  id="{{'bAcK' . $loop->index}}" class="card card-body" style="border-radius: 0 0 10px 10px; background-color: #d6d8d8">
-                                    <div class="row justify-content-center">
-                                        <table>
-                                            <tr>
-                                                <td style="padding: 0 15px 0 0">
-                                                    <div class="card card-hover">
-                                                        <a id="{{'anaGraph' . $loop->index}}" onclick="setButton({{$loop->index}}, this.id)" data-toggle="collapse" href="#{{'anagraficData' . $loop->index}}" role="button" aria-expanded="false" aria-controls="{{'multiCollapseExample' . $loop->index}}">
-                                                            <div class="box bg-dark text-center" id="{{'aNaGrAf' . $loop->index}}">
-                                                                <h6 class="text-white">Dati anagrafici</h6>
-                                                            </div>
-                                                        </a>
-                                                    </div>
-                                                </td>
-                                                <td style="padding: 0 15px 0 0">
-                                                    <div class="card card-hover" style="background-color: rgba(31, 38, 45, 0.8)">
-                                                        <a id="{{'plicMetr' . $loop->index}}" onclick="setButton({{$loop->index}}, this.id)" data-toggle="collapse" href="#{{'plicometricData' . $loop->index}}" role="button" aria-expanded="false" aria-controls="{{'multiCollapseExample' . $loop->index}}">
-                                                            <div class="box bg-dark text-center" id="{{'pLiC' . $loop->index}}">
-                                                                <h6 class="text-white">Dati plicometrici</h6>
-                                                            </div>
-                                                        </a>
-                                                    </div>
-                                                </td>
-                                                @if($user->getIsAdult() == false)
-                                                    <td style="padding: 0 15px 0 0">
-                                                        <div class="card card-hover" style="background-color: rgba(31, 38, 45, 0.8)">
-                                                            <a id="{{'tutoDa' . $loop->index}}" onclick="setButton({{$loop->index}}, this.id)" data-toggle="collapse" href="#{{'tutorData' . $loop->index}}" role="button" aria-expanded="false" aria-controls="{{'multiCollapseExample' . $loop->index}}">
-                                                                <div class="box bg-dark text-center" id="{{'tUtO' . $loop->index}}">
-                                                                    <h6 class="text-white">Dati tutore</h6>
-                                                                </div>
-                                                            </a>
-                                                        </div>
-                                                    </td>
-                                                @endif
-                                            </tr>
-                                        </table>
-                                    </div>
-                                </div>
-                            </section>
+
                         </div>
                     </form>
                 </div>
