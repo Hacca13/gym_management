@@ -8,10 +8,10 @@
                     <h1 style="color: #d6d8d8">Inserimento dati utente</h1>
                 </div>
                 <div class="col-md-12" style="margin-top: 2.5%; padding-top: 15px; background-color: #d6d8d8; border-radius: 10px">
-                    <form id="example-form" action="/admin/addUserPost"  method="post" class="m-t-40" enctype="multipart/form-data">
+                    <form id="example-form" action="/admin/addUserPost"  onsubmit="return testpass(this)" method="post" class="m-t-40" enctype="multipart/form-data">
                         @csrf
                         <div>
-                            <h3>Dati Utente</h3>
+                            <h3 id="parentTitle">Dati Utente</h3>
                             <section>
                                 <div class="row justify-content-center">
                                     <div class="col-lg-6 col-md-8 col-sm-12">
@@ -26,6 +26,8 @@
                                         <input type="email" class="form-control" id="email" name="email" required>
                                         <label for="pass" class="text-right control-label" style="font-size: 16px;">Password:</label>
                                         <input type="password" class="form-control" id="pass" name="password" required>
+                                        <label for="pass" class="text-right control-label" style="font-size: 16px;">Conferma password:</label>
+                                        <input type="password" class="form-control" id="pass" name="password2" required>
                                     </div>
                                 </div>
 
@@ -354,6 +356,47 @@
                                     </div>
                                 </div>
                             </section>
+
+                            <h3 id="parentTitle">Riepilogo</h3>
+                            <section id="parentData">
+                                <div  id="{{'bAcK' . $loop->index}}" class="card card-body" style="border-radius: 0 0 10px 10px; background-color: #d6d8d8">
+                                    <div class="row justify-content-center">
+                                        <table>
+                                            <tr>
+                                                <td style="padding: 0 15px 0 0">
+                                                    <div class="card card-hover">
+                                                        <a id="{{'anaGraph' . $loop->index}}" onclick="setButton({{$loop->index}}, this.id)" data-toggle="collapse" href="#{{'anagraficData' . $loop->index}}" role="button" aria-expanded="false" aria-controls="{{'multiCollapseExample' . $loop->index}}">
+                                                            <div class="box bg-dark text-center" id="{{'aNaGrAf' . $loop->index}}">
+                                                                <h6 class="text-white">Dati anagrafici</h6>
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td style="padding: 0 15px 0 0">
+                                                    <div class="card card-hover" style="background-color: rgba(31, 38, 45, 0.8)">
+                                                        <a id="{{'plicMetr' . $loop->index}}" onclick="setButton({{$loop->index}}, this.id)" data-toggle="collapse" href="#{{'plicometricData' . $loop->index}}" role="button" aria-expanded="false" aria-controls="{{'multiCollapseExample' . $loop->index}}">
+                                                            <div class="box bg-dark text-center" id="{{'pLiC' . $loop->index}}">
+                                                                <h6 class="text-white">Dati plicometrici</h6>
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                @if($user->getIsAdult() == false)
+                                                    <td style="padding: 0 15px 0 0">
+                                                        <div class="card card-hover" style="background-color: rgba(31, 38, 45, 0.8)">
+                                                            <a id="{{'tutoDa' . $loop->index}}" onclick="setButton({{$loop->index}}, this.id)" data-toggle="collapse" href="#{{'tutorData' . $loop->index}}" role="button" aria-expanded="false" aria-controls="{{'multiCollapseExample' . $loop->index}}">
+                                                                <div class="box bg-dark text-center" id="{{'tUtO' . $loop->index}}">
+                                                                    <h6 class="text-white">Dati tutore</h6>
+                                                                </div>
+                                                            </a>
+                                                        </div>
+                                                    </td>
+                                                @endif
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </section>
                         </div>
                     </form>
                 </div>
@@ -462,6 +505,29 @@
         document.getElementById("parentDateOfBirth").setAttribute("max", today);
 
 
+
+    </script>
+
+    <script language="Javascript" type="text/javascript">
+
+        function testpass(modulo){
+            // Verifico che il campo password sia valorizzato in caso contrario
+            // avverto dell'errore tramite un Alert
+            if (modulo.password.value === ""){
+                alert("Errore: inserire una password!")
+                modulo.password.focus()
+                return false
+            }
+            // Verifico che le due password siano uguali, in caso contrario avverto
+            // dell'errore con un Alert
+            if (modulo.password.value !== modulo.password_2.value) {
+                alert("La password inserita non coincide con la prima!")
+                modulo.password.focus()
+                modulo.password.select()
+                return false
+            }
+            return true
+        }
 
     </script>
 

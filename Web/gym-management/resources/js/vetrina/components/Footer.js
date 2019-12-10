@@ -1,4 +1,10 @@
 import React, {Component} from 'react';
+
+import { fab } from '@fortawesome/free-brands-svg-icons';
+import { library } from '@fortawesome/fontawesome-svg-core';
+
+library.add(fab);
+
 class Footer extends Component {
     render() {
         return (
@@ -51,19 +57,14 @@ class Footer extends Component {
 
                         <div className="col-lg-5">
 
-                            <div className="social-icons">
-
-                                <a href=""><i className="icon-facebook"></i></a>
-                                <a href=""><i className="icon-twitter"></i></a>
-                                <a href=""><i className="icon-instagram"></i></a>
-                                <a href=""><i className="icon-youtube-play"></i></a>
-                                <a href=""><i className="fab fa-instagram"></i></a>
-                                <a href=""><i className="icon-linkedin"></i></a>
-
-
-
+                            <div className="social-buttons">
+                                <h1>Ciao</h1>
+                                <a href="#"><i className="fab fa-facebook-f"></i></a>
+                                <a href="#"><i className="fab fa-twitter"></i></a>
+                                <a href="#"><i className="fab fa-instagram"></i></a>
+                                <a href="#"><i className="fab fa-youtube"></i></a>
+                                <a href="#"><i className="fab fa-linkedin-in"></i></a>
                             </div>
-                            <a href=""><i className="fab fa-instagram"></i></a>
 
 
                         </div>
@@ -71,6 +72,15 @@ class Footer extends Component {
                     </div>
 
 
+                </div>
+
+                <div className="social-buttons">
+                    <h1>Ciao</h1>
+                    <a href="#"><i className="fab fa-facebook-f"></i></a>
+                    <a href="#"><i className="fab fa-twitter"></i></a>
+                    <a href="#"><i className="fab fa-instagram"></i></a>
+                    <a href="#"><i className="fab fa-youtube"></i></a>
+                    <a href="#"><i className="fab fa-linkedin-in"></i></a>
                 </div>
 
             </footer>
