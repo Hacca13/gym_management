@@ -10709,6 +10709,11 @@ html[dir=ltr] body .p-l-0 {
     .left-sidebar{
         width: 80px
     }
+
+    .sidebar-nav ul .sidebar-item .sidebar-link:hover i{
+        font-size: 40px;
+        padding: 0 0 0 10px;
+    }
 }
 
 
@@ -11540,7 +11545,7 @@ ul.list-style-none li a:hover {
 
 .sidebar-nav ul .sidebar-item .sidebar-link {
     color: #fff;
-    padding: 14px 15px;
+    padding: 14px 15px 14px 15px;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -11565,7 +11570,9 @@ ul.list-style-none li a:hover {
 .sidebar-nav ul .sidebar-item .sidebar-link.active,
 .sidebar-nav ul .sidebar-item .sidebar-link:hover {
     opacity: 1;
-    background-color: rgb(31, 38, 45, 1)
+    background-color: rgba(31, 38, 45);
+    font-size: 20px;
+    padding: 15px 0 15px 0;
 }
 
 .sidebar-nav ul .sidebar-item.selected>.sidebar-link {
