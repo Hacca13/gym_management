@@ -233,6 +233,12 @@ class UsersManager extends Controller{
 
     public static function createUser(Request $request){
         $input = $request->all();
+
+        if($input['password'] != $input['password2']){
+          toastr()->error('Le due password non coincidono.');
+          return redirect('/admin/nuovoIscritto');
+        }
+
         $documentImage = $request->file('documentImage');
         $parentDocumentImage = null;
 

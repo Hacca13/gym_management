@@ -139,6 +139,7 @@
                                         <input type="number" class="form-control" id="weight" oninput="imcCalculation()" name="weight" value=1 required>
                                         <label for="height" class="text-left control-label" style="font-size: 16px;">Altezza (cm):</label>
                                         <input type="number" class="form-control" id="height" oninput="imcCalculation()" name="height" value=1 required>
+                                        <br>
                                         <label for="imcLabel" class="text-left control-label" style="font-size: 16px;">IMC:</label>
                                         <br>
                                         <input type="text" hidden class="form-control" id="imc" name="imc">
