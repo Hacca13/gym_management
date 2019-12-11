@@ -12,8 +12,10 @@
             <br>
             <br>
             <br>
+            <br>
+            <br>
+            <br>
             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/admin/logout" aria-expanded="false"><i class="far fa-caret-square-right"></i><span class="hide-menu">Loguot</span></a></li>
         </ul>
     </nav>
 </aside>
-
