@@ -239,8 +239,20 @@ class UsersManager extends Controller{
           return redirect('/admin/nuovoIscritto');
         }
 
-        $documentImage = $request->file('documentImage');
-        $parentDocumentImage = null;
+        if(!isset($input['documentImage'])){
+          $documentImage = null;
+        }
+        else{
+          $documentImage = $request->file('documentImage');
+        }
+
+        if(!isset($input['parentDocumentImage'])){
+          $parentDocumentImage = null;
+        }
+        else{
+          $parentDocumentImage = $request->file('parentDocumentImage');
+        }
+
 
         $external = "19/10/2100 14:48:21";
         $format = "d/m/Y H:i:s";
@@ -255,19 +267,22 @@ class UsersManager extends Controller{
 
         $firebase = (new Firebase\Factory());
 
-        $str = $firebase->createStorage()->getBucket()->upload(file_get_contents($documentImage),
-            [
-                'name' => '/esercizi/' . $input['name'].$input['surname'].'DocumentImage'
-            ]);
+        if(isset($input['documentImage'])){
+            $str = $firebase->createStorage()->getBucket()->upload(file_get_contents($documentImage),
+                [
+                    'name' => '/esercizi/' . $input['name'].$input['surname'].'DocumentImage'
+                ]);
+        }
 
         if($input['isUnderage'] == 'true'){
-            $str2 = $firebase->createStorage()->getBucket()->upload(file_get_contents($parentDocumentImage),
-                [
-                    'name' => $input['parentName'].$input['parentSurname'].'ParentDocumentImage'
-                ]);
-            $parentDocumentImage = $str2->signedUrl($dateobj).PHP_EOL;
+          if(isset($input['parentDocumentImage'])){
+              $str2 = $firebase->createStorage()->getBucket()->upload(file_get_contents($parentDocumentImage),
+                  [
+                      'name' => $input['parentName'].$input['parentSurname'].'ParentDocumentImage'
+                  ]);
+              $parentDocumentImage = $str2->signedUrl($dateobj).PHP_EOL;
 
-
+          }
 
             // $parentDocumentImage = "https://firebasestorage.googleapis.com/v0/b/fitandfight.appspot.com/o/". $str2 ."?alt=media";
 
