@@ -113,7 +113,7 @@
 
                                     <div class="col-lg-6 col-md-8 col-sm-12">
                                         <label for="documentImage" class="text-right control-label" style="font-size: 16px;">Imagine Documento d'Identità:</label>
-                                        <input type="file" class="form-control" id="documentImage" name="documentImage" onchange="Filevalidation()" required>
+                                        <input type="file" class="form-control" id="documentImage" name="documentImage" onchange="Filevalidation()">
                                     </div>
                                 </div>
 
@@ -431,7 +431,6 @@
                 document.getElementById('parentEmail').value = "";
                 document.getElementById('parentDocumentType').required = true;
                 document.getElementById('parentDocumentNumber').required = true;
-                document.getElementById('parentDocumentImage').required = true;
                 document.getElementById('parentDocumentReleaseDate').required = true;
                 document.getElementById('parentDocumentReleaser').required = true;
             }
