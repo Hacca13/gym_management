@@ -39,7 +39,6 @@
                                 @enderror
                             </div>
                         </div>
-                        <a href="/admin/password/reset" class="offset-1">Hai dimenticato la password?</a>
                         <br>
                         <br>
                         <div class="form-group row mb-0">

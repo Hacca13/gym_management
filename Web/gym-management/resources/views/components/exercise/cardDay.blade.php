@@ -4,7 +4,7 @@
             <div class="card card-hover">
                 <a id="{{'day' . $loop->index}}" data-toggle="collapse" onclick="setButton({{$loop->index}})" href="{{'#dayOfWeek' . $loop->index}}" role="button" aria-expanded="false" aria-controls="{{'dayOfWeek' . $loop->index}}">
                     <div class="box bg-dark text-center" id="{{'color' . $loop->index}}">
-                        <h3 class="text-white">NOME DEL GIORNO</h3>
+                        <h3 class="text-white">ESERCIZI</h3>
                     </div>
                 </a>
             </div>
@@ -13,12 +13,8 @@
             <div class="card" style="background-color: transparent">
                 <div class="col-md-12">
                     <div class="row justify-content-center">
-                        @foreach ($exerciseListBig as $exerciseList)
-                            @if(data_get($exerciseList,'idDatabase') == $trainingCard->getIdDatabase())
-                                @foreach ( data_get($exerciseList,'exercises') as $exercise)
-                                    @include('components.exercise.cardExerciseForTrainingCard')
-                                @endforeach
-                            @endif
+                        @foreach ($trainingCard->getExercises() as $exercise)
+                              @include('components.exercise.cardExerciseForTrainingCard')
                         @endforeach
                     </div>
                 </div>

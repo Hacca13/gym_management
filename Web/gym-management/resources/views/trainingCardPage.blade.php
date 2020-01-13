@@ -59,7 +59,7 @@
                         </div>
                     </div>
                 </div>
-
+<!--
                 <div class="row text-center" style="margin-top: 5%">
                   <br>
                   <br>
@@ -69,7 +69,7 @@
                   <br>
                   <br>
                 </div>
-  <!--
+  -->
                 @if(count($trainingCardsList) == 0)
                   <div class="row text-center" style="margin-top: 5%">
                     <br>
@@ -91,7 +91,7 @@
             <div class="row justify-content-center" style="margin-top: 2.5%">
                 {{ $trainingCardsList->links()}}
             </div>
-            -->
+
         </div>
     </div>
 

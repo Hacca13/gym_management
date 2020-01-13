@@ -161,7 +161,7 @@ class TrainingCardsManager extends Controller
       $timestamp = strtotime($endDate);
       $endDate = date("Y-m-d", $timestamp);
 
-      if($endDate > $today){
+      if($endDate < $today){
         return true;
       }
       else{
@@ -181,29 +181,8 @@ class TrainingCardsManager extends Controller
       $trainingCardsList= new LengthAwarePaginator($currentPageItems , count($itemCollection), $perPage);
       $trainingCardsList->setPath($request->url());
 
-      $exerciseListBig = array();
-      $exerciseListTemp = array();
-      foreach ($trainingCardsList as $trainingCard) {
-        $user = UsersManager::getUserById($trainingCard->getIdUserDatabase());
-        array_push($usersList,$user);
 
-        foreach ($trainingCard->getExercises() as $exercise) {
-          $exercise1 = ExercisesManager::trasformArrayExerciseToExercise($exercise);
-          $exercise1->setIdDatabase(data_get($exercise, 'idExerciseDatabase'));
-          $exercise1->setExerciseIsATime(data_get($exercise, 'atTime'));
-          array_push($exerciseListTemp,$exercise1);
-        }
-
-        $arrayTemp['idDatabase'] = $trainingCard->getIdDatabase();
-        $arrayTemp['exercises'] = $exerciseListTemp ;
-
-        array_push($exerciseListBig,$arrayTemp);
-
-      }
-
-
-
-      return view('trainingCardPage', compact('trainingCardsList', 'usersList', 'exerciseListBig' ));
+      return view('trainingCardPage', compact('trainingCardsList' ));
     }
 
     public static function getTrainingCardsDBOrTrainingCardsSession(Request $request,$currentPage){
