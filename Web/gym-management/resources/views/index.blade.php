@@ -59,6 +59,16 @@
                             </a>
                         </div>
                     </div>
+                    <div class="col-md-6 col-lg-2 col-sm-12">
+                        <div class="card card-hover" style="border-radius: 10px">
+                            <a href="/admin/inserisciUtenteCorso">
+                                <div class="box bg-dark text-center">
+                                    <h1 class="font-light text-white"><i class="fas fa-user"></i></h1>
+                                    <h6 class="text-white">Aggiungi un utente ad un corso</h6>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
