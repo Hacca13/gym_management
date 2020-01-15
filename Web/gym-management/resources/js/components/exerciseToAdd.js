@@ -12,7 +12,7 @@ class ExerciseToAdd extends Component {
                 min: '1',
                 sec: '0'
             },
-            day: 'Lunedì',
+            day: 'Lunedi',
         }
     }
 
