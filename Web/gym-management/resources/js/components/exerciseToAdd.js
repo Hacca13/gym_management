@@ -6,7 +6,7 @@ class ExerciseToAdd extends Component {
         this.state = {
             atTime: true,
             numberOfSeries: '1',
-            weight: '',
+            weight: '1',
             numberOfRepetitions: '1',
             rest: {
                 min: '1',

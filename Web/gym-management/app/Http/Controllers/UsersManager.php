@@ -239,6 +239,9 @@ class UsersManager extends Controller{
           return redirect('/admin/nuovoIscritto');
         }
 
+        $str = null;
+        $str2 = null;
+
         if(!isset($input['documentImage'])){
           $documentImage = null;
         }

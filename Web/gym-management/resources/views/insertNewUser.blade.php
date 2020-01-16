@@ -382,7 +382,7 @@
                 age--;
             }
 
-            if (age > 18) {
+            if (age >= 18) {
 
                 document.getElementById('isUnderage').value = 'false';
 

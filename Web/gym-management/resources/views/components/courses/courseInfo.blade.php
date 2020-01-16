@@ -7,8 +7,6 @@
                         <label class="col-lg-6 text-center col-form-label" style="color:rgba(31, 38, 45, 0.8)">{{$course->getName()}}</label>
                         <label for="fname" class="col-lg-5 text-right control-label">Nome Istruttore:</label>
                         <label class="col-lg-6 text-center col-form-label" style="color:rgba(31, 38, 45, 0.8)">{{$course->getInstructor()}}</label>
-                        <label for="fname" class="col-lg-5 text-right control-label">Durata:</label>
-                        <label class="col-lg-6 text-center col-form-label" style="color:rgba(31, 38, 45, 0.8)"></label>
                         <label class="col-lg-5 text-right control-label">Dal:</label>
                         <label class="col-lg-6 text-center col-form-label" style="color:rgba(31, 38, 45, 0.8)">{{$course->getPeriod()['startDate']}}</label>
                         <label class="col-lg-5 text-right control-label">Al:</label>
