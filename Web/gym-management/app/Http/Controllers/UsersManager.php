@@ -316,6 +316,13 @@ class UsersManager extends Controller{
         try {
             $uid = $firebase->createAuth()->createUserWithEmailAndPassword($input['email'], $input['password'])->uid;
 
+            if(!isset($input['publicSocial'])){
+              $input['publicSocial'] = null;
+            }
+            if(!isset($input['medicalCertificate'])){
+              $input['medicalCertificate'] = null;
+            }
+
             $input['name'] = strtolower($input['name']);
             $input['surname'] = strtolower($input['surname']);
 
@@ -343,6 +350,7 @@ class UsersManager extends Controller{
             if(!isset($input['previousSport'])){
               $input['previousSport'] = null;
             }
+
 
 
 
@@ -408,6 +416,7 @@ class UsersManager extends Controller{
         $birthNation = data_get($arrayUser,'birthNation');
         $birthPlace = data_get($arrayUser,'birthPlace');
 
+
         $residence = array(
             'nation' => data_get($arrayUser, 'residence.nation'),
             'cityOfResidence' => data_get($arrayUser, 'residence.cityOfResidence'),
@@ -427,6 +436,8 @@ class UsersManager extends Controller{
 
         $email = data_get($arrayUser,'email');
         $telephoneNumber = data_get($arrayUser,'telephoneNumber');
+        $publicSocial => data_get($arrayUser,'publicSocial');
+        $medicalCertificate = data_get($arrayUser,'medicalCertificate');
 
         if(UsersManager::isAdult($arrayUser) == FALSE){
             $parentName = data_get($arrayUser,'parentName');
@@ -457,11 +468,11 @@ class UsersManager extends Controller{
             $parentEmail = data_get($arrayUser,'parentEmail');
             $parentTelephoneNumber = data_get($arrayUser,'parentTelephoneNumber');
 
-            $user = new UserUnderageModel($idDatabase,$name,$surname,$gender,$profileImage,$status,$isAdult,$dateOfBirth,$birthNation,$birthPlace,$residence,$document,$email,$telephoneNumber,$parentName,$parentSurname,$parentGender,$parentDateOfBirth,$parentBirthNation,$parentBirthPlace,$parentResidence,$parentDocument,$parentEmail,$parentTelephoneNumber);
+            $user = new UserUnderageModel($idDatabase,$name,$surname,$gender,$profileImage,$status,$isAdult,$dateOfBirth,$birthNation,$birthPlace,$residence,$document,$email,$telephoneNumber,$publicSocial,$medicalCertificate,$parentName,$parentSurname,$parentGender,$parentDateOfBirth,$parentBirthNation,$parentBirthPlace,$parentResidence,$parentDocument,$parentEmail,$parentTelephoneNumber);
 
         }
         else{
-            $user = new UserModel($idDatabase,$name,$surname,$gender,$profileImage,$status,$isAdult,$dateOfBirth,$birthNation,$birthPlace,$residence,$document,$email,$telephoneNumber);
+            $user = new UserModel($idDatabase,$name,$surname,$gender,$profileImage,$status,$isAdult,$dateOfBirth,$birthNation,$birthPlace,$residence,$document,$email,$telephoneNumber,$publicSocial,$medicalCertificate);
         }
 
 
@@ -501,7 +512,10 @@ class UsersManager extends Controller{
             'residence' => $residence,
             'document' => $document,
             'email' => $user->getEmail(),
-            'telephoneNumber' => $user->getTelephoneNumber()
+            'telephoneNumber' => $user->getTelephoneNumber(),
+            'publicSocial' => $user->getPublicSocial(),
+            'medicalCertificate' => $user->getMedicalCertificate()
+
         );
 
         if(UsersManager::isAdult($user) == FALSE){
@@ -614,7 +628,10 @@ class UsersManager extends Controller{
             'residence' => $residence,
             'document' => $document,
             'email' => $input['email'],
-            'telephoneNumber' =>   $input['telephone']
+            'telephoneNumber' =>   $input['telephone'],
+            'publicSocial' => $input['publicSocial'],
+            'medicalCertificate' => $input['medicalCertificate']
+
         );
 
 

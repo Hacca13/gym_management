@@ -251,6 +251,29 @@
                                         <input type="text" class="form-control" id="importantInformation" name="importantInformation">
                                     </div>
                                 </div>
+
+                                <div class="form-group" id="">
+                                    <label class="text-left control-label" style="font-size: 16px;">Abilitazione a publicare media sui social:</label><br>
+                                    <div class="row justify-content-center">
+                                        <div class="custom-control custom-radio" style="margin-right: 5%">
+                                            <input type="radio" class="custom-control-input" id="comtrue" name="publicSocial" value="true" required>
+                                            <label class="custom-control-label" for="comtrue">Si</label>
+                                        </div>
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" checked class="custom-control-input" id="comfalse" name="publicSocial" value="false" required>
+                                            <label class="custom-control-label" for="comfalse">No</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row justify-content-center">
+                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                        <label for="medicalCertificate" class=" text-right control-label" style="font-size: 16px;">Data di Rilascio certificato medico:</label>
+                                        <input type="date" class="form-control" id="cono1" name="medicalCertificate" >
+                                    </div>
+                                </div>
+
+
                             </section>
 
                             <div class="card-body">
@@ -262,7 +285,7 @@
                                 <div id="myDiv">
                                     <div class="row">
                                         <div class="col-lg-6 col-md-6 col-sm-12">
-                                            <label for="parentName" class="text-left control-label" style="font-size: 16px;">Nome tutore:</label>
+                                            <lababel for="parentName" class="text-left control-label" style="font-size: 16px;">Nome tutore:</label>
                                             <input type="text" class="form-control" id="parentName" name="parentName" value="">
                                             <label for="parentSurname" class="text-left control-label" style="font-size: 16px;">Cognome tutore:</label>
                                             <input type="text" class="form-control" id="parentSurname" name="parentSurname" value="">
