@@ -38,8 +38,10 @@ class UserModel
     */
   protected $email;
   protected $telephoneNumber;
+  protected $publicSocial;
+  protected $medicalCertificate;
 
-  public function __construct($idDatabase,$name,$surname,$gender,$profileImage,$status,$isAdult,$dateOfBirth,$birthNation,$birthPlace,$residence,$document,$email,$telephoneNumber){
+  public function __construct($idDatabase,$name,$surname,$gender,$profileImage,$status,$isAdult,$dateOfBirth,$birthNation,$birthPlace,$residence,$document,$email,$telephoneNumber,$publicSocial,$medicalCertificate){
 
     $this->idDatabase = $idDatabase;
     $this->name = $name;
@@ -71,6 +73,8 @@ class UserModel
 
     $this->email = $email;
     $this->telephoneNumber = $telephoneNumber;
+    $this->publicSocial = $publicSocial;
+    $this->medicalCertificate = $medicalCertificate;
 
   }
 
@@ -418,5 +422,44 @@ class UserModel
     public function getProfilePicture() {
         return $this->profileImage;
     }
+
+
+    /**
+     * Set the value of publicSocial
+     *
+     * @param mixed publicSocial
+     *
+     * @return self
+     */
+    public function setPublicSocial($publicSocial)
+    {
+        $this->publicSocial = $publicSocial;
+
+        return $this;
+    }
+
+    public function getPublicSocial() {
+        return $this->publicSocial;
+    }
+
+    /**
+     * Set the value of medicalCertificate
+     *
+     * @param mixed medicalCertificate
+     *
+     * @return self
+     */
+    public function setMedicalCertificate($medicalCertificate)
+    {
+        $this->medicalCertificate = $medicalCertificate;
+
+        return $this;
+    }
+
+    public function getMedicalCertificate() {
+        return $this->medicalCertificate;
+    }
+
+
 
 }
