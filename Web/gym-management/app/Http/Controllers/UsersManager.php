@@ -436,7 +436,7 @@ class UsersManager extends Controller{
 
         $email = data_get($arrayUser,'email');
         $telephoneNumber = data_get($arrayUser,'telephoneNumber');
-        $publicSocial => data_get($arrayUser,'publicSocial');
+        $publicSocial = data_get($arrayUser,'publicSocial');
         $medicalCertificate = data_get($arrayUser,'medicalCertificate');
 
         if(UsersManager::isAdult($arrayUser) == FALSE){
