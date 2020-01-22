@@ -256,12 +256,12 @@
                                     <label class="text-left control-label" style="font-size: 16px;">Abilitazione a publicare media sui social:</label><br>
                                     <div class="row justify-content-center">
                                         <div class="custom-control custom-radio" style="margin-right: 5%">
-                                            <input type="radio" class="custom-control-input" id="comtrue" name="publicSocial" value="true" required>
-                                            <label class="custom-control-label" for="comtrue">Si</label>
+                                            <input type="radio" class="custom-control-input" id="socialtrue" name="publicSocial" value="true" required>
+                                            <label class="custom-control-label" for="socialtrue">Si</label>
                                         </div>
                                         <div class="custom-control custom-radio">
-                                            <input type="radio" checked class="custom-control-input" id="comfalse" name="publicSocial" value="false" required>
-                                            <label class="custom-control-label" for="comfalse">No</label>
+                                            <input type="radio" checked class="custom-control-input" id="socialfalse" name="publicSocial" value="false" required>
+                                            <label class="custom-control-label" for="socialfalse">No</label>
                                         </div>
                                     </div>
                                 </div>
