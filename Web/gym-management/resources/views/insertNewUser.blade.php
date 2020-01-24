@@ -318,9 +318,9 @@
                                     <div class="row justify-content-center">
                                         <div class="col-lg-6 col-md-6 col-sm-12">
                                             <label for="fname" class="text-left control-label" style="font-size: 16px;">Data di nascita tutore:</label>
-                                            <input type="date" class="form-control" id="parentDateOfBirth" name="parentDateOfBirth" value="12/12/1995">
+                                            <input type="date" class="form-control" id="parentDateOfBirth" name="parentDateOfBirth" >
                                             <label for="fname" class="text-left control-label" style="font-size: 16px;">Nazione di nascita tutore:</label>
-                                            <input type="text" class="form-control" id="parentBirthNation" name="parentBirthNation" value="12/12/1995">
+                                            <input type="text" class="form-control" id="parentBirthNation" name="parentBirthNation" >
                                             <label for="fname" class="text-left control-label" style="font-size: 16px;">Luogo di nascita tutore:</label>
                                             <input type="text" class="form-control" id="parentBirthPlace" name="parentBirthPlace" value="">
                                         </div>

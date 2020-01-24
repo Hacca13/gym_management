@@ -239,18 +239,18 @@ class UsersManager extends Controller{
           return redirect('/admin/nuovoIscritto');
         }
 
-        $str = null;
-        $str2 = null;
+        $str = 'null';
+        $str2 = 'null';
 
         if(!isset($input['documentImage'])){
-          $documentImage = null;
+          $documentImage = 'null';
         }
         else{
           $documentImage = $request->file('documentImage');
         }
 
         if(!isset($input['parentDocumentImage'])){
-          $parentDocumentImage = null;
+          $parentDocumentImage = 'null';
         }
         else{
           $parentDocumentImage = $request->file('parentDocumentImage');
@@ -296,8 +296,9 @@ class UsersManager extends Controller{
         }
        // $documentImage =  "https://firebasestorage.googleapis.com/v0/b/fitandfight.appspot.com/o/". $str ."?alt=media";
 
-
+       if(isset($input['documentImage'])){
         $documentImage = $str->signedUrl($dateobj).PHP_EOL;
+       }
 
 
 
@@ -313,11 +314,13 @@ class UsersManager extends Controller{
         $input['releaseDateDocument'] = date("d-m-Y", $timestamp);
 
 
+
+
         try {
             $uid = $firebase->createAuth()->createUserWithEmailAndPassword($input['email'], $input['password'])->uid;
 
             if(!isset($input['publicSocial'])){
-              $input['publicSocial'] = null;
+              $input['publicSocial'] = 'null';
             }
             if(!isset($input['medicalCertificate'])){
               $input['medicalCertificate'] = null;
@@ -333,22 +336,22 @@ class UsersManager extends Controller{
             $input['idUserDatabase'] = $uid;
 
             if(!isset($input['importantInformation'])){
-              $input['importantInformation'] = null;
+              $input['importantInformation'] = 'null';
             }
             if(!isset($input['otherGoals'])){
-              $input['otherGoals'] = null;
+              $input['otherGoals'] = 'null';
             }
             if(!isset($input['plicometricData'])){
-              $input['plicometricData'] = null;
+              $input['plicometricData'] = 'null';
             }
             if(!isset($input['inactiveTime'])){
-              $input['inactiveTime'] = null;
+              $input['inactiveTime'] = 'null';
             }
             if(!isset($input['previousSportTime'])){
-              $input['previousSportTime'] = null;
+              $input['previousSportTime'] = 'null';
             }
             if(!isset($input['previousSport'])){
-              $input['previousSport'] = null;
+              $input['previousSport'] = 'null';
             }
 
 
@@ -405,11 +408,13 @@ class UsersManager extends Controller{
     }
 
     public static function transformArrayUserIntoUser($arrayUser){
+
+
+
         $idDatabase = data_get($arrayUser,'idDatabase');
         $name = data_get($arrayUser,'name');
         $surname = data_get($arrayUser,'surname');
         $gender = data_get($arrayUser,'gender');
-        $profileImage = data_get($arrayUser,'profileImage');
         $status = data_get($arrayUser,'status');
         $isAdult = data_get($arrayUser,'isAdult');
         $dateOfBirth = data_get($arrayUser,'dateOfBirth');
@@ -468,11 +473,11 @@ class UsersManager extends Controller{
             $parentEmail = data_get($arrayUser,'parentEmail');
             $parentTelephoneNumber = data_get($arrayUser,'parentTelephoneNumber');
 
-            $user = new UserUnderageModel($idDatabase,$name,$surname,$gender,$profileImage,$status,$isAdult,$dateOfBirth,$birthNation,$birthPlace,$residence,$document,$email,$telephoneNumber,$publicSocial,$medicalCertificate,$parentName,$parentSurname,$parentGender,$parentDateOfBirth,$parentBirthNation,$parentBirthPlace,$parentResidence,$parentDocument,$parentEmail,$parentTelephoneNumber);
+            $user = new UserUnderageModel($idDatabase,$name,$surname,$gender,$status,$isAdult,$dateOfBirth,$birthNation,$birthPlace,$residence,$document,$email,$telephoneNumber,$publicSocial,$medicalCertificate,$parentName,$parentSurname,$parentGender,$parentDateOfBirth,$parentBirthNation,$parentBirthPlace,$parentResidence,$parentDocument,$parentEmail,$parentTelephoneNumber);
 
         }
         else{
-            $user = new UserModel($idDatabase,$name,$surname,$gender,$profileImage,$status,$isAdult,$dateOfBirth,$birthNation,$birthPlace,$residence,$document,$email,$telephoneNumber,$publicSocial,$medicalCertificate);
+            $user = new UserModel($idDatabase,$name,$surname,$gender,$status,$isAdult,$dateOfBirth,$birthNation,$birthPlace,$residence,$document,$email,$telephoneNumber,$publicSocial,$medicalCertificate);
         }
 
 
@@ -503,7 +508,6 @@ class UsersManager extends Controller{
             'name' => $user->getName(),
             'surname' => $user->getSurname(),
             'gender' => $user->getGender(),
-            'profilePicture' => $user->getProfilePicture(),
             'status' => $user->getStatus(),
             'isAdult' => $user->getIsAdult(),
             'dateOfBirth' => $user->getDateOfBirth(),
@@ -619,7 +623,6 @@ class UsersManager extends Controller{
             'name' => $input['name'],
             'surname' => $input['surname'],
             'gender' => $input['gender'],
-            'profileImage' => null,
             'status' => TRUE,
             'isAdult' =>$isAdult,
             'dateOfBirth' => $input['dateOfBirth'],
