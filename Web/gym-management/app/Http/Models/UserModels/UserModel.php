@@ -12,7 +12,6 @@ class UserModel
   protected $name;
   protected $surname;
   protected $gender ;
-  protected $profileImage;
   protected $status;
   protected $isAdult;
   protected $dateOfBirth;
@@ -41,13 +40,12 @@ class UserModel
   protected $publicSocial;
   protected $medicalCertificate;
 
-  public function __construct($idDatabase,$name,$surname,$gender,$profileImage,$status,$isAdult,$dateOfBirth,$birthNation,$birthPlace,$residence,$document,$email,$telephoneNumber,$publicSocial,$medicalCertificate){
+  public function __construct($idDatabase,$name,$surname,$gender,$status,$isAdult,$dateOfBirth,$birthNation,$birthPlace,$residence,$document,$email,$telephoneNumber,$publicSocial,$medicalCertificate){
 
     $this->idDatabase = $idDatabase;
     $this->name = $name;
     $this->surname = $surname;
     $this->gender = $gender;
-    $this->profileImage = $profileImage ;
     $this->status = $status;
     $this->isAdult = $isAdult;
     $this->dateOfBirth = $dateOfBirth;
@@ -179,29 +177,7 @@ class UserModel
         return $this;
     }
 
-    /**
-     * Get the value of Profile Image
-     *
-     * @return mixed
-     */
-    public function getProfileImage()
-    {
-        return $this->profileImage;
-    }
 
-    /**
-     * Set the value of Profile Image
-     *
-     * @param mixed profileImage
-     *
-     * @return self
-     */
-    public function setProfileImage($profileImage)
-    {
-        $this->profileImage = $profileImage;
-
-        return $this;
-    }
 
     /**
      * Get the value of Status
@@ -417,10 +393,6 @@ class UserModel
         $this->telephoneNumber = $telephoneNumber;
 
         return $this;
-    }
-
-    public function getProfilePicture() {
-        return $this->profileImage;
     }
 
 
