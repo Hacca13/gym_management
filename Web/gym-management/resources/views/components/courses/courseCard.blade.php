@@ -39,7 +39,7 @@
             <div class="col-md-12">
                 <div class="row justify-content-center">
                     <div class="col-lg-6 col-md-6 col-sm-12" style="text-align: center; margin-bottom: 5px;">
-                        <a href="/modificaCorso/{{$course->getIdDatabase()}}">
+                        <a href="/admin/modificaCorso/{{$course->getIdDatabase()}}">
                             <button class="btn btn-warning" id="fname" name="" style="border-radius: 10px;">Modifica</button>
                         </a>
                     </div>

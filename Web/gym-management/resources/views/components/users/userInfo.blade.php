@@ -47,7 +47,7 @@
     </div>
     <div class="row justify-content-center">
         <div class="col-lg-6 col-md-12 col-sm-12" style="text-align: center; margin-bottom: 5px;">
-            <a id="{{'button_1' . $loop->index}}" href="#" onclick="setNew({{$loop->index}})">
+            <a id="{{'button_1' . $loop->index}}" href="/admin/modificaUtente/{{$user->getIdDatabase()}}" >
                 <button id="{{'button1' . $loop->index}}" class="btn btn-warning" id="fname" name="" style="border-radius: 10px;">Modifica</button>
             </a>
         </div>
