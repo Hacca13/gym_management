@@ -187,7 +187,18 @@ class UsersManager extends Controller{
         return $documents;
     }
 
+    public static function setUserView($id,Request $request){
+        $documents = $request->session()->pull('allUsers');
+        $request->session()->put('allUsers', $documents);
 
+        foreach ($documents as $document) {
+          if($id == $document->getIdDatabase()){
+            $user = $document;
+          }
+        }
+
+        return view('setUser', compact('user'));
+    }
 
 
     public static function getUsersByName($name){
