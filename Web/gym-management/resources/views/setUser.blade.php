@@ -5,7 +5,7 @@
         <div class="card-body">
             <div class="row justify-content-center">
                 <div class="col-md-12" style="text-align: center;">
-                    <h1 style="color: #d6d8d8">Inserimento dati utente</h1>
+                    <h1 style="color: #d6d8d8">Modifica dati utente</h1>
                 </div>
                 <div class="col-md-12" style="margin-top: 2.5%; padding-top: 15px; background-color: #d6d8d8; border-radius: 10px">
                     <form id="example-form" action="/admin/"   method="post" class="m-t-40" enctype="multipart/form-data">
