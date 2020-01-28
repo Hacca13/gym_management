@@ -18,3 +18,5 @@ Web/gym-management/public/mix-manifest.json
 Web/gym-management/package-lock.json
 
 Web/gym-management/public/js/app.js
+
+Web/gym-management/composer.lock
