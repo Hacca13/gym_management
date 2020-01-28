@@ -20,3 +20,5 @@ Web/gym-management/package-lock.json
 Web/gym-management/public/js/app.js
 
 Web/gym-management/composer.lock
+
+Web/gym-management/routes/web.php
