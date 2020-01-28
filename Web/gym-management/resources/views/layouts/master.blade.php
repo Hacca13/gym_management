@@ -1,6 +1,11 @@
 <!doctype html>
 <html lang="it">
 <head>
+
+  <<?php $publicPath = public_path();
+        $publicPath = str_replace("\\","/",$publicPath);
+
+  ?>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -13,14 +18,14 @@
     <link rel="icon"  href="../images/iconPng.png">
     <title>Fit & Fight</title>
     <!-- Custom CSS -->
-    <link href="../matrix-admin-bt4/assets/libs/flot/css/float-chart.css" rel="stylesheet">
+    <link href="{{$publicPath}}/matrix-admin-bt4/assets/libs/flot/css/float-chart.css" rel="stylesheet">
     <!-- Custom CSS -->
-    <link href="../matrix-admin-bt4/dist/css/style.min.css" rel="stylesheet">
+    <link href="{{$publicPath}}/matrix-admin-bt4/dist/css/style.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css">
 
-    <link href="../css/bttn.min.css" rel="stylesheet">
-    <link href="../matrix-admin-bt4/assets/libs/jquery-steps/jquery.steps.css" rel="stylesheet">
-    <link href="../matrix-admin-bt4/assets/libs/jquery-steps/steps.css" rel="stylesheet">
+    <link href="{{$publicPath}}/css/bttn.min.css" rel="stylesheet">
+    <link href="{{$publicPath}}/matrix-admin-bt4/assets/libs/jquery-steps/jquery.steps.css" rel="stylesheet">
+    <link href="{{$publicPath}}/matrix-admin-bt4/assets/libs/jquery-steps/steps.css" rel="stylesheet">
     <script src="https://www.gstatic.com/firebasejs/7.2.0/firebase-auth.js"></script>
     <script src="https://kit.fontawesome.com/b9480319ec.js" crossorigin="anonymous"></script>
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -94,32 +99,31 @@
 
 
 
-<script src="../matrix-admin-bt4/assets/libs/jquery/dist/jquery.min.js"></script>
+<script src="{{$publicPath}}/matrix-admin-bt4/assets/libs/jquery/dist/jquery.min.js"></script>
 
-<script src="../matrix-admin-bt4/assets/libs/popper.js/dist/umd/popper.min.js"></script>
-<script src="../matrix-admin-bt4/assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
-<script src="../matrix-admin-bt4/assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js"></script>
-<script src="../matrix-admin-bt4/assets/extra-libs/sparkline/sparkline.js"></script>
+<script src="{{$publicPath}}/matrix-admin-bt4/assets/libs/popper.js/dist/umd/popper.min.js"></script>
+<script src="{{$publicPath}}/matrix-admin-bt4/assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="{{$publicPath}}/matrix-admin-bt4/assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js"></script>
+<script src="{{$publicPath}}/matrix-admin-bt4/assets/extra-libs/sparkline/sparkline.js"></script>
 
-<script src="../matrix-admin-bt4/dist/js/custom.min.js"></script>
+<script src="{{$publicPath}}/matrix-admin-bt4/dist/js/custom.min.js"></script>
 
-<script src="../matrix-admin-bt4/assets/libs/flot/excanvas.js"></script>
-<script src="../matrix-admin-bt4/assets/libs/flot/jquery.flot.js"></script>
-<script src="../matrix-admin-bt4/assets/libs/flot/jquery.flot.pie.js"></script>
-<script src="../matrix-admin-bt4/assets/libs/flot/jquery.flot.time.js"></script>
-<script src="../matrix-admin-bt4/assets/libs/flot/jquery.flot.stack.js"></script>
-<script src="../matrix-admin-bt4/assets/libs/flot/jquery.flot.crosshair.js"></script>
-<script src="../matrix-admin-bt4/assets/libs/flot.tooltip/js/jquery.flot.tooltip.min.js"></script>
-<script src="../matrix-admin-bt4/dist/js/pages/chart/chart-page-init.js"></script>
-<script src="../matrix-admin-bt4/assets/libs/jquery-steps/build/jquery.steps.min.js"></script>
-<script src="../matrix-admin-bt4/assets/libs/jquery-validation/dist/jquery.validate.min.js"></script>
-<script src="../matrix-admin-bt4/assets/libs/jquery/dist/js/custom.min.js"></script>
-<script src="../matrix-admin-bt4/assets/libs/popper.js/dist/umd/popper.min.js"></script>
-<script src="../matrix-admin-bt4/assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
-<script src="../matrix-admin-bt4/assets/assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js"></script>
-<script src="../matrix-admin-bt4/assets/assets/extra-libs/sparkline/sparkline.js"></script>
-<script src="../matrix-admin-bt4/assets/assets/libs/jquery/dist/jquery.min.js"></script>
-
+<script src="{{$publicPath}}/matrix-admin-bt4/assets/libs/flot/excanvas.js"></script>
+<script src="{{$publicPath}}/matrix-admin-bt4/assets/libs/flot/jquery.flot.js"></script>
+<script src="{{$publicPath}}/matrix-admin-bt4/assets/libs/flot/jquery.flot.pie.js"></script>
+<script src="{{$publicPath}}/matrix-admin-bt4/assets/libs/flot/jquery.flot.time.js"></script>
+<script src="{{$publicPath}}/matrix-admin-bt4/assets/libs/flot/jquery.flot.stack.js"></script>
+<script src="{{$publicPath}}/matrix-admin-bt4/assets/libs/flot/jquery.flot.crosshair.js"></script>
+<script src="{{$publicPath}}/matrix-admin-bt4/assets/libs/flot.tooltip/js/jquery.flot.tooltip.min.js"></script>
+<script src="{{$publicPath}}/matrix-admin-bt4/dist/js/pages/chart/chart-page-init.js"></script>
+<script src="{{$publicPath}}/matrix-admin-bt4/assets/libs/jquery-steps/build/jquery.steps.min.js"></script>
+<script src="{{$publicPath}}/matrix-admin-bt4/assets/libs/jquery-validation/dist/jquery.validate.min.js"></script>
+<script src="{{$publicPath}}/matrix-admin-bt4/assets/libs/jquery/dist/js/custom.min.js"></script>
+<script src="{{$publicPath}}/matrix-admin-bt4/assets/libs/popper.js/dist/umd/popper.min.js"></script>
+<script src="{{$publicPath}}/matrix-admin-bt4/assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="{{$publicPath}}/matrix-admin-bt4/assets/assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js"></script>
+<script src="{{$publicPath}}/matrix-admin-bt4/assets/assets/extra-libs/sparkline/sparkline.js"></script>
+<script src="{{$publicPath}}/matrix-admin-bt4/assets/assets/libs/jquery/dist/jquery.min.js"></script>
 
 <script>
     // Basic Example with form
@@ -153,6 +157,7 @@
 
 
 </script>
+
 
 <script>
     function myFunction() {
@@ -229,7 +234,7 @@
         }
     }
 </script>
-
+<h1>{{$publicPath}}</h1>
 </body>
 
 @jquery
