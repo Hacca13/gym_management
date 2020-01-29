@@ -187,17 +187,43 @@ class UsersManager extends Controller{
         return $documents;
     }
 
+    public static function setUser(Request $request){
+
+      if(isset($input['documentImage'])){
+
+      }
+      else{
+        $documentImage=$input['oldDocumentImage'];
+      }
+
+      if($input['isUnderage']==true){
+        if(isset($input['parentDocumentImage'])){
+
+        }
+        else{
+          $parentDocumentImage=$input['oldParentDocumentImage'];
+        }
+      }
+
+      $arrayUser = UsersManager::transformRequestIntoArrayUser($request,$documentImage,$parentDocumentImage);
+
+      toastr()->success('Utente modificato con successo.');
+      return redirect('/admin/gestioneIscritti');
+    }
+
     public static function setUserView($id,Request $request){
         $documents = $request->session()->pull('allUsers');
         $request->session()->put('allUsers', $documents);
+        $medicalHistory;
 
         foreach ($documents as $document) {
           if($id == $document->getIdDatabase()){
             $user = $document;
+            $medicalHistory = MedicalHistoryManager::getMedicalHistoryByUserId($user->getIdDatabase());
           }
         }
 
-        return view('setUser', compact('user'));
+        return view('setUser', compact('user', 'medicalHistory'));
     }
 
 

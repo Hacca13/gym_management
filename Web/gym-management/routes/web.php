@@ -43,9 +43,7 @@ Route::prefix('admin')->group(function () {
 //UTENTI
 Route::prefix('admin')->group(function () {
     Route::post('/setUser', 'UsersManager@setUser')->middleware('auth');
-    Route::get('/modificaUtente', function (){
-        return view('setUser');
-    })->middleware('auth');
+   
     Route::get('/modificaUtente/{id}', 'UsersManager@setUserView')->middleware('auth');
 
     Route::post('/addUserPost', 'UsersManager@createUser')->middleware('auth');
