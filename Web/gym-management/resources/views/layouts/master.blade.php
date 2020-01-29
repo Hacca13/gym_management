@@ -14,7 +14,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <!-- Favicon icon -->
-    <link rel="icon"  href="../images/iconFit&Fight.jpg">
+    <link rel="icon"  href="{{asset('images/iconFit&Fight.jpg')}}">
     <title>Fit & Fight</title>
     <!-- Custom CSS -->
     <link href="{{asset('matrix-admin-bt4/assets/libs/flot/css/float-chart.css')}}" rel="stylesheet">
@@ -44,11 +44,11 @@
     }
 </style>
 
-<body style="background: transparent">
+<body onload="testAge()" style="background: transparent">
 
 
 
-<div id="main-wrapper"  style="background-image:url('../images/wall.jpg'); background-size: cover; padding-bottom: 14%;background-attachment: fixed;">
+<div id="main-wrapper"  style="background-image:url('https://firebasestorage.googleapis.com/v0/b/fitandfight.appspot.com/o/wall.jpg?alt=media&token=2c274bde-c934-4af3-96ef-48efbaf3b2e9'); background-size: cover; padding-bottom: 14%;background-attachment: fixed;">
 
 @include('components.navbar')
 @include('components.sidebar')
