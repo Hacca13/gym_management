@@ -112,7 +112,7 @@
                                 <div class="form-group row">
                                     <label for="fname" class="col-sm-3 text-right control-label col-form-label">Immagine del Corso</label>
                                     <div class="col-sm-9">
-                                        <input type="text" hidden class="form-control" id="fname" name="oldCourseImage" value="{{$course->getImage()}}">
+                                        <input type="text" hidden class="form-control" id="fname" name="imageName" value="{{$course->getImageName()}}">
                                         <input type="file" class="form-control" id="courseImage" name="courseImage" >
                                     </div>
                                 </div>
