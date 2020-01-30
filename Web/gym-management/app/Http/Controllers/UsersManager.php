@@ -191,6 +191,7 @@ class UsersManager extends Controller{
       $input = $request->all();
       $collection = Firestore::collection('Users');
 
+
       $timestamp = strtotime($input['dateOfBirth']);
       $input['dateOfBirth'] = date("d-m-Y", $timestamp);
       $timestamp = strtotime($input['releaseDateDocument']);
@@ -237,8 +238,9 @@ class UsersManager extends Controller{
         $uploadedImage = $request->file("documentImage");
 
         $imageName = rtrim(base64_encode(md5(microtime())),"=");
+        $input['documentImageName'] = $imageName;
         $bucket = $firebase->createStorage()->getBucket();
-        $str = $bucket->upload(file_get_contents($uploadedImage,
+        $str = $bucket->upload(file_get_contents($uploadedImage),
           [
               'name' => $imageName
           ]);
@@ -249,8 +251,9 @@ class UsersManager extends Controller{
 
         $documentImage = $str->signedUrl($dateobj).PHP_EOL;
 
-        if($input['oldDocumentImage'] != null){
+        if(isset($input['oldDocumentImage'])){
           $oldImage = $input['oldDocumentImage'];
+          $obj = $bucket->object($oldImage);
           $obj->delete();
         }
 
@@ -266,6 +269,7 @@ class UsersManager extends Controller{
           $uploadedParentImage = $request->file("parentDocumentImage");
 
           $imageName = rtrim(base64_encode(md5(microtime())),"=");
+          $input['parentDocumentImageName'] = $imageName;
           $bucket = $firebase->createStorage()->getBucket();
           $str = $bucket->upload(file_get_contents($uploadedParentImage),
             [
@@ -278,7 +282,7 @@ class UsersManager extends Controller{
 
           $parentDocumentImage = $str->signedUrl($dateobj).PHP_EOL;
 
-          if($input['oldParentDocumentImage'] != null){
+          if(isset($input['oldParentDocumentImage'])){
             $oldImage = $input['oldParentDocumentImage'];
             $obj = $bucket->object($oldImage);
             $obj->delete();
