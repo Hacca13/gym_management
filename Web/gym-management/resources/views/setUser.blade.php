@@ -38,6 +38,7 @@
                             <h3 id="parentTitle">Dati Utente</h3>
                             <section>
                               <input type="text" id="idDatabase" hidden name="idDatabase" value="{{$user->getIdDatabase()}}" required></input>
+                              <input type="text" id="email" hidden name="email" value="{{$user->getEmail()}}" required></input>
 
                                 <div class="row justify-content-center">
                                     <div class="col-lg-6 col-md-8 col-sm-12">
@@ -139,7 +140,11 @@
                                     <div class="col-lg-6 col-md-8 col-sm-12">
                                         <label for="documentImage" class="text-right control-label" style="font-size: 16px;">Imagine Documento d'Identità:</label>
                                         <input type="file" class="form-control" id="documentImage" name="documentImage" onchange="Filevalidation()">
-                                        <input type="text" hidden class="form-control" id="fname" name="oldDocumentImage" value="{{data_get($user->getDocument(),'documentImage')}}">
+                                        <input type="text" hidden class="form-control" id="oldDocumentImage" name="oldDocumentImage" <?php if(data_get($user->getDocument(),'documentImage') != null){ ?>
+                                          value="{{data_get($user->getDocument(),'documentImage')}}"
+
+                                      <?php } ?>
+                                        >
                                     </div>
                                 </div>
 
