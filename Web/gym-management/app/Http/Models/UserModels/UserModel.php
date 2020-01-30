@@ -30,6 +30,7 @@ class UserModel
     /*
       document:
           documentImage;
+          documentImageName;
           type;
           number;
           ReleaseDate;
@@ -63,6 +64,7 @@ class UserModel
 
     $this->document = array(
         'documentImage' => data_get($document, 'documentImage'),
+        'documentImageName' => data_get($document, 'documentImageName'),
         'type' => data_get($document, 'type'),
         'number' => data_get($document, 'number'),
         'released' => data_get($document, 'released'),

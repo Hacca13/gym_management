@@ -188,8 +188,72 @@ class UsersManager extends Controller{
     }
 
     public static function setUser(Request $request){
+      $input = $request->all();
+      $collection = Firestore::collection('Users');
+
+      $timestamp = strtotime($input['dateOfBirth']);
+      $input['dateOfBirth'] = date("d-m-Y", $timestamp);
+      $timestamp = strtotime($input['releaseDateDocument']);
+      $input['releaseDateDocument'] = date("d-m-Y", $timestamp);
+
+
+
+      if($input['isUnderage']==true){
+        $timestamp = strtotime($input['parentDateOfBirth']);
+        $input['parentDateOfBirth'] = date("d-m-Y", $timestamp);
+        $timestamp = strtotime($input['parentDocumentReleaseDate']);
+        $input['parentDocumentReleaseDate'] = date("d-m-Y", $timestamp);
+      }
+
+      if(!isset($input['medicalCertificate'])){
+          $input['medicalCertificate'] = null;
+      }
+      if(!isset($input['publicSocial'])){
+          $input['publicSocial'] = 'null';
+      }
+      if(!isset($input['importantInformation'])){
+          $input['importantInformation'] = 'null';
+      }
+      if(!isset($input['otherGoals'])){
+          $input['otherGoals'] = 'null';
+      }
+      if(!isset($input['plicometricData'])){
+          $input['plicometricData'] = 'null';
+      }
+      if(!isset($input['inactiveTime'])){
+          $input['inactiveTime'] = 'null';
+      }
+      if(!isset($input['previousSportTime'])){
+          $input['previousSportTime'] = 'null';
+      }
+      if(!isset($input['previousSport'])){
+          $input['previousSport'] = 'null';
+      }
+
+      $firebase = (new Firebase\Factory());
 
       if(isset($input['documentImage'])){
+        $documentImage=$input['documentImage'];
+        $uploadedImage = $request->file("documentImage");
+
+        $imageName = rtrim(base64_encode(md5(microtime())),"=");
+        $bucket = $firebase->createStorage()->getBucket();
+        $str = $bucket->upload(file_get_contents($uploadedImage,
+          [
+              'name' => $imageName
+          ]);
+
+        $external = "19/10/2100 14:48:21";
+        $format = "d/m/Y H:i:s";
+        $dateobj = DateTime::createFromFormat($format, $external);
+
+        $documentImage = $str->signedUrl($dateobj).PHP_EOL;
+
+        if($input['oldDocumentImage'] != null){
+          $oldImage = $input['oldDocumentImage'];
+          $obj->delete();
+        }
+
 
       }
       else{
@@ -198,7 +262,27 @@ class UsersManager extends Controller{
 
       if($input['isUnderage']==true){
         if(isset($input['parentDocumentImage'])){
+          $parentDocumentImage = $input['parentDocumentImage'];
+          $uploadedParentImage = $request->file("parentDocumentImage");
 
+          $imageName = rtrim(base64_encode(md5(microtime())),"=");
+          $bucket = $firebase->createStorage()->getBucket();
+          $str = $bucket->upload(file_get_contents($uploadedParentImage),
+            [
+                'name' => $imageName
+            ]);
+
+          $external = "19/10/2100 14:48:21";
+          $format = "d/m/Y H:i:s";
+          $dateobj = DateTime::createFromFormat($format, $external);
+
+          $parentDocumentImage = $str->signedUrl($dateobj).PHP_EOL;
+
+          if($input['oldParentDocumentImage'] != null){
+            $oldImage = $input['oldParentDocumentImage'];
+            $obj = $bucket->object($oldImage);
+            $obj->delete();
+          }
         }
         else{
           $parentDocumentImage=$input['oldParentDocumentImage'];
@@ -206,6 +290,11 @@ class UsersManager extends Controller{
       }
 
       $arrayUser = UsersManager::transformRequestIntoArrayUser($request,$documentImage,$parentDocumentImage);
+      $arrayMedicalHistory = MedicalHistoryManager::trasformRequestToArrayMedicalHistory($input);
+      $arrayMedicalHistory['idDatabase'] = $input['medicalHistoryIdDatabase'];
+      MedicalHistoryManager::setMedicalHistory($arrayMedicalHistory);
+
+      $collection->document($input['idDatabase'])->set($arrayUser);
 
       toastr()->success('Utente modificato con successo.');
       return redirect('/admin/gestioneIscritti');
@@ -280,17 +369,23 @@ class UsersManager extends Controller{
         $str2 = 'null';
 
         if(!isset($input['documentImage'])){
-          $documentImage = 'null';
+          $documentImage = null;
         }
         else{
+          $documentImageName = rtrim(base64_encode(md5(microtime())),"=");
+          $input['documentImageName']=$documentImageName;
           $documentImage = $request->file('documentImage');
         }
 
         if(!isset($input['parentDocumentImage'])){
-          $parentDocumentImage = 'null';
+          $parentDocumentImage = null;
         }
         else{
-          $parentDocumentImage = $request->file('parentDocumentImage');
+          if($input['isUnderage'] == 'true'){
+            $parentDocumentImageName = rtrim(base64_encode(md5(microtime())),"=");
+            $input['parentDocumentImageName']=$parentDocumentImageName;
+            $parentDocumentImage = $request->file('parentDocumentImage');
+          }
         }
 
 
@@ -299,10 +394,6 @@ class UsersManager extends Controller{
         $dateobj = DateTime::createFromFormat($format, $external);
 
 
-        if($input['isUnderage'] == 'true'){
-            $parentDocumentImage = $request->file('parentDocumentImage');
-        }
-
         $tr = new GoogleTranslate('it');
 
         $firebase = (new Firebase\Factory());
@@ -310,7 +401,7 @@ class UsersManager extends Controller{
         if(isset($input['documentImage'])){
             $str = $firebase->createStorage()->getBucket()->upload(file_get_contents($documentImage),
                 [
-                    'name' => '/esercizi/' . $input['name'].$input['surname'].'DocumentImage'
+                    'name' => $documentImageName
                 ]);
         }
 
@@ -318,7 +409,7 @@ class UsersManager extends Controller{
           if(isset($input['parentDocumentImage'])){
               $str2 = $firebase->createStorage()->getBucket()->upload(file_get_contents($parentDocumentImage),
                   [
-                      'name' => $input['parentName'].$input['parentSurname'].'ParentDocumentImage'
+                      'name' => $parentDocumentImage
                   ]);
               $parentDocumentImage = $str2->signedUrl($dateobj).PHP_EOL;
 
@@ -470,6 +561,7 @@ class UsersManager extends Controller{
 
         $document = array(
             'documentImage' => data_get($arrayUser, 'document.documentImage'),
+            'documentImageName' => data_get($arrayUser, 'document.documentImageName'),
             'type' => data_get($arrayUser, 'document.type'),
             'number' => data_get($arrayUser, 'document.number'),
             'released' => data_get($arrayUser, 'document.released'),
@@ -500,6 +592,7 @@ class UsersManager extends Controller{
 
             $parentDocument = array(
                 'documentImage' => data_get($arrayUser, 'parentDocument.documentImage'),
+                'documentImageName' => data_get($arrayUser, 'parentDocument.documentImageName'),
                 'type' => data_get($arrayUser, 'parentDocument.type'),
                 'number' => data_get($arrayUser, 'parentDocument.number'),
                 'released' => data_get($arrayUser, 'parentDocument.released'),
@@ -534,6 +627,7 @@ class UsersManager extends Controller{
         );
         $document = array(
             'documentImage' => data_get($user->getDocument(), 'documentImage'),
+            'documentImageName' => data_get($user->getDocument(), 'documentImageName'),
             'type' => data_get($user->getDocument(),'type'),
             'number' => data_get($user->getDocument(),'number'),
             'released' => data_get($user->getDocument(),'released'),
@@ -569,6 +663,7 @@ class UsersManager extends Controller{
             );
             $parentDocument = array(
                 'documentImage' => data_get($user->getParentDocument(), 'documentImage'),
+                'documentImageName' => data_get($user->getParentDocument(), 'documentImageName'),
                 'type' => data_get($user->getParentDocument(),'type'),
                 'number' => data_get($user->getParentDocument(),'number'),
                 'released' => data_get($user->getParentDocument(),'released'),
@@ -609,6 +704,7 @@ class UsersManager extends Controller{
         );
         $document = array(
             'documentImage' => $documentImage,
+            'documentImageName' => $input['documentImageName'],
             'type' => $input['documentType'],
             'number' => $input['documentNumber'],
             'released' => $input['releaserDocument'],
@@ -635,6 +731,7 @@ class UsersManager extends Controller{
 
             $parentDocument = array(
                 'documentImage' => $parentDocumentImage,
+                'documentImage' => $input['parentDocumentImageName'],
                 'type' => $input['parentDocumentType'],
                 'number' => $input['parentDocumentNumber'],
                 'released' => $input['parentDocumentReleaser'],

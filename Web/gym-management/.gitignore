@@ -17,5 +17,6 @@ yarn-error.log
 /.idea/laravel-plugin.xml
 /.idea/vcs.xml
 /.idea/*
-/routes/web.php
+
+routes\web.php
 composer.lock
