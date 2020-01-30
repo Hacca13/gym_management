@@ -28,6 +28,7 @@ class UserUnderageModel extends UserModel
   /*
     parentDocument:
         documentImage;
+        documentImageName;
         type;
         number;
         ReleaseDate;
@@ -58,6 +59,7 @@ class UserUnderageModel extends UserModel
 
     $this->parentDocument = array(
         'documentImage' => data_get($parentDocument, 'documentImage'),
+        'documentImageName'=> data_get($parentDocument, 'documentImageName'),
         'type' => data_get($parentDocument, 'type'),
         'number' => data_get($parentDocument, 'number'),
         'released' => data_get($parentDocument, 'released'),

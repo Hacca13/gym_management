@@ -38,13 +38,15 @@
                     <label for="fname" class="col-lg-5 text-right control-label">Tipo Documento:</label>
                     <label class="col-lg-6 text-center col-form-label" style="color:rgba(31, 38, 45, 0.8)">{{data_get($user->getDocument(),'type')}}</label>
                     <label for="fname" class="col-lg-5 text-right control-label">Numero Documento:</label>
-                    <label class="col-lg-6 text-center col-form-label" style="color:rgba(31, 38, 45, 0.8)">{{data_get($user->getResidence(),'number')}}</label>
+                    <label class="col-lg-6 text-center col-form-label" style="color:rgba(31, 38, 45, 0.8)">{{data_get($user->getDocument(),'number')}}</label>
                     <label for="fname" class="col-lg-5 text-right control-label">Data Rilascio:</label>
-                    <label class="col-lg-6 text-center col-form-label" style="color:rgba(31, 38, 45, 0.8)">{{data_get($user->getResidence(),'releaseDate')}}</label>
+                    <label class="col-lg-6 text-center col-form-label" style="color:rgba(31, 38, 45, 0.8)">{{data_get($user->getDocument(),'releaseDate')}}</label>
                     <label for="fname" class="col-lg-5 text-right control-label">Rilasciato Da:</label>
-                    <label class="col-lg-6 text-center col-form-label" style="color:rgba(31, 38, 45, 0.8)">{{data_get($user->getResidence(),'released')}}</label>
-                    <label for="fname" class="col-lg-5 text-right control-label">Immagine del Documento:</label>
-                    <label class="col-lg-6 text-center col-form-label" style="color:rgba(31, 38, 45, 0.8)">{{data_get($user->getResidence(),'documentImage')}}</label>
+                    <label class="col-lg-6 text-center col-form-label" style="color:rgba(31, 38, 45, 0.8)">{{data_get($user->getDocument(),'released')}}</label>
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                        <label for="fname" class="col-sm-6 text-right control-label">Immagine Documento:</label>
+                        <img src="{{data_get($user->getDocument(),'documentImage')}}" height="180dpi" width="200dpi" class="img embed-responsive">
+                    </div>
                 </div>
                 <hr>
                 <div class="card-body">

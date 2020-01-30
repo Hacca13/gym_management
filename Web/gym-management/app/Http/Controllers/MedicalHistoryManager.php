@@ -13,6 +13,12 @@ class MedicalHistoryManager extends Controller{
       $collection = Firestore::collection('MedicalHistory');
       $collection->add($arrayMedicalHistory);
     }
+    public static function setMedicalHistory($arrayMedicalHistory){
+      $collection = Firestore::collection('MedicalHistory');
+      $idDatabase = $arrayMedicalHistory['idDatabase'];
+      unset($arrayMedicalHistory['idDatabase'])
+      $collection->document($idDatabase)->set($arrayMedicalHistory);
+    }
 
     public static function getMedicalHistoryByUserId($idUserDatabase){
       $collection = Firestore::collection('MedicalHistory');

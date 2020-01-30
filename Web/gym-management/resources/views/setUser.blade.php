@@ -161,6 +161,7 @@
                             <section>
                                 <div class="row">
                                     <div class="col-md-6">
+                                        <input type="text" id="medicalHistoryIdDatabase" hidden name="medicalHistoryIdDatabase" value="{{$medicalHistory->getIdDatabase()}}" required></input>
                                         <label for="weight" class="text-left control-label" style="font-size: 16px;">Peso (kg):</label>
                                         <input type="number" class="form-control" id="weight" oninput="imcCalculation()" name="weight" value="{{$medicalHistory->getWeight()}}" required>
                                         <label for="height" class="text-left control-label" style="font-size: 16px;">Altezza (cm):</label>
@@ -500,7 +501,7 @@
                                                 <div class="col-lg-12 col-md-12 col-sm-12">
                                                     <label for="lname" class="text-left control-label" style="font-size: 16px;">Imagine documento d'identità:</label>
                                                     <input type="text" class="form-control" id="parentDocumentImage" name="parentDocumentImage" value="">
-                                                    <input type="text" hidden class="form-control" id="fname" name="oldDocumentImage"
+                                                    <input type="text" hidden class="form-control" id="oldParentDocumentImage" name="oldParentDocumentImage"
                                                     <?php
                                                       if($user->getIsAdult() == false){
                                                         if(data_get($user->getParentDocument(),'documentImage') != null){ ?>
