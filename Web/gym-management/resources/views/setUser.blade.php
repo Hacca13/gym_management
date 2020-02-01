@@ -140,8 +140,8 @@
                                     <div class="col-lg-6 col-md-8 col-sm-12">
                                         <label for="documentImage" class="text-right control-label" style="font-size: 16px;">Imagine Documento d'Identità:</label>
                                         <input type="file" class="form-control" id="documentImage" name="documentImage" onchange="Filevalidation()">
-                                        <input type="text" hidden class="form-control" id="oldDocumentImage" name="oldDocumentImage" <?php if(data_get($user->getDocument(),'documentImage') != null){ ?>
-                                          value="{{data_get($user->getDocument(),'documentImage')}}"
+                                        <input type="text" hidden class="form-control" id="oldDocumentImage" name="oldDocumentImage" <?php if(data_get($user->getDocument(),'documentImageName') != null){ ?>
+                                          value="{{data_get($user->getDocument(),'documentImageName')}}"
 
                                       <?php } ?>
                                         >
@@ -509,8 +509,8 @@
                                                     <input type="text" hidden class="form-control" id="oldParentDocumentImage" name="oldParentDocumentImage"
                                                     <?php
                                                       if($user->getIsAdult() == false){
-                                                        if(data_get($user->getParentDocument(),'documentImage') != null){ ?>
-                                                          value="{{data_get($user->getParentDocument(),'documentImage')}}"
+                                                        if(data_get($user->getParentDocument(),'documentImageName') != null){ ?>
+                                                          value="{{data_get($user->getParentDocument(),'documentImageName')}}"
                                                     <?php }} ?>>
                                                 </div>
 
