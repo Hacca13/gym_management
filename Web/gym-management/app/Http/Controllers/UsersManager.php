@@ -254,6 +254,7 @@ class UsersManager extends Controller{
         if(isset($input['oldDocumentImage'])){
           $oldImage = $input['oldDocumentImage'];
           $obj = $bucket->object($oldImage);
+          var_dump($oldImage);
           $obj->delete();
         }
 
@@ -293,12 +294,14 @@ class UsersManager extends Controller{
         }
       }
 
-      $arrayUser = UsersManager::transformRequestIntoArrayUser($request,$documentImage,$parentDocumentImage);
+      $arrayUser = UsersManager::transformRequestIntoArrayUser($input,$documentImage,$parentDocumentImage);
+      $collection->document($input['idDatabase'])->set($arrayUser);
+      $input['idUserDatabase'] = $input['idDatabase'];
+
       $arrayMedicalHistory = MedicalHistoryManager::trasformRequestToArrayMedicalHistory($input);
       $arrayMedicalHistory['idDatabase'] = $input['medicalHistoryIdDatabase'];
       MedicalHistoryManager::setMedicalHistory($arrayMedicalHistory);
 
-      $collection->document($input['idDatabase'])->set($arrayUser);
 
       toastr()->success('Utente modificato con successo.');
       return redirect('/admin/gestioneIscritti');
@@ -735,7 +738,7 @@ class UsersManager extends Controller{
 
             $parentDocument = array(
                 'documentImage' => $parentDocumentImage,
-                'documentImage' => $input['parentDocumentImageName'],
+                'documentImageName' => $input['parentDocumentImageName'],
                 'type' => $input['parentDocumentType'],
                 'number' => $input['parentDocumentNumber'],
                 'released' => $input['parentDocumentReleaser'],
