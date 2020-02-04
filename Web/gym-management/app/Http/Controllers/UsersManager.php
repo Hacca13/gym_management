@@ -210,25 +210,37 @@ class UsersManager extends Controller{
           $input['medicalCertificate'] = null;
       }
       if(!isset($input['publicSocial'])){
-          $input['publicSocial'] = 'null';
+          $input['publicSocial'] = null;
       }
       if(!isset($input['importantInformation'])){
-          $input['importantInformation'] = 'null';
+          $input['importantInformation'] = null;
       }
       if(!isset($input['otherGoals'])){
-          $input['otherGoals'] = 'null';
+          $input['otherGoals'] = null;
       }
       if(!isset($input['plicometricData'])){
-          $input['plicometricData'] = 'null';
+          $input['plicometricData'] = null;
       }
       if(!isset($input['inactiveTime'])){
-          $input['inactiveTime'] = 'null';
+          $input['inactiveTime'] = null;
       }
       if(!isset($input['previousSportTime'])){
-          $input['previousSportTime'] = 'null';
+          $input['previousSportTime'] = null;
       }
       if(!isset($input['previousSport'])){
-          $input['previousSport'] = 'null';
+          $input['previousSport'] = null;
+      }
+      if(!isset($input['oldDocumentImageName'])){
+          $input['oldDocumentImageName'] = null;
+      }
+      if(!isset($input['oldDocumentImage'])){
+          $input['oldDocumentImage'] = null;
+      }
+      if(!isset($input['oldParentDocumentImageName'])){
+          $input['oldParentDocumentImageName'] = null;
+      }
+      if(!isset($input['oldParentDocumentImage'])){
+          $input['oldParentDocumentImage'] = null;
       }
 
       $firebase = (new Firebase\Factory());
@@ -251,8 +263,8 @@ class UsersManager extends Controller{
 
         $documentImage = $str->signedUrl($dateobj).PHP_EOL;
 
-        if(isset($input['oldDocumentImage'])){
-          $oldImage = $input['oldDocumentImage'];
+        if(isset($input['oldDocumentImageName'])){
+          $oldImage = $input['oldDocumentImageName'];
           $obj = $bucket->object($oldImage);
           var_dump($oldImage);
           $obj->delete();
@@ -262,6 +274,7 @@ class UsersManager extends Controller{
       }
       else{
         $documentImage=$input['oldDocumentImage'];
+        $input['documentImageName'] = $input['oldDocumentImageName'];
       }
 
       if($input['isUnderage']==true){
@@ -283,14 +296,15 @@ class UsersManager extends Controller{
 
           $parentDocumentImage = $str->signedUrl($dateobj).PHP_EOL;
 
-          if(isset($input['oldParentDocumentImage'])){
-            $oldImage = $input['oldParentDocumentImage'];
+          if(isset($input['oldParentDocumentImageName'])){
+            $oldImage = $input['oldParentDocumentImageName'];
             $obj = $bucket->object($oldImage);
             $obj->delete();
           }
         }
         else{
           $parentDocumentImage=$input['oldParentDocumentImage'];
+          $input['parentDocumentImageName'] = $input['oldParentDocumentImageName'];
         }
       }
 
