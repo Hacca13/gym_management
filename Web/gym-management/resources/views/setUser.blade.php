@@ -140,8 +140,13 @@
                                     <div class="col-lg-6 col-md-8 col-sm-12">
                                         <label for="documentImage" class="text-right control-label" style="font-size: 16px;">Imagine Documento d'Identità:</label>
                                         <input type="file" class="form-control" id="documentImage" name="documentImage" onchange="Filevalidation()">
-                                        <input type="text" hidden class="form-control" id="oldDocumentImage" name="oldDocumentImage" <?php if(data_get($user->getDocument(),'documentImageName') != null){ ?>
+                                        <input type="text" hidden class="form-control" id="oldDocumentImageName" name="oldDocumentImageName" <?php if(data_get($user->getDocument(),'documentImageName') != null){ ?>
                                           value="{{data_get($user->getDocument(),'documentImageName')}}"
+
+                                      <?php } ?>
+                                        >
+                                        <input type="text" hidden class="form-control" id="oldDocumentImage" name="oldDocumentImage" <?php if(data_get($user->getDocument(),'documentImage') != null){ ?>
+                                          value="{{data_get($user->getDocument(),'documentImage')}}"
 
                                       <?php } ?>
                                         >
@@ -507,6 +512,12 @@
                                                     <label for="lname" class="text-left control-label" style="font-size: 16px;">Imagine documento d'identità:</label>
                                                     <input type="text" class="form-control" id="parentDocumentImage" name="parentDocumentImage" value="">
                                                     <input type="text" hidden class="form-control" id="oldParentDocumentImage" name="oldParentDocumentImage"
+                                                    <?php
+                                                      if($user->getIsAdult() == false){
+                                                        if(data_get($user->getParentDocument(),'documentImage') != null){ ?>
+                                                          value="{{data_get($user->getParentDocument(),'documentImage')}}"
+                                                    <?php }} ?>>
+                                                    <input type="text" hidden class="form-control" id="oldParentDocumentImageName" name="oldParentDocumentImageName"
                                                     <?php
                                                       if($user->getIsAdult() == false){
                                                         if(data_get($user->getParentDocument(),'documentImageName') != null){ ?>
