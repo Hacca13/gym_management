@@ -11,13 +11,13 @@
 |
 */
 Route::prefix('admin')->group(function () {
-  Route::get('/', 'HomeController@index')->middleware('auth');
-  Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
-  Route::get('/firetest3','Firetest@test3')->middleware('auth');
+  Route::get('/', 'HomeController@index')->middleware();
+  Route::get('/home', 'HomeController@index')->name('home')->middleware();
+  Route::get('/firetest3','Firetest@test3')->middleware();
   Auth::routes(['register' => false]);
-  Route::get('/logout', 'Auth\LoginController@logout')->middleware('auth');
+  Route::get('/logout', 'Auth\LoginController@logout')->middleware();
 
-  Route::any('/', 'HomeController@index')->middleware('auth');
+  Route::any('/', 'HomeController@index')->middleware();
 });
 
 
@@ -25,65 +25,65 @@ Route::prefix('admin')->group(function () {
 
 //ESERCIZI
 Route::prefix('admin')->group(function () {
-    Route::post('/insertFormExercise', 'ExercisesManager@addExercise')->middleware('auth');
-    Route::post('/setFormExercise', 'ExercisesManager@setExercise')->middleware('auth');
-    Route::post('/exercisesSearchResultsPage', 'ExercisesManager@searchExercise')->middleware('auth');
-    Route::get('/exercisesPageSearchResults', 'ExercisesManager@searchExercise')->middleware('auth');
+    Route::post('/insertFormExercise', 'ExercisesManager@addExercise')->middleware();
+    Route::post('/setFormExercise', 'ExercisesManager@setExercise')->middleware();
+    Route::post('/exercisesSearchResultsPage', 'ExercisesManager@searchExercise')->middleware();
+    Route::get('/exercisesPageSearchResults', 'ExercisesManager@searchExercise')->middleware();
 
-    Route::get('/gestioneEsercizi', 'ExercisesManager@getAllExercisesForView')->middleware('auth');
+    Route::get('/gestioneEsercizi', 'ExercisesManager@getAllExercisesForView')->middleware();
 
     Route::get('/nuovoEsercizio', function () {
         return view('insertNewExercise') ;
-    })->middleware('auth');
+    })->middleware();
 
-    Route::get('/modificaEsercizio/{id}', 'ExercisesManager@setExerciseView')->middleware('auth');
-    Route::get('/eliminaEsercizio/{id}', 'ExercisesManager@deleteExercise')->middleware('auth');
+    Route::get('/modificaEsercizio/{id}', 'ExercisesManager@setExerciseView')->middleware();
+    Route::get('/eliminaEsercizio/{id}', 'ExercisesManager@deleteExercise')->middleware();
 });
 
 //UTENTI
 Route::prefix('admin')->group(function () {
-    Route::post('/setUser', 'UsersManager@setUser')->middleware('auth');
+    Route::post('/setUser', 'UsersManager@setUser')->middleware();
 
-    Route::get('/modificaUtente/{id}', 'UsersManager@setUserView')->middleware('auth');
+    Route::get('/modificaUtente/{id}', 'UsersManager@setUserView')->middleware();
 
-    Route::post('/addUserPost', 'UsersManager@createUser')->middleware('auth');
-    Route::post('/userSearchResultsPage', 'UsersManager@searchUsers')->middleware('auth');
-    Route::get('/userPageSearchResults', 'UsersManager@searchUsers')->middleware('auth');
+    Route::post('/addUserPost', 'UsersManager@createUser')->middleware();
+    Route::post('/userSearchResultsPage', 'UsersManager@searchUsers')->middleware();
+    Route::get('/userPageSearchResults', 'UsersManager@searchUsers')->middleware();
 
 
     Route::get('/nuovoIscritto', function (){
         return view('insertNewUser');
-    })->middleware('auth');
+    })->middleware();
 
 
-    Route::get('/gestioneIscritti', 'UsersManager@getAllUserForView')->middleware('auth');
+    Route::get('/gestioneIscritti', 'UsersManager@getAllUserForView')->middleware();
 
 
 });
 
 //ABBONAMENTI
 Route::prefix('admin')->group(function () {
-    Route::get('/gestioneAbbonamenti', 'SubscriptionManager@getAllSubscriptionForView')->middleware('auth');
-    Route::post('/subscriptionSearchResultsPage', 'SubscriptionManager@searchSubscription')->middleware('auth');
-    Route::get('/subscriptionPageSearchResults', 'SubscriptionManager@searchSubscription')->middleware('auth');
-    Route::get('/nuovoAbbonamento', 'SubscriptionManager@addSubscription')->middleware('auth');
+    Route::get('/gestioneAbbonamenti', 'SubscriptionManager@getAllSubscriptionForView')->middleware();
+    Route::post('/subscriptionSearchResultsPage', 'SubscriptionManager@searchSubscription')->middleware();
+    Route::get('/subscriptionPageSearchResults', 'SubscriptionManager@searchSubscription')->middleware();
+    Route::get('/nuovoAbbonamento', 'SubscriptionManager@addSubscription')->middleware();
 });
 
 
 //SCHEDA
 Route::prefix('admin')->group(function () {
-    Route::get('/getTrainingCardsPDFDownloads','TrainingCardsManager@DownloadTrainingCardsPDF')->middleware('auth');
-    Route::get('/disattivaScheda/{id}', 'TrainingCardsManager@disabledTrainingCard')->middleware('auth');
-    Route::get('/attivaScheda/{id}', 'TrainingCardsManager@activeTrainingCard')->middleware('auth');
-    Route::get('/eliminaScheda/{id}', 'TrainingCardsManager@deleteTrainingCard')->middleware('auth');
-    Route::get('/gestioneSchede', 'TrainingCardsManager@getAllTrainingCardsForView')->middleware('auth');
-  //  Route::get('/updateTCardView', 'TrainingCardsManager@updateTCardView')->middleware('auth');
-    Route::get('/nuovaScheda', 'TrainingCardsManager@exercisePage')->middleware('auth');
-    Route::post('/trainingCardsSearchResultsPage', 'TrainingCardsManager@searchTrainingCards')->middleware('auth');
-    Route::get('/trainingCardsPageSearchResult', 'TrainingCardsManager@searchTrainingCards')->middleware('auth');
+    Route::get('/getTrainingCardsPDFDownloads','TrainingCardsManager@DownloadTrainingCardsPDF')->middleware();
+    Route::get('/disattivaScheda/{id}', 'TrainingCardsManager@disabledTrainingCard')->middleware();
+    Route::get('/attivaScheda/{id}', 'TrainingCardsManager@activeTrainingCard')->middleware();
+    Route::get('/eliminaScheda/{id}', 'TrainingCardsManager@deleteTrainingCard')->middleware();
+    Route::get('/gestioneSchede', 'TrainingCardsManager@getAllTrainingCardsForView')->middleware();
+    Route::get('/modificaScheda/{id}', 'TrainingCardsManager@TCardPage')->middleware();
+    Route::get('/nuovaScheda', 'TrainingCardsManager@exercisePage')->middleware();
+    Route::post('/trainingCardsSearchResultsPage', 'TrainingCardsManager@searchTrainingCards')->middleware();
+    Route::get('/trainingCardsPageSearchResult', 'TrainingCardsManager@searchTrainingCards')->middleware();
     Route::get('/pdf', function (){
     //    return view('trainingCardPdf') ;
-    })->middleware('auth');
+    })->middleware();
 
 });
 
@@ -92,21 +92,21 @@ Route::prefix('admin')->group(function () {
 
 //CORSI
 Route::prefix('admin')->group(function () {
-    Route::get('/gestioneCorsi', 'CoursesManager@getAllCoursesView')->middleware('auth');//->middlewaree('auth')
+    Route::get('/gestioneCorsi', 'CoursesManager@getAllCoursesView')->middleware();//->middlewaree()
 
-    Route::post('/insertFormCourse', 'CoursesManager@addCourse')->middleware('auth');
-    Route::post('/setCourse', 'CoursesManager@setCourse')->middleware('auth');
+    Route::post('/insertFormCourse', 'CoursesManager@addCourse')->middleware();
+    Route::post('/setCourse', 'CoursesManager@setCourse')->middleware();
     Route::get('/nuovoCorso', function () {
         return view('insertNewCourse');
-    })->middleware('auth');
-    Route::post('/coursesSearchResultsPage', 'CoursesManager@searchCourses')->middleware('auth');
-    Route::get('/coursesPageSearchResults', 'CoursesManager@searchCourses')->middleware('auth');
+    })->middleware();
+    Route::post('/coursesSearchResultsPage', 'CoursesManager@searchCourses')->middleware();
+    Route::get('/coursesPageSearchResults', 'CoursesManager@searchCourses')->middleware();
 
     Route::get('/inserisciUtenteCorso', function () {
         return view('addUserToCourse');
-    })->middleware('auth');
+    })->middleware();
 
-    Route::get('/modificaCorso/{id}', 'CoursesManager@setCourseView')->middleware('auth');
+    Route::get('/modificaCorso/{id}', 'CoursesManager@setCourseView')->middleware();
 
 
 });

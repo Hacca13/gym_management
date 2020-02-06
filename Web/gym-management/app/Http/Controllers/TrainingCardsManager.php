@@ -220,7 +220,7 @@ class TrainingCardsManager extends Controller
       }
     }
 
-    public function updateTCardView($id) {
+    public function updateTCardData($id) {
         $exercises = Firestore::collection('Exercises')->documents();
         $exes = [];
         foreach ($exercises as $ex) {
@@ -231,12 +231,32 @@ class TrainingCardsManager extends Controller
         return response()->json([$card, $exes, $user]);
     }
 
+    public function jsonTCARD() {
+        return response()->json("ciao");
+    }
+
+    public function TCardPage($id) {
+        $exercises = Firestore::collection('Exercises')->documents();
+        $exes = [];
+        foreach ($exercises as $ex) {
+            array_push($exes, $ex->data());
+        }
+        $card = Firestore::collection('TrainingCards')->document($id)->snapshot()->data();
+        $user = Firestore::collection('Users')->document($card['idUserDatabase'])->snapshot()->data();
+        return view('updateTCard', compact('exes',  'user', 'card'));
+    }
+
+
     public function updatePostTCardView(Request $request, $id) {
+        return 'ok';
+       /*
         $input = $request->all();
         $collection = Firestore::collection('TrainingCards')->document($id);
         $collection->set($input);
-        return '/admin/gestioneSchede';
+        return 'updated';
+       */
     }
+
 
 
 

@@ -10,6 +10,7 @@ use App\Http\Models\SubscriptionModels\SubscriptionCourseModel;
 use App\Http\Models\SubscriptionModels\SubscriptionPeriodModel;
 use App\Http\Models\SubscriptionModels\SubscriptionRevenueModel;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Carbon\Carbon;
 
 class SubscriptionManager extends Controller
 {
@@ -171,7 +172,7 @@ class SubscriptionManager extends Controller
                 }
             }
             elseif ($subscription instanceof SubscriptionCourseModel) {
-              $endDate = $subscription->getEndDate();
+                $endDate = $subscription->getEndDate();
               if(SubscriptionManager::isExpired($endDate)){
                   $subscription->setIsActive(false);
                   CoursesManager::removeUserToCourse($subscription->getIdCourseDatabase(),$subscription->getIdUserDatabase());
@@ -197,16 +198,15 @@ class SubscriptionManager extends Controller
     }
 
     public static function isExpired($endDate){
-      $today = date("Y-m-d");
-      $timestamp = strtotime($endDate);
-      $endDate = date("Y-m-d", $timestamp);
-
-      if($endDate > $today){
-        return true;
-      }
-      else{
-        return false;
-      }
+        $parsedDate = str_replace("/", "-", $endDate);
+        $today = Carbon::now();
+        $dateTocheck = Carbon::parse($parsedDate);
+        if($today->lessThan($dateTocheck)){
+              return false;
+        }
+        else{
+            return true;
+        }
     }
 
     public static function getSubscriptionByUser($idUserDatabase){

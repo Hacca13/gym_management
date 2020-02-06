@@ -6,7 +6,7 @@ import Autosuggest from "react-autosuggest";
 import ExerciseToAddByTime from "../components/exerciseToAddByTime";
 import ExerciseToAdd from "../components/exerciseToAdd";
 
-class UpdateTCard extends Component {
+class UpdateTCard2 extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -19,6 +19,7 @@ class UpdateTCard extends Component {
             from: new Date(),
             to: new Date(),
             visible: false,
+            isActive: true
 
         };
         this.removeExercise = this.removeExercise.bind(this);
@@ -26,11 +27,11 @@ class UpdateTCard extends Component {
         this.addUser = this.addUser.bind(this);
     }
 
-    //COMPONENTS FUNCTIONS
-    componentDidMount() {
+    retrieveData = () => {
         axios.get('/api/updateTCard/' + this.props.id).then(value => {
             this.setState({
                 exercisesList: value.data[0].exercises,
+                isActive: value.data[0].isActive,
                 userName: value.data[2].name + ' ' + value.data[2].surname,
                 userID: value.data[2].idDatabase
             })
@@ -43,6 +44,11 @@ class UpdateTCard extends Component {
                 })
             })
         })
+    }
+
+    //COMPONENTS FUNCTIONS
+    componentDidMount() {
+       this.retrieveData()
     }
     //FORM FUNCTIONS
     onChange = (event, { newValue }) => {
@@ -60,16 +66,17 @@ class UpdateTCard extends Component {
 
     handleSubmit = event => {
         event.preventDefault();
-        axios.post('/api/updatePostTCard/' + this.props.pesp.match.params.id , {
+        axios.post('/api/updatePostTCard/' + this.props.id , {
             idUserDatabase: this.state.userID,
             exercises: this.state.exercisesList,
+            isActive: this.state.isActive,
             period: {
                 startDate: this.formatDate(this.state.from),
                 endDate: this.formatDate(this.state.to)
             }
         }).then(response => {
-            console.log(response)
-        }).catch(e => {
+            alert(response)
+            }).catch(e => {
             console.log(e);
         });
     }
@@ -370,12 +377,12 @@ class UpdateTCard extends Component {
                                                 <div className="form-group row">
                                                     <div className="col-md-6">
                                                         <p align="center">
-                                                            <button id="corso" name="acceptTerms" className="btn btn-danger" style={{borderRadius: '10px'}}>Annulla</button>
+                                                            <button onClick={() => this.retrieveData()}  className="btn btn-danger" style={{borderRadius: '10px'}}>Annulla</button>
                                                         </p>
                                                     </div>
                                                     <div className="col-md-6">
                                                         <p align="center">
-                                                            <button id="corso" name="acceptTerms" className="btn btn-success" style={{borderRadius: '10px'}}>Inserisci Scheda</button>
+                                                            <button id="corso" name="acceptTerms" className="btn btn-success" style={{borderRadius: '10px'}}>Modifica Scheda</button>
                                                         </p>
                                                     </div>
                                                 </div>
@@ -394,4 +401,4 @@ class UpdateTCard extends Component {
 
 }
 
-export default UpdateTCard;
+export default UpdateTCard2;
