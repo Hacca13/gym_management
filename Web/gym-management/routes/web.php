@@ -45,7 +45,8 @@ Route::prefix('admin')->group(function () {
     Route::post('/setUser', 'UsersManager@setUser')->middleware();
 
     Route::get('/modificaUtente/{id}', 'UsersManager@setUserView')->middleware();
-
+    Route::get('/attivaUtente/{id}', 'UsersManager@activeUser')->middleware();
+    Route::get('/disattivaUtente/{id}', 'UsersManager@deactivateUser')->middleware();
     Route::post('/addUserPost', 'UsersManager@createUser')->middleware();
     Route::post('/userSearchResultsPage', 'UsersManager@searchUsers')->middleware();
     Route::get('/userPageSearchResults', 'UsersManager@searchUsers')->middleware();
