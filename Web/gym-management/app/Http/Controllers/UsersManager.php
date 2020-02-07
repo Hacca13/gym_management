@@ -38,15 +38,13 @@ class UsersManager extends Controller{
               if($subscription->getIsActive() == TRUE){
                 $flag = false;
               }
+                if($flag){
+                    $user->setStatus(false);
+                    $user = UsersManager::transformUserIntoArrayUser($user);
+                    unset($user['idDatabase']);
+                    $collection->document($document->id())->set($user);
+                }
             }
-
-            if($flag){
-              $user->setStatus(false);
-              $user = UsersManager::transformUserIntoArrayUser($user);
-              unset($user['idDatabase']);
-              $collection->document($document->id())->set($user);
-            }
-
         }
         return $allUser;
     }

@@ -6,6 +6,7 @@ import ReactDOM from "react-dom";
 
 import InsertSubscription from "../views/insertSubscription";
 import VetrinaHome from "../vetrina/vetrinaHome";
+import UpdateTCard2 from "../views/updateTCard2";
 
 
 let InsertTCard = (props) => {
@@ -26,7 +27,7 @@ let Vetrina = (props) => {
 
 
 let UpdateTCard = (props) => {
-    return <UpdateTCard />;
+    return <UpdateTCard2 id={props.match.params.id}/>;
 };
 
 class App extends Component {
