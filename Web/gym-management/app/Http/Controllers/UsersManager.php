@@ -185,6 +185,8 @@ class UsersManager extends Controller{
         return $documents;
     }
 
+
+
     public static function setUser(Request $request){
       $input = $request->all();
       $collection = Firestore::collection('Users');
@@ -319,6 +321,8 @@ class UsersManager extends Controller{
       return redirect('/admin/gestioneIscritti');
     }
 
+
+
     public static function setUserView($id,Request $request){
         $documents = $request->session()->pull('allUsers');
         $request->session()->put('allUsers', $documents);
@@ -374,6 +378,27 @@ class UsersManager extends Controller{
       unset($user['idDatabase']);
 
       $collection->document($idDatabase)->set($user);
+
+      toastr()->success('Utente Attivato.');
+      return redirect('/admin/gestioneIscritti');
+
+    }
+
+    public static function deactivateUser($idDatabase){
+      $collection = Firestore::collection('Users');
+      $arrayUser = $collection->document($idDatabase)->snapshot()->data();
+
+      $user = UsersManager::transformArrayUserIntoUser($arrayUser);
+      $user->setIdDatabase($idDatabase);
+      $user->setStatus(false);
+      $user = UsersManager::transformUserIntoArrayUser($user);
+      unset($user['idDatabase']);
+
+      $collection->document($idDatabase)->set($user);
+
+
+      toastr()->success('Utente Disattivato.');
+      return redirect('/admin/gestioneIscritti');
     }
 
     public static function createUser(Request $request){
