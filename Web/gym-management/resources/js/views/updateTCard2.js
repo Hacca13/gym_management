@@ -33,7 +33,7 @@ class UpdateTCard2 extends Component {
                 exercisesList: value.data[0].exercises,
                 isActive: value.data[0].isActive,
                 userName: value.data[2].name + ' ' + value.data[2].surname,
-                userID: value.data[2].idDatabase
+                userID: value.data[3]
             })
         }).catch(e => {
             console.log(e);
@@ -75,7 +75,7 @@ class UpdateTCard2 extends Component {
                 endDate: this.formatDate(this.state.to)
             }
         }).then(response => {
-            alert(response)
+            alert(response.data);
             }).catch(e => {
             console.log(e);
         });
@@ -377,7 +377,7 @@ class UpdateTCard2 extends Component {
                                                 <div className="form-group row">
                                                     <div className="col-md-6">
                                                         <p align="center">
-                                                            <button onClick={() => this.retrieveData()}  className="btn btn-danger" style={{borderRadius: '10px'}}>Annulla</button>
+                                                            <a onClick={() => window.location.reload()}  className="btn btn-danger" style={{borderRadius: '10px', color: 'white'}}>Annulla</a>
                                                         </p>
                                                     </div>
                                                     <div className="col-md-6">

@@ -101,7 +101,7 @@ class ExerciseToAdd extends Component {
                                                    numberOfRepetitions: event.target.value
                                                })
                                            }}
-                                           type="number" style={{width: '30%'}}/>
+                                           type="text" style={{width: '30%'}}/>
                                 </div>
 
                             </div>

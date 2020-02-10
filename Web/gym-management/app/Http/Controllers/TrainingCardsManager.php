@@ -228,7 +228,7 @@ class TrainingCardsManager extends Controller
         }
         $card = Firestore::collection('TrainingCards')->document($id)->snapshot()->data();
         $user = Firestore::collection('Users')->document($card['idUserDatabase'])->snapshot()->data();
-        return response()->json([$card, $exes, $user]);
+        return response()->json([$card, $exes, $user, $card['idUserDatabase']]);
     }
 
     public function jsonTCARD() {
@@ -248,13 +248,11 @@ class TrainingCardsManager extends Controller
 
 
     public function updatePostTCardView(Request $request, $id) {
-        return 'ok';
-       /*
         $input = $request->all();
         $collection = Firestore::collection('TrainingCards')->document($id);
         $collection->set($input);
         return 'updated';
-       */
+
     }
 
 

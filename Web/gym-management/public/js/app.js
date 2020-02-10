@@ -89958,7 +89958,7 @@ function (_Component) {
             numberOfRepetitions: event.target.value
           });
         },
-        type: "number",
+        type: "text",
         style: {
           width: '30%'
         }
@@ -91829,7 +91829,7 @@ function (_Component) {
             key={index}
             retrieveState={this.returnInfo}
         />
-           */
+          */
 
       }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "form-group row"
@@ -91934,7 +91934,7 @@ function (_Component) {
           exercisesList: value.data[0].exercises,
           isActive: value.data[0].isActive,
           userName: value.data[2].name + ' ' + value.data[2].surname,
-          userID: value.data[2].idDatabase
+          userID: value.data[3]
         });
       })["catch"](function (e) {
         console.log(e);
@@ -91972,7 +91972,7 @@ function (_Component) {
           endDate: _this.formatDate(_this.state.to)
         }
       }).then(function (response) {
-        alert(response);
+        alert(response.data);
       })["catch"](function (e) {
         console.log(e);
       });
@@ -92370,13 +92370,14 @@ function (_Component) {
         className: "col-md-6"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         align: "center"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
         onClick: function onClick() {
-          return _this2.retrieveData();
+          return window.location.reload();
         },
         className: "btn btn-danger",
         style: {
-          borderRadius: '10px'
+          borderRadius: '10px',
+          color: 'white'
         }
       }, "Annulla"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-md-6"
