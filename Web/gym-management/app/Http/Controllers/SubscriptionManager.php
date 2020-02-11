@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use FontLib\Table\Type\name;
 use Illuminate\Http\Request;
 use Google\Cloud\Firestore\FirestoreClient;
 use Firevel\Firestore\Facades\Firestore;
@@ -323,5 +324,14 @@ class SubscriptionManager extends Controller
         return '/admin/gestioneAbbonamenti';
     }
 
+    public function updateSubsView($id) {
+        return view('updateSubscription');
+    }
+
+    public function updateSubsData($id) {
+        $subs = Firestore::collection('Subscriptions')->document($id)->snapshot()->data();
+        $user = Firestore::collection('Users')->document($subs['idUserDatabase'])->snapshot()->data();
+        return response()->json([$subs, $user, $subs['idUserDatabase']]);
+    }
 
 }

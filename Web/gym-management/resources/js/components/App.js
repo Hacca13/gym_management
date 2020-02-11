@@ -7,6 +7,7 @@ import ReactDOM from "react-dom";
 import InsertSubscription from "../views/insertSubscription";
 import VetrinaHome from "../vetrina/vetrinaHome";
 import UpdateTCard2 from "../views/updateTCard2";
+import UpdateSubs from "../views/updateSubs";
 
 
 let InsertTCard = (props) => {
@@ -30,6 +31,11 @@ let UpdateTCard = (props) => {
     return <UpdateTCard2 id={props.match.params.id}/>;
 };
 
+
+let UpdateSubscription = (props) => {
+    return <UpdateSubs id={props.match.params.id}/>;
+};
+
 class App extends Component {
     render() {
 
@@ -43,6 +49,7 @@ class App extends Component {
                     <Route exact path="/admin/nuovoAbbonamento" component={InsertSubs} />
                     <Route exact path="/admin/inserisciUtenteCorso" component={InsertUserToCourse} />
                     <Route exact path="/admin/modificaScheda/:id" component={UpdateTCard} />
+                    <Route exact path="/admin/modificaAbbonamenti/:id" component={UpdateSubscription} />
                 </div>
             </BrowserRouter>
         );

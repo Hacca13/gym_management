@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
+import axios from "axios";
 import UserSearch from "../components/userSearch";
 import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
 import CourseSearch from "../components/courseSearch";
-import axios from "axios";
+var moment = require('moment');
 
 
-class InsertSubscription extends Component {
+class UpdateSubs extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -19,7 +19,8 @@ class InsertSubscription extends Component {
             courseID: '',
             courseName: '',
             typeOfSubs: 'period',
-            numberOfEntries: 1
+            numberOfEntries: 0,
+            numberOfEntriesMade: 0
         };
 
         this.Entrate = this.Entrate.bind(this);
@@ -29,6 +30,59 @@ class InsertSubscription extends Component {
         this.addCourse = this.addCourse.bind(this);
     }
 
+    componentDidMount() {
+        axios.get('/api/updateSubs/' + this.props.id).then(value => {
+            this.setState({
+                userID: value.data[2],
+                userName: value.data[1].name + ' ' + value.data[1].surname,
+                isActive: value.data[0].isActive,
+                typeOfSubs: value.data[0].type,
+                sub: value.data[0]
+            })
+            this.setSubsData(value.data[0].type);
+        }).catch(err => {
+            console.log(err)
+        }).then(() => {
+
+        })
+    }
+
+    setSubsData = (type) => {
+        let mom = moment(this.state.sub.startDate, "DD-MM-YYYY").format("YYYY/MM/DD");
+        let datee = mom.format("YYYY/MM/DD");
+        console.log(datee);
+        switch (type) {
+            case "course":
+                var corso = document.getElementById("corso");
+                corso.click();
+                this.Corso();
+                this.setState({
+                    idCourseDatabase: this.state.courseID,
+                    corso_from: new Date(moment(this.state.sub.startDate, "DD-MM-YYYY").format("YYYY/MM/DD")),
+                    corso_to: new Date(moment(this.state.sub.endDate, "DD-MM-YYYY").format("YYYY/MM/DD")),
+                });
+                break;
+            case "period":
+                let checkBox = document.getElementById("myCheck");
+                checkBox.click();
+                this.Annuale();
+                this.setState({
+                    annuale_from: new Date(moment(this.state.sub.startDate, "DD-MM-YYYY").format("YYYY/MM/DD")),
+                    annuale_to: new Date( moment(this.state.sub.endDate, "DD-MM-YYYY").format("YYYY/MM/DD"))
+                });
+                console.log(this.state.annuale_from);
+                break;
+            case "revenue":
+                var entrata = document.getElementById("entrata");
+                entrata.click();
+                this.Entrate();
+                this.setState({
+                    numberOfEntries: this.state.sub.numberOfEntries,
+                    numberOfEntriesMade: this.state.sub.numberOfEntriesMade,
+                });
+                break;
+        }
+    }
 
     addUser(user) {
         this.setState({
@@ -150,13 +204,19 @@ class InsertSubscription extends Component {
         axios.post('/api/insertSubscription', subsToAdd).then(response => {
             window.location.href = response.data;
         }).catch(err => {
-            console.log(err.message);
+            console.log(err);
         })
 
     };
 
     formatDate(date) {
         return date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear();
+    }
+
+    prepateDate = (string) => {
+        let date = new Date(string, 'dd/mm/yyyy');
+        console.log(date);
+
     }
 
     addCourse(course) {
@@ -198,9 +258,13 @@ class InsertSubscription extends Component {
                                                 <div className="col-lg-8 col-md-12 col-sm-12" style={{textAlign: "center"}}>
                                                     <section>
                                                         <label htmlFor="userName" className="col-form-label" style={{backgroundColor: 'transparent', border: 'none', color: 'rgb(31, 38, 45, 0.8)', fontSize: '18px'}}>Abbonamento di: </label>
-                                                        <UserSearch
-                                                            retrieveUser={this.addUser}
-                                                        />
+                                                        <div className="input-group">
+                                                            <div className="input-group-prepend">
+                                                                <span className="input-group-text" id="basic-addon1"><i className="fas fa-user"/></span>
+                                                            </div>
+                                                            <input type="text" className="form-control" placeholder={this.state.userName} aria-label="Username"
+                                                                   aria-describedby="basic-addon1" disabled style={{width: '80%'}}/>
+                                                        </div>
 
                                                     </section>
                                                 </div>
@@ -319,10 +383,10 @@ class InsertSubscription extends Component {
                                                     <div className="form-group">
                                                         <label htmlFor="exampleFormControlSelect1" style={{color: 'rgb(31, 38, 45, 0.8)', fontSize: '13px'}}>Numero Entrate</label>
                                                         <input className="form-control" type="number"
-                                                                value={this.state.numberOfEntries}
-                                                                onChange={(event) => {
-                                                                    event.preventDefault();
-                                                                    this.setState({numberOfEntries: event.target.value})}}>
+                                                               value={this.state.numberOfEntries}
+                                                               onChange={(event) => {
+                                                                   event.preventDefault();
+                                                                   this.setState({numberOfEntries: event.target.value})}}>
                                                         </input>
                                                     </div>
                                                 </div>
@@ -353,4 +417,4 @@ class InsertSubscription extends Component {
     }
 }
 
-export default InsertSubscription;
+export default UpdateSubs;

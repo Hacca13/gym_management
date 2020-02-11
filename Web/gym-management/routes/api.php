@@ -21,6 +21,7 @@ Route::get('/jsonExercises', 'ExercisesManager@jsonEx');
 Route::get('/jsonUsers', 'ExercisesManager@jsonUsr');
 Route::get('/jsonCourses', 'CoursesManager@jsonCrs');
 Route::get('/updateTCard/{id}', 'TrainingCardsManager@updateTCardData');
+Route::get('/updateSubs/{id}', 'SubscriptionManager@updateSubsData');
 
 Route::post('/insertTrainCard', 'TrainingCardsManager@insertTrainingCard');
 
