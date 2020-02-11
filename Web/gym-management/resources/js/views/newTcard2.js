@@ -29,7 +29,7 @@ class NewTcard2 extends Component {
 
     //COMPONENTS FUNCTIONS
     componentDidMount() {
-        axios.get('/api/jsonExercises').then(value => {
+            axios.get('/api/jsonExercises').then(value => {
             this.setState({
                 exerr: value.data
             });

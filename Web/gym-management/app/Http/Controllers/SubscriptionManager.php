@@ -17,101 +17,101 @@ class SubscriptionManager extends Controller
 
 
     public static function subscriptionsThatExpireSoon(){
-      $listSubscription = array();
-      $today = date("Y-m-d");
-      $todayPlus5Day = strtotime ( '+5 day' , strtotime ( $today ) ) ;
-      $todayPlus5Day = date ( 'Y-m-d' , $todayPlus5Day );
+        $listSubscription = array();
+        $today = date("Y-m-d");
+        $todayPlus5Day = strtotime ( '+5 day' , strtotime ( $today ) ) ;
+        $todayPlus5Day = date ( 'Y-m-d' , $todayPlus5Day );
 
-      $subscriptions = SubscriptionManager::getAllSubscription();
+        $subscriptions = SubscriptionManager::getAllSubscription();
 
-      foreach ($subscriptions as $subscription) {
-        if($subscription->getIsActive() == TRUE){
-            if($subscription instanceof SubscriptionPeriodModel){
-              $timestamp = strtotime($subscription->getEndDate());
-              $endDate = date("Y-m-d", $timestamp);
-              if($today <= $endDate && $endDate <= $todayPlus5Day){
-                $user = UsersManager::getUserById($subscription->getIdUserDatabase());
-                $userNameAndSurname = $user->getName().' '.$user->getSurname();
-                $userNameAndSubscription = array(
-                    'userNameAndSurname' => $userNameAndSurname,
-                    'subscription' => $subscription);
+        foreach ($subscriptions as $subscription) {
+            if($subscription->getIsActive() == TRUE){
+                if($subscription instanceof SubscriptionPeriodModel){
+                    $timestamp = strtotime($subscription->getEndDate());
+                    $endDate = date("Y-m-d", $timestamp);
+                    if($today <= $endDate && $endDate <= $todayPlus5Day){
+                        $user = UsersManager::getUserById($subscription->getIdUserDatabase());
+                        $userNameAndSurname = $user->getName().' '.$user->getSurname();
+                        $userNameAndSubscription = array(
+                            'userNameAndSurname' => $userNameAndSurname,
+                            'subscription' => $subscription);
 
-                array_push($listSubscription,$userNameAndSubscription);
-              }
-            }
-            elseif ($subscription instanceof SubscriptionRevenueModel) {
-              if(($subscription->getNumberOfEntriesMade()+3) >= $subscription->getNumberOfEntries() ){
-                $user = UsersManager::getUserById($subscription->getIdUserDatabase());
-                $userNameAndSurname = $user->getName().' '.$user->getSurname();
-                $userNameAndSubscription = array(
-                    'userNameAndSurname' => $userNameAndSurname,
-                    'subscription' => $subscription);
+                        array_push($listSubscription,$userNameAndSubscription);
+                    }
+                }
+                elseif ($subscription instanceof SubscriptionRevenueModel) {
+                    if(($subscription->getNumberOfEntriesMade()+3) >= $subscription->getNumberOfEntries() ){
+                        $user = UsersManager::getUserById($subscription->getIdUserDatabase());
+                        $userNameAndSurname = $user->getName().' '.$user->getSurname();
+                        $userNameAndSubscription = array(
+                            'userNameAndSurname' => $userNameAndSurname,
+                            'subscription' => $subscription);
 
-                array_push($listSubscription,$userNameAndSubscription);
-              }
-            }
-            else{
-              $timestamp = strtotime($subscription->getEndDate());
-              $endDate = date("Y-m-d", $timestamp);
-              if($today <= $endDate && $endDate <= $todayPlus5Day){
-                $user = UsersManager::getUserById($subscription->getIdUserDatabase());
-                $userNameAndSurname = $user->getName().' '.$user->getSurname();
-                $userNameAndSubscription = array(
-                    'userNameAndSurname' => $userNameAndSurname,
-                    'subscription' => $subscription);
+                        array_push($listSubscription,$userNameAndSubscription);
+                    }
+                }
+                else{
+                    $timestamp = strtotime($subscription->getEndDate());
+                    $endDate = date("Y-m-d", $timestamp);
+                    if($today <= $endDate && $endDate <= $todayPlus5Day){
+                        $user = UsersManager::getUserById($subscription->getIdUserDatabase());
+                        $userNameAndSurname = $user->getName().' '.$user->getSurname();
+                        $userNameAndSubscription = array(
+                            'userNameAndSurname' => $userNameAndSurname,
+                            'subscription' => $subscription);
 
-                array_push($listSubscription,$userNameAndSubscription);
-              }
+                        array_push($listSubscription,$userNameAndSubscription);
+                    }
+                }
             }
         }
-      }
 
 
 
 
 
-      return $listSubscription;
+        return $listSubscription;
     }
 
 
     public static function searchSubscription(Request $request){
-      $currentPage = LengthAwarePaginator::resolveCurrentPage();
-      $input = $request->all();
+        $currentPage = LengthAwarePaginator::resolveCurrentPage();
+        $input = $request->all();
 
-     if(isset($input['searchInput'])){
-          $input = strtolower($input['searchInput']);
-          $request->session()->put('searchInput', $input);
-      }else{
-          $input = $request->session()->pull('searchInput');
-          $request->session()->put('searchInput', $input);
-      }
-
-      $url = substr($request->url(), 0, strlen($request->url())-29);
-      $url = $url.'/admin/subscriptionPageSearchResults';
-
-      $userForSubscriptionPage = UsersManager::getUserDBOrUserSessionForSearchPage($request,$currentPage,$input);
-      $subscriptionResultList = array();
-
-      $subscriptionlistTemp= $request->session()->pull('allSubscription');
-      $request->session()->put('allSubscription', $subscriptionlistTemp);
-
-      foreach ($userForSubscriptionPage as $user) {
-        foreach ($subscriptionlistTemp as $subscription) {
-          if($user->getIdDatabase() == $subscription->getIdUserDatabase()){
-            array_push($subscriptionResultList,$subscription);
-          }
+        if(isset($input['searchInput'])){
+            $input = strtolower($input['searchInput']);
+            $request->session()->put('searchInput', $input);
+        }else{
+            $input = $request->session()->pull('searchInput');
+            $request->session()->put('searchInput', $input);
         }
-      }
 
-      $itemCollection = collect($subscriptionResultList);
-      $perPage = 6;
-      $currentPageItems = $itemCollection->slice(($currentPage * $perPage) - $perPage, $perPage)->all();
-      $subscriptionResultList= new LengthAwarePaginator($currentPageItems , count($itemCollection), $perPage);
-      $subscriptionResultList->setPath($url);
+        $url = substr($request->url(), 0, strlen($request->url())-29);
+        $url = $url.'/admin/subscriptionPageSearchResults';
+
+        $userForSubscriptionPage = UsersManager::getUserDBOrUserSessionForSearchPage($request,$currentPage,$input);
+        $subscriptionResultList = array();
+
+        $subscriptionlistTemp= $request->session()->pull('allSubscription');
+        $request->session()->put('allSubscription', $subscriptionlistTemp);
+
+        foreach ($userForSubscriptionPage as $user) {
+            foreach ($subscriptionlistTemp as $subscription) {
+                if($user->getIdDatabase() == $subscription->getIdUserDatabase()){
+                    array_push($subscriptionResultList,$subscription);
+                }
+            }
+        }
+
+        $itemCollection = collect($subscriptionResultList);
+        $perPage = 6;
+        $currentPageItems = $itemCollection->slice(($currentPage * $perPage) - $perPage, $perPage)->all();
+        $subscriptionResultList= new LengthAwarePaginator($currentPageItems , count($itemCollection), $perPage);
+        $subscriptionResultList->setPath($url);
 
 
 
-      return view('subscriptionPageSearchResult', compact('subscriptionResultList','userForSubscriptionPage'));
+        return view('subscriptionPageSearchResult', compact('subscriptionResultList','userForSubscriptionPage'));
 
     }
 
@@ -120,38 +120,38 @@ class SubscriptionManager extends Controller
 
 
     public static function getAllSubscriptionForView(Request $request){
-      $currentPage = LengthAwarePaginator::resolveCurrentPage();
-      $subscriptionList = SubscriptionManager::getSubscriptionDBOrSubscriptionSession($request,$currentPage);
-      $itemCollection = collect($subscriptionList);
-      $perPage = 6;
-      $currentPageItems = $itemCollection->slice(($currentPage * $perPage) - $perPage, $perPage)->all();
-      $subscriptionList= new LengthAwarePaginator($currentPageItems , count($itemCollection), $perPage);
-      $subscriptionList->setPath($request->url());
+        $currentPage = LengthAwarePaginator::resolveCurrentPage();
+        $subscriptionList = SubscriptionManager::getSubscriptionDBOrSubscriptionSession($request,$currentPage);
+        $itemCollection = collect($subscriptionList);
+        $perPage = 6;
+        $currentPageItems = $itemCollection->slice(($currentPage * $perPage) - $perPage, $perPage)->all();
+        $subscriptionList= new LengthAwarePaginator($currentPageItems , count($itemCollection), $perPage);
+        $subscriptionList->setPath($request->url());
 
-      $userForSubscriptionPage = $request->session()->pull('userForSubscriptionPage');
-      $request->session()->put('userForSubscriptionPage', $userForSubscriptionPage);
+        $userForSubscriptionPage = $request->session()->pull('userForSubscriptionPage');
+        $request->session()->put('userForSubscriptionPage', $userForSubscriptionPage);
 
-      return view('subscriptionPage', compact('subscriptionList','userForSubscriptionPage'));
+        return view('subscriptionPage', compact('subscriptionList','userForSubscriptionPage'));
     }
 
     public static function getSubscriptionDBOrSubscriptionSession(Request $request,$currentPage){
-      if($currentPage == 1){
-        $documents = SubscriptionManager::getAllSubscription();
-        $request->session()->put('allSubscription', $documents);
-        $userForSubscriptionPage = array();
+        if($currentPage == 1){
+            $documents = SubscriptionManager::getAllSubscription();
+            $request->session()->put('allSubscription', $documents);
+            $userForSubscriptionPage = array();
 
-        foreach ($documents as $document) {
-          $user = UsersManager::getUserById($document->getIdUserDatabase());
-          array_push($userForSubscriptionPage, $user);
+            foreach ($documents as $document) {
+                $user = UsersManager::getUserById($document->getIdUserDatabase());
+                array_push($userForSubscriptionPage, $user);
+            }
+
+            $request->session()->put('userForSubscriptionPage', $userForSubscriptionPage);
         }
-
-        $request->session()->put('userForSubscriptionPage', $userForSubscriptionPage);
-      }
-      else{
-        $documents = $request->session()->pull('allSubscription');
-        $request->session()->put('allSubscription', $documents);
-      }
-      return $documents;
+        else{
+            $documents = $request->session()->pull('allSubscription');
+            $request->session()->put('allSubscription', $documents);
+        }
+        return $documents;
     }
 
     public static function getAllSubscription(){
@@ -173,25 +173,23 @@ class SubscriptionManager extends Controller
             }
             elseif ($subscription instanceof SubscriptionCourseModel) {
                 $endDate = $subscription->getEndDate();
-              if(SubscriptionManager::isExpired($endDate)){
-                  $subscription->setIsActive(false);
-                  CoursesManager::removeUserToCourse($subscription->getIdCourseDatabase(),$subscription->getIdUserDatabase());
-                  $subscriptionSet = SubscriptionManager::trasformSubscriptionToArraySubscription($subscription);
-                  unset($subscriptionSet['idDatabase']);
-                  $collection->document($subscription->getIdDatabase())->set($subscriptionSet);
-              }
+                if(SubscriptionManager::isExpired($endDate)){
+                    $subscription->setIsActive(false);
+                    CoursesManager::removeUserToCourse($subscription->getIdCourseDatabase(),$subscription->getIdUserDatabase());
+                    $subscriptionSet = SubscriptionManager::trasformSubscriptionToArraySubscription($subscription);
+                    unset($subscriptionSet['idDatabase']);
+                    $collection->document($subscription->getIdDatabase())->set($subscriptionSet);
+                }
             }
             else {
-              $endDate = $subscription->getEndDate();
-              if(SubscriptionManager::isExpired($endDate)){
-                  $subscription->setIsActive(false);
-                  $subscriptionSet = SubscriptionManager::trasformSubscriptionToArraySubscription($subscription);
-                  unset($subscriptionSet['idDatabase']);
-                  $collection->document($subscription->getIdDatabase())->set($subscriptionSet);
-              }
+                $endDate = $subscription->getEndDate();
+                if(SubscriptionManager::isExpired($endDate)){
+                    $subscription->setIsActive(false);
+                    $subscriptionSet = SubscriptionManager::trasformSubscriptionToArraySubscription($subscription);
+                    unset($subscriptionSet['idDatabase']);
+                    $collection->document($subscription->getIdDatabase())->set($subscriptionSet);
+                }
             }
-
-
             array_push($allSubscriptions,$subscription);
         }
         return $allSubscriptions;
@@ -202,7 +200,7 @@ class SubscriptionManager extends Controller
         $today = Carbon::now();
         $dateTocheck = Carbon::parse($parsedDate);
         if($today->lessThan($dateTocheck)){
-              return false;
+            return false;
         }
         else{
             return true;
@@ -293,13 +291,13 @@ class SubscriptionManager extends Controller
 
         $allUser = array();
 
-          $collection = Firestore::collection('Users');
-          $documents = $collection->documents();
-          foreach ($documents as $document) {
-              $user = UsersManager::transformArrayUserIntoUser($document->data());
-              $user->setIdDatabase($document->id());
-              array_push($allUser,$user);
-          }
+        $collection = Firestore::collection('Users');
+        $documents = $collection->documents();
+        foreach ($documents as $document) {
+            $user = UsersManager::transformArrayUserIntoUser($document->data());
+            $user->setIdDatabase($document->id());
+            array_push($allUser,$user);
+        }
 
 
         return view('subscriptionPage', compact('allUser'));
@@ -315,7 +313,7 @@ class SubscriptionManager extends Controller
         $input = $request->all();
 
         if($input['type'] == 'course'){
-          CoursesManager::addUserToCourse($input['idCourseDatabase'],$input['idUserDatabase']);
+            CoursesManager::addUserToCourse($input['idCourseDatabase'],$input['idUserDatabase']);
         }
 
         UsersManager::activeUser($input['idUserDatabase']);
