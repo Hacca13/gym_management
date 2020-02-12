@@ -69,6 +69,8 @@ Route::prefix('admin')->group(function () {
     Route::get('/subscriptionPageSearchResults', 'SubscriptionManager@searchSubscription');
     Route::get('/nuovoAbbonamento', 'SubscriptionManager@addSubscription');
     Route::get('/modificaAbbonamenti/{id}', 'SubscriptionManager@updateSubsView');
+    Route::get('/incrementEntrance/{id}', 'SubscriptionManager@incrementEntrances');
+    Route::get('/decrementEntrance/{id}', 'SubscriptionManager@decrementEntrances');
 });
 
 

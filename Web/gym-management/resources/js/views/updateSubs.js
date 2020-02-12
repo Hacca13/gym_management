@@ -204,9 +204,9 @@ class UpdateSubs extends Component {
                 break;
         }
 
-        //console.log(subsToAdd);
+        console.log(subsToAdd);
         axios.post('/api/updateSubsData/' + this.state.subID, subsToAdd).then(response => {
-            console.log(response.data)
+            window.location.href = response.data;
         }).catch(err => {
             console.log(err);
         })

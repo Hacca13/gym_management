@@ -354,9 +354,11 @@ class SubscriptionManager extends Controller
     public function retrieveSubsData($id) {
         $subs = Firestore::collection('Subscriptions')->document($id)->snapshot()->data();
         $courseName = [];
-        foreach ($subs['idCourseDatabase'] as $corsoid) {
-            $fbCrs = Firestore::collection('Courses')->document($corsoid)->snapshot()->data();
-            array_push($courseName, $fbCrs['name']);
+        if($subs['type'] == 'course') {
+            foreach ($subs['idCourseDatabase'] as $corsoid) {
+                $fbCrs = Firestore::collection('Courses')->document($corsoid)->snapshot()->data();
+                array_push($courseName, $fbCrs['name']);
+            }
         }
         $user = Firestore::collection('Users')->document($subs['idUserDatabase'])->snapshot()->data();
         return response()->json([$subs, $user, $subs['idUserDatabase'], $id, $courseName]);
@@ -366,11 +368,10 @@ class SubscriptionManager extends Controller
         $input = $request->all();
         $collection = Firestore::collection('Subscriptions')->document($id);
         $fireSub = Firestore::collection('Subscriptions')->document($id)->snapshot();
-        $coursesList = $fireSub['idCourseDatabase'];
-        array_push($coursesList, last($input['idCourseDatabase']));
-        var_dump($coursesList);
 
         if ($input['type'] == 'course') {
+            $coursesList = $fireSub['idCourseDatabase'];
+            array_push($coursesList, last($input['idCourseDatabase']));
             $newSub= array(
                 'endDate' => $input['endDate'],
                 'startDate' => $input['startDate'],
@@ -386,7 +387,38 @@ class SubscriptionManager extends Controller
 
         //var_dump($newSub);
         $collection->set($newSub);
-        return 'updated';
+        return '/admin/gestioneAbbonamenti';
+    }
+
+
+    public function decrementEntrances($id) {
+        $subs = Firestore::collection('Subscriptions')->document($id)->snapshot()->data();
+        $corso = array(
+            'idUserDatabase' => $subs['idUserDatabase'],
+            'isActive' => $subs['isActive'],
+            'numberOfEntries' => $subs['numberOfEntries'],
+            'numberOfEntriesMade' => $subs['numberOfEntriesMade'] -= 1,
+            'type' => $subs['type']
+        );
+        $toUp = Firestore::collection('Subscriptions')->document($id);
+        $toUp->set($corso);
+        return back();
+    }
+
+    public function incrementEntrances($id) {
+        $subs = Firestore::collection('Subscriptions')->document($id)->snapshot()->data();
+        $corso = array(
+            'idUserDatabase' => $subs['idUserDatabase'],
+            'isActive' => $subs['isActive'],
+            'numberOfEntries' => $subs['numberOfEntries'],
+            'numberOfEntriesMade' => $subs['numberOfEntriesMade'] += 1,
+            'type' => $subs['type']
+        );
+        $toUp = Firestore::collection('Subscriptions')->document($id);
+        $toUp->set($corso);
+        return back();
+
+
     }
 
 }

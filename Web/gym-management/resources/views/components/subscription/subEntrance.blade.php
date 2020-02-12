@@ -3,8 +3,13 @@
     <h1>{{$subscription->getNumberOfEntriesMade()}}</h1>
 </div>
 <div class="col-md-12" style="text-align: center">
-    <button name="acceptTerms" class="btn btn-success"><i class="fas fa-minus"></i></button>
-    <button name="acceptTerms" class="btn btn-danger"  style="margin-left: 5%"><i class="fas fa-plus"></i></button>
+    <a href={{'decrementEntrance/' . $subscription->getIdDatabase()}}>
+        <button name="acceptTerms" class="btn btn-success"><i class="fas fa-minus"></i></button>
+    </a>
+    <a href={{'incrementEntrance/' . $subscription->getIdDatabase()}}>
+
+        <button name="acceptTerms" class="btn btn-danger"  style="margin-left: 5%"><i class="fas fa-plus"></i></button>
+    </a>
 </div>
 
 <div class="col-md-12" style="text-align: center">

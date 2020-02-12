@@ -109633,11 +109633,11 @@ function (_Component) {
             type: _this.state.typeOfSubs
           });
           break;
-      } //console.log(subsToAdd);
+      }
 
-
+      console.log(subsToAdd);
       axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('/api/updateSubsData/' + _this.state.subID, subsToAdd).then(function (response) {
-        console.log(response.data);
+        window.location.href = response.data;
       })["catch"](function (err) {
         console.log(err);
       });
