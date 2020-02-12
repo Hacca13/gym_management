@@ -108,7 +108,7 @@ class CoursesManager extends Controller{
       }
       else{
         $image = $input['oldCourseImage'];
-        $imageName = $input['imageName'];
+        $imageName = $input['oldCourseImageName'];
       }
 
       $corso = array(

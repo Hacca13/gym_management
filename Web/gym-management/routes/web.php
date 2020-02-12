@@ -96,7 +96,7 @@ Route::prefix('admin')->group(function () {
 
 //CORSI
 Route::prefix('admin')->group(function () {
-    Route::get('/gestioneCorsi', 'CoursesManager@getAllCoursesView')->middleware('auth');//->middlewaree()
+    Route::get('/gestioneCorsi', 'CoursesManager@getAllCoursesView')->middleware('auth');//->middlewaree('auth');
 
     Route::post('/insertFormCourse', 'CoursesManager@addCourse')->middleware('auth');
     Route::post('/setCourse', 'CoursesManager@setCourse')->middleware('auth');
