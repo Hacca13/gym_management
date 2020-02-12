@@ -85,11 +85,11 @@
                                             <div class="form-group row">
                                                 <label class="col-sm-4 text-right control-label col-form-label">Alle</label>
                                                 <div class="col-sm-2">
-                                                    <input type="number" min="0" max="24" class="form-control" id="{{"hourTo" . $index}}" name="{{"hourTo" . $index}}" value="{{$day['endTime']['minutes']}}" required>
+                                                    <input type="number" min="0" max="24" class="form-control" id="{{"hourTo" . $index}}" name="{{"hourTo" . $index}}" value="{{$day['endTime']['hour']}}" required>
                                                 </div>
                                                 <h3 class="text-right control-label col-form-label">:</h3>
                                                 <div class="col-sm-2">
-                                                    <input type="number" min="0" max="59" class="form-control" id="{{"minutesTo" . $index}}" name="{{"minutesTo" . $index}}" value="{{$day['endTime']['minutes']}}">
+                                                    <input type="number" min="0" max="59" class="form-control" id="{{"minutesTo" . $index}}" name="{{"minutesTo" . $index}}" value="{{$day['endTime']['minutes']}}"required>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
@@ -111,7 +111,8 @@
                                 <div class="form-group row">
                                     <label for="fname" class="col-sm-3 text-right control-label col-form-label">Immagine del Corso</label>
                                     <div class="col-sm-9">
-                                        <input type="text" hidden class="form-control" id="fname" name="imageName" value="{{$course->getImageName()}}">
+                                        <input type="text" hidden class="form-control" id="oldCourseImage" name="oldCourseImage" value="{{$course->getImage()}}">
+                                        <input type="text" hidden class="form-control" id="oldCourseImageName" name="oldCourseImageName" value="{{$course->getImageName()}}">
                                         <input type="file" class="form-control" id="courseImage" name="courseImage" >
                                     </div>
                                 </div>
