@@ -75,22 +75,21 @@
                                             <div class="form-group row">
                                                 <label class="col-sm-4 text-right control-label col-form-label">Dalle</label>
                                                 <div class="col-sm-2">
-                                                    <input type="number" min="0" max="24" class="form-control" id="{{"hourFrom" . $index}}" name="{{"hourFrom" . $index}}" placeholder="{{$day['startTime']['hour']}}" required>
+                                                    <input type="number" min="0" max="24" class="form-control" id="{{"hourFrom" . $index}}" name="{{"hourFrom" . $index}}" value="{{$day['startTime']['hour']}}" required>
                                                 </div>
                                                 <h3 class="text-right control-label col-form-label">:</h3>
                                                 <div class="col-sm-2">
-                                                    <input type="number" min="0" max="59" class="form-control" id="{{"minutesFrom" . $index}}" name="{{"minutesFrom" . $index}}" placeholder="{{$day['startTime']['minutes']}}" required>
+                                                    <input type="number" min="0" max="59" class="form-control" id="{{"minutesFrom" . $index}}" name="{{"minutesFrom" . $index}}" value="{{$day['startTime']['minutes']}}" required>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label class="col-sm-4 text-right control-label col-form-label">Alle</label>
                                                 <div class="col-sm-2">
-                                                    <input type="number" min="0" max="24" class="form-control" id="{{"hourTo" . $index}}" name="{{"hourTo" . $index}}" placeholder="{{$day['endTime']['minutes']}}" required>
+                                                    <input type="number" min="0" max="24" class="form-control" id="{{"hourTo" . $index}}" name="{{"hourTo" . $index}}" value="{{$day['endTime']['minutes']}}" required>
                                                 </div>
                                                 <h3 class="text-right control-label col-form-label">:</h3>
                                                 <div class="col-sm-2">
-                                                    <input type="number" min="0" max="59" class="form-control" id="{{"minutesTo" . $index}}" name="{{"minutesTo" . $index}}" placeholder="{{$day['endTime']['minutes']}}">
-                                                    <input type="number" min="0" max="24" class="form-control" id="{{"hourTo" . $index}}" name="{{"hourTo" . $index}}" placeholder="{{$day['endTime']['minutes']}}"required>
+                                                    <input type="number" min="0" max="59" class="form-control" id="{{"minutesTo" . $index}}" name="{{"minutesTo" . $index}}" value="{{$day['endTime']['minutes']}}">
                                                 </div>
                                             </div>
                                             <div class="form-group row">

@@ -436,6 +436,7 @@ class CoursesManager extends Controller{
             'idDatabase' => $courses->getIdDatabase(),
             'name' => $courses->getName(),
             'image' => $courses->getImage(),
+            'imageName' => $courses->getImageName(),
             'isActive' => $courses->getIsActive(),
             'instructor' => $courses->getInstructor(),
             'period' => $courses->getPeriod(),
@@ -447,7 +448,7 @@ class CoursesManager extends Controller{
         $database = $firestore->database();
         $ref = $database->collection('Courses')->document($input["course"]);
         $ref->set($corso);
-        return "/gestioneCorsi";
+        return "/admin/gestioneCorsi";
 
     }
 
@@ -457,16 +458,5 @@ class CoursesManager extends Controller{
         return $arrCourse;
     }
 
-    public static function pelo() {
-
-        $factory = (new Firebase\Factory());
-        $firestore = $factory->createFirestore();
-        $database = $firestore->database();
-        $ref = $database->collection('Courses')->document('a405eea7aabd467d95d4');
-        $doc = $ref->snapshot();
-        $ref->set($doc);
-
-
-    }
 
 }

@@ -414,6 +414,7 @@ class UsersManager extends Controller{
 
         if(!isset($input['documentImage'])){
           $documentImage = null;
+          $input['documentImageName']=null;
         }
         else{
           $documentImageName = rtrim(base64_encode(md5(microtime())),"=");
@@ -423,6 +424,7 @@ class UsersManager extends Controller{
 
         if(!isset($input['parentDocumentImage'])){
           $parentDocumentImage = null;
+            $input['parentDocumentImageName']=null;
         }
         else{
           if($input['isUnderage'] == 'true'){

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use ChromePhp;
+use FontLib\Table\Type\name;
 use Illuminate\Http\Request;
 use Google\Cloud\Firestore\FirestoreClient;
 use Firevel\Firestore\Facades\Firestore;
@@ -11,6 +13,7 @@ use App\Http\Models\SubscriptionModels\SubscriptionPeriodModel;
 use App\Http\Models\SubscriptionModels\SubscriptionRevenueModel;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Carbon\Carbon;
+
 
 class SubscriptionManager extends Controller
 {
@@ -312,16 +315,110 @@ class SubscriptionManager extends Controller
         $collection = Firestore::collection('Subscriptions');
         $input = $request->all();
 
-        if($input['type'] == 'course'){
-            CoursesManager::addUserToCourse($input['idCourseDatabase'],$input['idUserDatabase']);
+        if ($input['type'] == 'course') {
+            $this::addUserToCourseSubs($input['idCourseDatabase'], $input['idUserDatabase']);
         }
 
         UsersManager::activeUser($input['idUserDatabase']);
 
         $collection->add($input);
-        toastr()->success('Abbonamento creato con successo');
         return '/admin/gestioneAbbonamenti';
     }
 
+    public function addUserToCourseSubs($courses, $userID) {
+        foreach ($courses as $course) {
+            $id = $course;
+            $fireCourse = CoursesManager::getCourseByID($course);
+            $userList = $fireCourse->getUsersList();
+            array_push($userList, $userID);
+            $corso = array(
+                'idDatabase' => $fireCourse->getIdDatabase(),
+                'name' => $fireCourse->getName(),
+                'image' => $fireCourse->getImage(),
+                'imageName' => $fireCourse->getImageName(),
+                'isActive' => $fireCourse->getIsActive(),
+                'instructor' => $fireCourse->getInstructor(),
+                'period' => $fireCourse->getPeriod(),
+                'weeklyFrequency' => $fireCourse->getWeeklyFrequency(),
+                'usersList' => $userList
+            );
+            $collection = Firestore::collection('Courses')->document($id);
+            $collection->set($corso);
+            }
+    }
+
+    public function updateSubsView($id) {
+        return view('updateSubscription');
+    }
+
+    public function retrieveSubsData($id) {
+        $subs = Firestore::collection('Subscriptions')->document($id)->snapshot()->data();
+        $courseName = [];
+        if($subs['type'] == 'course') {
+            foreach ($subs['idCourseDatabase'] as $corsoid) {
+                $fbCrs = Firestore::collection('Courses')->document($corsoid)->snapshot()->data();
+                array_push($courseName, $fbCrs['name']);
+            }
+        }
+        $user = Firestore::collection('Users')->document($subs['idUserDatabase'])->snapshot()->data();
+        return response()->json([$subs, $user, $subs['idUserDatabase'], $id, $courseName]);
+    }
+
+    public function updateSubsData(Request $request, $id) {
+        $input = $request->all();
+        $collection = Firestore::collection('Subscriptions')->document($id);
+        $fireSub = Firestore::collection('Subscriptions')->document($id)->snapshot();
+
+        if ($input['type'] == 'course') {
+            $coursesList = $fireSub['idCourseDatabase'];
+            array_push($coursesList, last($input['idCourseDatabase']));
+            $newSub= array(
+                'endDate' => $input['endDate'],
+                'startDate' => $input['startDate'],
+                'idCourseDatabase' => $coursesList,
+                'idUserDatabase' => $input['idUserDatabase'],
+                'isActive' => $input['isActive'],
+                'type' => $input['type']
+            );
+            $this::addUserToCourseSubs($coursesList, $input['idUserDatabase']);
+        } else {
+            $newSub = $input;
+        }
+
+        //var_dump($newSub);
+        $collection->set($newSub);
+        return '/admin/gestioneAbbonamenti';
+    }
+
+
+    public function decrementEntrances($id) {
+        $subs = Firestore::collection('Subscriptions')->document($id)->snapshot()->data();
+        $corso = array(
+            'idUserDatabase' => $subs['idUserDatabase'],
+            'isActive' => $subs['isActive'],
+            'numberOfEntries' => $subs['numberOfEntries'],
+            'numberOfEntriesMade' => $subs['numberOfEntriesMade'] -= 1,
+            'type' => $subs['type']
+        );
+        $toUp = Firestore::collection('Subscriptions')->document($id);
+        $toUp->set($corso);
+        return back();
+    }
+
+    public function incrementEntrances($id) {
+        $subs = Firestore::collection('Subscriptions')->document($id)->snapshot()->data();
+        $corso = array(
+            'idUserDatabase' => $subs['idUserDatabase'],
+            'isActive' => $subs['isActive'],
+            'numberOfEntries' => $subs['numberOfEntries'],
+            'numberOfEntriesMade' => $subs['numberOfEntriesMade'] += 1,
+            'type' => $subs['type']
+        );
+        $toUp = Firestore::collection('Subscriptions')->document($id);
+        $toUp->set($corso);
+        return back();
+
+
+    }
 
 }
