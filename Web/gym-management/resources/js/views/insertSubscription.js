@@ -16,8 +16,8 @@ class InsertSubscription extends Component {
             annuale_to: '',
             corso_from: '',
             corso_to: '',
-            courseID: '',
-            courseName: '',
+            courseID: [],
+            courseName: [],
             typeOfSubs: 'period',
             numberOfEntries: 1
         };
@@ -147,6 +147,7 @@ class InsertSubscription extends Component {
                 break;
         }
 
+
         axios.post('/api/insertSubscription', subsToAdd).then(response => {
             window.location.href = response.data;
         }).catch(err => {
@@ -160,9 +161,13 @@ class InsertSubscription extends Component {
     }
 
     addCourse(course) {
+        let coursesID=[];
+        let coursesName=[];
+        coursesID.push(course.idDatabase);
+        coursesName.push(course.name);
         this.setState({
-            courseID: course.idDatabase,
-            courseName: course.name
+            courseID: coursesID,
+            courseName: coursesName
         });
     }
 

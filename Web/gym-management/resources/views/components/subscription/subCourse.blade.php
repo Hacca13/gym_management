@@ -35,7 +35,9 @@
         <div class="col-md-12">
             <hr>
             <p align="center">
-                <button name="acceptTerms" class="btn btn-success">Rinnova Abbonamento</button>
+                <a href={{"/admin/modificaAbbonamenti/" . $subscription->getIdDatabase() }}>
+                <button name="acceptTerms" class="btn btn-success">Modifica Abbonamento</button>
+                </a>
             </p>
         </div>
     </div>

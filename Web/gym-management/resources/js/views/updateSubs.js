@@ -3,6 +3,7 @@ import axios from "axios";
 import UserSearch from "../components/userSearch";
 import DatePicker from "react-datepicker";
 import CourseSearch from "../components/courseSearch";
+
 var moment = require('moment');
 
 
@@ -16,11 +17,13 @@ class UpdateSubs extends Component {
             annuale_to: '',
             corso_from: '',
             corso_to: '',
-            courseID: '',
-            courseName: '',
+            courseID: [],
+            courseName: [],
+            OldcourseName: [],
             typeOfSubs: 'period',
             numberOfEntries: 0,
-            numberOfEntriesMade: 0
+            numberOfEntriesMade: 0,
+            sub: {}
         };
 
         this.Entrate = this.Entrate.bind(this);
@@ -37,8 +40,11 @@ class UpdateSubs extends Component {
                 userName: value.data[1].name + ' ' + value.data[1].surname,
                 isActive: value.data[0].isActive,
                 typeOfSubs: value.data[0].type,
-                sub: value.data[0]
-            })
+                sub: value.data[0],
+                subID: value.data[3],
+                OldcourseName: value.data[4],
+                courseName: value.data[4]
+            });
             this.setSubsData(value.data[0].type);
         }).catch(err => {
             console.log(err)
@@ -48,14 +54,12 @@ class UpdateSubs extends Component {
     }
 
     setSubsData = (type) => {
-        let mom = moment(this.state.sub.startDate, "DD-MM-YYYY").format("YYYY/MM/DD");
-        let datee = mom.format("YYYY/MM/DD");
-        console.log(datee);
         switch (type) {
             case "course":
                 var corso = document.getElementById("corso");
                 corso.click();
                 this.Corso();
+                console.log(this.state.courseName);
                 this.setState({
                     idCourseDatabase: this.state.courseID,
                     corso_from: new Date(moment(this.state.sub.startDate, "DD-MM-YYYY").format("YYYY/MM/DD")),
@@ -70,7 +74,6 @@ class UpdateSubs extends Component {
                     annuale_from: new Date(moment(this.state.sub.startDate, "DD-MM-YYYY").format("YYYY/MM/DD")),
                     annuale_to: new Date( moment(this.state.sub.endDate, "DD-MM-YYYY").format("YYYY/MM/DD"))
                 });
-                console.log(this.state.annuale_from);
                 break;
             case "revenue":
                 var entrata = document.getElementById("entrata");
@@ -82,7 +85,7 @@ class UpdateSubs extends Component {
                 });
                 break;
         }
-    }
+    };
 
     addUser(user) {
         this.setState({
@@ -186,7 +189,7 @@ class UpdateSubs extends Component {
                 subsToAdd = {
                     ...subsToAdd,
                     numberOfEntries: this.state.numberOfEntries,
-                    numberOfEntriesMade: 0,
+                    numberOfEntriesMade: this.state.numberOfEntriesMade,
                     type: this.state.typeOfSubs
                 };
                 break;
@@ -201,8 +204,9 @@ class UpdateSubs extends Component {
                 break;
         }
 
-        axios.post('/api/insertSubscription', subsToAdd).then(response => {
-            window.location.href = response.data;
+        //console.log(subsToAdd);
+        axios.post('/api/updateSubsData/' + this.state.subID, subsToAdd).then(response => {
+            console.log(response.data)
         }).catch(err => {
             console.log(err);
         })
@@ -220,9 +224,13 @@ class UpdateSubs extends Component {
     }
 
     addCourse(course) {
+        let coursesID=[];
+        let coursesName=[];
+        coursesID.push(course.idDatabase);
+        coursesName.push(course.name);
         this.setState({
-            courseID: course.idDatabase,
-            courseName: course.name
+            courseID: coursesID,
+            courseName: coursesName
         });
     }
 
@@ -243,7 +251,7 @@ class UpdateSubs extends Component {
                 <div className="card" style={{borderRadius: '10px', backgroundColor: 'rgb(31,38,45,0.8)'}}>
                     <div className="card-body">
                         <div className="col-md-12">
-                            <h2 className="text-center" style={{color: '#d6d8d8'}}>Inserisci dati abbonamento</h2>
+                            <h2 className="text-center" style={{color: '#d6d8d8'}}>Mdofica dati abbonamento</h2>
                         </div>
                         <div className="row"
                              style={{marginTop: '2.5%'}}>
@@ -336,6 +344,21 @@ class UpdateSubs extends Component {
                                             <div className="row justify-content-center">
                                                 <div className="col-md-12 col-lg-9 col-sm-12"  id="corsi" style={{display: 'none'}}>
                                                     <section>
+
+                                                        {this.state.OldcourseName.map((course, index) => (
+                                                            <div>
+                                                            <br/>
+                                                            <div className="input-group" key={index}>
+                                                                <div className="input-group-prepend">
+                                                                    <span className="input-group-text" id="basic-addon1"><i className='fas fa-calendar'/></span>
+                                                                </div>
+                                                                <input disabled={true} type="text" value={course} className="form-control" />
+                                                            </div>
+                                                            </div>
+                                                        ))
+                                                        }
+                                                        <br/>
+                                                        <h3>Aggiungi Corso</h3>
                                                         <label htmlFor="userName" className="row" style={{color: 'rgb(31, 38, 45, 0.8)', fontSize: '13px'}}>Nome corso: </label>
                                                         <CourseSearch
                                                             retrieveCourse={this.addCourse}

@@ -436,6 +436,7 @@ class CoursesManager extends Controller{
             'idDatabase' => $courses->getIdDatabase(),
             'name' => $courses->getName(),
             'image' => $courses->getImage(),
+            'imageName' => $courses->getImageName(),
             'isActive' => $courses->getIsActive(),
             'instructor' => $courses->getInstructor(),
             'period' => $courses->getPeriod(),
