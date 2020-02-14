@@ -13,7 +13,7 @@
 Route::prefix('admin')->group(function () {
   Route::get('/', 'HomeController@index')->middleware('auth');
   Route::get('/home', 'HomeController@index')->middleware('auth');
-  Route::get('/firetest3','Firetest@test3')->middleware('auth');
+//  Route::get('/firetest3','Firetest@test3')->middleware('auth');
   Auth::routes(['register' => false]);
   Route::get('/logout', 'Auth\LoginController@logout')->middleware('auth');
 
@@ -33,8 +33,8 @@ Route::prefix('admin')->group(function () {
     Route::get('/gestioneEsercizi', 'ExercisesManager@getAllExercisesForView')->middleware('auth');
 
     Route::get('/nuovoEsercizio', function () {
-        return view('insertNewExercise')->middleware('auth') ;
-    });
+        return view('insertNewExercise');
+    })->middleware('auth');
 
     Route::get('/modificaEsercizio/{id}', 'ExercisesManager@setExerciseView')->middleware('auth');
     Route::get('/eliminaEsercizio/{id}', 'ExercisesManager@deleteExercise')->middleware('auth');
@@ -53,8 +53,8 @@ Route::prefix('admin')->group(function () {
 
 
     Route::get('/nuovoIscritto', function (){
-        return view('insertNewUser')->middleware('auth');
-    });
+        return view('insertNewUser');
+    })->middleware('auth');
 
 
     Route::get('/gestioneIscritti', 'UsersManager@getAllUserForView')->middleware('auth');
@@ -101,14 +101,14 @@ Route::prefix('admin')->group(function () {
     Route::post('/insertFormCourse', 'CoursesManager@addCourse')->middleware('auth');
     Route::post('/setCourse', 'CoursesManager@setCourse')->middleware('auth');
     Route::get('/nuovoCorso', function () {
-        return view('insertNewCourse')->middleware('auth');
-    });
+        return view('insertNewCourse');
+    })->middleware('auth');
     Route::post('/coursesSearchResultsPage', 'CoursesManager@searchCourses')->middleware('auth');
     Route::get('/coursesPageSearchResults', 'CoursesManager@searchCourses')->middleware('auth');
 
     Route::get('/inserisciUtenteCorso', function () {
-        return view('addUserToCourse')->middleware('auth');
-    });
+        return view('addUserToCourse');
+    })->middleware('auth');
 
     Route::get('/modificaCorso/{id}', 'CoursesManager@setCourseView')->middleware('auth');
 
