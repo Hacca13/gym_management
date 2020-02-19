@@ -19,6 +19,8 @@
                                         <input type="text" class="form-control" id="fname" name="name" required>
                                         <label for="lname" class="text-right control-label" style="font-size: 16px;">Cognome:</label>
                                         <input type="text" class="form-control" id="lname" name="surname" required>
+                                        <label for="lname" class="text-right control-label" style="font-size: 16px;">Codice Fiscale:</label>
+                                        <input type="text" class="form-control" id="fiscalCode" maxlength="16" name="fiscalCode">
                                     </div>
 
                                     <div class="col-lg-6 col-md-8 col-sm-12">

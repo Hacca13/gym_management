@@ -209,6 +209,9 @@ class UsersManager extends Controller{
       if(!isset($input['medicalCertificate'])){
           $input['medicalCertificate'] = null;
       }
+      if(!isset($input['fiscalCode'])){
+        $input['fiscalCode'] = null;
+      }
       if(!isset($input['publicSocial'])){
           $input['publicSocial'] = null;
       }
@@ -242,6 +245,7 @@ class UsersManager extends Controller{
       if(!isset($input['oldParentDocumentImage'])){
           $input['oldParentDocumentImage'] = null;
       }
+
 
       $firebase = (new Firebase\Factory());
 
@@ -494,10 +498,13 @@ class UsersManager extends Controller{
             $uid = $firebase->createAuth()->createUserWithEmailAndPassword($input['email'], $input['password'])->uid;
 
             if(!isset($input['publicSocial'])){
-              $input['publicSocial'] = 'null';
+              $input['publicSocial'] = null;
             }
             if(!isset($input['medicalCertificate'])){
               $input['medicalCertificate'] = null;
+            }
+            if(!isset($input['fiscalCode'])){
+              $input['fiscalCode'] = null;
             }
 
             $input['name'] = strtolower($input['name']);
@@ -510,23 +517,24 @@ class UsersManager extends Controller{
             $input['idUserDatabase'] = $uid;
 
             if(!isset($input['importantInformation'])){
-              $input['importantInformation'] = 'null';
+              $input['importantInformation'] = null;
             }
             if(!isset($input['otherGoals'])){
-              $input['otherGoals'] = 'null';
+              $input['otherGoals'] = null;
             }
             if(!isset($input['plicometricData'])){
-              $input['plicometricData'] = 'null';
+              $input['plicometricData'] = null;
             }
             if(!isset($input['inactiveTime'])){
-              $input['inactiveTime'] = 'null';
+              $input['inactiveTime'] = null;
             }
             if(!isset($input['previousSportTime'])){
-              $input['previousSportTime'] = 'null';
+              $input['previousSportTime'] = null;
             }
             if(!isset($input['previousSport'])){
-              $input['previousSport'] = 'null';
+              $input['previousSport'] = null;
             }
+
 
 
 
@@ -618,6 +626,7 @@ class UsersManager extends Controller{
         $telephoneNumber = data_get($arrayUser,'telephoneNumber');
         $publicSocial = data_get($arrayUser,'publicSocial');
         $medicalCertificate = data_get($arrayUser,'medicalCertificate');
+        $fiscalCode = data_get($arrayUser,'fiscalCode');
 
         if(UsersManager::isAdult($arrayUser) == FALSE){
             $parentName = data_get($arrayUser,'parentName');
@@ -649,11 +658,11 @@ class UsersManager extends Controller{
             $parentEmail = data_get($arrayUser,'parentEmail');
             $parentTelephoneNumber = data_get($arrayUser,'parentTelephoneNumber');
 
-            $user = new UserUnderageModel($idDatabase,$name,$surname,$gender,$status,$isAdult,$dateOfBirth,$birthNation,$birthPlace,$residence,$document,$email,$telephoneNumber,$publicSocial,$medicalCertificate,$parentName,$parentSurname,$parentGender,$parentDateOfBirth,$parentBirthNation,$parentBirthPlace,$parentResidence,$parentDocument,$parentEmail,$parentTelephoneNumber);
+            $user = new UserUnderageModel($idDatabase,$name,$surname,$gender,$status,$isAdult,$dateOfBirth,$birthNation,$birthPlace,$residence,$document,$email,$telephoneNumber,$publicSocial,$medicalCertificate,$fiscalCode,$parentName,$parentSurname,$parentGender,$parentDateOfBirth,$parentBirthNation,$parentBirthPlace,$parentResidence,$parentDocument,$parentEmail,$parentTelephoneNumber);
 
         }
         else{
-            $user = new UserModel($idDatabase,$name,$surname,$gender,$status,$isAdult,$dateOfBirth,$birthNation,$birthPlace,$residence,$document,$email,$telephoneNumber,$publicSocial,$medicalCertificate);
+            $user = new UserModel($idDatabase,$name,$surname,$gender,$status,$isAdult,$dateOfBirth,$birthNation,$birthPlace,$residence,$document,$email,$telephoneNumber,$publicSocial,$medicalCertificate,$fiscalCode);
         }
 
 
@@ -695,8 +704,8 @@ class UsersManager extends Controller{
             'email' => $user->getEmail(),
             'telephoneNumber' => $user->getTelephoneNumber(),
             'publicSocial' => $user->getPublicSocial(),
-            'medicalCertificate' => $user->getMedicalCertificate()
-
+            'medicalCertificate' => $user->getMedicalCertificate(),
+            'fiscalCode' => $user->getFiscalCode()
         );
 
         if(UsersManager::isAdult($user) == FALSE){
@@ -813,8 +822,8 @@ class UsersManager extends Controller{
             'email' => $input['email'],
             'telephoneNumber' =>   $input['telephone'],
             'publicSocial' => $input['publicSocial'],
-            'medicalCertificate' => $input['medicalCertificate']
-
+            'medicalCertificate' => $input['medicalCertificate'],
+            'fiscalCode' =>  $input['fiscalCode']
         );
 
 

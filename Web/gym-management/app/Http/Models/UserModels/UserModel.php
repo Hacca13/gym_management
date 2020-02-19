@@ -40,8 +40,9 @@ class UserModel
   protected $telephoneNumber;
   protected $publicSocial;
   protected $medicalCertificate;
+  protected $fiscalCode;
 
-  public function __construct($idDatabase,$name,$surname,$gender,$status,$isAdult,$dateOfBirth,$birthNation,$birthPlace,$residence,$document,$email,$telephoneNumber,$publicSocial,$medicalCertificate){
+  public function __construct($idDatabase,$name,$surname,$gender,$status,$isAdult,$dateOfBirth,$birthNation,$birthPlace,$residence,$document,$email,$telephoneNumber,$publicSocial,$medicalCertificate,$fiscalCode){
 
     $this->idDatabase = $idDatabase;
     $this->name = $name;
@@ -75,9 +76,9 @@ class UserModel
     $this->telephoneNumber = $telephoneNumber;
     $this->publicSocial = $publicSocial;
     $this->medicalCertificate = $medicalCertificate;
+    $this->fiscalCode = $fiscalCode;
 
   }
-
 
 
 
@@ -433,6 +434,32 @@ class UserModel
     public function getMedicalCertificate() {
         return $this->medicalCertificate;
     }
+
+    /**
+     * Get the value of fiscal Code
+     *
+     * @return mixed
+     */
+    public function getFiscalCode()
+    {
+        return $this->fiscalCode;
+    }
+
+    /**
+     * Set the value of fiscal Code
+     *
+     * @param mixed  fiscal Code
+     *
+     * @return self
+     */
+    public function setFiscalCode($fiscalCode)
+    {
+        $this->fiscalCode = $fiscalCode;
+
+        return $this;
+    }
+
+
 
 
 
