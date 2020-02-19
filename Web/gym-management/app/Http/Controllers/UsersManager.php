@@ -312,6 +312,12 @@ class UsersManager extends Controller{
         }
       }
 
+      if(isset($input['email'])){
+        $firebase->createAuth()->changeUserEmail($input['idDatabase'], $input['email']);
+      }
+
+
+
       $arrayUser = UsersManager::transformRequestIntoArrayUser($input,$documentImage,$parentDocumentImage);
       $collection->document($input['idDatabase'])->set($arrayUser);
       $input['idUserDatabase'] = $input['idDatabase'];
@@ -404,6 +410,9 @@ class UsersManager extends Controller{
       toastr()->success('Utente Disattivato.');
       return redirect('/admin/gestioneIscritti');
     }
+
+
+
 
     public static function createUser(Request $request){
         $input = $request->all();
