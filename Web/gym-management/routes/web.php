@@ -43,7 +43,6 @@ Route::prefix('admin')->group(function () {
 //UTENTI
 Route::prefix('admin')->group(function () {
     Route::post('/setUser', 'UsersManager@setUser')->middleware('auth');
-
     Route::get('/modificaUtente/{id}', 'UsersManager@setUserView')->middleware('auth');
     Route::get('/attivaUtente/{id}', 'UsersManager@activeUser')->middleware('auth');
     Route::get('/disattivaUtente/{id}', 'UsersManager@deactivateUser')->middleware('auth');

@@ -46,6 +46,8 @@
                                         <input type="text" class="form-control" value="{{$user->getName()}}" id="fname" name="name" required>
                                         <label for="lname" class="text-right control-label" style="font-size: 16px;">Cognome:</label>
                                         <input type="text" class="form-control" value="{{$user->getSurname()}}" id="lname" name="surname" required>
+                                        <label for="lname" class="text-right control-label" style="font-size: 16px;">Email:</label>
+                                        <input type="text" class="form-control" id="email" value="{{$user->getEmail()}}" name="email" required>
                                         <label for="lname" class="text-right control-label" style="font-size: 16px;">Codice Fiscale:</label>
                                         <input type="text" class="form-control" id="fiscalCode" value="{{$user->getFiscalCode()}}" maxlength="16" name="fiscalCode">
                                     </div>
