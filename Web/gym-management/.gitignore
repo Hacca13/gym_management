@@ -9,6 +9,10 @@
 .env
 .env.backup
 .phpunit.result.cache
+Web/gym-management/routes/web.php
+/Web/gym-management/routes/web.php
+Web\gym-management\routes\web.php
+\Web\gym-management\routes\web.php
 Homestead.json
 Homestead.yaml
 npm-debug.log
