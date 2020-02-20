@@ -18,5 +18,20 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('/jsonExercises', 'ExercisesManager@jsonEx');
+Route::get('/jsonUsers', 'ExercisesManager@jsonUsr');
+Route::get('/jsonCourses', 'CoursesManager@jsonCrs');
+Route::get('/updateTCard/{id}', 'TrainingCardsManager@updateTCardData');
+Route::get('/updateSubs/{id}', 'SubscriptionManager@retrieveSubsData');
 
 Route::post('/insertTrainCard', 'TrainingCardsManager@insertTrainingCard');
+
+Route::post('/insertSubscription', 'SubscriptionManager@insertSubscription');
+
+Route::post('/insertUserToCourse', 'CoursesManager@addUserToCourse');
+
+Route::post('/updatePostTCard/{id}', 'TrainingCardsManager@updatePostTCardView');
+
+Route::post('updateSubsData/{id}', 'SubscriptionManager@updateSubsData');
+
+Route::post('/subsCourseAdd', 'SubscriptionManager@addUserToCourseSubs');
+

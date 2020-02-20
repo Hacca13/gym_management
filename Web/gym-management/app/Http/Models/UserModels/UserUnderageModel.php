@@ -28,6 +28,7 @@ class UserUnderageModel extends UserModel
   /*
     parentDocument:
         documentImage;
+        documentImageName;
         type;
         number;
         ReleaseDate;
@@ -36,9 +37,9 @@ class UserUnderageModel extends UserModel
   protected $parentEmail;
   protected $parentTelephoneNumber;
 
-  function __construct($idDatabase,$name,$surname,$gender,$profileImage,$status,$isAdult,$dateOfBirth,$birthNation,$birthPlace,$residence,$document,$email,$telephoneNumber,$parentName,$parentSurname,$parentGender,$parentDateOfBirth,$parentBirthNation,$parentBirthPlace,$parentResidence,$parentDocument,$parentEmail,$parentTelephoneNumber){
+  function __construct($idDatabase,$name,$surname,$gender,$status,$isAdult,$dateOfBirth,$birthNation,$birthPlace,$residence,$document,$email,$telephoneNumber,$publicSocial,$medicalCertificate,$fiscalCode,$parentName,$parentSurname,$parentGender,$parentDateOfBirth,$parentBirthNation,$parentBirthPlace,$parentResidence,$parentDocument,$parentEmail,$parentTelephoneNumber){
 
-    parent::__construct($idDatabase,$name,$surname,$gender,$profileImage,$status,$isAdult,$dateOfBirth,$birthNation,$birthPlace,$residence,$document,$email,$telephoneNumber);
+    parent::__construct($idDatabase,$name,$surname,$gender,$status,$isAdult,$dateOfBirth,$birthNation,$birthPlace,$residence,$document,$email,$telephoneNumber,$publicSocial,$medicalCertificate,$fiscalCode);
 
     $this->parentName = $parentName;
     $this->parentSurname = $parentSurname;
@@ -58,6 +59,7 @@ class UserUnderageModel extends UserModel
 
     $this->parentDocument = array(
         'documentImage' => data_get($parentDocument, 'documentImage'),
+        'documentImageName'=> data_get($parentDocument, 'documentImageName'),
         'type' => data_get($parentDocument, 'type'),
         'number' => data_get($parentDocument, 'number'),
         'released' => data_get($parentDocument, 'released'),

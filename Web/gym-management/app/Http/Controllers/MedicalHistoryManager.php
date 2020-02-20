@@ -9,11 +9,22 @@ use App\Http\Models\MedicalHistoryModel;
 
 class MedicalHistoryManager extends Controller{
 
+    public static function addMedicalHistory($arrayMedicalHistory){
+      $collection = Firestore::collection('MedicalHistory');
+      $collection->add($arrayMedicalHistory);
+    }
+    public static function setMedicalHistory($arrayMedicalHistory){
+      $collection = Firestore::collection('MedicalHistory');
+      $idDatabase = $arrayMedicalHistory['idDatabase'];
+      unset($arrayMedicalHistory['idDatabase']);
+      $collection->document($idDatabase)->set($arrayMedicalHistory);
+    }
+
     public static function getMedicalHistoryByUserId($idUserDatabase){
       $collection = Firestore::collection('MedicalHistory');
       $query = $collection->where('idUserDatabase','=', $idUserDatabase);
       $documents = $query->documents();
-
+      $medicalHistory=array();
       foreach ($documents as $document) {
         $medicalHistory = MedicalHistoryManager::trasformArrayMedicalHistoryToMedicalHistory($document->data());
         $medicalHistory->setIdDatabase($document->id());
@@ -98,4 +109,28 @@ class MedicalHistoryManager extends Controller{
 
         return $arrayMedicalHistory;
     }
+
+    public static function trasformRequestToArrayMedicalHistory($input){
+      $arrayMedicalHistory = array(
+        'idUserDatabase' => $input['idUserDatabase'],
+        'importantInformation' => $input['importantInformation'],
+        'weight' => $input['weight'],
+        'height' => $input['height'],
+        'imc' => $input['imc'],
+        'previousSport' => $input['previousSport'],
+        'previousSportTime' => $input['previousSportTime'],
+        'inactiveTime' => $input['inactiveTime'],
+        'plicometricData' => $input['plicometricData'],
+        'hypertrophy' => $input['hypertrophy'],
+        'slimming' => $input['slimming'],
+        'toning' => $input['toning'],
+        'athleticTraining' => $input['athleticTraining'],
+        'rehabilitation' => $input['rehabilitation'],
+        'combatSports' => $input['combatSports'],
+        'otherGoals' => $input['otherGoals']
+      );
+
+      return $arrayMedicalHistory;
+    }
+
 }

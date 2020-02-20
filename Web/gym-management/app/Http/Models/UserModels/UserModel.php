@@ -12,7 +12,6 @@ class UserModel
   protected $name;
   protected $surname;
   protected $gender ;
-  protected $profileImage;
   protected $status;
   protected $isAdult;
   protected $dateOfBirth;
@@ -31,6 +30,7 @@ class UserModel
     /*
       document:
           documentImage;
+          documentImageName;
           type;
           number;
           ReleaseDate;
@@ -38,14 +38,16 @@ class UserModel
     */
   protected $email;
   protected $telephoneNumber;
+  protected $publicSocial;
+  protected $medicalCertificate;
+  protected $fiscalCode;
 
-  public function __construct($idDatabase,$name,$surname,$gender,$profileImage,$status,$isAdult,$dateOfBirth,$birthNation,$birthPlace,$residence,$document,$email,$telephoneNumber){
+  public function __construct($idDatabase,$name,$surname,$gender,$status,$isAdult,$dateOfBirth,$birthNation,$birthPlace,$residence,$document,$email,$telephoneNumber,$publicSocial,$medicalCertificate,$fiscalCode){
 
     $this->idDatabase = $idDatabase;
     $this->name = $name;
     $this->surname = $surname;
     $this->gender = $gender;
-    $this->profileImage = $profileImage ;
     $this->status = $status;
     $this->isAdult = $isAdult;
     $this->dateOfBirth = $dateOfBirth;
@@ -63,6 +65,7 @@ class UserModel
 
     $this->document = array(
         'documentImage' => data_get($document, 'documentImage'),
+        'documentImageName' => data_get($document, 'documentImageName'),
         'type' => data_get($document, 'type'),
         'number' => data_get($document, 'number'),
         'released' => data_get($document, 'released'),
@@ -71,8 +74,11 @@ class UserModel
 
     $this->email = $email;
     $this->telephoneNumber = $telephoneNumber;
-  }
+    $this->publicSocial = $publicSocial;
+    $this->medicalCertificate = $medicalCertificate;
+    $this->fiscalCode = $fiscalCode;
 
+  }
 
 
 
@@ -99,6 +105,8 @@ class UserModel
 
         return $this;
     }
+
+
 
     /**
      * Get the value of Name
@@ -172,29 +180,7 @@ class UserModel
         return $this;
     }
 
-    /**
-     * Get the value of Profile Image
-     *
-     * @return mixed
-     */
-    public function getProfileImage()
-    {
-        return $this->profileImage;
-    }
 
-    /**
-     * Set the value of Profile Image
-     *
-     * @param mixed profileImage
-     *
-     * @return self
-     */
-    public function setProfileImage($profileImage)
-    {
-        $this->profileImage = $profileImage;
-
-        return $this;
-    }
 
     /**
      * Get the value of Status
@@ -411,5 +397,70 @@ class UserModel
 
         return $this;
     }
+
+
+    /**
+     * Set the value of publicSocial
+     *
+     * @param mixed publicSocial
+     *
+     * @return self
+     */
+    public function setPublicSocial($publicSocial)
+    {
+        $this->publicSocial = $publicSocial;
+
+        return $this;
+    }
+
+    public function getPublicSocial() {
+        return $this->publicSocial;
+    }
+
+    /**
+     * Set the value of medicalCertificate
+     *
+     * @param mixed medicalCertificate
+     *
+     * @return self
+     */
+    public function setMedicalCertificate($medicalCertificate)
+    {
+        $this->medicalCertificate = $medicalCertificate;
+
+        return $this;
+    }
+
+    public function getMedicalCertificate() {
+        return $this->medicalCertificate;
+    }
+
+    /**
+     * Get the value of fiscal Code
+     *
+     * @return mixed
+     */
+    public function getFiscalCode()
+    {
+        return $this->fiscalCode;
+    }
+
+    /**
+     * Set the value of fiscal Code
+     *
+     * @param mixed  fiscal Code
+     *
+     * @return self
+     */
+    public function setFiscalCode($fiscalCode)
+    {
+        $this->fiscalCode = $fiscalCode;
+
+        return $this;
+    }
+
+
+
+
 
 }
