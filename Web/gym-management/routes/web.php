@@ -47,6 +47,8 @@ Route::prefix('admin')->group(function () {
     Route::get('/attivaUtente/{id}', 'UsersManager@activeUser')->middleware('auth');
     Route::get('/disattivaUtente/{id}', 'UsersManager@deactivateUser')->middleware('auth');
     Route::post('/addUserPost', 'UsersManager@createUser')->middleware('auth');
+    Route::get('/userSearchByPublicSocialResultsPage/{input}', 'UsersManager@searchUsersByPublicSocial')->middleware('auth');
+    Route::get('/userSearchByCertificateResultsPage/{input}', 'UsersManager@searchUsersByCertificate')->middleware('auth');
     Route::post('/userSearchResultsPage', 'UsersManager@searchUsers')->middleware('auth');
     Route::get('/userPageSearchResults', 'UsersManager@searchUsers')->middleware('auth');
 

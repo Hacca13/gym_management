@@ -13,7 +13,7 @@
                     <div class="card" style="border-radius: 10px;background-color: #d6d8d8; margin-bottom: -0.5%">
                         <div class="card-body">
                             <div class="row justify-content-center">
-                                <div class="col-lg-5 col-md-12 col-sm-12">
+                                <div class="col-lg-10 col-md-12 col-sm-12">
                                     <form action="/admin/trainingCardsSearchResultsPage" method="post">
                                         @csrf
                                         <div class="input-group no-border">
@@ -26,27 +26,7 @@
                                     </form>
                                 </div><!--Ricerca-->
 
-                                <div class="col-lg-6 col-md-9 col-sm-9">
-                                    <div class="row justify-content-center">
-                                        <div class="col-lg-6 col-md-12 col-sm-12" style="padding: 8px 0 0 10px">
-                                            <div class="input-group no-border">
-                                                <div class="form-check">
-                                                    <input type="checkbox" checked class="form-check-input" id="exampleCheck1">
-                                                    <label class="form-check-label" for="exampleCheck1">Schede Attive</label>
-                                                </div>
-                                            </div>
-                                        </div>
 
-                                        <div class="col-lg-6 col-md-12 col-sm-12" style="padding: 8px 0 0 10px">
-                                            <div class="input-group no-border">
-                                                <div class="form-check">
-                                                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                                    <label class="form-check-label" for="exampleCheck1">Schede Non Attive</label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div><!--Radio button-->
 
                                 <div class="col-lg-1 col-md-3 col-sm-3" style="text-align: right; margin-top: auto; margin-bottom: auto">
                                     <a href="/admin/nuovaScheda" role="button">

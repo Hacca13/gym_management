@@ -15,9 +15,11 @@ use App\Http\Models\UserModels\UserModel;
 use App\Http\Models\UserModels\UserUnderageModel;
 use Stichoza\GoogleTranslate\GoogleTranslate;
 use Illuminate\Pagination\LengthAwarePaginator;
-
+use Carbon\Carbon;
 
 class UsersManager extends Controller{
+
+
 
 
     //this function retorn all User
@@ -92,6 +94,178 @@ class UsersManager extends Controller{
 
         return $usersResultList;
     }
+
+
+    public static function getUserDBOrUserSessionForSearchByPublicSocialPage($request,$currentPage,$input){
+        if($currentPage == 1){
+            $usersResultList= array();
+
+            $documents = $request->session()->pull('allUsers');
+            $request->session()->put('allUsers', $documents);
+
+            if($input == 'yes'){
+              $input = 'true';
+            }else {
+              $input = 'false';
+            }
+
+            foreach ($documents as $document) {
+              if($document->getPublicSocial() == $input){
+                array_push($usersResultList,$document);
+              }
+            }
+
+            $request->session()->put('usersResultListByPublicSocial', $usersResultList);
+        }
+        else{
+            $usersResultList = $request->session()->pull('usersResultListByPublicSocial');
+            $request->session()->put('usersResultListByPublicSocial', $usersResultList);
+        }
+        return $usersResultList;
+    }
+
+    public static function searchUsersByPublicSocial($input,Request $request){
+
+        $currentPage = LengthAwarePaginator::resolveCurrentPage();
+        $usersResultList = UsersManager::getUserDBOrUserSessionForSearchByPublicSocialPage($request,$currentPage,$input);
+        $coursesForUsers = array();
+        $medicalHistoryForUsers = array();
+
+        if($input == 'yes'){
+          $url = substr($request->url(), 0, strlen($request->url())-40);
+          $url = $url.'/userSearchByPublicSocialResultsPage/'.$input;
+        }
+        else{
+          $url = substr($request->url(), 0, strlen($request->url())-39);
+          $url = $url.'/userSearchByPublicSocialResultsPage/'.$input;
+        }
+
+        foreach ($usersResultList as $user) {
+            $coursesForUser = CoursesManager::theUserForWhichCourseIsRegistered($user->getIdDatabase());
+            $medicalHistory = MedicalHistoryManager::getMedicalHistoryByUserId($user->getIdDatabase());
+
+            $coursesForUsers[$user->getIdDatabase()] = $coursesForUser;
+            $medicalHistoryForUsers[$user->getIdDatabase()] =$medicalHistory;
+
+
+        }
+
+
+        $itemCollection = collect($usersResultList);
+        $perPage = 6;
+        $currentPageItems = $itemCollection->slice(($currentPage * $perPage) - $perPage, $perPage)->all();
+        $usersResultList= new LengthAwarePaginator($currentPageItems , count($itemCollection), $perPage);
+        $usersResultList->setPath($url);
+
+        return view('userSearchByPublicSocialResultsPage', compact('usersResultList','coursesForUsers','medicalHistoryForUsers'));
+    }
+
+
+
+    public static function getUserDBOrUserSessionForSearchByCertificatePage($request,$currentPage,$input){
+        if($currentPage == 1){
+            $usersResultList = array();
+
+            $documents = $request->session()->pull('allUsers');
+            $request->session()->put('allUsers', $documents);
+
+          /*  $date1=mktime(0, 0, 0, date("m")+1, date("d"), date("Y"));
+            $afterAMonth = date("Y-m-d",$date1);
+
+            $today =  date("Y-m-d");*/
+
+
+            $today = Carbon::now();
+            $afterAMonth = Carbon::now()->add(1, 'month');
+
+        
+            if($input == '1' || $input == 1 ){
+              foreach ($documents as $document) {
+                if($document->getMedicalCertificate() !=null ){
+
+                  $parsedDate = str_replace("/", "-", $document->getMedicalCertificate());
+                  $medicalCertificate = Carbon::parse($parsedDate)->add(1,'year');
+
+                  if($today->lessThan($medicalCertificate)){
+                    array_push($usersResultList,$document);
+                  }
+                }
+              }
+            }
+            elseif($input == '2' || $input == 2 ) {
+              foreach ($documents as $document) {
+                if($document->getMedicalCertificate() !=null ){
+
+                  $parsedDate = str_replace("/", "-", $document->getMedicalCertificate());
+                  $medicalCertificate = Carbon::parse($parsedDate)->add(1,'year');
+
+
+
+
+                  if($today->greaterThan($medicalCertificate)){
+                    array_push($usersResultList,$document);
+                  }
+                }
+                else{
+                  array_push($usersResultList,$document);
+                }
+              }
+            }
+            else{
+              foreach ($documents as $document) {
+                if($document->getMedicalCertificate() !=null){
+                  $parsedDate = str_replace("/", "-", $document->getMedicalCertificate());
+                  $medicalCertificate = Carbon::parse($parsedDate)->add(1,'year');
+
+                  if(($afterAMonth->greaterThan($medicalCertificate)) && ($today->lessThan($medicalCertificate))){
+                    array_push($usersResultList,$document);
+                  }
+                }
+              }
+            }
+
+
+
+            $request->session()->put('usersResultListByCertificate', $usersResultList);
+        }
+        else{
+            $usersResultList = $request->session()->pull('usersResultListByCertificate');
+            $request->session()->put('usersResultListByCertificate', $usersResultList);
+        }
+        return $usersResultList;
+    }
+
+    public static function searchUsersByCertificate($input,Request $request){
+
+
+      $currentPage = LengthAwarePaginator::resolveCurrentPage();
+      $usersResultList = UsersManager::getUserDBOrUserSessionForSearchByCertificatePage($request,$currentPage,$input);
+      $coursesForUsers = array();
+      $medicalHistoryForUsers = array();
+
+      $url = substr($request->url(), 0, strlen($request->url())-37);
+      $url = $url.'/userSearchByCertificateResultsPage/'.$input;
+
+      foreach ($usersResultList as $user) {
+        $coursesForUser = CoursesManager::theUserForWhichCourseIsRegistered($user->getIdDatabase());
+        $medicalHistory = MedicalHistoryManager::getMedicalHistoryByUserId($user->getIdDatabase());
+
+        $coursesForUsers[$user->getIdDatabase()] = $coursesForUser;
+        $medicalHistoryForUsers[$user->getIdDatabase()] =$medicalHistory;
+
+
+      }
+
+
+      $itemCollection = collect($usersResultList);
+      $perPage = 6;
+      $currentPageItems = $itemCollection->slice(($currentPage * $perPage) - $perPage, $perPage)->all();
+      $usersResultList= new LengthAwarePaginator($currentPageItems , count($itemCollection), $perPage);
+      $usersResultList->setPath($url);
+
+      return view('userSearchByCertificateResultsPage', compact('usersResultList','coursesForUsers','medicalHistoryForUsers'));
+   }
+
 
     public static function searchUsers(Request $request){
         $currentPage = LengthAwarePaginator::resolveCurrentPage();
