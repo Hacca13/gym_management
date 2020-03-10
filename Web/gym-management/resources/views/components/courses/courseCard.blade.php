@@ -31,7 +31,7 @@
 
 <div class="col-md-12">
     <div class="collapse multi-collapse" id="{{'multiCollapseExample' . $loop->index}}">
-        <div class="card card-body" style="background-color: rgba(214, 216, 216, 0.9); border-radius: 0 0 10px 10px;">
+        <div class="card card-body" style="background-color: rgba(186, 186, 186, 0.5); border-radius: 0 0 10px 10px;">
             <div class="row justify-content-center">
                 @include('components.courses.courseInfo')
             </div>
