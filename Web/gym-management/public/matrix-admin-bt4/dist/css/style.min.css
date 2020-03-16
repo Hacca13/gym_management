@@ -11570,9 +11570,8 @@ ul.list-style-none li a:hover {
 .sidebar-nav ul .sidebar-item .sidebar-link.active,
 .sidebar-nav ul .sidebar-item .sidebar-link:hover {
     opacity: 1;
-    background-color: rgba(186, 186, 186);
     font-size: 20px;
-    width: 250px;
+    width: auto;
     padding: 15px 0 15px 0;
 }
 

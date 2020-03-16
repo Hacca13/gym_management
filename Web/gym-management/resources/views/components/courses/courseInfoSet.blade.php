@@ -11,7 +11,7 @@
                         <label for="fname" class="col-lg-5 text-right control-label">Durata:</label>
                         <input class="col-lg-6 text-center col-form-label" style="color:rgba(31, 38, 45, 0.8)" placeholder="">
                         <label class="col-lg-5 text-right control-label">Dal:</label>
-                        <input class="col-lg-6 text-center col-form-label" style="color:rgba(31, 38, 45, 0.8)" placeholder="{{$course->getPeriod()['startDate']}}"></input>
+                        <input class="col-lg-6 text-center col-form-label" style="color:rgba(31, 38, 45, 0.8)" placeholder="{{$course->getPeriod()['startDate']}}">
                         <label class="col-lg-5 text-right control-label">Al:</label>
                         <input class="col-lg-6 text-center col-form-label" style="color:rgba(31, 38, 45, 0.8)" placeholder="{{$course->getPeriod()['endDate']}}">
                     </div>

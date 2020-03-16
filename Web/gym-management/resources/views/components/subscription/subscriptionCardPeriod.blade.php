@@ -39,7 +39,11 @@
     <div class="collapse multi-collapse" id="{{'subPeriod' . $loop->index}}">
         <div class="card card-body"  style="background-color:rgba(186, 186, 186, 0.5); border-radius: 0 0 10px 10px;">
             <div class="row justify-content-center">
-                @include('components.subscription.subPeriod')
+                <div class="col-md-3"></div>
+                <div class="col-md-6">
+                    @include('components.subscription.subPeriod')
+                </div>
+                <div class="col-md-3"></div>
             </div>
         </div>
     </div>
