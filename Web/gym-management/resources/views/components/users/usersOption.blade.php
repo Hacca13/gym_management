@@ -15,7 +15,7 @@
                   </div>
                 </form>
             </div>
-            <div class="col-lg-2 col-md-9 col-sm-9" style="text-align: center; margin-top: auto; margin-bottom: auto">
+            <div class="col-lg-2 col-md-5 col-sm-5" style="text-align: center; margin-top: auto; margin-bottom: auto">
               <div class="btn-group">
                   <button style="background-color: #3F5469" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Abilitazione Social </button>
                   <div class="dropdown-menu" >
@@ -24,7 +24,7 @@
                   </div>
               </div><!-- /btn-group -->
             </div>
-            <div class="col-lg-2 col-md-9 col-sm-9" style="text-align: center; margin-top: auto; margin-bottom: auto">
+            <div class="col-lg-2 col-md-5 col-sm-5" style="text-align: center; margin-top: auto; margin-bottom: auto">
               <div class="btn-group">
                   <button style="background-color: #3F5469" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Certificato medico </button>
                   <div class="dropdown-menu" >
@@ -34,7 +34,7 @@
                   </div>
               </div><!-- /btn-group -->
             </div>
-            <div class="col-lg-1 col-md-3 col-sm-3" style="text-align: right; margin-top: auto; margin-bottom: auto">
+            <div class="col-lg-1 col-md-2 col-sm-2" style="text-align: right; margin-top: auto; margin-bottom: auto">
                 <a href="/admin/nuovoIscritto" role="button">
                     <button class="bttn-material-circle bttn-md bttn-success" style="background-color: #3F5469">
                         <i class="fas fa-plus"></i>

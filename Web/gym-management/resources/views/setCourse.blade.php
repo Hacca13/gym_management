@@ -17,7 +17,7 @@
                             @csrf
                             <div class="card-body">
                                 <div class="form-group row">
-                                    <label for="fname" class="col-sm-3 text-right control-label col-form-label">Nome Corso</label>
+                                    <label for="fname" class="col-sm-3 text-right control-label col-form-label" style="background-color: transparent; border: none; color:rgba(31, 38, 45, 0.8)">Nome Corso</label>
                                     <div class="col-sm-9">
                                         <input type="text" hidden class="form-control" id="fname" name="idDatabase" value="{{$course->getIdDatabase()}}">
                                         <input type="text" hidden class="form-control" id="fname" name="imageName" value="{{$course->getImageName()}}">
@@ -25,13 +25,13 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="fname" class="col-sm-3 text-right control-label col-form-label">Nome Istruttore</label>
+                                    <label for="fname" class="col-sm-3 text-right control-label col-form-label" style="background-color: transparent; border: none; color:rgba(31, 38, 45, 0.8)">Nome Istruttore</label>
                                     <div class="col-sm-9">
                                         <input type="text" class="form-control" id="fname" name="instructor" value="{{$course->getInstructor()}}" required>
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="fname" class="col-sm-3 text-right control-label col-form-label">Data Inizio</label>
+                                    <label for="fname" class="col-sm-3 text-right control-label col-form-label" style="background-color: transparent; border: none; color:rgba(31, 38, 45, 0.8)">Data Inizio</label>
                                     <div class="col-sm-9">
                                         <input type="text" class="form-control" id="startDate" name="startDate"
                                                placeholder="{{data_get($course->getPeriod(), 'endDate')}}" onfocus="(this.type='date')"
@@ -39,19 +39,20 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="fname" class="col-sm-3 text-right control-label col-form-label">Data Fine</label>
+                                    <label for="fname" class="col-sm-3 text-right control-label col-form-label" style="background-color: transparent; border: none; color:rgba(31, 38, 45, 0.8)">Data Fine</label>
                                     <div class="col-sm-9">
                                         <input type="text" class="form-control" id="fname" name="endDate" placeholder="{{data_get($course->getPeriod(), 'endDate')}}" onfocus="(this.type='date')"
                                                onblur="(this.type='text')" value="{{data_get($course->getPeriod(), 'endDate')}}" required>
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <div class="col-md-1  offset-1">
+                                    <div class="col-md-6"></div>
+                                    <div class="col-md-1">
                                         <button type="button" class="bttn-material-flat bttn-sm bttn-success"
                                                 id="addbutton" onclick="addDay()"><i class="fas fa-plus"></i>
                                         </button>
-
                                     </div>
+                                    <div class="col-md-5"></div>
                                 </div>
 
                                 <div id="boxes">
@@ -60,7 +61,7 @@
 
                                         <div id="{{"Entireday" . $index}}">
                                             <div class="form-group row">
-                                                <label for="select" class="col-sm-5 text-right control-label col-form-label">Giorno</label>
+                                                <label for="select" class="col-sm-5 text-right control-label col-form-label" style="background-color: transparent; border: none; color:rgba(31, 38, 45, 0.8)">Giorno</label>
                                                 <div class="col-sm-2">
                                                     <select class="select2 form-control custom-select" id="select" name="singleDay1" style="width: 100%; height:36px;" required>
                                                         <option>{{$day['day']}}</option>
@@ -73,43 +74,42 @@
                                                 </div>
                                             </div>
                                             <div class="form-group row">
-                                                <label class="col-sm-4 text-right control-label col-form-label">Dalle</label>
+                                                <label class="col-sm-4 text-right control-label col-form-label" style="background-color: transparent; border: none; color:rgba(31, 38, 45, 0.8)">Dalle</label>
                                                 <div class="col-sm-2">
                                                     <input type="number" min="0" max="24" class="form-control" id="{{"hourFrom" . $index}}" name="{{"hourFrom" . $index}}" value="{{$day['startTime']['hour']}}" required>
                                                 </div>
-                                                <h3 class="text-right control-label col-form-label">:</h3>
+                                                <h3 class="text-right control-label col-form-label" style="background-color: transparent; border: none; color:rgba(31, 38, 45, 0.8)">:</h3>
                                                 <div class="col-sm-2">
                                                     <input type="number" min="0" max="59" class="form-control" id="{{"minutesFrom" . $index}}" name="{{"minutesFrom" . $index}}" value="{{$day['startTime']['minutes']}}" required>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
-                                                <label class="col-sm-4 text-right control-label col-form-label">Alle</label>
+                                                <label class="col-sm-4 text-right control-label col-form-label" style="background-color: transparent; border: none; color:rgba(31, 38, 45, 0.8)">Alle</label>
                                                 <div class="col-sm-2">
                                                     <input type="number" min="0" max="24" class="form-control" id="{{"hourTo" . $index}}" name="{{"hourTo" . $index}}" value="{{$day['endTime']['hour']}}" required>
                                                 </div>
-                                                <h3 class="text-right control-label col-form-label">:</h3>
+                                                <h3 class="text-right control-label col-form-label" style="background-color: transparent; border: none; color:rgba(31, 38, 45, 0.8)">:</h3>
                                                 <div class="col-sm-2">
                                                     <input type="number" min="0" max="59" class="form-control" id="{{"minutesTo" . $index}}" name="{{"minutesTo" . $index}}" value="{{$day['endTime']['minutes']}}"required>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
-                                                <div class="col-sm-6 deleter text-right">
+                                                <div class="col-md-6"></div>
+                                                <div class="col-sm-1 deleter ">
                                                     <button type="button" id="{{$index}}" class="bttn-material-flat bttn-sm bttn-danger"
                                                             onclick="removeButton(this.id)"><i class="fas fa-times"></i>
                                                     </button>
                                                 </div>
+                                                <div class="col-md-5"></div>
                                             </div>
                                         </div>
-
                                     @endforeach
-
-
                                 </div>
 
 
 
                                 <div class="form-group row">
-                                    <label for="fname" class="col-sm-3 text-right control-label col-form-label">Immagine del Corso</label>
+                                    <label for="fname" class="col-sm-3 text-right control-label col-form-label" style="background-color: transparent; border: none; color:rgba(31, 38, 45, 0.8)">Immagine del Corso</label>
                                     <div class="col-sm-9">
                                         <input type="text" hidden class="form-control" id="oldCourseImage" name="oldCourseImage" value="{{$course->getImage()}}">
                                         <input type="text" hidden class="form-control" id="oldCourseImageName" name="oldCourseImageName" value="{{$course->getImageName()}}">
@@ -117,11 +117,15 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <div class="card-body">
-                                        <button href="/admin/gestioneCorsi" class="btn btn-danger" style="border-radius: 10px;">Annulla</button>
+                                    <div class="col-md-6 text-center">
+                                        <div class="card-body">
+                                            <button href="/admin/gestioneCorsi" class="btn btn-danger" style="border-radius: 10px;">Annulla</button>
+                                        </div>
                                     </div>
-                                    <div class="card-body  offset-8">
-                                        <button  type="submit" class="btn btn-success" style="border-radius: 10px;">Modifica Corso</button>
+                                    <div class="col-md-6 text-center">
+                                        <div class="card-body">
+                                            <button  type="submit" class="btn btn-success" style="border-radius: 10px;">Modifica Corso</button>
+                                        </div>
                                     </div>
 
                                 </div>

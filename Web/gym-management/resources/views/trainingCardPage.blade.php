@@ -13,7 +13,7 @@
                     <div class="card" style="border-radius: 10px;background-color: #d6d8d8; margin-bottom: -0.5%">
                         <div class="card-body">
                             <div class="row justify-content-center">
-                                <div class="col-lg-10 col-md-12 col-sm-12">
+                                <div class="col-lg-10 col-md-12 col-sm-12" style="text-align: left; margin-top: auto; margin-bottom: auto">
                                     <form action="/admin/trainingCardsSearchResultsPage" method="post">
                                         @csrf
                                         <div class="input-group no-border">
