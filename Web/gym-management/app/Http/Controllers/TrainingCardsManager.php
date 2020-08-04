@@ -180,6 +180,7 @@ class TrainingCardsManager extends Controller
       $currentPageItems = $itemCollection->slice(($currentPage * $perPage) - $perPage, $perPage)->all();
       $trainingCardsList= new LengthAwarePaginator($currentPageItems , count($itemCollection), $perPage);
       $trainingCardsList->setPath($request->url());
+
       foreach ($trainingCardsList as $trainingCard) {
           $user = UsersManager::getUserById($trainingCard->getIdUserDatabase());
           array_push($usersList,$user);
