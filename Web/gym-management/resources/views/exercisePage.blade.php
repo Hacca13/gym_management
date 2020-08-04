@@ -6,29 +6,23 @@
                 <div class="col-md-12" style="text-align: center;">
                     <h1 style="color: #d6d8d8">Esercizi</h1>
                 </div>
-                <div class="col-md-12" style="margin-top: 2.5%">
                     @include('components.exercise.exerciseSearchBar')
-                </div>
                 @if(count($exercises) == 0)
-                  <div class="row text-center" style="margin-top: 5%">
-                    <br>
-                    <br>
-                    <br>
-                      <h1 class="col-md-12 text-center" style="color: #d6d8d8">Non ci sono risultati</h1>
-                    <br>
-                    <br>
-                    <br>
-                  </div>
+                    <div class="row text-center" style="margin-top: 5%">
+                        <br>
+                        <br>
+                        <br>
+                        <h1 class="col-md-12 text-center" style="color: #d6d8d8">Non ci sono risultati</h1>
+                        <br>
+                        <br>
+                        <br>
+                    </div>
                 @endif
                 <div class="col-md-12" >
-                    <div class="card">
-                        <div class="card-body" style="background-color: rgba(214, 216, 216, 0.9); border-radius: 10px">
-                            <div class="row justify-content-center">
-                                @foreach($exercises as $exercise)
-                                    @include('components.exercise.cardExercise')
-                                @endforeach
-                            </div>
-                        </div>
+                    <div class="row justify-content-center">
+                        @foreach($exercises as $exercise)
+                            @include('components.exercise.cardExercise')
+                        @endforeach
                     </div>
                     <div class="row justify-content-center" style="margin-top: 2.5%">
                         {{ $exercises->links()}}

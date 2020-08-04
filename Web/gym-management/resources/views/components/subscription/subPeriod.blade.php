@@ -11,15 +11,11 @@
             <h4>{{$subscription->getEndDate()}}</h4>
         </div>
     </div>
-    <br>
-    <br>
-    <br>
-    <div class="row justify-content-center">
-        <div class="col-md-6" style="text-align: center">
+
+        <div class="col-md-12" style="text-align: center">
             <hr>
             <p>
                 <a href={{"/admin/modificaAbbonamenti/" . $subscription->getIdDatabase() }}><button name="acceptTerms" class="btn btn-success">Rinnova Abbonamento</button></a>
             </p>
         </div>
-    </div>
 </div>

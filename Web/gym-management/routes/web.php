@@ -86,9 +86,9 @@ Route::prefix('admin')->group(function () {
     Route::get('/nuovaScheda', 'TrainingCardsManager@exercisePage')->middleware('auth');
     Route::post('/trainingCardsSearchResultsPage', 'TrainingCardsManager@searchTrainingCards')->middleware('auth');
     Route::get('/trainingCardsPageSearchResult', 'TrainingCardsManager@searchTrainingCards')->middleware('auth');
-    Route::get('/pdf', function (){
+  //  Route::get('/pdf', function (){
     //    return view('trainingCardPdf')->middleware('auth ;
-    });
+  //  });
 
 });
 

@@ -30,11 +30,8 @@
             </div>
         </div>
     </div>
-    <br>
-    <br>
-    <br>
-    <div class="row justify-content-center">
-        <div class="col-md-12">
+
+        <div class="col-md-12" style="text-align: center">
             <hr>
             <p align="center">
                 <a href={{"/admin/modificaAbbonamenti/" . $subscription->getIdDatabase() }}>
@@ -42,5 +39,4 @@
                 </a>
             </p>
         </div>
-    </div>
 </div>

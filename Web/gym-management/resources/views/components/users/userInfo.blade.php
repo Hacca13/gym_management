@@ -107,7 +107,7 @@
                 document.getElementById("bAcK"+id).style.backgroundColor="#d6d8d8";
             }else {
                 $("#aNaGrAf"+id).css("background-color", "#1F262D");
-                document.getElementById("bAcK" +id).style.backgroundColor ="rgb(214, 216, 216, 0.9)";
+                document.getElementById("bAcK" +id).style.backgroundColor ="rgba(186, 186, 186, 0.5)";
             }
 
         }
@@ -129,11 +129,11 @@
                 document.getElementById("bAcK" +id).style.backgroundColor="#d6d8d8";
             }else {
                 $("#pLiC" +id).css("background-color", "#1F262D");
-                document.getElementById("bAcK" +id).style.backgroundColor ="rgb(214, 216, 216, 0.9)";
+                document.getElementById("bAcK" +id).style.backgroundColor ="rgba(186, 186, 186, 0.5)";
             }
 
         }
-        if(id === "tutoDa" +id){
+        if(btnName === "tutoDa"+id){
 
             $("#plicMetr" +id).attr("aria-expanded","false");
              $("#plicMetr" +id).attr("class","");
@@ -152,7 +152,7 @@
                 document.getElementById("bAcK" +id).style.backgroundColor="#d6d8d8";
             }else {
                 $("#tUtO" +id).css("background-color", "#1F262D");
-                document.getElementById("bAcK" +id).style.backgroundColor ="rgb(214, 216, 216, 0.9)";
+                document.getElementById("bAcK" +id).style.backgroundColor ="rgba(186, 186, 186, 0.5)";
             }
         }
     }
