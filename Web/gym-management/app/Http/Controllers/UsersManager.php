@@ -40,12 +40,12 @@ class UsersManager extends Controller{
               if($subscription->getIsActive() == TRUE){
                 $flag = false;
               }
-                if($flag){
-                    $user->setStatus(false);
-                    $user = UsersManager::transformUserIntoArrayUser($user);
-                    unset($user['idDatabase']);
-                    $collection->document($document->id())->set($user);
-                }
+            }
+            if($flag){
+                $user->setStatus(false);
+                $user = UsersManager::transformUserIntoArrayUser($user);
+                unset($user['idDatabase']);
+                $collection->document($document->id())->set($user);
             }
         }
         return $allUser;
@@ -178,7 +178,7 @@ class UsersManager extends Controller{
             $today = Carbon::now();
             $afterAMonth = Carbon::now()->add(1, 'month');
 
-        
+
             if($input == '1' || $input == 1 ){
               foreach ($documents as $document) {
                 if($document->getMedicalCertificate() !=null ){
