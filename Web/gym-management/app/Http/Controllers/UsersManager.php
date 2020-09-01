@@ -55,7 +55,7 @@ class UsersManager extends Controller{
 
     public static function searchUsersPartiallyByName($input){
         $usersResultListByName = array();
-        $input = strtolower($input);
+        $input = ucfirst(strtolower($input));
         $collection = Firestore::collection('Users');
         $documents = $collection->orderBy('name')->startAt([$input])->endAt([$input.'z'])->documents();
 
@@ -281,11 +281,11 @@ class UsersManager extends Controller{
         }
 
 
+
         $url = substr($request->url(), 0, strlen($request->url())-21);
         $url = $url.'/admin/userPageSearchResults';
 
         $usersResultList = UsersManager::getUserDBOrUserSessionForSearchPage($request,$currentPage,$input);
-
         $coursesForUsers = array();
         $medicalHistoryForUsers = array();
 
@@ -314,6 +314,7 @@ class UsersManager extends Controller{
             $usersResultListByName = UsersManager::searchUsersPartiallyByName($input);
             $usersResultListBySurname = UsersManager::searchUsersPartiallyBySurname($input);
             $usersResultList = $usersResultListByName + $usersResultListBySurname;
+
             $request->session()->put('usersResultList', $usersResultList);
         }
         else{
@@ -444,7 +445,7 @@ class UsersManager extends Controller{
         if(isset($input['oldDocumentImageName'])){
           $oldImage = $input['oldDocumentImageName'];
           $obj = $bucket->object($oldImage);
-          var_dump($oldImage);
+      //    var_dump($oldImage);
           $obj->delete();
         }
 
