@@ -8,6 +8,8 @@ use Firevel\Firestore\Facades\Firestore;
 use App\Http\Models\TrainingCardsModel;
 use Illuminate\Pagination\LengthAwarePaginator;
 use PDF;
+use Carbon\Carbon;
+
 
 class TrainingCardsManager extends Controller
 {
@@ -157,17 +159,15 @@ class TrainingCardsManager extends Controller
     }
 
     public static function isExpired($endDate){
-      $today = date("Y-m-d");
-      $timestamp = strtotime($endDate);
-      $endDate = date("Y-m-d", $timestamp);
-
-      if($endDate < $today){
-        return true;
-      }
-      else{
-        return false;
-      }
-
+        $parsedDate = str_replace("/", "-", $endDate);
+        $today = Carbon::now();
+        $dateTocheck = Carbon::parse($parsedDate);
+        if($today->lessThan($dateTocheck)){
+            return false;
+        }
+        else{
+            return true;
+        }
     }
 
 
