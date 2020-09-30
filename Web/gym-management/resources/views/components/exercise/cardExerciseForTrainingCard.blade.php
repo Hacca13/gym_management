@@ -8,7 +8,7 @@
                 </div>
 
                 <div class="col-lg-2 col-md-2 col-sm-2" style="text-align: right; margin-top: auto; margin-bottom: auto">
-                    <a href="/eliminaEsercizioDallaScheda/{{$trainingCard->getIdDatabase().'/'.data_get($exercise,'idExerciseDatabase')}}">
+                    <a href="/admin/deleteAExerciseFromTrainingCard/{{$trainingCard->getIdDatabase().'/'.data_get($exercise,'idExerciseDatabase')}}">
                         <i class="fas fa-times" style="font-size: 170%; color: #980f00"></i>
                     </a>
                 </div>

@@ -40,6 +40,14 @@ class TrainingCardsManager extends Controller
       return redirect('/admin/gestioneSchede');
     }
 
+    public static function getTrainingCardsById($idDatabase){
+      $collection = Firestore::collection('TrainingCards');
+      $arrayTrainingCard = $collection->document($idDatabase)->snapshot()->data();
+      $trainingCard = TrainingCardsManager::transformArrayTrainingCardsIntoTrainingCards($arrayTrainingCard);
+      $trainingCard->setIdDatabase($idDatabase);
+      return $trainingCard;
+    }
+
     public static function disabledTrainingCard($idDatabase){
       $collection = Firestore::collection('TrainingCards');
       $arrayTrainingCard = $collection->document($idDatabase)->snapshot()->data();
@@ -160,13 +168,30 @@ class TrainingCardsManager extends Controller
 
     public static function isExpired($endDate){
         $parsedDate = str_replace("/", "-", $endDate);
-        $today = Carbon::now();
+        $today = Carbon::now()->add(-1, 'day');
         $dateTocheck = Carbon::parse($parsedDate);
         if($today->lessThan($dateTocheck)){
             return false;
         }
         else{
             return true;
+        }
+    }
+
+    public static function tor(){
+        $endDate = "30/9/2020";
+        $parsedDate = str_replace("/", "-", $endDate);
+        $today = Carbon::now()->add(1, 'day');
+        echo $endDate."\n";
+        echo $parsedDate."\n";
+        echo $today."\n";
+
+        $dateTocheck = Carbon::parse($parsedDate);
+        if($today->lessThan($dateTocheck)){
+            echo("scaduto");
+        }
+        else{
+              echo("Tappoooo");
         }
     }
 
@@ -318,7 +343,7 @@ class TrainingCardsManager extends Controller
       $collection->document($trainingCard->getIdDatabase())->set($arrayTrainingCard);
     }
 
-    public static function deleteExerciseFromTrainingCard($idExerciseDatabase){
+    public static function deleteExerciseFromAllTrainingCard($idExerciseDatabase){
         $collection = Firestore::collection('TrainingCards');
         $documents = TrainingCardsManager::getAllTrainingCards();
 
@@ -335,6 +360,26 @@ class TrainingCardsManager extends Controller
         }
 
     }
+
+
+        public static function deleteAExerciseFromTrainingCard($idTrainingCard,$idExerciseDatabase){
+            $collection = Firestore::collection('TrainingCards');
+            $document = TrainingCardsManager::getTrainingCardsById($idTrainingCard);
+
+            $document = TrainingCardsManager::transformTrainingCardsIntoArrayTrainingCards($document);
+            for ($i=0; $i < count(data_get($document,'exercises')) ; $i++) {
+              if(data_get(data_get($document,'exercises')[$i],'idExerciseDatabase') == $idExerciseDatabase){
+                array_splice($document['exercises'],$i,1);
+
+              }
+            }
+
+            $document = TrainingCardsManager::transformArrayTrainingCardsIntoTrainingCards($document);
+            TrainingCardsManager::setTrainingCard($document);
+
+            toastr()->success('Esercizio eliminato dalla scheda con successo.');
+            return redirect('/admin/gestioneSchede');
+        }
 
 
 }

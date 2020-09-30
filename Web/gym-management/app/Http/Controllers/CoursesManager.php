@@ -245,18 +245,17 @@ class CoursesManager extends Controller{
     }
 
     public static function isExpired($endDate){
-        $today = date("Y-m-d");
-        $timestamp = strtotime($endDate);
-        $endDate = date("Y-m-d", $timestamp);
-
-        if($endDate < $today){
-            return true;
-        }
-        else{
+        $parsedDate = str_replace("/", "-", $endDate);
+        $today = Carbon::now()->add(-1, 'day');
+        $dateTocheck = Carbon::parse($parsedDate);
+        if($today->lessThan($dateTocheck)){
             return false;
         }
-
+        else{
+            return true;
+        }
     }
+
 
     public static function getAllCoursesView(Request $request){
         $currentPage = LengthAwarePaginator::resolveCurrentPage();
