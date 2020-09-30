@@ -173,6 +173,12 @@ class SubscriptionManager extends Controller
                     unset($subscriptionSet['idDatabase']);
                     $collection->document($subscription->getIdDatabase())->set($subscriptionSet);
                 }
+                else {
+                  $subscription->setIsActive(true);
+                  $subscriptionSet = SubscriptionManager::trasformSubscriptionToArraySubscription($subscription);
+                  unset($subscriptionSet['idDatabase']);
+                  $collection->document($subscription->getIdDatabase())->set($subscriptionSet);
+                }
             }
             elseif ($subscription instanceof SubscriptionCourseModel) {
                 $endDate = $subscription->getEndDate();
@@ -183,6 +189,12 @@ class SubscriptionManager extends Controller
                     unset($subscriptionSet['idDatabase']);
                     $collection->document($subscription->getIdDatabase())->set($subscriptionSet);
                 }
+                else {
+                  $subscription->setIsActive(true);
+                  $subscriptionSet = SubscriptionManager::trasformSubscriptionToArraySubscription($subscription);
+                  unset($subscriptionSet['idDatabase']);
+                  $collection->document($subscription->getIdDatabase())->set($subscriptionSet);
+                }
             }
             else {
                 $endDate = $subscription->getEndDate();
@@ -192,15 +204,20 @@ class SubscriptionManager extends Controller
                     unset($subscriptionSet['idDatabase']);
                     $collection->document($subscription->getIdDatabase())->set($subscriptionSet);
                 }
+                else {
+                  $subscription->setIsActive(true);
+                  $subscriptionSet = SubscriptionManager::trasformSubscriptionToArraySubscription($subscription);
+                  unset($subscriptionSet['idDatabase']);
+                  $collection->document($subscription->getIdDatabase())->set($subscriptionSet);
+                }
             }
             array_push($allSubscriptions,$subscription);
         }
         return $allSubscriptions;
     }
-
     public static function isExpired($endDate){
         $parsedDate = str_replace("/", "-", $endDate);
-        $today = Carbon::now();
+        $today = Carbon::now()->add(-1, 'day');
         $dateTocheck = Carbon::parse($parsedDate);
         if($today->lessThan($dateTocheck)){
             return false;
@@ -209,6 +226,7 @@ class SubscriptionManager extends Controller
             return true;
         }
     }
+
 
     public static function getSubscriptionByUser($idUserDatabase){
         $allSubscriptions = array();

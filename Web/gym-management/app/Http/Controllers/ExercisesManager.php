@@ -32,7 +32,7 @@ class ExercisesManager extends Controller{
     public static function deleteExercise($id){
         $collection = Firestore::collection('Exercises');
         $collection->document($id)->delete();
-        TrainingCardsManager::deleteExerciseFromTrainingCard($id);
+        TrainingCardsManager::deleteExerciseFromAllTrainingCard($id);
         toastr()->error('Esercizio Eliminato');
         return redirect('/admin/gestioneEsercizi');
     }

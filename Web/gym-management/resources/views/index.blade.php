@@ -4,12 +4,12 @@
     <div class="row" style="align-content: center">
 
         <div class="col-md-12 col-lg-12 col-sm-12">
-            <div class="card" style="border-radius: 10px; background-color: rgba(31, 38, 45, 0.8)">
+            <div class="card" style="border-radius: 10px; background-color: rgba(31, 38, 45, 0.8); padding-left: 20px; padding-right: 20px; ">
                 <div class="card-body">
                     <h2 class="card-title m-t-10 text-center" style="color: #d6d8d8">Azioni Rapide</h2>
                 </div>
                 <div class="row justify-content-center">
-                    <div class="col-md-6 col-lg-2 col-sm-12">
+                    <div class="col-md-5 col-lg-2 col-sm-12">
                         <div class="card card-hover">
                             <a href="/admin/nuovaScheda">
                                 <div class="box bg-dark text-center">
@@ -19,7 +19,7 @@
                             </a>
                         </div>
                     </div>
-                    <div class="col-md-6 col-lg-2 col-sm-12">
+                    <div class="col-md-5 col-lg-2 col-sm-12">
                         <div class="card card-hover">
                             <a href="/admin/nuovoCorso">
                                 <div class="box bg-dark text-center">
@@ -29,7 +29,7 @@
                             </a>
                         </div>
                     </div>
-                    <div class="col-md-6 col-lg-2 col-sm-12">
+                    <div class="col-md-5 col-lg-2 col-sm-12">
                         <div class="card card-hover" style="border-radius: 10px">
                             <a href="/admin/nuovoIscritto">
                                 <div class="box bg-dark text-center">
@@ -39,7 +39,7 @@
                             </a>
                         </div>
                     </div>
-                    <div class="col-md-6 col-lg-2 col-sm-12">
+                    <div class="col-md-5 col-lg-2 col-sm-12">
                         <div class="card card-hover">
                             <a href="/admin/nuovoEsercizio">
                                 <div class="box bg-dark text-center">
@@ -49,7 +49,7 @@
                             </a>
                         </div>
                     </div>
-                    <div class="col-md-6 col-lg-2 col-sm-12">
+                    <div class="col-md-5 col-lg-2 col-sm-12">
                         <div class="card card-hover">
                             <a href="/admin/nuovoAbbonamento">
                                 <div class="box bg-dark text-center">
@@ -59,7 +59,7 @@
                             </a>
                         </div>
                     </div>
-                    <div class="col-md-6 col-lg-2 col-sm-12">
+                    <div class="col-md-5 col-lg-2 col-sm-12">
                         <div class="card card-hover" style="border-radius: 10px">
                             <a href="/admin/inserisciUtenteCorso">
                                 <div class="box bg-dark text-center">
