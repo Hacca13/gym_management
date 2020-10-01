@@ -11,6 +11,7 @@ use Spatie\LaravelImageOptimizer\Facades\ImageOptimizer;
 use Stichoza\GoogleTranslate\GoogleTranslate;
 use Kreait\Firebase;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Carbon\Carbon;
 
 class CoursesManager extends Controller{
 
