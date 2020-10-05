@@ -19,7 +19,7 @@ use Carbon\Carbon;
 
 class UsersManager extends Controller{
 
-
+  
 
 
     //this function retorn all User
@@ -55,7 +55,7 @@ class UsersManager extends Controller{
 
     public static function searchUsersPartiallyByName($input){
         $usersResultListByName = array();
-        $input = ucfirst(strtolower($input));
+        $input = strtolower($input);
         $collection = Firestore::collection('Users');
         $documents = $collection->orderBy('name')->startAt([$input])->endAt([$input.'z'])->documents();
 
@@ -322,6 +322,7 @@ class UsersManager extends Controller{
             $request->session()->put('usersResultList', $usersResultList);
         }
         return $usersResultList;
+
     }
 
     public static function getAllUserForView(Request $request){
@@ -373,12 +374,17 @@ class UsersManager extends Controller{
       $input['releaseDateDocument'] = date("d-m-Y", $timestamp);
 
 
+      $input['name'] = strtolower($input['name']);
+      $input['surname'] = strtolower($input['surname']);
 
       if($input['isUnderage']==true){
         $timestamp = strtotime($input['parentDateOfBirth']);
         $input['parentDateOfBirth'] = date("d-m-Y", $timestamp);
         $timestamp = strtotime($input['parentDocumentReleaseDate']);
         $input['parentDocumentReleaseDate'] = date("d-m-Y", $timestamp);
+        $input['parentName'] = strtolower($input['parentName']);
+        $input['parentSurname'] = strtolower($input['parentSurname']);
+
       }
 
       if(!isset($input['medicalCertificate'])){
@@ -655,6 +661,9 @@ class UsersManager extends Controller{
             $input['parentDateOfBirth'] = date("d-m-Y", $timestamp);
             $timestamp = strtotime($input['parentDocumentReleaseDate']);
             $input['parentDocumentReleaseDate'] = date("d-m-Y", $timestamp);
+            $input['parentName'] = strtolower($input['parentName']);
+            $input['parentSurname'] = strtolower($input['parentSurname']);
+
         }
        // $documentImage =  "https://firebasestorage.googleapis.com/v0/b/fitandfight.appspot.com/o/". $str ."?alt=media";
 

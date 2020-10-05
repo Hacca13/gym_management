@@ -178,22 +178,6 @@ class TrainingCardsManager extends Controller
         }
     }
 
-    public static function tor(){
-        $endDate = "30/9/2020";
-        $parsedDate = str_replace("/", "-", $endDate);
-        $today = Carbon::now()->add(1, 'day');
-        echo $endDate."\n";
-        echo $parsedDate."\n";
-        echo $today."\n";
-
-        $dateTocheck = Carbon::parse($parsedDate);
-        if($today->lessThan($dateTocheck)){
-            echo("scaduto");
-        }
-        else{
-              echo("Tappoooo");
-        }
-    }
 
 
     public static function getAllTrainingCardsForView(Request $request){
