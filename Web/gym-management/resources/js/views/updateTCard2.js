@@ -5,6 +5,7 @@ import DatePicker from "react-datepicker";
 import Autosuggest from "react-autosuggest";
 import ExerciseToAddByTime from "../components/exerciseToAddByTime";
 import ExerciseToAdd from "../components/exerciseToAdd";
+import moment from "moment";
 
 class UpdateTCard2 extends Component {
     constructor(props) {
@@ -19,8 +20,8 @@ class UpdateTCard2 extends Component {
             from: new Date(),
             to: new Date(),
             visible: false,
-            isActive: true
-
+            isActive: true,
+            user: ''
         };
         this.removeExercise = this.removeExercise.bind(this);
         this.returnInfo = this.returnInfo.bind(this);
@@ -33,7 +34,9 @@ class UpdateTCard2 extends Component {
                 exercisesList: value.data[0].exercises,
                 isActive: value.data[0].isActive,
                 userName: value.data[2].name + ' ' + value.data[2].surname,
-                userID: value.data[3]
+                userID: value.data[3],
+                to: moment(value.data[0].period.endDate, "DD/MM/YYYY").toDate(),
+                from: moment(value.data[0].period.startDate, "DD/MM/YYYY").toDate()
             })
         }).catch(e => {
             console.log(e);
@@ -48,7 +51,7 @@ class UpdateTCard2 extends Component {
 
     //COMPONENTS FUNCTIONS
     componentDidMount() {
-       this.retrieveData()
+        this.retrieveData()
     }
     //FORM FUNCTIONS
     onChange = (event, { newValue }) => {
@@ -76,7 +79,7 @@ class UpdateTCard2 extends Component {
             }
         }).then(response => {
             alert(response.data);
-            }).catch(e => {
+        }).catch(e => {
             console.log(e);
         });
     }
@@ -250,6 +253,7 @@ class UpdateTCard2 extends Component {
         })
     }
 
+
     render() {
         const { value, suggestions } = this.state;
         const inputProps = {
@@ -289,14 +293,20 @@ class UpdateTCard2 extends Component {
                                                     <div className="col-sm-12 col-md-12 col-lg-6">
                                                         <label htmlFor="fname"
                                                                className="col-sm-12 text-left control-label col-form-label">Utente</label>
-                                                        <input type="text" disabled={true} className="form-control" placeholder={this.state.userName}/>
+                                                        <UserSearch
+                                                            currentUser={this.state.userName}
+                                                            retrieveUser={this.addUser}/>
+
                                                     </div>
+
+
                                                     <div className="col-md-12 col-sm-12 col-lg-6">
                                                         <div className="form-group row">
                                                             <div className="col-sm-12 col-md-6">
                                                                 <label htmlFor="fname"
                                                                        className="col-sm-12 control-label col-form-label">Data inizio</label>
                                                                 <DatePicker
+
                                                                     required={true}
                                                                     selected={this.state.from}
                                                                     onChange={date =>
