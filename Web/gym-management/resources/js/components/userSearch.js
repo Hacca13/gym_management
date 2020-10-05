@@ -130,7 +130,7 @@ class UserSearch extends Component {
         const inputProps = {
             type: "text",
             className: "form-control",
-            placeholder: "Prepend",
+            placeholder: this.props.currentUser,
             value,
             onChange: this.onChange,
         };
