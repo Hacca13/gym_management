@@ -98349,7 +98349,7 @@ var safeInvoke = function safeInvoke(fn) {
 /*!***************************************************************!*\
   !*** ./node_modules/react-router-dom/esm/react-router-dom.js ***!
   \***************************************************************/
-/*! exports provided: BrowserRouter, HashRouter, Link, NavLink, MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, __RouterContext, generatePath, matchPath, useHistory, useLocation, useParams, useRouteMatch, withRouter */
+/*! exports provided: MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, __RouterContext, generatePath, matchPath, useHistory, useLocation, useParams, useRouteMatch, withRouter, BrowserRouter, HashRouter, Link, NavLink */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -106702,7 +106702,7 @@ function (_Component) {
       var inputProps = {
         type: "text",
         className: "form-control",
-        placeholder: "Prepend",
+        placeholder: this.props.currentUser,
         value: value,
         onChange: this.onChange
       };
@@ -108738,6 +108738,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_autosuggest__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react_autosuggest__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var _components_exerciseToAddByTime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/exerciseToAddByTime */ "./resources/js/components/exerciseToAddByTime.js");
 /* harmony import */ var _components_exerciseToAdd__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../components/exerciseToAdd */ "./resources/js/components/exerciseToAdd.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_7__);
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
@@ -108768,6 +108770,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
+
 var UpdateTCard2 =
 /*#__PURE__*/
 function (_Component) {
@@ -108786,7 +108789,9 @@ function (_Component) {
           exercisesList: value.data[0].exercises,
           isActive: value.data[0].isActive,
           userName: value.data[2].name + ' ' + value.data[2].surname,
-          userID: value.data[3]
+          userID: value.data[3],
+          to: moment__WEBPACK_IMPORTED_MODULE_7___default()(value.data[0].period.endDate, "DD/MM/YYYY").toDate(),
+          from: moment__WEBPACK_IMPORTED_MODULE_7___default()(value.data[0].period.startDate, "DD/MM/YYYY").toDate()
         });
       })["catch"](function (e) {
         console.log(e);
@@ -108929,7 +108934,8 @@ function (_Component) {
       from: new Date(),
       to: new Date(),
       visible: false,
-      isActive: true
+      isActive: true,
+      user: ''
     };
     _this.removeExercise = _this.removeExercise.bind(_assertThisInitialized(_this));
     _this.returnInfo = _this.returnInfo.bind(_assertThisInitialized(_this));
@@ -109134,11 +109140,9 @@ function (_Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         htmlFor: "fname",
         className: "col-sm-12 text-left control-label col-form-label"
-      }, "Utente"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        type: "text",
-        disabled: true,
-        className: "form-control",
-        placeholder: this.state.userName
+      }, "Utente"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_userSearch__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        currentUser: this.state.userName,
+        retrieveUser: this.addUser
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-md-12 col-sm-12 col-lg-6"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
