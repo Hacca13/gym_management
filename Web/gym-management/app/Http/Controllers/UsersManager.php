@@ -19,7 +19,24 @@ use Carbon\Carbon;
 
 class UsersManager extends Controller{
 
-  
+/*    public static function pulitore(){
+      $collection = Firestore::collection('Users');
+      $documents = $collection->documents();
+      foreach ($documents as $document) {
+          $user = UsersManager::transformArrayUserIntoUser($document->data());
+          $user->setName(strtolower($user->getName()));
+          $user->setSurname(strtolower($user->getSurname()));
+          $user->setIdDatabase($document->id());
+
+
+
+          $user = UsersManager::transformUserIntoArrayUser($user);
+          unset($user['idDatabase']);
+          $collection->document($document->id())->set($user);
+      }
+
+
+    }*/
 
 
     //this function retorn all User
