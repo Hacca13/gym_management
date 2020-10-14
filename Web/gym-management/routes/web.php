@@ -51,7 +51,7 @@ Route::prefix('admin')->group(function () {
     Route::get('/userSearchByCertificateResultsPage/{input}', 'UsersManager@searchUsersByCertificate')->middleware('auth');
     Route::post('/userSearchResultsPage', 'UsersManager@searchUsers')->middleware('auth');
     Route::get('/userPageSearchResults', 'UsersManager@searchUsers')->middleware('auth');
-  
+
     Route::get('/nuovoIscritto', function (){
         return view('insertNewUser');
     })->middleware('auth');
