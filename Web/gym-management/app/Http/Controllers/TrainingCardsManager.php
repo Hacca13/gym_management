@@ -332,14 +332,15 @@ class TrainingCardsManager extends Controller
         $documents = TrainingCardsManager::getAllTrainingCards();
 
         foreach ($documents as $document) {
-          $document = TrainingCardsManager::transformTrainingCardsIntoArrayTrainingCards($document);
-          for ($i=0; $i < count(data_get($document,'exercises')) ; $i++) {
-            if(data_get(data_get($document,'exercises')[$i],'idExerciseDatabase') == $idExerciseDatabase){
-              array_splice($document['exercises'],$i,1);
+          $exercises = $document->getExercises();
 
+          for($i=0; $i< count($exercises) ;$i++){
+            if(data_get($exercises[$i],'idExerciseDatabase') == $idExerciseDatabase){
+              unset($exercises[$i]);
             }
           }
-          $document = TrainingCardsManager::transformArrayTrainingCardsIntoTrainingCards($document);
+          $document->setExercises(array_merge($exercises));
+
           TrainingCardsManager::setTrainingCard($document);
         }
 
@@ -350,15 +351,15 @@ class TrainingCardsManager extends Controller
             $collection = Firestore::collection('TrainingCards');
             $document = TrainingCardsManager::getTrainingCardsById($idTrainingCard);
 
-            $document = TrainingCardsManager::transformTrainingCardsIntoArrayTrainingCards($document);
-            for ($i=0; $i < count(data_get($document,'exercises')) ; $i++) {
-              if(data_get(data_get($document,'exercises')[$i],'idExerciseDatabase') == $idExerciseDatabase){
-                array_splice($document['exercises'],$i,1);
+            $exercises = $document->getExercises();
 
+            for($i=0; $i< count($exercises) ;$i++){
+              if(data_get($exercises[$i],'idExerciseDatabase') == $idExerciseDatabase){
+                unset($exercises[$i]);
               }
             }
+            $document->setExercises(array_merge($exercises));
 
-            $document = TrainingCardsManager::transformArrayTrainingCardsIntoTrainingCards($document);
             TrainingCardsManager::setTrainingCard($document);
 
             toastr()->success('Esercizio eliminato dalla scheda con successo.');
