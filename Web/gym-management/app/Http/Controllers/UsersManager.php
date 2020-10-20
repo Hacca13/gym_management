@@ -169,7 +169,7 @@ class UsersManager extends Controller{
 
 
         $itemCollection = collect($usersResultList);
-        $perPage = 6;
+        $perPage = 12;
         $currentPageItems = $itemCollection->slice(($currentPage * $perPage) - $perPage, $perPage)->all();
         $usersResultList= new LengthAwarePaginator($currentPageItems , count($itemCollection), $perPage);
         $usersResultList->setPath($url);
@@ -275,7 +275,7 @@ class UsersManager extends Controller{
 
 
       $itemCollection = collect($usersResultList);
-      $perPage = 6;
+      $perPage = 12;
       $currentPageItems = $itemCollection->slice(($currentPage * $perPage) - $perPage, $perPage)->all();
       $usersResultList= new LengthAwarePaginator($currentPageItems , count($itemCollection), $perPage);
       $usersResultList->setPath($url);
@@ -318,7 +318,7 @@ class UsersManager extends Controller{
 
 
         $itemCollection = collect($usersResultList);
-        $perPage = 6;
+        $perPage = 12;
         $currentPageItems = $itemCollection->slice(($currentPage * $perPage) - $perPage, $perPage)->all();
         $usersResultList= new LengthAwarePaginator($currentPageItems , count($itemCollection), $perPage);
         $usersResultList->setPath($url);
@@ -357,7 +357,7 @@ class UsersManager extends Controller{
 
         }
         $itemCollection = collect($users);
-        $perPage = 6;
+        $perPage = 12;
         $currentPageItems = $itemCollection->slice(($currentPage * $perPage) - $perPage, $perPage)->all();
         $users= new LengthAwarePaginator($currentPageItems , count($itemCollection), $perPage);
         $users->setPath($request->url());
@@ -614,6 +614,8 @@ class UsersManager extends Controller{
 
     public static function createUser(Request $request){
         $input = $request->all();
+        $input['name'] = strtolower($input['name']);
+        $input['surname'] = strtolower($input['surname']);
 
         if($input['password'] != $input['password2']){
           toastr()->error('Le due password non coincidono.');
