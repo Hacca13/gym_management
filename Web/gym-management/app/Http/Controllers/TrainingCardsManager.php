@@ -107,7 +107,7 @@ class TrainingCardsManager extends Controller
       $url = $url.'/admin/trainingCardsPageSearchResult';
 
       $itemCollection = collect($trainingCardsResultList);
-      $perPage = 6;
+      $perPage = 9;
       $currentPageItems = $itemCollection->slice(($currentPage * $perPage) - $perPage, $perPage)->all();
       $trainingCardsResultList= new LengthAwarePaginator($currentPageItems , count($itemCollection), $perPage);
       $trainingCardsResultList->setPath($url);
@@ -147,6 +147,8 @@ class TrainingCardsManager extends Controller
 
     public static function getAllTrainingCards(){
       $allTrainingCards = array();
+      $allTrainingCardsActive = array();
+      $allTrainingCardsDisactive = array();
       $collection = Firestore::collection('TrainingCards');
       $documents = $collection->documents();
       foreach ($documents as $document) {
@@ -161,8 +163,41 @@ class TrainingCardsManager extends Controller
                 $collection->document($trainingCards->getIdDatabase())->set($trainingCardSet);
             }
         }
-        array_push($allTrainingCards,$trainingCards);
+
+        if($trainingCards->getIsActive() == true){
+          array_push($allTrainingCardsActive,$trainingCards);
+        }
+        else{
+          array_push($allTrainingCardsDisactive,$trainingCards);
+        }
+        //array_push($allTrainingCards,$trainingCards);
       }
+
+      usort($allTrainingCardsActive, function($a, $b){
+
+          $endDateA = data_get($a->getPeriod() ,'endDate');
+          $parsedDateA = str_replace("/", "-", $endDateA);
+          $endDateB = data_get($b->getPeriod() ,'endDate');
+          $parsedDateB = str_replace("/", "-", $endDateB);
+
+          $dateA = Carbon::parse($parsedDateA);
+          $dateB = Carbon::parse($parsedDateB);
+
+
+          if($dateB->lessThan($dateA)){
+            return 1;
+          }
+          elseif ($dateA === $dateB) {
+            return 0;
+          }
+          else{
+            return -1;
+          }
+
+      });
+
+      $allTrainingCards = array_merge($allTrainingCardsActive, $allTrainingCardsDisactive);
+
       return $allTrainingCards;
     }
 
@@ -185,7 +220,7 @@ class TrainingCardsManager extends Controller
       $usersList = array();
       $trainingCardsList = TrainingCardsManager::getAllTrainingCards();
       $itemCollection = collect($trainingCardsList);
-      $perPage = 6;
+      $perPage = 9;
       $currentPageItems = $itemCollection->slice(($currentPage * $perPage) - $perPage, $perPage)->all();
       $trainingCardsList= new LengthAwarePaginator($currentPageItems , count($itemCollection), $perPage);
       $trainingCardsList->setPath($request->url());

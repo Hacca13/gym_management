@@ -111,7 +111,7 @@ class UpdateTCard2 extends Component {
                     min: '',
                     sec: ''
                 },
-                day: '',
+                day: 'Lunedì',
                 gif: tmp_ex[ind].gif,
                 description: tmp_ex[ind].description,
                 link: tmp_ex[ind].link
@@ -128,7 +128,7 @@ class UpdateTCard2 extends Component {
                     min: '',
                     sec: ''
                 },
-                day: '',
+                day: 'Lunedì',
                 gif: tmp_ex[ind].gif,
                 description: tmp_ex[ind].description,
                 link: tmp_ex[ind].link
@@ -142,8 +142,13 @@ class UpdateTCard2 extends Component {
 
     removeExercise(index) {
         let tmp_exercises = this.state.exercisesList;
-        delete tmp_exercises[index];
-        this.setState({ exercisesList: tmp_exercises});
+        let deleted = tmp_exercises.filter((elem, index2) => {
+            if (index2 !== index) {
+                return elem
+            }
+        })
+        //delete tmp_exercises[index];
+        this.setState({ exercisesList: deleted});
     }
 
     returnInfo(item, index) {

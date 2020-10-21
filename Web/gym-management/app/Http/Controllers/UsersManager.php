@@ -65,9 +65,14 @@ class UsersManager extends Controller{
                 $collection->document($document->id())->set($user);
             }
         }
+
+
+        usort($allUser, function($a, $b){
+            return strcmp($a->getSurname(), $b->getSurname());
+        });
+
         return $allUser;
     }
-
 
 
     public static function searchUsersPartiallyByName($input){
