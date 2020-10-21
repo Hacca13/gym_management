@@ -82,6 +82,7 @@ class UserModel
 
 
 
+
     /**
      * Get the value of Id Database
      *

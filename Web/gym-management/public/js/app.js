@@ -98349,7 +98349,7 @@ var safeInvoke = function safeInvoke(fn) {
 /*!***************************************************************!*\
   !*** ./node_modules/react-router-dom/esm/react-router-dom.js ***!
   \***************************************************************/
-/*! exports provided: BrowserRouter, HashRouter, Link, NavLink, MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, __RouterContext, generatePath, matchPath, useHistory, useLocation, useParams, useRouteMatch, withRouter */
+/*! exports provided: MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, __RouterContext, generatePath, matchPath, useHistory, useLocation, useParams, useRouteMatch, withRouter, BrowserRouter, HashRouter, Link, NavLink */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -108982,7 +108982,7 @@ function (_Component) {
             min: '',
             sec: ''
           },
-          day: '',
+          day: 'Lunedì',
           gif: tmp_ex[ind].gif,
           description: tmp_ex[ind].description,
           link: tmp_ex[ind].link
@@ -108999,7 +108999,7 @@ function (_Component) {
             min: '',
             sec: ''
           },
-          day: '',
+          day: 'Lunedì',
           gif: tmp_ex[ind].gif,
           description: tmp_ex[ind].description,
           link: tmp_ex[ind].link
@@ -109018,9 +109018,14 @@ function (_Component) {
     key: "removeExercise",
     value: function removeExercise(index) {
       var tmp_exercises = this.state.exercisesList;
-      delete tmp_exercises[index];
+      var deleted = tmp_exercises.filter(function (elem, index2) {
+        if (index2 !== index) {
+          return elem;
+        }
+      }); //delete tmp_exercises[index];
+
       this.setState({
-        exercisesList: tmp_exercises
+        exercisesList: deleted
       });
     }
   }, {
