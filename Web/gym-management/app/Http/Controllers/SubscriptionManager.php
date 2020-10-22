@@ -107,7 +107,7 @@ class SubscriptionManager extends Controller
         }
 
         $itemCollection = collect($subscriptionResultList);
-        $perPage = 6;
+        $perPage = 12;
         $currentPageItems = $itemCollection->slice(($currentPage * $perPage) - $perPage, $perPage)->all();
         $subscriptionResultList= new LengthAwarePaginator($currentPageItems , count($itemCollection), $perPage);
         $subscriptionResultList->setPath($url);
@@ -126,7 +126,7 @@ class SubscriptionManager extends Controller
         $currentPage = LengthAwarePaginator::resolveCurrentPage();
         $subscriptionList = SubscriptionManager::getSubscriptionDBOrSubscriptionSession($request,$currentPage);
         $itemCollection = collect($subscriptionList);
-        $perPage = 6;
+        $perPage = 12;
         $currentPageItems = $itemCollection->slice(($currentPage * $perPage) - $perPage, $perPage)->all();
         $subscriptionList= new LengthAwarePaginator($currentPageItems , count($itemCollection), $perPage);
         $subscriptionList->setPath($request->url());
@@ -159,6 +159,11 @@ class SubscriptionManager extends Controller
 
     public static function getAllSubscription(){
         $allSubscriptions = array();
+        $allSubscriptionsActive = array();
+        $allSubscriptionsActiveRevenue = array();
+        $allSubscriptionsActiveCourse = array();
+        $allSubscriptionsActivePeriod = array();
+        $allSubscriptionsDisactive = array();
         $collection = Firestore::collection('Subscriptions');
         $documents = $collection->documents();
 
@@ -211,10 +216,108 @@ class SubscriptionManager extends Controller
                   $collection->document($subscription->getIdDatabase())->set($subscriptionSet);
                 }
             }
-            array_push($allSubscriptions,$subscription);
+
+            if(!$subscription->getIsActive()){
+              array_push($allSubscriptionsDisactive,$subscription);
+            }
+            else{
+              if($subscription instanceof SubscriptionRevenueModel){
+                array_push($allSubscriptionsActiveRevenue,$subscription);
+              }
+              elseif ($subscription instanceof SubscriptionCourseModel) {
+                array_push($allSubscriptionsActiveCourse,$subscription);
+              }
+              elseif ($subscription instanceof SubscriptionPeriodModel){
+                array_push($allSubscriptionsActivePeriod,$subscription);
+              }
+            }
+
+
         }
+
+
+        $allTrainingCardsActive = SubscriptionManager::mergeAndSortAllSubscriptionsActive($allSubscriptionsActivePeriod,$allSubscriptionsActiveCourse,$allSubscriptionsActiveRevenue);
+
+
+        $allSubscriptions = array_merge($allTrainingCardsActive, $allSubscriptionsDisactive);
         return $allSubscriptions;
     }
+
+    public static function mergeAndSortAllSubscriptionsActive($allSubscriptionsActivePeriod,$allSubscriptionsActiveCourse,$allSubscriptionsActiveRevenue){
+      $allTrainingCardsActive = array();
+
+      usort($allSubscriptionsActivePeriod, function($a, $b){
+
+          $endDateA = $a->getEndDate();
+          $parsedDateA = str_replace("/", "-", $endDateA);
+          $endDateB = $b->getEndDate();
+          $parsedDateB = str_replace("/", "-", $endDateB);
+
+          $dateA = Carbon::parse($parsedDateA);
+          $dateB = Carbon::parse($parsedDateB);
+
+
+          if($dateB->lessThan($dateA)){
+            return 1;
+          }
+          elseif ($dateA === $dateB) {
+            return 0;
+          }
+          else{
+            return -1;
+          }
+
+      });
+
+      usort($allSubscriptionsActiveCourse, function($a, $b){
+
+          $endDateA = $a->getEndDate();
+          $parsedDateA = str_replace("/", "-", $endDateA);
+          $endDateB = $b->getEndDate();
+          $parsedDateB = str_replace("/", "-", $endDateB);
+
+          $dateA = Carbon::parse($parsedDateA);
+          $dateB = Carbon::parse($parsedDateB);
+
+
+          if($dateB->lessThan($dateA)){
+            return 1;
+          }
+          elseif ($dateA === $dateB) {
+            return 0;
+          }
+          else{
+            return -1;
+          }
+
+      });
+
+      usort($allSubscriptionsActiveRevenue, function($a, $b){
+
+          $numberOfEntriesLeftA = $a->getNumberOfEntries() - $a->getNumberOfEntriesMade();
+          $numberOfEntriesLeftB = $b->getNumberOfEntries() - $b->getNumberOfEntriesMade();
+
+
+          if($numberOfEntriesLeftA > $numberOfEntriesLeftB){
+            return 1;
+          }
+          elseif ($numberOfEntriesLeftA === $numberOfEntriesLeftB) {
+            return 0;
+          }
+          else{
+            return -1;
+          }
+
+      });
+
+      $allSubscriptionsActive = array_merge($allSubscriptionsActivePeriod,$allSubscriptionsActiveCourse);
+      $allSubscriptionsActive = array_merge($allSubscriptionsActive,$allSubscriptionsActiveRevenue);
+
+      return $allSubscriptionsActive;
+    }
+
+
+
     public static function isExpired($endDate){
         $parsedDate = str_replace("/", "-", $endDate);
         $today = Carbon::now()->add(-1, 'day');
