@@ -102,14 +102,14 @@ class UpdateTCard2 extends Component {
                 idExerciseDatabase: tmp_ex[ind].idDatabase,
                 name: tmp_ex[ind].name,
                 atTime: tmp_ex[ind].exerciseIsATime,
-                numberOfSeries: '',
+                numberOfSeries: '1',
                 work: {
-                    min: '',
-                    sec: ''
+                    min: '1',
+                    sec: '1'
                 },
                 rest: {
-                    min: '',
-                    sec: ''
+                    min: '1',
+                    sec: '1'
                 },
                 day: 'Lunedì',
                 gif: tmp_ex[ind].gif,
@@ -121,12 +121,12 @@ class UpdateTCard2 extends Component {
                 idExerciseDatabase: tmp_ex[ind].idDatabase,
                 name: tmp_ex[ind].name,
                 atTime: tmp_ex[ind].exerciseIsATime,
-                numberOfRepetitions: '',
-                weight: '',
-                numberOfSeries: '',
+                numberOfRepetitions: '1',
+                weight: '1',
+                numberOfSeries: '1',
                 rest: {
-                    min: '',
-                    sec: ''
+                    min: '1',
+                    sec: '1'
                 },
                 day: 'Lunedì',
                 gif: tmp_ex[ind].gif,

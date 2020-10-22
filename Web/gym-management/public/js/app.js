@@ -98349,7 +98349,7 @@ var safeInvoke = function safeInvoke(fn) {
 /*!***************************************************************!*\
   !*** ./node_modules/react-router-dom/esm/react-router-dom.js ***!
   \***************************************************************/
-/*! exports provided: MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, __RouterContext, generatePath, matchPath, useHistory, useLocation, useParams, useRouteMatch, withRouter, BrowserRouter, HashRouter, Link, NavLink */
+/*! exports provided: BrowserRouter, HashRouter, Link, NavLink, MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, __RouterContext, generatePath, matchPath, useHistory, useLocation, useParams, useRouteMatch, withRouter */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -108973,14 +108973,14 @@ function (_Component) {
           idExerciseDatabase: tmp_ex[ind].idDatabase,
           name: tmp_ex[ind].name,
           atTime: tmp_ex[ind].exerciseIsATime,
-          numberOfSeries: '',
+          numberOfSeries: '1',
           work: {
-            min: '',
-            sec: ''
+            min: '1',
+            sec: '1'
           },
           rest: {
-            min: '',
-            sec: ''
+            min: '1',
+            sec: '1'
           },
           day: 'Lunedì',
           gif: tmp_ex[ind].gif,
@@ -108992,12 +108992,12 @@ function (_Component) {
           idExerciseDatabase: tmp_ex[ind].idDatabase,
           name: tmp_ex[ind].name,
           atTime: tmp_ex[ind].exerciseIsATime,
-          numberOfRepetitions: '',
-          weight: '',
-          numberOfSeries: '',
+          numberOfRepetitions: '1',
+          weight: '1',
+          numberOfSeries: '1',
           rest: {
-            min: '',
-            sec: ''
+            min: '1',
+            sec: '1'
           },
           day: 'Lunedì',
           gif: tmp_ex[ind].gif,
