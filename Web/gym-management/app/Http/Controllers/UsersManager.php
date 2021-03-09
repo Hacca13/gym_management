@@ -19,7 +19,7 @@ use Carbon\Carbon;
 
 class UsersManager extends Controller{
 
-/*    public static function pulitore(){
+  /*  public static function pulitore(){
       $collection = Firestore::collection('Users');
       $documents = $collection->documents();
       foreach ($documents as $document) {
@@ -586,6 +586,8 @@ class UsersManager extends Controller{
 
       $user = UsersManager::transformArrayUserIntoUser($arrayUser);
       $user->setIdDatabase($idDatabase);
+      $user->setName(strtolower($user->getName()));
+      $user->setSurname(strtolower($user->getSurname()));
       $user->setStatus(true);
       $user = UsersManager::transformUserIntoArrayUser($user);
       unset($user['idDatabase']);
@@ -603,6 +605,8 @@ class UsersManager extends Controller{
 
       $user = UsersManager::transformArrayUserIntoUser($arrayUser);
       $user->setIdDatabase($idDatabase);
+      $user->setName(strtolower($user->getName()));
+      $user->setSurname(strtolower($user->getSurname()));
       $user->setStatus(false);
       $user = UsersManager::transformUserIntoArrayUser($user);
       unset($user['idDatabase']);

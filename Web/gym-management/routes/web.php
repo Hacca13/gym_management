@@ -12,7 +12,7 @@
 */
 Route::prefix('admin')->group(function () {
   Route::get('/', 'HomeController@index')->middleware('auth'); //Patane
-  Route::get('/home', 'HomeController@index')->middleware('auth'); //Patane
+  Route::get('/home', 'HomeController@index')->middleware('auth'); //Patane 
 //  Route::get('/firetest3','Firetest@test3')->middleware('auth'); //Patane
   Auth::routes(['register' => false]);
   Route::get('/logout', 'Auth\LoginController@logout')->middleware('auth'); //Patane
@@ -51,7 +51,7 @@ Route::prefix('admin')->group(function () {
     Route::get('/userSearchByCertificateResultsPage/{input}', 'UsersManager@searchUsersByCertificate')->middleware('auth'); //Patane
     Route::post('/userSearchResultsPage', 'UsersManager@searchUsers')->middleware('auth'); //Patane
     Route::get('/userPageSearchResults', 'UsersManager@searchUsers')->middleware('auth'); //Patane
-
+    //Route::get('/pulitore', 'UsersManager@pulitore');
     Route::get('/nuovoIscritto', function (){
         return view('insertNewUser');
     })->middleware('auth'); //Patane
@@ -97,7 +97,7 @@ Route::prefix('admin')->group(function () {
 
 //CORSI
 Route::prefix('admin')->group(function () {
-    Route::get('/gestioneCorsi', 'CoursesManager@getAllCoursesView')->middleware('auth'); //Patane//->middlewaree('auth');
+    Route::get('/gestioneCorsi', 'CoursesManager@getAllCoursesView')->middleware('auth'); //Patane    //->middlewaree('auth');
 
     Route::post('/insertFormCourse', 'CoursesManager@addCourse')->middleware('auth'); //Patane
     Route::post('/setCourse', 'CoursesManager@setCourse')->middleware('auth'); //Patane
