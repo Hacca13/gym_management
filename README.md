@@ -31,7 +31,6 @@ Deployed on custom LAMP server, bought and configured on [Vps.ag](https://vps.ag
 
 
 
-## About me
-
-Check out my portfolio [SevAmm.ml](https://sevamm.ml)
+## About us
+[1r0n51uv] Severino Ammirati (Backend and Mobile Dev) [SevAmm.ml](https://sevamm.ml)
 
