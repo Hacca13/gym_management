@@ -133,6 +133,7 @@ class ExerciseToAddByTime extends Component {
                                                 })
                                             }}
                                             style={{width: '100%' , height:'36px'}}>
+                                        <option> </option>
                                         <option>Lunedi</option>
                                         <option>Martedi</option>
                                         <option>Mercoledi</option>
