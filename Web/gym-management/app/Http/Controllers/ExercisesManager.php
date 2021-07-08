@@ -21,7 +21,7 @@ class ExercisesManager extends Controller{
         $documents = $collection->documents();
         foreach ($documents as $document) {
             $exercise = ExercisesManager::trasformArrayExerciseToExercise($document->data());
-            $exercise->setName(ucfirst($exercise->getName()));
+            //$exercise->setName(ucfirst($exercise->getName()));
             $exercise->setIdDatabase($document->id());
             array_push($arrayExercises,$exercise);
         }
@@ -105,7 +105,7 @@ class ExercisesManager extends Controller{
 
         foreach ($documents as $document) {
             $exercise = ExercisesManager::trasformArrayExerciseToExercise($document->data());
-            $exercise->setName(ucfirst($exercise->getName()));
+            //$exercise->setName(ucfirst($exercise->getName()));
             $exercise->setIdDatabase($document->id());
             array_push($exercises,$exercise);
         }

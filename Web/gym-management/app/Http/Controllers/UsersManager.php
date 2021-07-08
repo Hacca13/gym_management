@@ -19,7 +19,7 @@ use Carbon\Carbon;
 
 class UsersManager extends Controller{
 
-  /*  public static function pulitore(){
+    public static function pulitore(){
       $collection = Firestore::collection('Users');
       $documents = $collection->documents();
       foreach ($documents as $document) {
@@ -36,7 +36,7 @@ class UsersManager extends Controller{
       }
 
 
-    }*/
+    }
 
 
     //this function retorn all User
@@ -46,8 +46,8 @@ class UsersManager extends Controller{
         $documents = $collection->documents();
         foreach ($documents as $document) {
             $user = UsersManager::transformArrayUserIntoUser($document->data());
-            $user->setName(ucfirst($user->getName()));
-            $user->setSurname(ucfirst($user->getSurname()));
+            //$user->setName(ucfirst($user->getName()));
+            //$user->setSurname(ucfirst($user->getSurname()));
             $user->setIdDatabase($document->id());
             array_push($allUser,$user);
 
@@ -83,8 +83,8 @@ class UsersManager extends Controller{
 
         foreach ($documents as $document) {
             $user = UsersManager::transformArrayUserIntoUser($document->data());
-            $user->setName(ucfirst($user->getName()));
-            $user->setSurname(ucfirst($user->getSurname()));
+            //$user->setName(ucfirst($user->getName()));
+            //$user->setSurname(ucfirst($user->getSurname()));
             $user->setIdDatabase($document->id());
             array_push($usersResultListByName,$user);
         }
@@ -100,8 +100,8 @@ class UsersManager extends Controller{
 
         foreach ($documents as $document) {
             $user = UsersManager::transformArrayUserIntoUser($document->data());
-            $user->setName(ucfirst($user->getName()));
-            $user->setSurname(ucfirst($user->getSurname()));
+            //$user->setName(ucfirst($user->getName()));
+            //$user->setSurname(ucfirst($user->getSurname()));
             $user->setIdDatabase($document->id());
             array_push($usersResultListBySurname,$user);
         }
@@ -336,7 +336,6 @@ class UsersManager extends Controller{
             $usersResultListByName = UsersManager::searchUsersPartiallyByName($input);
             $usersResultListBySurname = UsersManager::searchUsersPartiallyBySurname($input);
             $usersResultList = $usersResultListByName + $usersResultListBySurname;
-
             $request->session()->put('usersResultList', $usersResultList);
         }
         else{
@@ -560,8 +559,8 @@ class UsersManager extends Controller{
         $documents = $query->documents();
         foreach ($documents as $document) {
             $user = UsersManager::transformArrayUserIntoUser($document->data());
-            $user->setName(ucfirst($user->getName()));
-            $user->setSurname(ucfirst($user->getSurname()));
+            //$user->setName(ucfirst($user->getName()));
+            //$user->setSurname(ucfirst($user->getSurname()));
             $user->setIdDatabase($document->id());
             array_push($users,$user);
         }
@@ -574,8 +573,8 @@ class UsersManager extends Controller{
         $arrayUser = $collection->document($idDatabase)->snapshot()->data();
 
         $user = UsersManager::transformArrayUserIntoUser($arrayUser);
-        $user->setName(ucfirst($user->getName()));
-        $user->setSurname(ucfirst($user->getSurname()));
+        //$user->setName(ucfirst($user->getName()));
+        //$user->setSurname(ucfirst($user->getSurname()));
         $user->setIdDatabase($idDatabase);
         return $user;
     }

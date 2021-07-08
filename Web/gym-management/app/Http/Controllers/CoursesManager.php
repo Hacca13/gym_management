@@ -178,8 +178,8 @@ class CoursesManager extends Controller{
 
         foreach ($documents as $document) {
             $course = CoursesManager::trasformArrayCourseToCourse($document->data());
-            $course->setName(ucfirst($course->getName()));
-            $course->setInstructor(ucfirst($course->getInstructor()));
+            //$course->setName(ucfirst($course->getName()));
+            //$course->setInstructor(ucfirst($course->getInstructor()));
             $course->setIdDatabase($document->id());
             array_push($coursesResultList,$course);
         }
@@ -210,8 +210,8 @@ class CoursesManager extends Controller{
         $documents = $query->documents();
         foreach ($documents as $document){
             $course = CoursesManager::trasformArrayCourseToCourse($document->data());
-            $course->setName(ucfirst($course->getName()));
-            $course->setInstructor(ucfirst($course->getInstructor()));
+            //$course->setName(ucfirst($course->getName()));
+            //$course->setInstructor(ucfirst($course->getInstructor()));
             $course->setIdDatabase($document->id());
             array_push($courses,$course);
         }
@@ -226,8 +226,8 @@ class CoursesManager extends Controller{
         $documents = $collection->documents();
         foreach ($documents as $document) {
             $course = CoursesManager::trasformArrayCourseToCourse($document->data());
-            $course->setName(ucfirst($course->getName()));
-            $course->setInstructor(ucfirst($course->getInstructor()));
+            //$course->setName(ucfirst($course->getName()));
+            //$course->setInstructor(ucfirst($course->getInstructor()));
             $course->setIdDatabase($document->id());
 
             $endDate = data_get($course->getPeriod() ,'endDate');
@@ -286,6 +286,12 @@ class CoursesManager extends Controller{
     }
 
     public static function trasformArrayCourseToCourse($arrayCourse){
+        if(data_get($arrayCourse,'usersList') == null){
+          $usersList  = array();
+        }
+        else {
+          $usersList = data_get($arrayCourse,'usersList');
+        }
         $idDatabase = data_get($arrayCourse,'idDatabase');
         $name = data_get($arrayCourse,'name');
         $image = data_get($arrayCourse,'image');
@@ -294,7 +300,7 @@ class CoursesManager extends Controller{
         $instructor = data_get($arrayCourse,'instructor');
         $period = data_get($arrayCourse,'period');
         $weeklyFrequency = data_get($arrayCourse,'weeklyFrequency') ;
-        $usersList = data_get($arrayCourse,'usersList') ;
+      //  $usersList = data_get($arrayCourse,'usersList');
 
         $course = new CourseModel($idDatabase,$name,$image,$imageName,$isActive,$instructor,$period,$weeklyFrequency,$usersList);
 
