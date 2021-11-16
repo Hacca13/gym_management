@@ -19,7 +19,7 @@
         "grpc/grpc": "^v1.1.0",
         "joggapp/laravel-google-translate": "^3.0",
         "kreait/firebase-php": "^4.35",
-        "laravel/framework": "^5.8",
+        "laravel/framework": "^6.18",
         "laravel/tinker": "^1.0",
         "spatie/laravel-image-optimizer": "^1.5",
         "stichoza/google-translate-php": "^4.0",
